@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html> 
+        <head> 
+                <script> 
+var value = Math.floor(Math.random() * 25) + 1;
+function myfunction(txt) { 
+        str = "You guessed: " + document.getElementById("guess").value + "<br/>";
+        guess = document.getElementById("guess").value;
+        if(guess < value) {
+                str += "My number is larger!";
+        } else if(guess > value) {
+                str += "My number is smaller!";
+        } else {
+                str += "Correct!";
+        }
+        document.getElementById("paragraph").innerHTML = str
+} 
+                </script> 
+        </head> 
+
+        <body> 
+                <p>
+                Guessing game! I'm thinking of a number between 1 and 25, can you guess what it is?
+                </p>
+
+                <form> 
+                        <input type="text" id="guess" value=""> <br/>
+                        <input type="button" onclick="myfunction()" value="Guess"> 
+                </form> 
+
+                <p id="paragraph"></p>
+
+        </body> 
+</html> 
+
