@@ -10,25 +10,48 @@ Moreover, let's write this such that it's run in the browser. It should look som
 
 Now, in order to do this we're going to need Javascript and HTML.
 
-In order to get started, let's google for "html js". We'll end up at w3schools.com, a website with lots of tutorials and reference material for web development, including Javascript tutorials. You can go through those as much as you want.
+In order to get started, let's search online for "html js". We'll end up at w3schools.com, a website with lots of tutorials and reference material for web development, including Javascript tutorials. You can go through those as much as you want.
 
 The development environment will work like this: create a file with an extension .html and open it in your text editor. After you've made changes to your file, you can open it in your browser. For example, if your file is called hello.html, you can open it in Firefox by running "firefox hello.html" in your terminal. When you make changes to the file, refresh the tab in your browser.
 
-What happens here is that the browser will read in the contents of your file and interpret it. The browser has an engine for reading and rendering HTML, such that if you for example mark a part of text as red, the browser will know to render that text red. Similarly the browser has a Javascript interpreter built in, and will execute the Javascript code embedded in the HTML file.
+What happens here is that the browser will read in the contents of your file and interpret it. The browser has an engine for reading and rendering HTML, such that if you for example mark a part of text as red in your HTML code, the browser will know to render that text red. Similarly the browser has a Javascript interpreter built in, and will execute the Javascript code embedded in the HTML file.
 
 In order to break down this task, we need to identify the main components of our software. We can accomplish this breakdown by looking at the tutorials at w3schools.com.
 
-For example, we can take the example about adding numbers in Javascript, i.e. https://www.w3schools.com/js/tryit.asp?filename=tryjs_variables_add_numbers.
+After browsing some tutorials we can find one of the most basic HTML files:
 
-This example shows how to run Javascript and show the results on a webpage, but it's missing the interactivity that we need in our game, namely a button and a field for entering the guess.
+.. literalinclude:: js1.html
+   :language: html
+   :linenos:
 
-Browsing the tutorials some more, we'll also find examples for generating random numbers, adding a button and a field (HTML form). Namely these:
+You can copy-paste this code into a file and open it in your browser. You should see a plain web page with a text "some text".
 
-https://www.w3schools.com/js/tryit.asp?filename=tryjs_random
+If we go through this in detail, we see a bunch of tags such as "<html>" which mostly have a start and an end (e.g. "</html>", and the text "some text" in the middle. Most of the tags aren't very important now though I should note the tag "<p>" denotes a paragraph.
 
-https://www.w3schools.com/js/tryit.asp?filename=tryjs_functionarg2
+After browsing some tutorials we can find one of the most basic "programs" that utilise JS and HTML:
 
-https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit
+.. literalinclude:: js2.html
+   :language: html
+   :linenos:
+
+If you run this in your browser, you should see a text "old text" and a button. If you press the button, the text is replaced with "new text".
+
+What happens here is that the paragraph has an ID, and the button has a Javascript function associated with it. When pressing the button, the browser executes the Javascript code, which changes the text.
+
+In general, HTML describes the content, i.e. what is shown to the user, while Javascript describes the logic, i.e. what happens.
+
+Let's put together one more example to capture the other bits and pieces we need for our game:
+
+.. literalinclude:: js3.html
+   :language: html
+   :linenos:
+
+
+This example introduces a few concepts:
+
+* A random floating point number between 0 and 1 can be obtained by calling Math.random()
+* Numbers can be rounded down by using Math.floor()
+* HTML tag <input> with type="text" introduces a text box, the value of which can be read using Javascript.
 
 Now we have everything we need to put our game together. What we'll need is:
 
@@ -37,7 +60,7 @@ Now we have everything we need to put our game together. What we'll need is:
 3) A button indicating we'd like to make a guess
 4) Text indicating whether our guess is correct or not
 
-One more tricky bit is that the random function returns a floating point number, while the guessing should be based on integers. Searching for this online you can find a question around this at Stack Overflow (https://stackoverflow.com/questions/596467/how-do-i-convert-a-float-number-to-a-whole-number-in-javascript): by using Math.floor(value) we can ensure the number the computer is thinking of is integer.
+You may need to debug Javascript, for example if you make a typo, causing your program to not run correctly. How to debug Javascript depends on your browser. For example with Chrome, you can hit F12 to bring up the developer information panel. This shows any Javascript errors, for example.
 
 You should now have the pieces you need to implement the guessing game. Good luck! Once you're done, or if you get stuck, you can take a look at the appendix to see an example implementation.
 

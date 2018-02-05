@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width">
+<html> 
+    <head> 
+        <script> 
+function myfunc() {
+    var value = Math.random() * 20;
+    var value_rounded = Math.floor(value);
+    var str = "Values: " + value + " " + value_rounded;
+    if(value > 10) {
+        str += " value is larger than 10.";
+    }
+    str += " " + document.getElementById("guess").value;
+    document.getElementById("paragraph").innerHTML = str
+}
+        </script> 
+    </head> 
+
+    <body> 
+        <form> 
+            <input type="text" id="guess" value=""> <br/>
+            <input type="button" onclick="myfunc()" value="Press me"> 
+        </form> 
+        <p id="paragraph"></p>
+    </body> 
+</html> 
+
