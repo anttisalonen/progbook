@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width">
 <html> 
+    <head> 
+        <script> 
+function myfunc() {
+    document.getElementById("paragraph").innerHTML = "new text"
+}
+        </script> 
+    </head> 
+
     <body> 
-        <p>some text</p>
+        <p id="paragraph">old text</p><br/>
+        <input type="button" onclick="myfunc()" value="Press me"> 
     </body> 
 </html> 
 

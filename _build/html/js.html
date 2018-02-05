@@ -26,6 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to guide’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -52,6 +53,24 @@
 <p>What happens here is that the browser will read in the contents of your file and interpret it. The browser has an engine for reading and rendering HTML, such that if you for example mark a part of text as red in your HTML code, the browser will know to render that text red. Similarly the browser has a Javascript interpreter built in, and will execute the Javascript code embedded in the HTML file.</p>
 <p>In order to break down this task, we need to identify the main components of our software. We can accomplish this breakdown by looking at the tutorials at w3schools.com.</p>
 <p>After browsing some tutorials we can find one of the most basic HTML files:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span> 
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span> 
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>some text<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span> 
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span> 
+</pre></div>
+</td></tr></table></div>
+<p>You can copy-paste this code into a file and open it in your browser. You should see a plain web page with a text &#8220;some text&#8221;.</p>
+<p>If we go through this in detail, we see a bunch of tags such as &#8220;&lt;html&gt;&#8221; which mostly have a start and an end (e.g. &#8220;&lt;/html&gt;&#8221;, and the text &#8220;some text&#8221; in the middle. Most of the tags aren&#8217;t very important now though I should note the tag &#8220;&lt;p&gt;&#8221; denotes a paragraph.</p>
+<p>After browsing some tutorials we can find one of the most basic &#8220;programs&#8221; that utilise JS and HTML:</p>
 <div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -81,24 +100,6 @@
     <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span> 
         <span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;paragraph&quot;</span><span class="p">&gt;</span>old text<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
         <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;myfunc()&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Press me&quot;</span><span class="p">&gt;</span> 
-    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span> 
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span> 
-</pre></div>
-</td></tr></table></div>
-<p>You can copy-paste this code into a file and open it in your browser. You should see a plain web page with a text &#8220;some text&#8221;.</p>
-<p>If we go through this in detail, we see a bunch of tags such as &#8220;&lt;html&gt;&#8221; which mostly have a start and an end (e.g. &#8220;&lt;/html&gt;&#8221;, and the text &#8220;some text&#8221; in the middle. Most of the tags aren&#8217;t very important now though I should note the tag &#8220;&lt;p&gt;&#8221; denotes a paragraph.</p>
-<p>After browsing some tutorials we can find one of the most basic &#8220;programs&#8221; that utilise JS and HTML:</p>
-<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span> 
-    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span> 
-        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>some text<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span> 
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span> 
 </pre></div>
@@ -187,6 +188,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to guide&#8217;s documentation!</a></li>
   </ul></li>
 </ul>
 </div>
