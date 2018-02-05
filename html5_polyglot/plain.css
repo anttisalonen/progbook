@@ -228,6 +228,10 @@ div.sidebar {
   margin-right: -5.5%;
   background-color: #ffffee ;
 }
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 /* Code                     */
 
