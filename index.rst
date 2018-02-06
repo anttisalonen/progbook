@@ -10,6 +10,9 @@ Welcome to guide's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   python_generate_file
+   unix
+   regex
    js
 
 

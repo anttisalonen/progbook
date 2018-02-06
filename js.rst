@@ -1,5 +1,4 @@
-
-Task: Guessing game
+Guessing game in JS
 -------------------
 
 Let's write a guessing game. This game is fairly simple: the computer thinks of a number between 1 and 25, and you need to guess what it is. The computer will give hints such as "my number is smaller" or "my number is bigger" on wrong guesses.

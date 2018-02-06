@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Unix shell commands &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Regular expressions" href="regex.html" />
+    <link rel="prev" title="Generating input data using Python" href="python_generate_file.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-unix-shell-commands">
+<h1>Basic Unix shell commands<a class="headerlink" href="#basic-unix-shell-commands" title="Permalink to this headline">¶</a></h1>
+<p>Basic Unix shell commands are quite useful in day to day software development.</p>
+<p>Let&#8217;s assume you have the file with 10,000 lines defining the functions as discussed in &#8220;Generating input data using Python&#8221;. In order to inspect this file, you could open it in the text editor, but there are also other, typically easier, ways to achieve this.</p>
+<p>In the following, the character &#8216;$&#8217; means the shell prompt, i.e. you typically type in the shell whatever comes after &#8216;$&#8217;.</p>
+<p>If you wanted to take a quick look browsing a file, you could use the utility &#8216;less&#8217;:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ less test.txt
+</pre></div>
+</div>
+<p>This will open the file test.txt in &#8216;less&#8217;, which allows you to read and browse the file. Less has a few useful commands:</p>
+<ul class="simple">
+<li>&#8216;q&#8217; exists less</li>
+<li>&#8216;/&#8217; allows you to search in the file - type &#8216;/&#8217; followed by the string you want to search for, followed by &#8216;return&#8217;</li>
+<li>&#8216;n&#8217; repeats the previous search</li>
+<li>&#8216;N&#8217; repeats the previous search but searches backwards</li>
+</ul>
+<p>There are a few more, and you can look up the reference for &#8216;less&#8217; to see all of them (by running &#8220;man less&#8221;). These same commands are to some degree shared across several other Unix tools. For example vim has the same commands for searching.</p>
+<p>Let&#8217;s say you only wanted to see the beginning of the file. You can achieve this using &#8216;head&#8217;:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ head test.txt
+<span class="m">7</span>.269553 <span class="m">3</span>.427526 <span class="m">6</span>.633603
+<span class="m">1</span>.980206 -3.655827 -2.629755
+-8.687820 -6.930905 -8.731439
+-0.608791 -8.126272 -8.652504
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<p>This will print the first ten lines of the file. You can adjust the number of lines output by using the &#8220;-n&#8221; switch. For example, the command &#8220;head -n5 test.txt&#8221; would only output the first five lines.</p>
+<p>The command &#8216;tail&#8217; can be used to output the last lines of a file, by default ten:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ tail test.txt
+<span class="o">[</span>...<span class="o">]</span>
+-7.058864 -5.461025 -8.337095
+-0.197971 -1.485949 -0.748672
+-3.051099 -9.215679 <span class="m">3</span>.597125
+<span class="m">0</span>.868340 -2.444818 -3.173135
+</pre></div>
+</div>
+<p>If you want to search for a string in the file, you can use &#8216;grep&#8217;:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ grep <span class="s2">&quot;1234&quot;</span> test.txt
+<span class="m">6</span>.133025 -4.612349 <span class="m">4</span>.969612
+-0.904910 -5.976920 <span class="m">8</span>.821234
+-6.123416 <span class="m">7</span>.494195 <span class="m">4</span>.350390
+-1.123468 <span class="m">0</span>.327963 <span class="m">1</span>.291879
+</pre></div>
+</div>
+<p>This command would print all lines which have the string &#8220;1234&#8221; in them. The command &#8216;grep&#8217; also has a lot of useful switches, for example including lines before or after the line that includes the search string, or inverse search (only print lines that don&#8217;t have a match).</p>
+<p>If you only wanted to print one column of the file, you could achieve this using &#8216;awk&#8217;:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{print $1}&#39;</span> test.txt
+<span class="m">7</span>.269553
+<span class="m">1</span>.980206
+-8.687820
+-0.608791
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<p>This example only prints the first column in the file. (&#8216;awk&#8217; by default assumed the space is the delimiter character.)</p>
+<p>&#8216;awk&#8217; is actually a programming language capable of much more, but much of the daily use is simple one-liners. Let&#8217;s say we want to calculate the average of all values in the first column. This can be achieved using &#8216;awk&#8217;:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{sum += $1; n++} END {print sum / n}&#39;</span> test.txt
+<span class="m">0</span>.0478027
+</pre></div>
+</div>
+<p>What this line means is:</p>
+<ul class="simple">
+<li>For each line, take the value of the number in the first column, and add it in the variable called &#8220;sum&#8221; (automatically initialised to 0). Increment the variable &#8220;n&#8221; by one (also automatically initialised to 0).</li>
+<li>After the file has been processed, print &#8220;sum&#8221; divided by &#8220;n&#8221;, i.e. the sum divided by the number of lines.</li>
+</ul>
+<p>Another useful command is &#8216;wc&#8217;, or &#8220;word count&#8221;, which can be used to count the words in a file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ wc test.txt
+<span class="m">10000</span>  <span class="m">30000</span> <span class="m">284890</span> test.txt
+</pre></div>
+</div>
+<p>The output includes the number of lines, words, characters and the file name. By adding the switch &#8216;-l&#8217;, only the number of lines and the file name are output:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ wc -l test.txt
+<span class="m">10000</span> test.txt
+</pre></div>
+</div>
+<p>The final command introduced here is &#8216;sed&#8217;, or &#8220;stream editor&#8221;, which modified the input using a given expression. For example we can use &#8216;sed&#8217; to change all space characters in the file to commas:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sed <span class="s1">&#39;s/ /,/g&#39;</span> test.txt
+<span class="m">7</span>.269553,3.427526,6.633603
+<span class="m">1</span>.980206,-3.655827,-2.629755
+-8.687820,-6.930905,-8.731439
+-0.608791,-8.126272,-8.652504
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<p>Let&#8217;s break down this expression &#8216;s/ /,/g&#8217;:</p>
+<ul class="simple">
+<li>The character &#8216;/&#8217; is the delimiter; the expression consists of four parts: &#8216;s&#8217;, &#8216; &#8216;, &#8216;,&#8217; and &#8216;g&#8217;:</li>
+<li>&#8216;s&#8217;: initial command: search (and replace)</li>
+<li>&#8216; &#8216;: search for the space character</li>
+<li>&#8216;,&#8217;: replace with the comma</li>
+<li>&#8216;g&#8217;: do this globally, i.e. not only once per line (the default), but for all occurrences in the file.</li>
+</ul>
+<p>Another example is removing all &#8216;-&#8216; characters from the file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sed <span class="s1">&#39;s/-//g&#39;</span> test.txt
+<span class="m">7</span>.269553 <span class="m">3</span>.427526 <span class="m">6</span>.633603
+<span class="m">1</span>.980206 <span class="m">3</span>.655827 <span class="m">2</span>.629755
+<span class="m">8</span>.687820 <span class="m">6</span>.930905 <span class="m">8</span>.731439
+<span class="m">0</span>.608791 <span class="m">8</span>.126272 <span class="m">8</span>.652504
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<p>We can also pass multiple expressions to &#8216;sed&#8217; by using the &#8216;-e&#8217; switch, for example to replace spaces with commas and remove the dashes:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sed -e <span class="s1">&#39;s/ /,/g&#39;</span> -e <span class="s1">&#39;s/-//g&#39;</span> test.txt
+<span class="m">7</span>.269553,3.427526,6.633603
+<span class="m">1</span>.980206,3.655827,2.629755
+<span class="m">8</span>.687820,6.930905,8.731439
+<span class="m">0</span>.608791,8.126272,8.652504
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<div class="section" id="unix-pipelines">
+<h2>Unix pipelines<a class="headerlink" href="#unix-pipelines" title="Permalink to this headline">¶</a></h2>
+<p>The &#8216;awk&#8217; command above lists the first column for all 10,000 lines which might not be what you want. Let&#8217;s say you only wanted to see the first ten lines, i.e. apply the &#8216;head&#8217; command to the output of the &#8216;awk&#8217; command. You can achieve this using pipelines:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{print $1}&#39;</span> test.txt <span class="p">|</span> head
+<span class="m">7</span>.269553
+<span class="m">1</span>.980206
+-8.687820
+-0.608791
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<p>In this case, head doesn&#8217;t take a file name as input, but instead reads from standard input, i.e. the output from &#8216;awk&#8217;. This is the typical behaviour for Unix commands.</p>
+<p>In general, the commands can be combined in any way, giving a lot of power to the user.</p>
+<p><em>Exercise</em>: Find out how many lines in the file have no &#8216;-&#8216; character.</p>
+</div>
+<div class="section" id="redirecting">
+<h2>Redirecting<a class="headerlink" href="#redirecting" title="Permalink to this headline">¶</a></h2>
+<p>You can always write the output of a command to a file by redirecting, i.e. using the &#8216;&gt;&#8217; character:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{print $1}&#39;</span> test.txt &gt; output.txt
+</pre></div>
+</div>
+<p>This will create a file called output.txt, overwriting any previous contents, with the output of the &#8216;awk&#8217; command.</p>
+<p>This will allow us to simplify writing our own software. For example, it might not be necessary to open a file for writing in Python, so instead of this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>...we can simply do this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="mf">0.5</span>
+</pre></div>
+</div>
+<p>...and then run it like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python with.py &gt; test.txt
+</pre></div>
+</div>
+<p>This has the added flexibility that we haven&#8217;t hard coded the output file name.</p>
+<p><em>Exercise</em>: rewrite your program that generates the 10,000 functions file to write to standard output.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basic Unix shell commands</a><ul>
+<li><a class="reference internal" href="#unix-pipelines">Unix pipelines</a></li>
+<li><a class="reference internal" href="#redirecting">Redirecting</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="python_generate_file.html" title="previous chapter">Generating input data using Python</a></li>
+      <li>Next: <a href="regex.html" title="next chapter">Regular expressions</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/unix.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/unix.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
