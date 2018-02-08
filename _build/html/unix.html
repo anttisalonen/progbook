@@ -341,7 +341,7 @@ not found
 <div class="section" id="if-and-branches">
 <h3>if and branches<a class="headerlink" href="#if-and-branches" title="Permalink to this headline">¶</a></h3>
 <p>The shell built-in command &#8220;if&#8221; allows branching. There are other built-ins for comparing values against each other. For example:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ grep -q <span class="m">23456</span> test.txt <span class="p">;</span> <span class="nv">return_value</span><span class="o">=</span><span class="nv">$?</span><span class="p">;</span> <span class="k">if</span> <span class="o">[</span> <span class="nv">$return_value</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="s2">&quot;found&quot;</span><span class="p">;</span> <span class="k">else</span> <span class="nb">echo</span> <span class="s2">&quot;not found&quot;</span><span class="p">;</span> <span class="k">fi</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ grep -q <span class="m">2345</span> test.txt <span class="p">;</span> <span class="nv">return_value</span><span class="o">=</span><span class="nv">$?</span><span class="p">;</span> <span class="k">if</span> <span class="o">[</span> <span class="nv">$return_value</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="s2">&quot;found&quot;</span><span class="p">;</span> <span class="k">else</span> <span class="nb">echo</span> <span class="s2">&quot;not found&quot;</span><span class="p">;</span> <span class="k">fi</span>
 </pre></div>
 </div>
 <p>This command will output &#8220;found&#8221; if the string was found in the input file, and &#8220;not found&#8221; otherwise. (The &#8220;-q&#8221; switch to grep suppresses output.)</p>
@@ -351,7 +351,7 @@ not found
 <p>It&#8217;s often practical to store scripts to a file. Here&#8217;s the previous example stored in a file:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
-grep -q <span class="m">23456</span> test.txt
+grep -q <span class="m">2345</span> test.txt
 <span class="nv">return_value</span><span class="o">=</span><span class="nv">$?</span>
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$return_value</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
     <span class="nb">echo</span> <span class="s2">&quot;found&quot;</span>
@@ -363,7 +363,7 @@ grep -q <span class="m">23456</span> test.txt
 <p>The script behaves similarly as the one-liner, but the script has one more line: it starts with &#8220;#!/bin/bash&#8221;. This is also called shebang, a character sequence at the beginning of a script indicating which tool should be used to interpret the script (in this case bash).</p>
 <p>You can store the above in a file, and then execute it by passing it to bash explicitly:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ bash ./test.sh
-not found
+found
 </pre></div>
 </div>
 <p>Or you can simply make it executable, in which case it can be directly interpreted using bash:</p>
