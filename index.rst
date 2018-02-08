@@ -3,11 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to guide's documentation!
+Software development fundamentals
 =================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    learn
@@ -16,6 +16,7 @@ Welcome to guide's documentation!
    unix
    regex
    js
+   js2
 
 
 

@@ -4,7 +4,7 @@
         <head> 
                 <script> 
 var value = Math.floor(Math.random() * 25) + 1;
-function myfunction(txt) { 
+function guessed() { 
         str = "You guessed: " + document.getElementById("guess").value + "<br/>";
         guess = document.getElementById("guess").value;
         if(guess < value) {
@@ -26,7 +26,7 @@ function myfunction(txt) {
 
                 <form> 
                         <input type="text" id="guess" value=""> <br/>
-                        <input type="button" onclick="myfunction()" value="Guess"> 
+                        <input type="button" onclick="guessed()" value="Guess"> 
                 </form> 
 
                 <p id="paragraph"></p>

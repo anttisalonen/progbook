@@ -26,6 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Guessing game - improvements" href="js2.html" />
     <link rel="prev" title="Regular expressions" href="regex.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -48,11 +49,11 @@
 <p>Moreover, let&#8217;s write this such that it&#8217;s run in the browser. It should look something like this:</p>
 <img alt="_images/guess.png" src="_images/guess.png" />
 <p>Now, in order to do this we&#8217;re going to need Javascript and HTML.</p>
-<p>In order to get started, let&#8217;s search online for &#8220;html js&#8221;. We&#8217;ll end up at w3schools.com, a website with lots of tutorials and reference material for web development, including Javascript tutorials. You can go through those as much as you want.</p>
+<p>In order to get started, let&#8217;s search online for &#8220;html js&#8221;. We&#8217;ll find lots of tutorials and reference material for web development, including Javascript tutorials. You can go through those as much as you want.</p>
 <p>The development environment will work like this: create a file with an extension .html and open it in your text editor. After you&#8217;ve made changes to your file, you can open it in your browser. For example, if your file is called hello.html, you can open it in Firefox by running &#8220;firefox hello.html&#8221; in your terminal. When you make changes to the file, refresh the tab in your browser.</p>
 <p>What happens here is that the browser will read in the contents of your file and interpret it. The browser has an engine for reading and rendering HTML, such that if you for example mark a part of text as red in your HTML code, the browser will know to render that text red. Similarly the browser has a Javascript interpreter built in, and will execute the Javascript code embedded in the HTML file.</p>
-<p>In order to break down this task, we need to identify the main components of our software. We can accomplish this breakdown by looking at the tutorials at w3schools.com.</p>
-<p>After browsing some tutorials we can find one of the most basic HTML files:</p>
+<p>In order to break down this task, we need to identify the main components of our software. We can accomplish this breakdown by looking at the tutorials online.</p>
+<p>After browsing some tutorials we&#8217;re able to construct one of the most basic HTML files:</p>
 <div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -68,7 +69,7 @@
 </td></tr></table></div>
 <p>You can copy-paste this code into a file and open it in your browser. You should see a plain web page with a text &#8220;some text&#8221;.</p>
 <p>If we go through this in detail, we see a bunch of tags such as &#8220;&lt;html&gt;&#8221; which mostly have a start and an end (e.g. &#8220;&lt;/html&gt;&#8221;, and the text &#8220;some text&#8221; in the middle. Most of the tags aren&#8217;t very important now though I should note the tag &#8220;&lt;p&gt;&#8221; denotes a paragraph.</p>
-<p>After browsing some tutorials we can find one of the most basic &#8220;programs&#8221; that utilise JS and HTML:</p>
+<p>After browsing some tutorials we can write one of the most basic &#8220;programs&#8221; that utilise JS and HTML:</p>
 <div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -101,7 +102,7 @@
 </pre></div>
 </td></tr></table></div>
 <p>If you run this in your browser, you should see a text &#8220;old text&#8221; and a button. If you press the button, the text is replaced with &#8220;new text&#8221;.</p>
-<p>What happens here is that the paragraph has an ID, and the button has a Javascript function associated with it. When pressing the button, the browser executes the Javascript code, which changes the text.</p>
+<p>What happens here is that the paragraph has an ID, and the button has a Javascript function associated with it. When pressing the button, the browser executes the Javascript code which changes the text.</p>
 <p>In general, HTML describes the content, i.e. what is shown to the user, while Javascript describes the logic, i.e. what happens.</p>
 <p>Let&#8217;s put together one more example to capture the other bits and pieces we need for our game:</p>
 <div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -168,9 +169,9 @@
 <li>A button indicating we&#8217;d like to make a guess</li>
 <li>Text indicating whether our guess is correct or not</li>
 </ol>
-<p>You may need to debug Javascript, for example if you make a typo, causing your program to not run correctly. How to debug Javascript depends on your browser. For example with Chrome, you can hit F12 to bring up the developer information panel. This shows any Javascript errors, for example.</p>
-<p>You should now have the pieces you need to implement the guessing game. Good luck! Once you&#8217;re done, or if you get stuck, you can take a look at the appendix to see an example implementation.</p>
-<p>Extra work: have the program count the number of guesses, and display the total number at the end.</p>
+<p>You may need to debug Javascript, for example if you make a typo, causing your program to not run correctly. How to debug Javascript depends on your browser. For example with Chrome, you can hit F12 to bring up the developer information panel. This shows any Javascript errors, for example. You&#8217;ll also need to store the value to be guessed as a global variable, that is, outside any function. This ensures the value will stay persistent.</p>
+<p><em>Exercise</em>: Implement the guessing game. Good luck! Once you&#8217;re done, or if you get stuck, you can take a look at the appendix to see an example implementation.</p>
+<p><em>Exercise</em>: Have the program count the number of guesses, and display the total number at the end.</p>
 </div>
 
 
@@ -183,6 +184,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="regex.html" title="previous chapter">Regular expressions</a></li>
+      <li>Next: <a href="js2.html" title="next chapter">Guessing game - improvements</a></li>
   </ul></li>
 </ul>
 </div>

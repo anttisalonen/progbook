@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Guessing game - improvements &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Guessing game in JS" href="js.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="guessing-game-improvements">
+<h1>Guessing game - improvements<a class="headerlink" href="#guessing-game-improvements" title="Permalink to this headline">¶</a></h1>
+<p>Try to play the guessing game a few times.</p>
+<p>What is the best strategy to win the game in the least number of guesses? Have a think before reading further.</p>
+<p>You may have noticed that the best strategy is to guess at the middle point of the available range, that is, 12 or 13 when the maximum number is 25, and then on the middle point of the available range again depending on the answer, so either 6 if the number is smaller or 19 if the number is larger. This method will in general arrive at the right answer in the minimum number of guesses.</p>
+<p>In terms of O notation, the performance of such an algorithm would be O(log n), i.e. doubling the problem space will cause one more iteration. Think about it: if the maximum number was 50, the first guess should be 25, after which we know the number is either below 25 or between 26 and 50, such that the range is the same as if the original maximum had been 25.</p>
+<p>This algorithm is called &#8220;binary search&#8221; because it searches for an answer, and splits the search space in half with each lookup. It&#8217;s one of the most important concepts in computer science.</p>
+<p>What we&#8217;ll write next is a binary search algorithm to solve the game for us. Let&#8217;s add a button that whenever it&#8217;s pressed, it&#8217;ll make an ideal guess (without looking up the correct answer!), such that we can skip playing the game and hit the button enough times to have the function find the correct number for us.</p>
+<p>In more detail, what should happen is that pressing the new button will call a function which will need to decide what to guess, enter that number in the field, press the button to make a guess, and read and understand the text saying whether the number was too small, too big or correct.</p>
+<p>Here are the building blocks for this to get you started:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">my_guess</span> <span class="o">=</span> <span class="cm">/* TODO */</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;guess&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">my_guess</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;guess_button&quot;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">answer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;paragraph&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="s2">&quot;smaller&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* TODO */</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>The above snippet demonstrates the following:</p>
+<ul class="simple">
+<li>On line 2, the label is set to be whatever the value of &#8220;my_guess&#8221; is</li>
+<li>On line 3, a button with the ID &#8220;guess_button&#8221; is clicked</li>
+<li>On line 4, the text indicating the answer is stored in a variable</li>
+<li>On line 5, the search string is searched for the text &#8220;smaller&#8221;. -1 will indicate the string was not found.</li>
+</ul>
+<p><em>Exercise</em>: What does the search() function actually return, and what exactly can you pass to it as a parameter? Find the reference for the function online.</p>
+<p>The above should be enough to put the general infrastructure in place for our button. What&#8217;s still required is the actual logic. I can share some hints:</p>
+<ul class="simple">
+<li>You will need to track the upper and lower limit of the range where the correct number might reside</li>
+<li>As these will need to be stored between button clicks (one click will only guess once), they need to be stored outside the function</li>
+<li>The upper and lower limit are needed to define the value to guess, and are influenced by the answer string</li>
+</ul>
+<p><em>Exercise</em>: Implement this button that plays the number guessing game.</p>
+<p><em>Exercise</em>: Once you&#8217;ve implemented this button, you might want to experiment with increasing the maximum number from 25 to something larger, for example 5000. See if your algorithm still finds the correct number with a small number of guesses. Make sure you define the maximum number only once in the source code such that there&#8217;s no worry of your different functions going out of sync.</p>
+<p><em>Exercise</em>: The original image of the game included a text &#8220;I&#8217;m thinking of a number between 1 and 25,&#8221; but after the previous exercise, this might not be true anymore. Modify this string based on the variable you have that holds the maximum value. For this you&#8217;ll need to run Javascript at the page loading phase. Look up online how to do this.</p>
+<p><em>Exercise</em>: Assuming the maximum number is 5000, what is the maximum number of guesses the algorithm will need in order to find the correct number? Hint: the algorithm has O(log n) complexity.</p>
+<p>Note that the Javascript code is executed in the browser. This means that if you were to load a public webpage with, for example, such a game, you can modify the HTML your browser renders to add a new button, and the Javascript your browser executes to solve the game. It may be difficult to identify and understand the correct Javascript in order to do this, depending on the web page, but as the Javascript execution and HTML are in the end controlled by the browser, in general there&#8217;s nothing stopping any webpage visitors from making their own additions to the code they execute.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="js.html" title="previous chapter">Guessing game in JS</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/js2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/js2.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width">
+<html> 
+        <head> 
+                <script> 
+var max_value = 5000;
+var min_value = 1;
+var value = Math.floor(Math.random() * max_value) + min_value;
+var number_of_guesses = 0;
+function init() {
+    document.getElementById("intro").innerHTML = "Guessing game! I'm thinking of a number between " + min_value + " and " + max_value + ", can you guess what it is?";
+}
+window.onload = init;
+function guessed() { 
+    number_of_guesses++;
+    str = "You guessed: " + document.getElementById("guess").value + "<br/>";
+    guess = document.getElementById("guess").value;
+    if(guess < value) {
+            str += "My number is larger!";
+    } else if(guess > value) {
+            str += "My number is smaller!";
+    } else {
+            str += "Correct! And it only took you " + number_of_guesses + " guesses!";
+    }
+    document.getElementById("paragraph").innerHTML = str
+} 
+
+function solve() {
+    var my_guess = Math.floor((max_value + min_value) / 2);
+    document.getElementById("guess").value = my_guess;
+    document.getElementById("guess_button").click();
+    var answer = document.getElementById("paragraph").innerHTML;
+    if(answer.search("smaller") != -1) {
+        max_value = my_guess - 1;
+    } else if(answer.search("larger") != -1) {
+        min_value = my_guess + 1;
+    }
+}
+                </script> 
+        </head> 
+
+        <body> 
+                <p id="intro">
+                </p>
+
+                <form> 
+                        <input type="text" id="guess" value=""> <br/>
+                        <input type="button" onclick="guessed()" value="Guess" id="guess_button"> <br/>
+                        <input type="button" onclick="solve()" value="Solve"> 
+                </form> 
+
+                <p id="paragraph"></p>
+
+        </body> 
+</html> 
+
