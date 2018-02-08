@@ -10,6 +10,8 @@ Welcome to guide's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   learn
+   lang
    python_generate_file
    unix
    regex

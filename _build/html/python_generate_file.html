@@ -46,7 +46,7 @@
   <div class="section" id="generating-input-data-using-python">
 <h1>Generating input data using Python<a class="headerlink" href="#generating-input-data-using-python" title="Permalink to this headline">¶</a></h1>
 <p>Previously we wrote a program that uses the quadratic formula. Let&#8217;s scale this up and have the program calculate the root of 10,000 functions. For this, defining 10,000 functions is required. These 10,000 functions should be defined in a file.</p>
-<p>Before we can define 10,000 functions in a file, we need to decide on the file format. A function can be represented by three numbers; a, b and c. Hence the file will need to store 30,000 numbers. One of the simplest ways to achieve this is to store them as /delimiter separated values/, e.g. three numbers per line, delimited by a space character.</p>
+<p>Before we can define 10,000 functions in a file, we need to decide on the file format. A function can be represented by three numbers; a, b and c. Hence the file will need to store 30,000 numbers. One of the simplest ways to achieve this is to store them as <em>delimiter separated values</em>, e.g. three numbers per line, delimited by a space character.</p>
 <p>How would we go about generating this file in Python? The numbers should be random. Python provides a set of random functions, the simplest one being random.random(), which returns a random floating point number between 0 and 1:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 

@@ -158,6 +158,160 @@ In general, the commands can be combined in any way, giving a lot of power to th
 
 *Exercise*: Find out how many lines in the file have no '-' character.
 
+Further Unix shell tips and tricks
+==================================
+
+man
+~~~
+
+The command "man" (short for "manual") allows you to browse the documentation of different tools. For example, running "man grep" will display the documentation for grep. The documentation is opened using "less", such that you can browse the text freely and exit with 'q'.
+
+sort
+~~~~
+
+The tool "sort" sorts its input line by line. By default it sorts alphabetically, but by passing the switch "-n" it will interpret its input data numerically. It by default sorts based on the beginning of each line but this can be changed:
+
+.. code-block:: bash
+
+    $ sort -n test.txt | head
+    -9.995596 8.887278 2.325502
+    -9.995454 -0.339710 4.518171
+    -9.993047 -9.059912 -0.660508
+    -9.990530 -5.503126 -8.374026
+    [...]
+
+(If your sort command output seems nonsensical, it might be due to the locale set on your shell such that the decimal point is defined as ',' instead of '.', confusing sort. You should be able to fix this by running "export LC_ALL=C".)
+
+The above sorted the data based on the first column. If we wanted to sort by the second column instead, we can use:
+
+.. code-block:: bash
+
+    $ sort -n -k 2 test.txt | head
+    0.649875 -9.998834 2.834749
+    -3.819303 -9.998413 -7.295722
+    0.985071 -9.997176 1.182082
+    -6.991833 -9.995815 -7.523136
+
+"sort" also allows redefining the delimiter character using the "-t" switch. For more information, run "man sort".
+
+Variables
+~~~~~~~~~
+
+Variable support is typically something that Unix shells have built in. That is, defining variables isn't executing a program per se, but rather using a feature of the shell itself.
+
+Terminology wise, there are different Unix shells (called for example bash, tcsh, zsh), each with different characteristics and quirks, but each one typically implements the same core functionality, namely being compatible with the original Unix shell (sh) and conforming to the POSIX shell specification.
+
+This example defines a variable in bash:
+
+.. code-block:: bash
+
+    $ MY_FILE=test.txt
+    $ head -n1 $MY_FILE
+    7.269553 3.427526 6.633603
+
+In other words, defining a variable is trivial, and you can use the variable by prefixing it with a dollar sign.
+
+Sometimes you might want to combine the variable with other bits. In those cases it's typically safe to enclose the variable with curly brackets ({ and }). This will make it clear when the variable name starts and ends. For example, if we wanted to combine two variables in one file name:
+
+    $ MY_FILE_START=test
+    $ MY_FILE_SUFFIX=txt
+    $ echo ${MY_FILE_START}.${MY_FILE_SUFFIX}
+    test.txt
+
+echo and cat
+~~~~~~~~~~~~
+
+The command "echo" simply prints its output. For example:
+
+.. code-block:: bash
+
+    $ echo "hello"
+    hello
+    $ echo $MY_FILE
+    test.txt
+
+The command "cat" concatenates files. It can also be used to display the contents of a file:
+
+.. code-block:: bash
+
+    $ cat test.txt
+    7.269553 3.427526 6.633603
+    1.980206 -3.655827 -2.629755
+    -8.687820 -6.930905 -8.731439
+    -0.608791 -8.126272 -8.652504
+
+Exit codes
+~~~~~~~~~~
+
+Whenever you've finished running a program in Unix, it will return an exit code. The convention is that the exit code 0 means success while non-0 means failure. You can typically see the conditions under which a program returns success or failure by looking at the documentation. For example, grep returns exit code 1 if the search string was not found at all. You can use the special built-in variable $? to access the exit code:
+
+.. code-block:: bash
+
+    $ grep 2345 test.txt
+    5.145898 3.219212 3.234599
+    3.323714 3.883829 -4.722345
+    6.142345 -4.611688 0.817618
+    -7.761082 9.886385 -5.742345
+    $ echo $?
+    0
+    $ grep 23456 test.txt
+    $ echo $?
+    1
+
+Multiple commands
+~~~~~~~~~~~~~~~~~
+
+You can run multiple commands in series in one line. The following runs "head", followed by "tail":
+
+.. code-block:: bash
+
+    $ head -n 1 test.txt ; tail -n 1 test.txt
+    7.269553 3.427526 6.633603
+    0.868340 -2.444818 -3.173135
+
+You can also run multiple commands depending on the exit code of the previous execution. The shorthand "&&" means "run the following command only if the previous command succeeded, i.e. returned an exit code 0". The shorthand "||" means "run the following command only if the previous command failed". You can also group commands using parentheses. For example:
+
+.. code-block:: bash
+
+    $ (grep 2345 test.txt && echo "found") || echo "not found"
+    5.145898 3.219212 3.234599
+    3.323714 3.883829 -4.722345
+    6.142345 -4.611688 0.817618
+    -7.761082 9.886385 -5.742345
+    found
+    $ (grep 23456 test.txt && echo "found") || echo "not found"
+    not found
+
+globbing
+~~~~~~~~
+
+Globbing refers to using special characters to match multiple files. An example is "\*.py" which means "all files with the extension .py in the current directory". For example, to find out the number of lines in Python files:
+
+.. code-block:: bash
+
+    $ wc -l *.py
+     156 conf.py
+       8 gen.py
+       4 rand.py
+       3 with.py
+     171 total
+
+seq
+~~~
+
+The command "seq" simply outputs a sequence of numbers:
+
+.. code-block:: bash
+
+    $ seq 1 5
+    1
+    2
+    3
+    4
+    5
+
+This might not be very useful by itself but can be handy when combined with other tools.
+
 Redirecting
 ===========
 
@@ -189,4 +343,78 @@ This will allow us to simplify writing our own software. For example, it might n
 
 This has the added flexibility that we haven't hard coded the output file name.
 
+If necessary, you can also discard the output by redirecting it to the special file /dev/null, which has the sole purpose of consuming and discarding all its input:
+
+.. code-block:: bash
+
+    $ python with.py > /dev/null
+
 *Exercise*: rewrite your program that generates the 10,000 functions file to write to standard output.
+
+Shell scripts
+=============
+
+simple for loops
+~~~~~~~~~~~~~~~~
+
+In most Unix shells including bash you can define for loops. For example, let's say you wanted to run your number generation program three times, and store the output to different files:
+
+.. code-block:: bash
+
+    $ for i in 1 2 3; do python gen.py > functions_${i}.txt ; done
+
+This will generate three files named functions_1.txt, functions_2.txt and functions_3.txt.
+
+If we wanted to generate a hundred files, typing in the number would get tedious. We can use "seq" instead:
+
+.. code-block:: bash
+
+    $ for i in $(seq 1 100); do python gen.py > functions_${i}.txt ; done
+
+This will generate a hundred files. The notation $(...) allows capturing the output of a command within another command.
+
+if and branches
+~~~~~~~~~~~~~~~
+
+The shell built-in command "if" allows branching. There are other built-ins for comparing values against each other. For example:
+
+.. code-block:: bash
+
+    $ grep -q 2345 test.txt ; return_value=$?; if [ $return_value -eq 0 ]; then echo "found"; else echo "not found"; fi
+
+This command will output "found" if the string was found in the input file, and "not found" otherwise. (The "-q" switch to grep suppresses output.)
+
+Storing scripts in a file
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It's often practical to store scripts to a file. Here's the previous example stored in a file:
+
+.. code-block:: bash
+
+    #!/bin/bash
+
+    grep -q 2345 test.txt
+    return_value=$?
+    if [ $return_value -eq 0 ]; then
+        echo "found"
+    else
+        echo "not found"
+    fi
+
+The script behaves similarly as the one-liner, but the script has one more line: it starts with "#!/bin/bash". This is also called shebang, a character sequence at the beginning of a script indicating which tool should be used to interpret the script (in this case bash).
+
+You can store the above in a file, and then execute it by passing it to bash explicitly:
+
+.. code-block:: bash
+
+    $ bash ./test.sh
+    found
+
+Or you can simply make it executable, in which case it can be directly interpreted using bash:
+
+.. code-block:: bash
+
+    $ chmod +x test.sh
+    $ ./test.sh
+
+(The command "chmod" modifies the access rights to a file, and passing it "+x" means the file is allowed to be executed.)
