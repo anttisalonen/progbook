@@ -14,6 +14,7 @@ Software development fundamentals
    lang
    python_generate_file
    unix
+   vcs
    regex
    js
    js2

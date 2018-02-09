@@ -301,7 +301,11 @@ not found
 </pre></div>
 </div>
 <p>This will create a file called output.txt, overwriting any previous contents, with the output of the &#8216;awk&#8217; command.</p>
-<p>This will allow us to simplify writing our own software. For example, it might not be necessary to open a file for writing in Python, so instead of this:</p>
+<p>You can also append to the end of an existing file, by using &#8216;&gt;&gt;&#8217;:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{print $1}&#39;</span> test.txt &gt;&gt; output.txt
+</pre></div>
+</div>
+<p>Redirecting will allow us to simplify writing our own software. For example, it might not be necessary to open a file for writing in Python, so instead of this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="mf">0.5</span><span class="p">)</span>

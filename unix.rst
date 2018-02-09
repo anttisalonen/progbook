@@ -323,7 +323,13 @@ You can always write the output of a command to a file by redirecting, i.e. usin
 
 This will create a file called output.txt, overwriting any previous contents, with the output of the 'awk' command.
 
-This will allow us to simplify writing our own software. For example, it might not be necessary to open a file for writing in Python, so instead of this:
+You can also append to the end of an existing file, by using '>>':
+
+.. code-block:: bash
+
+    $ awk '{print $1}' test.txt >> output.txt
+
+Redirecting will allow us to simplify writing our own software. For example, it might not be necessary to open a file for writing in Python, so instead of this:
 
 .. literalinclude:: with.py
    :language: python
