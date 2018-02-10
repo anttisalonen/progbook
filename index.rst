@@ -20,6 +20,7 @@ Software development fundamentals
    js2
    c2
    httpserv
+   sec
 
 
 
