@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Intermediate C &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="intermediate-c">
+<h1>Intermediate C<a class="headerlink" href="#intermediate-c" title="Permalink to this headline">¶</a></h1>
+<p>We&#8217;ve now had our first touch with C. Let&#8217;s go a bit deeper.</p>
+<p>When writing C, it sometimes helps to think about the memory layout, and what the CPU actually does. If you consider that C is practically a thin layer abstracting the CPU, it may start to feel more logical.</p>
+<div class="section" id="records">
+<h2>Records<a class="headerlink" href="#records" title="Permalink to this headline">¶</a></h2>
+<p>In our previous code we worked with functions and quadratic equations. A function was represented by three floating point values a, b and c. Let&#8217;s write a function that returns the value of the function at a given point x:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">function_value</span><span class="p">(</span><span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Seems straightforward enough. Now, let&#8217;s imagine we need to find out the difference between two functions at a given point x. Let&#8217;s write this function:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">difference_between_functions</span><span class="p">(</span><span class="kt">float</span> <span class="n">a1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">function_value</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">val2</span> <span class="o">=</span> <span class="n">function_value</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">val2</span> <span class="o">-</span> <span class="n">val1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This seems a bit unwieldly: The function takes seven parameters in total, and it&#8217;s easy to make a mistake somewhere. Surely we can do better?</p>
+<p>In C (and in fact most programming languages) it&#8217;s possible to combine values in <em>records</em> or composite data types. See below:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">function</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">a</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>If we wanted to declare such a struct and define its values, we can do simply:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">function</span> <span class="n">f</span><span class="p">;</span>
+<span class="n">f</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mf">1.0f</span><span class="p">;</span>
+<span class="n">f</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="p">;</span>
+<span class="n">f</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="mf">3.0f</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>...and use f.a, f.b and f.c as we want.</p>
+<p>We can now also redefine the function that calculates the value at a given point:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">function_value</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">function</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We&#8217;ve made a few changes:</p>
+<ul class="simple">
+<li>The parameters a, b and c are now replaced by (or contained in) f, a struct</li>
+<li>f is passed in as a const pointer, not a value</li>
+</ul>
+<p>About passing a variable to a function as a pointer: By default, in C, whenever a variable is passed to a function it&#8217;s passed <em>by value</em> which means a copy of the variable is made for the function (allocated in the stack), and the copy is discarded when the function returns. It often makes sense to pass a pointer to a function instead, i.e. <em>by reference</em>, because then the data the function has access to is the original data.</p>
+<p>In this case, it makes very little difference except that it saves an unnecessary copy of a few bytes.</p>
+<p>About the keyword const: this means we treat the variable f as a constant within the function, and if we wanted to modify the data pointed to by f, i.e. its fields a, b or c, the compiler would issue an error. This is helpful for us as the function implementors to ensure we don&#8217;t modify data we don&#8217;t want to modify, and helpful to the caller of the function to know that the function shouldn&#8217;t modify the input data.</p>
+<p>Because f is a pointer, the syntax for accessing the fields of the struct is different: the operator -&gt; is used instead of dot (.).</p>
+<p>Now, defining the function difference_between_functions can be much clearer:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">difference_between_functions</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">function</span> <span class="o">*</span><span class="n">f1</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">function</span> <span class="o">*</span><span class="n">f2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">function_value</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">val2</span> <span class="o">=</span> <span class="n">function_value</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">val2</span> <span class="o">-</span> <span class="n">val1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This seems much clearer.</p>
+<p><em>Exercise</em>: The derivative of a function ax^2 + bx + c is 2ax + b. Write a function that calculates the derivative for a function at a given point x and call it, with the input function passed as a pointer to a struct.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Intermediate C</a><ul>
+<li><a class="reference internal" href="#records">Records</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/c2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/c2.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

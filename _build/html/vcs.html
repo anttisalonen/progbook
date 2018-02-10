@@ -101,8 +101,9 @@ nothing to commit, working tree clean
 </div>
 <p>This means that the latest version git has stored matches the contents of our files (in this case, hello.py).</p>
 <p>Let&#8217;s now assume we want to make a change to our hello.py, by appending &#8220;print &#8216;hello world&#8217;&#8221; to it:</p>
-<blockquote>
-<div>$ echo &#8220;print &#8216;hello world&#8217;&#8221; &gt;&gt; hello.py</div></blockquote>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;print &#39;hello world&#39;&quot;</span> &gt;&gt; hello.py
+</pre></div>
+</div>
 <p>Now that we&#8217;ve modified our file, we can check status again:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ git status
 On branch master

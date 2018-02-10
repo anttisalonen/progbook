@@ -18,6 +18,8 @@ Software development fundamentals
    regex
    js
    js2
+   c2
+   httpserv
 
 
 
