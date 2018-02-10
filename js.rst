@@ -9,9 +9,11 @@ Moreover, let's write this such that it's run in the browser. It should look som
 
 Now, in order to do this we're going to need Javascript and HTML.
 
-In order to get started, let's search online for "html js". We'll find lots of tutorials and reference material for web development, including Javascript tutorials. You can go through those as much as you want.
+In order to get started, let's search online for "html js". We'll find lots of tutorials and reference material for web development, including Javascript tutorials.
 
-The development environment will work like this: create a file with an extension .html and open it in your text editor. After you've made changes to your file, you can open it in your browser. For example, if your file is called hello.html, you can open it in Firefox by running "firefox hello.html" in your terminal. When you make changes to the file, refresh the tab in your browser.
+*Exercise*: Find a Javascript tutorial online. You won't need it right now but in general you'll need to be able to look up more information when necessary.
+
+The development environment will work like this: create a file with an extension .html and open it in your text editor. After you've made changes to your file, you can open it in your browser. For example, on Linux, if your file is called hello.html, you can open it in Firefox by running "firefox hello.html" in your terminal. When you make changes to the file, refresh the tab in your browser. If you're running some other system you'll need to find out how to open a local HTML file.
 
 What happens here is that the browser will read in the contents of your file and interpret it. The browser has an engine for reading and rendering HTML, such that if you for example mark a part of text as red in your HTML code, the browser will know to render that text red. Similarly the browser has a Javascript interpreter built in, and will execute the Javascript code embedded in the HTML file.
 

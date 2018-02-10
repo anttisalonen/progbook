@@ -1,5 +1,5 @@
-Writing a simple web server
----------------------------
+Writing a toy web server
+------------------------
 
 After using Flask a bit, you might have wondered "what's actually happening?"
 
@@ -54,7 +54,31 @@ Let's walk through this step by step:
 * Line 39: We call accept(), another BSD sockets API function. This function call will block, i.e. our program execution will not proceed, until someone connects to the server.
 * Line 47: We call the function handle_server() which is a function that we will need to write ourselves. This defines what the server actually does.
 
-This code can be compiled e.g. with the following:
+Digression: type casting
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Line 26 is also interesting because we perform a *type cast* here. The line without the type cast would look like this:
+
+.. code-block:: c
+
+    if (bind(server_fd, &sa, sizeof sa) == -1) {
+
+That is, we simply pass the address of our struct sockaddr_in to the bind() function. If we were to try this then we would get a compiler warning, turned error if the "-Werror" switch is used:
+
+.. code-block:: bash
+
+    sock1.c: In function 'main'
+    sock1.c:26:22: error: passing argument 2 of 'bind' from incompatible pointer type [-Werror=incompatible-pointer-types]
+      if (bind(server_fd, &sa, sizeof sa) == -1) {
+                      ^
+    In file included from sock1.c:2:0:
+    /usr/include/sys/socket.h:123:12: note: expected 'const struct sockaddr *' but argument is of type 'struct sockaddr_in *'
+     extern int bind (int __fd, __CONST_SOCKADDR_ARG __addr, socklen_t __len)
+                ^~~~
+
+What the error tells us is that the function bind() expects a pointer to *struct sockaddr* but we pass it a pointer to *struct sockaddr_in*. Because of the way the API is specified (in the case of IP communication it actually required *struct sockaddr_in* despite what the function declaration says), we cast the type to *struct sockaddr*. Type casting basically means telling the compiler "please pretend this variable has a different type than what it actually has". Having this possibility in C makes C a weakly typed language.
+
+The code listing above can be compiled e.g. with the following:
 
 .. code-block:: bash
 
@@ -124,10 +148,20 @@ Let's see what we have...
 * Lines 1-2: In C, you can declare strings over multiple lines. The literal quotes will be simply concatenated at compile time. Also note the character sequence \r\n which means CRLF, or "carriage return, line feed".
 * Line 5: The function strncmp(), from string.h, is available for checking whether two strings are the same. In order to only check whether a substring matches another string, set the third parameter to the length of the string. See "man strncmp" for more information.
 * Line 9: The function strlen() is available for determining the length of a string.
-* Line 11: By adding a number to a pointer (string), you can effectively start reading from a later point in a string. In line 10, we checked that we're not reading past the end of a string. You must be careful not to read data past the end of a string is accessed. (If you do, you've created a potential security hole.)
+* Line 11: By adding a number to a pointer (string), you can effectively start reading from a later point in a string. (This is called doing *pointer arithmetic*.) In line 10, we checked that we're not reading past the end of a string. You must be careful not to read data past the end of a string is accessed. (If you do, you've created a potential security hole.)
 * Lines 16-19: For turning an integer value to a string (character buffer), allocate a buffer large enough, clear it using memset() and finally use the sprintf() function to write the integer value as the contents of the buffer.
 
-With the above knowledge it should be possible to finish the next exercise.
+Another potentially useful function is strtok(). Here's an example of its usage:
+
+.. code-block:: c
+    :linenos:
+
+    char *str = "this is a string.\n";
+    char *p = strtok(str, " "); // p now points to "this"
+    p = strtok(NULL, " ");      // p now points to "is"
+    p = strtok(NULL, " ");      // p now points to "a"
+
+With the above knowledge it should be possible to finish the next exercise. You may also find it interesting to take a look at the various man pages of the different functions.
 
 *Exercise*: Modify the function handle_client to check if the client connecting appears to make a HTTP 1.1 GET request. In this case, respond with a valid HTTP 1.1 200 response, replying with a short message such as "Hello world". Make sure you set the Content-Length part of the response correctly. Connect to your server using your web browser to ensure you send the correct data.
 
