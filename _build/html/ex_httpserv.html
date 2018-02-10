@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>16. Solutions to exercises: Writing a toy web server &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="15. Solutions to exercises: Guessing game - improvements" href="ex_js2.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="solutions-to-exercises-writing-a-toy-web-server">
+<h1>16. Solutions to exercises: Writing a toy web server<a class="headerlink" href="#solutions-to-exercises-writing-a-toy-web-server" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">try_handle_http</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">loc</span> <span class="o">=</span> <span class="n">buf</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="s">&quot;GET /&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;no GET</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">loc</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
+
+	<span class="kt">char</span> <span class="o">*</span><span class="n">found</span> <span class="o">=</span> <span class="n">strstr</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="s">&quot; HTTP/1.1&quot;</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">found</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;no HTTP found</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kt">int</span> <span class="n">file_len</span> <span class="o">=</span> <span class="n">found</span> <span class="o">-</span> <span class="n">loc</span><span class="p">;</span>
+	<span class="kt">char</span> <span class="n">file</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">file</span><span class="p">));</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">file_len</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;length too long</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">strncpy</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">file_len</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Searching for: &#39;%s&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="p">);</span>
+	<span class="n">loc</span> <span class="o">+=</span> <span class="n">file_len</span><span class="p">;</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="s">&quot; HTTP/1.1</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;no HTTP</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">&quot;page.html&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">&quot;guess2.html&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span> <span class="p">{</span>
+		<span class="kt">char</span> <span class="n">file_contents</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
+		<span class="n">memset</span><span class="p">(</span><span class="n">file_contents</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">file_contents</span><span class="p">));</span>
+		<span class="kt">FILE</span><span class="o">*</span> <span class="n">html_file</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">&quot;page.html&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span> <span class="p">{</span>
+			<span class="n">html_file</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&quot;sock_index.html&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">);</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="n">html_file</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&quot;guess2.html&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="kt">int</span> <span class="n">content_length</span> <span class="o">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">file_contents</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="n">html_file</span><span class="p">);</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;content length: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">content_length</span><span class="p">);</span>
+		<span class="n">fclose</span><span class="p">(</span><span class="n">html_file</span><span class="p">);</span>
+
+		<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">resp1</span> <span class="o">=</span> <span class="s">&quot;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Date: Mon, 5 Feb 2018 12:28:53 GMT</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Server: Simple</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Last-Modified: Mon, 5 Feb 2018 12:28:53 GMT</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;ETag: </span><span class="se">\&quot;</span><span class="s">34aa387-d-1568eb00</span><span class="se">\&quot;\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Accept-Ranges: bytes</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Content-Length: &quot;</span><span class="p">;</span>
+		<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">resp2</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Vary: Accept-Encoding</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Content-Type: text/html</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+		<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">resp1</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">resp1</span><span class="p">));</span>
+		<span class="kt">char</span> <span class="n">len_buf</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+		<span class="n">sprintf</span><span class="p">(</span><span class="n">len_buf</span><span class="p">,</span> <span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="n">content_length</span><span class="p">);</span>
+		<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">len_buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">len_buf</span><span class="p">));</span>
+		<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">resp2</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">resp2</span><span class="p">));</span>
+		<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">file_contents</span><span class="p">,</span> <span class="n">content_length</span><span class="p">);</span>
+		<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="p">{</span>
+		<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">resp</span> <span class="o">=</span> <span class="s">&quot;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Date: Mon, 5 Feb 2018 12:28:53 GMT</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Server: Simple</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Last-Modified: Mon, 5 Feb 2018 12:28:53 GMT</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;ETag: </span><span class="se">\&quot;</span><span class="s">34aa387-d-1568eb00</span><span class="se">\&quot;\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Accept-Ranges: bytes</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Content-Length: 51</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Vary: Accept-Encoding</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Content-Type: text/plain</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span>
+				   <span class="s">&quot;Hello World! My payload includes a trailing CRLF.</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+		<span class="kt">int</span> <span class="n">resp_len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">resp</span><span class="p">,</span> <span class="n">resp_len</span><span class="p">);</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Wrote %d/%d bytes.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ret</span><span class="p">,</span> <span class="n">resp_len</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">handle_client</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">for</span><span class="p">(;;)</span> <span class="p">{</span>
+		<span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+		<span class="n">memset</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+		<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="mi">1023</span><span class="p">);</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">perror</span><span class="p">(</span><span class="s">&quot;read&quot;</span><span class="p">);</span>
+			<span class="k">return</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+		<span class="n">try_handle_http</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+	<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;guess2.html&quot;</span><span class="p">&gt;</span>Guessing game<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+	<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ex_js2.html" title="previous chapter">15. Solutions to exercises: Guessing game - improvements</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ex_httpserv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/ex_httpserv.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

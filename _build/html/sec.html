@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Further on programming languages &#8212; guide 0.1 documentation</title>
+    <title>11. Further on programming languages &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Writing a toy web server" href="httpserv.html" />
+    <link rel="prev" title="10. Writing a toy web server" href="httpserv.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,9 +43,9 @@
           <div class="body" role="main">
             
   <div class="section" id="further-on-programming-languages">
-<h1>Further on programming languages<a class="headerlink" href="#further-on-programming-languages" title="Permalink to this headline">¶</a></h1>
+<h1>11. Further on programming languages<a class="headerlink" href="#further-on-programming-languages" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="security">
-<h2>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
+<h2>11.1. Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
 <p>In the chapter &#8220;Writing a toy web server&#8221;, I warned about potential security holes when writing C. Let&#8217;s take a look at the following code, which attempts to copy a string represented by a char pointer to a 20-element char array:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -59,16 +59,16 @@
 <p>This is possible in C and some other languages like C++ because of lack of <em>memory safety</em>; memory can be accidentally read or written. It&#8217;s a good reason to consider using another language for the task at hand, if possible.</p>
 </div>
 <div class="section" id="statically-vs-dynamically-typed-languages">
-<h2>Statically vs. dynamically typed languages<a class="headerlink" href="#statically-vs-dynamically-typed-languages" title="Permalink to this headline">¶</a></h2>
+<h2>11.2. Statically vs. dynamically typed languages<a class="headerlink" href="#statically-vs-dynamically-typed-languages" title="Permalink to this headline">¶</a></h2>
 <p>We already touched upon the topic of static and dynamic typing on our programming language taxonomy.</p>
 <p>We also briefly touched upon the concept of interpreted vs. compiled languages as we wrote our first Python programs.</p>
 <p>Typically (but not always), statically typed languages are compiled languages and dynamically typed languages are interpreted. There are pros and cons to both. The following attempts to summarise this somewhat.</p>
 <div class="section" id="catching-errors">
-<h3>Catching errors<a class="headerlink" href="#catching-errors" title="Permalink to this headline">¶</a></h3>
+<h3>11.2.1. Catching errors<a class="headerlink" href="#catching-errors" title="Permalink to this headline">¶</a></h3>
 <p>Compilation can catch errors that wouldn&#8217;t be caught in interpreted programs until the code with the error was executed. For example, accidentally attempting to assign a string value to an int will be a compiler error. With an interpreted language, the error typically won&#8217;t be raised until the code is ran.</p>
 </div>
 <div class="section" id="possible-program-space">
-<h3>Possible program space<a class="headerlink" href="#possible-program-space" title="Permalink to this headline">¶</a></h3>
+<h3>11.2.2. Possible program space<a class="headerlink" href="#possible-program-space" title="Permalink to this headline">¶</a></h3>
 <p>Because compilation and type checking necessarily eliminates some programs which in theory would be sound, the programmer can write programs in dynamically typed languages that aren&#8217;t possible in statically typed languages. Consider the following example (Python code):</p>
 <dl class="docutils">
 <dt>..code-block:: python</dt>
@@ -113,11 +113,11 @@ print func(&#8216;int&#8217;, 42)</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Further on programming languages</a><ul>
-<li><a class="reference internal" href="#security">Security</a></li>
-<li><a class="reference internal" href="#statically-vs-dynamically-typed-languages">Statically vs. dynamically typed languages</a><ul>
-<li><a class="reference internal" href="#catching-errors">Catching errors</a></li>
-<li><a class="reference internal" href="#possible-program-space">Possible program space</a></li>
+<li><a class="reference internal" href="#">11. Further on programming languages</a><ul>
+<li><a class="reference internal" href="#security">11.1. Security</a></li>
+<li><a class="reference internal" href="#statically-vs-dynamically-typed-languages">11.2. Statically vs. dynamically typed languages</a><ul>
+<li><a class="reference internal" href="#catching-errors">11.2.1. Catching errors</a></li>
+<li><a class="reference internal" href="#possible-program-space">11.2.2. Possible program space</a></li>
 </ul>
 </li>
 </ul>
@@ -127,7 +127,7 @@ print func(&#8216;int&#8217;, 42)</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="httpserv.html" title="previous chapter">Writing a toy web server</a></li>
+      <li>Previous: <a href="httpserv.html" title="previous chapter">10. Writing a toy web server</a></li>
   </ul></li>
 </ul>
 </div>

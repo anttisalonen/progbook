@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Programming language taxonomy &#8212; guide 0.1 documentation</title>
+    <title>8. Programming language taxonomy &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Generating input data using Python" href="python_generate_file.html" />
-    <link rel="prev" title="Learning to learn" href="learn.html" />
+    <link rel="next" title="9. Intermediate C" href="c2.html" />
+    <link rel="prev" title="7. Guessing game - improvements" href="js2.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,10 +44,10 @@
           <div class="body" role="main">
             
   <div class="section" id="programming-language-taxonomy">
-<h1>Programming language taxonomy<a class="headerlink" href="#programming-language-taxonomy" title="Permalink to this headline">¶</a></h1>
+<h1>8. Programming language taxonomy<a class="headerlink" href="#programming-language-taxonomy" title="Permalink to this headline">¶</a></h1>
 <p>There are a few concepts around programming languages that help pick up a new language.</p>
 <div class="section" id="typing">
-<h2>Typing<a class="headerlink" href="#typing" title="Permalink to this headline">¶</a></h2>
+<h2>8.1. Typing<a class="headerlink" href="#typing" title="Permalink to this headline">¶</a></h2>
 <p>Most programming languages come with a more or less sophisticated type systems. The type system defines how the types of variables and functions are used and interpreted.</p>
 <p>A common example is the following expression:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="m">4</span> + <span class="s2">&quot;2&quot;</span>
@@ -167,12 +167,12 @@
 <p>We see the result makes sense when inputting a number for all languages. When inputting &#8220;5&#8221; as string, C interprets this as a pointer and undefined behaviour ensues. Javascript implicitly converts the string to a number, which works when the string is indeed a number but returns &#8220;NaN&#8221; otherwise. When passing a string to the function in Python, Python interprets the multiplication as a multiplication of the string, hence duplicating the string. Haskell refuses to work with the string input.</p>
 <p>The above can be summarised by categorising the language type systems by how dynamic the typing is (static vs. dynamic), and the strength (strong vs. weak).</p>
 <div class="section" id="static-vs-dynamic-typing">
-<h3>Static vs. dynamic typing<a class="headerlink" href="#static-vs-dynamic-typing" title="Permalink to this headline">¶</a></h3>
+<h3>8.1.1. Static vs. dynamic typing<a class="headerlink" href="#static-vs-dynamic-typing" title="Permalink to this headline">¶</a></h3>
 <p>C and Haskell are statically typed languages: the types of all variables must be defined at compilation time. For C, the types must in most cases be explicitly stated, like we saw in the function definition above. Haskell typically infers the types at compile time.</p>
 <p>Javascript and Python are dynamically typed languages: the types of variables may change depending on context. For example, the variable &#8220;x&#8221; in the function above may be a string or an integer, depending on the caller.</p>
 </div>
 <div class="section" id="strong-vs-weak-typing">
-<h3>Strong vs. weak typing<a class="headerlink" href="#strong-vs-weak-typing" title="Permalink to this headline">¶</a></h3>
+<h3>8.1.2. Strong vs. weak typing<a class="headerlink" href="#strong-vs-weak-typing" title="Permalink to this headline">¶</a></h3>
 <p>C and Javascript are weakly typed languages: the types of the variables aren&#8217;t fixed but may be implicitly converted to other types depending on the context. For example, passing a string as an int will cause implicit conversion of the string to an int.</p>
 <p>Python and Haskell are strongly typed languages: the types of variables are fixed and will not implicitly change, such that any type conversions must be explicit by the programmer.</p>
 <p>Having this overview of the different type systems helps picking up and understanding new languages.</p>
@@ -188,10 +188,10 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Programming language taxonomy</a><ul>
-<li><a class="reference internal" href="#typing">Typing</a><ul>
-<li><a class="reference internal" href="#static-vs-dynamic-typing">Static vs. dynamic typing</a></li>
-<li><a class="reference internal" href="#strong-vs-weak-typing">Strong vs. weak typing</a></li>
+<li><a class="reference internal" href="#">8. Programming language taxonomy</a><ul>
+<li><a class="reference internal" href="#typing">8.1. Typing</a><ul>
+<li><a class="reference internal" href="#static-vs-dynamic-typing">8.1.1. Static vs. dynamic typing</a></li>
+<li><a class="reference internal" href="#strong-vs-weak-typing">8.1.2. Strong vs. weak typing</a></li>
 </ul>
 </li>
 </ul>
@@ -201,8 +201,8 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="learn.html" title="previous chapter">Learning to learn</a></li>
-      <li>Next: <a href="python_generate_file.html" title="next chapter">Generating input data using Python</a></li>
+      <li>Previous: <a href="js2.html" title="previous chapter">7. Guessing game - improvements</a></li>
+      <li>Next: <a href="c2.html" title="next chapter">9. Intermediate C</a></li>
   </ul></li>
 </ul>
 </div>

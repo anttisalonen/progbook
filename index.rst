@@ -9,18 +9,25 @@ Software development fundamentals
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
+   :numbered:
 
    learn
-   lang
    python_generate_file
-   unix
    vcs
+   unix
    regex
    js
    js2
+   lang
    c2
    httpserv
    sec
+
+   ex_python_generate_file
+   ex_regex
+   ex_js
+   ex_js2
+   ex_httpserv
 
 
 

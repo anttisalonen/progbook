@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>14. Solutions to exercises: Guessing game in JS &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="15. Solutions to exercises: Guessing game - improvements" href="ex_js2.html" />
+    <link rel="prev" title="13. Solutions to exercises: Regular expressions" href="ex_regex.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="solutions-to-exercises-guessing-game-in-js">
+<h1>14. Solutions to exercises: Guessing game in JS<a class="headerlink" href="#solutions-to-exercises-guessing-game-in-js" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span> 
+        <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span> 
+                <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span> 
+<span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">25</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">guessed</span><span class="p">()</span> <span class="p">{</span> 
+        <span class="nx">str</span> <span class="o">=</span> <span class="s2">&quot;You guessed: &quot;</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;guess&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">+</span> <span class="s2">&quot;&lt;br/&gt;&quot;</span><span class="p">;</span>
+        <span class="nx">guess</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;guess&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">guess</span> <span class="o">&lt;</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">str</span> <span class="o">+=</span> <span class="s2">&quot;My number is larger!&quot;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">guess</span> <span class="o">&gt;</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">str</span> <span class="o">+=</span> <span class="s2">&quot;My number is smaller!&quot;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">str</span> <span class="o">+=</span> <span class="s2">&quot;Correct!&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;paragraph&quot;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">str</span>
+<span class="p">}</span> 
+                <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span> 
+        <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span> 
+
+        <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span> 
+                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+                Guessing game! I&#39;m thinking of a number between 1 and 25, can you guess what it is?
+                <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+                <span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span> 
+                        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;guess&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;guessed()&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Guess&quot;</span><span class="p">&gt;</span> 
+                <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span> 
+
+                <span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;paragraph&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span> 
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span> 
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ex_regex.html" title="previous chapter">13. Solutions to exercises: Regular expressions</a></li>
+      <li>Next: <a href="ex_js2.html" title="next chapter">15. Solutions to exercises: Guessing game - improvements</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ex_js.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/ex_js.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
