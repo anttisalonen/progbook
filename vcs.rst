@@ -81,6 +81,8 @@ This means that the latest version git has stored matches the contents of our fi
 
 Let's now assume we want to make a change to our hello.py, by appending "print 'hello world'" to it:
 
+.. code-block:: bash
+
     $ echo "print 'hello world'" >> hello.py
 
 Now that we've modified our file, we can check status again:
