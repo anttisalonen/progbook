@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.2. Solutions to exercises: Regular expressions &#8212; guide 0.1 documentation</title>
+    <title>5. Intermediate web development &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6.3. Solutions to exercises: Guessing game in JS" href="ex_js.html" />
-    <link rel="prev" title="6.1. Solutions to exercises: Generating input data using Python" href="ex_python_generate_file.html" />
+    <link rel="next" title="5.1. Guessing game - improvements" href="js2.html" />
+    <link rel="prev" title="4.3. Further on programming languages" href="sec.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,11 +43,24 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="solutions-to-exercises-regular-expressions">
-<h1>6.2. Solutions to exercises: Regular expressions<a class="headerlink" href="#solutions-to-exercises-regular-expressions" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>sed -e <span class="s1">&#39;s/\.[0-9]*/.0/g&#39;</span> test.txt
-</pre></div>
+  <div class="section" id="intermediate-web-development">
+<h1>5. Intermediate web development<a class="headerlink" href="#intermediate-web-development" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="js2.html">5.1. Guessing game - improvements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json.html">5.2. JSON</a></li>
+</ul>
 </div>
+<p>In this section we&#8217;ll turn our guessing game from a single HTML page to a simple web app.</p>
+<p>We&#8217;ll start by adding some logic to gain some more experience in JS, and then learn about the following topics:</p>
+<ul class="simple">
+<li>JSON; which we&#8217;ll need to transfer data between backend and frontend</li>
+<li>HTML table generation</li>
+<li>AJAX; data transfer between backend and frontend in practice</li>
+<li>Setting up a simple NoSQL database</li>
+<li>Putting everything together</li>
+</ul>
+<p>What we&#8217;ll end up is a two-page guessing game as well as a simple algorithm to play it for us, with a hiscore list displayed on the page and stored in a database. It doesn&#8217;t sound like much but includes lots of software development fundamentals.</p>
 </div>
 
 
@@ -59,17 +72,15 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="ex_index.html">6. Exercises</a><ul>
-      <li>Previous: <a href="ex_python_generate_file.html" title="previous chapter">6.1. Solutions to exercises: Generating input data using Python</a></li>
-      <li>Next: <a href="ex_js.html" title="next chapter">6.3. Solutions to exercises: Guessing game in JS</a></li>
-  </ul></li>
+      <li>Previous: <a href="sec.html" title="previous chapter">4.3. Further on programming languages</a></li>
+      <li>Next: <a href="js2.html" title="next chapter">5.1. Guessing game - improvements</a></li>
   </ul></li>
 </ul>
 </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/ex_regex.rst.txt"
+      <li><a href="_sources/int_web_index.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -95,7 +106,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/ex_regex.rst.txt"
+      <a href="_sources/int_web_index.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

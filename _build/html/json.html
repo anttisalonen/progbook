@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.2. JSON &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Exercises" href="ex_index.html" />
+    <link rel="prev" title="5.1. Guessing game - improvements" href="js2.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="json">
+<h1>5.2. JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h1>
+<p>JSON stands for JavaScript Object Notation but is used a lot outside Javascript.</p>
+<p>It&#8217;s a data format for storing any basic data, is fairly simple and is often used for exchanging data between different programs (often implemented in different programming languages) or more generally storing the output of a program.</p>
+<p>Here&#8217;s a simple JSON file:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;key&quot;</span><span class="o">:</span> <span class="s2">&quot;value&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This JSON file contains one key named &#8220;key&#8221; which has the value &#8220;value&#8221;. JSON can store objects (collections of key-value pairs) like above, numbers, strings and lists. Here&#8217;s a more complex JSON file:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="s2">&quot;my_list&quot;</span><span class="o">:</span> <span class="p">[</span>
+         <span class="mi">1</span><span class="p">,</span>
+         <span class="mi">2</span><span class="p">,</span>
+         <span class="mi">3</span><span class="p">,</span>
+         <span class="mi">4</span>
+     <span class="p">],</span>
+     <span class="s2">&quot;alphabet&quot;</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+         <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+         <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">3</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here we have an object with two keys: my_list and alphabet. The item my_list is a list with four numbers as elements. The item alphabet is an object with three key-value pairs. Because objects and lists can include lists or other objects, JSON is very flexible and can support arbitrarily complex data. The top level item in JSON must be either an object or a list. In professional settings, it&#8217;s not uncommon to work with JSON files with thousands of entries.</p>
+<p>One of the main strengths about JSON is that pretty much all main languages have support for reading and writing JSON. Here&#8217;s an example Python code to read and use the above JSON file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;my_list&#39;</span><span class="p">])</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;alphabet&#39;</span><span class="p">][</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The above will print 4 and 3 (the length of the list and the value for key &#8216;c&#8217; respectively). Here&#8217;s an example Javascript code to read and use the same JSON file:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">parsed</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parsed</span><span class="p">[</span><span class="s1">&#39;my_list&#39;</span><span class="p">].</span><span class="nx">len</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parsed</span><span class="p">[</span><span class="s1">&#39;alphabet&#39;</span><span class="p">][</span><span class="s1">&#39;c&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>Here&#8217;s an example Python code to generate this JSON file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;my_list&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;my_alphabet&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or in Javascript:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">data</span><span class="p">.</span><span class="nx">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+<span class="nx">data</span><span class="p">.</span><span class="nx">alphabet</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="section" id="json-vs-delimiter-separated-data">
+<h2>5.2.1. JSON vs. delimiter separated data<a class="headerlink" href="#json-vs-delimiter-separated-data" title="Permalink to this headline">¶</a></h2>
+<p>In our code where we read in the 10,000 functions we used delimiter separated data (delimiter being the space character in our case). In other words, our data looked like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="m">7</span>.269553 <span class="m">3</span>.427526 <span class="m">6</span>.633603
+<span class="m">1</span>.980206 -3.655827 -2.629755
+-8.687820 -6.930905 -8.731439
+-0.608791 -8.126272 -8.652504
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<p>This is fine for many cases but it has some pros and cons when compared to JSON, namely:</p>
+<ul class="simple">
+<li>Delimiter separated data is easier to work on with standard Unix tools than JSON</li>
+<li>JSON provides more flexibility in terms of nesting data or variable length lists</li>
+<li>If no JSON library is available, parsing delimiter separated data is usually easier</li>
+</ul>
+<p>If we were to store this data in JSON, we could use for example:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;a&#39;</span><span class="o">:</span> <span class="mf">7.269553</span><span class="p">,</span>
+        <span class="s1">&#39;b&#39;</span><span class="o">:</span> <span class="mf">3.427526</span><span class="p">,</span>
+        <span class="s1">&#39;c&#39;</span><span class="o">:</span> <span class="mf">6.633603</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;a&#39;</span><span class="o">:</span> <span class="mf">1.980206</span><span class="p">,</span>
+        <span class="s1">&#39;b&#39;</span><span class="o">:</span> <span class="o">-</span><span class="mf">3.655827</span><span class="p">,</span>
+        <span class="s1">&#39;c&#39;</span><span class="o">:</span> <span class="o">-</span><span class="mf">2.629755</span>
+    <span class="p">},</span>
+    <span class="p">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>That is, a list of objects, whereby each object has the keys a, b and c. If we wanted to parse and use this in Python we could e.g. do this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)</span> <span class="c1"># data is now a list with 10,000 elements</span>
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># would print 10000 for 10,000 objects in the list</span>
+<span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">function</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">function</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">function</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="c1"># prints out the values for each function</span>
+</pre></div>
+</div>
+<p>Another way to store the same data would be:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">[</span><span class="mf">7.269553</span><span class="p">,</span> <span class="mf">3.427526</span><span class="p">,</span> <span class="mf">6.633603</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.980206</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.655827</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.629755</span><span class="p">],</span>
+    <span class="p">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>That is, a list of lists, whereby each inner list always has three entries. We could then use this data in Python e.g. like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)</span> <span class="c1"># data is now a list with 10,000 elements</span>
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># would print 10000 for 10,000 elements in the list</span>
+<span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span> <span class="c1"># function is a list of three floats</span>
+    <span class="k">print</span> <span class="n">function</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">function</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">function</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># prints out the values for each function</span>
+</pre></div>
+</div>
+<p>Whichever way the data is structured is mostly a matter of personal preference, though the latter in some ways has less room for error as there are no keys to type.</p>
+<p><em>Exercise</em>: Rewrite the Python program that generates 10,000 functions to generate JSON instead. You can simply put your data in a list, which you&#8217;d then need to write out using json.dumps(my_list, indent=4). You can initialise a list e.g. by stating my_list = list(), and append to a list using my_list.append(item). You can also create a dictionary e.g. by stating my_dict = dict(), and setting a value by stating my_dict[&#8216;key&#8217;] = value.</p>
+<p><em>Exercise</em>: Modify your Python program that reads in 10,000 functions to read from your JSON file instead.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">5.2. JSON</a><ul>
+<li><a class="reference internal" href="#json-vs-delimiter-separated-data">5.2.1. JSON vs. delimiter separated data</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="int_web_index.html">5. Intermediate web development</a><ul>
+      <li>Previous: <a href="js2.html" title="previous chapter">5.1. Guessing game - improvements</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">6. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/json.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/json.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

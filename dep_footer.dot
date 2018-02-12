@@ -1,0 +1,17 @@
+    python_generate_file -> unix;
+    learn -> unix;
+    unix -> vcs;
+    unix -> regex;
+    lang -> sec;
+    o_not -> js2;
+    learn -> js2;
+    lang -> js;
+    vcs -> js;
+    js -> js2;
+    js2 -> js3;
+    js3 -> json;
+    learn -> c2;
+    vcs -> c2;
+    c2 -> httpserv;
+    httpserv -> sec;
+}

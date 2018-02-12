@@ -1,5 +1,5 @@
-Basic Unix shell commands
--------------------------
+Basic Unix shell scripting
+--------------------------
 
 Basic Unix shell commands are quite useful in day to day software development.
 

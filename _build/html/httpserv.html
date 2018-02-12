@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>10. Writing a toy web server &#8212; guide 0.1 documentation</title>
+    <title>4.2. Writing a toy web server &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="11. Further on programming languages" href="sec.html" />
-    <link rel="prev" title="9. Intermediate C" href="c2.html" />
+    <link rel="next" title="4.3. Further on programming languages" href="sec.html" />
+    <link rel="prev" title="4.1. Intermediate C" href="c2.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,11 +44,11 @@
           <div class="body" role="main">
             
   <div class="section" id="writing-a-toy-web-server">
-<h1>10. Writing a toy web server<a class="headerlink" href="#writing-a-toy-web-server" title="Permalink to this headline">¶</a></h1>
+<h1>4.2. Writing a toy web server<a class="headerlink" href="#writing-a-toy-web-server" title="Permalink to this headline">¶</a></h1>
 <p>After using Flask a bit, you might have wondered &#8220;what&#8217;s actually happening?&#8221;</p>
 <p>In essence, Flask receives HTTP requests from the browser over the network, and sends HTML data back to the browser which then displays it. But we should dig a bit further here.</p>
 <div class="section" id="osi-model">
-<h2>10.1. OSI model<a class="headerlink" href="#osi-model" title="Permalink to this headline">¶</a></h2>
+<h2>4.2.1. OSI model<a class="headerlink" href="#osi-model" title="Permalink to this headline">¶</a></h2>
 <p>The OSI model is a way to structure the network activity in these kinds of situations. There are total seven layers which make up the model:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -232,7 +232,7 @@
 <li>Line 47: We call the function handle_server() which is a function that we will need to write ourselves. This defines what the server actually does.</li>
 </ul>
 <div class="section" id="digression-type-casting">
-<h3>10.1.1. Digression: type casting<a class="headerlink" href="#digression-type-casting" title="Permalink to this headline">¶</a></h3>
+<h3>4.2.1.1. Digression: type casting<a class="headerlink" href="#digression-type-casting" title="Permalink to this headline">¶</a></h3>
 <p>Line 26 is also interesting because we perform a <em>type cast</em> here. The line without the type cast would look like this:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">bind</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sa</span><span class="p">,</span> <span class="k">sizeof</span> <span class="n">sa</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 </pre></div>
@@ -387,9 +387,9 @@ Host: <span class="m">127</span>.0.0.1:1234
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">10. Writing a toy web server</a><ul>
-<li><a class="reference internal" href="#osi-model">10.1. OSI model</a><ul>
-<li><a class="reference internal" href="#digression-type-casting">10.1.1. Digression: type casting</a></li>
+<li><a class="reference internal" href="#">4.2. Writing a toy web server</a><ul>
+<li><a class="reference internal" href="#osi-model">4.2.1. OSI model</a><ul>
+<li><a class="reference internal" href="#digression-type-casting">4.2.1.1. Digression: type casting</a></li>
 </ul>
 </li>
 </ul>
@@ -399,8 +399,10 @@ Host: <span class="m">127</span>.0.0.1:1234
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="c2.html" title="previous chapter">9. Intermediate C</a></li>
-      <li>Next: <a href="sec.html" title="next chapter">11. Further on programming languages</a></li>
+  <li><a href="int_c_index.html">4. Intermediate C</a><ul>
+      <li>Previous: <a href="c2.html" title="previous chapter">4.1. Intermediate C</a></li>
+      <li>Next: <a href="sec.html" title="next chapter">4.3. Further on programming languages</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>

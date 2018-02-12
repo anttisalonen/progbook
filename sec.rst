@@ -38,7 +38,7 @@ Possible program space
 
 Because compilation and type checking necessarily eliminates some programs which in theory would be sound, the programmer can write programs in dynamically typed languages that aren't possible in statically typed languages. Consider the following example (Python code):
 
-..code-block:: python
+.. code-block:: python
     :linenos:
 
     def func(which_type, which_value):
