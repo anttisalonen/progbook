@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width">
+<html> 
+    <head> 
+        <script> 
+var overall_max_value = {{ max_value }};
+var max_value = overall_max_value;
+var min_value = 1;
+var value = Math.floor(Math.random() * max_value) + min_value;
+var number_of_guesses = 0;
+var game_over = false;
+var solver_used = false;
+function init() {
+    update_hiscore();
+}
+window.onload = init;
+function guessed() { 
+    if(game_over)
+        return;
+    number_of_guesses++;
+    str = "You guessed: " + document.getElementById("guess").value + "<br/>";
+    guess = document.getElementById("guess").value;
+    if(guess < value) {
+        str += "My number is larger!";
+    } else if(guess > value) {
+        str += "My number is smaller!";
+    } else {
+        str += "Correct! And it only took you " + number_of_guesses + " guesses!";
+        notify_server();
+        game_over = true;
+    }
+    document.getElementById("paragraph").innerHTML = str
+} 
+
+function update_hiscore() {
+    // Initialize the HTTP request.
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'hiscore', true);
+
+    // Track the state changes of the request.
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            display_hiscore(xhr.responseText);
+        }
+    };
+
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(JSON.stringify({'max_value': overall_max_value}));
+}
+
+function display_hiscore(data) {
+    var x;
+    table = document.getElementById("hiscore");
+    var parsed = JSON.parse(data);
+    for(var i = 0; i < Math.min(parsed.length, 5); i++) {
+        var x = parsed[i];
+        table.rows[i + 1].cells.item(1).innerHTML = x.date;
+        table.rows[i + 1].cells.item(2).innerHTML = x.user;
+        table.rows[i + 1].cells.item(3).innerHTML = x.guesses;
+    }
+}
+
+function notify_server() {
+    // Initialize the HTTP request.
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'finished', true);
+
+    // Track the state changes of the request.
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            display_hiscore(xhr.responseText);
+        }
+    };
+
+    if(solver_used) {
+        user = 'ai';
+    } else {
+        user = "{{ user }}";
+    }
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(JSON.stringify({'guesses': number_of_guesses, 'max_value': overall_max_value, 'user': user}));
+}
+
+function solve() {
+    solver_used = true;
+    var my_guess = Math.floor((max_value + min_value) / 2);
+    document.getElementById("guess").value = my_guess;
+    document.getElementById("guess_button").click();
+    var answer = document.getElementById("paragraph").innerHTML;
+    if(answer.search("smaller") != -1) {
+        max_value = my_guess - 1;
+    } else if(answer.search("larger") != -1) {
+        min_value = my_guess + 1;
+    }
+}
+        </script> 
+    </head> 
+
+    <body> 
+        <p id="intro">
+        Guessing game! I'm thinking of a number between 1 and {{ max_value }}, can you guess what it is?
+        </p>
+
+        <form> 
+            <input type="text" id="guess" value=""> <br/>
+            <input type="button" onclick="guessed()" value="Guess" id="guess_button"> <br/>
+            <input type="button" onclick="solve()" value="Solve"> 
+        </form> 
+
+        <p id="paragraph"></p>
+        <table id="hiscore" border="1">
+            <tr>
+                <td>Position</td>
+                <td>Date</td>
+                <td>User</td>
+                <td>Guesses</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+    </body> 
+</html> 
+

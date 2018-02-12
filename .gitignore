@@ -3,3 +3,4 @@ _build/html/_sources
 tmp
 dep_labels.dot
 dependencies.png
+*.pyc
