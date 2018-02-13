@@ -15,6 +15,6 @@ Writing files in Python is fairly straightforward. We can use the 'with' clause 
 .. literalinclude:: with.py
    :language: python
 
-This program will create a file called test.txt with the five times the line "0.5". (If the file existed before, it will be overwritten.)
+This program will create a file called test.txt with the five times the line "0.200000 0.500000". (If the file existed before, it will be overwritten.)
 
 *Exercise*: Create the described input file. To make the functions more interesting, don't use the output of random.random() directly, i.e. don't only store numbers between 0.0 and 1.0, but use multiplication and subtraction to generate numbers that are e.g. between -10.0 and 10.0.

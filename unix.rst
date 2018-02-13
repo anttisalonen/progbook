@@ -15,7 +15,7 @@ If you wanted to take a quick look browsing a file, you could use the utility 'l
 
 This will open the file test.txt in 'less', which allows you to read and browse the file. Less has a few useful commands:
 
-* 'q' exists less
+* 'q' exits less
 * '/' allows you to search in the file - type '/' followed by the string you want to search for, followed by 'return'
 * 'n' repeats the previous search
 * 'N' repeats the previous search but searches backwards
@@ -57,6 +57,8 @@ If you want to search for a string in the file, you can use 'grep':
     -1.123468 0.327963 1.291879
 
 This command would print all lines which have the string "1234" in them. The command 'grep' also has a lot of useful switches, for example including lines before or after the line that includes the search string, or inverse search (only print lines that don't have a match).
+
+*Exercise*: Find out which grep switch makes grep only select non-matching lines.
 
 If you only wanted to print one column of the file, you could achieve this using 'awk':
 
@@ -156,7 +158,7 @@ In this case, head doesn't take a file name as input, but instead reads from sta
 
 In general, the commands can be combined in any way, giving a lot of power to the user.
 
-*Exercise*: Find out how many lines in the file have no '-' character.
+*Exercise*: Find out how many lines in the file have no '0' character in them.
 
 Further Unix shell tips and tricks
 ==================================
@@ -213,6 +215,8 @@ In other words, defining a variable is trivial, and you can use the variable by 
 
 Sometimes you might want to combine the variable with other bits. In those cases it's typically safe to enclose the variable with curly brackets ({ and }). This will make it clear when the variable name starts and ends. For example, if we wanted to combine two variables in one file name:
 
+.. code-block:: bash
+
     $ MY_FILE_START=test
     $ MY_FILE_SUFFIX=txt
     $ echo ${MY_FILE_START}.${MY_FILE_SUFFIX}
@@ -239,6 +243,7 @@ The command "cat" concatenates files. It can also be used to display the content
     1.980206 -3.655827 -2.629755
     -8.687820 -6.930905 -8.731439
     -0.608791 -8.126272 -8.652504
+    [...]
 
 Exit codes
 ~~~~~~~~~~
@@ -282,7 +287,7 @@ You can also run multiple commands depending on the exit code of the previous ex
     $ (grep 23456 test.txt && echo "found") || echo "not found"
     not found
 
-globbing
+Globbing
 ~~~~~~~~
 
 Globbing refers to using special characters to match multiple files. An example is "\*.py" which means "all files with the extension .py in the current directory". For example, to find out the number of lines in Python files:
@@ -296,7 +301,7 @@ Globbing refers to using special characters to match multiple files. An example 
        3 with.py
      171 total
 
-seq
+Seq
 ~~~
 
 The command "seq" simply outputs a sequence of numbers:
@@ -312,10 +317,44 @@ The command "seq" simply outputs a sequence of numbers:
 
 This might not be very useful by itself but can be handy when combined with other tools.
 
+Find
+~~~~
+
+Find is useful for finding files, and optionally performing operations on them.
+
+For example, let's assume you have a directory with subdirectories, with the directory and subdirectories having lots of Python files. Let's further assume you had used the Python "with" statement in some of the files and would like to see how, but you can't remember which files exactly use "with". Find and grep to the rescue:
+
+.. code-block:: bash
+
+    $ find . -name '*.py' -exec grep with {} +
+    ./conf.py:# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+    ./with.py:with open('test.txt', 'w') as f:
+
+Let's go through this point by point:
+
+* We execute find with several parameters
+* The first parameter is '.', i.e. search in the current working directory (as well as subdirectories)
+* Search for files with the extension '.py'
+* For each found file, run "grep with $filename". The notation {} means the found file name will be used here, and the final '+' means the grep command will be run for once with all the files as parameters. For example, if the find command found three Python files, ./a.py, subdir/b.py and subdir2/c.py, it would execute "grep with ./a.py subdir/b.py subdir2/c.py".
+
+The output has two lines: one with grep matching in conf.py, where a comment using the word "with", and another in with.py where the Python with statement was used.
+
+If we only wanted to find the files with the Python extension without grepping, we simply leave out the -exec part:
+
+.. code-block:: bash
+
+    $ find . -name '*.py'
+    ./tmp/config.py
+    ./conf.py
+    ./my_project/hello.py
+    ./guess/guess.py
+    ./with.py
+    ./rand.py
+
 Redirecting
 ===========
 
-You can always write the output of a command to a file by redirecting, i.e. using the '>' character:
+You can always write the output of any command to a file by redirecting, i.e. using the '>' character:
 
 .. code-block:: bash
 
@@ -339,7 +378,7 @@ Redirecting will allow us to simplify writing our own software. For example, it 
 .. code-block:: python
 
     for i in xrange(5):
-        print "%f\n" % 0.5
+        print "%f %f\n" % (0.5, 0.2)
 
 ...and then run it like this:
 
@@ -347,7 +386,7 @@ Redirecting will allow us to simplify writing our own software. For example, it 
 
     $ python with.py > test.txt
 
-This has the added flexibility that we haven't hard coded the output file name.
+This has the added flexibility that we don't have to hard code the output file name.
 
 If necessary, you can also discard the output by redirecting it to the special file /dev/null, which has the sole purpose of consuming and discarding all its input:
 

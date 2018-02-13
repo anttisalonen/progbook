@@ -42,4 +42,4 @@ The same principle applies not only to Unix commands, but also to programming la
 
 Terminology wise, this book will use the terms "API" and "library" interexchangably. The acronym "API" stands for "Application Programming Interface" and generally means the interface, i.e. the available functions, variables and other constructs, that a library provides to make use of the library. For example, if one were to use the libcurl library, a library for downloading files via URLs, one would want to find the reference of the library on the webpage of the software.
 
-*exercise*: Find the reference of the libcurl library online. See if you can find both the entry point to the reference as well as the reference of a specific libcurl function, for example curl_easy_init().
+*Exercise*: Find the reference of the libcurl library online. See if you can find both the entry point to the reference as well as the reference of a specific libcurl function, for example curl_easy_init().
