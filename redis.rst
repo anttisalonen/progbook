@@ -1,7 +1,7 @@
 Redis
 -----
 
-Redis is a NoSQL database that we'll use for our hi-score list.
+Redis is a NoSQL database that we'll use for our high score list.
 
 Let's do the following:
 

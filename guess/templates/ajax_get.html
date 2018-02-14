@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width">
+<html> 
+    <head> 
+        <script> 
+function guessed() { 
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'get_test/', true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            console.log("Received: " + xhr.responseText);
+        }
+    };
+    xhr.send(null);
+}
+
+function do_post() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'post_test/', true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            console.log("Data received: " + xhr.responseText);
+        }
+    };
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(JSON.stringify({'my_number': 42}));
+}
+        </script> 
+    </head> 
+
+    <body> 
+        <input type="button" onclick="guessed()" value="GET" id="guess_button"> <br/>
+        <input type="button" onclick="do_post()" value="POST" id="guess_button"> <br/>
+    </body> 
+</html> 
+

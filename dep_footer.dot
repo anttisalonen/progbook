@@ -9,7 +9,11 @@
     vcs -> js;
     js -> js2;
     js2 -> json;
+    httpserv -> redis;
     json -> redis;
+    oop -> ajax;
+    binary -> ajax;
+    redis -> ajax;
     learn -> c2;
     vcs -> c2;
     c2 -> httpserv;

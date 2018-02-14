@@ -10,6 +10,19 @@ import json
 def hello():
     return "Hello World!"
 
+@app.route("/ajax_get.html")
+def ajax_get():
+    return render_template('ajax_get.html')
+
+@app.route("/post_test/", methods=['POST'])
+def post_test():
+    data = request.get_json()
+    return json.dumps({'my_number': data['my_number'] * 2})
+
+@app.route("/get_test/")
+def get_test():
+    return "Hello World!"
+
 @app.route("/guess_start/")
 def guess_start():
     return render_template('guess_start.html')

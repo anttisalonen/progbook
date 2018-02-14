@@ -50,6 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="js2.html">5.1. Guessing game - improvements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="json.html">5.2. JSON</a></li>
 <li class="toctree-l1"><a class="reference internal" href="redis.html">5.3. Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajax.html">5.4. AJAX</a></li>
 </ul>
 </div>
 <p>In this section we&#8217;ll turn our guessing game from a single HTML page to a simple web app.</p>
@@ -57,11 +58,54 @@
 <ul class="simple">
 <li>JSON; which we&#8217;ll need to transfer data between backend and frontend</li>
 <li>Setting up a simple NoSQL database</li>
-<li>HTML table generation</li>
 <li>AJAX; data transfer between backend and frontend in practice</li>
+<li>HTML table generation</li>
 <li>Putting everything together</li>
 </ul>
-<p>What we&#8217;ll end up is a two-page guessing game as well as a simple algorithm to play it for us, with a hi-score list displayed on the page and stored in a database. It doesn&#8217;t sound like much but includes lots of software development fundamentals.</p>
+<p>What we&#8217;ll end up is a two-page guessing game as well as a simple algorithm to play it for us, with a high score list displayed on the page and stored in a database. The high score list could look e.g. like this:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="53%" />
+<col width="11%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Position</th>
+<th class="head">Date</th>
+<th class="head">User</th>
+<th class="head">Guesses</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>2018=02=14 22:00:47.418645</td>
+<td>ai</td>
+<td>5</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>2018-02-14 22:01:14.371682</td>
+<td>User</td>
+<td>6</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>2018-02-14 22:00:35.543943</td>
+<td>ai</td>
+<td>6</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>2018-02-14 22:00:45.238895</td>
+<td>ai</td>
+<td>7</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>2018-02-14 22:00:51.128031</td>
+<td>ai</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>It doesn&#8217;t sound like much but includes lots of software development fundamentals.</p>
 </div>
 
 

@@ -51,15 +51,37 @@
     <span class="k">print</span> <span class="s1">&#39;a is greater than 5&#39;</span>
 </pre></div>
 </div>
-<p>Another is the standard library. For example, Python has a library for math functions, called &#8220;math&#8221;:</p>
+<p>While for example in C it would look like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a is greater than 5</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Another is the standard library, i.e. the library included as part of the language implementation. For example, as part of its standard library, Python has a module for math functions, called &#8220;math&#8221;:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 
 <span class="k">print</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
 </pre></div>
 </div>
-<p>The &#8220;math&#8221; library has lots of functions, and the <em>reference</em> for them can be accessed by running &#8220;help(math)&#8221; in Python interpreter (after &#8220;import math&#8221;). The concept of reference is important: it&#8217;s a factual listing of a library or a programming language. It typically doesn&#8217;t include examples or tutorials but is useful for getting a deeper understanding of a subject.</p>
-<p>For example, we will introduce the Unix command &#8220;ls&#8221;, a tool for listing files. In order to gain initial understanding of this tool, this book will give a couple of examples:</p>
+<p>The &#8220;math&#8221; module has lots of functions, and the <em>reference</em> for them can be accessed in the Python interpreter e.g. by running the following commands:</p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ python2
+Python <span class="m">2</span>.7.13 <span class="o">(</span>default, Dec <span class="m">21</span> <span class="m">2016</span>, <span class="m">07</span>:16:46<span class="o">)</span>
+<span class="o">[</span>GCC <span class="m">6</span>.2.1 <span class="m">20160830</span><span class="o">]</span> on linux2
+Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
+&gt;&gt;&gt; import math
+&gt;&gt;&gt; help<span class="o">(</span>math<span class="o">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>That is, on line 1 we run &#8220;python2&#8221; in shell to start the Python interactive interpreter. On line 5 we import the math module, and on line 6 we ask for the help for that module.</p>
+<p><em>Exercise</em>: Check out the help for the math module in Python. You can exit the help screen by pressing &#8220;q&#8221;. You can exit the Python interpreter by pressing ctrl+d.</p>
+<p>The concept of reference is important: it&#8217;s a factual listing of a library or a programming language. It typically doesn&#8217;t include examples or tutorials but is useful for getting a deeper understanding of a subject.</p>
+<p>As another example, we will introduce the Unix command &#8220;ls&#8221;, a tool for listing files. In order to gain initial understanding of this tool, this book will give a couple of examples:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls
 genindex.html  index.html  objects.inv                regex.html   searchindex.js  _static
 _images        js.html     python_generate_file.html  search.html  _sources        unix.html
@@ -72,7 +94,20 @@ drwxr-xr-x <span class="m">2</span> antti users  <span class="m">4096</span> Feb
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>This example shows that merely running &#8220;ls&#8221; will list the files, while adding the switch &#8220;-l&#8221; will give more information, such as the last modify time of the files. However, &#8220;ls&#8221; has a lot more possible switches which are not all covered in this book, although they will become useful and will to some extent be necessary to use, learn and understand as a software engineer. Hence it&#8217;ll be important to refer to the reference of the command to get an overview. This can typically be done either by passing the switch &#8220;&#8211;help&#8221; to the relevant command, or reading the manual for the command (by running &#8220;man&#8221;, e.g. &#8220;man ls&#8221;).</p>
+<p>This example shows that merely running &#8220;ls&#8221; will list the files, while adding the switch &#8220;-l&#8221; will give more information, such as the last modify time of the files. However, &#8220;ls&#8221; has a lot more possible switches which are not all covered in this book, although they will become useful and will to some extent be necessary to use, learn and understand as a software engineer. Hence it&#8217;ll be important to refer to the reference of the command to get an overview. This can typically be done either by passing the switch &#8220;&#8211;help&#8221; to the relevant command, or reading the manual for the command (by running &#8220;man&#8221;, e.g. &#8220;man ls&#8221;). For example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls --help
+Usage: ls <span class="o">[</span>OPTION<span class="o">]</span>... <span class="o">[</span>FILE<span class="o">]</span>...
+List information about the FILEs <span class="o">(</span>the current directory by default<span class="o">)</span>.
+Sort entries alphabetically <span class="k">if</span> none of -cftuvSUX nor --sort is specified.
+
+Mandatory arguments to long options are mandatory <span class="k">for</span> short options too.
+  -a, --all                  <span class="k">do</span> not ignore entries starting with .
+  -A, --almost-all           <span class="k">do</span> not list implied . and ..
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<p>If you run &#8220;man ls&#8221; you&#8217;ll open the manual page which you can exit by pressing &#8220;q&#8221;.</p>
+<p><em>Exercise</em>: Open the manual page for ls.</p>
 <p>The same principle applies not only to Unix commands, but also to programming languages as well as standard and non-standard libraries. For example, for most programming languages there is either a language specification or reference material available which should be consulted whenever questions arise about a specific behaviour in a programming language. Similarly, libraries typically come with references. The standard library for C is included in the Unix man pages, such that for example running &#8220;man scanf&#8221; will present a detailed documentation of the scanf() function family. For other libraries, the website of the library or other similar material should be consulted. Many libraries also install their own man pages as part of the library installation.</p>
 <p>Terminology wise, this book will use the terms &#8220;API&#8221; and &#8220;library&#8221; interexchangably. The acronym &#8220;API&#8221; stands for &#8220;Application Programming Interface&#8221; and generally means the interface, i.e. the available functions, variables and other constructs, that a library provides to make use of the library. For example, if one were to use the libcurl library, a library for downloading files via URLs, one would want to find the reference of the library on the webpage of the software.</p>
 <p><em>Exercise</em>: Find the reference of the libcurl library online. See if you can find both the entry point to the reference as well as the reference of a specific libcurl function, for example curl_easy_init().</p>
