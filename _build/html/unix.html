@@ -371,7 +371,7 @@ not found
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="k">for</span> i in <span class="k">$(</span>seq <span class="m">1</span> <span class="m">100</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span> python gen.py &gt; functions_<span class="si">${</span><span class="nv">i</span><span class="si">}</span>.txt <span class="p">;</span> <span class="k">done</span>
 </pre></div>
 </div>
-<p>This will generate a hundred files. The notation $(...) allows capturing the output of a command within another command.</p>
+<p>This will generate a hundred files. The notation $(...) allows capturing the output of a command within another command. By using curly braces ({}) around the &#8216;i&#8217; variable we ensure the variable name gets correctly understood by the shell and not confused with the file name template.</p>
 </div>
 <div class="section" id="if-and-branches">
 <h3>2.1.4.2. if and branches<a class="headerlink" href="#if-and-branches" title="Permalink to this headline">¶</a></h3>

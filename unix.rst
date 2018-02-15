@@ -416,7 +416,7 @@ If we wanted to generate a hundred files, typing in the number would get tedious
 
     $ for i in $(seq 1 100); do python gen.py > functions_${i}.txt ; done
 
-This will generate a hundred files. The notation $(...) allows capturing the output of a command within another command.
+This will generate a hundred files. The notation $(...) allows capturing the output of a command within another command. By using curly braces ({}) around the 'i' variable we ensure the variable name gets correctly understood by the shell and not confused with the file name template.
 
 if and branches
 ~~~~~~~~~~~~~~~
