@@ -35,7 +35,7 @@ function guessed() {
 function update_hiscore() {
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'hiscore', true);
+    xhr.open('GET', 'hiscore?max_value=' + overall_max_value, true);
 
     // Track the state changes of the request.
     xhr.onreadystatechange = function () {
@@ -45,7 +45,7 @@ function update_hiscore() {
     };
 
     xhr.setRequestHeader("Content-type", "application/json");
-    xhr.send(JSON.stringify({'max_value': overall_max_value}));
+    xhr.send(null);
 }
 
 function display_hiscore(data) {
