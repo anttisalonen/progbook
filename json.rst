@@ -39,7 +39,8 @@ One of the main strengths about JSON is that pretty much all main languages have
 
     import json
 
-    data = json.loads('data.json')
+    with open('data.json', 'r') as f:
+        data = json.load(f)
     print len(data['my_list'])
     print data['alphabet']['c']
 
@@ -114,7 +115,8 @@ That is, a list of objects, whereby each object has the keys a, b and c. If we w
 
     import json
 
-    data = json.loads('data.json') # data is now a list with 10,000 elements
+    with open('data.json', 'r') as f:
+        data = json.load(f)    # data is now a list with 10,000 elements
     print len(data) # would print 10000 for 10,000 objects in the list
     for function in data:
         print function['a'], function['b'], function['c'] # prints out the values for each function
@@ -135,7 +137,8 @@ That is, a list of lists, whereby each inner list always has three entries. We c
 
     import json
 
-    data = json.loads('data.json') # data is now a list with 10,000 elements
+    with open('data.json', 'r') as f:
+        data = json.load(f)    # data is now a list with 10,000 elements
     print len(data) # would print 10000 for 10,000 elements in the list
     for function in data: # function is a list of three floats
         print function[0], function[1], function[2] # prints out the values for each function

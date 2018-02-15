@@ -8,6 +8,7 @@ Exercises
    ex_regex
    ex_js
    ex_js2
+   ex_json
    ex_httpserv
    ex_ajax
 

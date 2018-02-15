@@ -73,7 +73,8 @@
 <p>One of the main strengths about JSON is that pretty much all main languages have support for reading and writing JSON. Here&#8217;s an example Python code to read and use the above JSON file:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;my_list&#39;</span><span class="p">])</span>
 <span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;alphabet&#39;</span><span class="p">][</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
 </pre></div>
@@ -135,7 +136,8 @@
 <p>That is, a list of objects, whereby each object has the keys a, b and c. If we wanted to parse and use this in Python we could e.g. do this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)</span> <span class="c1"># data is now a list with 10,000 elements</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>    <span class="c1"># data is now a list with 10,000 elements</span>
 <span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># would print 10000 for 10,000 objects in the list</span>
 <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
     <span class="k">print</span> <span class="n">function</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">function</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">function</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="c1"># prints out the values for each function</span>
@@ -152,7 +154,8 @@
 <p>That is, a list of lists, whereby each inner list always has three entries. We could then use this data in Python e.g. like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)</span> <span class="c1"># data is now a list with 10,000 elements</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>    <span class="c1"># data is now a list with 10,000 elements</span>
 <span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># would print 10000 for 10,000 elements in the list</span>
 <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span> <span class="c1"># function is a list of three floats</span>
     <span class="k">print</span> <span class="n">function</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">function</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">function</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># prints out the values for each function</span>

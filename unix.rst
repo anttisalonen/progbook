@@ -168,6 +168,18 @@ man
 
 The command "man" (short for "manual") allows you to browse the documentation of different tools. For example, running "man grep" will display the documentation for grep. The documentation is opened using "less", such that you can browse the text freely and exit with 'q'.
 
+There can be multiple man pages for a single command. For example, "man signal" can mean either looking up the signal() C standard library functions or the general overview of signals. The man pages are categorised by type, such that for example category 1 means commands that can be run, 3 means C standard library functions and 7 means miscellaneous documentation. You can specify which category you mean by including it in your command, for example:
+
+.. code-block:: bash
+
+    $ man 7 signal
+
+...will look up the man page on signal in category 7, providing the reader with an overview of signals in Unix.
+
+*Exercise*: Look up the man page for the command "man".
+
+*Exercise*: Look up the man page for the C function call "printf".
+
 sort
 ~~~~
 
@@ -463,3 +475,93 @@ Or you can simply make it executable, in which case it can be directly interpret
     $ ./test.sh
 
 (The command "chmod" modifies the access rights to a file, and passing it "+x" means the file is allowed to be executed.)
+
+Process handling
+================
+
+Process handling refers to managing how and when programs (processes) start and end.
+
+Typically, unless overridden by the program, hitting ctrl+c sends SIGTERM (signal to terminate) to the current program. SIGTERM is a signal that tells a program it should terminate, and by default will kill the program. However programs are allowed to install a *signal handler* for SIGTERM so they can perform any necessary cleanup before terminating, for example closing and saving any files that have been modified.
+
+Another useful key combination is ctrl+z which stops the program execution and puts it in the background. This means that you can start a process, for example "less test.txt", then exit the program but keep it running by pressing ctrl+z which will drop you back to the shell. Let's go through an example usage:
+
+.. code-block:: bash
+    :linenos:
+
+    $ cp -i big_file.tgz /mnt
+    ^Z
+    [1]+  Stopped                 cp -i big_file.tgz /mnt
+    $ bg
+    [1]+ cp -i big_file.tgz /mnt &
+    $ ls
+    Makefile  dep.rst   ex_js2.rst
+    $
+    [1]+  Done                    cp -i big_file.tgz /mnt
+
+Let's assume we have a very large file we want to copy somewhere. Copying large files can take time, and cp by default doesn't output anything while copying. We start the copy on line 1.
+
+After waiting for some time, we get bored and want to do something else so we press ctrl+z. This is shown in the terminal with ^Z (line 2). Pressing this key combination will tell us that the copy command has been stopped (line 3), and drops us back in our shell (line 4).
+
+We then issue the command "bg" which means the previous command should run in the *background*, meaning it can run but should not prevent us from using the shell. Issuing this command tells us on line 5 that the copy command continues to run again, pointed out by the & sign at the end of the command.
+
+On line 6 we can then do what we want, e.g. run "ls".
+
+On line 7, we have the prompt again and wait for some time, until we expect the copy command to have finished. We can check if this is indeed the case by hitting enter (doing nothing). Bash uses this opportunity to tell us that the copy operation indeed has finished (line 9).
+
+If you're running a command and you want to start it on the background right away, you can add the & sign to the end of the command:
+
+.. code-block:: bash
+
+    $ cp -i big_file.tgz /mnt &
+    [1] 23904
+    $
+
+If you have a command running in the background but want to run it on the foreground again, run "fg":
+
+.. code-block:: bash
+
+    $ cp -i big_file.tgz /mnt &
+    [1] 23904
+    $ fg
+    cp -i big_file.tgz /mnt
+    $
+
+If you want to see which commands you have running in the background in the current terminal, run "ps":
+
+.. code-block:: bash
+
+    $ ps
+      PID TTY          TIME CMD
+     5898 pts/8    00:00:01 bash
+    23904 pts/8    00:00:00 cp
+    23905 pts/8    00:00:00 ps
+
+If you want to send a SIGTERM signal to another process than what's currently running in the foreground, you can use the "kill" command with the PID (process ID) of the process you want to kill, for example:
+
+.. code-block:: bash
+
+    $ cp -i big_file.tgz /mnt &
+    [1] 23904
+    $ ps
+      PID TTY          TIME CMD
+     5898 pts/8    00:00:01 bash
+    23904 pts/8    00:00:00 cp
+    23905 pts/8    00:00:00 ps
+    $ kill 23904
+    [1]+  Terminated              cp -i big_file.tgz /mnt
+    $
+
+Note that bash tells you the PID of the newly started process when you start it on the background using &.
+
+Because a program can install a signal handler for SIGTERM, it's possible that sending SIGTERM to a program won't kill it. To force kill a program you need to send the signal SIGKILL (signal 9 as can be seen from the signal man page at "man 7 signal"):
+
+.. code-block:: bash
+
+    $ cp -i big_file.tgz /mnt &
+    [1] 23937
+    $ kill -9 23937
+    $
+    [1]+  Killed                  cp -i big_file.tgz /mnt
+    $
+
+*Exercise*: Start "less" to browse a file, hit ctrl+z to move it to the background, then run "fg" to bring it to foreground again.

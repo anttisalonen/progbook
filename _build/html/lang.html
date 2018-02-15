@@ -68,32 +68,35 @@
 <tr class="row-even"><td>Javascript</td>
 <td>42</td>
 </tr>
-<tr class="row-odd"><td>Perl</td>
+<tr class="row-odd"><td>Java</td>
+<td>42</td>
+</tr>
+<tr class="row-even"><td>Perl</td>
 <td>6</td>
 </tr>
-<tr class="row-even"><td>Lua</td>
+<tr class="row-odd"><td>Lua</td>
 <td>6</td>
 </tr>
-<tr class="row-odd"><td>Python</td>
+<tr class="row-even"><td>Python</td>
 <td>TypeError: unsupported operand type(s) for +: &#8216;int&#8217; and &#8216;str&#8217;</td>
 </tr>
-<tr class="row-even"><td>Haskell</td>
+<tr class="row-odd"><td>Haskell</td>
 <td>Error: No instance for (Num [Char]) arising from a use of ‘+’</td>
 </tr>
-<tr class="row-odd"><td>Ruby</td>
+<tr class="row-even"><td>Ruby</td>
 <td>String can&#8217;t be coerced into Fixnum (TypeError)</td>
 </tr>
-<tr class="row-even"><td>C</td>
+<tr class="row-odd"><td>C</td>
 <td>134514105 (undefined behaviour)</td>
 </tr>
-<tr class="row-odd"><td>C++</td>
+<tr class="row-even"><td>C++</td>
 <td>garbage (undefined behaviour)</td>
 </tr>
 </tbody>
 </table>
 <p>We see four different kinds of answers:</p>
 <ul class="simple">
-<li>Javascript implicitly converts the number 4 into a string, then appends 2, resulting in &#8220;42&#8221;</li>
+<li>Javascript and Java implicitly convert the number 4 into a string, then appends 2, resulting in &#8220;42&#8221;</li>
 <li>Perl and Lua implicitly convert the string &#8220;2&#8221; into a number, then add 4, resulting in 6</li>
 <li>Python, Haskell and Ruby throw an error</li>
 <li>C and C++ interpret the addition as pointer arithmetic, accessing memory after the statically allocated string &#8220;2&#8221;, resulting in undefined behaviour</li>
@@ -124,6 +127,12 @@
 </div>
 <p>While in Haskell the definition would look like this:</p>
 <div class="highlight-haskell"><div class="highlight"><pre><span></span><span class="nf">function</span> <span class="n">x</span> <span class="ow">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Or in Java:</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">function</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="o">;</span>
+<span class="o">}</span>
 </pre></div>
 </div>
 <p>What if we called these functions with a number? A string? The following table summarises this:</p>
@@ -157,25 +166,94 @@
 <td>&#8220;55&#8221;</td>
 <td>&#8220;abcabc&#8221;</td>
 </tr>
-<tr class="row-odd"><td>Haskell</td>
+<tr class="row-odd"><td>Java</td>
+<td>10</td>
+<td>Compile error</td>
+<td>Compile error</td>
+</tr>
+<tr class="row-even"><td>Haskell</td>
 <td>10</td>
 <td>Compile error</td>
 <td>Compile error</td>
 </tr>
 </tbody>
 </table>
-<p>We see the result makes sense when inputting a number for all languages. When inputting &#8220;5&#8221; as string, C interprets this as a pointer and undefined behaviour ensues. Javascript implicitly converts the string to a number, which works when the string is indeed a number but returns &#8220;NaN&#8221; otherwise. When passing a string to the function in Python, Python interprets the multiplication as a multiplication of the string, hence duplicating the string. Haskell refuses to work with the string input.</p>
+<p>We see the result makes sense when inputting a number for all languages. When inputting &#8220;5&#8221; as string, C interprets this as a pointer and undefined behaviour ensues. Javascript implicitly converts the string to a number, which works when the string is indeed a number but returns &#8220;NaN&#8221; otherwise. When passing a string to the function in Python, Python interprets the multiplication as a multiplication of the string, hence duplicating the string. Haskell and Java refuse to work with the string input.</p>
 <p>The above can be summarised by categorising the language type systems by how dynamic the typing is (static vs. dynamic), and the strength (strong vs. weak).</p>
 <div class="section" id="static-vs-dynamic-typing">
 <h3>3.1.1.1. Static vs. dynamic typing<a class="headerlink" href="#static-vs-dynamic-typing" title="Permalink to this headline">¶</a></h3>
-<p>C and Haskell are statically typed languages: the types of all variables must be defined at compilation time. For C, the types must in most cases be explicitly stated, like we saw in the function definition above. Haskell typically infers the types at compile time.</p>
+<p>C, Haskell and Java are statically typed languages: the types of all variables must be defined at compilation time. For C and Java, the types must in most cases be explicitly stated, like we saw in the function definitions above. Haskell typically infers the types at compile time.</p>
 <p>Javascript and Python are dynamically typed languages: the types of variables may change depending on context. For example, the variable &#8220;x&#8221; in the function above may be a string or an integer, depending on the caller.</p>
 </div>
 <div class="section" id="strong-vs-weak-typing">
 <h3>3.1.1.2. Strong vs. weak typing<a class="headerlink" href="#strong-vs-weak-typing" title="Permalink to this headline">¶</a></h3>
 <p>C and Javascript are weakly typed languages: the types of the variables aren&#8217;t fixed but may be implicitly converted to other types depending on the context. For example, passing a string as an int will cause implicit conversion of the string to an int.</p>
 <p>Python and Haskell are strongly typed languages: the types of variables are fixed and will not implicitly change, such that any type conversions must be explicit by the programmer.</p>
+<p>It should be pointed out that while, based on the above, Java and Haskell are both strongly typed, some languages are more strongly typed than others. In our 4 + &#8220;2&#8221; example we saw that Haskell returned an error while Java returned &#8220;42&#8221;. In this case, Java <em>implicitly converted</em> the type of the expression 4 to a string in order to avoid a compile error and return a string instead. Hence it can be argued that while Java is also a strongly typed language, Haskell is even more strongly typed.</p>
 <p>Having this overview of the different type systems helps picking up and understanding new languages.</p>
+</div>
+<div class="section" id="duck-typing">
+<h3>3.1.1.3. Duck typing<a class="headerlink" href="#duck-typing" title="Permalink to this headline">¶</a></h3>
+<p>The combination of strong, dynamic typing is also often called &#8220;duck typing&#8221;. This is based on the notion that &#8220;if it walks like a duck and it quacks like a duck, then it is a duck&#8221;. Let&#8217;s take a look at our Python function definition again:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>The operation to multiply with an int (2 *) is defined for both integers and strings. For integers, the traditional multiplication is performed, while for strings the string is duplicated. From the point of view of the function, it makes no difference which type is passed to the function, as long as it can be multiplied by 2, hence duck typing.</p>
+</div>
+<div class="section" id="defining-your-own-data-types">
+<h3>3.1.1.4. Defining your own data types<a class="headerlink" href="#defining-your-own-data-types" title="Permalink to this headline">¶</a></h3>
+<p>Most programming languages will make it possible for the programmer to define own data types. While a lot can be written about this topic, in this section we&#8217;ll describe two approaches: C structs and Python classes.</p>
+<p>In C, data types are defined by defining a struct, for example:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">my_datatype</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This struct consists of three integers. As C is relatively close to the actual hardware, we can reason about what this struct looks like in practice. In general, the amount of memory used by an integer in C is implementation defined but for the purpose of this section we can assume it&#8217;s 4 bytes (32 bits). Defining a structure like this typically means the data will be packed well, such that 12 bytes will be required for one allocation of struct my_datatype and the layout will only contain the memory required for a, b and c, nothing more. (Mixing different data types of different sizes may cause padding memory to be added by the C compiler, depending on the hardware constraints.)</p>
+<p>In this sense, defining structures in C mostly serves to combine various data into one unit, simplifying code and aiding in having the necessary memory available and allocated.</p>
+<p>In Python, on the other hand, data types can only be defined using the &#8220;class&#8221; keyword:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">call_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s1">&#39;A called&#39;</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="n">foo</span>
+
+    <span class="k">def</span> <span class="nf">call_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s1">&#39;B called - my foo is: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foo</span><span class="p">)</span>
+
+<span class="n">my_objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">(),</span> <span class="n">B</span><span class="p">(</span><span class="mi">42</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">my_objects</span><span class="p">:</span>
+    <span class="n">o</span><span class="o">.</span><span class="n">call_me</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<p>Let&#8217;s go through this line by line:</p>
+<ul class="simple">
+<li>Line 1: We define a <em>class</em> named A. At a high level, a class is a data type, describing data types and functions common to the class.</li>
+<li>Line 2: We define a <em>member function</em> - a function that&#8217;s part of a class.</li>
+<li>Line 3: Calling this member function will produce output</li>
+<li>Line 5: We define another class named B.</li>
+<li>Line 6: We define a <em>constructor</em> for class B: a function that will be called when an object of this type is created.</li>
+<li>Line 7: The constructor will create a <em>member variable</em> named foo - a variable that&#8217;s contained within the object.</li>
+<li>Line 9: We define a member function for class B - with the same name as we did for class A.</li>
+<li>Line 10: This member function produces some output and also reads the member variable value.</li>
+<li>Line 12: We define a list with two elements, and create (or <em>instantiate</em>) one object of each class; one of class A, one of class B. Class B has a constructor that requires one parameter: we pass in 42.</li>
+<li>Line 14: We iterate through our list.</li>
+<li>Line 15: We call the member function &#8220;call_me&#8221; for each element in the list, i.e. once for our object of class A, once for our object of class B.</li>
+</ul>
+<p>Executing this will output:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python2 cl.py
+A called
+B called - my foo is: <span class="m">42</span>
+</pre></div>
+</div>
+<p>We see an example of duck typing here: while classes A and B technically have nothing to do with each other, they do share the same <em>interface</em>, namely calling the function &#8220;call_me&#8221;. We also see that the classes in Python are more powerful than the structs in C: in Python we can combine multiple variables in one object, but in addition we can have member functions and use these to define an interface on interacting with the data.</p>
 </div>
 </div>
 </div>
@@ -192,6 +270,8 @@
 <li><a class="reference internal" href="#typing">3.1.1. Typing</a><ul>
 <li><a class="reference internal" href="#static-vs-dynamic-typing">3.1.1.1. Static vs. dynamic typing</a></li>
 <li><a class="reference internal" href="#strong-vs-weak-typing">3.1.1.2. Strong vs. weak typing</a></li>
+<li><a class="reference internal" href="#duck-typing">3.1.1.3. Duck typing</a></li>
+<li><a class="reference internal" href="#defining-your-own-data-types">3.1.1.4. Defining your own data types</a></li>
 </ul>
 </li>
 </ul>

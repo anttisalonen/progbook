@@ -174,6 +174,13 @@
 <div class="section" id="man">
 <h3>2.1.2.1. man<a class="headerlink" href="#man" title="Permalink to this headline">¶</a></h3>
 <p>The command &#8220;man&#8221; (short for &#8220;manual&#8221;) allows you to browse the documentation of different tools. For example, running &#8220;man grep&#8221; will display the documentation for grep. The documentation is opened using &#8220;less&#8221;, such that you can browse the text freely and exit with &#8216;q&#8217;.</p>
+<p>There can be multiple man pages for a single command. For example, &#8220;man signal&#8221; can mean either looking up the signal() C standard library functions or the general overview of signals. The man pages are categorised by type, such that for example category 1 means commands that can be run, 3 means C standard library functions and 7 means miscellaneous documentation. You can specify which category you mean by including it in your command, for example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ man <span class="m">7</span> signal
+</pre></div>
+</div>
+<p>...will look up the man page on signal in category 7, providing the reader with an overview of signals in Unix.</p>
+<p><em>Exercise</em>: Look up the man page for the command &#8220;man&#8221;.</p>
+<p><em>Exercise</em>: Look up the man page for the C function call &#8220;printf&#8221;.</p>
 </div>
 <div class="section" id="sort">
 <h3>2.1.2.2. sort<a class="headerlink" href="#sort" title="Permalink to this headline">¶</a></h3>
@@ -409,6 +416,82 @@ $ ./test.sh
 <p>(The command &#8220;chmod&#8221; modifies the access rights to a file, and passing it &#8220;+x&#8221; means the file is allowed to be executed.)</p>
 </div>
 </div>
+<div class="section" id="process-handling">
+<h2>2.1.5. Process handling<a class="headerlink" href="#process-handling" title="Permalink to this headline">¶</a></h2>
+<p>Process handling refers to managing how and when programs (processes) start and end.</p>
+<p>Typically, unless overridden by the program, hitting ctrl+c sends SIGTERM (signal to terminate) to the current program. SIGTERM is a signal that tells a program it should terminate, and by default will kill the program. However programs are allowed to install a <em>signal handler</em> for SIGTERM so they can perform any necessary cleanup before terminating, for example closing and saving any files that have been modified.</p>
+<p>Another useful key combination is ctrl+z which stops the program execution and puts it in the background. This means that you can start a process, for example &#8220;less test.txt&#8221;, then exit the program but keep it running by pressing ctrl+z which will drop you back to the shell. Let&#8217;s go through an example usage:</p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ cp -i big_file.tgz /mnt
+^Z
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>+  Stopped                 cp -i big_file.tgz /mnt
+$ <span class="nb">bg</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>+ cp -i big_file.tgz /mnt <span class="p">&amp;</span>
+$ ls
+Makefile  dep.rst   ex_js2.rst
+$
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>+  Done                    cp -i big_file.tgz /mnt
+</pre></div>
+</td></tr></table></div>
+<p>Let&#8217;s assume we have a very large file we want to copy somewhere. Copying large files can take time, and cp by default doesn&#8217;t output anything while copying. We start the copy on line 1.</p>
+<p>After waiting for some time, we get bored and want to do something else so we press ctrl+z. This is shown in the terminal with ^Z (line 2). Pressing this key combination will tell us that the copy command has been stopped (line 3), and drops us back in our shell (line 4).</p>
+<p>We then issue the command &#8220;bg&#8221; which means the previous command should run in the <em>background</em>, meaning it can run but should not prevent us from using the shell. Issuing this command tells us on line 5 that the copy command continues to run again, pointed out by the &amp; sign at the end of the command.</p>
+<p>On line 6 we can then do what we want, e.g. run &#8220;ls&#8221;.</p>
+<p>On line 7, we have the prompt again and wait for some time, until we expect the copy command to have finished. We can check if this is indeed the case by hitting enter (doing nothing). Bash uses this opportunity to tell us that the copy operation indeed has finished (line 9).</p>
+<p>If you&#8217;re running a command and you want to start it on the background right away, you can add the &amp; sign to the end of the command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ cp -i big_file.tgz /mnt <span class="p">&amp;</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="m">23904</span>
+$
+</pre></div>
+</div>
+<p>If you have a command running in the background but want to run it on the foreground again, run &#8220;fg&#8221;:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ cp -i big_file.tgz /mnt <span class="p">&amp;</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="m">23904</span>
+$ <span class="nb">fg</span>
+cp -i big_file.tgz /mnt
+$
+</pre></div>
+</div>
+<p>If you want to see which commands you have running in the background in the current terminal, run &#8220;ps&#8221;:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ps
+  PID TTY          TIME CMD
+ <span class="m">5898</span> pts/8    <span class="m">00</span>:00:01 bash
+<span class="m">23904</span> pts/8    <span class="m">00</span>:00:00 cp
+<span class="m">23905</span> pts/8    <span class="m">00</span>:00:00 ps
+</pre></div>
+</div>
+<p>If you want to send a SIGTERM signal to another process than what&#8217;s currently running in the foreground, you can use the &#8220;kill&#8221; command with the PID (process ID) of the process you want to kill, for example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ cp -i big_file.tgz /mnt <span class="p">&amp;</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="m">23904</span>
+$ ps
+  PID TTY          TIME CMD
+ <span class="m">5898</span> pts/8    <span class="m">00</span>:00:01 bash
+<span class="m">23904</span> pts/8    <span class="m">00</span>:00:00 cp
+<span class="m">23905</span> pts/8    <span class="m">00</span>:00:00 ps
+$ <span class="nb">kill</span> <span class="m">23904</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>+  Terminated              cp -i big_file.tgz /mnt
+$
+</pre></div>
+</div>
+<p>Note that bash tells you the PID of the newly started process when you start it on the background using &amp;.</p>
+<p>Because a program can install a signal handler for SIGTERM, it&#8217;s possible that sending SIGTERM to a program won&#8217;t kill it. To force kill a program you need to send the signal SIGKILL (signal 9 as can be seen from the signal man page at &#8220;man 7 signal&#8221;):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ cp -i big_file.tgz /mnt <span class="p">&amp;</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="m">23937</span>
+$ <span class="nb">kill</span> -9 <span class="m">23937</span>
+$
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>+  Killed                  cp -i big_file.tgz /mnt
+$
+</pre></div>
+</div>
+<p><em>Exercise</em>: Start &#8220;less&#8221; to browse a file, hit ctrl+z to move it to the background, then run &#8220;fg&#8221; to bring it to foreground again.</p>
+</div>
 </div>
 
 
@@ -440,6 +523,7 @@ $ ./test.sh
 <li><a class="reference internal" href="#storing-scripts-in-a-file">2.1.4.3. Storing scripts in a file</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#process-handling">2.1.5. Process handling</a></li>
 </ul>
 </li>
 </ul>
