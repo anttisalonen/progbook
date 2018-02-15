@@ -70,12 +70,11 @@ XmlHttpRequest
 
 XmlHttpRequest is the API that allows asynchronous communication with the server. It's now standardised across browsers such that all major browsers provide this API, allowing us as Javascript programmers to send and receive data from the server via HTTP. It's called XmlHttpRequest (probably) because it was originally mainly used to send and receive XML data, but in general it can be used to transfer any data. Specifically, we'll be using it to transfer JSON.
 
-XML and JSON
-~~~~~~~~~~~~
+.. topic:: XML and JSON
 
-You might wonder, what is this XML that I keep hearing about. XML (Extensible Markup Language) is a markup language that shares many similarities with HTML. Here's an example XML document:
+  You might wonder, what is this XML that I keep hearing about. XML (Extensible Markup Language) is a markup language that shares many similarities with HTML. Here's an example XML document:
 
-.. code-block:: xml
+  .. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
     <start_tag>
@@ -84,7 +83,7 @@ You might wonder, what is this XML that I keep hearing about. XML (Extensible Ma
         </second_tag>
     </start_tag>
 
-In general, you can define all the values (tag names, attribute keys and values, the contents in the body of a tag) as you wish. In this sense XML can be used to transfer generic data between two programs or components. For this use case XML is very similar to JSON. We're focusing on JSON in this book instead of XML because it's generally simpler to work with, and seems to be at least as common as XML if not more.
+  In general, you can define all the values (tag names, attribute keys and values, the contents in the body of a tag) as you wish. In this sense XML can be used to transfer generic data between two programs or components. For this use case XML is very similar to JSON. We're focusing on JSON in this book instead of XML because it's generally simpler to work with, and seems to be at least as common as XML if not more.
 
 Here's an example of XmlHttpRequest in practice - how to get some data from the server:
 
@@ -164,4 +163,4 @@ Further tips:
 * If you need to purge the database, call r.flushdb(). This will erase all data in the database.
 * You may want to write a small script or a URL handler to check the contents of the database to ensure you're adding the data there. You may alternatively want to use the Redis command line interface for this.
 
-We should now be able to store something resembling a high score list in a database, but we're still lacking the possibility for the user to enter his or her name, displaying the high score list on the web page, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapter.
+We should now be able to store something resembling a high score list in a database, but we're still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapters.

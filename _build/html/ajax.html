@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>5.4. AJAX &#8212; guide 0.1 documentation</title>
+    <title>5.5. AJAX &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. Exercises" href="ex_index.html" />
-    <link rel="prev" title="5.3. Redis" href="redis.html" />
+    <link rel="prev" title="5.4. Redis" href="redis.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="ajax">
-<h1>5.4. AJAX<a class="headerlink" href="#ajax" title="Permalink to this headline">¶</a></h1>
+<h1>5.5. AJAX<a class="headerlink" href="#ajax" title="Permalink to this headline">¶</a></h1>
 <p>AJAX stands for Asynchronous Javascript and XmlHttpRequest which is quite a mouthful. Before we go through what it is, let&#8217;s explain why we need it.</p>
 <p>Remember that what we wanted to do was have a high score list for our guessing game. We have the following constraints:</p>
 <ul class="simple">
@@ -72,7 +72,7 @@
 <p>Before we get to AJAX in detail, you might have noticed that we talk about server and client here, however if we simply load our HTML guessing game in the browser there is no server, only client. This means that we will have to pull up Flask, our web microframework again, as it has the capability of running a web server which we need going forwards.</p>
 <p><em>Exercise</em>: Move your guessing game HTML to be served by Flask. To do this, as per Flask documentation, you need to 1) create a directory named &#8220;templates&#8221; and move your HTML file there; 2) Set up a Flask &#8220;hello world&#8221; program such that there&#8217;s a URL which serves your HTML file (using render_template()); and 3) Start Flask and try it out to ensure everything is set up correctly.</p>
 <div class="section" id="asynchronous-execution">
-<h2>5.4.1. Asynchronous execution<a class="headerlink" href="#asynchronous-execution" title="Permalink to this headline">¶</a></h2>
+<h2>5.5.1. Asynchronous execution<a class="headerlink" href="#asynchronous-execution" title="Permalink to this headline">¶</a></h2>
 <p>Asynchronous Javascript and XmlHttpRequest. Asynchronous means that the code is not run synchronously. So far all our code has run synchronously. For example here:</p>
 <div class="highlight-js"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -103,10 +103,10 @@
 <p>What makes this asynchronous is that we define code which isn&#8217;t run synchronously with the execution flow otherwise.</p>
 </div>
 <div class="section" id="xmlhttprequest">
-<h2>5.4.2. XmlHttpRequest<a class="headerlink" href="#xmlhttprequest" title="Permalink to this headline">¶</a></h2>
+<h2>5.5.2. XmlHttpRequest<a class="headerlink" href="#xmlhttprequest" title="Permalink to this headline">¶</a></h2>
 <p>XmlHttpRequest is the API that allows asynchronous communication with the server. It&#8217;s now standardised across browsers such that all major browsers provide this API, allowing us as Javascript programmers to send and receive data from the server via HTTP. It&#8217;s called XmlHttpRequest (probably) because it was originally mainly used to send and receive XML data, but in general it can be used to transfer any data. Specifically, we&#8217;ll be using it to transfer JSON.</p>
-<div class="section" id="xml-and-json">
-<h3>5.4.2.1. XML and JSON<a class="headerlink" href="#xml-and-json" title="Permalink to this headline">¶</a></h3>
+<div class="topic">
+<p class="topic-title first">XML and JSON</p>
 <p>You might wonder, what is this XML that I keep hearing about. XML (Extensible Markup Language) is a markup language that shares many similarities with HTML. Here&#8217;s an example XML document:</p>
 <div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="nt">&lt;start_tag&gt;</span>
@@ -117,6 +117,7 @@
 </pre></div>
 </div>
 <p>In general, you can define all the values (tag names, attribute keys and values, the contents in the body of a tag) as you wish. In this sense XML can be used to transfer generic data between two programs or components. For this use case XML is very similar to JSON. We&#8217;re focusing on JSON in this book instead of XML because it&#8217;s generally simpler to work with, and seems to be at least as common as XML if not more.</p>
+</div>
 <p>Here&#8217;s an example of XmlHttpRequest in practice - how to get some data from the server:</p>
 <div class="highlight-js"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -200,8 +201,7 @@
 <li>If you need to purge the database, call r.flushdb(). This will erase all data in the database.</li>
 <li>You may want to write a small script or a URL handler to check the contents of the database to ensure you&#8217;re adding the data there. You may alternatively want to use the Redis command line interface for this.</li>
 </ul>
-<p>We should now be able to store something resembling a high score list in a database, but we&#8217;re still lacking the possibility for the user to enter his or her name, displaying the high score list on the web page, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapter.</p>
-</div>
+<p>We should now be able to store something resembling a high score list in a database, but we&#8217;re still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapters.</p>
 </div>
 </div>
 
@@ -213,12 +213,9 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">5.4. AJAX</a><ul>
-<li><a class="reference internal" href="#asynchronous-execution">5.4.1. Asynchronous execution</a></li>
-<li><a class="reference internal" href="#xmlhttprequest">5.4.2. XmlHttpRequest</a><ul>
-<li><a class="reference internal" href="#xml-and-json">5.4.2.1. XML and JSON</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">5.5. AJAX</a><ul>
+<li><a class="reference internal" href="#asynchronous-execution">5.5.1. Asynchronous execution</a></li>
+<li><a class="reference internal" href="#xmlhttprequest">5.5.2. XmlHttpRequest</a></li>
 </ul>
 </li>
 </ul>
@@ -227,7 +224,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="int_web_index.html">5. Intermediate web development</a><ul>
-      <li>Previous: <a href="redis.html" title="previous chapter">5.3. Redis</a></li>
+      <li>Previous: <a href="redis.html" title="previous chapter">5.4. Redis</a></li>
       <li>Next: <a href="ex_index.html" title="next chapter">6. Exercises</a></li>
   </ul></li>
   </ul></li>

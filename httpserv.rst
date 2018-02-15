@@ -54,29 +54,28 @@ Let's walk through this step by step:
 * Line 39: We call accept(), another BSD sockets API function. This function call will block, i.e. our program execution will not proceed, until someone connects to the server.
 * Line 47: We call the function handle_server() which is a function that we will need to write ourselves. This defines what the server actually does.
 
-Digression: type casting
-~~~~~~~~~~~~~~~~~~~~~~~~
+.. topic:: Digression: type casting
 
-Line 26 is also interesting because we perform a *type cast* here. The line without the type cast would look like this:
+  Line 26 is also interesting because we perform a *type cast* here. The line without the type cast would look like this:
 
-.. code-block:: c
+  .. code-block:: c
 
     if (bind(server_fd, &sa, sizeof sa) == -1) {
 
-That is, we simply pass the address of our struct sockaddr_in to the bind() function. If we were to try this then we would get a compiler warning, turned error if the "-Werror" switch is used:
+  That is, we simply pass the address of our struct sockaddr_in to the bind() function. If we were to try this then we would get a compiler warning, turned error if the "-Werror" switch is used:
 
-.. code-block:: bash
+  .. code-block:: bash
 
-    sock1.c: In function 'main'
-    sock1.c:26:22: error: passing argument 2 of 'bind' from incompatible pointer type [-Werror=incompatible-pointer-types]
-      if (bind(server_fd, &sa, sizeof sa) == -1) {
+      sock1.c: In function 'main'
+      sock1.c:26:22: error: passing argument 2 of 'bind' from incompatible pointer type [-Werror=incompatible-pointer-types]
+        if (bind(server_fd, &sa, sizeof sa) == -1) {
                       ^
-    In file included from sock1.c:2:0:
-    /usr/include/sys/socket.h:123:12: note: expected 'const struct sockaddr *' but argument is of type 'struct sockaddr_in *'
-     extern int bind (int __fd, __CONST_SOCKADDR_ARG __addr, socklen_t __len)
-                ^~~~
+      In file included from sock1.c:2:0:
+      /usr/include/sys/socket.h:123:12: note: expected 'const struct sockaddr *' but argument is of type 'struct sockaddr_in *'
+       extern int bind (int __fd, __CONST_SOCKADDR_ARG __addr, socklen_t __len)
+                  ^~~~
 
-What the error tells us is that the function bind() expects a pointer to *struct sockaddr* but we pass it a pointer to *struct sockaddr_in*. Because of the way the API is specified (in the case of IP communication it actually required *struct sockaddr_in* despite what the function declaration says), we cast the type to *struct sockaddr*. Type casting basically means telling the compiler "please pretend this variable has a different type than what it actually has". Having this possibility in C makes C a weakly typed language.
+  What the error tells us is that the function bind() expects a pointer to *struct sockaddr* but we pass it a pointer to *struct sockaddr_in*. Because of the way the API is specified (in the case of IP communication it actually required *struct sockaddr_in* despite what the function declaration says), we cast the type to *struct sockaddr*. Type casting basically means telling the compiler "please pretend this variable has a different type than what it actually has". Having this possibility in C makes C a weakly typed language.
 
 The code listing above can be compiled e.g. with the following:
 

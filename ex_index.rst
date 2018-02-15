@@ -9,4 +9,5 @@ Exercises
    ex_js
    ex_js2
    ex_httpserv
+   ex_ajax
 

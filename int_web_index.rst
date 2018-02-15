@@ -5,6 +5,7 @@ Intermediate web development
    :maxdepth: 1
 
    js2
+   html_tables
    json
    redis
    ajax
@@ -13,10 +14,10 @@ In this section we'll turn our guessing game from a single HTML page to a simple
 
 We'll start by adding some logic to gain some more experience in JS, and then learn about the following topics:
 
+* HTML table generation
 * JSON; which we'll need to transfer data between backend and frontend
 * Setting up a simple NoSQL database
 * AJAX; data transfer between backend and frontend in practice
-* HTML table generation
 * Putting everything together
 
 What we'll end up is a two-page guessing game as well as a simple algorithm to play it for us, with a high score list displayed on the page and stored in a database. The high score list could look e.g. like this:

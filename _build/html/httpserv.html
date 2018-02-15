@@ -231,8 +231,8 @@
 <li>Line 39: We call accept(), another BSD sockets API function. This function call will block, i.e. our program execution will not proceed, until someone connects to the server.</li>
 <li>Line 47: We call the function handle_server() which is a function that we will need to write ourselves. This defines what the server actually does.</li>
 </ul>
-<div class="section" id="digression-type-casting">
-<h3>4.2.1.1. Digression: type casting<a class="headerlink" href="#digression-type-casting" title="Permalink to this headline">¶</a></h3>
+<div class="topic">
+<p class="topic-title first">Digression: type casting</p>
 <p>Line 26 is also interesting because we perform a <em>type cast</em> here. The line without the type cast would look like this:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">bind</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sa</span><span class="p">,</span> <span class="k">sizeof</span> <span class="n">sa</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 </pre></div>
@@ -241,7 +241,7 @@
 <div class="highlight-bash"><div class="highlight"><pre><span></span>sock1.c: In <span class="k">function</span> <span class="s1">&#39;main&#39;</span>
 sock1.c:26:22: error: passing argument <span class="m">2</span> of <span class="s1">&#39;bind&#39;</span> from incompatible pointer <span class="nb">type</span> <span class="o">[</span>-Werror<span class="o">=</span>incompatible-pointer-types<span class="o">]</span>
   <span class="k">if</span> <span class="o">(</span>bind<span class="o">(</span>server_fd, <span class="p">&amp;</span>sa, sizeof sa<span class="o">)</span> <span class="o">==</span> -1<span class="o">)</span> <span class="o">{</span>
-                  ^
+                ^
 In file included from sock1.c:2:0:
 /usr/include/sys/socket.h:123:12: note: expected <span class="s1">&#39;const struct sockaddr *&#39;</span> but argument is of <span class="nb">type</span> <span class="s1">&#39;struct sockaddr_in *&#39;</span>
  extern int <span class="nb">bind</span> <span class="o">(</span>int __fd, __CONST_SOCKADDR_ARG __addr, socklen_t __len<span class="o">)</span>
@@ -249,6 +249,7 @@ In file included from sock1.c:2:0:
 </pre></div>
 </div>
 <p>What the error tells us is that the function bind() expects a pointer to <em>struct sockaddr</em> but we pass it a pointer to <em>struct sockaddr_in</em>. Because of the way the API is specified (in the case of IP communication it actually required <em>struct sockaddr_in</em> despite what the function declaration says), we cast the type to <em>struct sockaddr</em>. Type casting basically means telling the compiler &#8220;please pretend this variable has a different type than what it actually has&#8221;. Having this possibility in C makes C a weakly typed language.</p>
+</div>
 <p>The code listing above can be compiled e.g. with the following:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -Wall -Werror -O2 -o sock1 sock1.c <span class="o">&amp;&amp;</span> ./sock1
 /tmp/ccf2I2NV.o: In <span class="k">function</span> <span class="sb">`</span>main<span class="s1">&#39;</span>
@@ -377,7 +378,6 @@ Host: <span class="m">127</span>.0.0.1:1234
 <p>At this stage our implementation doesn&#8217;t respect the whole specification, but it&#8217;s able to serve some web pages. If you made it here, congratulations.</p>
 </div>
 </div>
-</div>
 
 
           </div>
@@ -388,10 +388,7 @@ Host: <span class="m">127</span>.0.0.1:1234
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">4.2. Writing a toy web server</a><ul>
-<li><a class="reference internal" href="#osi-model">4.2.1. OSI model</a><ul>
-<li><a class="reference internal" href="#digression-type-casting">4.2.1.1. Digression: type casting</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#osi-model">4.2.1. OSI model</a></li>
 </ul>
 </li>
 </ul>

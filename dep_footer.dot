@@ -9,6 +9,7 @@
     vcs -> js;
     js -> js2;
     js2 -> json;
+    js2 -> html_tables;
     httpserv -> redis;
     json -> redis;
     oop -> ajax;

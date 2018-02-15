@@ -66,6 +66,12 @@ This introduces us some important concepts:
 
 Running these commands should result in your system compiling Redis and all its dependencies. If something goes wrong then your C compiler might not be correctly set up.
 
+.. topic:: Software versioning
+
+  The Redis package downloaded in the example was version 4.0.8. The typical convention is that the number '4' in this version denotes the *major* version number, '0' is the *minor* version number and '8' is the *patch level* version number. As Redis is software we'll write software to work against and hence has an API, it's important to note which version is being used. When we use Redis we assume that the documentation matches its behaviour - but this might change in future Redis versions. Typically, in new versions which only have the patch level changed, e.g. 4.0.9, all changes made will be *backwards compatible* - that means, all the code that was written against 4.0.8 will work for 4.0.9. This is typically also the case for minor versions, but a major version change can be expected to introduced changes that *break* backwards compatibility. That means, if we were to update our Redis server years later, it might end up e.g. as version 6.0.0, and if changes that break backwards compatibility were introduced and we tried running our code with that version we'd get errors.
+
+  Code that's ended up not working due to software it's dependent on having moved on to break backwards compatibility is said to have *bitrot*. Somewhat related, code that has been written over a longer time without consideration over maintainability or proper structure is said to have *organically grown*. Code for which the execution flow is hard to follow due to various branches and lack of structure is called *spaghetti code*.
+
 As per the documentation, once the compilation is done, you can then start the Redis server by running "src/redis-server". This is the binary that resulted from the compilation. You should then see a bunch of text running through, ending with something along the following lines:
 
 .. code-block:: bash
@@ -75,7 +81,7 @@ As per the documentation, once the compilation is done, you can then start the R
 
 Redis should now be running and accepting TCP/IP connections. You can leave it running as we try to connect to it using Python.
 
-*Exercise*: Download, compile and start Redis
+*Exercise*: Download, compile and start Redis.
 
 Python Redis client
 ===================
