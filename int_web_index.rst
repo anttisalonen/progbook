@@ -6,7 +6,6 @@ Intermediate web development
 
    js2
    html_tables
-   json
    redis
    ajax
 

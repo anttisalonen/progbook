@@ -79,6 +79,9 @@ If we wanted to see the status of our repository now, we can run "git status" ag
 
 This means that the latest version git has stored matches the contents of our files (in this case, hello.py).
 
+Further commits
+===============
+
 Let's now assume we want to make a change to our hello.py, by appending "print 'hello world'" to it:
 
 .. code-block:: bash
@@ -144,6 +147,9 @@ Now we already have two commits. We can see the commit log by running "git log":
 
 The log will show the summary of each commit as well as the *commit hash*, which uniquely identifies each commit.
 
+git reset
+=========
+
 Now comes the interesting part: let's say we want to go back to the previous version, before we added the second "print 'hello world'" to the end of hello.py. One way to do this is the following:
 
 .. code-block:: bash
@@ -179,13 +185,16 @@ If we wanted to get our changes back, we can, because we noted the commit hash:
     print 'hello world'
     print 'hello world'
 
+Staging area
+============
+
 If you're about to commit changes to git, but want to review the changes before, this is possible too. First, mark the changes you want to add with "git add":
 
 .. code-block:: bash
 
     $ git add hello.py
 
-You can then run "git diff --cached" to see the changes that are in the "staging area", i.e. marked to be committed:
+You can then run "git diff --cached" to see the changes that are in the *staging area*, i.e. marked to be committed:
 
 .. code-block:: bash
 
@@ -215,4 +224,5 @@ Note that git also helpfully provides some tips about which commands to run.
 This was a very short introduction to git. There will be more covered in this book later; you can also check the built in documentation for git by running "git --help" or the help for specific commands, for example "git status --help".
 
 *Exercise*: Create a git repository and repeat the above commands yourself.
+
 *Exercise*: Use git to version control all your previous and future software development projects.

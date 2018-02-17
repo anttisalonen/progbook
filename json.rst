@@ -149,4 +149,3 @@ Whichever way the data is structured is mostly a matter of personal preference, 
 
 *Exercise*: Modify your Python program that reads in 10,000 functions to read from your JSON file instead.
 
-

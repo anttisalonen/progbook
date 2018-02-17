@@ -36,6 +36,9 @@ The layers 5, 6 and 7 are all summarised by HTTP. When we ran Flask, we ran its 
 
 Now, we've used OS functions before: When we open a file in C, we call the open() or fopen() functions, which end up calling kernel functions. The kernel functions typically interact with the actual hardware; In case of opening a file, the kernel functions would read data from the physical hard drive in the computer. Similarly, when writing a HTTP server, "all" we need to do is call the relevant kernel functions that trigger TCP/IP communications. Let's try this out.
 
+BSD sockets API
+===============
+
 The API for accessing the TCP/IP stack is called the BSD sockets API. (BSD stands for "Berkeley Software Distribution"; the API originates from the University of California, Berkeley.) Here's a simple example using it:
 
 .. literalinclude:: sock1.c
@@ -90,6 +93,9 @@ Compilation succeeds but linking fails because the function "handle_client" isn'
 
 *Exercise*: Check out a man page of one of the BSD sockets API, for example by running "man shutdown".
 
+Reading from a socket
+=====================
+
 Here's a short and simple implementation of the handle_client function:
 
 .. literalinclude:: sock_read.c
@@ -101,6 +107,9 @@ This function reads up to 1,023 bytes at once from the client and prints them ou
 Because we now have a server which listens to connections to port 1234, we can try connecting to it using a web browser. We should then see what the web browser sends our program.
 
 *Exercise*: Run the above server code and connect to 127.0.0.1:1234 with your browser. 127.0.0.1 means localhost, meaning the computer you're running.
+
+HTTP
+====
 
 After doing the above exercise you should see a nice set of text that the web browser has sent our program. On my setup, the first two lines are these:
 
@@ -116,6 +125,9 @@ The full HTTP 1.1 protocol is described in RFCs 7230-7237. RFC's (Request for Co
 *Exercise*: Look up RFC 7230 online. Don't read all of it, but try to get an overview of the HTTP 1.1 architecture.
 
 Now that you've seen RFC 7230, you can probably tell that a simple server response has a few lines of text, beginning with a line such as "HTTP/1.1 200 OK", with the actual data for the user at the end.
+
+C string handling
+=================
 
 Before we continue with implementing our web server, there are a couple of building blocks regarding string handling in C that you should know about. See the snippet below for some useful information:
 

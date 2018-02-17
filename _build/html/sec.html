@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.3. Further on programming languages &#8212; guide 0.1 documentation</title>
+    <title>7.3. Security &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5. Intermediate web development" href="int_web_index.html" />
-    <link rel="prev" title="4.2. Writing a toy web server" href="httpserv.html" />
+    <link rel="next" title="8. Intermediate web development" href="int_web_index.html" />
+    <link rel="prev" title="7.2. Writing a toy web server" href="httpserv.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,10 +43,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="further-on-programming-languages">
-<h1>4.3. Further on programming languages<a class="headerlink" href="#further-on-programming-languages" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="security">
-<h2>4.3.1. Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="security">
+<h1>7.3. Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h1>
 <p>In the chapter &#8220;Writing a toy web server&#8221;, I warned about potential security holes when writing C. Let&#8217;s take a look at the following code, which attempts to copy a string represented by a char pointer to a 20-element char array:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -58,48 +56,7 @@
 <p>This code is a potential security hole. Can you spot why?</p>
 <p>What happens if the string is longer than 20 characters? The function strcpy() will copy past the end of the 20-element array, overwriting something else. Technically, according to the C language standard, the behaviour is undefined, meaning that anything can happen. In practice, some data in stack will be overwritten, like another variable, or the address to return to when the function returns. The attacker needs to construct a suitable input to modify the variables such that some code that the attacker wants to execute will get executed, typically leading to the attacker gaining full access to the system. The attacker can then e.g. read any passwords, credit card numbers or any other sensitive data available on the system.</p>
 <p>This is possible in C and some other languages like C++ because of lack of <em>memory safety</em>; memory can be accidentally read or written. It&#8217;s a good reason to consider using another language for the task at hand, if possible.</p>
-</div>
-<div class="section" id="statically-vs-dynamically-typed-languages">
-<h2>4.3.2. Statically vs. dynamically typed languages<a class="headerlink" href="#statically-vs-dynamically-typed-languages" title="Permalink to this headline">¶</a></h2>
-<p>We already touched upon the topic of static and dynamic typing on our programming language taxonomy.</p>
-<p>We also briefly touched upon the concept of interpreted vs. compiled languages as we wrote our first Python programs.</p>
-<p>Typically (but not always), statically typed languages are compiled languages and dynamically typed languages are interpreted. There are pros and cons to both. The following attempts to summarise this somewhat.</p>
-<div class="section" id="catching-errors">
-<h3>4.3.2.1. Catching errors<a class="headerlink" href="#catching-errors" title="Permalink to this headline">¶</a></h3>
-<p>Compilation can catch errors that wouldn&#8217;t be caught in interpreted programs until the code with the error was executed. For example, accidentally attempting to assign a string value to an int will be a compiler error. With an interpreted language, the error typically won&#8217;t be raised until the code is ran.</p>
-</div>
-<div class="section" id="possible-program-space">
-<h3>4.3.2.2. Possible program space<a class="headerlink" href="#possible-program-space" title="Permalink to this headline">¶</a></h3>
-<p>Because compilation and type checking necessarily eliminates some programs which in theory would be sound, the programmer can write programs in dynamically typed languages that aren&#8217;t possible in statically typed languages. Consider the following example (Python code):</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">which_type</span><span class="p">,</span> <span class="n">which_value</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">which_type</span> <span class="o">==</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">which_value</span> <span class="o">+</span> <span class="s1">&#39;a&#39;</span>
-    <span class="k">elif</span> <span class="n">which_type</span> <span class="o">==</span> <span class="s1">&#39;int&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">which_value</span> <span class="o">+</span> <span class="mi">5</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
-
-<span class="c1"># the following parameters are hard coded here but could e.g. be read from a file instead</span>
-<span class="k">print</span> <span class="n">func</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">func</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
-<p>The function &#8216;func&#8217; returns either a string, an integer or None depending on the input parameter. The program can be run and it&#8217;ll work perfectly fine, but if one attempts to write a similar program in a statically typed language then one must circumvent the type checking because the types for both the second input parameter and the return value are dynamic, that is, determined at runtime. While for many languages it&#8217;s possible to circumvent the type checking, in practice the easiest solution in a statically typed language would be to avoid this kind of a construct altogether and reshape the program such that it won&#8217;t be necessary.</p>
-<p>In general, there&#8217;s no clear right or wrong around which kind of typing is the best, and typically arguments around this topic arise the same way normal people would argue about which car make, film, political party or religion is the best. While I attempt to stay objective, the following does include my subjective opinion where necessary - caveat emptor.</p>
-<p>Often, for short and simple programs or programs that are easy to test, dynamic typing doesn&#8217;t hurt, and dynamically typed languages often help implement the program faster. For larger programs that are more difficult to break to smaller pieces that can be executed in isolation, static typing often ends up being a big productivity boost as a large class of errors are trivially caught by the compiler, as opposed to discovering issues at runtime.</p>
-<p>In addition to typing, there are other considerations about which language to use when; compiled languages have typically much better performance than dynamically typed languages which, depending on the requirements, may or may not rule out dynamically typed languages; languages with memory safety may be preferred to avoid any security issues or other memory handling related bugs; some platforms, especially embedded systems, may only have a C compiler or an assembler available.</p>
-</div>
-</div>
+<p><em>Exercise</em>: Take a look at your HTTP server code and see if you can spot any security issues.</p>
 </div>
 
 
@@ -107,26 +64,13 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">4.3. Further on programming languages</a><ul>
-<li><a class="reference internal" href="#security">4.3.1. Security</a></li>
-<li><a class="reference internal" href="#statically-vs-dynamically-typed-languages">4.3.2. Statically vs. dynamically typed languages</a><ul>
-<li><a class="reference internal" href="#catching-errors">4.3.2.1. Catching errors</a></li>
-<li><a class="reference internal" href="#possible-program-space">4.3.2.2. Possible program space</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<div class="relations">
+        <div class="sphinxsidebarwrapper"><div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_c_index.html">4. Intermediate C</a><ul>
-      <li>Previous: <a href="httpserv.html" title="previous chapter">4.2. Writing a toy web server</a></li>
-      <li>Next: <a href="int_web_index.html" title="next chapter">5. Intermediate web development</a></li>
+  <li><a href="int_c_index.html">7. Intermediate C</a><ul>
+      <li>Previous: <a href="httpserv.html" title="previous chapter">7.2. Writing a toy web server</a></li>
+      <li>Next: <a href="int_web_index.html" title="next chapter">8. Intermediate web development</a></li>
   </ul></li>
   </ul></li>
 </ul>

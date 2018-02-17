@@ -7,13 +7,16 @@ Software development fundamentals
 =================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
    :numbered:
 
    intro_index
    unix_index
+   lang_index
+   ds_index
    js_index
+   int_py_index
    int_c_index
    int_web_index
    ex_index

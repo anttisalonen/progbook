@@ -1,12 +1,5 @@
-Intermediate C
---------------
-
-We've now had our first touch with C. Let's go a bit deeper.
-
-When writing C, it sometimes helps to think about the memory layout, and what the CPU actually does. If you consider that C is practically a thin layer abstracting the CPU, it may start to feel more logical.
-
 Records
-=======
+-------
 
 In our previous code we worked with functions and quadratic equations. A function was represented by three floating point values a, b and c. Let's write a function that returns the value of the function at a given point x:
 
@@ -88,4 +81,16 @@ This seems much clearer.
 
 *Exercise*: The derivative of a function ax^2 + bx + c is 2ax + b. Write a function that calculates the derivative for a function at a given point x and call it, with the input function passed as a pointer to a struct.
 
+What is a struct
+================
+
+Our example struct consists of three integers. As C is relatively close to the actual hardware, we can reason about what this struct looks like in practice. In general, the amount of memory used by an integer in C is implementation defined but for the purpose of this section we can assume it's 4 bytes (32 bits). Defining a structure like this typically means the data will be packed well, such that 12 bytes will be required for one allocation of struct my_datatype and the layout will only contain the memory required for a, b and c, nothing more. (Mixing different data types of different sizes may cause padding memory to be added by the C compiler, depending on the hardware constraints.)
+
+You can find out what the size of a data type is in C by using the "sizeof" operator:
+
+.. code-block:: c
+
+    printf("%lu\n", sizeof(struct function));
+
+In this sense, defining structures in C mostly serves to combine various data into one unit, simplifying code and aiding in having the necessary memory available and allocated.
 

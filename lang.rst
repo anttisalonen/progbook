@@ -1,10 +1,5 @@
-Programming language taxonomy
------------------------------
-
-There are a few concepts around programming languages that help pick up a new language.
-
 Typing
-======
+------
 
 Most programming languages come with a more or less sophisticated type systems. The type system defines how the types of variables and functions are used and interpreted.
 
@@ -140,52 +135,42 @@ The combination of strong, dynamic typing is also often called "duck typing". Th
     def function(x):
         return 2 * x
 
-The operation to multiply with an int (2 \*) is defined for both integers and strings. For integers, the traditional multiplication is performed, while for strings the string is duplicated. From the point of view of the function, it makes no difference which type is passed to the function, as long as it can be multiplied by 2, hence duck typing.
+The operation to multiply with an int (2 \*) is defined for both integers and strings. For integers, the traditional multiplication is performed, while for strings the string is duplicated. From the point of view of the function, it makes no difference which type is passed to the function, as long as it can be multiplied by 2, hence duck typing. As we shall see, this becomes more interesting when writing your own data types.
 
-Defining your own data types
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Interpreted and compiled languages
+==================================
 
-Most programming languages will make it possible for the programmer to define own data types. While a lot can be written about this topic, in this section we'll describe two approaches: C structs and Python classes.
+Typically (but not always), statically typed languages are compiled languages and dynamically typed languages are interpreted. There are pros and cons to both. The following attempts to summarise this somewhat.
 
-In C, data types are defined by defining a struct, for example:
+Catching errors
+~~~~~~~~~~~~~~~
 
-.. code-block:: c
+Compilation can catch errors that wouldn't be caught in interpreted programs until the code with the error was executed. For example, accidentally attempting to assign a string value to an int will be a compiler error. With an interpreted language, the error typically won't be raised until the code is ran.
 
-    struct my_datatype {
-        int a;
-        int b;
-        int c;
-    };
+Possible program space
+~~~~~~~~~~~~~~~~~~~~~~
 
-This struct consists of three integers. As C is relatively close to the actual hardware, we can reason about what this struct looks like in practice. In general, the amount of memory used by an integer in C is implementation defined but for the purpose of this section we can assume it's 4 bytes (32 bits). Defining a structure like this typically means the data will be packed well, such that 12 bytes will be required for one allocation of struct my_datatype and the layout will only contain the memory required for a, b and c, nothing more. (Mixing different data types of different sizes may cause padding memory to be added by the C compiler, depending on the hardware constraints.)
+Because compilation and type checking necessarily eliminates some programs which in theory would be sound, the programmer can write programs in dynamically typed languages that aren't possible in statically typed languages. Consider the following example (Python code):
 
-In this sense, defining structures in C mostly serves to combine various data into one unit, simplifying code and aiding in having the necessary memory available and allocated.
+.. code-block:: python
+    :linenos:
 
-In Python, on the other hand, data types can only be defined using the "class" keyword:
+    def func(which_type, which_value):
+        if which_type == 'str':
+            return which_value + 'a'
+        elif which_type == 'int':
+            return which_value + 5
+        else:
+            return None
 
-.. literalinclude:: cl.py
-   :language: python
+    # the following parameters are hard coded here but could e.g. be read from a file instead
+    print func('str', 'foo')
+    print func('int', 42)
 
-Let's go through this line by line:
+The function 'func' returns either a string, an integer or None depending on the input parameter. The program can be run and it'll work perfectly fine, but if one attempts to write a similar program in a statically typed language then one must circumvent the type checking because the types for both the second input parameter and the return value are dynamic, that is, determined at runtime. While for many languages it's possible to circumvent the type checking, in practice the easiest solution in a statically typed language would be to avoid this kind of a construct altogether and reshape the program such that it won't be necessary.
 
-* Line 1: We define a *class* named A. At a high level, a class is a data type, describing data types and functions common to the class.
-* Line 2: We define a *member function* - a function that's part of a class.
-* Line 3: Calling this member function will produce output
-* Line 5: We define another class named B.
-* Line 6: We define a *constructor* for class B: a function that will be called when an object of this type is created.
-* Line 7: The constructor will create a *member variable* named foo - a variable that's contained within the object.
-* Line 9: We define a member function for class B - with the same name as we did for class A.
-* Line 10: This member function produces some output and also reads the member variable value.
-* Line 12: We define a list with two elements, and create (or *instantiate*) one object of each class; one of class A, one of class B. Class B has a constructor that requires one parameter: we pass in 42.
-* Line 14: We iterate through our list.
-* Line 15: We call the member function "call_me" for each element in the list, i.e. once for our object of class A, once for our object of class B.
+In general, there's no clear right or wrong around which kind of typing is the best, and typically arguments around this topic arise the same way normal people would argue about which car make, film, political party or religion is the best. While I attempt to stay objective, the following does include my subjective opinion where necessary - caveat emptor.
 
-Executing this will output:
+Often, for short and simple programs or programs that are easy to test, dynamic typing doesn't hurt, and dynamically typed languages often help implement the program faster. For larger programs that are more difficult to break to smaller pieces that can be executed in isolation, static typing often ends up being a big productivity boost as a large class of errors are trivially caught by the compiler, as opposed to discovering issues at runtime.
 
-.. code-block:: bash
-
-    $ python2 cl.py
-    A called
-    B called - my foo is: 42
-
-We see an example of duck typing here: while classes A and B technically have nothing to do with each other, they do share the same *interface*, namely calling the function "call_me". We also see that the classes in Python are more powerful than the structs in C: in Python we can combine multiple variables in one object, but in addition we can have member functions and use these to define an interface on interacting with the data.
+In addition to typing, there are other considerations about which language to use when; compiled languages have typically much better performance than dynamically typed languages which, depending on the requirements, may or may not rule out dynamically typed languages; languages with memory safety may be preferred to avoid any security issues or other memory handling related bugs; some platforms, especially embedded systems, may only have a C compiler or an assembler available.

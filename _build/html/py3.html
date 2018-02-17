@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.3. More useful Python constructs &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Intermediate C" href="int_c_index.html" />
+    <link rel="prev" title="6.2. JSON" href="json.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="more-useful-python-constructs">
+<h1>6.3. More useful Python constructs<a class="headerlink" href="#more-useful-python-constructs" title="Permalink to this headline">¶</a></h1>
+<p>To demonstrate some of these constructs, let&#8217;s start by loading some data to work on. As before, let&#8217;s work on the 10,000 functions we defined before, and load this data from JSON.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/dev/stdin&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We read the JSON data from stdin, meaning that we can define the input file on the command line like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python2 useful.py &lt; test.json
+</pre></div>
+</div>
+<p>In the following, we assume the data is stored in a list of lists, i.e.:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>
+   <span class="o">[</span>
+      <span class="m">6</span>.44887349885013,
+      -6.80408794830961,
+      <span class="m">5</span>.87205564819696
+   <span class="o">]</span>,
+   <span class="o">[</span>
+      <span class="m">0</span>.839489029433732,
+      -8.86306739443021,
+      -1.69246328305772
+...
+</pre></div>
+</div>
+<div class="section" id="list-comprehensions">
+<h2>6.3.1. List comprehensions<a class="headerlink" href="#list-comprehensions" title="Permalink to this headline">¶</a></h2>
+<p>List comprehensions are a shorthand notation for doing things with lists. They spare you at times from having to write tedious for loops.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This line fetches the second column of our data, i.e. all the &#8216;b&#8217; values for our functions (hence the variable name, &#8216;b&#8217;s). What it means is:</p>
+<blockquote>
+<div>&#8220;For each data point (l) in our input list (data), take the second element.&#8221;</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Number of b&#39;s: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">))</span> <span class="c1"># prints 10,000</span>
+</pre></div>
+</div>
+<p>The variable bs is a list of 10,000 numbers. With &#8220;len(bs)&#8221; we can obtain the length of the list. (With &#8220;str()&#8221; we can convert data to a string for output purposes.)</p>
+<p>We can now calculate the average of all &#8216;b&#8217;s:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">b_avg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>(We need to convert the denominator to float to ensure the result is also float.)</p>
+<p>In other words, while for delimiter separated data we could write a one-liner in awk to calculate the average, for JSON we&#8217;ll need to write about three lines of Python. On the other hand JSON is in general more powerful than delimiter separated data.</p>
+</div>
+<div class="section" id="slices">
+<h2>6.3.2. Slices<a class="headerlink" href="#slices" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">first_hundred</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span> <span class="c1"># len(first_hundred) is 100</span>
+</pre></div>
+</div>
+<p>Here, with &#8220;[:100]&#8221; we say &#8220;<em>slice</em> the list such that only the first hundred elements are included&#8221;.</p>
+<p>You can also slice the end of the list by using negative index.</p>
+</div>
+<div class="section" id="sorting">
+<h2>6.3.3. Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h2>
+<p>Python has sorting built in:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">])[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This line introduces a few concepts:</p>
+<ul class="simple">
+<li>By calling the function sorted(data), we can obtain a sorted copy of the data.</li>
+<li>sorted() takes an <em>optional parameter</em> &#8220;reverse&#8221; which we set to True. This means that the returned list will be sorted in descending order instead of ascending.</li>
+<li>We can specify a <em>key</em> for sorting: here we specify a <em>lambda function</em>, i.e. an anonymous function.</li>
+<li>Our anonymous function says &#8220;use the third element in the list as the key&#8221;, i.e. the value &#8220;c&#8221; in the functions.</li>
+</ul>
+<p>We could also have defined a named function for this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_third_element</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">get_third_element</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: What would you expect this statement to print in the end? Which functions would be included in the output?</p>
+<p><em>Exercise</em>: Execute this statement and see if the output matches your expectations.</p>
+</div>
+<div class="section" id="useful-built-in-functions">
+<h2>6.3.4. Useful built in functions<a class="headerlink" href="#useful-built-in-functions" title="Permalink to this headline">¶</a></h2>
+<p>&#8220;sum&#8221; sums up all the numbers in a list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sum_of_all_numbers</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>&#8220;all&#8221; returns True if all values are True in a list, and False otherwise. (&#8220;any&#8221; return True if any element in a list is True.)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">all_numbers_in_list_are_above_zero</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">l</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>List comprehensions also support <em>filtering</em>, i.e. applying a function to only include certain elements in the resulting list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">above_zero_functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">all_numbers_in_list_above_zero</span><span class="p">(</span><span class="n">f</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: For your data set, find the function where the sum of its values (a, b and c) is the highest.</p>
+<p><em>Exercise</em>: For your data set, find the function where the sum of its values (a, b and c) is the highest <em>and</em> all values a, b and c are negative.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.3. More useful Python constructs</a><ul>
+<li><a class="reference internal" href="#list-comprehensions">6.3.1. List comprehensions</a></li>
+<li><a class="reference internal" href="#slices">6.3.2. Slices</a></li>
+<li><a class="reference internal" href="#sorting">6.3.3. Sorting</a></li>
+<li><a class="reference internal" href="#useful-built-in-functions">6.3.4. Useful built in functions</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="int_py_index.html">6. Useful Python tips</a><ul>
+      <li>Previous: <a href="json.html" title="previous chapter">6.2. JSON</a></li>
+      <li>Next: <a href="int_c_index.html" title="next chapter">7. Intermediate C</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/py3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/py3.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

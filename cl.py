@@ -1,8 +1,8 @@
-class A:
+class A(object):
     def call_me(self):
         print 'A called'
 
-class B:
+class B(object):
     def __init__(self, foo):
         self.foo = foo
 

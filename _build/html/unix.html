@@ -225,11 +225,13 @@ test.txt
 </div>
 <div class="section" id="echo-and-cat">
 <h3>2.1.2.4. echo and cat<a class="headerlink" href="#echo-and-cat" title="Permalink to this headline">¶</a></h3>
-<p>The command &#8220;echo&#8221; simply prints its output. For example:</p>
+<p>The command &#8220;echo&#8221; simply prints its input. For example:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;hello&quot;</span>
 hello
 $ <span class="nb">echo</span> <span class="nv">$MY_FILE</span>
 test.txt
+$ <span class="nb">echo</span> <span class="s2">&quot;abc,def,ghi&quot;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/,/ /g&#39;</span>
+abc def ghi
 </pre></div>
 </div>
 <p>The command &#8220;cat&#8221; concatenates files. It can also be used to display the contents of a file:</p>
@@ -368,7 +370,7 @@ not found
 <div class="section" id="shell-scripts">
 <h2>2.1.4. Shell scripts<a class="headerlink" href="#shell-scripts" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="simple-for-loops">
-<h3>2.1.4.1. simple for loops<a class="headerlink" href="#simple-for-loops" title="Permalink to this headline">¶</a></h3>
+<h3>2.1.4.1. Simple for loops<a class="headerlink" href="#simple-for-loops" title="Permalink to this headline">¶</a></h3>
 <p>In most Unix shells including bash you can define for loops. For example, let&#8217;s say you wanted to run your number generation program three times, and store the output to different files:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="k">for</span> i in <span class="m">1</span> <span class="m">2</span> <span class="m">3</span><span class="p">;</span> <span class="k">do</span> python gen.py &gt; functions_<span class="si">${</span><span class="nv">i</span><span class="si">}</span>.txt <span class="p">;</span> <span class="k">done</span>
 </pre></div>
@@ -518,7 +520,7 @@ $
 </li>
 <li><a class="reference internal" href="#redirecting">2.1.3. Redirecting</a></li>
 <li><a class="reference internal" href="#shell-scripts">2.1.4. Shell scripts</a><ul>
-<li><a class="reference internal" href="#simple-for-loops">2.1.4.1. simple for loops</a></li>
+<li><a class="reference internal" href="#simple-for-loops">2.1.4.1. Simple for loops</a></li>
 <li><a class="reference internal" href="#if-and-branches">2.1.4.2. if and branches</a></li>
 <li><a class="reference internal" href="#storing-scripts-in-a-file">2.1.4.3. Storing scripts in a file</a></li>
 </ul>

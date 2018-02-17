@@ -100,6 +100,9 @@ nothing to commit, working tree clean
 </pre></div>
 </div>
 <p>This means that the latest version git has stored matches the contents of our files (in this case, hello.py).</p>
+</div>
+<div class="section" id="further-commits">
+<h2>2.2.2. Further commits<a class="headerlink" href="#further-commits" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s now assume we want to make a change to our hello.py, by appending &#8220;print &#8216;hello world&#8217;&#8221; to it:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;print &#39;hello world&#39;&quot;</span> &gt;&gt; hello.py
 </pre></div>
@@ -152,6 +155,9 @@ Date:   Fri Feb <span class="m">9</span> <span class="m">00</span>:35:05 <span c
 </pre></div>
 </div>
 <p>The log will show the summary of each commit as well as the <em>commit hash</em>, which uniquely identifies each commit.</p>
+</div>
+<div class="section" id="git-reset">
+<h2>2.2.3. git reset<a class="headerlink" href="#git-reset" title="Permalink to this headline">¶</a></h2>
 <p>Now comes the interesting part: let&#8217;s say we want to go back to the previous version, before we added the second &#8220;print &#8216;hello world&#8217;&#8221; to the end of hello.py. One way to do this is the following:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ git reset --hard b279b4f
 HEAD is now at b279b4f initial commit
@@ -179,11 +185,14 @@ print <span class="s1">&#39;hello world&#39;</span>
 print <span class="s1">&#39;hello world&#39;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="staging-area">
+<h2>2.2.4. Staging area<a class="headerlink" href="#staging-area" title="Permalink to this headline">¶</a></h2>
 <p>If you&#8217;re about to commit changes to git, but want to review the changes before, this is possible too. First, mark the changes you want to add with &#8220;git add&#8221;:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ git add hello.py
 </pre></div>
 </div>
-<p>You can then run &#8220;git diff &#8211;cached&#8221; to see the changes that are in the &#8220;staging area&#8221;, i.e. marked to be committed:</p>
+<p>You can then run &#8220;git diff &#8211;cached&#8221; to see the changes that are in the <em>staging area</em>, i.e. marked to be committed:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ git diff --cached
 diff --git a/hello.py b/hello.py
 index 01283b8..4c80684 <span class="m">100644</span>
@@ -206,8 +215,8 @@ Changes to be committed:
 </div>
 <p>Note that git also helpfully provides some tips about which commands to run.</p>
 <p>This was a very short introduction to git. There will be more covered in this book later; you can also check the built in documentation for git by running &#8220;git &#8211;help&#8221; or the help for specific commands, for example &#8220;git status &#8211;help&#8221;.</p>
-<p><em>Exercise</em>: Create a git repository and repeat the above commands yourself.
-<em>Exercise</em>: Use git to version control all your previous and future software development projects.</p>
+<p><em>Exercise</em>: Create a git repository and repeat the above commands yourself.</p>
+<p><em>Exercise</em>: Use git to version control all your previous and future software development projects.</p>
 </div>
 </div>
 
@@ -221,6 +230,9 @@ Changes to be committed:
   <ul>
 <li><a class="reference internal" href="#">2.2. Version control</a><ul>
 <li><a class="reference internal" href="#creating-a-git-repository">2.2.1. Creating a git repository</a></li>
+<li><a class="reference internal" href="#further-commits">2.2.2. Further commits</a></li>
+<li><a class="reference internal" href="#git-reset">2.2.3. git reset</a></li>
+<li><a class="reference internal" href="#staging-area">2.2.4. Staging area</a></li>
 </ul>
 </li>
 </ul>

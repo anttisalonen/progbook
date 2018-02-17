@@ -237,7 +237,7 @@ Sometimes you might want to combine the variable with other bits. In those cases
 echo and cat
 ~~~~~~~~~~~~
 
-The command "echo" simply prints its output. For example:
+The command "echo" simply prints its input. For example:
 
 .. code-block:: bash
 
@@ -245,6 +245,8 @@ The command "echo" simply prints its output. For example:
     hello
     $ echo $MY_FILE
     test.txt
+    $ echo "abc,def,ghi" | sed -e 's/,/ /g'
+    abc def ghi
 
 The command "cat" concatenates files. It can also be used to display the contents of a file:
 
@@ -411,7 +413,7 @@ If necessary, you can also discard the output by redirecting it to the special f
 Shell scripts
 =============
 
-simple for loops
+Simple for loops
 ~~~~~~~~~~~~~~~~
 
 In most Unix shells including bash you can define for loops. For example, let's say you wanted to run your number generation program three times, and store the output to different files:

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.2. Writing a toy web server &#8212; guide 0.1 documentation</title>
+    <title>7.2. Writing a toy web server &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.3. Further on programming languages" href="sec.html" />
-    <link rel="prev" title="4.1. Intermediate C" href="c2.html" />
+    <link rel="next" title="7.3. Security" href="sec.html" />
+    <link rel="prev" title="7.1. Records" href="c2.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,11 +44,11 @@
           <div class="body" role="main">
             
   <div class="section" id="writing-a-toy-web-server">
-<h1>4.2. Writing a toy web server<a class="headerlink" href="#writing-a-toy-web-server" title="Permalink to this headline">¶</a></h1>
+<h1>7.2. Writing a toy web server<a class="headerlink" href="#writing-a-toy-web-server" title="Permalink to this headline">¶</a></h1>
 <p>After using Flask a bit, you might have wondered &#8220;what&#8217;s actually happening?&#8221;</p>
 <p>In essence, Flask receives HTTP requests from the browser over the network, and sends HTML data back to the browser which then displays it. But we should dig a bit further here.</p>
 <div class="section" id="osi-model">
-<h2>4.2.1. OSI model<a class="headerlink" href="#osi-model" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.1. OSI model<a class="headerlink" href="#osi-model" title="Permalink to this headline">¶</a></h2>
 <p>The OSI model is a way to structure the network activity in these kinds of situations. There are total seven layers which make up the model:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -103,6 +103,9 @@
 <p>The layers 3 and 4 are implemented by your OS; Windows, Mac and Linux implement the TCP/IP stack in the kernel.</p>
 <p>The layers 5, 6 and 7 are all summarised by HTTP. When we ran Flask, we ran its built in HTTP server.</p>
 <p>Now, we&#8217;ve used OS functions before: When we open a file in C, we call the open() or fopen() functions, which end up calling kernel functions. The kernel functions typically interact with the actual hardware; In case of opening a file, the kernel functions would read data from the physical hard drive in the computer. Similarly, when writing a HTTP server, &#8220;all&#8221; we need to do is call the relevant kernel functions that trigger TCP/IP communications. Let&#8217;s try this out.</p>
+</div>
+<div class="section" id="bsd-sockets-api">
+<h2>7.2.2. BSD sockets API<a class="headerlink" href="#bsd-sockets-api" title="Permalink to this headline">¶</a></h2>
 <p>The API for accessing the TCP/IP stack is called the BSD sockets API. (BSD stands for &#8220;Berkeley Software Distribution&#8221;; the API originates from the University of California, Berkeley.) Here&#8217;s a simple example using it:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -259,6 +262,9 @@ collect2: error: ld returned <span class="m">1</span> <span class="nb">exit</spa
 </div>
 <p>Compilation succeeds but linking fails because the function &#8220;handle_client&#8221; isn&#8217;t defined. If we implement that function correctly then we have a simple web server.</p>
 <p><em>Exercise</em>: Check out a man page of one of the BSD sockets API, for example by running &#8220;man shutdown&#8221;.</p>
+</div>
+<div class="section" id="reading-from-a-socket">
+<h2>7.2.3. Reading from a socket<a class="headerlink" href="#reading-from-a-socket" title="Permalink to this headline">¶</a></h2>
 <p>Here&#8217;s a short and simple implementation of the handle_client function:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -304,6 +310,9 @@ collect2: error: ld returned <span class="m">1</span> <span class="nb">exit</spa
 <p>This function reads up to 1,023 bytes at once from the client and prints them out to stdout.</p>
 <p>Because we now have a server which listens to connections to port 1234, we can try connecting to it using a web browser. We should then see what the web browser sends our program.</p>
 <p><em>Exercise</em>: Run the above server code and connect to 127.0.0.1:1234 with your browser. 127.0.0.1 means localhost, meaning the computer you&#8217;re running.</p>
+</div>
+<div class="section" id="http">
+<h2>7.2.4. HTTP<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
 <p>After doing the above exercise you should see a nice set of text that the web browser has sent our program. On my setup, the first two lines are these:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>GET / HTTP/1.1
 Host: <span class="m">127</span>.0.0.1:1234
@@ -313,6 +322,9 @@ Host: <span class="m">127</span>.0.0.1:1234
 <p>The full HTTP 1.1 protocol is described in RFCs 7230-7237. RFC&#8217;s (Request for Comments) are documents maintained by W3C (World Wide Web Consortium).</p>
 <p><em>Exercise</em>: Look up RFC 7230 online. Don&#8217;t read all of it, but try to get an overview of the HTTP 1.1 architecture.</p>
 <p>Now that you&#8217;ve seen RFC 7230, you can probably tell that a simple server response has a few lines of text, beginning with a line such as &#8220;HTTP/1.1 200 OK&#8221;, with the actual data for the user at the end.</p>
+</div>
+<div class="section" id="c-string-handling">
+<h2>7.2.5. C string handling<a class="headerlink" href="#c-string-handling" title="Permalink to this headline">¶</a></h2>
 <p>Before we continue with implementing our web server, there are a couple of building blocks regarding string handling in C that you should know about. See the snippet below for some useful information:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -387,8 +399,12 @@ Host: <span class="m">127</span>.0.0.1:1234
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.2. Writing a toy web server</a><ul>
-<li><a class="reference internal" href="#osi-model">4.2.1. OSI model</a></li>
+<li><a class="reference internal" href="#">7.2. Writing a toy web server</a><ul>
+<li><a class="reference internal" href="#osi-model">7.2.1. OSI model</a></li>
+<li><a class="reference internal" href="#bsd-sockets-api">7.2.2. BSD sockets API</a></li>
+<li><a class="reference internal" href="#reading-from-a-socket">7.2.3. Reading from a socket</a></li>
+<li><a class="reference internal" href="#http">7.2.4. HTTP</a></li>
+<li><a class="reference internal" href="#c-string-handling">7.2.5. C string handling</a></li>
 </ul>
 </li>
 </ul>
@@ -396,9 +412,9 @@ Host: <span class="m">127</span>.0.0.1:1234
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_c_index.html">4. Intermediate C</a><ul>
-      <li>Previous: <a href="c2.html" title="previous chapter">4.1. Intermediate C</a></li>
-      <li>Next: <a href="sec.html" title="next chapter">4.3. Further on programming languages</a></li>
+  <li><a href="int_c_index.html">7. Intermediate C</a><ul>
+      <li>Previous: <a href="c2.html" title="previous chapter">7.1. Records</a></li>
+      <li>Next: <a href="sec.html" title="next chapter">7.3. Security</a></li>
   </ul></li>
   </ul></li>
 </ul>
