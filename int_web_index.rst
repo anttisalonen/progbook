@@ -8,6 +8,8 @@ Intermediate web development
    html_tables
    redis
    ajax
+   guess_start
+   hiscore_table
 
 In this section we'll turn our guessing game from a single HTML page to a simple web app.
 

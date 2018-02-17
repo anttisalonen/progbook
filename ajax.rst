@@ -117,6 +117,15 @@ Let's try this out ourselves.
 3) Add another function in your Python code to serve the URL that the AJAX request will request. In the example above, that URL is "file.html". Note that the URL doesn't need to have a file extension. That function should return a string, like "Hello world!"
 4) Run your Python code using Flask. Navigate to the HTML page that has the button. Open the Javascript console in the browser developer menu. Click the button. You should see the text from the Python server code in the console.
 
+.. topic:: GET vs. POST
+
+  To summarise, GET and POST are both two "verbs" in HTTP - commands the client sends to the server. What are the differences?
+
+  * GET typically has no data attached to it from the client, except for the URL - it's meant to say "I want to download a page or a file"
+  * POST can have data - any kind of data - attached to it - it's meant to say "I want to upload data to the server"
+  
+  The rule of thumb is that if you're only reading information from the server - but not changing anything in the server - you should use GET. You should use POST if the action results in changing something on the server, for example adding data in the database.
+
 The example above requests something from the server. We can also send data to the server by using the HTTP command POST. Here's an example of sending a block of JSON:
 
 .. code-block:: js
@@ -150,17 +159,42 @@ After the above exercise we're starting to have some pieces we can put together.
 
 *Exercise*: Connect to the Redis server in your Python module. Note that the code in the Python module will be executed automatically when you start Flask. This means you can connect to the Redis server in your top level Python code, without having to define a function for this.
 
-*Exercise*: When your server receives the number of guesses from Javascript, store this in the Redis database. Use the following schema:
+Now, let's see if we can store the number of guesses in the Redis database. Here's something to get you started:
 
-* The key is the maximum number that the computer would think of (e.g. 25). (We'll make this configurable later on.)
-* The values are stored as a list.
-* The elements in the value list are JSON strings. The JSON should contain the number of guesses as well as the current server date and time. There should be one element per finished game, i.e. the length of the list should indicate how many times the game has been played.
+.. code-block:: python
+    :linenos:
 
-Further tips:
+    @app.route("/guess/finished", methods=['POST'])
+    def finished():
+        data = request.get_json()
+        print data['guesses'] # prints the number of guesses
+        curr_date = str(datetime.datetime.now())
+        our_string_to_store = json.dumps({'guesses': 42})
+        r.lpush("25", our_string_to_store)
+        return 'abc'
 
-* You can get the current date and time by calling the function datetime.datetime.now(), and you can convert non-string data to string by str(x) (where x is the return value of the datetime function). You'll need to "import datetime".
-* You can add an element in a list in a Redis key by calling e.g. r.lpush("key", "value"), where r is the Redis connection returned by the redis.StrictRedis() function. This will add the element "value" to the list indexed by key "key". If the list doesn't exist it will be automatically created.
+This introduces a few new concepts:
+
+* Line 1: We want the URL /guess/finished to handle POST requests. We need to tell this to Flask explicitly by using the "methods" optional parameter in the @app.route decorator.
+* Line 3: As per Flask documentation, Flask provides the globally accessible object called "request" which includes all data associated with the request. More specifically, it allows us to access the POST data the user sent. If the user sent JSON, it's available to us using the get_json() member function.
+* Line 4: As the JSON data has been parsed by the get_json() function, it's available to us in Python dictionary form.
+* Line 5: We can query the current system time by calling the function "datetime.datetime.now()" (after importing datetime). Furthermore we can convert it (and almost any other data type including numbers) to a string by calling the str() function.
+* Line 6: We can convert a Python dictionary to a JSON string by calling the "json.dumps()" function (after importing json).
+* Line 7: Here, we insert data in the Redis database whereby the connection is represented by the "r" object. We use the member function "lpush" which ensures the value in the key-value pair is a list. More specifically, it:
+  * Takes two parameters, the key and a value
+  * Creates a new list if the key didn't yet exist, such that the value is a new list with a single element, namely the value
+  * Appends the value to the end of the existing list if the key existed
+* Line 8: We return a string which will be available in JSON in the xhr.responseText variable.
+
+Here, we also implicitly defined the *database schema* for our data: the key is the maximum number that the computer could think of, as a string. For now it's hard coded to 25 but we'll make it configurable later. The value is a list whereby each element in a list describes a finished game. Each finished game should be represented in JSON, such that the JSON has a field describing the number of guesses required in the game as well as the timestamp when the game was finished. We'll expand on this later.
+
+Note that there are different ways the schema could be defined for this use case - this is one of the simplest ways but in general, schemas can be defined in significantly different ways, depending on the use case, amount of data and any performance requirements.
+
+*Exercise*: When your server receives the number of guesses from Javascript, store this in the Redis database.
+
+Here are some hints:
+
 * If you need to purge the database, call r.flushdb(). This will erase all data in the database.
-* You may want to write a small script or a URL handler to check the contents of the database to ensure you're adding the data there. You may alternatively want to use the Redis command line interface for this.
+* You may want to write a small script or a URL handler to check the contents of the database to ensure you're adding the correct data. You may alternatively want to use the Redis command line interface for this.
 
 We should now be able to store something resembling a high score list in a database, but we're still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapters.

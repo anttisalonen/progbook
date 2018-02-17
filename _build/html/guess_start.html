@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8.5. The page for starting a new game &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8.6. Generating the high score table" href="hiscore_table.html" />
+    <link rel="prev" title="8.4. AJAX" href="ajax.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-page-for-starting-a-new-game">
+<h1>8.5. The page for starting a new game<a class="headerlink" href="#the-page-for-starting-a-new-game" title="Permalink to this headline">¶</a></h1>
+<p>We should have a &#8220;start new game&#8221; page for our guessing game. The purpose of this page is to capture the player user name and the maximum number that the computer will think of.</p>
+<p>How could we go about this? Let&#8217;s define the use case first:</p>
+<ol class="arabic simple">
+<li>The user will enter a page where he or she will have to enter a name and a maximum number. The page should have a button &#8220;Play&#8221; that takes the user to the guessing game.</li>
+<li>In the guessing game page, the maximum number the computer will think of will need to be determined by what the user entered.</li>
+<li>Once the user has guessed the correct number, the user name and the maximum number will be stored alongside the number of guesses in the database.</li>
+</ol>
+<p>What are the challenges around implementing this? It&#8217;s often helpful to think about the interfaces, i.e. data exchanges between different components, including pages as well as the server and the client.</p>
+<ul class="simple">
+<li>The &#8220;start new game&#8221; page will have to transfer the user name and the maximum number to the actual guessing game page.
+* We should GET the guessing game page as opposed to POST, as we&#8217;re not changing the server state. This implies the parameters from the user will need to be transferred in the URL when loading the guessing game page.</li>
+<li>The guessing game page will have to read in and use this information.</li>
+</ul>
+<p>How would we architect the implementation? There are (at least) two possibilities:</p>
+<ol class="arabic simple">
+<li>We could generate the guessing game page differently based on user input.</li>
+<li>We could read the user parameters from the URL in our Javascript code in the guessing game.</li>
+</ol>
+<p>It doesn&#8217;t seem to make a huge difference which way we go, but let&#8217;s pick the first alternative. (The second one involves using regular expressions in Javascript to parse the parameters from the URL.)</p>
+<p>To break this down in tasks:</p>
+<ol class="arabic simple">
+<li>Write the HTML for the &#8220;start new game&#8221; page. This page should have a HTML form for capturing user input, and pressing the button to submit the form should lead the user to the guessing game page.</li>
+<li>Update our server code to serve the new HTML for some URL.</li>
+<li>Modify our guessing game HTML and JS such that it reads the user name and maximum number from server parameters.</li>
+<li>Handle any possible GET parameters in our server code such that they&#8217;ll be used to fill the guessing game page template.</li>
+<li>Modify our code that uploads data in the database to include the user name and the maximum number.</li>
+</ol>
+<p>Let&#8217;s do this then.</p>
+<div class="section" id="html-forms">
+<h2>8.5.1. HTML forms<a class="headerlink" href="#html-forms" title="Permalink to this headline">¶</a></h2>
+<p>HTML forms are a fairly simple way to get simple data from a user. Here&#8217;s an example:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/guess/&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;get&quot;</span><span class="p">&gt;</span>
+            What&#39;s your name? <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;user&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;User&quot;</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Play!&quot;</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Line 4: We define the form. It has two attributes: <em>action</em> and <em>method</em>. Action tells the browser which page should be fetched when the form was submitted. Method tells the browser whether it should GET or POST.</li>
+<li>Line 5: We create a text box with a default value (&#8220;User&#8221;) and name (&#8220;user&#8221;), the contents of which will be sent to the server. As GET will be used, they will be sent in the URL.</li>
+<li>Line 6: We use the &lt;input&gt; tag to define the button pressing which will submit the form.</li>
+</ul>
+<p><em>Exercise</em>: Add this HTML to your templates directory. Add a text box such that the user can also input the maximum number.</p>
+<p><em>Exercise</em>: Add a new Flask function to serve your HTML using render_template().</p>
+</div>
+<div class="section" id="using-templates">
+<h2>8.5.2. Using templates<a class="headerlink" href="#using-templates" title="Permalink to this headline">¶</a></h2>
+<p>So what we have now is a page has a form, which, when filled and submitted, will fetch our guessing game, and send the parameters from the form to the server as part of the URL when fetching the guessing game page. (If you try this out you should see the parameters encoded in the URL.) However, the guessing game page doesn&#8217;t use the parameters. Let&#8217;s fix this.</p>
+<p>Earlier we decided to handle this using <em>templates</em>: Flask provides an easy way to define variables in our HTML files such that the server can <em>generate</em> the HTML page differently depending on the parameters. This is documented thoroughly on the Flask web site but let&#8217;s see how it would look in our URL handler function:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/guess/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">guess</span><span class="p">():</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;User&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;guess3.html&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>What Flask provides us is a globally available object named &#8220;request&#8221; which contains any GET parameters. We use this on line 3. It has the member variable &#8220;args&#8221; which has the member function &#8220;get&#8221; which takes two parameters: the name of the GET parameter, and a default value should the parameter not exist.</p>
+<p>On line 4, we pass this parameter to the HTML generation function. In order to use the parameter, we need to modify our HTML file. Check this out:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;intro&quot;</span><span class="p">&gt;</span>
+Hello {{ user }}! This is the guessing game! I&#39;m thinking of a number between 1 and 25, can you guess what it is?
+<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Here, we use the parameter &#8220;user&#8221; using double curly braces (&#8216;{{&#8216; and &#8216;}}&#8217;). What happens is Flask will generate HTML based on this template, i.e. replace &#8220;{{ user }}&#8221; with the value from our Python code, and serve the generated HTML to the browser.</p>
+<p><em>Exercise</em>: Handle both user name and maximum number parameters in your Flask code and guessing game HTML. For the maximum number, you can have Flask insert it in your Javascript code by doing e.g. &#8220;var overall_max_value = {{ max_value }};&#8221;. You can also store the user name as a Javascript variable for later use.</p>
+</div>
+<div class="section" id="uploading-more-json-data">
+<h2>8.5.3. Uploading more JSON data<a class="headerlink" href="#uploading-more-json-data" title="Permalink to this headline">¶</a></h2>
+<p>Now we should have everything in place such that the maximum number depends on the user input, and the user name is available for our Javascript. Let&#8217;s add this information in the database. We should currently have something like this in our Javascript code:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="s1">&#39;my_number&#39;</span><span class="o">:</span> <span class="mi">42</span><span class="p">}));</span>
+</pre></div>
+</div>
+<p>...with the number of guesses sent instead of &#8216;my_number&#8217;. Can you find out how to add the user name and the maximum number of guesses here?</p>
+<p><em>Exercise</em>: Include the user name and the maximum number of guesses in the JSON to be sent to the server.</p>
+<p>There&#8217;s one more step we need to do before the correct data is added in the database. From before we should have a line like this on the Python handler when the correct number is guessed and JS POSTs the result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">lpush</span><span class="p">(</span><span class="s2">&quot;25&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;guesses&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}))</span>
+</pre></div>
+</div>
+<p>...with the value being a JSON string containing the number of guesses and the current date and time, as a string. Let&#8217;s improve on this.</p>
+<p><em>Exercise</em>: Modify your data insertion code such that the key is the maximum number, and the value JSON includes the user name.</p>
+<p>Now we should have almost everything in place, except the user doesn&#8217;t have visibility over previous scores. Let&#8217;s fix this in the next chapter.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">8.5. The page for starting a new game</a><ul>
+<li><a class="reference internal" href="#html-forms">8.5.1. HTML forms</a></li>
+<li><a class="reference internal" href="#using-templates">8.5.2. Using templates</a></li>
+<li><a class="reference internal" href="#uploading-more-json-data">8.5.3. Uploading more JSON data</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="int_web_index.html">8. Intermediate web development</a><ul>
+      <li>Previous: <a href="ajax.html" title="previous chapter">8.4. AJAX</a></li>
+      <li>Next: <a href="hiscore_table.html" title="next chapter">8.6. Generating the high score table</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/guess_start.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/guess_start.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

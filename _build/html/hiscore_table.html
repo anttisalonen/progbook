@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8.6. Generating the high score table &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. Exercises" href="ex_index.html" />
+    <link rel="prev" title="8.5. The page for starting a new game" href="guess_start.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="generating-the-high-score-table">
+<h1>8.6. Generating the high score table<a class="headerlink" href="#generating-the-high-score-table" title="Permalink to this headline">¶</a></h1>
+<p>We should now have the following:</p>
+<ul class="simple">
+<li>The user can play the game and data over previous games is stored in the database, and we have an empty table as a placeholder for the high score table</li>
+</ul>
+<p>Let&#8217;s connect the dots. Here&#8217;s our high level architecture:</p>
+<ul class="simple">
+<li>On page load, the Javascript code requests the high score data from the server.</li>
+<li>In Python, we have a handler that replies to this request by fetching data from the database and use this data to generate and send back a suitable JSON that can be used for the high score table.</li>
+<li>In Javascript, we receive this data, and write and call a function that takes this data as the input parameter and inserts it in the HTML high score table.</li>
+<li>Once the player has guessed the correct number, the server shall send the high score data to the client and the client shall update the high score table again.</li>
+</ul>
+<p>You might wonder, why have the Javascript code request data from the server at page load time instead of generating the high score table as part of the template on the server? While this is certainly a feasible approach, the good thing about having the Javascript generate the high score table at page load is that as we want to have Javascript code to update the high score table at the end of the game anyway, we can reuse that code at page load and hence have only one piece of code update the high score table instead of two.</p>
+<div class="section" id="calling-a-javascript-function-at-page-load">
+<h2>8.6.1. Calling a Javascript function at page load<a class="headerlink" href="#calling-a-javascript-function-at-page-load" title="Permalink to this headline">¶</a></h2>
+<p>A quick search online reveals a way to do this:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">update_hiscore</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">init</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>That is, we define a function which we want to be called at page load time, and install it as a callback function in the member function &#8220;onload&#8221; in the global object &#8220;window&#8221;.</p>
+</div>
+<div class="section" id="actually-updating-the-high-score-table">
+<h2>8.6.2. Actually updating the high score table<a class="headerlink" href="#actually-updating-the-high-score-table" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s define the function update_hiscore().</p>
+<p>First of all, we need to send an XMLHttpRequest to the server. We should use GET as we&#8217;re only asking the server for some data. However we&#8217;ll need to supply a parameter to the server, namely <em>which</em> high score table we want - as the high score table should be different based on the maximum number the computer can think of. As we&#8217;ve learnt, with GET we can only pass parameters as part of the URL, so let&#8217;s do that. The URL should look something like &#8220;hiscore?max_value=25&#8221; - in this example, we&#8217;d fetch the page &#8220;hiscore&#8221; from the server, with &#8220;max_value&#8221; as the GET parameter, with 25 as its value.</p>
+<p><em>Exercise</em>: Implement the update_hiscore() function. It should do nothing else but send an XMLHttpRequest to the server, asking for the high score data, for the maximum number that the user is currently using in his or her game. You can concatenate a number to a Javascript string with the &#8216;+&#8217; operator, e.g. &#8220;hiscore?max_value=&#8221; + my_variable. The handler for the data that is received from the server should do nothing else but call a function &#8220;display_hiscore()&#8221; (which we haven&#8217;t defined yet), passing the response text to this function. For testing purposes you&#8217;ll want to add a Flask handler for this URL, but for now it can return only a test string.</p>
+</div>
+<div class="section" id="providing-the-necessary-data-server-side">
+<h2>8.6.3. Providing the necessary data server side<a class="headerlink" href="#providing-the-necessary-data-server-side" title="Permalink to this headline">¶</a></h2>
+<p>We now have the client asking for high score data, but the server not providing any. Let&#8217;s fix that next.</p>
+<p>We might already have some Flask handler that will be called when the client requests for high score data. (If not, then add that now.) What we&#8217;ll need to do in that function is:</p>
+<ul class="simple">
+<li>Fetch the relevant data from the database</li>
+<li>Parse the JSON we&#8217;ve stored</li>
+<li>Sort the data and pick the top five entries</li>
+<li>Serialise this data in JSON</li>
+<li>Send it to the client</li>
+</ul>
+<p>You may recall we decided that in our database schema, the key is the maximum number and the value is a list, with each entry in the list representing one finished game. In order to fetch data from Redis where the value is a list, according to Redis Python client documentation, we can use the &#8220;lrange&#8221; function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">stored_data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">lrange</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The &#8220;lrange&#8221; function takes three parameters: the key, start index and end index, which, if negatively indexed, counts from the end. In other words, pssing 0 and -1 as the indices we fetch the full list. The variable &#8220;stored_data&#8221; now holds a list of strings, each string being JSON data.</p>
+<p><em>Exercise</em>: In your handler function, read all the data for the relevant key in a variable. You need to use &#8220;request.get.args()&#8221; to get the GET parameter.</p>
+<p>We can parse a string which should be well formatted JSON data by using the &#8220;json.loads()&#8221; function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">parsed_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Parse all the JSON strings in the list such that you have the data available in Python dictionaries. You should be able to e.g. access the number of guesses field. Ideally you&#8217;d parse the strings by using a list comprehension.</p>
+<p>Now that we have the data available, we need to sort it by the number of guesses and send the data to the client (by converting it to JSON using (json.dumps() and &#8220;return&#8221;ing it in our Flask handler function).</p>
+<p><em>Exercise</em>: Sort the data based on the number of guesses, from lowest to highest. Pass the optional argument &#8220;key&#8221; to the list.sort() or sorted() function. As the key, pass a function (anonymous or named) which return the field in the dictionary that is the number of guesses. Serialise the first five elements of that list into a JSON string and return the string to the client.</p>
+</div>
+<div class="section" id="handling-the-high-score-data-on-the-client">
+<h2>8.6.4. Handling the high score data on the client<a class="headerlink" href="#handling-the-high-score-data-on-the-client" title="Permalink to this headline">¶</a></h2>
+<p>On the client side, we have a function that requests the high score data from the server, and calls a callback function when this data is available, passing the data to the function.</p>
+<p>The data that this function receives should be the JSON string that we programmed the server to send in the previous section. (You can use console.log() to verify.)</p>
+<p>Now, what we should do is take that data and put it in our HTML table.</p>
+<p>We already saw some Javascript code before to change a cell in an HTML table:</p>
+<div class="highlight-js"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nx">table</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;hiscore&quot;</span><span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">table</span><span class="p">.</span><span class="nx">rows</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cells</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;2017-02-15&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>We&#8217;ve also seen how to parse a JSON string into a Javascript dictionary:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">parsed</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Then, it seems what we need to do is take the data from our dictionary, iterate over it in a loop and add the data in the relevant cells in our HTML table, cell by cell.</p>
+<p><em>Exercise</em>: Fill in the high score table. Make sure you don&#8217;t overwrite the header row in the table - add one to your index where necessary. If you&#8217;re sending more entries in your server code than you have space for in your table, you can use the function &#8220;Math.min(a, b)&#8221; to limit the number of iterations in your for loop.</p>
+</div>
+<div class="section" id="updating-the-high-score-table-at-game-end">
+<h2>8.6.5. Updating the high score table at game end<a class="headerlink" href="#updating-the-high-score-table-at-game-end" title="Permalink to this headline">¶</a></h2>
+<p>It would be nice to update the high score table once the game has finished. It seems all we need to do is call the update_hiscore() function at the right time. This would work but seems a bit ugly:</p>
+<ul class="simple">
+<li>At game end, the client POSTs the game result to the server</li>
+<li>The server replies with... nothing in particular</li>
+<li>The client immediately after GETs the updated high score data</li>
+</ul>
+<p>It seems more elegant if we, when the client POSTs the game result, reply with the new high score data, and have the client use this to update the high score list - no additional GET necessary. So let&#8217;s do this instead.</p>
+<p><em>Exercise</em>: In your server code, in your POST handler, have the POST handler return the JSON string the same way your GET handler does when the high score data is being requested. Instead of copying code, move any common code to a function and call that function from different places instead.</p>
+<p><em>Exercise</em>: In your client code, when POSTing the game result, have the handler call display_hiscore() the same way you do when GETting high score data at page load.</p>
+<p>Congratulations! Our odyssey of turning our guessing game to a simple web app is now done.</p>
+</div>
+<div class="section" id="using-our-new-api-outside-the-browser">
+<h2>8.6.6. Using our new API outside the browser<a class="headerlink" href="#using-our-new-api-outside-the-browser" title="Permalink to this headline">¶</a></h2>
+<p>As we wrote a new GET handler in Flask to send the high score data, we created an API for the high score that can also be used outside the browser. To demonstrate this, you can e.g. run the following command in your shell:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl -s localhost:5000/guess/hiscore?max_value<span class="o">=</span><span class="m">25</span>
+</pre></div>
+</div>
+<p>(The &#8220;-s&#8221; switch reduces the output of curl such that only the response from the server is output. You may need to change the URL and the parameter to match your code.)</p>
+<p>If you run this, you should get a JSON string back representing your high score list. This is practical because you can do all kinds of things with this API, such as:</p>
+<ul class="simple">
+<li>Write a script that gets the JSON files for all max_values, and display statistics over:
+* which max_values have been played and which haven&#8217;t
+* who are the most active (or best) users of the game
+* how do the high score lists evolve over time</li>
+<li>Visualise the high score list in some other way, like as a 3D scene</li>
+<li>Fetch the high score list periodically and automatically email an alert when the list has changed</li>
+</ul>
+<p>It&#8217;s often beneficial to expose such an API for reasons like this.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">8.6. Generating the high score table</a><ul>
+<li><a class="reference internal" href="#calling-a-javascript-function-at-page-load">8.6.1. Calling a Javascript function at page load</a></li>
+<li><a class="reference internal" href="#actually-updating-the-high-score-table">8.6.2. Actually updating the high score table</a></li>
+<li><a class="reference internal" href="#providing-the-necessary-data-server-side">8.6.3. Providing the necessary data server side</a></li>
+<li><a class="reference internal" href="#handling-the-high-score-data-on-the-client">8.6.4. Handling the high score data on the client</a></li>
+<li><a class="reference internal" href="#updating-the-high-score-table-at-game-end">8.6.5. Updating the high score table at game end</a></li>
+<li><a class="reference internal" href="#using-our-new-api-outside-the-browser">8.6.6. Using our new API outside the browser</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="int_web_index.html">8. Intermediate web development</a><ul>
+      <li>Previous: <a href="guess_start.html" title="previous chapter">8.5. The page for starting a new game</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">9. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/hiscore_table.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/hiscore_table.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

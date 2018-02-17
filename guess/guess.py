@@ -33,7 +33,7 @@ def guess():
     user = request.args.get('user', 'User')
     return render_template('guess3.html', max_value=max_value, user=user)
 
-@app.route("/guess/hiscore", methods=['POST', 'GET'])
+@app.route("/guess/hiscore", methods=['GET'])
 def hiscore():
     val = request.args.get('max_value', 25)
     return get_hiscore(val)
@@ -42,7 +42,7 @@ def get_hiscore(key):
     stored_data = r.lrange(key, 0, -1)
     hiscore = [json.loads(s) for s in stored_data]
     hiscore.sort(key=lambda x: x['guesses'])
-    return json.dumps(hiscore)
+    return json.dumps(hiscore[:5])
 
 @app.route("/guess/finished", methods=['POST'])
 def finished():

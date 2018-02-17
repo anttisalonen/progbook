@@ -309,7 +309,7 @@ collect2: error: ld returned <span class="m">1</span> <span class="nb">exit</spa
 </td></tr></table></div>
 <p>This function reads up to 1,023 bytes at once from the client and prints them out to stdout.</p>
 <p>Because we now have a server which listens to connections to port 1234, we can try connecting to it using a web browser. We should then see what the web browser sends our program.</p>
-<p><em>Exercise</em>: Run the above server code and connect to 127.0.0.1:1234 with your browser. 127.0.0.1 means localhost, meaning the computer you&#8217;re running.</p>
+<p><em>Exercise</em>: Put together all the above server code and connect to 127.0.0.1:1234 with your browser. 127.0.0.1 means localhost, meaning the computer you&#8217;re running.</p>
 </div>
 <div class="section" id="http">
 <h2>7.2.4. HTTP<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
@@ -325,7 +325,139 @@ Host: <span class="m">127</span>.0.0.1:1234
 </div>
 <div class="section" id="c-string-handling">
 <h2>7.2.5. C string handling<a class="headerlink" href="#c-string-handling" title="Permalink to this headline">¶</a></h2>
-<p>Before we continue with implementing our web server, there are a couple of building blocks regarding string handling in C that you should know about. See the snippet below for some useful information:</p>
+<p>Before we continue with implementing our web server, there are a couple of building blocks regarding string handling in C that you should know about. Let&#8217;s first cover through some basics about strings in C.</p>
+<p>C doesn&#8217;t really have strings. What it has are buffers (allocation of continuous memory), chars or characters (one byte, representing one ASCII character, meaning English letters, numbers or other symbols) and pointers. Mixing these conceptually results in something like a string. See the below diagram which is a continuous buffer i.e. array with eight slots, each holding one byte (character):</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
+<span class="o">|</span> <span class="sc">&#39;H&#39;</span> <span class="o">|</span> <span class="sc">&#39;e&#39;</span> <span class="o">|</span> <span class="sc">&#39;l&#39;</span> <span class="o">|</span> <span class="sc">&#39;l&#39;</span> <span class="o">|</span> <span class="sc">&#39;o&#39;</span> <span class="o">|</span> <span class="sc">&#39;\0&#39;</span> <span class="o">|</span> <span class="o">?</span> <span class="o">|</span> <span class="o">?</span> <span class="o">|</span>
+<span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
+</pre></div>
+</div>
+<p>This is a buffer with eight slots containing the string &#8220;Hello&#8221;. The sixth slot is a 0, or &#8216;0&#8217;, which indicates the end of a string. The last two slots are <em>undefined</em> and reading them results in <em>undefined behaviour</em> like crashing, garbage, nothing, or anything.</p>
+<p>You can create such a buffer by e.g. doing the following:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="n">sprintf</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Line 1: We allocate the buffer in stack.</li>
+<li>Line 2: We write the string &#8220;Hello&#8221; to the buffer.</li>
+</ul>
+<p>In general, however, you may write something into a buffer where you don&#8217;t know the length of the string in advance. What you&#8217;ll need to do in any case is allocate a buffer large enough for your needs, but in addition it&#8217;s always best practice to <em>clear</em> the memory in advance, to avoid undefined behaviour. You must also ensure you don&#8217;t write <em>past the end</em> of the buffer because this will typically overwrite some of your other variables, probably crashing your program and also possibly creating a security hole. It&#8217;s typically better to do this:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span> <span class="cm">/* sizeof(my_array) will return 8 */</span>
+<span class="n">snprintf</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Line 1: We allocate the buffer in stack.</li>
+<li>Line 2: We clear the buffer, such that all the values in the buffer are 0. This way, as long as we keep the last character to 0 in the buffer (remember 0 indicates end of a string), we shouldn&#8217;t be either reading or writing past the end of our buffer.</li>
+<li>Line 3: We write the string &#8220;Hello&#8221; to the buffer using <em>snprintf</em>, which takes as a parameter the maximum number of bytes to write. We tell it to write maximum seven characters such that the last one will always be 0.</li>
+</ul>
+<p>Now, while array in general is not the same thing as a pointer, for strings the two are sometimes interexchangable. For example, let&#8217;s assume you want to pass your array as a parameter to another function. You can&#8217;t because arrays are always passed by reference in C. This means that the array will <em>decay</em> into a pointer:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* sizeof(str) will NOT give an answer as to how long the buffer is */</span>
+    <span class="n">snprintf</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span> <span class="cm">/* sizeof(my_array) returns 8 */</span>
+    <span class="n">my_function</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Here, &#8220;my_function&#8221; cannot by itself know how long the string (character buffer) pointed to by &#8220;str&#8221; is, and must take a second parameter &#8220;len&#8221; which must have this information. The &#8220;sizeof&#8221; operator only tells the size of the array (in bytes) at the site where the array is allocated, not where only a pointer is available.</p>
+</div>
+<div class="section" id="pointer-arithmetic-and-substrings">
+<h2>7.2.6. Pointer arithmetic and substrings<a class="headerlink" href="#pointer-arithmetic-and-substrings" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s say we want to modify the array by a character. We can do this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span>
+<span class="n">snprintf</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="n">my_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;J&#39;</span><span class="p">;</span> <span class="cm">/* my_array is now &quot;Jello&quot;;</span>
+<span class="cm">my_array[4] = &#39;y&#39;; /* my_array is now &quot;Jelly&quot;;</span>
+</pre></div>
+</div>
+<p>How would we do this if we only had a char pointer, not the array itself? We can use <em>pointer arithmetic</em>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="sc">&#39;J&#39;</span><span class="p">;</span>
+    <span class="o">*</span><span class="p">(</span><span class="n">str</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="sc">&#39;y&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span>
+    <span class="n">snprintf</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+    <span class="n">my_function</span><span class="p">(</span><span class="n">my_array</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>By <em>dereferencing</em> the pointer &#8220;str&#8221; with * we can access individual characters in the buffer, and also assign to them.</p>
+<p>By adding a number n to a pointer the resulting pointer points to data n elements after the first element, and by dereferencing it we can also assign to it.</p>
+<p>As a diagram it looks like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
+<span class="o">|</span> <span class="sc">&#39;H&#39;</span> <span class="o">|</span> <span class="sc">&#39;e&#39;</span> <span class="o">|</span> <span class="sc">&#39;l&#39;</span> <span class="o">|</span> <span class="sc">&#39;l&#39;</span> <span class="o">|</span> <span class="sc">&#39;o&#39;</span> <span class="o">|</span> <span class="sc">&#39;\0&#39;</span> <span class="o">|</span> <span class="o">?</span> <span class="o">|</span> <span class="o">?</span> <span class="o">|</span>
+<span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
+<span class="p">.</span>  <span class="o">^</span>                       <span class="o">^</span>
+<span class="p">.</span> <span class="n">str</span>                    <span class="n">str</span> <span class="o">+</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>If one were to pass a char pointer to my_function which pointed to less than five bytes of allocated memory, <em>my_function</em> would cause undefined behaviour.</p>
+<p>As my_function modifies &#8220;str&#8221;, the parameter can&#8217;t have the const qualifier.</p>
+</div>
+<div class="section" id="string-comparisons">
+<h2>7.2.7. String comparisons<a class="headerlink" href="#string-comparisons" title="Permalink to this headline">¶</a></h2>
+<p>You can check if two strings are the same by using the &#8220;strncmp&#8221; function:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+<span class="cm">/* set a and b somehow */</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a and b are the same (at least the first 20 characters).</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>(You&#8217;ll need to #include &lt;string.h&gt; for strncmp as well as most of the other string utility functions, including memset().)</p>
+<p>If you want to compare only parts of a string, strncmp can do this too. Let&#8217;s say you have a buffer, and you know its first letters are &#8220;HTTP/1.1 &#8221; but you want to know whether the status code is &#8220;200&#8221;. You can do e.g.:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">input_string</span> <span class="o">=</span> <span class="p">...</span> <span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">input_string</span> <span class="o">+</span> <span class="mi">9</span><span class="p">,</span> <span class="s">&quot;200&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The status code is 200.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>What happens here is that we use pointer arithmetic to skip the first nine characters (&#8220;HTTP/1.1 &#8221;), then compare the next three (and only three) characters with the string &#8220;200&#8221;. strncmp() returns 0 if the strings matched for the given number of characters.</p>
+<p>Another option would be to copy the relevant substring to its own buffer (assuming we don&#8217;t want to modify the input string):</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">input_string</span> <span class="o">=</span> <span class="p">...</span> <span class="p">;</span>
+<span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+<span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span> <span class="cm">/* ensure NULL termination */</span>
+<span class="n">strncpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">input_string</span> <span class="o">+</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&quot;200&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The status code is 200.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The function &#8220;strncpy&#8221; copies n bytes from a source buffer to a destination buffer.</p>
+<p>Since it&#8217;s only three characters were checking, we could also check them manually:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">input_string</span> <span class="o">=</span> <span class="p">...</span> <span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">input_string</span> <span class="o">+</span> <span class="mi">9</span><span class="p">)</span>  <span class="o">==</span> <span class="sc">&#39;2&#39;</span> <span class="o">&amp;&amp;</span>
+   <span class="o">*</span><span class="p">(</span><span class="n">input_string</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span>
+   <span class="o">*</span><span class="p">(</span><span class="n">input_string</span> <span class="o">+</span> <span class="mi">11</span><span class="p">)</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The status code is 200.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, here&#8217;s a snippet that puts some of this together:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -343,20 +475,18 @@ Host: <span class="m">127</span>.0.0.1:1234
 15
 16
 17
-18
-19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">my_string</span> <span class="o">=</span> <span class="s">&quot;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s">&quot;</span>
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">my_string</span> <span class="o">=</span> <span class="s">&quot;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s">&quot;</span>
                         <span class="s">&quot;Date: Mon, 27 Jul 2009 12:28:53 GMT</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">;</span>
 
-<span class="kt">char</span> <span class="o">*</span><span class="n">other_string</span> <span class="o">=</span> <span class="cm">/* ... */</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">strncmp</span><span class="p">(</span><span class="n">other_string</span><span class="p">,</span> <span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">strncmp</span><span class="p">(</span><span class="n">my_string</span><span class="p">,</span> <span class="s">&quot;HTTP/1.1&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
 <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;other_string begins with </span><span class="se">\&quot;</span><span class="s">GET</span><span class="se">\&quot;\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;my_string begins with </span><span class="se">\&quot;</span><span class="s">HTTP/1.1</span><span class="se">\&quot;\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="kt">int</span> <span class="n">other_string_len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">other_string</span><span class="p">);</span>
-<span class="k">if</span><span class="p">(</span><span class="n">other_string_len</span> <span class="o">&gt;</span> <span class="mi">14</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="n">strncmp</span><span class="p">(</span><span class="n">other_string</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&quot;HTTP&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">my_string_len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">my_string</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">my_string_len</span> <span class="o">&gt;</span> <span class="mi">14</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">strncmp</span><span class="p">(</span><span class="n">my_string</span> <span class="o">+</span> <span class="mi">9</span><span class="p">,</span> <span class="s">&quot;200&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
         <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;other_string has the characters </span><span class="se">\&quot;</span><span class="s">HTTP</span><span class="se">\&quot;</span><span class="s"> ten characters after the start.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;my_string has the characters </span><span class="se">\&quot;</span><span class="s">200</span><span class="se">\&quot;</span><span class="s"> nine characters after the start.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
         <span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
@@ -368,10 +498,11 @@ Host: <span class="m">127</span>.0.0.1:1234
 <p>Let&#8217;s see what we have...</p>
 <ul class="simple">
 <li>Lines 1-2: In C, you can declare strings over multiple lines. The literal quotes will be simply concatenated at compile time. Also note the character sequence rn which means CRLF, or &#8220;carriage return, line feed&#8221;.</li>
-<li>Line 5: The function strncmp(), from string.h, is available for checking whether two strings are the same. In order to only check whether a substring matches another string, set the third parameter to the length of the string. See &#8220;man strncmp&#8221; for more information.</li>
-<li>Line 9: The function strlen() is available for determining the length of a string.</li>
-<li>Line 11: By adding a number to a pointer (string), you can effectively start reading from a later point in a string. (This is called doing <em>pointer arithmetic</em>.) In line 10, we checked that we&#8217;re not reading past the end of a string. You must be careful not to read data past the end of a string is accessed. (If you do, you&#8217;ve created a potential security hole.)</li>
-<li>Lines 16-19: For turning an integer value to a string (character buffer), allocate a buffer large enough, clear it using memset() and finally use the sprintf() function to write the integer value as the contents of the buffer.</li>
+<li>Line 4: The function strncmp() checks whether two strings are the same.</li>
+<li>Line 8: The function strlen() determines the length of a string.</li>
+<li>Line 9: Check that we won&#8217;t be reading past the end of a string to avoid undefined behaviour or creating security holes.</li>
+<li>Line 10: By adding a number to a pointer (string), you can effectively start reading from a later point in a string.</li>
+<li>Lines 15-18: For turning an integer value to a string (character buffer), allocate a buffer large enough, clear it using memset() and finally use the sprintf() function to write the integer value as the contents of the buffer.</li>
 </ul>
 <p>Another potentially useful function is strtok(). Here&#8217;s an example of its usage:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -384,7 +515,7 @@ Host: <span class="m">127</span>.0.0.1:1234
 </pre></div>
 </td></tr></table></div>
 <p>With the above knowledge it should be possible to finish the next exercise. You may also find it interesting to take a look at the various man pages of the different functions.</p>
-<p><em>Exercise</em>: Modify the function handle_client to check if the client connecting appears to make a HTTP 1.1 GET request. In this case, respond with a valid HTTP 1.1 200 response, replying with a short message such as &#8220;Hello world&#8221;. Make sure you set the Content-Length part of the response correctly. Connect to your server using your web browser to ensure you send the correct data.</p>
+<p><em>Exercise</em>: Modify the function handle_client to check if the client connecting appears to make a HTTP 1.1 GET request. In this case, respond with a valid HTTP 1.1 200 response, replying with a short message such as &#8220;Hello world&#8221;. Make sure you set the Content-Length part of the response correctly. Connect to your server using your web browser to ensure you send the correct data. You can write data to the client by using the write() function, e.g. &#8216;write(fd, &#8220;hello&#8221;, 5);&#8217;. You can also write data piece by piece, by calling write() multiple times.</p>
 <p>As you can now see, the browser will be able to render your text, which means you have the beginnings of a web browser. To make things more interesting, let&#8217;s have another exercise.</p>
 <p><em>Exercise</em>: Create two HTML pages, with the first one linking to the second. (You can create a link in HTML by using the &lt;a&gt; tag; for example, the following creates a link to a page called two.html: &lt;a href=&#8221;two.html&#8221;&gt;link&lt;/a&gt;.) For the request to /, serve the first HTML page by reading its contents to a buffer and then sending the buffer contents as part of the response. Again, make sure you set the Content-Length part of the response correctly. Parse the request path in detail, such that you&#8217;ll be able to serve the second page when the browser requests it. Note: in order to have the browser display HTML properly, you&#8217;ll need to set the Content-Type field to text/html.</p>
 <p>At this stage our implementation doesn&#8217;t respect the whole specification, but it&#8217;s able to serve some web pages. If you made it here, congratulations.</p>
@@ -405,6 +536,8 @@ Host: <span class="m">127</span>.0.0.1:1234
 <li><a class="reference internal" href="#reading-from-a-socket">7.2.3. Reading from a socket</a></li>
 <li><a class="reference internal" href="#http">7.2.4. HTTP</a></li>
 <li><a class="reference internal" href="#c-string-handling">7.2.5. C string handling</a></li>
+<li><a class="reference internal" href="#pointer-arithmetic-and-substrings">7.2.6. Pointer arithmetic and substrings</a></li>
+<li><a class="reference internal" href="#string-comparisons">7.2.7. String comparisons</a></li>
 </ul>
 </li>
 </ul>
