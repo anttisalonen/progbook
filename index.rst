@@ -19,6 +19,7 @@ Software development fundamentals
    int_py_index
    int_c_index
    int_web_index
+   strong_index
    ex_index
 
    dep
