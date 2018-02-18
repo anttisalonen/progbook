@@ -118,24 +118,4 @@ It seems more elegant if we, when the client POSTs the game result, reply with t
 
 Congratulations! Our odyssey of turning our guessing game to a simple web app is now done.
 
-Using our new API outside the browser
-=====================================
 
-As we wrote a new GET handler in Flask to send the high score data, we created an API for the high score that can also be used outside the browser. To demonstrate this, you can e.g. run the following command in your shell:
-
-.. code-block:: bash
-
-    $ curl -s localhost:5000/guess/hiscore?max_value=25
-
-(The "-s" switch reduces the output of curl such that only the response from the server is output. You may need to change the URL and the parameter to match your code.)
-
-If you run this, you should get a JSON string back representing your high score list. This is practical because you can do all kinds of things with this API, such as:
-
-* Write a script that gets the JSON files for all max_values, and display statistics over:
-  * which max_values have been played and which haven't
-  * who are the most active (or best) users of the game
-  * how do the high score lists evolve over time
-* Visualise the high score list in some other way, like as a 3D scene
-* Fetch the high score list periodically and automatically email an alert when the list has changed
-
-It's often beneficial to expose such an API for reasons like this.

@@ -39,7 +39,7 @@ This command outputs any line in which a number between -1.0 and -1.3 was found.
 
 [0-9] means that after the previous character (0, 1 or 2) we search for any digit.
 
-* means that the previous search must be repeated as often as possible, i.e. for any digits until some other character is found.
+\* means that the previous search must be repeated as often as possible, i.e. for any digits until some other character is found.
 
 Hence, the regular expression "\\-1\\.[012][0-9]*" means "search for a string that starts with a minus character, has a 1, followed by a period, followed by either 0, 1 or 2, followed by zero or more digits".
 
@@ -56,7 +56,7 @@ It may become more obvious if we pass the switch "-o" to grep, which means that 
 
 Now, grep only outputs the strings that were matched, i.e. the numbers between -1.0 and -1.3.
 
-As unplausible as it may sound, experienced programmers are often able to derive a correct regular expression for a certain use case with ease, though sometimes, especially with more complex expressions, some debugging may be needed. This comes with practice; an experienced programmer often uses regular expressions several times every day.
+As unplausible as it may sound, experienced programmers are often able to derive a correct regular expression for a certain use case with ease, though sometimes, especially with more complex expressions, some debugging may be needed. This comes with practice; an experienced programmer often uses regular expressions several times per day.
 
 Regular expressions aren't limited to grep, but are available in most programming languages as well as other Unix tools such as sed. To get a refresher on sed, you might, for example, use sed to search and replace the string "123" with "456":
 
@@ -91,3 +91,4 @@ The third component is 0.0: Whatever was matched in the search will be replaced 
 The fourth component is 'g' again, i.e. apply this search as many times as possible for each line. This means that for example for line "-1.234 -2.000 1.23" the both matching instances will be replaced (both "-1.234" and "-2.000" will be replaced by "0.0").
 
 *Exercise*: Using your generated file of 10,000 functions, write a 'sed' command to replace all digits after the decimal point with a 0. For example, the line "1.980206 -3.655827 -2.629755" should become "1.0 -3.0 -2.0".
+

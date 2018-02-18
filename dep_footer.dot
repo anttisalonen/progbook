@@ -28,4 +28,6 @@
     vcs -> c2;
     c2 -> httpserv;
     httpserv -> sec;
+    hiscore_table -> web_tips;
+    file_hashing -> web_tips;
 }

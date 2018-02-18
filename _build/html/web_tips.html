@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8.7. Some more tips and tricks &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. Exercises" href="ex_index.html" />
+    <link rel="prev" title="8.6. Generating the high score table" href="hiscore_table.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="some-more-tips-and-tricks">
+<h1>8.7. Some more tips and tricks<a class="headerlink" href="#some-more-tips-and-tricks" title="Permalink to this headline">¶</a></h1>
+<p>Our simple web app is now fully functional. This page includes some tips related to it.</p>
+<div class="section" id="using-our-new-api-outside-the-browser">
+<h2>8.7.1. Using our new API outside the browser<a class="headerlink" href="#using-our-new-api-outside-the-browser" title="Permalink to this headline">¶</a></h2>
+<p>As we wrote a new GET handler in Flask to send the high score data, we created an API for the high score that can also be used outside the browser. To demonstrate this, you can e.g. run the following command in your shell:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl -s localhost:5000/guess/hiscore?max_value<span class="o">=</span><span class="m">25</span>
+</pre></div>
+</div>
+<p>(The &#8220;-s&#8221; switch reduces the output of curl such that only the response from the server is output. You may need to change the URL and the parameter to match your code.)</p>
+<p>If you run this, you should get a JSON string back representing your high score list. This is practical because you can do all kinds of things with this API, such as:</p>
+<ul class="simple">
+<li>Write a script that gets the JSON files for all max_values, and display statistics over:
+* which max_values have been played and which haven&#8217;t
+* who are the most active (or best) users of the game
+* how do the high score lists evolve over time</li>
+<li>Visualise the high score list in some other way, like as a 3D scene</li>
+<li>Fetch the high score list periodically and automatically email an alert when the list has changed</li>
+</ul>
+<p>It&#8217;s often beneficial to expose such an API for reasons like this.</p>
+</div>
+<div class="section" id="css-or-making-web-pages-prettier">
+<h2>8.7.2. CSS, or making web pages prettier<a class="headerlink" href="#css-or-making-web-pages-prettier" title="Permalink to this headline">¶</a></h2>
+<p>CSS (Cascading Style Sheets) is a standard for defining how web pages look like. It&#8217;s typically used together with HTML and JS; HTML controls the layout, JS defines the logic and CSS defines the looks. As this book isn&#8217;t a web design book we won&#8217;t go to the details on CSS but here&#8217;s an overview:</p>
+<ul class="simple">
+<li>You create a .css file which describes e.g. what color or fonts different tags should use, for example headings or paragraphs. CSS looks something like this:</li>
+</ul>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="nt">body</span> <span class="p">{</span>
+    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#ff0000</span><span class="p">;</span>
+    <span class="k">color</span><span class="p">:</span> <span class="mh">#00ff00</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>(Colours are defined from 0 to 255 for red, green and blue separately, in hex notation, i.e. ff stands for 255. In other words, the above sets the background colour to strong red and the text colour to strong green.)</p>
+<ul class="simple">
+<li>You can also define a <em>class</em>: a style that applies to multiple elements.</li>
+<li>Once you&#8217;ve defined your CSS file you reference it in your HTML by including something like the following tag in your head section:</li>
+</ul>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;my_file.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>If your CSS defines styles for a class, then you need to define which class your element uses. For example:</li>
+</ul>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;hiscore&quot;</span> <span class="na">border</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my-table-style&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>For those with little eye for design, there are several CSS libraries available online that can be used and downloaded by your web page such that you don&#8217;t have to specify the style yourself. After searching online for a while you might find some. One of the popular ones is Pure.</p>
+<p><em>Exercise</em>: Find the Pure CSS website.</p>
+<div class="section" id="pure-css-modules">
+<h3>8.7.2.1. Pure CSS modules<a class="headerlink" href="#pure-css-modules" title="Permalink to this headline">¶</a></h3>
+<p>If you take a look at the usage section on Pure, you&#8217;ll find the URL you can use to reference in your HTML such that when opening your page, the browser will download the Pure CSS modules in addition and use those if you define any of your elements to use the Pure styles. At the time of writing, the Pure page instructs you to do this:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/purecss@1.0.0/build/pure-min.css&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>This includes the URL to the Pure css file (at unpkg.com) as well as a hash of the file to ensure the file hasn&#8217;t been modified by a malicious party.</p>
+<p>Once we have this css defined, we can set the class of some of our elements such that they use Pure. As per Pure documentation, you can define the class for your high score table using the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;hiscore&quot;</span> <span class="na">border</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pure-table&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>That is, you can otherwise keep it the same but include the &#8220;class&#8221; attribute to refer to &#8220;pure-table&#8221;.</p>
+<p><em>Exercise</em>: Modify your HTML to use Pure. You can start with the table, but if you&#8217;re interested you can also modify the form in your page for starting the new game to use Pure. You&#8217;ll need to use a couple of extra HTML tags to use all of Pure&#8217;s features.</p>
+</div>
+</div>
+<div class="section" id="accessing-your-page-from-other-devices">
+<h2>8.7.3. Accessing your page from other devices<a class="headerlink" href="#accessing-your-page-from-other-devices" title="Permalink to this headline">¶</a></h2>
+<p>By default Flask only accepts connections from the computer Flask itself is running on. As per Flask documentation you can override this by passing the &#8211;host parameter to Flask, e.g.:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nv">FLASK_APP</span><span class="o">=</span>guess.py flask run --host<span class="o">=</span><span class="m">0</span>.0.0.0
+</pre></div>
+</div>
+<p>This will allow connections from all devices in your network. (If you&#8217;ve enabled Flask debugger and don&#8217;t trust all users in your network or expose your computer to the Internet directly then don&#8217;t run this as in debug mode Flask allows users to execute code on your computer directly.)</p>
+<p>In order to connect to your page from another device, you&#8217;ll need to know the IP address where to connect. How to find this out is operating system dependent; on Linux, for example, you can typically run either &#8220;ifconfig&#8221; or &#8220;netcfg&#8221;. You&#8217;ll typically have multiple IP addresses (at least 127.0.0.1 and one more if you&#8217;re connected to Internet) - pick one that makes sense for your network.</p>
+<p><em>Exercise</em>: Connect to your page from another device. Look up online how to find out your IP address if necessary. By default Flask serves your pages at port 5000 so you&#8217;ll need to include that in your URL.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">8.7. Some more tips and tricks</a><ul>
+<li><a class="reference internal" href="#using-our-new-api-outside-the-browser">8.7.1. Using our new API outside the browser</a></li>
+<li><a class="reference internal" href="#css-or-making-web-pages-prettier">8.7.2. CSS, or making web pages prettier</a><ul>
+<li><a class="reference internal" href="#pure-css-modules">8.7.2.1. Pure CSS modules</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#accessing-your-page-from-other-devices">8.7.3. Accessing your page from other devices</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="int_web_index.html">8. Intermediate web development</a><ul>
+      <li>Previous: <a href="hiscore_table.html" title="previous chapter">8.6. Generating the high score table</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">9. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/web_tips.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/web_tips.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

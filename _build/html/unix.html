@@ -351,21 +351,25 @@ not found
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="s2"> </span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>...we can simply do this:</p>
+<p>...we can simply write this in Python:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="k">print</span> <span class="s2">&quot;</span><span class="si">%f</span><span class="s2"> </span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>...and then run it like this:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python with.py &gt; test.txt
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python my_file.py &gt; test.txt
 </pre></div>
 </div>
 <p>This has the added flexibility that we don&#8217;t have to hard code the output file name.</p>
 <p>If necessary, you can also discard the output by redirecting it to the special file /dev/null, which has the sole purpose of consuming and discarding all its input:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python with.py &gt; /dev/null
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python my_file.py &gt; /dev/null
 </pre></div>
 </div>
 <p><em>Exercise</em>: rewrite your program that generates the 10,000 functions file to write to standard output.</p>
+<p>If you have a program that reads from standard input (stdin), you can have it read a file with a redirection:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python script.py &lt; myfile.txt
+</pre></div>
+</div>
 </div>
 <div class="section" id="shell-scripts">
 <h2>2.1.4. Shell scripts<a class="headerlink" href="#shell-scripts" title="Permalink to this headline">¶</a></h2>

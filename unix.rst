@@ -387,7 +387,7 @@ Redirecting will allow us to simplify writing our own software. For example, it 
 .. literalinclude:: with.py
    :language: python
 
-...we can simply do this:
+...we can simply write this in Python:
 
 .. code-block:: python
 
@@ -398,7 +398,7 @@ Redirecting will allow us to simplify writing our own software. For example, it 
 
 .. code-block:: bash
 
-    $ python with.py > test.txt
+    $ python my_file.py > test.txt
 
 This has the added flexibility that we don't have to hard code the output file name.
 
@@ -406,9 +406,15 @@ If necessary, you can also discard the output by redirecting it to the special f
 
 .. code-block:: bash
 
-    $ python with.py > /dev/null
+    $ python my_file.py > /dev/null
 
 *Exercise*: rewrite your program that generates the 10,000 functions file to write to standard output.
+
+If you have a program that reads from standard input (stdin), you can have it read a file with a redirection:
+
+.. code-block:: bash
+
+    $ python script.py < myfile.txt
 
 Shell scripts
 =============

@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. Exercises" href="ex_index.html" />
+    <link rel="next" title="8.7. Some more tips and tricks" href="web_tips.html" />
     <link rel="prev" title="8.5. The page for starting a new game" href="guess_start.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -134,24 +134,6 @@
 <p><em>Exercise</em>: In your client code, when POSTing the game result, have the handler call display_hiscore() the same way you do when GETting high score data at page load.</p>
 <p>Congratulations! Our odyssey of turning our guessing game to a simple web app is now done.</p>
 </div>
-<div class="section" id="using-our-new-api-outside-the-browser">
-<h2>8.6.6. Using our new API outside the browser<a class="headerlink" href="#using-our-new-api-outside-the-browser" title="Permalink to this headline">¶</a></h2>
-<p>As we wrote a new GET handler in Flask to send the high score data, we created an API for the high score that can also be used outside the browser. To demonstrate this, you can e.g. run the following command in your shell:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl -s localhost:5000/guess/hiscore?max_value<span class="o">=</span><span class="m">25</span>
-</pre></div>
-</div>
-<p>(The &#8220;-s&#8221; switch reduces the output of curl such that only the response from the server is output. You may need to change the URL and the parameter to match your code.)</p>
-<p>If you run this, you should get a JSON string back representing your high score list. This is practical because you can do all kinds of things with this API, such as:</p>
-<ul class="simple">
-<li>Write a script that gets the JSON files for all max_values, and display statistics over:
-* which max_values have been played and which haven&#8217;t
-* who are the most active (or best) users of the game
-* how do the high score lists evolve over time</li>
-<li>Visualise the high score list in some other way, like as a 3D scene</li>
-<li>Fetch the high score list periodically and automatically email an alert when the list has changed</li>
-</ul>
-<p>It&#8217;s often beneficial to expose such an API for reasons like this.</p>
-</div>
 </div>
 
 
@@ -168,7 +150,6 @@
 <li><a class="reference internal" href="#providing-the-necessary-data-server-side">8.6.3. Providing the necessary data server side</a></li>
 <li><a class="reference internal" href="#handling-the-high-score-data-on-the-client">8.6.4. Handling the high score data on the client</a></li>
 <li><a class="reference internal" href="#updating-the-high-score-table-at-game-end">8.6.5. Updating the high score table at game end</a></li>
-<li><a class="reference internal" href="#using-our-new-api-outside-the-browser">8.6.6. Using our new API outside the browser</a></li>
 </ul>
 </li>
 </ul>
@@ -178,7 +159,7 @@
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="int_web_index.html">8. Intermediate web development</a><ul>
       <li>Previous: <a href="guess_start.html" title="previous chapter">8.5. The page for starting a new game</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">9. Exercises</a></li>
+      <li>Next: <a href="web_tips.html" title="next chapter">8.7. Some more tips and tricks</a></li>
   </ul></li>
   </ul></li>
 </ul>
