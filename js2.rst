@@ -7,7 +7,7 @@ What is the best strategy to win the game in the least number of guesses? Have a
 
 You may have noticed that the best strategy is to guess at the middle point of the available range, that is, 12 or 13 when the maximum number is 25, and then on the middle point of the available range again depending on the answer, so either 6 if the number is smaller or 19 if the number is larger. This method will in general arrive at the right answer in the minimum number of guesses.
 
-In terms of O notation, the performance of such an algorithm would be O(log n), i.e. doubling the problem space will cause one more iteration. Think about it: if the maximum number was 50, the first guess should be 25, after which we know the number is either below 25 or between 26 and 50, such that the range is the same as if the original maximum had been 25.
+In terms of big O notation, the performance of such an algorithm would be O(log n), i.e. doubling the problem space will cause one more iteration. Think about it: if the maximum number was 50, the first guess should be 25, after which we know the number is either below 25 or between 26 and 50, such that the range is the same as if the original maximum had been 25.
 
 This algorithm is called "binary search" because it searches for an answer, and splits the search space in half with each lookup. It's one of the most important concepts in computer science.
 
