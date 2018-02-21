@@ -111,6 +111,13 @@
 <p>The third component is 0.0: Whatever was matched in the search will be replaced by this.</p>
 <p>The fourth component is &#8216;g&#8217; again, i.e. apply this search as many times as possible for each line. This means that for example for line &#8220;-1.234 -2.000 1.23&#8221; the both matching instances will be replaced (both &#8220;-1.234&#8221; and &#8220;-2.000&#8221; will be replaced by &#8220;0.0&#8221;).</p>
 <p><em>Exercise</em>: Using your generated file of 10,000 functions, write a &#8216;sed&#8217; command to replace all digits after the decimal point with a 0. For example, the line &#8220;1.980206 -3.655827 -2.629755&#8221; should become &#8220;1.0 -3.0 -2.0&#8221;.</p>
+<p>The man page for GNU grep includes a good reference on regular expressions, although this might not be available on non-GNU systems like some BSDs.</p>
+<div class="topic">
+<p class="topic-title first">GNU? BSD? What&#8217;s going on?</p>
+<p>Unix has a long and complex history. To make it short, BSD (Berkeley Software Distribution, originating from the University of California, Berkeley) is a family of Unix implementations nowadays consisting of a few operating systems including OpenBSD and macOS. The BSD operating systems have the typical Unix tools such as grep implemented and documented. GNU (GNU&#8217;s Not Unix - implying GNU doesn&#8217;t contain any original Unix code) is <em>another</em> implementation of Unix and hence <em>also</em> has typical Unix tools such as grep implemented and documented - but implemented and documented separately and hence slightly differently. While Unix has been standardised, such that one can expect tools such as grep generally behave similarly across various Unix implementations, the different implementations can include additional features in their implementations that others might not have. Or indeed include a reference on regular expressions in their grep man page.</p>
+<p>Linux distributions are the most common operating systems that include GNU tools.</p>
+</div>
+<p><em>Exercise</em>: Look up a regular expression reference to see what character classes and expressions are available.</p>
 </div>
 
 

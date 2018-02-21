@@ -107,7 +107,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ds.html">4.2. Overview of data structures</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ds.html#arrays">4.2.1. Arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html#arrays">4.2.1. Arrays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ds.html#stack">4.2.1.1. Stack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ds.html#queue">4.2.1.2. Queue</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="ds.html#linked-lists">4.2.2. Linked lists</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ds.html#sets">4.2.3. Sets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ds.html#dictionaries">4.2.4. Dictionaries</a></li>
@@ -118,6 +122,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="js_index.html">5. Javascript</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="js.html">5.1. Guessing game in JS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js2.html">5.2. Javascript meets algorithms</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="int_py_index.html">6. Useful Python tips</a><ul>
@@ -157,42 +162,41 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="int_web_index.html">8. Intermediate web development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="js2.html">8.1. Guessing game - improvements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="html_tables.html">8.2. HTML tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="redis.html">8.3. Redis</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="redis.html#what-is-a-database">8.3.1. What is a database?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="redis.html#sql-vs-nosql">8.3.2. SQL vs. NoSQL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="redis.html#setting-up-redis">8.3.3. Setting up Redis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="redis.html#python-redis-client">8.3.4. Python Redis client</a></li>
-<li class="toctree-l3"><a class="reference internal" href="redis.html#using-redis">8.3.5. Using Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="html_tables.html">8.1. HTML tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html">8.2. Redis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="redis.html#what-is-a-database">8.2.1. What is a database?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis.html#sql-vs-nosql">8.2.2. SQL vs. NoSQL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis.html#setting-up-redis">8.2.3. Setting up Redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis.html#python-redis-client">8.2.4. Python Redis client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis.html#using-redis">8.2.5. Using Redis</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ajax.html">8.4. AJAX</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ajax.html#asynchronous-execution">8.4.1. Asynchronous execution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ajax.html#xmlhttprequest">8.4.2. XmlHttpRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ajax.html">8.3. AJAX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ajax.html#asynchronous-execution">8.3.1. Asynchronous execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ajax.html#xmlhttprequest">8.3.2. XmlHttpRequest</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="guess_start.html">8.5. The page for starting a new game</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="guess_start.html#html-forms">8.5.1. HTML forms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guess_start.html#using-templates">8.5.2. Using templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guess_start.html#uploading-more-json-data">8.5.3. Uploading more JSON data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guess_start.html">8.4. The page for starting a new game</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guess_start.html#html-forms">8.4.1. HTML forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guess_start.html#using-templates">8.4.2. Using templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guess_start.html#uploading-more-json-data">8.4.3. Uploading more JSON data</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="hiscore_table.html">8.6. Generating the high score table</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#calling-a-javascript-function-at-page-load">8.6.1. Calling a Javascript function at page load</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#actually-updating-the-high-score-table">8.6.2. Actually updating the high score table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#providing-the-necessary-data-server-side">8.6.3. Providing the necessary data server side</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#handling-the-high-score-data-on-the-client">8.6.4. Handling the high score data on the client</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#updating-the-high-score-table-at-game-end">8.6.5. Updating the high score table at game end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hiscore_table.html">8.5. Generating the high score table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#calling-a-javascript-function-at-page-load">8.5.1. Calling a Javascript function at page load</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#actually-updating-the-high-score-table">8.5.2. Actually updating the high score table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#providing-the-necessary-data-server-side">8.5.3. Providing the necessary data server side</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#handling-the-high-score-data-on-the-client">8.5.4. Handling the high score data on the client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiscore_table.html#updating-the-high-score-table-at-game-end">8.5.5. Updating the high score table at game end</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="web_tips.html">8.7. Some more tips and tricks</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="web_tips.html#using-our-new-api-outside-the-browser">8.7.1. Using our new API outside the browser</a></li>
-<li class="toctree-l3"><a class="reference internal" href="web_tips.html#css-or-making-web-pages-prettier">8.7.2. CSS, or making web pages prettier</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="web_tips.html#pure-css-modules">8.7.2.1. Pure CSS modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_tips.html">8.6. Some more tips and tricks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="web_tips.html#using-our-new-api-outside-the-browser">8.6.1. Using our new API outside the browser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web_tips.html#css-or-making-web-pages-prettier">8.6.2. CSS, or making web pages prettier</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web_tips.html#pure-css-modules">8.6.2.1. Pure CSS modules</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="web_tips.html#accessing-your-page-from-other-devices">8.7.3. Accessing your page from other devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web_tips.html#accessing-your-page-from-other-devices">8.6.3. Accessing your page from other devices</a></li>
 </ul>
 </li>
 </ul>
@@ -219,7 +223,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ex_python_generate_file.html">10.1. Solutions to exercises: Generating input data using Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ex_regex.html">10.2. Solutions to exercises: Regular expressions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ex_js.html">10.3. Solutions to exercises: Guessing game in JS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ex_js2.html">10.4. Solutions to exercises: Guessing game - improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_js2.html">10.4. Solutions to exercises: Javascript meets algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ex_json.html">10.5. Solutions to exercises: JSON</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ex_httpserv.html">10.6. Solutions to exercises: Writing a toy web server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ex_ajax.html">10.7. Solutions to exercises: AJAX</a></li>

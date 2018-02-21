@@ -1,5 +1,5 @@
-Guessing game - improvements
-----------------------------
+Javascript meets algorithms
+---------------------------
 
 Try to play the guessing game a few times.
 

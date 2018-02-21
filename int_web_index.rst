@@ -4,7 +4,6 @@ Intermediate web development
 .. toctree::
    :maxdepth: 1
 
-   js2
    html_tables
    redis
    ajax

@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="5. Javascript" href="js_index.html" />
-    <link rel="prev" title="4.1. O notation" href="o_not.html" />
+    <link rel="prev" title="4.1. Big O notation" href="o_not.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -64,6 +64,68 @@
 </pre></div>
 </div>
 <p>Lists in Python are technically also arrays but each elements holds a pointer to arbitrary data, such that in Python, each element in a list can be of different type.</p>
+<div class="section" id="stack">
+<h3>4.2.1.1. Stack<a class="headerlink" href="#stack" title="Permalink to this headline">¶</a></h3>
+<p>Typically the memory layout for a stack is the same as for an array but the usage pattern is different.</p>
+<p>You can imagine stack as an array where you only have visibility over the last element in the array: you can read it, pop it (redefine &#8220;last element&#8221; as one to the left), and push an element (redefine &#8220;last element&#8221; as one to the right, and set its value).</p>
+<p>Stack is also called &#8220;LIFO&#8221; - last in, first out. Here&#8217;s an example &#8220;animation&#8221; of using a stack:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---+---+---+</span>
+<span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="c1"># push(3)</span>
+<span class="o">+---+---+---+</span>
+      <span class="o">^</span> <span class="n">end</span> <span class="n">of</span> <span class="n">stack</span>
+
+<span class="o">+---+---+---+</span>
+<span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span> <span class="c1"># pop() - returns 3</span>
+<span class="o">+---+---+---+</span>
+          <span class="o">^</span> <span class="n">end</span> <span class="n">of</span> <span class="n">stack</span>
+
+<span class="o">+---+---+---+</span>
+<span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span>
+<span class="o">+---+---+---+</span>
+      <span class="o">^</span> <span class="n">end</span> <span class="n">of</span> <span class="n">stack</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Initially, in this example, we have two elements in the stack (1 and 2). In total our array has three elements, such as the stack can&#8217;t hold any more. If we try to push any more in the stack then we get a <em>stack overflow</em>. (&#8216;x&#8217; denotes unknown memory.)</li>
+<li>We then push 3 in the stack, meaning we set the value of the third element to 3 and note that the end of the stack is now on the third element.</li>
+<li>We then pop an element from the stack, meaning we set the end of the stack to the second element. The 3 is still in the memory but not treated as part of the stack.</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">I&#8217;ve heard of stack overflow before</p>
+<p>In computers (mobile phones, what have you) there&#8217;s normally another, implicit stack: whenever you declare a variable in C, it&#8217;s typically put in <em>the stack</em>, which is memory allocated by the compiler for the program run time for things like local variables. Also, when you call a function, the function parameters as well as the return address are typically put in the stack.</p>
+<p>An issue arises when you overflow <em>this stack</em> - it typically has a fixed amount of memory allocated to it, for example eight megabytes, and if you have very large local variables (for example an array with tens of millions of elements) or very deep recursion (millions of recursive function calls) then your program will overflow the stack, the operating system will notice this and kill your application. Apart from having your application crash, stack overflows can be security holes and therefore used to hack into systems.</p>
+</div>
+</div>
+<div class="section" id="queue">
+<h3>4.2.1.2. Queue<a class="headerlink" href="#queue" title="Permalink to this headline">¶</a></h3>
+<p>Queue is similar to stack but the opposite. It typically also has the same memory layout as an array but with a different usage pattern.</p>
+<p>You can imagine queue as an array where you only have visibility over the first element in the array: you can read it, pop it (redefine &#8220;first element&#8221; as one to the right), and push an element (redefine the last element as one to the right, and set its value).</p>
+<p>Queue is also called &#8220;FIFO&#8221; - first in, first out. Here&#8217;s an example &#8220;animation&#8221; of using a queue:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---+---+---+---+---+</span>
+<span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="c1"># push(3)</span>
+<span class="o">+---+---+---+---+---+</span>
+  <span class="o">^</span>   <span class="o">^</span> <span class="n">end</span> <span class="n">of</span> <span class="n">queue</span>
+  <span class="n">start</span> <span class="n">of</span> <span class="n">queue</span>
+
+<span class="o">+---+---+---+---+---+</span>
+<span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="c1"># pop() - returns 1</span>
+<span class="o">+---+---+---+---+---+</span>
+  <span class="o">^</span>       <span class="o">^</span> <span class="n">end</span> <span class="n">of</span> <span class="n">queue</span>
+  <span class="n">start</span> <span class="n">of</span> <span class="n">queue</span>
+
+<span class="o">+---+---+---+---+---+</span>
+<span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span>
+<span class="o">+---+---+---+---+---+</span>
+      <span class="o">^</span>   <span class="o">^</span> <span class="n">end</span> <span class="n">of</span> <span class="n">queue</span>
+      <span class="n">start</span> <span class="n">of</span> <span class="n">queue</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Initially, in this example, we have two elements in the queue (1 and 2). In total our array has five elements, such as we can&#8217;t push more than five elements in the queue ever without reallocating.</li>
+<li>We then push 3 in the queue, meaning we set the value of the third element to 3 and note that the end of the queue is now on the third element.</li>
+<li>We then pop an element from the queue, meaning we set the beginning of the queue to the second element. The 1 is still in the memory but not treated as part of the queue.</li>
+</ul>
+</div>
 </div>
 <div class="section" id="linked-lists">
 <h2>4.2.2. Linked lists<a class="headerlink" href="#linked-lists" title="Permalink to this headline">¶</a></h2>
@@ -198,7 +260,11 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">4.2. Overview of data structures</a><ul>
-<li><a class="reference internal" href="#arrays">4.2.1. Arrays</a></li>
+<li><a class="reference internal" href="#arrays">4.2.1. Arrays</a><ul>
+<li><a class="reference internal" href="#stack">4.2.1.1. Stack</a></li>
+<li><a class="reference internal" href="#queue">4.2.1.2. Queue</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#linked-lists">4.2.2. Linked lists</a></li>
 <li><a class="reference internal" href="#sets">4.2.3. Sets</a></li>
 <li><a class="reference internal" href="#dictionaries">4.2.4. Dictionaries</a></li>
@@ -211,7 +277,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="ds_index.html">4. Data structures</a><ul>
-      <li>Previous: <a href="o_not.html" title="previous chapter">4.1. O notation</a></li>
+      <li>Previous: <a href="o_not.html" title="previous chapter">4.1. Big O notation</a></li>
       <li>Next: <a href="js_index.html" title="next chapter">5. Javascript</a></li>
   </ul></li>
   </ul></li>

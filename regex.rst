@@ -92,3 +92,12 @@ The fourth component is 'g' again, i.e. apply this search as many times as possi
 
 *Exercise*: Using your generated file of 10,000 functions, write a 'sed' command to replace all digits after the decimal point with a 0. For example, the line "1.980206 -3.655827 -2.629755" should become "1.0 -3.0 -2.0".
 
+The man page for GNU grep includes a good reference on regular expressions, although this might not be available on non-GNU systems like some BSDs.
+
+.. topic:: GNU? BSD? What's going on?
+
+    Unix has a long and complex history. To make it short, BSD (Berkeley Software Distribution, originating from the University of California, Berkeley) is a family of Unix implementations nowadays consisting of a few operating systems including OpenBSD and macOS. The BSD operating systems have the typical Unix tools such as grep implemented and documented. GNU (GNU's Not Unix - implying GNU doesn't contain any original Unix code) is *another* implementation of Unix and hence *also* has typical Unix tools such as grep implemented and documented - but implemented and documented separately and hence slightly differently. While Unix has been standardised, such that one can expect tools such as grep generally behave similarly across various Unix implementations, the different implementations can include additional features in their implementations that others might not have. Or indeed include a reference on regular expressions in their grep man page.
+
+    Linux distributions are the most common operating systems that include GNU tools.
+
+*Exercise*: Look up a regular expression reference to see what character classes and expressions are available.

@@ -1,5 +1,5 @@
-Solutions to exercises: Guessing game - improvements
-----------------------------------------------------
+Solutions to exercises: Javascript meets algorithms
+---------------------------------------------------
 
 .. literalinclude:: guess2.html
    :language: html
