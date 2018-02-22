@@ -76,27 +76,12 @@ Python has sorting built in:
 
 .. code-block:: python
 
-    print sorted(data, reverse=True, key=lambda l: l[2])[:3]
+    print sorted(data, reverse=True)[:3]
 
 This line introduces a few concepts:
 
 * By calling the function sorted(data), we can obtain a sorted copy of the data.
 * sorted() takes an *optional parameter* "reverse" which we set to True. This means that the returned list will be sorted in descending order instead of ascending.
-* We can specify a *key* for sorting: here we specify a *lambda function*, i.e. an anonymous function.
-* Our anonymous function says "use the third element in the list as the key", i.e. the value "c" in the functions.
-
-We could also have defined a named function for this:
-
-.. code-block:: python
-
-    def get_third_element(l):
-        return l[2]
-
-    print sorted(data, reverse=True, key=get_third_element)[:3]
-
-*Exercise*: What would you expect this statement to print in the end? Which functions would be included in the output?
-
-*Exercise*: Execute this statement and see if the output matches your expectations.
 
 Useful built in functions
 =========================
@@ -124,3 +109,37 @@ List comprehensions also support *filtering*, i.e. applying a function to only i
 
 *Exercise*: For your data set, find the function where the sum of its values (a, b and c) is the highest *and* all values a, b and c are negative.
 
+Tuples
+======
+
+Tuples in Python are quite similar to lists, but the size of a tuple is fixed. This means that while you can remove or add elements to a list in Python, this isn't possible with tuples, making tuples a nice way to implicitly document a fixed nature of some of your data.
+
+Tuples can be created using parentheses:
+
+.. code-block:: python
+
+    my_tuple = ('a', 1)
+
+They can be accessed like you access lists:
+
+.. code-block:: python
+
+    my_tuple[0] # returns 'a'
+    my_tuple[1] # returns 1
+
+They can be used like any other variable, e.g. added in lists:
+
+.. code-block:: python
+
+    my_list = [('a', 1), ('b', 2)]
+    print my_list[1][0] # first element of the second element in the list, i.e. 'b'
+
+A fun function is "zip" - which zips two given lists to one list of tuples:
+
+.. code-block:: python
+
+    list1 = ['a', 'b', 'c']
+    list2 = [1, 2, 3]
+
+    zipped_list = zip(list1, list2)
+    print zipped_list # prints [('a', 1), ('b', 2), ('c', 3)]

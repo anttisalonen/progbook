@@ -16,6 +16,7 @@
     json -> redis;
     python_generate_file -> py2;
     lang -> py2;
+    c2 -> py2;
     py2 -> py3;
     json -> py3;
     js2 -> ajax;

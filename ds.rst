@@ -197,7 +197,7 @@ C doesn't have built in support for dictionaries (although C++ does). In Python,
     ...
     not found
 
-(This example also demonstrates the Pythonic EAFP ("easier to ask for forgiveness than permission") principle as well as exceptions: it's typically cleaner code to try to access a key in a dictionary and handle the error if the key is not found than check beforehand whether the key is in a dictionary and only access it if it is.)
+(This example also demonstrates Python exception handling and the Pythonic EAFP ("easier to ask for forgiveness than permission") principle as well as exceptions: it's typically cleaner code to try to access a key in a dictionary and handle the error if the key is not found than check beforehand whether the key is in a dictionary and only access it if it is.)
 
 Summary
 =======

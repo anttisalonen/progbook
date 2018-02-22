@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.2. Redis &#8212; guide 0.1 documentation</title>
+    <title>11.2. Redis &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8.3. AJAX" href="ajax.html" />
-    <link rel="prev" title="8.1. HTML tables" href="html_tables.html" />
+    <link rel="next" title="11.3. AJAX" href="ajax.html" />
+    <link rel="prev" title="11.1. HTML tables" href="html_tables.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="redis">
-<h1>8.2. Redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
+<h1>11.2. Redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
 <p>Redis is a NoSQL database that we&#8217;ll use for our high score list.</p>
 <p>Let&#8217;s do the following:</p>
 <ul class="simple">
@@ -53,7 +53,7 @@
 <li>Figure out how to use Redis with some examples</li>
 </ul>
 <div class="section" id="what-is-a-database">
-<h2>8.2.1. What is a database?<a class="headerlink" href="#what-is-a-database" title="Permalink to this headline">¶</a></h2>
+<h2>11.2.1. What is a database?<a class="headerlink" href="#what-is-a-database" title="Permalink to this headline">¶</a></h2>
 <p>In general, database is a program that allows other programs to perform data operations. The typical data operations are CRUD:</p>
 <ul class="simple">
 <li>Create, i.e. add some data in the database</li>
@@ -70,13 +70,13 @@
 <p>In some cases, like our programs that worked with 10,000 quadratic function definitions, as databases can be used to store data persistently, a database can be used instead of storing data in a file. The program would then read the data from the database instead of a file.</p>
 </div>
 <div class="section" id="sql-vs-nosql">
-<h2>8.2.2. SQL vs. NoSQL<a class="headerlink" href="#sql-vs-nosql" title="Permalink to this headline">¶</a></h2>
+<h2>11.2.2. SQL vs. NoSQL<a class="headerlink" href="#sql-vs-nosql" title="Permalink to this headline">¶</a></h2>
 <p>SQL is a wide-spread class of databases. There are several SQL databases, for example the open source MySQL and PostgreSQL as well as Microsoft SQL. The main common characteristics is that the interface to them is defined by the SQL language which standardises many of the common database operations. SQL databases are also relational, meaning that relationships between data can be explicitly described. Typically, the data tables, i.e. the format in which the data can be stored, must also be defined explicitly, and will to some extent be verified by the database.</p>
 <p>NoSQL databases generally mean any database that don&#8217;t have SQL as the interface for performing database operations, however the term is often used for a certain type of databases which often aren&#8217;t relational and don&#8217;t expect the user to define the tables beforehand.</p>
 <p>There have been a lot of discussions about pros and cons of SQL and NoSQL. The following is mostly my opinion which, like many hot topics in software development, won&#8217;t be shared by most other developers - caveat emptor. In general, SQL, forcing the user to structure the data formats beforehand, is suitable when the user benefits from the database ensuring the user is doing the right thing. In other words, if you have or will have lots of code working with the database, it&#8217;s beneficial to use an SQL database because the database will help you do the right thing. On the other hand, for simpler projects with little code touching the data, it can be more effective to use a NoSQL database as it&#8217;s often faster to set up and use. As this project is about introducing the concepts around web development and the amount of code is relatively little, we&#8217;ll use a NoSQL database. We&#8217;ll be using an SQL database later on.</p>
 </div>
 <div class="section" id="setting-up-redis">
-<h2>8.2.3. Setting up Redis<a class="headerlink" href="#setting-up-redis" title="Permalink to this headline">¶</a></h2>
+<h2>11.2.3. Setting up Redis<a class="headerlink" href="#setting-up-redis" title="Permalink to this headline">¶</a></h2>
 <p>Redis is one of the more popular NoSQL databases: it&#8217;s relatively simple and small (about 16,000 lines of C), and easy to set up. It&#8217;s a key-value database, meaning the user can store data simply by defining the key and the value, and read data using the key. In the simplest case, both key and value are strings so one can e.g. store the value &#8220;bar&#8221; with the key &#8220;foo&#8221;, and then retrieve the value &#8220;bar&#8221; by querying for key &#8220;foo&#8221;.</p>
 <p>While Redis could be installed a more traditional way (e.g. package manager on Linux), we can use this as an opportunity to compile other people&#8217;s code from source.</p>
 <p>If you go to the Redis website, you&#8217;ll see a download link and some instructions on how to set Redis up. At the time of writing these are the instructions:</p>
@@ -114,7 +114,7 @@ $ make
 <p><em>Exercise</em>: Download, compile and start Redis.</p>
 </div>
 <div class="section" id="python-redis-client">
-<h2>8.2.4. Python Redis client<a class="headerlink" href="#python-redis-client" title="Permalink to this headline">¶</a></h2>
+<h2>11.2.4. Python Redis client<a class="headerlink" href="#python-redis-client" title="Permalink to this headline">¶</a></h2>
 <p>The main Python Redis client can be found online (at the time of writing, in Github). There are a few ways you could install this, but pip is probably the most straightforward:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>pip install redis
 </pre></div>
@@ -140,7 +140,7 @@ True
 <p>Now, we should be all set to go.</p>
 </div>
 <div class="section" id="using-redis">
-<h2>8.2.5. Using Redis<a class="headerlink" href="#using-redis" title="Permalink to this headline">¶</a></h2>
+<h2>11.2.5. Using Redis<a class="headerlink" href="#using-redis" title="Permalink to this headline">¶</a></h2>
 <p>There are several ways to store data in Redis. While Redis can store simple string key-value pairs, it can do more, for example lists and sets. The best way depends on how you access and modify the data, but for getting a bit familiar with Redis we can envision the following exercises.</p>
 <p><em>Exercise</em>: Write a Python program to read in your JSON file with 10,000 functions, and store it as a value, as a string, in Redis. The key isn&#8217;t very important for this exercise.</p>
 <p><em>Exercise</em>: In your Python program that reads 10,000 functions from a file, add functionality to read the data from the Redis database instead. You&#8217;ll need to parse the JSON string.</p>
@@ -155,12 +155,12 @@ True
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">8.2. Redis</a><ul>
-<li><a class="reference internal" href="#what-is-a-database">8.2.1. What is a database?</a></li>
-<li><a class="reference internal" href="#sql-vs-nosql">8.2.2. SQL vs. NoSQL</a></li>
-<li><a class="reference internal" href="#setting-up-redis">8.2.3. Setting up Redis</a></li>
-<li><a class="reference internal" href="#python-redis-client">8.2.4. Python Redis client</a></li>
-<li><a class="reference internal" href="#using-redis">8.2.5. Using Redis</a></li>
+<li><a class="reference internal" href="#">11.2. Redis</a><ul>
+<li><a class="reference internal" href="#what-is-a-database">11.2.1. What is a database?</a></li>
+<li><a class="reference internal" href="#sql-vs-nosql">11.2.2. SQL vs. NoSQL</a></li>
+<li><a class="reference internal" href="#setting-up-redis">11.2.3. Setting up Redis</a></li>
+<li><a class="reference internal" href="#python-redis-client">11.2.4. Python Redis client</a></li>
+<li><a class="reference internal" href="#using-redis">11.2.5. Using Redis</a></li>
 </ul>
 </li>
 </ul>
@@ -168,9 +168,9 @@ True
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_web_index.html">8. Intermediate web development</a><ul>
-      <li>Previous: <a href="html_tables.html" title="previous chapter">8.1. HTML tables</a></li>
-      <li>Next: <a href="ajax.html" title="next chapter">8.3. AJAX</a></li>
+  <li><a href="int_web_index.html">11. Intermediate web development</a><ul>
+      <li>Previous: <a href="html_tables.html" title="previous chapter">11.1. HTML tables</a></li>
+      <li>Next: <a href="ajax.html" title="next chapter">11.3. AJAX</a></li>
   </ul></li>
   </ul></li>
 </ul>

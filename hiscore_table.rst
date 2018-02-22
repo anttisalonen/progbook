@@ -14,24 +14,12 @@ Let's connect the dots. Here's our high level architecture:
 
 You might wonder, why have the Javascript code request data from the server at page load time instead of generating the high score table as part of the template on the server? While this is certainly a feasible approach, the good thing about having the Javascript generate the high score table at page load is that as we want to have Javascript code to update the high score table at the end of the game anyway, we can reuse that code at page load and hence have only one piece of code update the high score table instead of two.
 
-Calling a Javascript function at page load
-==========================================
-
-A quick search online reveals a way to do this:
-
-.. code-block:: js
-
-    function init() {
-        update_hiscore();
-    }
-    window.onload = init;
-
-That is, we define a function which we want to be called at page load time, and install it as a callback function in the member function "onload" in the global object "window".
-
 Actually updating the high score table
 ======================================
 
-Let's define the function update_hiscore().
+You may remember from the chapter how to call a Javascript function at page load. If not, the hint is that you assign the member function "onload" in the global object "window" as your callback function.
+
+Let's install a function called update_hiscore() as the function that will be called at page load time, and implement it.
 
 First of all, we need to send an XMLHttpRequest to the server. We should use GET as we're only asking the server for some data. However we'll need to supply a parameter to the server, namely *which* high score table we want - as the high score table should be different based on the maximum number the computer can think of. As we've learnt, with GET we can only pass parameters as part of the URL, so let's do that. The URL should look something like "hiscore?max_value=25" - in this example, we'd fetch the page "hiscore" from the server, with "max_value" as the GET parameter, with 25 as its value.
 

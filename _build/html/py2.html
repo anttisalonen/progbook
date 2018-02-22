@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.1. Object oriented programming &#8212; guide 0.1 documentation</title>
+    <title>9.1. Object oriented programming &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6.2. JSON" href="json.html" />
-    <link rel="prev" title="6. Useful Python tips" href="int_py_index.html" />
+    <link rel="next" title="9.2. JSON" href="json.html" />
+    <link rel="prev" title="9. Useful Python tips" href="int_py_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="object-oriented-programming">
-<h1>6.1. Object oriented programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">¶</a></h1>
+<h1>9.1. Object oriented programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">¶</a></h1>
 <p>Object oriented programming is fairly common in Python, and we&#8217;ve used it pretty much from the beginning. See for example this code:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
@@ -54,20 +54,62 @@
 <p>Here, &#8220;f&#8221; is a file object and &#8220;write&#8221; is a <em>member function</em> of the file class.</p>
 <p>In general, in many languages including Python, if you call a function such that the function syntactically appears to &#8220;belong&#8221; to a variable, like with &#8220;f.write()&#8221;, then you&#8217;re probably calling a member function of a class.</p>
 <div class="section" id="defining-your-own-data-types">
-<h2>6.1.1. Defining your own data types<a class="headerlink" href="#defining-your-own-data-types" title="Permalink to this headline">¶</a></h2>
+<h2>9.1.1. Defining your own data types<a class="headerlink" href="#defining-your-own-data-types" title="Permalink to this headline">¶</a></h2>
 <p>In Python, data types are defined using the &#8220;class&#8221; keyword:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">call_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s1">&#39;A called&#39;</span>
-
-<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="n">foo</span>
 
-    <span class="k">def</span> <span class="nf">call_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s1">&#39;B called - my foo is: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foo</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">add_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foo</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="n">my_objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">(),</span> <span class="n">B</span><span class="p">(</span><span class="mi">42</span><span class="p">)]</span>
+    <span class="k">def</span> <span class="nf">call_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s1">&#39;A called - my foo is: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foo</span><span class="p">)</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">obj</span><span class="o">.</span><span class="n">call_me</span><span class="p">()</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">add_one</span><span class="p">()</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">call_me</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<p>Let&#8217;s go through this line by line:</p>
+<ul class="simple">
+<li>Line 1: We define a <em>class</em> named A. At a high level, a class is a data type, describing data types and functions common to the class.</li>
+<li>Line 2: We define the <em>init function</em>, or <em>constructor</em>: a function that will be automatically called when an object of this class is created.</li>
+<li>Line 3: The constructor will create a <em>member variable</em> named foo - a variable that&#8217;s contained within the object.</li>
+<li>Line 5-6: We define a <em>member function</em> - a function that&#8217;s part of a class.</li>
+<li>Line 8-9: This member function produces some output and also uses the member variable value.</li>
+<li>Line 11: We create (or <em>instantiate</em>) one object of class A. Class A has a constructor that requires one parameter: we pass in 42.</li>
+<li>Line 13: We call the member function &#8220;call_me&#8221; for class A.</li>
+<li>Line 14: We call the member function &#8220;add_one&#8221; for class A.</li>
+<li>Line 15: We call the member function &#8220;call_me&#8221; for class A.</li>
+</ul>
+<p>Executing this will output:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python2 cl1.py
+A called - my foo is: <span class="m">42</span>
+A called - my foo is: <span class="m">43</span>
+</pre></div>
+</div>
+<div class="section" id="duck-typing-revisited">
+<h3>9.1.1.1. Duck typing revisited<a class="headerlink" href="#duck-typing-revisited" title="Permalink to this headline">¶</a></h3>
+<p>Here&#8217;s a bit larger example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="n">foo</span>
+
+    <span class="k">def</span> <span class="nf">add_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foo</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">call_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s1">&#39;A called - my foo is: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foo</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">call_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s1">&#39;B called&#39;</span>
+
+<span class="n">my_objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="mi">42</span><span class="p">),</span> <span class="n">B</span><span class="p">()]</span>
 
 <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">my_objects</span><span class="p">:</span>
     <span class="n">o</span><span class="o">.</span><span class="n">call_me</span><span class="p">()</span>
@@ -76,25 +118,21 @@
 </div>
 <p>Let&#8217;s go through this line by line:</p>
 <ul class="simple">
-<li>Line 1: We define a <em>class</em> named A. At a high level, a class is a data type, describing data types and functions common to the class.</li>
-<li>Line 2: We define a <em>member function</em> - a function that&#8217;s part of a class.</li>
-<li>Line 3: Calling this member function will produce output</li>
-<li>Line 5: We define another class named B.</li>
-<li>Line 6: We define a <em>constructor</em> for class B: a function that will be called when an object of this type is created.</li>
-<li>Line 7: The constructor will create a <em>member variable</em> named foo - a variable that&#8217;s contained within the object.</li>
-<li>Line 9: We define a member function for class B - with the same name as we did for class A.</li>
-<li>Line 10: This member function produces some output and also reads the member variable value.</li>
-<li>Line 12: We define a list with two elements, and create (or <em>instantiate</em>) one object of each class; one of class A, one of class B. Class B has a constructor that requires one parameter: we pass in 42.</li>
-<li>Line 14: We iterate through our list.</li>
-<li>Line 15: We call the member function &#8220;call_me&#8221; for each element in the list, i.e. once for our object of class A, once for our object of class B.</li>
+<li>Lines 1-10: As in the example above.</li>
+<li>Line 11: We define another class named B.</li>
+<li>Line 12-13: We define a member function for class B - with the same name as we did for class A.</li>
+<li>Line 15: We define a list with two elements, and create (or <em>instantiate</em>) one object of each class; one of class A, one of class B. Class A has a constructor that requires one parameter: we pass in 42.</li>
+<li>Line 17: We iterate through our list.</li>
+<li>Line 18: We call the member function &#8220;call_me&#8221; for each element in the list, i.e. once for our object of class A, once for our object of class B.</li>
 </ul>
 <p>Executing this will output:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ python2 cl.py
-A called
-B called - my foo is: <span class="m">42</span>
+A called - my foo is: <span class="m">42</span>
+B called
 </pre></div>
 </div>
 <p>We see an example of duck typing here: while classes A and B technically have nothing to do with each other, they do share the same <em>interface</em>, namely calling the function &#8220;call_me&#8221;. We also see that the classes in Python are more powerful than the structs in C: in Python we can combine multiple variables in one object, but in addition we can have member functions and use these to define an interface on interacting with the data.</p>
+</div>
 </div>
 </div>
 
@@ -106,8 +144,11 @@ B called - my foo is: <span class="m">42</span>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">6.1. Object oriented programming</a><ul>
-<li><a class="reference internal" href="#defining-your-own-data-types">6.1.1. Defining your own data types</a></li>
+<li><a class="reference internal" href="#">9.1. Object oriented programming</a><ul>
+<li><a class="reference internal" href="#defining-your-own-data-types">9.1.1. Defining your own data types</a><ul>
+<li><a class="reference internal" href="#duck-typing-revisited">9.1.1.1. Duck typing revisited</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -115,9 +156,9 @@ B called - my foo is: <span class="m">42</span>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_py_index.html">6. Useful Python tips</a><ul>
-      <li>Previous: <a href="int_py_index.html" title="previous chapter">6. Useful Python tips</a></li>
-      <li>Next: <a href="json.html" title="next chapter">6.2. JSON</a></li>
+  <li><a href="int_py_index.html">9. Useful Python tips</a><ul>
+      <li>Previous: <a href="int_py_index.html" title="previous chapter">9. Useful Python tips</a></li>
+      <li>Next: <a href="json.html" title="next chapter">9.2. JSON</a></li>
   </ul></li>
   </ul></li>
 </ul>

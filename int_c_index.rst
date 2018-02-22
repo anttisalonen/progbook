@@ -5,6 +5,8 @@ Intermediate C
    :maxdepth: 1
 
    c2
+   c_stack
+   c_str
    httpserv
    sec
 

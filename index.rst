@@ -14,10 +14,13 @@ Software development fundamentals
    intro_index
    unix_index
    lang_index
-   ds_index
    js_index
-   int_py_index
+   ds_index
+   js2_index
    int_c_index
+   ds2_index
+   int_py_index
+   func_index
    int_web_index
    strong_index
    ex_index

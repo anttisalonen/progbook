@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7.3. C and strings &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7.4. Writing a toy web server" href="httpserv.html" />
+    <link rel="prev" title="7.2. C and the stack" href="c_stack.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="c-and-strings">
+<h1>7.3. C and strings<a class="headerlink" href="#c-and-strings" title="Permalink to this headline">¶</a></h1>
+<p>This chapter goes in depth around strings (and buffers in general) in C.</p>
+<div class="section" id="c-string-handling">
+<h2>7.3.1. C string handling<a class="headerlink" href="#c-string-handling" title="Permalink to this headline">¶</a></h2>
+<p>Before we continue with C, there are a couple of building blocks regarding string handling that you should know about. Let&#8217;s first cover through some basics about strings in C.</p>
+<p>C doesn&#8217;t really have strings. What it has are buffers (allocation of continuous memory), chars or characters (one byte, representing one ASCII character, meaning English letters, numbers or other symbols) and pointers. Mixing these conceptually results in something like a string. See the below diagram which is a continuous buffer i.e. array with eight slots, each holding one byte (character):</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
+<span class="o">|</span> <span class="sc">&#39;H&#39;</span> <span class="o">|</span> <span class="sc">&#39;e&#39;</span> <span class="o">|</span> <span class="sc">&#39;l&#39;</span> <span class="o">|</span> <span class="sc">&#39;l&#39;</span> <span class="o">|</span> <span class="sc">&#39;o&#39;</span> <span class="o">|</span> <span class="sc">&#39;\0&#39;</span> <span class="o">|</span> <span class="o">?</span> <span class="o">|</span> <span class="o">?</span> <span class="o">|</span>
+<span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
+</pre></div>
+</div>
+<p>This is a buffer with eight slots containing the string &#8220;Hello&#8221;. The sixth slot is a 0, or &#8216;0&#8217;, which indicates the end of a string. The value of this is in fact 0 but this has two representations: 0 (the number) or &#8216;0&#8217; (character). The last two slots are <em>undefined</em> and reading them results in <em>undefined behaviour</em> like crashing, garbage, nothing, or anything.</p>
+<div class="topic">
+<p class="topic-title first">Undefined behaviour</p>
+<p>Undefined behaviour is a concept that mainly only exists in C and C++ and refers to behaviour which according to the language standard isn&#8217;t defined. The language specifications in these cases explicitly allow the compiler to do anything. What compilers could do is insert code that would crash your program, or possibly send data over a network or reboot the system. What the compilers typically insert is the &#8220;expected&#8221; code - e.g. if you read from a variable or a buffer where the contents are undefined, the compiler will insert code to read from it anyway, such that you might get <em>stale</em> data - for example, the value of a variable that doesn&#8217;t exist anymore. In general, bugs involving undefined behaviour are unpleasant to work with, such that it&#8217;s recommended to avoid undefined behaviour where possible.</p>
+</div>
+<p>You can create such a buffer by e.g. doing the following:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="n">sprintf</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Line 1: We allocate the buffer in stack.</li>
+<li>Line 2: We write the string &#8220;Hello&#8221; to the buffer.</li>
+</ul>
+<p>In general, however, you may write something into a buffer where you don&#8217;t know the length of the string in advance. What you&#8217;ll need to do in any case is allocate a buffer large enough for your needs, but in addition it&#8217;s always best practice to <em>clear</em> the memory in advance, to avoid undefined behaviour. You must also ensure you don&#8217;t write <em>past the end</em> of the buffer because this will typically overwrite some of your other variables, probably crashing your program and also possibly creating a security hole. It&#8217;s typically better to do this:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span> <span class="cm">/* sizeof(my_array) will return 8 */</span>
+<span class="n">snprintf</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Line 1: We allocate the buffer in stack.</li>
+<li>Line 2: We clear the buffer, such that all the values in the buffer are 0. This way, as long as we keep the last character to 0 in the buffer (remember 0 indicates end of a string), we shouldn&#8217;t be either reading or writing past the end of our buffer. (You will need to #include &lt;string.h&gt; to declare memset().)</li>
+<li>Line 3: We write the string &#8220;Hello&#8221; to the buffer using <em>snprintf</em>, which takes as a parameter the maximum number of bytes to write. We tell it to write maximum seven characters such that the last one will always be 0.</li>
+</ul>
+<p>Now, while array in general is not the same thing as a pointer, for strings the two are sometimes interexchangable. For example, let&#8217;s assume you want to pass your array as a parameter to another function. You can&#8217;t because arrays are always passed by reference in C. This means that the array will <em>decay</em> into a pointer:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* sizeof(str) will NOT give an answer as to how long the buffer is */</span>
+    <span class="n">snprintf</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span> <span class="cm">/* sizeof(my_array) returns 8 */</span>
+    <span class="n">my_function</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Here, &#8220;my_function&#8221; cannot by itself know how long the string (character buffer) pointed to by &#8220;str&#8221; is, and must take a second parameter &#8220;len&#8221; which must have this information. The &#8220;sizeof&#8221; operator only tells the size of the array (in bytes) at the site where the array is allocated, not where only a pointer is available.</p>
+</div>
+<div class="section" id="pointer-arithmetic-and-substrings">
+<h2>7.3.2. Pointer arithmetic and substrings<a class="headerlink" href="#pointer-arithmetic-and-substrings" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s say we want to modify the array by a character. We can do this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span>
+<span class="n">snprintf</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="n">my_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;J&#39;</span><span class="p">;</span> <span class="cm">/* my_array is now &quot;Jello&quot;; */</span>
+<span class="n">my_array</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;y&#39;</span><span class="p">;</span> <span class="cm">/* my_array is now &quot;Jelly&quot;; */</span>
+</pre></div>
+</div>
+<p>How would we do this if we only had a char pointer, not the array itself? We can use <em>pointer arithmetic</em>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="sc">&#39;J&#39;</span><span class="p">;</span>
+    <span class="o">*</span><span class="p">(</span><span class="n">str</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="sc">&#39;y&#39;</span><span class="p">;</span>
+    <span class="cm">/* or equivalently: str[4] = &#39;y&#39;;         */</span>
+    <span class="cm">/* or equivalently: str += 4; *str = &#39;y&#39;; */</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span>
+    <span class="n">snprintf</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+    <span class="n">my_function</span><span class="p">(</span><span class="n">my_array</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>By <em>dereferencing</em> the pointer &#8220;str&#8221; with * we can access individual characters in the buffer, and also assign to them.</p>
+<p>By adding a number n to a pointer the resulting pointer points to data n elements after the first element, and by dereferencing it we can also assign to it.</p>
+<p>As a diagram it looks like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
+<span class="o">|</span> <span class="sc">&#39;H&#39;</span> <span class="o">|</span> <span class="sc">&#39;e&#39;</span> <span class="o">|</span> <span class="sc">&#39;l&#39;</span> <span class="o">|</span> <span class="sc">&#39;l&#39;</span> <span class="o">|</span> <span class="sc">&#39;o&#39;</span> <span class="o">|</span> <span class="sc">&#39;\0&#39;</span> <span class="o">|</span> <span class="o">?</span> <span class="o">|</span> <span class="o">?</span> <span class="o">|</span>
+<span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
+<span class="p">.</span>  <span class="o">^</span>                       <span class="o">^</span>
+<span class="p">.</span> <span class="n">str</span>                    <span class="n">str</span> <span class="o">+</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>If one were to pass a char pointer to my_function which pointed to less than five bytes of allocated memory, <em>my_function</em> would cause undefined behaviour.</p>
+<p>As my_function modifies &#8220;str&#8221;, the parameter can&#8217;t have the const qualifier.</p>
+<p><em>Exercise</em>: Write a function that will determine the length of a string. You can detect the end of a string by comparing a character in a string against 0, or &#8216;0&#8217;: if it is 0 then it denotes the end of the string. (This exercise exists for educational purposes; the C standard library includes a functions &#8220;strlen&#8221; and &#8220;strnlen&#8221; for this.)</p>
+<p><em>Exercise</em>: Write a function to count the number of occurrences of the character &#8216;a&#8217; in a given input string.</p>
+<p><em>Exercise</em>: Extend your function from the previous exercise such that the character to count occurrences for is given as an additional input parameter.</p>
+</div>
+<div class="section" id="string-comparisons">
+<h2>7.3.3. String comparisons<a class="headerlink" href="#string-comparisons" title="Permalink to this headline">¶</a></h2>
+<p>You can check if two strings are the same by using the &#8220;strncmp&#8221; function:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+<span class="cm">/* set a and b somehow */</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a and b are the same (at least the first 20 characters).</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>(You&#8217;ll need to #include &lt;string.h&gt; for strncmp as well as most of the other string utility functions, including memset().)</p>
+<p>If you want to compare only parts of a string, strncmp can do this too. Let&#8217;s say you have a buffer, and you know its first letters are &#8220;HTTP/1.1 &#8221; but you want to know whether they are followed by the letters &#8220;200&#8221;. You can do e.g.:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">input_string</span> <span class="o">=</span> <span class="p">...</span> <span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">input_string</span> <span class="o">+</span> <span class="mi">9</span><span class="p">,</span> <span class="s">&quot;200&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The status code is 200.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>What happens here is that we use pointer arithmetic to skip the first nine characters (&#8220;HTTP/1.1 &#8221;), then compare the next three (and only three) characters with the string &#8220;200&#8221;. strncmp() returns 0 if the strings matched for the given number of characters.</p>
+<p>Another option would be to copy the relevant substring to its own buffer (assuming we don&#8217;t want to modify the input string):</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">input_string</span> <span class="o">=</span> <span class="p">...</span> <span class="p">;</span>
+<span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+<span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span> <span class="cm">/* ensure NULL termination */</span>
+<span class="n">strncpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">input_string</span> <span class="o">+</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&quot;200&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The status code is 200.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The function &#8220;strncpy&#8221; copies n bytes from a source buffer to a destination buffer.</p>
+<p>Since it&#8217;s only three characters were checking, we could also check them manually:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">input_string</span> <span class="o">=</span> <span class="p">...</span> <span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">input_string</span> <span class="o">+</span> <span class="mi">9</span><span class="p">)</span>  <span class="o">==</span> <span class="sc">&#39;2&#39;</span> <span class="o">&amp;&amp;</span>
+   <span class="o">*</span><span class="p">(</span><span class="n">input_string</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span>
+   <span class="o">*</span><span class="p">(</span><span class="n">input_string</span> <span class="o">+</span> <span class="mi">11</span><span class="p">)</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The status code is 200.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Another potentially useful function is strtok(). Here&#8217;s an example of its usage:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="s">&quot;this is a string.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">);</span> <span class="c1">// p now points to &quot;this&quot;</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">);</span>      <span class="c1">// p now points to &quot;is&quot;</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">);</span>      <span class="c1">// p now points to &quot;a&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Finally, the functions &#8220;strcat&#8221; and &#8220;strncat&#8221; append a string to an existing string:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+<span class="n">memset</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+<span class="n">strncat</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&quot;hello &quot;</span><span class="p">,</span> <span class="mi">255</span><span class="p">);</span>
+<span class="n">strncat</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&quot;world</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">249</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Let&#8217;s assume you have 50 words with five letters each and you append each word to a buffer using strncat, one after another. (The buffer is assumed to be large enough.) In terms of big O notation, what&#8217;s the run time of this algorithm? In order to know where to append to, strncat() iterates through the destination buffer to find the end of the string every time it is called.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7.3. C and strings</a><ul>
+<li><a class="reference internal" href="#c-string-handling">7.3.1. C string handling</a></li>
+<li><a class="reference internal" href="#pointer-arithmetic-and-substrings">7.3.2. Pointer arithmetic and substrings</a></li>
+<li><a class="reference internal" href="#string-comparisons">7.3.3. String comparisons</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="int_c_index.html">7. Intermediate C</a><ul>
+      <li>Previous: <a href="c_stack.html" title="previous chapter">7.2. C and the stack</a></li>
+      <li>Next: <a href="httpserv.html" title="next chapter">7.4. Writing a toy web server</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/c_str.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/c_str.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

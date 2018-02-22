@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>5.2. Javascript meets algorithms &#8212; guide 0.1 documentation</title>
+    <title>6.1. Javascript meets algorithms &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Useful Python tips" href="int_py_index.html" />
-    <link rel="prev" title="5.1. Guessing game in JS" href="js.html" />
+    <link rel="next" title="7. Data structures" href="ds2_index.html" />
+    <link rel="prev" title="6. Javascript - part 2" href="js2_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="javascript-meets-algorithms">
-<h1>5.2. Javascript meets algorithms<a class="headerlink" href="#javascript-meets-algorithms" title="Permalink to this headline">¶</a></h1>
+<h1>6.1. Javascript meets algorithms<a class="headerlink" href="#javascript-meets-algorithms" title="Permalink to this headline">¶</a></h1>
 <p>Try to play the guessing game a few times.</p>
 <p>What is the best strategy to win the game in the least number of guesses? Have a think before reading further.</p>
 <p>You may have noticed that the best strategy is to guess at the middle point of the available range, that is, 12 or 13 when the maximum number is 25, and then on the middle point of the available range again depending on the answer, so either 6 if the number is smaller or 19 if the number is larger. This method will in general arrive at the right answer in the minimum number of guesses.</p>
@@ -75,7 +75,7 @@
 <li>On line 4, the text indicating the answer is stored in a variable</li>
 <li>On line 5, the search string is searched for the text &#8220;smaller&#8221;. -1 will indicate the string was not found.</li>
 </ul>
-<p><em>Exercise</em>: What does the search() function actually return, and what exactly can you pass to it as a parameter? Find the reference for the function online.</p>
+<p><em>Exercise</em>: What does the search() function as used on line 5 actually return, and what exactly can you pass to it as a parameter? Find the reference for the function online. What is the type of the variable &#8220;answer&#8221; in the snippet above?</p>
 <p>The above should be enough to put the general infrastructure in place for our button. What&#8217;s still required is the actual logic. I can share some hints:</p>
 <ul class="simple">
 <li>You will need to track the upper and lower limit of the range where the correct number might reside</li>
@@ -84,9 +84,20 @@
 </ul>
 <p><em>Exercise</em>: Implement this button that plays the number guessing game.</p>
 <p><em>Exercise</em>: Once you&#8217;ve implemented this button, you might want to experiment with increasing the maximum number from 25 to something larger, for example 5000. See if your algorithm still finds the correct number with a small number of guesses. Make sure you define the maximum number only once in the source code such that there&#8217;s no worry of your different functions going out of sync.</p>
-<p><em>Exercise</em>: The original image of the game included a text &#8220;I&#8217;m thinking of a number between 1 and 25,&#8221; but after the previous exercise, this might not be true anymore. Modify this string based on the variable you have that holds the maximum value. For this you&#8217;ll need to run Javascript at the page loading phase. Look up online how to do this.</p>
+<div class="section" id="calling-a-javascript-function-at-page-load">
+<h2>6.1.1. Calling a Javascript function at page load<a class="headerlink" href="#calling-a-javascript-function-at-page-load" title="Permalink to this headline">¶</a></h2>
+<p>A quick search online reveals a way to do this:</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/* my code goes here */</span>
+<span class="p">}</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">init</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>That is, we define a function which we want to be called at page load time, and install it as a <em>callback</em> function in the member function &#8220;onload&#8221; in the global object &#8220;window&#8221;. (We&#8217;ll get to the concepts of callback functions, member functions and objects in more detail later.)</p>
+<p><em>Exercise</em>: The original image of the game included a text &#8220;I&#8217;m thinking of a number between 1 and 25,&#8221; but after the previous exercise, this might not be true anymore. Modify this string based on the variable you have that holds the maximum value. For this you&#8217;ll need to run Javascript at the page loading phase.</p>
 <p><em>Exercise</em>: Assuming the maximum number is 5000, what is the maximum number of guesses the algorithm will need in order to find the correct number? Hint: the algorithm has O(log n) complexity.</p>
 <p>Note that the Javascript code is executed in the browser. This means that if you were to load a public webpage with, for example, such a game, you can modify the HTML your browser renders to add a new button, and the Javascript your browser executes to solve the game. It may be difficult to identify and understand the correct Javascript in order to do this, depending on the web page, but as the Javascript execution and HTML are in the end controlled by the browser, in general there&#8217;s nothing stopping any webpage visitors from making their own additions to the code they execute.</p>
+</div>
 </div>
 
 
@@ -94,13 +105,21 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.1. Javascript meets algorithms</a><ul>
+<li><a class="reference internal" href="#calling-a-javascript-function-at-page-load">6.1.1. Calling a Javascript function at page load</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="js_index.html">5. Javascript</a><ul>
-      <li>Previous: <a href="js.html" title="previous chapter">5.1. Guessing game in JS</a></li>
-      <li>Next: <a href="int_py_index.html" title="next chapter">6. Useful Python tips</a></li>
+  <li><a href="js2_index.html">6. Javascript - part 2</a><ul>
+      <li>Previous: <a href="js2_index.html" title="previous chapter">6. Javascript - part 2</a></li>
+      <li>Next: <a href="ds2_index.html" title="next chapter">7. Data structures</a></li>
   </ul></li>
   </ul></li>
 </ul>

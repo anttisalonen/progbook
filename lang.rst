@@ -137,6 +137,8 @@ The combination of strong, dynamic typing is also often called "duck typing". Th
 
 The operation to multiply with an int (2 \*) is defined for both integers and strings. For integers, the traditional multiplication is performed, while for strings the string is duplicated. From the point of view of the function, it makes no difference which type is passed to the function, as long as it can be multiplied by 2, hence duck typing. As we shall see, this becomes more interesting when writing your own data types.
 
+*Exercise*: Write Python code that, when executed, prints the asterisk 50 times, i.e. "**************************************************".
+
 Interpreted and compiled languages
 ==================================
 

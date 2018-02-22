@@ -8,12 +8,9 @@ class A(object):
     def call_me(self):
         print 'A called - my foo is: ' + str(self.foo)
 
-class B(object):
-    def call_me(self):
-        print 'B called'
+obj = A(42)
 
-my_objects = [A(42), B()]
-
-for o in my_objects:
-    o.call_me()
+obj.call_me()
+obj.add_one()
+obj.call_me()
 
