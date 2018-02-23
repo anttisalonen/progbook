@@ -8,8 +8,9 @@ Exercises
    ex_regex
    ex_js
    ex_js2
-   ex_json
+   ex_st
    ex_httpserv
+   ex_json
    ex_ajax
    ex_guess_start
    ex_hiscore_table

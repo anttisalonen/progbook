@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>13. Strongly, statically typed languages &#8212; guide 0.1 documentation</title>
+    <title>14.5. Solutions to exercises: C and the stack &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="13.1. Overview of some strongly, statically typed languages" href="strong.html" />
-    <link rel="prev" title="12.6. Some more tips and tricks" href="web_tips.html" />
+    <link rel="next" title="14.6. Solutions to exercises: Writing a toy web server" href="ex_httpserv.html" />
+    <link rel="prev" title="14.4. Solutions to exercises: Javascript meets algorithms" href="ex_js2.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,12 +43,21 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="strongly-statically-typed-languages">
-<h1>13. Strongly, statically typed languages<a class="headerlink" href="#strongly-statically-typed-languages" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="strong.html">13.1. Overview of some strongly, statically typed languages</a></li>
-</ul>
+  <div class="section" id="solutions-to-exercises-c-and-the-stack">
+<h1>14.5. Solutions to exercises: C and the stack<a class="headerlink" href="#solutions-to-exercises-c-and-the-stack" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+	<span class="kt">int</span> <span class="o">**</span><span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+
+</pre></div>
 </div>
 </div>
 
@@ -61,15 +70,17 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="web_tips.html" title="previous chapter">12.6. Some more tips and tricks</a></li>
-      <li>Next: <a href="strong.html" title="next chapter">13.1. Overview of some strongly, statically typed languages</a></li>
+  <li><a href="ex_index.html">14. Exercises</a><ul>
+      <li>Previous: <a href="ex_js2.html" title="previous chapter">14.4. Solutions to exercises: Javascript meets algorithms</a></li>
+      <li>Next: <a href="ex_httpserv.html" title="next chapter">14.6. Solutions to exercises: Writing a toy web server</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/strong_index.rst.txt"
+      <li><a href="_sources/ex_st.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -95,7 +106,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/strong_index.rst.txt"
+      <a href="_sources/ex_st.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

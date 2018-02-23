@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.1. Object oriented programming &#8212; guide 0.1 documentation</title>
+    <title>10.1. Object oriented programming &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9.2. JSON" href="json.html" />
-    <link rel="prev" title="9. Useful Python tips" href="int_py_index.html" />
+    <link rel="next" title="10.2. JSON" href="json.html" />
+    <link rel="prev" title="10. Useful Python tips" href="int_py_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="object-oriented-programming">
-<h1>9.1. Object oriented programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">¶</a></h1>
+<h1>10.1. Object oriented programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">¶</a></h1>
 <p>Object oriented programming is fairly common in Python, and we&#8217;ve used it pretty much from the beginning. See for example this code:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
@@ -54,7 +54,7 @@
 <p>Here, &#8220;f&#8221; is a file object and &#8220;write&#8221; is a <em>member function</em> of the file class.</p>
 <p>In general, in many languages including Python, if you call a function such that the function syntactically appears to &#8220;belong&#8221; to a variable, like with &#8220;f.write()&#8221;, then you&#8217;re probably calling a member function of a class.</p>
 <div class="section" id="defining-your-own-data-types">
-<h2>9.1.1. Defining your own data types<a class="headerlink" href="#defining-your-own-data-types" title="Permalink to this headline">¶</a></h2>
+<h2>10.1.1. Defining your own data types<a class="headerlink" href="#defining-your-own-data-types" title="Permalink to this headline">¶</a></h2>
 <p>In Python, data types are defined using the &#8220;class&#8221; keyword:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
@@ -93,7 +93,7 @@ A called - my foo is: <span class="m">43</span>
 </pre></div>
 </div>
 <div class="section" id="duck-typing-revisited">
-<h3>9.1.1.1. Duck typing revisited<a class="headerlink" href="#duck-typing-revisited" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.1.1. Duck typing revisited<a class="headerlink" href="#duck-typing-revisited" title="Permalink to this headline">¶</a></h3>
 <p>Here&#8217;s a bit larger example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
@@ -144,9 +144,9 @@ B called
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">9.1. Object oriented programming</a><ul>
-<li><a class="reference internal" href="#defining-your-own-data-types">9.1.1. Defining your own data types</a><ul>
-<li><a class="reference internal" href="#duck-typing-revisited">9.1.1.1. Duck typing revisited</a></li>
+<li><a class="reference internal" href="#">10.1. Object oriented programming</a><ul>
+<li><a class="reference internal" href="#defining-your-own-data-types">10.1.1. Defining your own data types</a><ul>
+<li><a class="reference internal" href="#duck-typing-revisited">10.1.1.1. Duck typing revisited</a></li>
 </ul>
 </li>
 </ul>
@@ -156,9 +156,9 @@ B called
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_py_index.html">9. Useful Python tips</a><ul>
-      <li>Previous: <a href="int_py_index.html" title="previous chapter">9. Useful Python tips</a></li>
-      <li>Next: <a href="json.html" title="next chapter">9.2. JSON</a></li>
+  <li><a href="int_py_index.html">10. Useful Python tips</a><ul>
+      <li>Previous: <a href="int_py_index.html" title="previous chapter">10. Useful Python tips</a></li>
+      <li>Next: <a href="json.html" title="next chapter">10.2. JSON</a></li>
   </ul></li>
   </ul></li>
 </ul>

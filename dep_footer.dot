@@ -2,7 +2,9 @@
     learn -> unix;
     unix -> vcs;
     unix -> regex;
+    c_quadr -> lang;
     lang -> sec;
+    c_quadr -> o_not;
     o_not -> js2;
     learn -> js2;
     lang -> js;
@@ -13,9 +15,17 @@
     httpserv -> redis;
     o_not -> ds;
     ds -> json;
+    ds -> c_stack;
+    ds -> ds2;
     json -> redis;
     python_generate_file -> py2;
+    c_stack -> c_str;
+    ds2 -> py2;
     lang -> py2;
+    py3 -> func;
+    func -> ajax;
+    lang -> strong;
+    c_str -> strong;
     c2 -> py2;
     py2 -> py3;
     json -> py3;
@@ -24,9 +34,8 @@
     ajax -> guess_start;
     html_tables -> hiscore_table;
     guess_start -> hiscore_table;
-    py3 -> hiscore_table;
-    learn -> c2;
     vcs -> c2;
+    c_str -> httpserv;
     c2 -> httpserv;
     httpserv -> sec;
     hiscore_table -> web_tips;

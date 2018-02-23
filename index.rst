@@ -17,8 +17,9 @@ Software development fundamentals
    js_index
    ds_index
    js2_index
-   int_c_index
    ds2_index
+   int_c_index
+   ds3_index
    int_py_index
    func_index
    int_web_index
