@@ -19,7 +19,8 @@
     ds -> ds2;
     json -> redis;
     python_generate_file -> py2;
-    c_stack -> c_str;
+    c_stack -> c_dyn;
+    c_dyn -> c_str;
     ds2 -> py2;
     lang -> py2;
     py3 -> func;
@@ -31,7 +32,8 @@
     json -> py3;
     js2 -> ajax;
     redis -> ajax;
-    ajax -> guess_start;
+    ajax -> redis_ajax_glue;
+    redis_ajax_glue -> guess_start;
     html_tables -> hiscore_table;
     guess_start -> hiscore_table;
     vcs -> c2;

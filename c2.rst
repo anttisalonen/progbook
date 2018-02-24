@@ -77,8 +77,6 @@ Now, defining the function difference_between_functions can be much clearer:
         return val2 - val1;
     }
 
-This seems much clearer.
-
 *Exercise*: The derivative of a function ax^2 + bx + c is 2ax + b. Write a function that calculates the derivative for a function at a given point x and call it, with the input function passed as a pointer to a struct.
 
 What is a struct

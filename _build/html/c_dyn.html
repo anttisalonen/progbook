@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8.3. Dynamic memory allocation &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8.4. C and strings" href="c_str.html" />
+    <link rel="prev" title="8.2. C and the stack" href="c_stack.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dynamic-memory-allocation">
+<h1>8.3. Dynamic memory allocation<a class="headerlink" href="#dynamic-memory-allocation" title="Permalink to this headline">¶</a></h1>
+<p>You might ask yourself any of the following questions:</p>
+<ul class="simple">
+<li>The stack can hold up to eight megabytes. What if I need more memory?</li>
+<li>What if I want to allocate memory in a function and have the caller use it?</li>
+<li>What if I want to allocate memory where I don&#8217;t know how long I&#8217;ll be needing it?</li>
+<li>What if I want to allocate memory where the exact amount of memory I need isn&#8217;t known until runtime?</li>
+</ul>
+<p>The answer to all of these is <em>dynamic memory allocation</em>.</p>
+<p>The C standard library provides two functions for this: &#8220;malloc&#8221; and &#8220;free&#8221;. The function &#8220;malloc&#8221; (memory allocation) allocated memory, which can then be freed using the function &#8220;free&#8221;. Here&#8217;s a simple example:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+	<span class="n">assert</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mi">20</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+	<span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="o">*</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+	<span class="n">b</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+	<span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+
+</pre></div>
+</td></tr></table></div>
+<p>Let&#8217;s first go through this line by line:</p>
+<ul class="simple">
+<li>Line 8: We call &#8220;malloc&#8221; to allocate memory for 20 integers (80 bytes if our int is four bytes). We <em>cast</em> the type of the &#8220;malloc&#8221; return value from void pointer to int pointer. This is because &#8220;malloc&#8221; in general returns a void pointer, which means any pointer, because &#8220;malloc&#8221; isn&#8217;t specific to any type. We&#8217;ll go a bit deeper around casting later.</li>
+<li>Line 9: We <em>assert</em> the return value of &#8220;malloc&#8221; is non-zero. If &#8220;malloc&#8221; fails, it will return a NULL pointer, and in this case our assertion would fail, meaning our program would crash itself. This is to ensure our memory allocation succeeded. (In practice there should be no problem allocating 80 bytes.)</li>
+<li>Line 10: We set all of the allocated memory to 0.</li>
+<li>Line 11: We set the first element in our array to 3.</li>
+<li>Line 12: We set the second element in our array to 4. The syntax here is equivalent to what was used in line 11.</li>
+<li>Line 13: We declare a variable &#8220;b&#8221; which has the same value as &#8220;a&#8221;.</li>
+<li>Line 14: We increment the value of &#8220;b&#8221; by two (that is, eight bytes, assuming our int is four bytes). It now points to the third element in our array.</li>
+<li>Line 15: We set the value pointed to by &#8220;b&#8221; to 5.</li>
+<li>Line 17: We free the memory we allocated.</li>
+</ul>
+<p>At the end of the main function, our stack will look something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">Address</span>    <span class="o">|</span> <span class="n">Contents</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="mh">0x50000004</span> <span class="o">|</span> <span class="mh">0x23456788</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mh">0x50000000</span> <span class="o">|</span> <span class="mh">0x23456780</span> <span class="o">|</span>
+</pre></div>
+</div>
+<p>That is, we have two variables, &#8220;a&#8221; and &#8220;b&#8221;, whereby &#8220;a&#8221; points to the address of the first byte of the memory we allocated (and freed) and &#8220;b&#8221; points to an address eight bytes after. The function &#8220;malloc&#8221;, when allocating memory, will, with the help of the operating system, retrieve and provide the address to a block of memory somewhere in RAM, such that the address may look random but will <em>not</em> be in the stack. It is said that the memory is in this case allocated in the <em>heap</em>.</p>
+<p><em>Exercise</em>: Allocate some memory using &#8220;malloc&#8221;. Print out the address of the memory returned using printf(&#8220;%p\n&#8221;, pointer). Compare against the address of a variable you have in stack. Run your program multiple times. Do the addresses change?</p>
+<div class="section" id="dynamic-memory-allocation-gotchas">
+<h2>8.3.1. Dynamic memory allocation gotchas<a class="headerlink" href="#dynamic-memory-allocation-gotchas" title="Permalink to this headline">¶</a></h2>
+<p>There are a few things that could go wrong with dynamic memory allocations, providing job security for programmers for years to come.</p>
+<p>Use after free: As we saw in our program above, the variable &#8220;a&#8221;, which contained the address of memory allocated in heap stayed unchanged after freeing the memory. In principle there&#8217;s nothing preventing the programmer from accidentally reading the memory after freeing it, or writing to it. Reading it and then using the value, for example, in an &#8220;if&#8221; statement, will cause the code to randomly either branch into the &#8220;if&#8221; statement or not. Writing to it will possibly mess up some other memory in your program, e.g. accidentally changing some unrelated variable. This is all nasty.</p>
+<p>One way to prevent this is to always reset your pointers after freeing the memory that was pointed to. E.g.:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(...);</span>
+<span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>By setting &#8220;a&#8221; to NULL, which is a special pointer value roughly meaning &#8220;invalid&#8221;, if we now try to either read the value pointed to by it, or write to it, the program will immediately crash. (Actually reading or writing to NULL is undefined behaviour, but in practice compilers seem to do us a favour and crash.) This makes it more obvious what has gone wrong.</p>
+<p>Double free: You may accidentally free memory pointed to by a pointer after it&#8217;s already been freed. This will possibly free some other memory that you&#8217;re still using, or otherwise generally corrupt your memory. Again, resetting pointers to NULL after &#8220;free&#8221; helps as calling &#8220;free&#8221; for a NULL pointer is defined to do nothing.</p>
+<p>Memory leaks: You may have a pointer to memory, then point the pointer somewhere else but not free the memory. The memory is now inaccessible but still allocated to your program. If you do this often enough, or if your program runs long enough, it will soak up a significant amount of memory and will need to be restarted.</p>
+<p>In general, it&#8217;s sometimes not clear from using a function what the semantics for memory ownership are. Let&#8217;s say you call a function from a library which returns a pointer. Should you call &#8220;free&#8221; on that pointer when you&#8217;re done with it, or not? This is typically (hopefully) described in the documentation for the function.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">8.3. Dynamic memory allocation</a><ul>
+<li><a class="reference internal" href="#dynamic-memory-allocation-gotchas">8.3.1. Dynamic memory allocation gotchas</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="int_c_index.html">8. Intermediate C</a><ul>
+      <li>Previous: <a href="c_stack.html" title="previous chapter">8.2. C and the stack</a></li>
+      <li>Next: <a href="c_str.html" title="next chapter">8.4. C and strings</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/c_dyn.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/c_dyn.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

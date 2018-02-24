@@ -32,9 +32,9 @@ The layers 1 and 2 are set up depending on your network configuration.
 
 The layers 3 and 4 are implemented by your OS; Windows, Mac and Linux implement the TCP/IP stack in the kernel.
 
-The layers 5, 6 and 7 are all summarised by HTTP. When we ran Flask, we ran its built in HTTP server.
+The layers 5, 6 and 7 are all summarised by HTTP. When we ran Flask, we ran its built-in HTTP server.
 
-Now, we've used OS functions before: When we open a file in C, we call the open() or fopen() functions, which end up calling kernel functions. The kernel functions typically interact with the actual hardware; In case of opening a file, the kernel functions would read data from the physical hard drive in the computer. Similarly, when writing a HTTP server, "all" we need to do is call the relevant kernel functions that trigger TCP/IP communications. Let's try this out.
+Now, we've used OS functions before: When we open a file in C, we call the open() or fopen() functions, which end up calling kernel functions. The kernel functions typically interact with the actual hardware; in case of opening a file, the kernel functions would read data from the physical hard drive in the computer. Similarly, when writing a HTTP server, "all" we need to do is call the relevant kernel functions that trigger TCP/IP communications. Let's try this out.
 
 BSD sockets API
 ===============

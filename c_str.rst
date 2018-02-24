@@ -16,11 +16,7 @@ C doesn't really have strings. What it has are buffers (allocation of continuous
     | 'H' | 'e' | 'l' | 'l' | 'o' | '\0' | ? | ? |
     +-----+-----+-----+-----+-----+------+---+---+
 
-This is a buffer with eight slots containing the string "Hello". The sixth slot is a 0, or '\0', which indicates the end of a string. The value of this is in fact 0 but this has two representations: 0 (the number) or '\0' (character). The last two slots are *undefined* and reading them results in *undefined behaviour* like crashing, garbage, nothing, or anything.
-
-.. topic:: Undefined behaviour
-
-    Undefined behaviour is a concept that mainly only exists in C and C++ and refers to behaviour which according to the language standard isn't defined. The language specifications in these cases explicitly allow the compiler to do anything. What compilers could do is insert code that would crash your program, or possibly send data over a network or reboot the system. What the compilers typically insert is the "expected" code - e.g. if you read from a variable or a buffer where the contents are undefined, the compiler will insert code to read from it anyway, such that you might get *stale* data - for example, the value of a variable that doesn't exist anymore. In general, bugs involving undefined behaviour are unpleasant to work with, such that it's recommended to avoid undefined behaviour where possible.
+This is a buffer with eight slots containing the string "Hello". The sixth slot is a 0, or '\\0', which indicates the end of a string. The value of this is in fact 0 but this has two representations: 0 (the number) or '\\0' (character). The last two slots are *undefined* and reading them results in *undefined behaviour* like crashing, garbage, nothing, or anything.
 
 You can create such a buffer by e.g. doing the following:
 
@@ -113,7 +109,7 @@ If one were to pass a char pointer to my_function which pointed to less than fiv
 
 As my_function modifies "str", the parameter can't have the const qualifier.
 
-*Exercise*: Write a function that will determine the length of a string. You can detect the end of a string by comparing a character in a string against 0, or '\0': if it is 0 then it denotes the end of the string. (This exercise exists for educational purposes; the C standard library includes a functions "strlen" and "strnlen" for this.)
+*Exercise*: Write a function that will determine the length of a string. You can detect the end of a string by comparing a character in a string against 0, or '\\0': if it is 0 then it denotes the end of the string. (This exercise exists for educational purposes; the C standard library includes functions "strlen" and "strnlen" for this.)
 
 *Exercise*: Write a function to count the number of occurrences of the character 'a' in a given input string.
 
@@ -152,7 +148,7 @@ Another option would be to copy the relevant substring to its own buffer (assumi
 
     char *input_string = ... ;
     char buf[4];
-    buf[3] = '\0'; /* ensure NULL termination */
+    buf[3] = '\0'; /* ensure string termination */
     strncpy(buf, input_string + 9, 3);
     if(!strncmp(buf, "200", 3)) {
         printf("The status code is 200.\n");

@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>12.4. Gluing AJAX and Redis together &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="12.5. The page for starting a new game" href="guess_start.html" />
+    <link rel="prev" title="12.3. AJAX" href="ajax.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gluing-ajax-and-redis-together">
+<h1>12.4. Gluing AJAX and Redis together<a class="headerlink" href="#gluing-ajax-and-redis-together" title="Permalink to this headline">¶</a></h1>
+<p>After the exercises in the previous chapter we&#8217;re starting to have some pieces we can put together. Let&#8217;s start with a couple more exercises.</p>
+<p><em>Exercise</em>: Modify your guessing game such that when the number was guessed correctly, send the number of guesses to the server in JSON.</p>
+<p><em>Exercise</em>: Connect to the Redis server in your Python module. Note that the code in the Python module will be executed automatically when you start Flask. This means you can connect to the Redis server in your top level Python code, without having to define a function for this.</p>
+<p>Now, let&#8217;s see if we can store the number of guesses in the Redis database. Here&#8217;s something to get you started:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/guess/finished&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">finished</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;guesses&#39;</span><span class="p">]</span> <span class="c1"># prints the number of guesses</span>
+    <span class="n">curr_date</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+    <span class="n">our_string_to_store</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;guesses&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">})</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">lpush</span><span class="p">(</span><span class="s2">&quot;25&quot;</span><span class="p">,</span> <span class="n">our_string_to_store</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;abc&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>This introduces a few new concepts:</p>
+<ul class="simple">
+<li>Line 1: We want the URL /guess/finished to handle POST requests. We need to tell this to Flask explicitly by using the &#8220;methods&#8221; optional parameter in the &#64;app.route decorator.</li>
+<li>Line 3: As per Flask documentation, Flask provides the globally accessible object called &#8220;request&#8221; which includes all data associated with the request. More specifically, it allows us to access the POST data the user sent. If the user sent JSON, it&#8217;s available to us using the get_json() member function.</li>
+<li>Line 4: As the JSON data has been parsed by the get_json() function, it&#8217;s available to us in Python dictionary form.</li>
+<li>Line 5: We can query the current system time by calling the function &#8220;datetime.datetime.now()&#8221; (after importing datetime). Furthermore we can convert it (and almost any other data type including numbers) to a string by calling the str() function.</li>
+<li>Line 6: We can convert a Python dictionary to a JSON string by calling the &#8220;json.dumps()&#8221; function (after importing json).</li>
+<li>Line 7: Here, we insert data in the Redis database whereby the connection is represented by the &#8220;r&#8221; object. We use the member function &#8220;lpush&#8221; which ensures the value in the key-value pair is a list. More specifically, it:
+* Takes two parameters, the key and a value
+* Creates a new list if the key didn&#8217;t yet exist, such that the value is a new list with a single element, namely the value
+* Appends the value to the end of the existing list if the key existed</li>
+<li>Line 8: We return a string which will be available in JSON in the xhr.responseText variable.</li>
+</ul>
+<p>Here, we also implicitly defined the <em>database schema</em> for our data: the key is the maximum number that the computer could think of, as a string. For now it&#8217;s hard coded to 25 but we&#8217;ll make it configurable later. The value is a list whereby each element in a list describes a finished game. Each finished game should be represented in JSON, such that the JSON has a field describing the number of guesses required in the game as well as the timestamp when the game was finished. We&#8217;ll expand on this later.</p>
+<p>Note that there are different ways the schema could be defined for this use case - this is one of the simplest ways but in general, schemas can be defined in significantly different ways, depending on the use case, amount of data and any performance requirements.</p>
+<p><em>Exercise</em>: When your server receives the number of guesses from Javascript, store this in the Redis database.</p>
+<p>Here are some hints:</p>
+<ul class="simple">
+<li>If you need to purge the database, call r.flushdb(). This will erase all data in the database.</li>
+<li>You may want to write a small script or a URL handler to check the contents of the database to ensure you&#8217;re adding the correct data. You may alternatively want to use the Redis command line interface for this.</li>
+</ul>
+<p>We should now be able to store something resembling a high score list in a database, but we&#8217;re still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapters.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="int_web_index.html">12. Intermediate web development</a><ul>
+      <li>Previous: <a href="ajax.html" title="previous chapter">12.3. AJAX</a></li>
+      <li>Next: <a href="guess_start.html" title="next chapter">12.5. The page for starting a new game</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/redis_ajax_glue.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/redis_ajax_glue.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

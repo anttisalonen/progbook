@@ -7,6 +7,7 @@ Intermediate web development
    html_tables
    redis
    ajax
+   redis_ajax_glue
    guess_start
    hiscore_table
    web_tips

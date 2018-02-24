@@ -42,7 +42,7 @@ However, what if we wanted to sort by the third element in the inner lists, i.e.
         # values is a function, i.e. list with three elements
         return values[2]
 
-    print sorted(data, reverse=True, key=my_callback)[:3]
+    print sorted(data, key=my_callback)[:3]
 
 What happens here is that we define a function called "my_callback" which returns the third value in a list. That's a fairly boring function, but we provide this function as a *callback* to the sorted() function, namely as the "key" parameter. As sorted() calls the key function for each element and uses that to define the ordering, we end up with the resulting list being sorted by the third value in the functions, i.e. the value "c".
 
@@ -53,6 +53,7 @@ In the chapter "Big O notation" we touched upon sorting in C using the built in 
 
   .. literalinclude:: qsort.c
      :language: c
+     :linenos:
 
 Now, what happens here is the following:
 
@@ -81,7 +82,7 @@ In some languages including Python and Javascript, we can define functions *anon
 
 .. code-block:: python
 
-    print sorted(data, reverse=True, key=lambda l: l[2])[:3]
+    print sorted(data, key=lambda l: l[2])[:3]
 
 In Python, *lambda* is a key word for defining an anonymous function: instead of using "key=my_callback", we set "key" to a lambda function, which is otherwise defined like a regular function but we skip the "return" keyword. This will have the same behaviour as our earlier example where we defined a named function as the callback.
 

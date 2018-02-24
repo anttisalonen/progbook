@@ -58,9 +58,11 @@ This introduces us some important concepts:
 
 * Line 1: We use wget to download a tarball (file with a .tar.gz ending). wget is a tool for downloading files from the web (similar to curl), and tar is a common way in Unix to package several files into one for easier handling.
 * Line 2: We extract the contents of the tarball. tar takes three switches:
+
   * 'x' means "extract"
   * 'z' means "decompress gzipped data" - the file extension .tar.gz implies the files have been packaged using tar, and compressed using gzip
   * 'f' means read from a given file
+
 * Line 3: We then change directory to the directory that was extracted. The convention is that when extracting a tarball, it should only create one directory with the name of the tarball as not to mix up with files in the current directory.
 * Line 4: We run "make", which is a standard Unix tool for compiling code. What it does is software specific; make as such only executes what's been defined in the Makefile. In case of Redis, the Makefile starts compiling a bunch of C code.
 

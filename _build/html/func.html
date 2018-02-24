@@ -73,7 +73,7 @@
     <span class="c1"># values is a function, i.e. list with three elements</span>
     <span class="k">return</span> <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
-<span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">my_callback</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">my_callback</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>What happens here is that we define a function called &#8220;my_callback&#8221; which returns the third value in a list. That&#8217;s a fairly boring function, but we provide this function as a <em>callback</em> to the sorted() function, namely as the &#8220;key&#8221; parameter. As sorted() calls the key function for each element and uses that to define the ordering, we end up with the resulting list being sorted by the third value in the functions, i.e. the value &#8220;c&#8221;.</p>
@@ -82,7 +82,23 @@
 <h3>11.1.2.2. Sorting in C<a class="headerlink" href="#sorting-in-c" title="Permalink to this headline">¶</a></h3>
 <p>In the chapter &#8220;Big O notation&#8221; we touched upon sorting in C using the built in &#8220;qsort&#8221; function. Here&#8217;s the code again:</p>
 <blockquote>
-<div><div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div><div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">comparison</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span>
@@ -100,7 +116,7 @@
 <span class="p">}</span>
 
 </pre></div>
-</div>
+</td></tr></table></div>
 </div></blockquote>
 <p>Now, what happens here is the following:</p>
 <ul class="simple">
@@ -124,7 +140,7 @@
 <div class="section" id="anonymous-functions">
 <h2>11.1.3. Anonymous functions<a class="headerlink" href="#anonymous-functions" title="Permalink to this headline">¶</a></h2>
 <p>In some languages including Python and Javascript, we can define functions <em>anonymously</em>, meaning we don&#8217;t have to really define a function with a name, but merely a function without one. Going back to our Python example about providing a callback function as the &#8220;key&#8221; parameter, we wrote a function to return the third element of a list but this function is actually very simple. We can shorten our code by doing the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">])[:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">])[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>In Python, <em>lambda</em> is a key word for defining an anonymous function: instead of using &#8220;key=my_callback&#8221;, we set &#8220;key&#8221; to a lambda function, which is otherwise defined like a regular function but we skip the &#8220;return&#8221; keyword. This will have the same behaviour as our earlier example where we defined a named function as the callback.</p>
