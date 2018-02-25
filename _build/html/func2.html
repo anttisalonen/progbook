@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>11.2. Functional programming &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="12. Intermediate web development" href="int_web_index.html" />
+    <link rel="prev" title="11.1. Callbacks and anonymous functions" href="func.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="functional-programming">
+<h1>11.2. Functional programming<a class="headerlink" href="#functional-programming" title="Permalink to this headline">¶</a></h1>
+<p>The programming languages we&#8217;ve used so far are all <em>imperative</em>; they&#8217;re based on the mental model of a computer executing instructions in a series, from a list, from the top, one by one. This is furthermore based on the mathematical model of a <em>Turing machine</em>, described by Alan Turing; a machine that points to an element on a memory tape and has instructions to move on the tape and modify elements on it.</p>
+<p>There are several programming paradigms other than imperative, but one of interest for us is <em>functional programming</em>. We won&#8217;t go to details and actually program in a functional programming language in this book, but there are some aspects you should know about. (Again, as this chapter is about different programming languages, several programmers will disagree with the contents.)</p>
+<p>Functional programming is based on <em>lambda calculus</em>, a formal system described by Alonzo Church in the 1930s. It was later hypothesised that the work by Turing and Church is actually equivalent; that is, a Turing machine can be formally translated to lambda calculus and vice versa.</p>
+<p>The first functional programming language was Lisp, described in 1958 by John McCarthy. At the time, one of the most common imperative languages was Fortran. To get a high level understanding on how the languages look like, here&#8217;s an example snippet from both:</p>
+<p>Lisp:</p>
+<div class="highlight-lisp"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&gt;</span> <span class="nv">b</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="nv">println</span> <span class="s">&quot;b is bigger than 3&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Fortran:</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">IF</span> <span class="p">(</span><span class="n">NB</span><span class="p">.</span><span class="n">GT</span><span class="p">.</span><span class="mi">4</span><span class="p">)</span> <span class="k">THEN</span>
+<span class="k">  PRINT</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;B is larger than 3.&#39;</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+<p>Fortran was originally mainly used when entering code to computers using punch cards, while Lisp was originally described in a research paper but it was later discovered that an interpreter for this originally theoretical language could be implemented. So they have very different backgrounds and approaches but Lisp had some features that were at the time not available for other languages, including:</p>
+<ul class="simple">
+<li>Dynamic typing</li>
+<li>Recursion</li>
+<li>if-then-else</li>
+<li>Anonymous functions</li>
+<li>First class functions</li>
+<li>Dynamic memory allocation</li>
+<li>Macros i.e. running code at compile time</li>
+<li>Garbage collection</li>
+</ul>
+<p>There&#8217;s been a trend since the 1960&#8217;s and continuing that mainstream (imperative) languages are slowly adopting features that Lisp and functional programming in general have pioneered. This is mostly because there are less limitations around computer hardware, and the focus is shifting to increasing programmer productivity and ergonomics. Indeed Python and Javascript as well as several other languages such as Java have incorporated one or more of the above list either as best practices, or as integral parts of the language.</p>
+<p>This chapter is mostly concerned with providing examples around best practices in Python which can often be applied for other languages as well, as a means to reduce the number of bugs, reduce typing, and make code easier to understand.</p>
+<div class="section" id="map-and-reduce">
+<h2>11.2.1. Map and reduce<a class="headerlink" href="#map-and-reduce" title="Permalink to this headline">¶</a></h2>
+<p>Map and reduce are the most primitive operations to apply to lists (or arrays). As much of the power of computers and software development lies in the fact that once an operation has been described in code, it can easily be applied thousands or millions of times, it&#8217;s important to understand how to extend basic logic to be applied multiple times.</p>
+<p>&#8220;Map&#8221; relates to the general concept of applying a function that processes data over a list. For example, let&#8217;s have a simple function named &#8220;process&#8221; that tells how many digits are there in an integer, which would, for example, return 1 when given 5 as input, or 2 for 15, or 3 for 115.</p>
+<p><em>Exercise</em>: Implement the described function. (You can convert from string to integer using the int() function.)</p>
+<p>This function takes a value of type &#8220;int&#8221; and returns a value of type &#8220;int&#8221;. Now, we can pass a value to this function and receive the answer. If we had a list of numbers, and wanted to have a list of results of this function, we could do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">:</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">process</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>However, with a list comprehension, we can reduce the amount of code and simply use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">process</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Either way, this process of applying a function over a list is called <em>map</em>.</p>
+<p>A related operation is <em>reduce</em>, where we also apply a function to multiple elements of a list but the result is a single value that&#8217;s accumulated over each element, not a list. For example, our function could be a simple addition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>Now, our input could e.g. be [1, 2, 3, 4]. In order to <em>reduce</em> this we want to apply the function &#8220;add&#8221; continuously, and also define the initialisation value, in this case 0:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">:</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">inp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Note</em>: &#8220;add&#8221; was here implemented for demonstration purposes. In actual code you&#8217;d rather just use the &#8216;+&#8217; operator directly. However, if you do want to pass addition as a function you could either use a lambda function, or import operator and pass operator.add.</p>
+<p>There&#8217;s no list comprehension for this pattern. However, there&#8217;s a special case of reduction, namely filtering, or creating a new list with only values that fulfil a given condition. For example, if we wanted to only keep numbers less than 3:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inp</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Finally, map and filter can be combined, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">process</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This snippet returns a list with two elements, with the function &#8220;process&#8221; called for both of them.</p>
+<p><em>Exercise</em>: Write a list comprehension that returns a list of elements that have less than three digits in them. For the example input of [5, 15, 115] it should return [5, 15].</p>
+<p>Now, while the examples here are in Python, the concepts of map, reduce and filter apply to several languages, both static and dynamic.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">11.2. Functional programming</a><ul>
+<li><a class="reference internal" href="#map-and-reduce">11.2.1. Map and reduce</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="func_index.html">11. Some concepts around functions</a><ul>
+      <li>Previous: <a href="func.html" title="previous chapter">11.1. Callbacks and anonymous functions</a></li>
+      <li>Next: <a href="int_web_index.html" title="next chapter">12. Intermediate web development</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/func2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/func2.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

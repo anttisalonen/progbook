@@ -1,5 +1,5 @@
-Data structures - part 2
-========================
+Data structures - part two
+==========================
 
 .. toctree::
    :maxdepth: 1

@@ -44,14 +44,14 @@ Another example is about defining a simple function (pseudocode):
 
 .. code-block:: bash
 
-    function(x):
+    f(x):
         return 2 * x
 
 If we were to define this function in C, it could look for example like this:
 
 .. code-block:: bash
 
-    int function(int x)
+    int f(int x)
     {
         return 2 * x;
     }
@@ -70,20 +70,20 @@ I.e. no variable types explicitly defined. If we were to use Python, it would lo
 
 .. code-block:: python
 
-    def function(x):
+    def f(x):
         return 2 * x
 
 While in Haskell the definition would look like this:
 
 .. code-block:: haskell
 
-    function x = 2 * x
+    f x = 2 * x
 
 Or in Java:
 
 .. code-block:: java
 
-    public static int function(int x) {
+    public static int f(int x) {
         return 2 * x;
     }
 
@@ -132,12 +132,12 @@ The combination of strong, dynamic typing is also often called "duck typing". Th
 
 .. code-block:: python
 
-    def function(x):
+    def f(x):
         return 2 * x
 
 The operation to multiply with an int (2 \*) is defined for both integers and strings. For integers, the traditional multiplication is performed, while for strings the string is duplicated. From the point of view of the function, it makes no difference which type is passed to the function, as long as it can be multiplied by 2, hence duck typing. As we shall see, this becomes more interesting when writing your own data types.
 
-*Exercise*: Write Python code that, when executed, prints the asterisk 50 times, i.e. "**************************************************".
+*Exercise*: Write Python code that, when executed, prints the asterisk 50 times, i.e. "**************************************************". (One line of code.)
 
 Interpreted and compiled languages
 ==================================
@@ -170,6 +170,10 @@ Because compilation and type checking necessarily eliminates some programs which
     print func('int', 42)
 
 The function 'func' returns either a string, an integer or None depending on the input parameter. The program can be run and it'll work perfectly fine, but if one attempts to write a similar program in a statically typed language then one must circumvent the type checking because the types for both the second input parameter and the return value are dynamic, that is, determined at runtime. While for many languages it's possible to circumvent the type checking, in practice the easiest solution in a statically typed language would be to avoid this kind of a construct altogether and reshape the program such that it won't be necessary.
+
+Note: a more idiomatic way to accomplish this in Python would be to use the information about the type of a variable directly. I.e. running "isinstance(which_value, str)" will return True if the variable "which_value" is of type string.
+
+*Exercise*: Rewrite the above code such that the function "func" only takes one parameter - which_value - and the operation performed on it depends on the output of "isinstance".
 
 In general, there's no clear right or wrong around which kind of typing is the best, and typically arguments around this topic arise the same way normal people would argue about which car make, film, political party or religion is the best. While I attempt to stay objective, the following does include my subjective opinion where necessary - caveat emptor.
 

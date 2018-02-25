@@ -51,6 +51,8 @@ Here, we have a for loop that goes through the whole array (in the worst case). 
 
 In terms of big O notation, constant time is annotated O(1). Linear time, i.e. run time depends directly on the size of the array (n) is annotated O(n).
 
+*Exercise*: Try to implement the above algorithm of checking if an element is in an array without copy-pasting the code or looking at it.
+
 Quadratic run time
 ==================
 
@@ -88,6 +90,8 @@ This sorting algorithm is called *selection sort* and it's one of the simpler on
 
 What's the run time of this algorithm? We saw it has two for loops, and the number of iterations of both is only dependent (and linear to) the array size. Hence, the run time is *quadratic* to n - in terms of big O notation, O(n\ :sup:`2`\ ). For every new element in the array we'll have to run the inner loop *and* the outer loop once more. If n = 10, we have 9 * 8 = 72 iterations. If n = 100, we have 99 * 98 = 9702 iterations.
 
+*Exercise*: Try to implement the above algorithm of sorting an array without copy-pasting the code or looking at it.
+
 Logarithmic run time
 ====================
 
@@ -122,3 +126,4 @@ The final common run time class is O(n log n) - logarithmic run time multiplied 
 
   For qsort() in C, one has to define a *callback function* - a function that qsort() calls to get information on what the ordering between the elements should be, as well as the *size of* each element in the array. We'll touch more on these constructs later.
 
+*Exercise*: There are lots of nice visualisations on how sorting algorithms work, for example on Wikipedia. Check out one or two.
