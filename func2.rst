@@ -32,7 +32,7 @@ Fortran was originally mainly used when entering code to computers using punch c
 * First class functions
 * Dynamic memory allocation
 * Macros i.e. running code at compile time
-* Garbage collection
+* Garbage collection, i.e. memory is freed automatically when it's not used anymore
 
 There's been a trend since the 1960's and continuing that mainstream (imperative) languages are slowly adopting features that Lisp and functional programming in general have pioneered. This is mostly because there are less limitations around computer hardware, and the focus is shifting to increasing programmer productivity and ergonomics. Indeed Python and Javascript as well as several other languages such as Java have incorporated one or more of the above list either as best practices, or as integral parts of the language.
 
