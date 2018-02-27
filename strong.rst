@@ -213,6 +213,8 @@ Java is a language introduced in mid-90s and has a strong notion of *object orie
 * Uses *garbage collection* - instead of relying on the programmer to free memory that's not used, Java periodically checks whether memory is still in use or not and if not, will mark it as free
 * Has an improved module system - with no need to define header files
 
+Java has also been evolving and the newer versions of the language include some features that haven't been part of Java before, such as lambda functions and generic functions.
+
 C#
 ~~
 
