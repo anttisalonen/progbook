@@ -24,6 +24,18 @@ This looks a bit different to e.g. C# and Java:
 
 If the Go compiler is installed, this can be compiled and run using "go run split.go".
 
+Filtering elements from an array in Go:
+
+.. literalinclude:: filt.go
+    :language: go
+    :linenos:
+
+* Line 9: We call our function filt which does the work.
+* Line 15: The function implementation begins. It takes one parameter called "arr" which is an array of integers. Its return value is called "ret" and is also an array of integers.
+* Line 16-20: We define a simple for loop for adding the relevant numbers in the return value. The function "append" appends an element to an array, and returns the array with the element appended.
+
+Go doesn't support defining generic functions so this function only works for integers.
+
 Swift
 =====
 

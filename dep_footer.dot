@@ -21,7 +21,8 @@
     ds -> ds2;
     json -> redis;
     python_generate_file -> py2;
-    c_stack -> c_dyn;
+    c_stack -> c_stack2;
+    c_stack2 -> c_dyn;
     c_dyn -> c_str;
     ds2 -> py2;
     lang -> py2;
@@ -29,7 +30,7 @@
     func -> ajax;
     func -> func2;
     func2 -> vm;
-    c_stack -> asm;
+    c_stack2 -> asm;
     asm -> vm;
     vm -> strong;
     lang -> strong;

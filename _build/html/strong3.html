@@ -88,6 +88,58 @@
 <li>Line 12: We use the &#8220;fmt&#8221; module to print out each word to stdout</li>
 </ul>
 <p>If the Go compiler is installed, this can be compiled and run using &#8220;go run split.go&#8221;.</p>
+<p>Filtering elements from an array in Go:</p>
+<div class="highlight-go"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">d</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">}</span>
+    <span class="nx">d2</span> <span class="o">:=</span> <span class="nx">filt</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">d2</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">filt</span><span class="p">(</span><span class="nx">arr</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="nx">ret</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">arr</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="nx">ret</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">ret</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Line 9: We call our function filt which does the work.</li>
+<li>Line 15: The function implementation begins. It takes one parameter called &#8220;arr&#8221; which is an array of integers. Its return value is called &#8220;ret&#8221; and is also an array of integers.</li>
+<li>Line 16-20: We define a simple for loop for adding the relevant numbers in the return value. The function &#8220;append&#8221; appends an element to an array, and returns the array with the element appended.</li>
+</ul>
+<p>Go doesn&#8217;t support defining generic functions so this function only works for integers.</p>
 </div>
 <div class="section" id="swift">
 <h2>14.5.2. Swift<a class="headerlink" href="#swift" title="Permalink to this headline">¶</a></h2>
