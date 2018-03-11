@@ -1,0 +1,71 @@
+Done
+What is programming - CPUs, asm
+Python fizzbuzz
+Python flask
+quadratic formula
+
+Need
+What is clean code
+editors + macros
+shell - ls, >, sed, grep, awk, env var, pipe
+reading open source code
+programming language taxonomy
+Python bytecode
+osi model
+esr
+algorithms - sort, binary search, dfs, bfs, np completeness, o notation
+profiling
+< plotting (plotly)
+cron
+< nosql
+< json
+binary files (png parsing?)
+machine learning
++ print yalando paper
++ online clothes shop
+< sql
+< bootstrap
+opengl shaders
+< sockets
+< pointers
+ffi
++ chat web site
+rust, go or other
+stack overflow profile
++ web crawler
+< regexes
++ web server
+other languages: java, c#, lisp, etc
+oop
+gpgpu
+parallel programming - threads
+git - branches, remotes, checkout
+open source licenses
+processes - unit testing, code reviews, q&a, ci
+security
+fsm
+diff
+data structures
+configuring the environment - .vimrc, .gitconfig, .bashrc etc.
+angular
+tech behind the book
+useful python - len, list comp, lambda
+file hashes, sym links - on pure
+assert
+backus naur
+sw design, kiss, python manifesto
+vm's
+make
+c func ptr + data driven - http server revisited
+timestamp sort
+
+
+quadratic formula - generate text data, generate json, read json, plot using plotly, store to nosql, show stats
+guess number - js, binary search
+web server - sockets, pointers, osi
+yalando api - curl, json
+yalando print paper - scan code, pdf, sql
+yalando - sql, json, bootstrap
+crawler - regexes
+sudoku - dfs, recursion, classes, propagate + search
+dot parsing  - regexes, proper parser, backus naur, graphs

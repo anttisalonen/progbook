@@ -13,6 +13,7 @@ Software development fundamentals
 
    intro_index
    unix_index
+   edit_index
    lang_index
    js_index
    ds_index

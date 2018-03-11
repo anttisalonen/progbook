@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>14.2. Virtual machines &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="14.3. Overview of some statically, strongly typed languages" href="strong.html" />
+    <link rel="prev" title="14.1. Under the hood" href="asm.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="virtual-machines">
+<h1>14.2. Virtual machines<a class="headerlink" href="#virtual-machines" title="Permalink to this headline">¶</a></h1>
+<p>In the previous chapter we discussed the assembly language. Many languages, including C and C++, are typically compiled to a machine specific assembly code before the program can be executed. Which prompts the question, what do other languages do.</p>
+<div class="section" id="python">
+<h2>14.2.1. Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p>Python is an interpreted language. This, however, doesn&#8217;t mean that the interpreter looks at each character in the code while the program is being executed; instead, the interpreter compiles the code to <em>bytecode</em> - a code similar to assembly, which is then interpreted by the interpreter. You may see files with the suffix .pyc after running some Python code - these contain the bytecode.</p>
+<p>The standard Python implementation also provides a library for inspecting the resulting bytecode. Take a look at this example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dis</span>
+
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What happens here is we define a trivial function, then use the built in module &#8220;dis&#8221; to display the disassembly of this function. You can also use this module in the Python interpreter.</p>
+<p>The program outputs this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="m">4</span>           <span class="m">0</span> LOAD_FAST                <span class="m">0</span> <span class="o">(</span>a<span class="o">)</span>
+            <span class="m">3</span> LOAD_FAST                <span class="m">1</span> <span class="o">(</span>b<span class="o">)</span>
+            <span class="m">6</span> BINARY_ADD
+            <span class="m">7</span> RETURN_VALUE
+</pre></div>
+</div>
+<p>The first two lines load two values, a and b, and the third one adds the two.</p>
+<p>If you recall the x86-64 assembly, this is somewhat similar, but arguably simplified. Which is kind of the point: it&#8217;s relatively fast for the Python interpreter to interpret the bytecode, but it&#8217;s still independent of the machine, such that Python code can in general be run on any platform that can run the Python interpreter. Hence such interpreters are also called <em>virtual machines</em> - they run a program which isn&#8217;t compiled for a certain platform and is hence platform independent.</p>
+<p>Speaking of the Python interpreter, it&#8217;s also a good idea to take a look at the Python implementation to get a better understanding of how it works.</p>
+<p><em>Exercise</em>: Find the source code of the main Python implementation online. (This is also called &#8220;cpython&#8221;, as in, the C implementation of Python.) Make sure you pick the source code of the 2.7 branch, not the Python 3 code. You may either download a package with all the source code, or browse the code as it&#8217;s stored in version control, though downloading the whole code might be easier for searching (find and grep). See if you can find the function which interprets the command BINARY_ADD.</p>
+</div>
+<div class="section" id="other-virtual-machines">
+<h2>14.2.2. Other virtual machines<a class="headerlink" href="#other-virtual-machines" title="Permalink to this headline">¶</a></h2>
+<p>Javascript is implemented by each browser, and several implementations are actually virtual machines which compile Javascript to bytecode and interpret this at run time. However, many of the main implementations actually compile Javascript code directly to machine code before the code is run for better performance; so called <em>JIT</em> or just-in-time compilation.</p>
+<p>Java is generally not compiled into machine code but to bytecode executed by <em>JVM</em>, or Java Virtual Machine. JIT is also used with JVM.</p>
+<p>Similar to JVM, .NET from Microsoft contains a virtual machine (called <em>CLR</em> or Common Language Runtime) which executes .NET bytecode and uses JIT for improved performance.</p>
+<p>As virtual machines generally only take the specific bytecode as the program input, and the bytecode generally is not strictly tied to a higher level language, it&#8217;s often possible to implement a compiler for another language which outputs bytecode which can then be interpreted by the virtual machine. There are several languages that are not Java but can execute on the JVM, such as Clojure (which is a dialect of Lisp) and Scala. Similarly, there are several languages that can run on the .NET virtual machine such as C# and Visual Basic .NET. There are also implementation of Python that compile Python to JVM and CLR bytecode.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">14.2. Virtual machines</a><ul>
+<li><a class="reference internal" href="#python">14.2.1. Python</a></li>
+<li><a class="reference internal" href="#other-virtual-machines">14.2.2. Other virtual machines</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="strong_index.html">14. Strongly, statically typed languages</a><ul>
+      <li>Previous: <a href="asm.html" title="previous chapter">14.1. Under the hood</a></li>
+      <li>Next: <a href="strong.html" title="next chapter">14.3. Overview of some statically, strongly typed languages</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/vm.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/vm.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

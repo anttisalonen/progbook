@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>13.1. Overview of some statically, strongly typed languages &#8212; guide 0.1 documentation</title>
+    <title>14.3. The case for statically, strongly typed languages &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14. Exercises" href="ex_index.html" />
-    <link rel="prev" title="13. Strongly, statically typed languages" href="strong_index.html" />
+    <link rel="next" title="14.4. Established languages" href="strong2.html" />
+    <link rel="prev" title="14.2. Virtual machines" href="vm.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,8 +43,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="overview-of-some-statically-strongly-typed-languages">
-<h1>13.1. Overview of some statically, strongly typed languages<a class="headerlink" href="#overview-of-some-statically-strongly-typed-languages" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="the-case-for-statically-strongly-typed-languages">
+<h1>14.3. The case for statically, strongly typed languages<a class="headerlink" href="#the-case-for-statically-strongly-typed-languages" title="Permalink to this headline">¶</a></h1>
 <p>We&#8217;ve so far mostly used three languages:</p>
 <ul class="simple">
 <li>Javascript: a dynamically, weakly typed language</li>
@@ -57,9 +57,9 @@
 <p>All the languages here are statically, strongly typed as well as imperative, such that it shouldn&#8217;t be very difficult for the reader to implement FizzBuzz for any of the languages after seeing the &#8220;Hello world&#8221; program and possibly a search or two online on syntax. To make things more interesting we&#8217;ll also, for each language, quote two programs for relatively common operations:</p>
 <ul class="simple">
 <li>Splitting a string by a space, with the goal to be able to access and print out each word separately.</li>
-<li>Filtering numbers less than zero from a list (or an array)</li>
+<li>A separate function which filters numbers less than zero from a list (or an array)</li>
 </ul>
-<p>For the second operation, the implementation should be implemented generically, i.e. for any different numeric types, if possible in each language.</p>
+<p>For the second operation, the implementation should be implemented generically, i.e. for any different numeric types, if possible, in each language.</p>
 <p>This may be helpful in illustrating the different concepts between languages.</p>
 <p><em>Exercise</em>: Implement both of the above operations in one of the languages (C, Python or Javascript). Note that example implementations will be listed below. If you pick C, you may want to use the function &#8220;realloc&#8221;. If you pick Javascript, you may want to look up the reference for the Javascript array class first.</p>
 <p>To prepare, here&#8217;s how to split a string in C, Python and Javascript:</p>
@@ -136,7 +136,7 @@
 </pre></div>
 </td></tr></table></div>
 <p>(Compile and run e.g. using &#8220;gcc -Wall -O2 -o str str.c &amp;&amp; ./str&#8221;.)</p>
-<p>Some explanation to the above: we create a buffer where we store a copy of the original string, with each space replaced with a string terminator (&#8216;0&#8217;). We index into the buffer in order to access the individual words. In order to do this, we create an array with MAX_WORDS (20) elements, each one including the index (position) of the word.</p>
+<p>Some explanation to the above: we create a buffer where we store a copy of the original string, with each space replaced with a string terminator (&#8216;\0&#8217;). We index into the buffer in order to access the individual words. In order to do this, we create an array with MAX_WORDS (20) elements, each one including the index (position) of the word.</p>
 <p>Python:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;this is a string.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
 <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">):</span>
@@ -153,75 +153,108 @@
 </div>
 <p>Here&#8217;s the program to filter numbers less than zero in C, Python and Javascript:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/* filt: filter out positive numbers from an int array </span>
+<span class="cm"> * Input parameters:</span>
+<span class="cm"> *   arr: pointer to array with numbers</span>
+<span class="cm"> *   len: number of elements in arr</span>
+<span class="cm"> *</span>
+<span class="cm"> * Output parameters:</span>
+<span class="cm"> *   return value: pointer to a newly allocated array with only</span>
+<span class="cm"> *                 negative numbers</span>
+<span class="cm"> *   end_len: number of elements in return value</span>
+<span class="cm"> *</span>
+<span class="cm"> * Return value may be NULL if no memory available.</span>
+<span class="cm"> * Otherwise, caller must free() the return value after use.</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="o">*</span><span class="nf">filt</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">end_len</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// first allocate memory large enough to hold the whole array</span>
+	<span class="c1">// in case this is needed</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="n">len</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">perror</span><span class="p">(</span><span class="s">&quot;malloc&quot;</span><span class="p">);</span>
+		<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="n">len</span><span class="p">);</span>
+
+	<span class="c1">// end_len serves as our index so we know where to put the</span>
+	<span class="c1">// next number</span>
+	<span class="o">*</span><span class="n">end_len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">res</span><span class="p">[</span><span class="o">*</span><span class="n">end_len</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="n">arr</span><span class="p">;</span>
+			<span class="p">(</span><span class="o">*</span><span class="n">end_len</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="n">arr</span><span class="o">++</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="c1">// resize the size of the output buffer</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">new_res</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">realloc</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="o">*</span><span class="n">end_len</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">new_res</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">perror</span><span class="p">(</span><span class="s">&quot;realloc&quot;</span><span class="p">);</span>
+		<span class="n">free</span><span class="p">(</span><span class="n">res</span><span class="p">);</span>
+		<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">new_res</span><span class="p">;</span>
+<span class="p">}</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="cp"># define MAX_WORDS 20</span>
-
-    <span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="s">&quot;this is a string.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="n">str_buf</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">str_buf</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">str_buf</span><span class="p">));</span>
-    <span class="n">strncpy</span><span class="p">(</span><span class="n">str_buf</span><span class="p">,</span> <span class="n">str</span><span class="p">,</span> <span class="mi">255</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">indices</span><span class="p">[</span><span class="n">MAX_WORDS</span><span class="p">];</span>
-    <span class="kt">int</span> <span class="n">next_index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
-    <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">str_buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\0&#39;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">str_buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">indices</span><span class="p">[</span><span class="n">next_index</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="n">str_buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
-            <span class="n">assert</span><span class="p">(</span><span class="n">next_index</span> <span class="o">&lt;</span> <span class="n">MAX_WORDS</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">num_words</span> <span class="o">=</span> <span class="n">next_index</span><span class="p">;</span>
-
-    <span class="cm">/* printing out each word */</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_words</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">str_buf</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
-    <span class="p">}</span>
+	<span class="kt">int</span> <span class="n">inp</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">};</span>
+	<span class="kt">int</span> <span class="n">end_len</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">res</span> <span class="o">=</span> <span class="n">filt</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">end_len</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">end_len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+	<span class="p">}</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">res</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>(This also introduces &#8220;realloc&#8221; for re-allocating existing memory.)</p>
+<p>(This uses &#8220;realloc&#8221; for re-allocating existing memory.)</p>
 <p>Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]</span>
-<span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">inp</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
-<span class="k">print</span> <span class="n">out</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filt</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">arr</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">filt</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Javascript:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">];</span>
-<span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">inp</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">out</span><span class="p">);</span>
+<span class="kd">function</span> <span class="nx">filt</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="k">return</span> <span class="nx">out</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">filt</span><span class="p">(</span><span class="nx">inp</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>(We use the built-in array class member function &#8220;filter&#8221; and pass it an anonymous function as the callback that defines what to filter on.)</p>
 <div class="section" id="what-s-new">
-<h2>13.1.1. What&#8217;s new<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
+<h2>14.3.1. What&#8217;s new<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <p>What could statically, strongly typed languages improve on compared to the above?</p>
 <p>Python and Javascript are fairly concise but, when compared to C, have some characteristics that can be perceived as disadvantages:</p>
 <ul class="simple">
 <li>The performance of Python and Javascript is generally not as good as C and much of this is due to dynamic typing, although there are optimisations that can be done to alleviate this (for example <em>JIT</em>, or just-in-time compilation, where parts of a program can be compiled during execution after the runtime has collected data on which type is typically associated with each variable)</li>
-<li>There&#8217;s arguably more room for error with dynamic typing; errors that could be caught before running the program</li>
+<li>There&#8217;s arguably more room for error with dynamic typing; errors that could be caught before running the program may cause a run time error during execution</li>
 </ul>
 <p>On the other hand, C has some characteristics that can be perceived as disadvantages compared to Python and Javascript:</p>
 <ul class="simple">
 <li>C is fairly verbose; based on the number of lines already there&#8217;s arguably more effort required in C to achieve the same behaviour</li>
 <li>C is not memory safe, opening the possibility of nasty memory related bugs and security holes</li>
 <li>C is not as strongly typed as Python, such that some bugs in the code could go undetected which would raise a (run time) error in Python</li>
-<li>While we haven&#8217;t discussed C projects with multiple files in detail, in general the system in C with header files and source files, with the header files being included in source files using the #include preprocessor directive (which practically automatically copy-pastes the header file in the source file) introduces some drawbacks that are ideally to be improved upon</li>
+<li>While we haven&#8217;t discussed C projects with multiple files in detail, in general the system in C with header files and source files, with the header files being included in source files using the #include preprocessor directive (which practically automatically copy-pastes the header file in the source file) introduces some drawbacks ideally can be improved upon</li>
 </ul>
 <div class="section" id="generic-functions">
-<h3>13.1.1.1. Generic functions<a class="headerlink" href="#generic-functions" title="Permalink to this headline">¶</a></h3>
+<h3>14.3.1.1. Generic functions<a class="headerlink" href="#generic-functions" title="Permalink to this headline">¶</a></h3>
 <p>Another point to note is that because types have to be explicitly defined in C, it is generally not possible to implement some <em>generic</em> functions in C without eliminating type safety. A classic example is a function to return the maximum value of two values:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">max_int</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
 <span class="p">{</span>
@@ -250,177 +283,7 @@
 </div>
 <p>(The <em>ternary operator</em> ?: returns the term before the : if the term before the ? is true and the term after the : otherwise.)</p>
 <p>However, macros provide no type safety, such that it&#8217;s e.g. possible to mix the types of &#8220;a&#8221; and &#8220;b&#8221; in the above without warning. (Macros also have other issues; if, for example, an expression with side effects such as &#8220;x++&#8221; was passed to the above &#8220;max&#8221; macro, then x could be incremented twice.)</p>
-<p>Statically, strongly typed languages attempt to improve on the above points. It should be noted that there is no silver bullet, i.e. even with static, strong typing it can be argued that no language is categorically better than all other languages.</p>
-</div>
-</div>
-<div class="section" id="established-languages">
-<h2>13.1.2. Established languages<a class="headerlink" href="#established-languages" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="c">
-<h3>13.1.2.1. C++<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<p>C++ started in the 80s as an improvement over C. Since then it has accumulated an impressive set of features. It&#8217;s still mostly backwards compatible to C - such that most C can be compiled with a C++ compiler with little changes - but has a lot of features that C doesn&#8217;t have.</p>
-<p>Some things that C++ &#8220;fixes&#8221; comparing to C are:</p>
-<ul class="simple">
-<li>Automatic code execution when a variable leaves the scope: We saw in our BSD socket handling code that we had to call close() and sometimes shutdown() whenever we saw something go wrong. This is easily forgotten or neglected, causing resource leaks (in this case file descriptors but can also be e.g. memory). C++ uses the concept of classes to enable automatic cleanup when necessary. This also enables <em>smart pointers</em> - pointers with <em>reference counting</em> such that no manual memory management is necessary, and instead the pointers should know themselves when the memory pointed to can be freed.</li>
-<li>Arrays: In C, the programmer has to keep track of the length of an array (or pointer to an array) manually - it&#8217;s not automatically associated with the array. C++ has array datatypes which include the length, greatly simplifying the code.</li>
-<li>Generic programming: In C, if one were to e.g. implement a function to return the larger of two numbers, it&#8217;s necessary to implement the function for all numeric data types, e.g. float, int, etc. even when the body of the function is the same. C++ solves this using <em>templates</em>.</li>
-<li>Extended standard library: E.g. the max() function but also several string handling functions are included in the C++ standard library. Furthermore, data structures such as linked lists, sets and dictionaries (maps) are included.</li>
-</ul>
-<p>Things that C++ hasn&#8217;t (completely) fixed are:</p>
-<ul class="simple">
-<li>Memory safety: While it&#8217;s possible to write safe C++, it still allows things like pointer arithmetic and manual memory management for backwards compatibility reasons.</li>
-<li>Module system: It&#8217;s still necessary to have a header file (.h) for declaring the functions and data types and the source file (.cpp) for function definitions.</li>
-</ul>
-<p>Hello world program:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello world&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>In C++, instead of calling printf() with its inherent lack of type safety (as the format string can be dynamic, it&#8217;s in general not possible for the compiler to check that the format string matches the types that are provided as extra parameters, or indeed that the number of extra parameters is correct), the C++ standard library provides an object called std::cout which has <em>overloaded</em> the &#8220;&lt;&lt;&#8221; operator (left shift) to mean writing to it.</p>
-<p>Split string:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iterator&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span><span class="p">(</span><span class="s">&quot;this is a string.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">iss</span><span class="p">),</span>
-         <span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(),</span>
-         <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">res</span><span class="p">));</span>
-
-    <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">w</span> <span class="p">:</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">w</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table></div>
-<ul class="simple">
-<li>Line 1-6: Necessary includes.</li>
-<li>Line 10: Our input string.</li>
-<li>Line 11: Our <em>vector</em> (dynamic array) to hold the result (individual words).</li>
-<li>Line 12: Input stream, a class that holds the string, but as a stream.</li>
-<li>Line 13-15: We copy the data from the stream to our vector. When reading the stream, it returns words one at a time, which are inserted into our vector using the class std::back_inserter.</li>
-<li>Line 16-18: Writing out each word.</li>
-</ul>
-<p>This can be compiled and run e.g. with the following command: g++ &#8211;std=c++11 -Wall -O2 -o str str.cpp &amp;&amp; ./str</p>
-<p>Filtering numbers less than zero:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iterator&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-<span class="k">auto</span> <span class="n">filt</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span>
-<span class="p">{</span>
-	<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
-	<span class="n">std</span><span class="o">::</span><span class="n">copy_if</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
-			<span class="n">arr</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-			<span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">res</span><span class="p">),</span>
-			<span class="p">[](</span><span class="n">T</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">;</span> <span class="p">});</span>
-	<span class="k">return</span> <span class="n">res</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">inp</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">};</span>
-    <span class="k">auto</span> <span class="n">res</span> <span class="o">=</span> <span class="n">filt</span><span class="p">(</span><span class="n">inp</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table></div>
-<p>Due to how C++ works, we have to define the function that does the actual work before we define main. Let&#8217;s go through main first.</p>
-<ul class="simple">
-<li>Line 21: We define our input, a vector of integers.</li>
-<li>Line 22: We call our processing function. We don&#8217;t need to type the type of the variable but use &#8220;auto&#8221; instead, meaning the compiler can deduce it for us. In this case, the type is std::vector&lt;int&gt;.</li>
-<li>Line 8-17: Our processing function implementation.</li>
-<li>Line 8: We define a <em>template</em> for our function. This means that the type named &#8220;T&#8221; will be replaced by whatever the called used to call the function. In this case, int. This way our function only needs to be implemented once for all numeric types including floating point numbers.</li>
-<li>Line 9: We define the signature of our function such that the input is a <em>reference to</em> a std::vector which holds elements of type &#8220;T&#8221; (in our case, int). Reference is created using the &#8220;&amp;&#8221; symbol. It&#8217;s very similar to a pointer in C, but it is more restricted. For example it must always be defined to refer to a variable, and it cannot be set to NULL. The output of our function is &#8220;auto&#8221;, i.e. automatically derived, but in our case std::vector&lt;int&gt;.</li>
-<li>Line 11: We define our variable which we&#8217;ll return in the end.</li>
-<li>Line 12-14: We use C++ standard template library functions to describe copying values from one vector (array) to another.</li>
-<li>Line 15: Here, we define a <em>lambda</em> function that takes &#8220;T i&#8221; (in our case, &#8220;int i&#8221;) as a parameter, and returns true if i is less than 0. This is used as the predicate for our copying function.</li>
-</ul>
-<p>C++ is a fairly large language, both from syntax and the standard template library. I&#8217;d expect most C++ programmers to spend a significant portion of their programming time perusing the various language and library references.</p>
-</div>
-<div class="section" id="java">
-<h3>13.1.2.2. Java<a class="headerlink" href="#java" title="Permalink to this headline">¶</a></h3>
-<p>Java is a language introduced in mid-90s and has a strong notion of <em>object oriented programming</em>. Compared to C++, Java:</p>
-<ul class="simple">
-<li>Generally has memory safety - no manually managed memory, or pointers</li>
-<li>Uses <em>garbage collection</em> - instead of relying on the programmer to free memory that&#8217;s not used, Java periodically checks whether memory is still in use or not and if not, will mark it as free</li>
-<li>Has an improved module system - with no need to define header files</li>
-</ul>
-</div>
-<div class="section" id="id1">
-<h3>13.1.2.3. C#<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
-<div class="section" id="newer-established-languages">
-<h2>13.1.3. Newer established languages<a class="headerlink" href="#newer-established-languages" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="go">
-<h3>13.1.3.1. Go<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="swift">
-<h3>13.1.3.2. Swift<a class="headerlink" href="#swift" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="rust">
-<h3>13.1.3.3. Rust<a class="headerlink" href="#rust" title="Permalink to this headline">¶</a></h3>
+<p>Other languages may attempt to improve on the above points. It should be noted that there is no silver bullet, i.e. even with static, strong typing it can be argued that no language is categorically better than all other languages.</p>
 </div>
 </div>
 </div>
@@ -433,21 +296,9 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">13.1. Overview of some statically, strongly typed languages</a><ul>
-<li><a class="reference internal" href="#what-s-new">13.1.1. What&#8217;s new</a><ul>
-<li><a class="reference internal" href="#generic-functions">13.1.1.1. Generic functions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#established-languages">13.1.2. Established languages</a><ul>
-<li><a class="reference internal" href="#c">13.1.2.1. C++</a></li>
-<li><a class="reference internal" href="#java">13.1.2.2. Java</a></li>
-<li><a class="reference internal" href="#id1">13.1.2.3. C#</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#newer-established-languages">13.1.3. Newer established languages</a><ul>
-<li><a class="reference internal" href="#go">13.1.3.1. Go</a></li>
-<li><a class="reference internal" href="#swift">13.1.3.2. Swift</a></li>
-<li><a class="reference internal" href="#rust">13.1.3.3. Rust</a></li>
+<li><a class="reference internal" href="#">14.3. The case for statically, strongly typed languages</a><ul>
+<li><a class="reference internal" href="#what-s-new">14.3.1. What&#8217;s new</a><ul>
+<li><a class="reference internal" href="#generic-functions">14.3.1.1. Generic functions</a></li>
 </ul>
 </li>
 </ul>
@@ -457,9 +308,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="strong_index.html">13. Strongly, statically typed languages</a><ul>
-      <li>Previous: <a href="strong_index.html" title="previous chapter">13. Strongly, statically typed languages</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">14. Exercises</a></li>
+  <li><a href="strong_index.html">14. Strongly, statically typed languages</a><ul>
+      <li>Previous: <a href="vm.html" title="previous chapter">14.2. Virtual machines</a></li>
+      <li>Next: <a href="strong2.html" title="next chapter">14.4. Established languages</a></li>
   </ul></li>
   </ul></li>
 </ul>

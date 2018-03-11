@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.1. Typing &#8212; guide 0.1 documentation</title>
+    <title>4.1. Typing &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Javascript" href="js_index.html" />
-    <link rel="prev" title="3. Programming language taxonomy" href="lang_index.html" />
+    <link rel="next" title="5. Javascript" href="js_index.html" />
+    <link rel="prev" title="4. Programming language taxonomy" href="lang_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="typing">
-<h1>3.1. Typing<a class="headerlink" href="#typing" title="Permalink to this headline">¶</a></h1>
+<h1>4.1. Typing<a class="headerlink" href="#typing" title="Permalink to this headline">¶</a></h1>
 <p>Most programming languages come with a more or less sophisticated type systems. The type system defines how the types of variables and functions are used and interpreted.</p>
 <p>A common example is the following expression:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="m">4</span> + <span class="s2">&quot;2&quot;</span>
@@ -178,19 +178,19 @@
 <p>We see the result makes sense when inputting a number for all languages. When inputting &#8220;5&#8221; as string, C interprets this as a pointer and undefined behaviour ensues. Javascript implicitly converts the string to a number, which works when the string is indeed a number but returns &#8220;NaN&#8221; otherwise. When passing a string to the function in Python, Python interprets the multiplication as a multiplication of the string, hence duplicating the string. Haskell and Java refuse to work with the string input.</p>
 <p>The above can be summarised by categorising the language type systems by how dynamic the typing is (static vs. dynamic), and the strength (strong vs. weak).</p>
 <div class="section" id="static-vs-dynamic-typing">
-<h2>3.1.1. Static vs. dynamic typing<a class="headerlink" href="#static-vs-dynamic-typing" title="Permalink to this headline">¶</a></h2>
+<h2>4.1.1. Static vs. dynamic typing<a class="headerlink" href="#static-vs-dynamic-typing" title="Permalink to this headline">¶</a></h2>
 <p>C, Haskell and Java are statically typed languages: the types of all variables must be defined at compilation time. For C and Java, the types must in most cases be explicitly stated, like we saw in the function definitions above. Haskell typically infers the types at compile time.</p>
 <p>Javascript and Python are dynamically typed languages: the types of variables may change depending on context. For example, the variable &#8220;x&#8221; in the function above may be a string or an integer, depending on the caller.</p>
 </div>
 <div class="section" id="strong-vs-weak-typing">
-<h2>3.1.2. Strong vs. weak typing<a class="headerlink" href="#strong-vs-weak-typing" title="Permalink to this headline">¶</a></h2>
+<h2>4.1.2. Strong vs. weak typing<a class="headerlink" href="#strong-vs-weak-typing" title="Permalink to this headline">¶</a></h2>
 <p>C and Javascript are weakly typed languages: the types of the variables aren&#8217;t fixed but may be implicitly converted to other types depending on the context. For example, passing a string as an int will cause implicit conversion of the string to an int.</p>
 <p>Python and Haskell are strongly typed languages: the types of variables are fixed and will not implicitly change, such that any type conversions must be explicit by the programmer.</p>
 <p>It should be pointed out that while, based on the above, Java and Haskell are both strongly typed, some languages are more strongly typed than others. In our 4 + &#8220;2&#8221; example we saw that Haskell returned an error while Java returned &#8220;42&#8221;. In this case, Java <em>implicitly converted</em> the type of the expression 4 to a string in order to avoid a compile error and return a string instead. Hence it can be argued that while Java is also a strongly typed language, Haskell is even more strongly typed.</p>
 <p>Having this overview of the different type systems helps picking up and understanding new languages.</p>
 </div>
 <div class="section" id="duck-typing">
-<h2>3.1.3. Duck typing<a class="headerlink" href="#duck-typing" title="Permalink to this headline">¶</a></h2>
+<h2>4.1.3. Duck typing<a class="headerlink" href="#duck-typing" title="Permalink to this headline">¶</a></h2>
 <p>The combination of strong, dynamic typing is also often called &#8220;duck typing&#8221;. This is based on the notion that &#8220;if it walks like a duck and it quacks like a duck, then it is a duck&#8221;. Let&#8217;s take a look at our Python function definition again:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
@@ -199,16 +199,16 @@
 <p>The operation to multiply with an int (2 *) is defined for both integers and strings. For integers, the traditional multiplication is performed, while for strings the string is duplicated. From the point of view of the function, it makes no difference which type is passed to the function, as long as it can be multiplied by 2, hence duck typing. As we shall see, this becomes more interesting when writing your own data types.</p>
 <p><em>Exercise</em>: Write Python code that, when executed, prints the asterisk 50 times, i.e. &#8220;<strong>**********************************************</strong>&#8221;. (One line of code.)</p>
 <div class="section" id="interpreted-and-compiled-languages">
-<h3>3.1.3.1. Interpreted and compiled languages<a class="headerlink" href="#interpreted-and-compiled-languages" title="Permalink to this headline">¶</a></h3>
+<h3>4.1.3.1. Interpreted and compiled languages<a class="headerlink" href="#interpreted-and-compiled-languages" title="Permalink to this headline">¶</a></h3>
 <p>Typically (but not always), statically typed languages are compiled languages and dynamically typed languages are interpreted. There are pros and cons to both. The following attempts to summarise this somewhat.</p>
 </div>
 </div>
 <div class="section" id="catching-errors">
-<h2>3.1.4. Catching errors<a class="headerlink" href="#catching-errors" title="Permalink to this headline">¶</a></h2>
+<h2>4.1.4. Catching errors<a class="headerlink" href="#catching-errors" title="Permalink to this headline">¶</a></h2>
 <p>Compilation can catch errors that wouldn&#8217;t be caught in interpreted programs until the code with the error was executed. For example, accidentally attempting to assign a string value to an int will be a compiler error. With an interpreted language, the error typically won&#8217;t be raised until the code is ran.</p>
 </div>
 <div class="section" id="possible-program-space">
-<h2>3.1.5. Possible program space<a class="headerlink" href="#possible-program-space" title="Permalink to this headline">¶</a></h2>
+<h2>4.1.5. Possible program space<a class="headerlink" href="#possible-program-space" title="Permalink to this headline">¶</a></h2>
 <p>Because compilation and type checking necessarily eliminates some programs which in theory would be sound, the programmer can write programs in dynamically typed languages that aren&#8217;t possible in statically typed languages. Consider the following example (Python code):</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -250,15 +250,15 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.1. Typing</a><ul>
-<li><a class="reference internal" href="#static-vs-dynamic-typing">3.1.1. Static vs. dynamic typing</a></li>
-<li><a class="reference internal" href="#strong-vs-weak-typing">3.1.2. Strong vs. weak typing</a></li>
-<li><a class="reference internal" href="#duck-typing">3.1.3. Duck typing</a><ul>
-<li><a class="reference internal" href="#interpreted-and-compiled-languages">3.1.3.1. Interpreted and compiled languages</a></li>
+<li><a class="reference internal" href="#">4.1. Typing</a><ul>
+<li><a class="reference internal" href="#static-vs-dynamic-typing">4.1.1. Static vs. dynamic typing</a></li>
+<li><a class="reference internal" href="#strong-vs-weak-typing">4.1.2. Strong vs. weak typing</a></li>
+<li><a class="reference internal" href="#duck-typing">4.1.3. Duck typing</a><ul>
+<li><a class="reference internal" href="#interpreted-and-compiled-languages">4.1.3.1. Interpreted and compiled languages</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#catching-errors">3.1.4. Catching errors</a></li>
-<li><a class="reference internal" href="#possible-program-space">3.1.5. Possible program space</a></li>
+<li><a class="reference internal" href="#catching-errors">4.1.4. Catching errors</a></li>
+<li><a class="reference internal" href="#possible-program-space">4.1.5. Possible program space</a></li>
 </ul>
 </li>
 </ul>
@@ -266,9 +266,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="lang_index.html">3. Programming language taxonomy</a><ul>
-      <li>Previous: <a href="lang_index.html" title="previous chapter">3. Programming language taxonomy</a></li>
-      <li>Next: <a href="js_index.html" title="next chapter">4. Javascript</a></li>
+  <li><a href="lang_index.html">4. Programming language taxonomy</a><ul>
+      <li>Previous: <a href="lang_index.html" title="previous chapter">4. Programming language taxonomy</a></li>
+      <li>Next: <a href="js_index.html" title="next chapter">5. Javascript</a></li>
   </ul></li>
   </ul></li>
 </ul>

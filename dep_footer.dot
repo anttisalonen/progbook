@@ -1,3 +1,5 @@
+    unix -> vim;
+    vim -> vim2;
     python_generate_file -> unix;
     learn -> unix;
     unix -> vcs;
@@ -25,8 +27,16 @@
     lang -> py2;
     py3 -> func;
     func -> ajax;
+    func -> func2;
+    func2 -> vm;
+    c_stack -> asm;
+    asm -> vm;
+    vm -> strong;
     lang -> strong;
     c_str -> strong;
+    binary -> strong;
+    strong -> strong2;
+    strong2 -> strong3;
     c2 -> py2;
     py2 -> py3;
     json -> py3;

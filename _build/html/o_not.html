@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>5.1. Big O notation &#8212; guide 0.1 documentation</title>
+    <title>6.1. Big O notation &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Javascript - part 2" href="js2_index.html" />
-    <link rel="prev" title="5. First touch of algorithms" href="ds_index.html" />
+    <link rel="next" title="7. Javascript - part 2" href="js2_index.html" />
+    <link rel="prev" title="6. First touch of algorithms" href="ds_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,13 +44,13 @@
           <div class="body" role="main">
             
   <div class="section" id="big-o-notation">
-<h1>5.1. Big O notation<a class="headerlink" href="#big-o-notation" title="Permalink to this headline">¶</a></h1>
+<h1>6.1. Big O notation<a class="headerlink" href="#big-o-notation" title="Permalink to this headline">¶</a></h1>
 <p>An algorithm is, succinctly put, a piece of code (or logic) which solves a class of problems.</p>
 <p>When discussing algorithms, it&#8217;s handy to understand what big O notation is.</p>
 <p>To put it short (possibly oversimplified), the big O notation is a notation to express the run time of an algorithm or a function in terms of the input size.</p>
 <p>Maybe it&#8217;s easiest to go through some examples.</p>
 <div class="section" id="constant-time">
-<h2>5.1.1. Constant time<a class="headerlink" href="#constant-time" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.1. Constant time<a class="headerlink" href="#constant-time" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s assume we have a C array with five integers in it.</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
 <span class="cm">/* define values in the array */</span>
@@ -62,7 +62,7 @@
 </div>
 </div>
 <div class="section" id="linear-time">
-<h2>5.1.2. Linear time<a class="headerlink" href="#linear-time" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.2. Linear time<a class="headerlink" href="#linear-time" title="Permalink to this headline">¶</a></h2>
 <p>Now, let&#8217;s assume we want to check whether the number 42 is included in the array:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 
@@ -105,7 +105,7 @@
 <p><em>Exercise</em>: Try to implement the above algorithm of checking if an element is in an array without copy-pasting the code or looking at it.</p>
 </div>
 <div class="section" id="quadratic-run-time">
-<h2>5.1.3. Quadratic run time<a class="headerlink" href="#quadratic-run-time" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.3. Quadratic run time<a class="headerlink" href="#quadratic-run-time" title="Permalink to this headline">¶</a></h2>
 <p>Furthermore, let&#8217;s assume we want to sort the array. We can invent a simple sorting algorithm for this:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -187,11 +187,11 @@
 <p><em>Exercise</em>: Try to implement the above algorithm of sorting an array without copy-pasting the code or looking at it.</p>
 </div>
 <div class="section" id="logarithmic-run-time">
-<h2>5.1.4. Logarithmic run time<a class="headerlink" href="#logarithmic-run-time" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.4. Logarithmic run time<a class="headerlink" href="#logarithmic-run-time" title="Permalink to this headline">¶</a></h2>
 <p>With a quadratic run time, the run time grows exponentially as the number of elements grows, which is pretty bad. The opposite of exponential is <em>logarithmic</em>, where the run time grows relatively slowly: in order to double the run time, you need to grow the number of elements exponentially. This is annotated O(log n). An example is searching for a person in a phone book: you could pick a page in the middle, see if the person is alphabetically before or after the page you picked, and pick a page in the middle of either the section before or after your page - with each lookup, you halve the number of pages you need to look at.</p>
 </div>
 <div class="section" id="o-n-log-n">
-<h2>5.1.5. O(n log n)<a class="headerlink" href="#o-n-log-n" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.5. O(n log n)<a class="headerlink" href="#o-n-log-n" title="Permalink to this headline">¶</a></h2>
 <p>The final common run time class is O(n log n) - logarithmic run time multiplied with a linear run time. This means the run time is generally dominated by the linear part as the logarithmic run time grows relatively slowly. O(n log n) is also been proven to be the fastest possible run time class for a generic sorting algorithm.</p>
 <div class="topic">
 <p class="topic-title first">Fast sorting algorithms</p>
@@ -239,12 +239,12 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">5.1. Big O notation</a><ul>
-<li><a class="reference internal" href="#constant-time">5.1.1. Constant time</a></li>
-<li><a class="reference internal" href="#linear-time">5.1.2. Linear time</a></li>
-<li><a class="reference internal" href="#quadratic-run-time">5.1.3. Quadratic run time</a></li>
-<li><a class="reference internal" href="#logarithmic-run-time">5.1.4. Logarithmic run time</a></li>
-<li><a class="reference internal" href="#o-n-log-n">5.1.5. O(n log n)</a></li>
+<li><a class="reference internal" href="#">6.1. Big O notation</a><ul>
+<li><a class="reference internal" href="#constant-time">6.1.1. Constant time</a></li>
+<li><a class="reference internal" href="#linear-time">6.1.2. Linear time</a></li>
+<li><a class="reference internal" href="#quadratic-run-time">6.1.3. Quadratic run time</a></li>
+<li><a class="reference internal" href="#logarithmic-run-time">6.1.4. Logarithmic run time</a></li>
+<li><a class="reference internal" href="#o-n-log-n">6.1.5. O(n log n)</a></li>
 </ul>
 </li>
 </ul>
@@ -252,9 +252,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="ds_index.html">5. First touch of algorithms</a><ul>
-      <li>Previous: <a href="ds_index.html" title="previous chapter">5. First touch of algorithms</a></li>
-      <li>Next: <a href="js2_index.html" title="next chapter">6. Javascript - part 2</a></li>
+  <li><a href="ds_index.html">6. First touch of algorithms</a><ul>
+      <li>Previous: <a href="ds_index.html" title="previous chapter">6. First touch of algorithms</a></li>
+      <li>Next: <a href="js2_index.html" title="next chapter">7. Javascript - part 2</a></li>
   </ul></li>
   </ul></li>
 </ul>

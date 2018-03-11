@@ -19,7 +19,7 @@ Fortran:
 
 .. code-block:: fortran
 
-    IF (NB.GT.4) THEN
+    IF (NB.GT.3) THEN
       PRINT *, 'B is larger than 3.'
     END IF
 

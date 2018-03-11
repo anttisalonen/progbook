@@ -6,6 +6,7 @@ Intermediate C
 
    c2
    c_stack
+   c_stack2
    c_dyn
    c_str
    httpserv

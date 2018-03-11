@@ -88,7 +88,7 @@ The code listing above can be compiled e.g. with the following:
 
 .. code-block:: bash
 
-    $ gcc -Wall -Werror -O2 -o sock1 sock1.c && ./sock1
+    $ gcc -Wall -Werror -o sock1 sock1.c && ./sock1
     /tmp/ccf2I2NV.o: In function `main'
     sock1.c:(.text.startup+0x73): undefined reference to `handle_client'
     collect2: error: ld returned 1 exit status

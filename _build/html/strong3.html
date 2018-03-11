@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>14.5. Newer languages &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="15. Exercises" href="ex_index.html" />
+    <link rel="prev" title="14.4. Established languages" href="strong2.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="newer-languages">
+<h1>14.5. Newer languages<a class="headerlink" href="#newer-languages" title="Permalink to this headline">¶</a></h1>
+<p>The previous section covered languages that are relatively established, with C++ originating from the 80s and Java and C# from mid-90s and early 2000s respectively. This section covers some of the languages which are a bit newer and hence somewhat less common, though still interesting. I should also point out that there are in fact hundreds if not thousands of new programming languages created in the past couple of decades so this section only covers a couple of hand picked ones, however there are several others that are widely used, to some extent more widely used than the selection here, and also arguably more different from other languages covered in this book.</p>
+<div class="section" id="go">
+<h2>14.5.1. Go<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h2>
+<p>Go is a language created by Google and originally launched in 2009. Its standard implementation compiles to machine code and it aims to be an improvement over C, with memory safety and garbage collection included, among other features.</p>
+<p>Splitting a string in Go:</p>
+<div class="highlight-go"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&quot;fmt&quot;</span>
+	<span class="s">&quot;strings&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">s</span> <span class="o">:=</span> <span class="s">&quot;This is a string.\n&quot;</span>
+	<span class="nx">s2</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">word</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">s2</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>This looks a bit different to e.g. C# and Java:</p>
+<ul class="simple">
+<li>Line 3-6: We define the list of modules to import, namely &#8220;strings&#8221; and &#8220;fmt&#8221;</li>
+<li>Line 9: We define our string, assigning to it with the := operator</li>
+<li>Line 10: We split our string by calling the function &#8220;Split&#8221; from the strings module</li>
+<li>Line 11: We iterate over our string array using a for loop and the <em>range</em> keyword. What range does is provide an iterator for the loop, with two variables in each iteration, namely the index and the element itself. We capture the element in the &#8220;word&#8221; variable and ignore the index by denoting it with an underscore (&#8220;_&#8221;).</li>
+<li>Line 12: We use the &#8220;fmt&#8221; module to print out each word to stdout</li>
+</ul>
+<p>If the Go compiler is installed, this can be compiled and run using &#8220;go run split.go&#8221;.</p>
+</div>
+<div class="section" id="swift">
+<h2>14.5.2. Swift<a class="headerlink" href="#swift" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="rust">
+<h2>14.5.3. Rust<a class="headerlink" href="#rust" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">14.5. Newer languages</a><ul>
+<li><a class="reference internal" href="#go">14.5.1. Go</a></li>
+<li><a class="reference internal" href="#swift">14.5.2. Swift</a></li>
+<li><a class="reference internal" href="#rust">14.5.3. Rust</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="strong_index.html">14. Strongly, statically typed languages</a><ul>
+      <li>Previous: <a href="strong2.html" title="previous chapter">14.4. Established languages</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">15. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/strong3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/strong3.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
