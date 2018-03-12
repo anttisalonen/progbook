@@ -143,9 +143,107 @@
 </div>
 <div class="section" id="swift">
 <h2>14.5.2. Swift<a class="headerlink" href="#swift" title="Permalink to this headline">¶</a></h2>
+<p>Swift is a language announced by Apple in 2014. It&#8217;s also compiled to machine code and is designed as the main language for writing applications for Mac and other Apple devices.</p>
+<p>Splitting a string in Swift:</p>
+<div class="highlight-swift"><div class="highlight"><pre><span></span><span class="kd">import</span> <span class="nc">Foundation</span>
+
+<span class="kd">let</span> <span class="nv">str</span> <span class="p">=</span> <span class="s">&quot;this is a string.</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="kd">let</span> <span class="nv">s2</span>  <span class="p">=</span> <span class="n">str</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">word</span> <span class="k">in</span> <span class="n">s2</span> <span class="p">{</span>
+    <span class="bp">print</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Swift infers the types of the variables in this example.</p>
+<p>Filtering elements from an array in Swift:</p>
+<div class="highlight-swift"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">import</span> <span class="nc">Foundation</span>
+
+<span class="kd">func</span> <span class="nf">filt</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">BinaryInteger</span><span class="p">&gt;(</span><span class="n">arr</span><span class="p">:</span> <span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">arr</span><span class="p">.</span><span class="bp">filter</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nv">d</span> <span class="p">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+<span class="kd">let</span> <span class="nv">d2</span> <span class="p">=</span> <span class="n">filt</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="n">d</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">d2</span> <span class="p">{</span>
+    <span class="bp">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>This seems interesting:</p>
+<ul class="simple">
+<li>Line 3: We define our filtering function. It takes an array of T as input, and returns an array of T as output. Swift allows use of generics here such that we can define T to be of generic type <em>BinaryInteger</em>, which means any kind of integer, but not e.g. floating point. This means our function can be used for different kinds of integer numbers but not for any numbers.</li>
+<li>Line 4: Function body. We use the filter function with a lambda function as the predicate. The special variable $0 is the element in the array passed to the lambda function.</li>
+</ul>
+<p>Swift infers the types of our arrays (d and d2) but the types needed to be explicitly defined for the function definition.</p>
 </div>
 <div class="section" id="rust">
 <h2>14.5.3. Rust<a class="headerlink" href="#rust" title="Permalink to this headline">¶</a></h2>
+<p>Rust is another fairly recent language, being announced by Mozilla in 2010. It&#8217;s intended to be an improvement over C++ with good performance and improved memory safety.</p>
+<p>Splitting a string in Rust:</p>
+<div class="highlight-rust"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="kt">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;this is a string.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">str</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">word</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Rust infers the types of our variables in this program.</p>
+<p>Filtering elements from an array in Swift:</p>
+<div class="highlight-rust"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="k">crate</span><span class="w"> </span><span class="n">num</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">num</span>::<span class="n">Num</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">4</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">d2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filt</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">d2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">filt</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">PartialOrd</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Copy</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arr</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">arr</span><span class="p">.</span><span class="n">into_iter</span><span class="p">().</span><span class="n">filter</span><span class="p">(</span><span class="o">|&amp;&amp;</span><span class="n">i</span><span class="o">|</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">T</span>::<span class="n">zero</span><span class="p">()).</span><span class="n">cloned</span><span class="p">().</span><span class="n">collect</span><span class="p">()</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table></div>
+<p>Again, this seems interesting:</p>
+<ul class="simple">
+<li>Line 5: We define our input data. This is an array of integers (specifically 32-bit integers), whereby the type is inferred by Rust.</li>
+<li>Line 6: We call our function. We pass a reference of &#8220;d&#8221; to the function.</li>
+<li>Line 12: We define our function. The parameter called &#8220;arr&#8221; is a reference to an array of T&#8217;s. It returns a vector (dynamically allocated array) of T&#8217;s. T is a generic type parameter but the function mandates it must implement the Num, PartialOrd and Copy <em>traits</em>, meaning it must be numeric, sortable and copyable.</li>
+<li>Line 13: We first convert our input variable, an array, to iterable using &#8220;into_iter&#8221;, which is required by the next step. We then filter on it using the built in &#8220;filter&#8221; function. We pass an anonymous function as the predicate, whereby we call the variable passed to the predicate &#8220;i&#8221;. We need to use &#8220;&amp;&amp;i&#8221; instead of plain &#8220;i&#8221; to copy &#8220;i&#8221; for comparison with T::zero(), which is a generic function representing a generic zero. Finally we clone the resulting array which is required for turning it into a vector, which is done by collect().</li>
+</ul>
+<p>The type system and generics in Rust allows us to write the function such that it works for all numeric types.</p>
+<p>To summarise, Rust allows fairly direct control over allocation and its type system is extensive, however some work is required from the developer to take advantage of all Rust features.</p>
+<p><em>Exercise</em>: Out of the six new languages described in this and the previous chapter, pick one that seems to appeal to you the most, and one that seems to appeal to you the least.</p>
+<p><em>Exercise</em>: For both of the two languages you picked, implement Fizz Buzz and some other simple application. Note that for most of the languages you don&#8217;t necessarily have to install the compiler on your computer; there are several web pages that provide an interactive code editor and compiler for testing out a language. Try searching for e.g. &#8220;rust online&#8221; or &#8220;rust playground&#8221;.</p>
 </div>
 </div>
 

@@ -39,7 +39,57 @@ Go doesn't support defining generic functions so this function only works for in
 Swift
 =====
 
+Swift is a language announced by Apple in 2014. It's also compiled to machine code and is designed as the main language for writing applications for Mac and other Apple devices.
+
+Splitting a string in Swift:
+
+.. literalinclude:: split.swift
+    :language: swift
+
+Swift infers the types of the variables in this example.
+
+Filtering elements from an array in Swift:
+
+.. literalinclude:: filt.swift
+    :language: swift
+    :linenos:
+
+This seems interesting:
+
+* Line 3: We define our filtering function. It takes an array of T as input, and returns an array of T as output. Swift allows use of generics here such that we can define T to be of generic type *BinaryInteger*, which means any kind of integer, but not e.g. floating point. This means our function can be used for different kinds of integer numbers but not for any numbers.
+* Line 4: Function body. We use the filter function with a lambda function as the predicate. The special variable $0 is the element in the array passed to the lambda function.
+
+Swift infers the types of our arrays (d and d2) but the types needed to be explicitly defined for the function definition.
+
 Rust
 ====
 
+Rust is another fairly recent language, being announced by Mozilla in 2010. It's intended to be an improvement over C++ with good performance and improved memory safety.
 
+Splitting a string in Rust:
+
+.. literalinclude:: split.rust
+    :language: rust
+
+Rust infers the types of our variables in this program.
+
+Filtering elements from an array in Swift:
+
+.. literalinclude:: filt.rust
+    :language: rust
+    :linenos:
+
+Again, this seems interesting:
+
+* Line 5: We define our input data. This is an array of integers (specifically 32-bit integers), whereby the type is inferred by Rust.
+* Line 6: We call our function. We pass a reference of "d" to the function.
+* Line 12: We define our function. The parameter called "arr" is a reference to an array of T's. It returns a vector (dynamically allocated array) of T's. T is a generic type parameter but the function mandates it must implement the Num, PartialOrd and Copy *traits*, meaning it must be numeric, sortable and copyable.
+* Line 13: We first convert our input variable, an array, to iterable using "into_iter", which is required by the next step. We then filter on it using the built in "filter" function. We pass an anonymous function as the predicate, whereby we call the variable passed to the predicate "i". We need to use "&&i" instead of plain "i" to copy "i" for comparison with T::zero(), which is a generic function representing a generic zero. Finally we clone the resulting array which is required for turning it into a vector, which is done by collect().
+
+The type system and generics in Rust allows us to write the function such that it works for all numeric types.
+
+To summarise, Rust allows fairly direct control over allocation and its type system is extensive, however some work is required from the developer to take advantage of all Rust features.
+
+*Exercise*: Out of the six new languages described in this and the previous chapter, pick one that seems to appeal to you the most, and one that seems to appeal to you the least.
+
+*Exercise*: For both of the two languages you picked, implement Fizz Buzz and some other simple application. Note that for most of the languages you don't necessarily have to install the compiler on your computer; there are several web pages that provide an interactive code editor and compiler for testing out a language. Try searching for e.g. "rust online" or "rust playground".
