@@ -69,3 +69,4 @@ yalando - sql, json, bootstrap
 crawler - regexes
 sudoku - dfs, recursion, classes, propagate + search
 dot parsing  - regexes, proper parser, backus naur, graphs
+bus schedule - software design, strong+static languages, more algorithms

@@ -13,11 +13,11 @@ This opens the file called "file.txt" in vim. If the file doesn't exist, vim ope
 
 Vim is a modal editor. This means it has *modes*. When starting vim, it is in *normal mode*. You can always get to this mode by hitting the Escape key (ESC) three times. Go ahead, try it out.
 
-The second mode is the *command line mode*. You can enter this mode from the normal mode by pressing semicolon (:) (without hitting enter afterwards). You should then see a semicolon at the bottom of the screen.
+The second mode is the *command line mode*. You can enter this mode from the normal mode by pressing colon (:) (without hitting enter afterwards). You should then see a colon at the bottom of the screen.
 
-In command line mode, you can enter several commands. For exit, you can enter the command to quit vim by giving the command q, i.e. typing ":q" followed by enter (or ":q<Enter>"). Try it out. Enter vim again.
+In command line mode, you can enter several commands. For exit, you can quit vim by typing ":q" followed by enter (or ":q<Enter>"). Try it out. Enter vim again.
 
-Another useful command is "w", for writing, i.e. saving a file. Try running ":w<Enter>". This should save file.txt. As we didn't enter any contents to the file, it'll be empty.
+Another useful command is ":w", for writing, i.e. saving a file. Try running ":w<Enter>". This should save file.txt. As we didn't enter any contents to the file, it'll be empty.
 
 You can also combine commands. For example, the command ":wq" will save and quit vim.
 

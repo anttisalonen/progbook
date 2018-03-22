@@ -68,14 +68,14 @@ Rust is another fairly recent language, being announced by Mozilla in 2010. It's
 
 Splitting a string in Rust:
 
-.. literalinclude:: split.rust
+.. literalinclude:: split.rs
     :language: rust
 
 Rust infers the types of our variables in this program.
 
 Filtering elements from an array in Swift:
 
-.. literalinclude:: filt.rust
+.. literalinclude:: filt.rs
     :language: rust
     :linenos:
 
