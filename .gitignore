@@ -1,9 +1,9 @@
 _build/doctrees
 _build/html/_sources
 tmp
-dep_labels.dot
-dependencies.png
-dependencies2.png
+gen/dep_labels.dot
+gen/dependencies.png
+gen/dependencies2.png
 *.pyc
-dep.dot
-dep2.dot
+gen/dep.dot
+gen/dep2.dot

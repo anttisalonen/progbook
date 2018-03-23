@@ -5,7 +5,7 @@
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build2
 SPHINXPROJ    = guide
-SOURCEDIR     = .
+SOURCEDIR     = rst
 BUILDDIR      = _build
 
 # Put it first so that "make" without argument is like "make help".
@@ -17,6 +17,7 @@ help:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
-	./gen_dot.sh
-	./gen_graphs.sh &
+	@mkdir -p rst/_static
+	gen/gen_dot.sh
+	gen/gen_graphs.sh &
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
