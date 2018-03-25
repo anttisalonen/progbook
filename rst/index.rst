@@ -7,7 +7,7 @@ Software development fundamentals
 =================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :caption: Contents:
    :numbered:
 
@@ -23,6 +23,7 @@ Software development fundamentals
    ds3_index
    int_py_index
    func_index
+   git_index
    int_web_index
    strong_index
    sud_index

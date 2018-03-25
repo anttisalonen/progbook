@@ -52,7 +52,9 @@
     c2 -> httpserv;
     httpserv -> sec;
     hiscore_table -> web_tips;
-    file_hashing -> web_tips;
+    vcs -> git2;
+    git2 -> git3;
+    git3 -> web_tips;
     httpserv -> sud1;
     strong3 -> sud1;
     sud1 -> sud2;

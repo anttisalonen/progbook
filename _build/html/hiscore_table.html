@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>13.6. Generating the high score table &#8212; guide 0.1 documentation</title>
+    <title>14.6. Generating the high score table &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="13.7. Some more tips and tricks" href="web_tips.html" />
-    <link rel="prev" title="13.5. The page for starting a new game" href="guess_start.html" />
+    <link rel="next" title="14.7. Some more tips and tricks" href="web_tips.html" />
+    <link rel="prev" title="14.5. The page for starting a new game" href="guess_start.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="generating-the-high-score-table">
-<h1>13.6. Generating the high score table<a class="headerlink" href="#generating-the-high-score-table" title="Permalink to this headline">¶</a></h1>
+<h1>14.6. Generating the high score table<a class="headerlink" href="#generating-the-high-score-table" title="Permalink to this headline">¶</a></h1>
 <p>We should now have the following:</p>
 <ul class="simple">
 <li>The user can play the game and data over previous games is stored in the database, and we have an empty table as a placeholder for the high score table</li>
@@ -58,14 +58,14 @@
 </ul>
 <p>You might wonder, why have the Javascript code request data from the server at page load time instead of generating the high score table as part of the template on the server? While this is certainly a feasible approach, the good thing about having the Javascript generate the high score table at page load is that as we want to have Javascript code to update the high score table at the end of the game anyway, we can reuse that code at page load and hence have only one piece of code update the high score table instead of two.</p>
 <div class="section" id="actually-updating-the-high-score-table">
-<h2>13.6.1. Actually updating the high score table<a class="headerlink" href="#actually-updating-the-high-score-table" title="Permalink to this headline">¶</a></h2>
+<h2>14.6.1. Actually updating the high score table<a class="headerlink" href="#actually-updating-the-high-score-table" title="Permalink to this headline">¶</a></h2>
 <p>You may remember from the chapter how to call a Javascript function at page load. If not, the hint is that you assign the member function &#8220;onload&#8221; in the global object &#8220;window&#8221; as your callback function.</p>
 <p>Let&#8217;s install a function called update_hiscore() as the function that will be called at page load time, and implement it.</p>
 <p>First of all, we need to send an XMLHttpRequest to the server. We should use GET as we&#8217;re only asking the server for some data. However we&#8217;ll need to supply a parameter to the server, namely <em>which</em> high score table we want - as the high score table should be different based on the maximum number the computer can think of. As we&#8217;ve learnt, with GET we can only pass parameters as part of the URL, so let&#8217;s do that. The URL should look something like &#8220;hiscore?max_value=25&#8221; - in this example, we&#8217;d fetch the page &#8220;hiscore&#8221; from the server, with &#8220;max_value&#8221; as the GET parameter, with 25 as its value.</p>
 <p><em>Exercise</em>: Implement the update_hiscore() function. It should do nothing else but send an XMLHttpRequest to the server, asking for the high score data, for the maximum number that the user is currently using in his or her game. You can concatenate a number to a Javascript string with the &#8216;+&#8217; operator, e.g. &#8220;hiscore?max_value=&#8221; + my_variable. The handler for the data that is received from the server should do nothing else but call a function &#8220;display_hiscore()&#8221; (which we haven&#8217;t defined yet), passing the response text to this function. For testing purposes you&#8217;ll want to add a Flask handler for this URL, but for now it can return only a test string.</p>
 </div>
 <div class="section" id="providing-the-necessary-data-server-side">
-<h2>13.6.2. Providing the necessary data server side<a class="headerlink" href="#providing-the-necessary-data-server-side" title="Permalink to this headline">¶</a></h2>
+<h2>14.6.2. Providing the necessary data server side<a class="headerlink" href="#providing-the-necessary-data-server-side" title="Permalink to this headline">¶</a></h2>
 <p>We now have the client asking for high score data, but the server not providing any. Let&#8217;s fix that next.</p>
 <p>We might already have some Flask handler that will be called when the client requests for high score data. (If not, then add that now.) What we&#8217;ll need to do in that function is:</p>
 <ul class="simple">
@@ -90,7 +90,7 @@
 <p><em>Exercise</em>: Sort the data based on the number of guesses, from lowest to highest. Pass the optional argument &#8220;key&#8221; to the list.sort() or sorted() function. As the key, pass a function (anonymous or named) which return the field in the dictionary that is the number of guesses. Serialise the first five elements of that list into a JSON string and return the string to the client.</p>
 </div>
 <div class="section" id="handling-the-high-score-data-on-the-client">
-<h2>13.6.3. Handling the high score data on the client<a class="headerlink" href="#handling-the-high-score-data-on-the-client" title="Permalink to this headline">¶</a></h2>
+<h2>14.6.3. Handling the high score data on the client<a class="headerlink" href="#handling-the-high-score-data-on-the-client" title="Permalink to this headline">¶</a></h2>
 <p>On the client side, we have a function that requests the high score data from the server, and calls a callback function when this data is available, passing the data to the function.</p>
 <p>The data that this function receives should be the JSON string that we programmed the server to send in the previous section. (You can use console.log() to verify.)</p>
 <p>Now, what we should do is take that data and put it in our HTML table.</p>
@@ -112,7 +112,7 @@
 <p><em>Exercise</em>: Fill in the high score table. Make sure you don&#8217;t overwrite the header row in the table - add one to your index where necessary. If you&#8217;re sending more entries in your server code than you have space for in your table, you can use the function &#8220;Math.min(a, b)&#8221; to limit the number of iterations in your for loop.</p>
 </div>
 <div class="section" id="updating-the-high-score-table-at-game-end">
-<h2>13.6.4. Updating the high score table at game end<a class="headerlink" href="#updating-the-high-score-table-at-game-end" title="Permalink to this headline">¶</a></h2>
+<h2>14.6.4. Updating the high score table at game end<a class="headerlink" href="#updating-the-high-score-table-at-game-end" title="Permalink to this headline">¶</a></h2>
 <p>It would be nice to update the high score table once the game has finished. It seems all we need to do is call the update_hiscore() function at the right time. This would work but seems a bit ugly:</p>
 <ul class="simple">
 <li>At game end, the client POSTs the game result to the server</li>
@@ -134,11 +134,11 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">13.6. Generating the high score table</a><ul>
-<li><a class="reference internal" href="#actually-updating-the-high-score-table">13.6.1. Actually updating the high score table</a></li>
-<li><a class="reference internal" href="#providing-the-necessary-data-server-side">13.6.2. Providing the necessary data server side</a></li>
-<li><a class="reference internal" href="#handling-the-high-score-data-on-the-client">13.6.3. Handling the high score data on the client</a></li>
-<li><a class="reference internal" href="#updating-the-high-score-table-at-game-end">13.6.4. Updating the high score table at game end</a></li>
+<li><a class="reference internal" href="#">14.6. Generating the high score table</a><ul>
+<li><a class="reference internal" href="#actually-updating-the-high-score-table">14.6.1. Actually updating the high score table</a></li>
+<li><a class="reference internal" href="#providing-the-necessary-data-server-side">14.6.2. Providing the necessary data server side</a></li>
+<li><a class="reference internal" href="#handling-the-high-score-data-on-the-client">14.6.3. Handling the high score data on the client</a></li>
+<li><a class="reference internal" href="#updating-the-high-score-table-at-game-end">14.6.4. Updating the high score table at game end</a></li>
 </ul>
 </li>
 </ul>
@@ -146,9 +146,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_web_index.html">13. Intermediate web development</a><ul>
-      <li>Previous: <a href="guess_start.html" title="previous chapter">13.5. The page for starting a new game</a></li>
-      <li>Next: <a href="web_tips.html" title="next chapter">13.7. Some more tips and tricks</a></li>
+  <li><a href="int_web_index.html">14. Intermediate web development</a><ul>
+      <li>Previous: <a href="guess_start.html" title="previous chapter">14.5. The page for starting a new game</a></li>
+      <li>Next: <a href="web_tips.html" title="next chapter">14.7. Some more tips and tricks</a></li>
   </ul></li>
   </ul></li>
 </ul>

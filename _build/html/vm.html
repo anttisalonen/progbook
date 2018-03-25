@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>14.2. Virtual machines &#8212; guide 0.1 documentation</title>
+    <title>15.2. Virtual machines &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14.3. The case for statically, strongly typed languages" href="strong.html" />
-    <link rel="prev" title="14.1. Under the hood" href="asm.html" />
+    <link rel="next" title="15.3. The case for statically, strongly typed languages" href="strong.html" />
+    <link rel="prev" title="15.1. Under the hood" href="asm.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,10 +44,10 @@
           <div class="body" role="main">
             
   <div class="section" id="virtual-machines">
-<h1>14.2. Virtual machines<a class="headerlink" href="#virtual-machines" title="Permalink to this headline">¶</a></h1>
+<h1>15.2. Virtual machines<a class="headerlink" href="#virtual-machines" title="Permalink to this headline">¶</a></h1>
 <p>In the previous chapter we discussed the assembly language. Many languages, including C and C++, are typically compiled to a machine specific assembly code before the program can be executed. Which prompts the question, what do other languages do.</p>
 <div class="section" id="python">
-<h2>14.2.1. Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<h2>15.2.1. Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <p>Python is an interpreted language. This, however, doesn&#8217;t mean that the interpreter looks at each character in the code while the program is being executed; instead, the interpreter compiles the code to <em>bytecode</em> - a code similar to assembly, which is then interpreted by the interpreter. You may see files with the suffix .pyc after running some Python code - these contain the bytecode.</p>
 <p>The standard Python implementation also provides a library for inspecting the resulting bytecode. Take a look at this example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dis</span>
@@ -72,7 +72,7 @@
 <p><em>Exercise</em>: Find the source code of the main Python implementation online. (This is also called &#8220;cpython&#8221;, as in, the C implementation of Python.) Make sure you pick the source code of the 2.7 branch, not the Python 3 code. You may either download a package with all the source code, or browse the code as it&#8217;s stored in version control, though downloading the whole code might be easier for searching (find and grep). See if you can find the function which interprets the command BINARY_ADD.</p>
 </div>
 <div class="section" id="other-virtual-machines">
-<h2>14.2.2. Other virtual machines<a class="headerlink" href="#other-virtual-machines" title="Permalink to this headline">¶</a></h2>
+<h2>15.2.2. Other virtual machines<a class="headerlink" href="#other-virtual-machines" title="Permalink to this headline">¶</a></h2>
 <p>Javascript is implemented by each browser, and several implementations are actually virtual machines which compile Javascript to bytecode and interpret this at run time. However, many of the main implementations actually compile Javascript code directly to machine code before the code is run for better performance; so called <em>JIT</em> or just-in-time compilation.</p>
 <p>Java is generally not compiled into machine code but to bytecode executed by <em>JVM</em>, or Java Virtual Machine. JIT is also used with JVM.</p>
 <p>Similar to JVM, .NET from Microsoft contains a virtual machine (called <em>CLR</em> or Common Language Runtime) which executes .NET bytecode and uses JIT for improved performance.</p>
@@ -88,9 +88,9 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">14.2. Virtual machines</a><ul>
-<li><a class="reference internal" href="#python">14.2.1. Python</a></li>
-<li><a class="reference internal" href="#other-virtual-machines">14.2.2. Other virtual machines</a></li>
+<li><a class="reference internal" href="#">15.2. Virtual machines</a><ul>
+<li><a class="reference internal" href="#python">15.2.1. Python</a></li>
+<li><a class="reference internal" href="#other-virtual-machines">15.2.2. Other virtual machines</a></li>
 </ul>
 </li>
 </ul>
@@ -98,9 +98,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="strong_index.html">14. Strongly, statically typed languages</a><ul>
-      <li>Previous: <a href="asm.html" title="previous chapter">14.1. Under the hood</a></li>
-      <li>Next: <a href="strong.html" title="next chapter">14.3. The case for statically, strongly typed languages</a></li>
+  <li><a href="strong_index.html">15. Strongly, statically typed languages</a><ul>
+      <li>Previous: <a href="asm.html" title="previous chapter">15.1. Under the hood</a></li>
+      <li>Next: <a href="strong.html" title="next chapter">15.3. The case for statically, strongly typed languages</a></li>
   </ul></li>
   </ul></li>
 </ul>

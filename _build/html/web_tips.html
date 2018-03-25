@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>13.7. Some more tips and tricks &#8212; guide 0.1 documentation</title>
+    <title>14.7. Some more tips and tricks &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14. Strongly, statically typed languages" href="strong_index.html" />
-    <link rel="prev" title="13.6. Generating the high score table" href="hiscore_table.html" />
+    <link rel="next" title="15. Strongly, statically typed languages" href="strong_index.html" />
+    <link rel="prev" title="14.6. Generating the high score table" href="hiscore_table.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,10 +44,10 @@
           <div class="body" role="main">
             
   <div class="section" id="some-more-tips-and-tricks">
-<h1>13.7. Some more tips and tricks<a class="headerlink" href="#some-more-tips-and-tricks" title="Permalink to this headline">¶</a></h1>
+<h1>14.7. Some more tips and tricks<a class="headerlink" href="#some-more-tips-and-tricks" title="Permalink to this headline">¶</a></h1>
 <p>Our simple web app is now fully functional. This page includes some tips related to it.</p>
 <div class="section" id="using-our-new-api-outside-the-browser">
-<h2>13.7.1. Using our new API outside the browser<a class="headerlink" href="#using-our-new-api-outside-the-browser" title="Permalink to this headline">¶</a></h2>
+<h2>14.7.1. Using our new API outside the browser<a class="headerlink" href="#using-our-new-api-outside-the-browser" title="Permalink to this headline">¶</a></h2>
 <p>As we wrote a new GET handler in Flask to send the high score data, we created an API for the high score that can also be used outside the browser. To demonstrate this, you can e.g. run the following command in your shell:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl -s localhost:5000/guess/hiscore?max_value<span class="o">=</span><span class="m">25</span>
 </pre></div>
@@ -65,7 +65,7 @@
 <p>It&#8217;s often beneficial to expose such an API for reasons like this.</p>
 </div>
 <div class="section" id="css-or-making-web-pages-prettier">
-<h2>13.7.2. CSS, or making web pages prettier<a class="headerlink" href="#css-or-making-web-pages-prettier" title="Permalink to this headline">¶</a></h2>
+<h2>14.7.2. CSS, or making web pages prettier<a class="headerlink" href="#css-or-making-web-pages-prettier" title="Permalink to this headline">¶</a></h2>
 <p>CSS (Cascading Style Sheets) is a standard for defining how web pages look like. It&#8217;s typically used together with HTML and JS; HTML controls the layout, JS defines the logic and CSS defines the looks. As this book isn&#8217;t a web design book we won&#8217;t go to the details on CSS but here&#8217;s an overview:</p>
 <ul class="simple">
 <li>You create a .css file which describes e.g. what color or fonts different tags should use, for example headings or paragraphs. CSS looks something like this:</li>
@@ -93,7 +93,7 @@
 <p>For those with little eye for design, there are several CSS libraries available online that can be used and downloaded by your web page such that you don&#8217;t have to specify the style yourself. After searching online for a while you might find some. One of the popular ones is Pure.</p>
 <p><em>Exercise</em>: Find the Pure CSS website.</p>
 <div class="section" id="pure-css-modules">
-<h3>13.7.2.1. Pure CSS modules<a class="headerlink" href="#pure-css-modules" title="Permalink to this headline">¶</a></h3>
+<h3>14.7.2.1. Pure CSS modules<a class="headerlink" href="#pure-css-modules" title="Permalink to this headline">¶</a></h3>
 <p>If you take a look at the usage section on Pure, you&#8217;ll find the URL you can use to reference in your HTML such that when opening your page, the browser will download the Pure CSS modules in addition and use those if you define any of your elements to use the Pure styles. At the time of writing, the Pure page instructs you to do this:</p>
 <div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/purecss@1.0.0/build/pure-min.css&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;</span>
 </pre></div>
@@ -108,7 +108,7 @@
 </div>
 </div>
 <div class="section" id="accessing-your-page-from-other-devices">
-<h2>13.7.3. Accessing your page from other devices<a class="headerlink" href="#accessing-your-page-from-other-devices" title="Permalink to this headline">¶</a></h2>
+<h2>14.7.3. Accessing your page from other devices<a class="headerlink" href="#accessing-your-page-from-other-devices" title="Permalink to this headline">¶</a></h2>
 <p>By default Flask only accepts connections from the computer Flask itself is running on. As per Flask documentation you can override this by passing the &#8211;host parameter to Flask, e.g.:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nv">FLASK_APP</span><span class="o">=</span>guess.py flask run --host<span class="o">=</span><span class="m">0</span>.0.0.0
 </pre></div>
@@ -127,13 +127,13 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">13.7. Some more tips and tricks</a><ul>
-<li><a class="reference internal" href="#using-our-new-api-outside-the-browser">13.7.1. Using our new API outside the browser</a></li>
-<li><a class="reference internal" href="#css-or-making-web-pages-prettier">13.7.2. CSS, or making web pages prettier</a><ul>
-<li><a class="reference internal" href="#pure-css-modules">13.7.2.1. Pure CSS modules</a></li>
+<li><a class="reference internal" href="#">14.7. Some more tips and tricks</a><ul>
+<li><a class="reference internal" href="#using-our-new-api-outside-the-browser">14.7.1. Using our new API outside the browser</a></li>
+<li><a class="reference internal" href="#css-or-making-web-pages-prettier">14.7.2. CSS, or making web pages prettier</a><ul>
+<li><a class="reference internal" href="#pure-css-modules">14.7.2.1. Pure CSS modules</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#accessing-your-page-from-other-devices">13.7.3. Accessing your page from other devices</a></li>
+<li><a class="reference internal" href="#accessing-your-page-from-other-devices">14.7.3. Accessing your page from other devices</a></li>
 </ul>
 </li>
 </ul>
@@ -141,9 +141,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_web_index.html">13. Intermediate web development</a><ul>
-      <li>Previous: <a href="hiscore_table.html" title="previous chapter">13.6. Generating the high score table</a></li>
-      <li>Next: <a href="strong_index.html" title="next chapter">14. Strongly, statically typed languages</a></li>
+  <li><a href="int_web_index.html">14. Intermediate web development</a><ul>
+      <li>Previous: <a href="hiscore_table.html" title="previous chapter">14.6. Generating the high score table</a></li>
+      <li>Next: <a href="strong_index.html" title="next chapter">15. Strongly, statically typed languages</a></li>
   </ul></li>
   </ul></li>
 </ul>
