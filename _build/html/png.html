@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>15.1. PNG files &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="16. Strongly, statically typed languages" href="strong_index.html" />
+    <link rel="prev" title="15. Working with binary data" href="bin_index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="png-files">
+<h1>15.1. PNG files<a class="headerlink" href="#png-files" title="Permalink to this headline">¶</a></h1>
+<p>PNG (Portable Network Graphics) is a common file format for storing image data. Let&#8217;s write a parser to parse some parts of PNG files in C. This will help teach us the following concepts:</p>
+<ul class="simple">
+<li>Working with binary data</li>
+<li>Data driven programming in C - or, how to structure C programs nicely</li>
+</ul>
+<p>On the side, we&#8217;ll learn about the following smaller but important C concepts:</p>
+<ul class="simple">
+<li>C macros</li>
+<li>Command line options</li>
+<li>The switch-case statement</li>
+<li>typedef</li>
+</ul>
+<p>We&#8217;ll end up with a program that can parse some parts of a PNG file and display what it parsed. The program will be around 150 lines of code. The author wrote the program in about two hours. The reader should ideally be able to finish the exercises within 40 hours.</p>
+<div class="section" id="introduction-to-png">
+<h2>15.1.1. Introduction to PNG<a class="headerlink" href="#introduction-to-png" title="Permalink to this headline">¶</a></h2>
+<p>PNG file format is described online at e.g. Wikipedia but also at the RFC (Request for Comments) 2083 which describes the format in detail. In a nutshell:</p>
+<ul class="simple">
+<li>PNG starts with a <em>signature</em>, a sequence of bytes which can be used to identify a file as a PNG file</li>
+<li>The signature is followed by multiple <em>chunks</em>, whereby each chunk contains different kind of information about the file, including the actual image data</li>
+<li>Each chunk is identified by four characters and includes, apart from the identifier, the length, the actual data, and the <em>CRC</em>, or <em>cyclic redundancy check</em> - a checksum used to ensure the contents of the buffer are valid</li>
+</ul>
+<p><em>Exercise</em>: Look up RFC 2083 online. You&#8217;ll be needing it later.</p>
+<p>The signature is eight bytes long and contains the following values, in hex format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+----+----+----+----+----+----+----+----+</span>
+<span class="o">|</span> <span class="mi">89</span> <span class="o">|</span> <span class="mi">50</span> <span class="o">|</span> <span class="mi">4</span><span class="n">E</span> <span class="o">|</span> <span class="mi">47</span> <span class="o">|</span> <span class="mi">0</span><span class="n">D</span> <span class="o">|</span> <span class="mi">0</span><span class="n">A</span> <span class="o">|</span> <span class="mi">1</span><span class="n">A</span> <span class="o">|</span> <span class="mi">0</span><span class="n">A</span> <span class="o">|</span>
+<span class="o">+----+----+----+----+----+----+----+----+</span>
+</pre></div>
+</div>
+<p>In ASCII, the bytes 2-4 (starting from 1) are &#8220;PNG&#8221;; bytes 5-6 are &#8220;rn&#8221; (CRLF) and byte 8 is &#8220;n&#8221;.</p>
+<p>Let&#8217;s write a program that loads a given input file to a buffer. For this, we&#8217;ll allocate a buffer of 16 megabytes. If the user attempts to open a larger file, we exit. This is naive but works well enough for our purposes.</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#define MAX_SIZE (16 * 1024 * 1024)</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Usage: %s &lt;png file&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kt">char</span> <span class="o">*</span><span class="n">buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">MAX_SIZE</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">buf</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t allocate memory</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kt">FILE</span> <span class="o">*</span><span class="n">f</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot;r&quot;</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">perror</span><span class="p">(</span><span class="s">&quot;fopen&quot;</span><span class="p">);</span>
+		<span class="n">free</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MAX_SIZE</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+	<span class="n">fclose</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let&#8217;s go through this line by line:</p>
+<ul class="simple">
+<li>Line 5: We define a <em>macro</em> that contains the maximum size of the file we can open (16 MB). Because we need this value in several places, it&#8217;s best to define it in one place to keep the uses in sync.</li>
+<li>Line 9-13: We check the command line arguments. In C, we can either define the main function to take no parameters (void) or &#8220;int argc, char **argv&#8221;. If we use the latter, the variable &#8220;argc&#8221; contains the number of arguments and the variable &#8220;argv&#8221; the arguments themselves. If argc is 1, then the only argument (found at argv[0]) is the program name itself. We want to accept one additional argument so we ensure &#8220;argc&#8221; is 2.</li>
+<li>Line 18: We open the given file.</li>
+<li>Line 24: We read the whole file into our buffer.</li>
+</ul>
+<p>Now, that program doesn&#8217;t do very much so let&#8217;s change that. We can, after opening and reading in the file, add a function call to a new function &#8220;check_header&#8221;, which receives our buffer as the input parameter:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">validate</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Invalid file: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">check_header</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x89</span><span class="p">,</span> <span class="s">&quot;header byte 1&quot;</span><span class="p">);</span>
+    <span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;P&#39;</span><span class="p">,</span>  <span class="s">&quot;header byte 2&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, our function &#8220;check_header&#8221; calls &#8220;validate&#8221; twice, for the first two bytes in the buffer. The function &#8220;validate&#8221;, defined above, checks if the condition is true, and if not, prints out an error and exits the program.</p>
+<div class="topic">
+<p class="topic-title first">Digression stderr</p>
+<p>The function &#8220;validate&#8221; prints out the error using <em>fprintf</em>, which is similar to printf but allows defining the output file for writing. We define the output to go to <em>stderr</em>, or &#8220;standard error&#8221;, which is very similar to standard in but is another file. The main use case is redirecting: if we were to direct the output of our program to a file, what gets written to stderr actually gets written out in the terminal, not in the output file. E.g:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./png file.c &gt; out.txt
+Invalid file: header byte <span class="m">1</span>
+$ cat out.txt
+$
+</pre></div>
+</div>
+<p>If you want to redirect stderr, you can use &#8220;2&gt;&#8221;, e.g. &#8221;./png file.c &gt; out.txt 2&gt; stderr.txt&#8221;.</p>
+<p>The function call &#8216;printf(&#8220;abcn&#8221;);&#8217; is equivalent to &#8216;fprintf(stdout, &#8220;abcn&#8221;);&#8217;.</p>
+</div>
+<p><em>Exercise</em>: Expand the program to check for all eight bytes of the header. Find a PNG file to test your program on.</p>
+<p>You can download a sample PNG file here - a screenshot from another chapter:</p>
+<img alt="_images/guess.png" src="_images/guess.png" />
+<p>You&#8217;ll need to use either this image or another image with the same chunks for later exercises in this part of the book.</p>
+<p>Now we have a program that checks, for a given input file, whether it has the correct PNG signature or not. Let&#8217;s see if we can expand it to read all the headers in a PNG file. You may have read from the RFC or Wikipedia that after the signature, the series of chunks begins, with each chunk having the following format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---------+------------+----------------+---------+</span>
+<span class="o">|</span> <span class="n">Length</span>  <span class="o">|</span> <span class="n">Chunk</span> <span class="nb">type</span> <span class="o">|</span> <span class="n">Chunk</span> <span class="n">data</span>     <span class="o">|</span> <span class="n">CRC</span>     <span class="o">|</span>
+<span class="o">+---------+------------+----------------+---------+</span>
+<span class="o">|</span> <span class="mi">4</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="mi">4</span> <span class="nb">bytes</span>    <span class="o">|</span> <span class="o">/</span><span class="n">length</span><span class="o">/</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="mi">4</span> <span class="nb">bytes</span> <span class="o">|</span>
+<span class="o">+---------+------------+----------------+---------+</span>
+</pre></div>
+</div>
+<p>Now, let&#8217;s see if we can parse this. Let&#8217;s add the following code after we&#8217;ve checked the header:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* FIXME: infinite loop */</span>
+    <span class="kt">char</span> <span class="n">lenbuf</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">lenbuf</span><span class="p">,</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">pos</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">get_big_endian</span><span class="p">(</span><span class="n">lenbuf</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="n">chunkbuf</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+    <span class="cm">/* TODO: fill chunkbuf */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;chunk: %s - len: %d (%d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">chunkbuf</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">12</span><span class="p">));</span>
+    <span class="cm">/* TODO: increment pos correctly */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The code is a bit incomplete but a nice skeleton to start with:</p>
+<ul class="simple">
+<li>We define the variable &#8220;pos&#8221; which refers to our position in the full buffer.</li>
+<li>We then loop over all the chunks in the file (and more).</li>
+<li>We first copy the bytes designating the length of the buffer to a 4-byte buffer.</li>
+<li>We then convert that to an integer using the function &#8220;get_big_endian&#8221; (to be defined).</li>
+<li>We fill in the chunkbuf, i.e. a buffer containing the name of the chunk. We allocate a buffer of five bytes for this for convenience - the four bytes which are the chunk name are all ASCII so by allocating five bytes and finishing the buffer with a zero we can treat the buffer as a string and pass it to printf directly.</li>
+<li>We then call printf telling us which chunk we&#8217;ve found, what the length of the chunk is, and how much of the file is still left after this chunk.</li>
+</ul>
+<p>Before we fill in the blanks, let&#8217;s go to the details around &#8220;get_big_endian&#8221;.</p>
+</div>
+<div class="section" id="endianness-and-bit-level-operations">
+<h2>15.1.2. Endianness, and bit level operations<a class="headerlink" href="#endianness-and-bit-level-operations" title="Permalink to this headline">¶</a></h2>
+<p>You may have noticed from the RFC or other sources that some values in the PNG file are stored as <em>big endian</em>. What does this mean? Let&#8217;s first have a refresher on binary numbers. Imagine we have the number 135,200 and we want to store this. The number 135,200 is in decimal - in binary it is (using the Python interpreter to check):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">bin</span><span class="p">(</span><span class="mi">135200</span><span class="p">)</span>
+<span class="go">&#39;0b100001000000100000&#39;</span>
+</pre></div>
+</div>
+<p>In other words - each of the four bytes in binary and hex:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+----------+----------+----------+----------+</span>
+<span class="o">|</span> <span class="mi">00000000</span> <span class="o">|</span> <span class="mi">00000010</span> <span class="o">|</span> <span class="mi">00010000</span> <span class="o">|</span> <span class="mi">00100000</span> <span class="o">|</span>
+<span class="o">+----------+----------+----------+----------+</span>
+<span class="o">|</span>  <span class="mh">0x00</span>    <span class="o">|</span>  <span class="mh">0x02</span>    <span class="o">|</span>  <span class="mh">0x10</span>    <span class="o">|</span>  <span class="mh">0x20</span>    <span class="o">|</span>
+<span class="o">+----------+----------+----------+----------+</span>
+</pre></div>
+</div>
+<p>The first byte has no bits set. Each of the other bytes has one bit set each.</p>
+<p>Now, the way the table is here is in <em>big endian</em> - the most significant byte is the first one from the right, i.e. the bytes are ordered from the big end.</p>
+<p>This means that in our buffer, if the length was 135,200 bytes, we&#8217;d have the following contents:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+--------------+--------------+--------------+--------------+</span>
+<span class="o">|</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">|</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">|</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span> <span class="o">|</span>
+<span class="o">+--------------+--------------+--------------+--------------+</span>
+<span class="o">|</span>  <span class="mh">0x00</span>        <span class="o">|</span>  <span class="mh">0x02</span>        <span class="o">|</span>  <span class="mh">0x10</span>        <span class="o">|</span>  <span class="mh">0x20</span>        <span class="o">|</span>
+<span class="o">+--------------+--------------+--------------+--------------+</span>
+</pre></div>
+</div>
+<p>Now the question is, how would we convert these four bytes to an integer containing the value 135,200. This is the purpose of the function &#8220;get_big_endian&#8221;.</p>
+<p>To make it short, here&#8217;s the function definition:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">get_big_endian</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">|</span>
+           <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span>
+           <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span>  <span class="o">|</span>
+            <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>This introduces two new operators: <em>bit shifting</em> and <em>bitwise or</em>.</p>
+<p>Bit shifting shifts bits within a variable. Let&#8217;s assume we the following code:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span> <span class="c1">// prints &quot;8&quot;</span>
+</pre></div>
+</div>
+<p>Here, &#8220;x&#8221; originally had the value 4, or &#8220;00000100&#8221; in binary (skipping some 0&#8217;s at the front). We then <em>shift the bits to the left</em> by one on the second line, ending up with &#8220;00001000&#8221;, or 8. This is bit shifting.</p>
+<p>Bitwise or then:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">|</span> <span class="n">y</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span> <span class="c1">// prints &quot;7&quot;</span>
+</pre></div>
+</div>
+<p>Here we &#8220;or&#8221; the bits of x and y, bitwise:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+-------+----------+</span>
+<span class="o">|</span> <span class="n">x</span>     <span class="o">|</span> <span class="mi">00000011</span> <span class="o">|</span>
+<span class="o">+-------+----------+</span>
+<span class="o">|</span> <span class="n">y</span>     <span class="o">|</span> <span class="mi">00000110</span> <span class="o">|</span>
+<span class="o">+-------+----------+</span>
+<span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="n">y</span> <span class="o">|</span> <span class="mi">00000111</span> <span class="o">|</span>
+<span class="o">+-------+----------+</span>
+</pre></div>
+</div>
+<p>...and 00000111 is 7.</p>
+<p>Where does that leave us with get_big_endian? Let&#8217;s take another look:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">|</span>
+       <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span>
+       <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span>  <span class="o">|</span>
+        <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>We take the first byte, shift its value by 24 bits to the left. We take the second byte, shift its value by 16 bits to the left, and &#8216;or&#8217; the two. We take the third byte, shift its value 8 bits to the left, and &#8216;or&#8217; the three. We take the fourth byte and &#8216;or&#8217; it with the rest. Hence constructing the representation of an int from the four bytes.</p>
+<p>Now we have everything to fill the gaps in our loop to go through all the chunks in a PNG file.</p>
+<p><em>Exercise</em>: Implement the missing bits. Terminate the loop when you reach the end of the file, as identified by the &#8220;size&#8221; variable. Increment pos by the chunk header size plus the length. Initialise the chunk string appropriately. Your program should output something like this (for guess.png):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">chunk</span><span class="p">:</span> <span class="n">IHDR</span> <span class="o">-</span> <span class="nb">len</span><span class="p">:</span> <span class="mi">13</span> <span class="p">(</span><span class="mi">15154</span><span class="p">)</span>
+<span class="n">chunk</span><span class="p">:</span> <span class="n">bKGD</span> <span class="o">-</span> <span class="nb">len</span><span class="p">:</span> <span class="mi">6</span> <span class="p">(</span><span class="mi">15136</span><span class="p">)</span>
+<span class="n">chunk</span><span class="p">:</span> <span class="n">pHYs</span> <span class="o">-</span> <span class="nb">len</span><span class="p">:</span> <span class="mi">9</span> <span class="p">(</span><span class="mi">15115</span><span class="p">)</span>
+<span class="n">chunk</span><span class="p">:</span> <span class="n">tIME</span> <span class="o">-</span> <span class="nb">len</span><span class="p">:</span> <span class="mi">7</span> <span class="p">(</span><span class="mi">15096</span><span class="p">)</span>
+<span class="n">chunk</span><span class="p">:</span> <span class="n">iTXt</span> <span class="o">-</span> <span class="nb">len</span><span class="p">:</span> <span class="mi">29</span> <span class="p">(</span><span class="mi">15055</span><span class="p">)</span>
+<span class="n">chunk</span><span class="p">:</span> <span class="n">IDAT</span> <span class="o">-</span> <span class="nb">len</span><span class="p">:</span> <span class="mi">8192</span> <span class="p">(</span><span class="mi">6851</span><span class="p">)</span>
+<span class="n">chunk</span><span class="p">:</span> <span class="n">IDAT</span> <span class="o">-</span> <span class="nb">len</span><span class="p">:</span> <span class="mi">6827</span> <span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">chunk</span><span class="p">:</span> <span class="n">IEND</span> <span class="o">-</span> <span class="nb">len</span><span class="p">:</span> <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">15.1. PNG files</a><ul>
+<li><a class="reference internal" href="#introduction-to-png">15.1.1. Introduction to PNG</a></li>
+<li><a class="reference internal" href="#endianness-and-bit-level-operations">15.1.2. Endianness, and bit level operations</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="bin_index.html">15. Working with binary data</a><ul>
+      <li>Previous: <a href="bin_index.html" title="previous chapter">15. Working with binary data</a></li>
+      <li>Next: <a href="strong_index.html" title="next chapter">16. Strongly, statically typed languages</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/png.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/png.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

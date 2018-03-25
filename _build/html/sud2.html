@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>16.2. Containers for Sudoku &#8212; guide 0.1 documentation</title>
+    <title>17.2. Containers for Sudoku &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="16.3. Sudoku Puzzle class" href="sud3.html" />
-    <link rel="prev" title="16.1. Introduction to Sudoku" href="sud1.html" />
+    <link rel="next" title="17.3. Sudoku Puzzle class" href="sud3.html" />
+    <link rel="prev" title="17.1. Introduction to Sudoku" href="sud1.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="containers-for-sudoku">
-<h1>16.2. Containers for Sudoku<a class="headerlink" href="#containers-for-sudoku" title="Permalink to this headline">¶</a></h1>
+<h1>17.2. Containers for Sudoku<a class="headerlink" href="#containers-for-sudoku" title="Permalink to this headline">¶</a></h1>
 <p>Recall that our main idea to solve Sudoku (constraint propagation) revolves around the idea of checking how many possible values a cell has, and if it has only one possible value, set it.</p>
 <p>We then discussed the concept of a cell - which may either have a value, or at least we should know which values it could and could not have.</p>
 <p>After our discussion around classes we now almost have enough to implement a class &#8220;Cell&#8221;, which represents a cell and the value it has or could have. Before we implement this, let&#8217;s consider for a moment how we could achieve this concept of potential values.</p>
@@ -218,7 +218,7 @@
 <li>In the for loops, we use the construct &#8220;const auto &amp;v&#8221;. This means &#8220;v should be a reference to a constant variable of automatically inferred type&#8221;. What referencing (&#8220;&amp;&#8221;) means in practice is that we don&#8217;t copy the data, possibly saving some CPU cycles. What &#8220;const&#8221; means is that we promise not to modify the data within the container. Overall this means we simply want to read the contents. If we wanted to, say, modify the element then we should remove &#8220;const&#8221;. If we wanted to construct a copy of the element (e.g. for modifying it but without modifying the element in the container) then we should remove the &#8220;&amp;&#8221;.</li>
 </ul>
 <div class="section" id="cell-class">
-<h2>16.2.1. Cell class<a class="headerlink" href="#cell-class" title="Permalink to this headline">¶</a></h2>
+<h2>17.2.1. Cell class<a class="headerlink" href="#cell-class" title="Permalink to this headline">¶</a></h2>
 <p>Now, we should have everything we need for a Cell class. It should have the following functionality:</p>
 <ul class="simple">
 <li>On construction, it should store the numbers from 1 to 9.</li>
@@ -256,7 +256,7 @@
 <p>We may need some more member functions for our Cell class later, but we can implement these as we go along.</p>
 </div>
 <div class="section" id="digression-debugging">
-<h2>16.2.2. Digression: debugging<a class="headerlink" href="#digression-debugging" title="Permalink to this headline">¶</a></h2>
+<h2>17.2.2. Digression: debugging<a class="headerlink" href="#digression-debugging" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s assume you try to run your program, and it crashes. What&#8217;s going on?</p>
 <p>There are a few ways to find out. In the worst case, you simply get a segmentation fault, i.e. tried to access memory your program didn&#8217;t have access to. There are a few ways to debug this:</p>
 <ol class="arabic simple">
@@ -308,9 +308,9 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">16.2. Containers for Sudoku</a><ul>
-<li><a class="reference internal" href="#cell-class">16.2.1. Cell class</a></li>
-<li><a class="reference internal" href="#digression-debugging">16.2.2. Digression: debugging</a></li>
+<li><a class="reference internal" href="#">17.2. Containers for Sudoku</a><ul>
+<li><a class="reference internal" href="#cell-class">17.2.1. Cell class</a></li>
+<li><a class="reference internal" href="#digression-debugging">17.2.2. Digression: debugging</a></li>
 </ul>
 </li>
 </ul>
@@ -318,9 +318,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="sud_index.html">16. Learning to program using Sudoku</a><ul>
-      <li>Previous: <a href="sud1.html" title="previous chapter">16.1. Introduction to Sudoku</a></li>
-      <li>Next: <a href="sud3.html" title="next chapter">16.3. Sudoku Puzzle class</a></li>
+  <li><a href="sud_index.html">17. Learning to program using Sudoku</a><ul>
+      <li>Previous: <a href="sud1.html" title="previous chapter">17.1. Introduction to Sudoku</a></li>
+      <li>Next: <a href="sud3.html" title="next chapter">17.3. Sudoku Puzzle class</a></li>
   </ul></li>
   </ul></li>
 </ul>

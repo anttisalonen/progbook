@@ -25,6 +25,7 @@ Software development fundamentals
    func_index
    git_index
    int_web_index
+   bin_index
    strong_index
    sud_index
    ex_index
