@@ -1,72 +1,73 @@
-Done
+Beginning
+Intro
 What is programming - CPUs, asm
 Python fizzbuzz
 Python flask
 quadratic formula
 
-Need
-What is clean code
-editors + macros
+Have enough of
+osi model
 shell - ls, >, sed, grep, awk, env var, pipe
-reading open source code
 programming language taxonomy
 Python bytecode
-osi model
-esr
-algorithms - sort, binary search, dfs, bfs, np completeness, o notation
-profiling
-< plotting (plotly)
-cron
-< nosql
-< json
-binary files (png parsing?)
-machine learning
-+ print yalando paper
-+ online clothes shop
-< sql
-< bootstrap
-opengl shaders
-< sockets
-< pointers
-ffi
-+ chat web site
+nosql
+json
+binary files (png parsing)
+sockets
+pointers
 rust, go or other
-stack overflow profile
-+ web crawler
-< regexes
-+ web server
+regexes
 other languages: java, c#, lisp, etc
 oop
-gpgpu
-parallel programming - threads
 git - branches, remotes, checkout
-open source licenses
-processes - unit testing, code reviews, q&a, ci
 security
-fsm
 diff
 data structures
 configuring the environment - .vimrc, .gitconfig, .bashrc etc.
-angular
-tech behind the book
 useful python - len, list comp, lambda
 file hashes, sym links - on pure
 assert
-backus naur
-sw design, kiss, python manifesto
 vm's
-make
-c func ptr + data driven - http server revisited
-timestamp sort
+web server
 
+May have enough of
+What is clean code
+editors + macros
+reading open source code
+algorithms - sort, binary search, dfs, bfs, np completeness, o notation
 
+May not need
+plotting (plotly)
+cron
+bootstrap
+opengl shaders
+stack overflow profile
+angular
+
+Missing
+esr
+profiling
+machine learning
+ffi
+chat web site
+web crawler
+gpgpu
+parallel programming - threads
+open source licenses
+processes - unit testing, code reviews, q&a, ci
+
+Projects done
 quadratic formula - generate text data, generate json, read json, plot using plotly, store to nosql, show stats
 guess number - js, binary search
 web server - sockets, pointers, osi
-yalando api - curl, json
-yalando print paper - scan code, pdf, sql
-yalando - sql, json, bootstrap
+
+Projects left
 crawler - regexes
 sudoku - dfs, recursion, classes, propagate + search
-dot parsing  - regexes, proper parser, backus naur, graphs
-bus schedule - software design, strong+static languages, more algorithms
+dot parsing  - regexes, fsm, proper parser, backus naur, graphs, bfs, topological sort
+bus schedule - software design, strong+static languages, more algorithms, make, kiss, processes (unit testing)
+http server revisited - sw design in c
+timestamp sort
+tech behind the book
+online shop - sql, json (bootstrap?)
+print return receipt - scan code, pdf, sql

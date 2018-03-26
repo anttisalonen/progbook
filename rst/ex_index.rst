@@ -14,5 +14,6 @@ Exercises
    ex_ajax
    ex_guess_start
    ex_hiscore_table
+   ex_png
    ex_sudoku
 

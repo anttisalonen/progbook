@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>16.11. Solutions to exercises: PNG &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="16.12. Solutions to exercises: Sudoku" href="ex_sudoku.html" />
+    <link rel="prev" title="16.10. Solutions to exercises: Generating the high score table" href="ex_hiscore_table.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="solutions-to-exercises-png">
+<h1>16.11. Solutions to exercises: PNG<a class="headerlink" href="#solutions-to-exercises-png" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#define MAX_SIZE (16 * 1024 * 1024)</span>
+
+<span class="cm">/* crc - from rfc2083 */</span>
+
+<span class="cm">/* Table of CRCs of all 8-bit messages. */</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">crc_table</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+
+<span class="cm">/* Flag: has the table been computed? Initially false. */</span>
+<span class="kt">int</span> <span class="n">crc_table_computed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="cm">/* Make the table for a fast CRC. */</span>
+<span class="kt">void</span> <span class="nf">make_crc_table</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">c</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span> <span class="n">n</span><span class="p">;</span>
+		<span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>
+				<span class="n">c</span> <span class="o">=</span> <span class="mh">0xedb88320L</span> <span class="o">^</span> <span class="p">(</span><span class="n">c</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+			<span class="k">else</span>
+				<span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="n">crc_table</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">crc_table_computed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Update a running CRC with the bytes buf[0..len-1]--the CRC</span>
+<span class="cm">   should be initialized to all 1&#39;s, and the transmitted value</span>
+<span class="cm">   is the 1&#39;s complement of the final running CRC (see the</span>
+<span class="cm">   crc() routine below)). */</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">update_crc</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">crc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span>
+		<span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">c</span> <span class="o">=</span> <span class="n">crc</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">crc_table_computed</span><span class="p">)</span>
+		<span class="n">make_crc_table</span><span class="p">();</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">c</span> <span class="o">=</span> <span class="n">crc_table</span><span class="p">[(</span><span class="n">c</span> <span class="o">^</span> <span class="n">buf</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">]</span> <span class="o">^</span> <span class="p">(</span><span class="n">c</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Return the CRC of the bytes buf[0..len-1]. */</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">calculate_crc</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">update_crc</span><span class="p">(</span><span class="mh">0xffffffffL</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">len</span><span class="p">)</span> <span class="o">^</span> <span class="mh">0xffffffffL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* png handling */</span>
+
+<span class="k">struct</span> <span class="n">png_data</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">color_type</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">handler_ptr</span><span class="p">)(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="k">struct</span> <span class="n">png_data</span> <span class="o">*</span><span class="n">png</span><span class="p">);</span>
+
+<span class="k">struct</span> <span class="n">handler</span> <span class="p">{</span>
+	<span class="k">const</span> <span class="kt">char</span>  <span class="o">*</span><span class="n">type</span><span class="p">;</span>
+	<span class="n">handler_ptr</span> <span class="n">func</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">validate</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Invalid file: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+		<span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">get_2_byte_big_endian</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span>
+	       <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">get_big_endian</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">|</span>
+	       <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> 
+	       <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> 
+	       <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">header_handler</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="k">struct</span> <span class="n">png_data</span> <span class="o">*</span><span class="n">png</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">validate</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">13</span><span class="p">,</span> <span class="s">&quot;header must be 13 bytes&quot;</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Width:              %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_big_endian</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Height:             %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_big_endian</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">4</span><span class="p">));</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Bit depth:          %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+	<span class="n">png</span><span class="o">-&gt;</span><span class="n">color_type</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">9</span><span class="p">];</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Color type:         %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">png</span><span class="o">-&gt;</span><span class="n">color_type</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Compression method: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">10</span><span class="p">]);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Filter method:      %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">11</span><span class="p">]);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Interlace method:   %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">12</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">background_handler</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="k">struct</span> <span class="n">png_data</span> <span class="o">*</span><span class="n">png</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">switch</span><span class="p">(</span><span class="n">png</span><span class="o">-&gt;</span><span class="n">color_type</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+			<span class="n">validate</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;color type 3 must have 1 byte&quot;</span><span class="p">);</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Palette index: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+			<span class="k">break</span><span class="p">;</span>
+
+		<span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+		<span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+			<span class="n">validate</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&quot;color type 0/4 must have 2 bytes&quot;</span><span class="p">);</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Gray: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_2_byte_big_endian</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+			<span class="k">break</span><span class="p">;</span>
+
+		<span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+		<span class="k">case</span> <span class="mi">6</span><span class="o">:</span>
+			<span class="n">validate</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">6</span><span class="p">,</span> <span class="s">&quot;color type 2/6 must have 6 bytes&quot;</span><span class="p">);</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;R: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_2_byte_big_endian</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;G: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_2_byte_big_endian</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">2</span><span class="p">));</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;B: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_2_byte_big_endian</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">4</span><span class="p">));</span>
+			<span class="k">break</span><span class="p">;</span>
+
+		<span class="k">default</span><span class="o">:</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Unknown background color type</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+			<span class="k">break</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">phys_handler</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="k">struct</span> <span class="n">png_data</span> <span class="o">*</span><span class="n">png</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">validate</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">9</span><span class="p">,</span> <span class="s">&quot;phys len==9&quot;</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;pixels/unit, x: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_big_endian</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;pixels/unit, y: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_big_endian</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">4</span><span class="p">));</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;unit:           %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">time_handler</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="k">struct</span> <span class="n">png_data</span> <span class="o">*</span><span class="n">png</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">validate</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&quot;time len==7&quot;</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Year:   %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_2_byte_big_endian</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Month:  %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Day:    %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hour:   %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Minute: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Second: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="k">struct</span> <span class="n">handler</span> <span class="n">handlers</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">{</span> <span class="s">&quot;IHDR&quot;</span><span class="p">,</span> <span class="n">header_handler</span> <span class="p">},</span>
+	<span class="p">{</span> <span class="s">&quot;bKGD&quot;</span><span class="p">,</span> <span class="n">background_handler</span> <span class="p">},</span>
+	<span class="p">{</span> <span class="s">&quot;pHYs&quot;</span><span class="p">,</span> <span class="n">phys_handler</span> <span class="p">},</span>
+	<span class="p">{</span> <span class="s">&quot;tIME&quot;</span><span class="p">,</span> <span class="n">time_handler</span> <span class="p">},</span>
+	<span class="p">{</span> <span class="nb">NULL</span><span class="p">,</span>   <span class="nb">NULL</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">check_header</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x89</span><span class="p">,</span> <span class="s">&quot;header byte 1&quot;</span><span class="p">);</span>
+	<span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;P&#39;</span><span class="p">,</span> <span class="s">&quot;header byte 2&quot;</span><span class="p">);</span>
+	<span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;N&#39;</span><span class="p">,</span> <span class="s">&quot;header byte 3&quot;</span><span class="p">);</span>
+	<span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;G&#39;</span><span class="p">,</span> <span class="s">&quot;header byte 4&quot;</span><span class="p">);</span>
+	<span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\r&#39;</span><span class="p">,</span> <span class="s">&quot;header byte 5&quot;</span><span class="p">);</span>
+	<span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\n&#39;</span><span class="p">,</span> <span class="s">&quot;header byte 6&quot;</span><span class="p">);</span>
+	<span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x1a</span><span class="p">,</span> <span class="s">&quot;header byte 7&quot;</span><span class="p">);</span>
+	<span class="n">validate</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">buf</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\n&#39;</span><span class="p">,</span> <span class="s">&quot;header byte 8&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">check_crc</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">crcbuf</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">found_crc</span> <span class="o">=</span> <span class="n">get_big_endian</span><span class="p">(</span><span class="n">crcbuf</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">calc_crc</span> <span class="o">=</span> <span class="n">calculate_crc</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;CRC correct: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">found_crc</span> <span class="o">==</span> <span class="n">calc_crc</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Usage: %s &lt;png file&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kt">char</span> <span class="o">*</span><span class="n">buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">MAX_SIZE</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">buf</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t allocate memory</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kt">FILE</span> <span class="o">*</span><span class="n">f</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot;r&quot;</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">perror</span><span class="p">(</span><span class="s">&quot;fopen&quot;</span><span class="p">);</span>
+		<span class="n">free</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MAX_SIZE</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Too small file</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+		<span class="n">fclose</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+		<span class="n">free</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">check_header</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">png_data</span> <span class="n">png</span><span class="p">;</span>
+	<span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">png</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">png</span><span class="p">));</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">12</span> <span class="o">&lt;=</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kt">char</span> <span class="n">lenbuf</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+		<span class="n">memcpy</span><span class="p">(</span><span class="n">lenbuf</span><span class="p">,</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">pos</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">get_big_endian</span><span class="p">(</span><span class="n">lenbuf</span><span class="p">);</span>
+		<span class="kt">char</span> <span class="n">chunkbuf</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+		<span class="n">chunkbuf</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="n">memcpy</span><span class="p">(</span><span class="n">chunkbuf</span><span class="p">,</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;chunk: %s - len: %d (%d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">chunkbuf</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">12</span><span class="p">));</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">type</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">chunkbuf</span><span class="p">,</span> <span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">type</span><span class="p">))</span> <span class="p">{</span>
+				<span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">func</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">8</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">png</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="n">check_crc</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span> <span class="n">len</span><span class="p">,</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+		<span class="n">pos</span> <span class="o">+=</span> <span class="mi">12</span> <span class="o">+</span> <span class="n">len</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">fclose</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="ex_index.html">16. Exercises</a><ul>
+      <li>Previous: <a href="ex_hiscore_table.html" title="previous chapter">16.10. Solutions to exercises: Generating the high score table</a></li>
+      <li>Next: <a href="ex_sudoku.html" title="next chapter">16.12. Solutions to exercises: Sudoku</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ex_png.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/ex_png.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

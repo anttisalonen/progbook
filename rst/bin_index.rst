@@ -5,4 +5,5 @@ Working with binary data
    :maxdepth: 1
 
    png
+   png2
 

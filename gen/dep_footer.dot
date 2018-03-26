@@ -33,6 +33,7 @@
     c_stack2 -> asm;
     asm -> vm;
     httpserv -> png;
+    png -> png2;
     vm -> strong;
     lang -> strong;
     c_str -> strong;
