@@ -1,5 +1,5 @@
 More data structures
----
+--------------------
 
 Previously we had a section on arrays. Recall that arrays are a continuous block of memory and have fast random access but slow insertion. This section goes through some more interesting data structures.
 

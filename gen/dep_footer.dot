@@ -32,10 +32,11 @@
     func2 -> vm;
     c_stack2 -> asm;
     asm -> vm;
+    httpserv -> png;
     vm -> strong;
     lang -> strong;
     c_str -> strong;
-    binary -> strong;
+    png -> strong;
     strong -> strong2;
     strong2 -> strong3;
     c2 -> py2;

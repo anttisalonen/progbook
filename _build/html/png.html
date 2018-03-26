@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>15.1. PNG files &#8212; guide 0.1 documentation</title>
+    <title>13.1. PNG files &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="16. Strongly, statically typed languages" href="strong_index.html" />
-    <link rel="prev" title="15. Working with binary data" href="bin_index.html" />
+    <link rel="next" title="14. Strongly, statically typed languages" href="strong_index.html" />
+    <link rel="prev" title="13. Working with binary data" href="bin_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="png-files">
-<h1>15.1. PNG files<a class="headerlink" href="#png-files" title="Permalink to this headline">¶</a></h1>
+<h1>13.1. PNG files<a class="headerlink" href="#png-files" title="Permalink to this headline">¶</a></h1>
 <p>PNG (Portable Network Graphics) is a common file format for storing image data. Let&#8217;s write a parser to parse some parts of PNG files in C. This will help teach us the following concepts:</p>
 <ul class="simple">
 <li>Working with binary data</li>
@@ -59,7 +59,7 @@
 </ul>
 <p>We&#8217;ll end up with a program that can parse some parts of a PNG file and display what it parsed. The program will be around 150 lines of code. The author wrote the program in about two hours. The reader should ideally be able to finish the exercises within 40 hours.</p>
 <div class="section" id="introduction-to-png">
-<h2>15.1.1. Introduction to PNG<a class="headerlink" href="#introduction-to-png" title="Permalink to this headline">¶</a></h2>
+<h2>13.1.1. Introduction to PNG<a class="headerlink" href="#introduction-to-png" title="Permalink to this headline">¶</a></h2>
 <p>PNG file format is described online at e.g. Wikipedia but also at the RFC (Request for Comments) 2083 which describes the format in detail. In a nutshell:</p>
 <ul class="simple">
 <li>PNG starts with a <em>signature</em>, a sequence of bytes which can be used to identify a file as a PNG file</li>
@@ -157,7 +157,7 @@
 </div>
 <p>Here, our function &#8220;check_header&#8221; calls &#8220;validate&#8221; twice, for the first two bytes in the buffer. The function &#8220;validate&#8221;, defined above, checks if the condition is true, and if not, prints out an error and exits the program.</p>
 <div class="topic">
-<p class="topic-title first">Digression stderr</p>
+<p class="topic-title first">Digression: stderr</p>
 <p>The function &#8220;validate&#8221; prints out the error using <em>fprintf</em>, which is similar to printf but allows defining the output file for writing. We define the output to go to <em>stderr</em>, or &#8220;standard error&#8221;, which is very similar to standard in but is another file. The main use case is redirecting: if we were to direct the output of our program to a file, what gets written to stderr actually gets written out in the terminal, not in the output file. E.g:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./png file.c &gt; out.txt
 Invalid file: header byte <span class="m">1</span>
@@ -169,9 +169,9 @@ $
 <p>The function call &#8216;printf(&#8220;abcn&#8221;);&#8217; is equivalent to &#8216;fprintf(stdout, &#8220;abcn&#8221;);&#8217;.</p>
 </div>
 <p><em>Exercise</em>: Expand the program to check for all eight bytes of the header. Find a PNG file to test your program on.</p>
-<p>You can download a sample PNG file here - a screenshot from another chapter:</p>
+<p>You can download a sample PNG file here - a screenshot from another chapter (e.g. right click and &#8220;save as&#8221;):</p>
 <img alt="_images/guess.png" src="_images/guess.png" />
-<p>You&#8217;ll need to use either this image or another image with the same chunks for later exercises in this part of the book.</p>
+<p>You&#8217;ll need to use either this exact image or another image with the same chunks for later exercises in this part of the book.</p>
 <p>Now we have a program that checks, for a given input file, whether it has the correct PNG signature or not. Let&#8217;s see if we can expand it to read all the headers in a PNG file. You may have read from the RFC or Wikipedia that after the signature, the series of chunks begins, with each chunk having the following format:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---------+------------+----------------+---------+</span>
 <span class="o">|</span> <span class="n">Length</span>  <span class="o">|</span> <span class="n">Chunk</span> <span class="nb">type</span> <span class="o">|</span> <span class="n">Chunk</span> <span class="n">data</span>     <span class="o">|</span> <span class="n">CRC</span>     <span class="o">|</span>
@@ -205,7 +205,7 @@ $
 <p>Before we fill in the blanks, let&#8217;s go to the details around &#8220;get_big_endian&#8221;.</p>
 </div>
 <div class="section" id="endianness-and-bit-level-operations">
-<h2>15.1.2. Endianness, and bit level operations<a class="headerlink" href="#endianness-and-bit-level-operations" title="Permalink to this headline">¶</a></h2>
+<h2>13.1.2. Endianness, and bit level operations<a class="headerlink" href="#endianness-and-bit-level-operations" title="Permalink to this headline">¶</a></h2>
 <p>You may have noticed from the RFC or other sources that some values in the PNG file are stored as <em>big endian</em>. What does this mean? Let&#8217;s first have a refresher on binary numbers. Imagine we have the number 135,200 and we want to store this. The number 135,200 is in decimal - in binary it is (using the Python interpreter to check):</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">bin</span><span class="p">(</span><span class="mi">135200</span><span class="p">)</span>
 <span class="go">&#39;0b100001000000100000&#39;</span>
@@ -303,9 +303,9 @@ $
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">15.1. PNG files</a><ul>
-<li><a class="reference internal" href="#introduction-to-png">15.1.1. Introduction to PNG</a></li>
-<li><a class="reference internal" href="#endianness-and-bit-level-operations">15.1.2. Endianness, and bit level operations</a></li>
+<li><a class="reference internal" href="#">13.1. PNG files</a><ul>
+<li><a class="reference internal" href="#introduction-to-png">13.1.1. Introduction to PNG</a></li>
+<li><a class="reference internal" href="#endianness-and-bit-level-operations">13.1.2. Endianness, and bit level operations</a></li>
 </ul>
 </li>
 </ul>
@@ -313,9 +313,9 @@ $
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="bin_index.html">15. Working with binary data</a><ul>
-      <li>Previous: <a href="bin_index.html" title="previous chapter">15. Working with binary data</a></li>
-      <li>Next: <a href="strong_index.html" title="next chapter">16. Strongly, statically typed languages</a></li>
+  <li><a href="bin_index.html">13. Working with binary data</a><ul>
+      <li>Previous: <a href="bin_index.html" title="previous chapter">13. Working with binary data</a></li>
+      <li>Next: <a href="strong_index.html" title="next chapter">14. Strongly, statically typed languages</a></li>
   </ul></li>
   </ul></li>
 </ul>

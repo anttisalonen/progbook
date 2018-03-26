@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>17.4. Finding Sudoku peers &#8212; guide 0.1 documentation</title>
+    <title>15.4. Finding Sudoku peers &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="18. Exercises" href="ex_index.html" />
-    <link rel="prev" title="17.3. Sudoku Puzzle class" href="sud3.html" />
+    <link rel="next" title="16. Exercises" href="ex_index.html" />
+    <link rel="prev" title="15.3. Sudoku Puzzle class" href="sud3.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="finding-sudoku-peers">
-<h1>17.4. Finding Sudoku peers<a class="headerlink" href="#finding-sudoku-peers" title="Permalink to this headline">¶</a></h1>
+<h1>15.4. Finding Sudoku peers<a class="headerlink" href="#finding-sudoku-peers" title="Permalink to this headline">¶</a></h1>
 <p>Previously we filled out the blanks except for finding peers. Now, let&#8217;s implement this. In the function, we should consider the three ways we could have a peer:</p>
 <ul class="simple">
 <li>Cells in the same horizontal line</li>
@@ -140,7 +140,7 @@
 </pre></div>
 </div>
 <div class="section" id="searching">
-<h2>17.4.1. Searching<a class="headerlink" href="#searching" title="Permalink to this headline">¶</a></h2>
+<h2>15.4.1. Searching<a class="headerlink" href="#searching" title="Permalink to this headline">¶</a></h2>
 <p>The next puzzle to solve is searching. Recall that we wanted to propagate constraints where possible but at some point we won&#8217;t be able to progress any further and have to guess (search). How searching should work in principle is this:</p>
 <ul class="simple">
 <li>We pick one cell where we make a guess (namely the one with the least possible options to minimise the number of searches)</li>
@@ -163,7 +163,7 @@
 <p>Now, in terms of syntax, there are a couple of useful things to know.</p>
 </div>
 <div class="section" id="working-with-this">
-<h2>17.4.2. Working with &#8220;this&#8221;<a class="headerlink" href="#working-with-this" title="Permalink to this headline">¶</a></h2>
+<h2>15.4.2. Working with &#8220;this&#8221;<a class="headerlink" href="#working-with-this" title="Permalink to this headline">¶</a></h2>
 <p>In C++, &#8220;this&#8221; is a keyword that is a pointer to the current object. In our case, it allows us to make a copy of our object. Here&#8217;s an example use:</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -212,7 +212,7 @@
 <p><em>Exercise</em>: Finish the above function. Call it from your program. See if you can solve the more difficult Sudoku puzzle.</p>
 </div>
 <div class="section" id="solving-more-sudokus">
-<h2>17.4.3. Solving more Sudokus<a class="headerlink" href="#solving-more-sudokus" title="Permalink to this headline">¶</a></h2>
+<h2>15.4.3. Solving more Sudokus<a class="headerlink" href="#solving-more-sudokus" title="Permalink to this headline">¶</a></h2>
 <p>Here are 30 easy Sudoku puzzles, courtesy project Euler:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span><span class="mf">3.2</span><span class="o">.</span><span class="mf">6.</span><span class="o">.</span><span class="mf">9.</span><span class="o">.</span><span class="mf">3.5</span><span class="o">..</span><span class="mf">1.</span><span class="o">.</span><span class="mf">18.64</span><span class="o">....</span><span class="mf">81.29</span><span class="o">..</span><span class="mf">7.</span><span class="o">......</span><span class="mf">8.</span><span class="o">.</span><span class="mf">67.82</span><span class="o">....</span><span class="mf">26.95</span><span class="o">..</span><span class="mf">8.</span><span class="o">.</span><span class="mf">2.3</span><span class="o">..</span><span class="mf">9.</span><span class="o">.</span><span class="mf">5.1</span><span class="o">.</span><span class="mf">3.</span><span class="o">.</span>
 <span class="mf">2.</span><span class="o">..</span><span class="mf">8.3</span><span class="o">...</span><span class="mf">6.</span><span class="o">.</span><span class="mf">7.</span><span class="o">.</span><span class="mf">84.3</span><span class="o">.</span><span class="mf">5.</span><span class="o">.</span><span class="mf">2.9</span><span class="o">...</span><span class="mf">1.54</span><span class="o">.</span><span class="mf">8.</span><span class="o">........</span><span class="mf">4.27</span><span class="o">.</span><span class="mf">6.</span><span class="o">..</span><span class="mf">3.1</span><span class="o">..</span><span class="mf">7.4</span><span class="o">.</span><span class="mf">72.</span><span class="o">.</span><span class="mf">4.</span><span class="o">.</span><span class="mf">6.</span><span class="o">..</span><span class="mf">4.1</span><span class="o">...</span><span class="mi">3</span>
@@ -283,7 +283,7 @@
 <p><em>Exercise</em>: Solve these puzzles as well. If you get tired of waiting, remember to compile your program with optimisations, that is, with &#8220;-O2&#8221; which can speed up C++ programs significantly.</p>
 </div>
 <div class="section" id="constraint-propagation-with-units">
-<h2>17.4.4. Constraint propagation with units<a class="headerlink" href="#constraint-propagation-with-units" title="Permalink to this headline">¶</a></h2>
+<h2>15.4.4. Constraint propagation with units<a class="headerlink" href="#constraint-propagation-with-units" title="Permalink to this headline">¶</a></h2>
 <p>We&#8217;ve missed one part of our plan: in the introduction we said that &#8220;another common strategy is to see if a number has been ruled out for all cells in a unit except one. In this case it must be the correct number for that cell.&#8221;</p>
 <p>This means that if e.g. we have a row where a cell could have values 2, 3 and 7, but the number 7 was eliminated in all peers, then we can assign the number 7 for this cell.</p>
 <p><em>Exercise</em>: Implement this strategy as part of the propagation function. Note that you may find it necessary to use recursion. See if this strategy speeds up your program execution. You may want to reuse parts of your function to identify peers of a cell, and rewrite it to suit you better.</p>
@@ -300,11 +300,11 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">17.4. Finding Sudoku peers</a><ul>
-<li><a class="reference internal" href="#searching">17.4.1. Searching</a></li>
-<li><a class="reference internal" href="#working-with-this">17.4.2. Working with &#8220;this&#8221;</a></li>
-<li><a class="reference internal" href="#solving-more-sudokus">17.4.3. Solving more Sudokus</a></li>
-<li><a class="reference internal" href="#constraint-propagation-with-units">17.4.4. Constraint propagation with units</a></li>
+<li><a class="reference internal" href="#">15.4. Finding Sudoku peers</a><ul>
+<li><a class="reference internal" href="#searching">15.4.1. Searching</a></li>
+<li><a class="reference internal" href="#working-with-this">15.4.2. Working with &#8220;this&#8221;</a></li>
+<li><a class="reference internal" href="#solving-more-sudokus">15.4.3. Solving more Sudokus</a></li>
+<li><a class="reference internal" href="#constraint-propagation-with-units">15.4.4. Constraint propagation with units</a></li>
 </ul>
 </li>
 </ul>
@@ -312,9 +312,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="sud_index.html">17. Learning to program using Sudoku</a><ul>
-      <li>Previous: <a href="sud3.html" title="previous chapter">17.3. Sudoku Puzzle class</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">18. Exercises</a></li>
+  <li><a href="sud_index.html">15. Learning to program using Sudoku</a><ul>
+      <li>Previous: <a href="sud3.html" title="previous chapter">15.3. Sudoku Puzzle class</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">16. Exercises</a></li>
   </ul></li>
   </ul></li>
 </ul>

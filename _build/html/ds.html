@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.1. Overview of data structures &#8212; guide 0.1 documentation</title>
+    <title>5.2. Array, stack, queue &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. Intermediate C" href="int_c_index.html" />
-    <link rel="prev" title="8. Data structures" href="ds2_index.html" />
+    <link rel="next" title="6. Javascript" href="js_index.html" />
+    <link rel="prev" title="5.1. Big O notation" href="o_not.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,11 +43,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="overview-of-data-structures">
-<h1>8.1. Overview of data structures<a class="headerlink" href="#overview-of-data-structures" title="Permalink to this headline">¶</a></h1>
-<p>For reasons that will soon become apparent, it&#8217;s useful to have a basic understanding of data structures. This section will cover arrays.</p>
+  <div class="section" id="array-stack-queue">
+<h1>5.2. Array, stack, queue<a class="headerlink" href="#array-stack-queue" title="Permalink to this headline">¶</a></h1>
+<p>For reasons that will soon become apparent, it&#8217;s useful to have a basic understanding of data structures. This section will cover arrays, stacks and queues.</p>
 <div class="section" id="arrays">
-<h2>8.1.1. Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
+<h2>5.2.1. Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
 <p>We&#8217;ve already used <em>arrays</em> in C: Array is a data structure which contains multiple elements of data, such that each element uses the same amount of memory and they&#8217;re allocated contiguously:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---+---+---+</span>
 <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span>
@@ -65,7 +65,7 @@
 </div>
 <p>Lists in Python are technically also arrays but each elements holds a pointer to arbitrary data, such that in Python, each element in a list can be of different type.</p>
 <div class="section" id="stack">
-<h3>8.1.1.1. Stack<a class="headerlink" href="#stack" title="Permalink to this headline">¶</a></h3>
+<h3>5.2.1.1. Stack<a class="headerlink" href="#stack" title="Permalink to this headline">¶</a></h3>
 <p>Typically the memory layout for a stack is the same as for an array but the usage pattern is different.</p>
 <p>You can imagine stack as an array where you only have visibility over the last element in the array: you can read it, pop it (redefine &#8220;last element&#8221; as one to the left), and push an element (redefine &#8220;last element&#8221; as one to the right, and set its value).</p>
 <p>Stack is also called &#8220;LIFO&#8221; - last in, first out. Here&#8217;s an example &#8220;animation&#8221; of using a stack:</p>
@@ -97,7 +97,7 @@
 </div>
 </div>
 <div class="section" id="queue">
-<h3>8.1.1.2. Queue<a class="headerlink" href="#queue" title="Permalink to this headline">¶</a></h3>
+<h3>5.2.1.2. Queue<a class="headerlink" href="#queue" title="Permalink to this headline">¶</a></h3>
 <p>Queue is similar to stack but the opposite. It typically also has the same memory layout as an array but with a different usage pattern.</p>
 <p>You can imagine queue as an array where you only have visibility over the first element in the array: you can read it, pop it (redefine &#8220;first element&#8221; as one to the right), and push an element (redefine the last element as one to the right, and set its value).</p>
 <p>Queue is also called &#8220;FIFO&#8221; - first in, first out. Here&#8217;s an example &#8220;animation&#8221; of using a queue:</p>
@@ -137,10 +137,10 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">8.1. Overview of data structures</a><ul>
-<li><a class="reference internal" href="#arrays">8.1.1. Arrays</a><ul>
-<li><a class="reference internal" href="#stack">8.1.1.1. Stack</a></li>
-<li><a class="reference internal" href="#queue">8.1.1.2. Queue</a></li>
+<li><a class="reference internal" href="#">5.2. Array, stack, queue</a><ul>
+<li><a class="reference internal" href="#arrays">5.2.1. Arrays</a><ul>
+<li><a class="reference internal" href="#stack">5.2.1.1. Stack</a></li>
+<li><a class="reference internal" href="#queue">5.2.1.2. Queue</a></li>
 </ul>
 </li>
 </ul>
@@ -150,9 +150,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="ds2_index.html">8. Data structures</a><ul>
-      <li>Previous: <a href="ds2_index.html" title="previous chapter">8. Data structures</a></li>
-      <li>Next: <a href="int_c_index.html" title="next chapter">9. Intermediate C</a></li>
+  <li><a href="ds_index.html">5. First touch of algorithms</a><ul>
+      <li>Previous: <a href="o_not.html" title="previous chapter">5.1. Big O notation</a></li>
+      <li>Next: <a href="js_index.html" title="next chapter">6. Javascript</a></li>
   </ul></li>
   </ul></li>
 </ul>

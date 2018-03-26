@@ -1,7 +1,7 @@
-Overview of data structures
----------------------------
+Array, stack, queue
+-------------------
 
-For reasons that will soon become apparent, it's useful to have a basic understanding of data structures. This section will cover arrays.
+For reasons that will soon become apparent, it's useful to have a basic understanding of data structures. This section will cover arrays, stacks and queues.
 
 Arrays
 ======

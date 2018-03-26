@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.1. Records &#8212; guide 0.1 documentation</title>
+    <title>7.1. Records &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9.2. C and the stack" href="c_stack.html" />
-    <link rel="prev" title="9. Intermediate C" href="int_c_index.html" />
+    <link rel="next" title="7.2. C and the stack" href="c_stack.html" />
+    <link rel="prev" title="7. Intermediate C" href="int_c_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="records">
-<h1>9.1. Records<a class="headerlink" href="#records" title="Permalink to this headline">¶</a></h1>
+<h1>7.1. Records<a class="headerlink" href="#records" title="Permalink to this headline">¶</a></h1>
 <p>In our previous code we worked with functions and quadratic equations. A function was represented by three floating point values a, b and c. Let&#8217;s write a function that returns the value of the function at a given point x:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">function_value</span><span class="p">(</span><span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
 <span class="p">{</span>
@@ -105,7 +105,7 @@
 </div>
 <p><em>Exercise</em>: The derivative of a function ax^2 + bx + c is 2ax + b. Write a function that calculates the derivative for a function at a given point x and call it, with the input function passed as a pointer to a struct.</p>
 <div class="section" id="what-is-a-struct">
-<h2>9.1.1. What is a struct<a class="headerlink" href="#what-is-a-struct" title="Permalink to this headline">¶</a></h2>
+<h2>7.1.1. What is a struct<a class="headerlink" href="#what-is-a-struct" title="Permalink to this headline">¶</a></h2>
 <p>Our example struct consists of three integers. As C is relatively close to the actual hardware, we can reason about what this struct looks like in practice. In general, the amount of memory used by an integer in C is implementation defined but for the purpose of this section we can assume it&#8217;s 4 bytes (32 bits). Defining a structure like this typically means the data will be packed well, such that 12 bytes will be required for one allocation of struct my_datatype and the layout will only contain the memory required for a, b and c, nothing more. (Mixing different data types of different sizes may cause padding memory to be added by the C compiler, depending on the hardware constraints.)</p>
 <p>You can find out what the size of a data type is in C by using the &#8220;sizeof&#8221; operator:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">function</span><span class="p">));</span>
@@ -123,8 +123,8 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">9.1. Records</a><ul>
-<li><a class="reference internal" href="#what-is-a-struct">9.1.1. What is a struct</a></li>
+<li><a class="reference internal" href="#">7.1. Records</a><ul>
+<li><a class="reference internal" href="#what-is-a-struct">7.1.1. What is a struct</a></li>
 </ul>
 </li>
 </ul>
@@ -132,9 +132,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_c_index.html">9. Intermediate C</a><ul>
-      <li>Previous: <a href="int_c_index.html" title="previous chapter">9. Intermediate C</a></li>
-      <li>Next: <a href="c_stack.html" title="next chapter">9.2. C and the stack</a></li>
+  <li><a href="int_c_index.html">7. Intermediate C</a><ul>
+      <li>Previous: <a href="int_c_index.html" title="previous chapter">7. Intermediate C</a></li>
+      <li>Next: <a href="c_stack.html" title="next chapter">7.2. C and the stack</a></li>
   </ul></li>
   </ul></li>
 </ul>

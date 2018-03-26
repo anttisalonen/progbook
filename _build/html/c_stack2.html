@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.3. More C and the stack &#8212; guide 0.1 documentation</title>
+    <title>7.3. More C and the stack &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9.4. Dynamic memory allocation" href="c_dyn.html" />
-    <link rel="prev" title="9.2. C and the stack" href="c_stack.html" />
+    <link rel="next" title="7.4. Dynamic memory allocation" href="c_dyn.html" />
+    <link rel="prev" title="7.2. C and the stack" href="c_stack.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,9 +44,9 @@
           <div class="body" role="main">
             
   <div class="section" id="more-c-and-the-stack">
-<h1>9.3. More C and the stack<a class="headerlink" href="#more-c-and-the-stack" title="Permalink to this headline">¶</a></h1>
+<h1>7.3. More C and the stack<a class="headerlink" href="#more-c-and-the-stack" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="arrays">
-<h2>9.3.1. Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
+<h2>7.3.1. Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
 <p>Arrays are blocks of memory allocated in stack.</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
@@ -74,7 +74,7 @@
 <p>In other words, each integer in the array is available in the stack.</p>
 </div>
 <div class="section" id="arrays-and-functions">
-<h2>9.3.2. Arrays and functions<a class="headerlink" href="#arrays-and-functions" title="Permalink to this headline">¶</a></h2>
+<h2>7.3.2. Arrays and functions<a class="headerlink" href="#arrays-and-functions" title="Permalink to this headline">¶</a></h2>
 <p>When passing an array to a function, the array is not copied like a pointer or an integer, but instead a <em>pointer</em> to the first element is passed. The array is said to <em>decay</em> to a pointer:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -160,7 +160,7 @@
 <p>If you&#8217;re wondering what happens to the memory above the stack when a function call returns, the answer is probably nothing. What the compiler instructs the CPU to do when returning from a function is simply to decrement the <em>stack pointer</em> - a pointer that points to the top of the stack, which is needed when adding new data in the stack. The code to manage the stack pointer is added automatically by the compiler.</p>
 </div>
 <div class="section" id="stack-overflow">
-<h2>9.3.3. Stack overflow<a class="headerlink" href="#stack-overflow" title="Permalink to this headline">¶</a></h2>
+<h2>7.3.3. Stack overflow<a class="headerlink" href="#stack-overflow" title="Permalink to this headline">¶</a></h2>
 <p>Typically, the compiler allocates a chunk of memory for the stack at the beginning of the program execution. The memory is typically eight megabytes. This means that you could possibly - although the behaviour is undefined, meaning the compiler can generate any code - access memory in stack that&#8217;s been allocated but not defined. We can try this out:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -213,10 +213,10 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">9.3. More C and the stack</a><ul>
-<li><a class="reference internal" href="#arrays">9.3.1. Arrays</a></li>
-<li><a class="reference internal" href="#arrays-and-functions">9.3.2. Arrays and functions</a></li>
-<li><a class="reference internal" href="#stack-overflow">9.3.3. Stack overflow</a></li>
+<li><a class="reference internal" href="#">7.3. More C and the stack</a><ul>
+<li><a class="reference internal" href="#arrays">7.3.1. Arrays</a></li>
+<li><a class="reference internal" href="#arrays-and-functions">7.3.2. Arrays and functions</a></li>
+<li><a class="reference internal" href="#stack-overflow">7.3.3. Stack overflow</a></li>
 </ul>
 </li>
 </ul>
@@ -224,9 +224,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_c_index.html">9. Intermediate C</a><ul>
-      <li>Previous: <a href="c_stack.html" title="previous chapter">9.2. C and the stack</a></li>
-      <li>Next: <a href="c_dyn.html" title="next chapter">9.4. Dynamic memory allocation</a></li>
+  <li><a href="int_c_index.html">7. Intermediate C</a><ul>
+      <li>Previous: <a href="c_stack.html" title="previous chapter">7.2. C and the stack</a></li>
+      <li>Next: <a href="c_dyn.html" title="next chapter">7.4. Dynamic memory allocation</a></li>
   </ul></li>
   </ul></li>
 </ul>

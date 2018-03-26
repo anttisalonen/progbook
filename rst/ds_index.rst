@@ -5,5 +5,5 @@ First touch of algorithms
    :maxdepth: 1
 
    o_not
-
+   ds
 
