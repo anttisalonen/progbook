@@ -123,7 +123,7 @@ Then, type "gg=G" to correctly indent the whole file. You may recall that "gg" g
 Working with braces
 ===================
 
-If you have the cursor on top of a start of end of any kind of parenthesis ("(", "[", "{", either opening or closing), pressing "%" will jump to either the closing or opening of the parenthesis. You can use e.g. the command "di(" to delete all text within the "(" parenthesis the cursor is at. (Similarly you can delete a word with "dw", or e.g. delete the next three words with "d3w".) Another useful command is "c", for changing text. Running "cc" will remove the current line and go to insert mode. "cw" will remove the current work and go to insert mode. Running "ci(" will remove the text within parenthesis and go to insert mode. Similarly, running "ci"" (that is, ci followed by quote) will remove the text within quotes (") and go to insert mode.
+If you have the cursor on top of a start or end of any kind of parenthesis ("(", "[", "{", either opening or closing), pressing "%" will jump to either the closing or opening of the parenthesis. You can use e.g. the command "di(" to delete all text within the "(" parenthesis the cursor is at. (Similarly you can delete a word with "dw", or e.g. delete the next three words with "d3w".) Another useful command is "c", for changing text. Running "cc" will remove the current line and go to insert mode. "cw" will remove the current word and go to insert mode. Running "ci(" will remove the text within parenthesis and go to insert mode. Similarly, running "ci"" (that is, ci followed by quote) will remove the text within quotes (") and go to insert mode.
 
 Combining the above, if you e.g. move the cursor to an opening brace, running "=%" will indent everything within the braces.
 

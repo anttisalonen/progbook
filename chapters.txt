@@ -60,10 +60,10 @@ Projects done
 quadratic formula - generate text data, generate json, read json, plot using plotly, store to nosql, show stats
 guess number - js, binary search
 web server - sockets, pointers, osi
+sudoku - dfs, recursion, classes, propagate + search
 
 Projects left
 crawler - regexes
-sudoku - dfs, recursion, classes, propagate + search
 dot parsing  - regexes, fsm, proper parser, backus naur, graphs, bfs, topological sort
 bus schedule - software design, strong+static languages, more algorithms, make, kiss, processes (unit testing)
 http server revisited - sw design in c
