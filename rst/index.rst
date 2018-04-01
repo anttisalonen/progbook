@@ -30,6 +30,7 @@ Software development fundamentals
    bin_index
    strong_index
    sud_index
+   design_index
    ex_index
 
    dep
