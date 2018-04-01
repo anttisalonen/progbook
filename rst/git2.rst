@@ -1,8 +1,5 @@
-Some more git
--------------
-
-Working with other repositories
-===============================
+Working with other git repositories
+-----------------------------------
 
 We've learned how to create a git repository and commit changes to it. Git allows collaboration between different people by having the functionality to *push* commits to and *pull* commits from another repository. (Git is a *distributed* version control system, which means that each repository is equal; there is no server-client relationship like with some other version control systems such as Subversion.)
 

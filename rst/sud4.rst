@@ -92,12 +92,13 @@ The next puzzle to solve is searching. Recall that we wanted to propagate constr
 * If propagation shows we haven't solved the puzzle but can't progress any further, we repeat this (search recursively again on this board)
 * If propagation shows we've ended up with an invalid puzzle (wrong guess), we throw out this copy and guess a different number on the same cell. If we've tried all numbers then we've made a wrong guess at some point before and return from our (recursive) function call.
 
-What we have here is *depth-first search*. It's called depth first because we follow one "path" until we either find the solution, in which case we return this, or a dead end, in which case we try the next path. It's similar to trying to find the exit from a maze by always following the wall on one of your sides; you may have to traverse the maze quite a lot but you'll find the exit eventually (if it exists). This is in contrast to *breadth-width search* which, instead of following one path down, visits each neighbouring node first before progressing further down the graph.
+What we have here is *depth-first search*. It's called depth first because we follow one "path" until we either find the solution, in which case we return this, or a dead end, in which case we try the next path. It's similar to trying to find the exit from a maze by always following the wall on one side; you may have to traverse the maze quite a lot but you'll find the exit eventually (if it exists). This is in contrast to *breadth-width search* which, instead of following one path down, visits each neighbouring node first before progressing further down the graph.
 
 Generally speaking we can agree on the following structure:
 
 * The Puzzle class has a member function "search", which, when called, will return a Puzzle class which is expected to be the solved puzzle
 * The "search" member function does the following:
+
   * Check if this puzzle is solved; if so then return self
   * Check if any of the cells in this puzzle are invalid, i.e. don't have any valid options; if so then return self
   * Find the cell with the smallest number of valid options (but still more than 1)

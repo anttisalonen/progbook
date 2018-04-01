@@ -73,10 +73,12 @@
 <li>Line 4: As the JSON data has been parsed by the get_json() function, it&#8217;s available to us in Python dictionary form.</li>
 <li>Line 5: We can query the current system time by calling the function &#8220;datetime.datetime.now()&#8221; (after importing datetime). Furthermore we can convert it (and almost any other data type including numbers) to a string by calling the str() function.</li>
 <li>Line 6: We can convert a Python dictionary to a JSON string by calling the &#8220;json.dumps()&#8221; function (after importing json).</li>
-<li>Line 7: Here, we insert data in the Redis database whereby the connection is represented by the &#8220;r&#8221; object. We use the member function &#8220;lpush&#8221; which ensures the value in the key-value pair is a list. More specifically, it:
-* Takes two parameters, the key and a value
-* Creates a new list if the key didn&#8217;t yet exist, such that the value is a new list with a single element, namely the value
-* Appends the value to the end of the existing list if the key existed</li>
+<li>Line 7: Here, we insert data in the Redis database whereby the connection is represented by the &#8220;r&#8221; object. We use the member function &#8220;lpush&#8221; which ensures the value in the key-value pair is a list. More specifically, it:<ul>
+<li>Takes two parameters, the key and a value</li>
+<li>Creates a new list if the key didn&#8217;t yet exist, such that the value is a new list with a single element, namely the value</li>
+<li>Appends the value to the end of the existing list if the key existed</li>
+</ul>
+</li>
 <li>Line 8: We return a string which will be available in JSON in the xhr.responseText variable.</li>
 </ul>
 <p>Here, we also implicitly defined the <em>database schema</em> for our data: the key is the maximum number that the computer could think of, as a string. For now it&#8217;s hard coded to 25 but we&#8217;ll make it configurable later. The value is a list whereby each element in a list describes a finished game. Each finished game should be represented in JSON, such that the JSON has a field describing the number of guesses required in the game as well as the timestamp when the game was finished. We&#8217;ll expand on this later.</p>

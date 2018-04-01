@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14. Strongly, statically typed languages" href="strong_index.html" />
+    <link rel="next" title="13.2. Finishing our simple PNG parser" href="png2.html" />
     <link rel="prev" title="13. Working with binary data" href="bin_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -73,7 +73,7 @@
 <span class="o">+----+----+----+----+----+----+----+----+</span>
 </pre></div>
 </div>
-<p>In ASCII, the bytes 2-4 (starting from 1) are &#8220;PNG&#8221;; bytes 5-6 are &#8220;rn&#8221; (CRLF) and byte 8 is &#8220;n&#8221;.</p>
+<p>In ASCII, the bytes 2-4 (starting from 1) are &#8220;PNG&#8221;; bytes 5-6 are &#8220;\r\n&#8221; (CRLF) and byte 8 is &#8220;\n&#8221;.</p>
 <p>Let&#8217;s write a program that loads a given input file to a buffer. For this, we&#8217;ll allocate a buffer of 16 megabytes. If the user attempts to open a larger file, we exit. This is naive but works well enough for our purposes.</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -166,7 +166,7 @@ $
 </pre></div>
 </div>
 <p>If you want to redirect stderr, you can use &#8220;2&gt;&#8221;, e.g. &#8221;./png file.c &gt; out.txt 2&gt; stderr.txt&#8221;.</p>
-<p>The function call &#8216;printf(&#8220;abcn&#8221;);&#8217; is equivalent to &#8216;fprintf(stdout, &#8220;abcn&#8221;);&#8217;.</p>
+<p>The function call &#8216;printf(&#8220;abc\n&#8221;);&#8217; is equivalent to &#8216;fprintf(stdout, &#8220;abc\n&#8221;);&#8217;.</p>
 </div>
 <p><em>Exercise</em>: Expand the program to check for all eight bytes of the header. Find a PNG file to test your program on.</p>
 <p>You can download a sample PNG file here - a screenshot from another chapter (e.g. right click and &#8220;save as&#8221;):</p>
@@ -220,16 +220,16 @@ $
 </pre></div>
 </div>
 <p>The first byte has no bits set. Each of the other bytes has one bit set each.</p>
-<p>Now, the way the table is here is in <em>big endian</em> - the most significant byte is the first one from the right, i.e. the bytes are ordered from the big end.</p>
+<p>Now, the way the table is here is in <em>big endian</em> - the most significant byte is the first one from the left, i.e. the bytes are ordered from the big end.</p>
 <p>This means that in our buffer, if the length was 135,200 bytes, we&#8217;d have the following contents:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+--------------+--------------+--------------+--------------+</span>
-<span class="o">|</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">|</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">|</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span> <span class="o">|</span>
-<span class="o">+--------------+--------------+--------------+--------------+</span>
-<span class="o">|</span>  <span class="mh">0x00</span>        <span class="o">|</span>  <span class="mh">0x02</span>        <span class="o">|</span>  <span class="mh">0x10</span>        <span class="o">|</span>  <span class="mh">0x20</span>        <span class="o">|</span>
-<span class="o">+--------------+--------------+--------------+--------------+</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+-------------------+-------------------+-------------------+-------------------+</span>
+<span class="o">|</span> <span class="n">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="n">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">|</span> <span class="n">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">|</span> <span class="n">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span> <span class="o">|</span>
+<span class="o">+-------------------+-------------------+-------------------+-------------------+</span>
+<span class="o">|</span>  <span class="mh">0x00</span>             <span class="o">|</span>  <span class="mh">0x02</span>             <span class="o">|</span>  <span class="mh">0x10</span>             <span class="o">|</span>  <span class="mh">0x20</span>             <span class="o">|</span>
+<span class="o">+-------------------+-------------------+-------------------+-------------------+</span>
 </pre></div>
 </div>
-<p>Now the question is, how would we convert these four bytes to an integer containing the value 135,200. This is the purpose of the function &#8220;get_big_endian&#8221;.</p>
+<p>Now the question is, how would we convert these four bytes (char values) to an integer containing the value 135,200. This is the purpose of the function &#8220;get_big_endian&#8221;.</p>
 <p>To make it short, here&#8217;s the function definition:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -315,7 +315,7 @@ $
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="bin_index.html">13. Working with binary data</a><ul>
       <li>Previous: <a href="bin_index.html" title="previous chapter">13. Working with binary data</a></li>
-      <li>Next: <a href="strong_index.html" title="next chapter">14. Strongly, statically typed languages</a></li>
+      <li>Next: <a href="png2.html" title="next chapter">13.2. Finishing our simple PNG parser</a></li>
   </ul></li>
   </ul></li>
 </ul>

@@ -150,15 +150,17 @@
 <li>If propagation shows we haven&#8217;t solved the puzzle but can&#8217;t progress any further, we repeat this (search recursively again on this board)</li>
 <li>If propagation shows we&#8217;ve ended up with an invalid puzzle (wrong guess), we throw out this copy and guess a different number on the same cell. If we&#8217;ve tried all numbers then we&#8217;ve made a wrong guess at some point before and return from our (recursive) function call.</li>
 </ul>
-<p>What we have here is <em>depth-first search</em>. It&#8217;s called depth first because we follow one &#8220;path&#8221; until we either find the solution, in which case we return this, or a dead end, in which case we try the next path. It&#8217;s similar to trying to find the exit from a maze by always following the wall on one of your sides; you may have to traverse the maze quite a lot but you&#8217;ll find the exit eventually (if it exists). This is in contrast to <em>breadth-width search</em> which, instead of following one path down, visits each neighbouring node first before progressing further down the graph.</p>
+<p>What we have here is <em>depth-first search</em>. It&#8217;s called depth first because we follow one &#8220;path&#8221; until we either find the solution, in which case we return this, or a dead end, in which case we try the next path. It&#8217;s similar to trying to find the exit from a maze by always following the wall on one side; you may have to traverse the maze quite a lot but you&#8217;ll find the exit eventually (if it exists). This is in contrast to <em>breadth-width search</em> which, instead of following one path down, visits each neighbouring node first before progressing further down the graph.</p>
 <p>Generally speaking we can agree on the following structure:</p>
 <ul class="simple">
 <li>The Puzzle class has a member function &#8220;search&#8221;, which, when called, will return a Puzzle class which is expected to be the solved puzzle</li>
-<li>The &#8220;search&#8221; member function does the following:
-* Check if this puzzle is solved; if so then return self
-* Check if any of the cells in this puzzle are invalid, i.e. don&#8217;t have any valid options; if so then return self
-* Find the cell with the smallest number of valid options (but still more than 1)
-* For all the options in the selected cell, make a copy of the puzzle, set a value in the copy, search in the copy; if solution found then return it, else return self</li>
+<li>The &#8220;search&#8221; member function does the following:<ul>
+<li>Check if this puzzle is solved; if so then return self</li>
+<li>Check if any of the cells in this puzzle are invalid, i.e. don&#8217;t have any valid options; if so then return self</li>
+<li>Find the cell with the smallest number of valid options (but still more than 1)</li>
+<li>For all the options in the selected cell, make a copy of the puzzle, set a value in the copy, search in the copy; if solution found then return it, else return self</li>
+</ul>
+</li>
 </ul>
 <p>Now, in terms of syntax, there are a couple of useful things to know.</p>
 </div>

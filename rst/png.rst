@@ -34,7 +34,7 @@ The signature is eight bytes long and contains the following values, in hex form
     | 89 | 50 | 4E | 47 | 0D | 0A | 1A | 0A |
     +----+----+----+----+----+----+----+----+
 
-In ASCII, the bytes 2-4 (starting from 1) are "PNG"; bytes 5-6 are "\r\n" (CRLF) and byte 8 is "\n".
+In ASCII, the bytes 2-4 (starting from 1) are "PNG"; bytes 5-6 are "\\r\\n" (CRLF) and byte 8 is "\\n".
 
 Let's write a program that loads a given input file to a buffer. For this, we'll allocate a buffer of 16 megabytes. If the user attempts to open a larger file, we exit. This is naive but works well enough for our purposes.
 
@@ -82,7 +82,7 @@ Here, our function "check_header" calls "validate" twice, for the first two byte
 
   If you want to redirect stderr, you can use "2>", e.g. "./png file.c > out.txt 2> stderr.txt".
 
-  The function call 'printf("abc\n");' is equivalent to 'fprintf(stdout, "abc\n");'.
+  The function call 'printf("abc\\n");' is equivalent to 'fprintf(stdout, "abc\\n");'.
 
 *Exercise*: Expand the program to check for all eight bytes of the header. Find a PNG file to test your program on.
 
@@ -150,19 +150,19 @@ In other words - each of the four bytes in binary and hex:
 
 The first byte has no bits set. Each of the other bytes has one bit set each.
 
-Now, the way the table is here is in *big endian* - the most significant byte is the first one from the right, i.e. the bytes are ordered from the big end.
+Now, the way the table is here is in *big endian* - the most significant byte is the first one from the left, i.e. the bytes are ordered from the big end.
 
 This means that in our buffer, if the length was 135,200 bytes, we'd have the following contents:
 
 ::
 
-    +--------------+--------------+--------------+--------------+
-    | buf[pos + 0] | buf[pos + 1] | buf[pos + 2] | buf[pos + 3] |
-    +--------------+--------------+--------------+--------------+
-    |  0x00        |  0x02        |  0x10        |  0x20        |
-    +--------------+--------------+--------------+--------------+
+    +-------------------+-------------------+-------------------+-------------------+
+    | char buf[pos + 0] | char buf[pos + 1] | char buf[pos + 2] | char buf[pos + 3] |
+    +-------------------+-------------------+-------------------+-------------------+
+    |  0x00             |  0x02             |  0x10             |  0x20             |
+    +-------------------+-------------------+-------------------+-------------------+
 
-Now the question is, how would we convert these four bytes to an integer containing the value 135,200. This is the purpose of the function "get_big_endian".
+Now the question is, how would we convert these four bytes (char values) to an integer containing the value 135,200. This is the purpose of the function "get_big_endian".
 
 To make it short, here's the function definition:
 
