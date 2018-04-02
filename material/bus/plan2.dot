@@ -1,0 +1,10 @@
+digraph G {
+    "Rest of application" [shape=box fillcolor=lightgrey style=filled];
+    "Screen drawing"      [shape=box fillcolor=lightgrey style=filled];
+    "Historical GPS data"  -> "Rest of application";
+    "Current GPS data"     -> "Rest of application";
+    "Schedule information" -> "Rest of application";
+    "Rest of application"  -> "23 text labels";
+    "23 text labels"       -> "Screen drawing";
+    "Screen drawing"       -> "Screen";
+}

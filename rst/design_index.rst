@@ -5,4 +5,5 @@ Larger software
    :maxdepth: 1
 
    design_intro
+   components
 

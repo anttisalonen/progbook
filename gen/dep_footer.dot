@@ -62,4 +62,6 @@
     sud1 -> sud2;
     sud2 -> sud3;
     sud3 -> sud4;
+    sud4 -> design_intro;
+    design_intro -> components;
 }

@@ -46,6 +46,8 @@ The following is the requirement specification for the software. It's written by
 
   The bus schedule data must be used directly when displaying the bus arrival time.
 
+  The times must be displayed in 24 hour format and contain the hour and the minute.
+
   The routes displayed must be sorted such that the one arriving soonest must be displayed at the top.
 
   The first row text must be in yellow while the other rows must be in white. The background colour must be white.

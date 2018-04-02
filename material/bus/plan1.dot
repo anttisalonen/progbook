@@ -1,0 +1,7 @@
+digraph G {
+    "Application" [shape=box fillcolor=lightgrey style=filled];
+    "Historical GPS data" -> "Application";
+    "Current GPS data" -> "Application";
+    "Schedule information" -> "Application";
+    "Application" -> "Screen";
+}

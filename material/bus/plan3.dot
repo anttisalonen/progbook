@@ -1,0 +1,16 @@
+digraph G {
+    "Screen drawing"                   [shape=box fillcolor=lightgrey style=filled];
+    "Merge GPS and schedule data"      [shape=box fillcolor=lightgrey style=filled];
+    "Parse GPS data"                   [shape=box fillcolor=lightgrey style=filled];
+    "Parse schedule data"              [shape=box fillcolor=lightgrey style=filled];
+    "Historical GPS data"          -> "Parse GPS data";
+    "Current GPS data"             -> "Parse GPS data";
+    "Schedule information"         -> "Parse schedule data";
+    "Parse GPS data"               -> "Incoming bus data [GPS]";
+    "Parse schedule data"          -> "Incoming bus data [schedule]";
+    "Incoming bus data [GPS]"      -> "Merge GPS and schedule data";
+    "Incoming bus data [schedule]" -> "Merge GPS and schedule data";
+    "Merge GPS and schedule data"  -> "23 text labels";
+    "23 text labels"               -> "Screen drawing";
+    "Screen drawing"               -> "Screen";
+}
