@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>16.3. Drawing to a screen using SDL2 &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="17. Exercises" href="ex_index.html" />
+    <link rel="prev" title="16.2. Breaking software down to components" href="components.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="drawing-to-a-screen-using-sdl2">
+<h1>16.3. Drawing to a screen using SDL2<a class="headerlink" href="#drawing-to-a-screen-using-sdl2" title="Permalink to this headline">¶</a></h1>
+<p>Let&#8217;s tackle the problem of drawing something on the screen.</p>
+<p>The requirement is that an image will be drawn on the screen at the bus stop, which is running an embedded CPU with Linux, with the screen being driven by fbdev (framebuffer device). We don&#8217;t have to care about these details because we don&#8217;t have the actual hardware available so we&#8217;ll have to simulate it. What one can do in this case is write an application that can be run on a desktop computer (or some other device that&#8217;s easily available), but make it configurable or portable such that if the same code was compiled for the system running at the bus stop, it would use the relevant system interfaces to display the information on the bus stop screen instead. When running the code on our development computer we&#8217;ll simply create a window and draw in it instead.</p>
+<p>Now, depending on the OS you&#8217;re using (Linux, Mac, Windows), the interface to create a window and draw something on it is different. We&#8217;ll skip this platform specific bit and instead use a library called <em>SDL2</em>, or <em>Simple DirectMedia Layer 2</em>, which is a relatively thin library providing one interface for all our window handling and drawing needs. Although SDL2 is common among game developers, it&#8217;s also fairly widely used with embedded software.</p>
+<p>What SDL2 does, in a nutshell, is provide functions that do something like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">SDL_CreateWindow</span><span class="p">(</span><span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="cp">#ifdef _WIN32</span>
+    <span class="cm">/* Windows specific API calls are here */</span>
+<span class="cp">#elif __linux__</span>
+    <span class="cm">/* Linux specific API calls are here */</span>
+<span class="cp">#elif __APPLE__</span>
+<span class="cp">#ifdef TARGET_OS_MAC</span>
+    <span class="cm">/* Mac OS specific API calls are here */</span>
+<span class="cp">#elif TARGET_OS_IPHONE</span>
+    <span class="cm">/* iPhone specific API calls are here */</span>
+<span class="cp">#else</span>
+<span class="cp">#error Unknown Apple target</span>
+<span class="cp">#endif </span><span class="cm">/* __APPLE__ */</span><span class="cp"></span>
+<span class="cp">#else</span>
+<span class="cp">#error Unknown platform</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>What this exemplifies is the use of the C preprocessor to define what code to compile. The C compiler typically defines the platform specific defines automatically, but it&#8217;s also possible to set defines either in source code or in the compiler command line. Long story short, the people behind SDL have taken care of this such that we won&#8217;t have to, and can simply call the SDL functions. As a bonus, SDL supports Linux fbdev as well (which is a rather primitive interface for displaying graphics on Linux but popular on embedded systems) so our software could theoretically actually work on a bus stop.</p>
+<p><em>Exercise</em>: SDL2 can be downloaded online although your OS may also provide it. In either case, install SDL2 on your computer. One way to do this is to download the source code, extract it and compile it using &#8221;./configure &amp;&amp; make&#8221;. You can check out the file INSTALL.txt for more details. The author used SDL2 version 2.0.8.</p>
+<p>Although SDL2 is a C library (and hence can be used from C++ directly), many <em>bindings</em> to it exist from other language. A binding is a simple wrapper that allows using a library written in one language from another language. E.g. Java bindings for SDL2 exist; this means that there is a Java library available which does nothing more but calls the C SDL2 functions, allowing the use of SDL2 from Java. Typically programming languages only have built in support for calling C functions. This means that if a library was written in e.g. Java and one wanted to call it from Go, this might not be easily possible without first writing a wrapper of the library in C and then calling the C library from Go. The takeaway is that our bus stop program could be written in e.g. Java if we wanted to.</p>
+<div class="section" id="hello-world-in-sdl2">
+<h2>16.3.1. Hello world in SDL2<a class="headerlink" href="#hello-world-in-sdl2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;SDL.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not init SDL: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SDL_GetError</span><span class="p">());</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+	<span class="n">SDL_Window</span> <span class="o">*</span><span class="n">screen</span> <span class="o">=</span> <span class="n">SDL_CreateWindow</span><span class="p">(</span><span class="s">&quot;My application&quot;</span><span class="p">,</span>
+                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+                          <span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span>
+                          <span class="mi">0</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">screen</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create window</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">SDL_Renderer</span> <span class="o">*</span><span class="n">renderer</span> <span class="o">=</span> <span class="n">SDL_CreateRenderer</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">SDL_RENDERER_SOFTWARE</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">renderer</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create renderer</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">SDL_SetRenderDrawColor</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">);</span>
+	<span class="n">SDL_RenderClear</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
+	<span class="n">SDL_RenderPresent</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
+	<span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+
+	<span class="n">SDL_DestroyWindow</span><span class="p">(</span><span class="n">screen</span><span class="p">);</span>
+	<span class="n">SDL_Quit</span><span class="p">();</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>The above program should, when run, create a window with black contents, display it for three seconds, then terminate. It&#8217;s a test case to ensure the library can be used.</p>
+<p>Let&#8217;s go through this line by line:</p>
+<ul class="simple">
+<li>Line 3: We include the header for the SDL library. This ensures we have the relevant SDL functions declared.</li>
+<li>Line 7: We initialise SDL, asking for support to video (i.e. drawing to a screen). We check the return value. If it&#8217;s unequal to 0, we terminate.</li>
+<li>Lines 11-15: We create a window of size 640x480 with title &#8220;My application&#8221;.</li>
+<li>Line 20: We create a renderer, i.e. something that can draw something to a window. We ask SDL to create a <em>software</em> renderer, i.e. something that doesn&#8217;t use hardware acceleration (GPU) for drawing to the screen.</li>
+<li>Line 26: We set the colour to be used for clearing the screen to be black.</li>
+<li>Line 27: We ask the renderer to clear the screen.</li>
+<li>Line 28: We ask the renderer to <em>present</em> the contents. How rendering typically works is that all pixel colours are first set in a memory buffer, and presenting the contents actually interacts with the OS API to draw something on the actual screen. Hence, clearing the screen on line 27 effectively set the contents on the memory buffer.</li>
+<li>Line 29: We pause the execution for three seconds.</li>
+<li>Lines 31-33: We clean up and exit.</li>
+</ul>
+<p>Now, let&#8217;s try to compile and run this application to ensure we&#8217;re able to use the SDL2 library.</p>
+<p>E.g. on Linux, if you have the library installed via package manager, this command should compile the code:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>g++ -Wall $(sdl2-config --cflags --libs) -o main sdl_hw.cpp
+</pre></div>
+</div>
+<p>Here, $(sdl2-config ...) is a <em>shell expansion</em>, i.e. it executes the command within the parenthesis and includes the output in the command line. The contents typically are something along the lines of &#8220;-I/usr/include/SDL2 -D_REENTRANT -L/usr/lib -lSDL2&#8221;. This means:</p>
+<ul class="simple">
+<li>-I/usr/include/SDL2: Include the path /usr/include/SDL2 in the path where to search for header files. In other words, when compiling, because we had the line #include &#8220;SDL.h&#8221; in our source code, the file SDL.h should be found somewhere during compilation. We can point to the directory where SDL.h can be found by using the -I switch.</li>
+<li>-L/usr/lib: Include the path /usr/lib in the path where to search for library files. In other words, when compiling, because we call functions such as SDL_Init(), the function should be compiled somewhere so our program can call it. We can point to the directory where the library containing the compiled code is by using the -L switch.</li>
+<li>-lSDL2. <em>Link</em> against the library SDL2. In other words, when linking our program to create the final executable, because we call functions such as SDL_Init(), the compiler needs to know which file includes the compiled functions. On Linux, with the combination of the -L/usr/lib flag above, we tell the compiler that we expect the library to be found at /usr/lib/libSDL2.so.</li>
+</ul>
+<p>If we compiled the SDL2 source code ourselves but didn&#8217;t install it on the system, we could compile the code e.g. using this command:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">++</span> <span class="o">-</span><span class="n">Wall</span> <span class="o">-</span><span class="n">ISDL2</span><span class="o">-</span><span class="mf">2.0</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">include</span> <span class="o">-</span><span class="n">D_REENTRANT</span> <span class="o">-</span><span class="n">LSDL2</span><span class="o">-</span><span class="mf">2.0</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">build</span><span class="o">/.</span><span class="n">libs</span> <span class="o">-</span><span class="n">lSDL2</span> <span class="o">-</span><span class="n">o</span> <span class="n">main</span> <span class="n">sdl_hw</span><span class="o">.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+<p>This basically does the same thing but tells the compiler to look for the header and library files in local directories instead of the system directories.</p>
+<p><em>Exercise</em>: Compile and run the above program. Try changing the clear colour and running again.</p>
+<p>Now, you may wonder what all is there that SDL provides, and what are all the different parameters that the different functions can accept. This is a very valid question and is answered in the SDL <em>reference</em>.</p>
+<p><em>Exercise</em>: Look up the SDL documentation for the functions SDL_Init and SDL_CreateRenderer. If you&#8217;re curious, you can also try to find the definitions of the functions in the SDL source code.</p>
+</div>
+<div class="section" id="sdl-and-font-handling">
+<h2>16.3.2. SDL and font handling<a class="headerlink" href="#sdl-and-font-handling" title="Permalink to this headline">¶</a></h2>
+<p>Now, what we want is display text on a screen using SDL. As nothing is ever as simple as you&#8217;d think when programming, SDL doesn&#8217;t provide drawing text out of the box, but instead there&#8217;s another library called SDL2_TTF which provides this functionality. How this works in a nutshell is that you initialise SDL2_TTF, then load a font from a .ttf file (the DejaVu Sans font that was referenced in the introduction), then use that font to create an SDL surface which we then convert to an SDL texture which we copy to the screen buffer using the renderer, finally showing the text on the screen when we present the buffer. Confused yet? The following diagram illustrates the data flow.</p>
+<img alt="_images/sdlttf.png" src="_images/sdlttf.png" />
+<p>The good news is that we only need to implement this once.</p>
+<p><em>Exercise</em>: Install the SDL2_TTF library. As before, you may either install it using your OS or compile it from source.</p>
+<p><em>Exercise</em>: Look up the documentation for the functions TTF_OpenFont() and TTF_RenderUTF8_Blended().</p>
+<p>Here&#8217;s some code to demonstrate usage of SDL2_TTF together with the SDL2 renderer to draw some text.</p>
+<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;SDL.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;SDL_ttf.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="cm">/* TODO: init SDL */</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">TTF_Init</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t init SDL_ttf: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">TTF_GetError</span><span class="p">());</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">TTF_Font</span> <span class="o">*</span><span class="n">font</span> <span class="o">=</span> <span class="n">TTF_OpenFont</span><span class="p">(</span><span class="s">&quot;DejaVuSans.ttf&quot;</span><span class="p">,</span> <span class="mi">72</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">font</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t load font</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* TODO: create SDL_Window and SDL_Renderer */</span>
+
+    <span class="n">SDL_Color</span> <span class="n">col_white</span><span class="p">;</span>
+    <span class="n">col_white</span><span class="p">.</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+    <span class="n">col_white</span><span class="p">.</span><span class="n">g</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+    <span class="n">col_white</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+    <span class="n">col_white</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+    <span class="n">SDL_Surface</span> <span class="o">*</span><span class="n">text</span> <span class="o">=</span> <span class="n">TTF_RenderUTF8_Blended</span><span class="p">(</span><span class="n">font</span><span class="p">,</span> <span class="s">&quot;Hello world&quot;</span><span class="p">,</span> <span class="n">col_white</span><span class="p">);</span>
+
+    <span class="cm">/* TODO: clear the renderer */</span>
+    <span class="n">SDL_Texture</span> <span class="o">*</span><span class="n">texture</span> <span class="o">=</span> <span class="n">SDL_CreateTextureFromSurface</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">text</span><span class="p">);</span>
+    <span class="n">SDL_FreeSurface</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">SDL_Rect</span> <span class="n">dest</span><span class="p">;</span>
+    <span class="n">dest</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">dest</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">SDL_QueryTexture</span><span class="p">(</span><span class="n">texture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">.</span><span class="n">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">.</span><span class="n">h</span><span class="p">);</span>
+    <span class="n">SDL_RenderCopy</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">);</span>
+    <span class="n">SDL_DestroyTexture</span><span class="p">(</span><span class="n">texture</span><span class="p">);</span>
+    <span class="n">texture</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="cm">/* TODO: present, delay and clean up both SDL and TTF libraries */</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>This code is unfortunately missing some key SDL2 calls. If it was complete, you could compile it with the same command as you compile the previous example, but with the added switch &#8220;-LSDL2_ttf&#8221; to also link against the SDL2_ttf library containing the TTF_* functions.</p>
+<p><em>Exercise</em>: Fix the TODOs to get a program that displays some text on the screen. It should display &#8220;Hello world&#8221; in the top left corner. Note that as the example code is, it will search for the font in the current working directory, i.e. where your shell is when you run the program. Make sure your font file can be found.</p>
+<p>Now, provided we had the text labels for our bus stop, we should be able to actually display a window that meets the requirements. What we&#8217;ll do in this chapter is that we&#8217;ll have this bit of C++ code which is shared by both implementations of our software; our software following the Unix philosophy will create a text file with the labels which is read by the C++ code to display the correct window while our monolithic C++ application will take the labels as a function parameter and display them. In either case, the SDL code stays the same so we only need to implement that part once.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">16.3. Drawing to a screen using SDL2</a><ul>
+<li><a class="reference internal" href="#hello-world-in-sdl2">16.3.1. Hello world in SDL2</a></li>
+<li><a class="reference internal" href="#sdl-and-font-handling">16.3.2. SDL and font handling</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="design_index.html">16. Larger software</a><ul>
+      <li>Previous: <a href="components.html" title="previous chapter">16.2. Breaking software down to components</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">17. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/sdl.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/sdl.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,21 @@
+digraph G {
+    "TTF_OpenFont" [shape=box fillcolor=lightgrey style=filled];
+    "SDL_CreateRenderer" [shape=box fillcolor=lightgrey style=filled];
+    "TTF_RenderUTF8_Blended" [shape=box fillcolor=lightgrey style=filled];
+    "SDL_CreateTextureFromSurface" [shape=box fillcolor=lightgrey style=filled];
+    "SDL_RenderCopy" [shape=box fillcolor=lightgrey style=filled];
+    "SDL_RendererPresent" [shape=box fillcolor=lightgrey style=filled];
+    "SDL_CreateWindow" [shape=box fillcolor=lightgrey style=filled];
+    "DejaVuSans.ttf" -> "TTF_OpenFont";
+    "TTF_OpenFont" -> "TTF_Font *";
+    "SDL_CreateWindow" -> "SDL_Window *";
+    "SDL_Window *" -> "SDL_CreateRenderer";
+    "SDL_CreateRenderer" -> "SDL_Renderer *";
+    "TTF_Font *" -> "TTF_RenderUTF8_Blended";
+    "TTF_RenderUTF8_Blended" -> "SDL_Surface *";
+    "SDL_Surface *" -> "SDL_CreateTextureFromSurface";
+    "SDL_CreateTextureFromSurface" -> "SDL_Texture *";
+    "SDL_Renderer *" -> "SDL_RenderCopy";
+    "SDL_Texture *" -> "SDL_RenderCopy";
+    "SDL_RenderCopy" -> "SDL_RendererPresent";
+}
