@@ -37,7 +37,7 @@ The above snippet demonstrates the following:
 
 *Exercise*: What does the search() function as used on line 5 actually return, and what exactly can you pass to it as a parameter? Find the reference for the function online. What is the type of the variable "answer" in the snippet above?
 
-The above should be enough to put the general infrastructure in place for our button. What's still required is the actual logic. I can share some hints:
+The above, combined with your previous knowledge from the previous chapter, should be enough to put the general infrastructure in place for our button. What's still required is the actual logic. I can share some hints:
 
 * You will need to track the upper and lower limit of the range where the correct number might reside
 * As these will need to be stored between button clicks (one click will only guess once), they need to be stored outside the function

@@ -53,6 +53,8 @@ This example introduces a few concepts:
 * Numbers can be rounded down by using Math.floor()
 * HTML tag <input> with type="text" introduces a text box, the value of which can be read using Javascript.
 
+To be clear, with Javascript we can change the HTML, i.e. what the user sees, based on logic (code). Our Javascript code can *read* user input by reading the values stored in the *Document Object Model* (DOM), e.g. by reading the variable of a text field using document.getElementById("guess").value. Similarly our Javascript code can *write* to the DOM, i.e. modify what the user sees e.g. by changing the value of a variable such as document.getElementById("paragraph").innerHTML. By reading user input from DOM and making changes to DOM, we can build interactive web pages.
+
 Now we have everything we need to put our game together. What we'll need is:
 
 1) Some JS logic to generate the number and check the guess against the number the computer is thinking of
