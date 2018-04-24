@@ -64,4 +64,6 @@
     sud3 -> sud4;
     sud4 -> design_intro;
     design_intro -> components;
+    components -> sdl;
+    sdl -> sdl2;
 }

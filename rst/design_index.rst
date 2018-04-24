@@ -7,4 +7,5 @@ Larger software
    design_intro
    components
    sdl
+   sdl2
 
