@@ -17,4 +17,5 @@ Exercises
    ex_png
    ex_sudoku
    ex_sdl
+   ex_sched
 

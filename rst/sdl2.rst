@@ -1,5 +1,5 @@
-Drawing the schedule screen using SDL
--------------------------------------
+Drawing the schedule screen using SDL2
+--------------------------------------
 
 We're now able to draw some text on a screen using SDL. Let's expand this so we can draw the bus schedule screen.
 

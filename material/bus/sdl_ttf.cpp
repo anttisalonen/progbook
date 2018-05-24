@@ -38,3 +38,4 @@ int main()
     /* TODO: present, delay and clean up both SDL and TTF libraries */
 
     return 0;
+}

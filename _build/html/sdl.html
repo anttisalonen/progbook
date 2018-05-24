@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="17. Exercises" href="ex_index.html" />
+    <link rel="next" title="16.4. Drawing the schedule screen using SDL2" href="sdl2.html" />
     <link rel="prev" title="16.2. Breaking software down to components" href="components.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -112,33 +112,33 @@
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not init SDL: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SDL_GetError</span><span class="p">());</span>
         <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
-	<span class="n">SDL_Window</span> <span class="o">*</span><span class="n">screen</span> <span class="o">=</span> <span class="n">SDL_CreateWindow</span><span class="p">(</span><span class="s">&quot;My application&quot;</span><span class="p">,</span>
-                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
-                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
-                          <span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span>
-                          <span class="mi">0</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">screen</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create window</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="n">SDL_Renderer</span> <span class="o">*</span><span class="n">renderer</span> <span class="o">=</span> <span class="n">SDL_CreateRenderer</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">SDL_RENDERER_SOFTWARE</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">renderer</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create renderer</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
+    <span class="n">SDL_Window</span> <span class="o">*</span><span class="n">screen</span> <span class="o">=</span> <span class="n">SDL_CreateWindow</span><span class="p">(</span><span class="s">&quot;My application&quot;</span><span class="p">,</span>
+            <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+            <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+            <span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">screen</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create window</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">SDL_Renderer</span> <span class="o">*</span><span class="n">renderer</span> <span class="o">=</span> <span class="n">SDL_CreateRenderer</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">SDL_RENDERER_SOFTWARE</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">renderer</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create renderer</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-	<span class="n">SDL_SetRenderDrawColor</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">);</span>
-	<span class="n">SDL_RenderClear</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
-	<span class="n">SDL_RenderPresent</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
-	<span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+    <span class="n">SDL_SetRenderDrawColor</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">);</span>
+    <span class="n">SDL_RenderClear</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
+    <span class="n">SDL_RenderPresent</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
+    <span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
 
-	<span class="n">SDL_DestroyWindow</span><span class="p">(</span><span class="n">screen</span><span class="p">);</span>
-	<span class="n">SDL_Quit</span><span class="p">();</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">SDL_DestroyWindow</span><span class="p">(</span><span class="n">screen</span><span class="p">);</span>
+    <span class="n">SDL_Quit</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
@@ -222,7 +222,8 @@
 37
 38
 39
-40</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+40
+41</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;SDL.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;SDL_ttf.h&quot;</span><span class="cp"></span>
@@ -262,6 +263,7 @@
     <span class="cm">/* TODO: present, delay and clean up both SDL and TTF libraries */</span>
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 <p>This code is unfortunately missing some key SDL2 calls. If it was complete, you could compile it with the same command as you compile the previous example, but with the added switch &#8220;-LSDL2_ttf&#8221; to also link against the SDL2_ttf library containing the TTF_* functions.</p>
@@ -290,7 +292,7 @@
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="design_index.html">16. Larger software</a><ul>
       <li>Previous: <a href="components.html" title="previous chapter">16.2. Breaking software down to components</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">17. Exercises</a></li>
+      <li>Next: <a href="sdl2.html" title="next chapter">16.4. Drawing the schedule screen using SDL2</a></li>
   </ul></li>
   </ul></li>
 </ul>

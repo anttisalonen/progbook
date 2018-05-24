@@ -66,4 +66,5 @@
     design_intro -> components;
     components -> sdl;
     sdl -> sdl2;
+    sdl2 -> sched;
 }

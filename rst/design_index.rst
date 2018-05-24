@@ -8,4 +8,5 @@ Larger software
    components
    sdl
    sdl2
+   sched
 
