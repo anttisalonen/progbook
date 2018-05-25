@@ -9,4 +9,5 @@ Larger software
    sdl
    sdl2
    sched
+   parse_gps
 

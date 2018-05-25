@@ -18,4 +18,5 @@ Exercises
    ex_sudoku
    ex_sdl
    ex_sched
+   ex_parse_gps
 

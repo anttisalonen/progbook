@@ -159,7 +159,7 @@ Here's a snippet that puts some of the C string handling together:
 
 Let's see what we have...
 
-* Lines 1-2: In C, you can declare strings over multiple lines. The literal quotes will be simply concatenated at compile time. Also note the character sequence \r\n which means CRLF, or "carriage return, line feed".
+* Lines 1-2: In C, you can declare strings over multiple lines. The literal quotes will be simply concatenated at compile time. Also note the character sequence \\r\\n which means CRLF, or "carriage return, line feed".
 * Line 4: The function strncmp() checks whether two strings are the same.
 * Line 8: The function strlen() determines the length of a string.
 * Line 9: Check that we won't be reading past the end of a string to avoid undefined behaviour or creating security holes.
@@ -170,7 +170,7 @@ With the above knowledge it should be possible to finish the next exercise. You 
 
 *Exercise*: Modify the function handle_client to check if the client connecting appears to make a HTTP 1.1 GET request. In this case, respond with a valid HTTP 1.1 200 response, replying with a short message such as "Hello world". Make sure you set the Content-Length part of the response correctly. Connect to your server using your web browser to ensure you send the correct data. You can write data to the client by using the write() function, e.g. 'write(fd, "hello", 5);'. You can also write data piece by piece, by calling write() multiple times.
 
-As you can now see, the browser will be able to render your text, which means you have the beginnings of a web browser. To make things more interesting, let's have another exercise.
+As you can now see, the browser will be able to render your text, which means you have the beginnings of a web server. To make things more interesting, let's have another exercise.
 
 *Exercise*: Create two HTML pages, with the first one linking to the second. (You can create a link in HTML by using the <a> tag; for example, the following creates a link to a page called two.html: <a href="two.html">link</a>.) For the request to /, serve the first HTML page by reading its contents to a buffer and then sending the buffer contents as part of the response. Again, make sure you set the Content-Length part of the response correctly. Parse the request path in detail, such that you'll be able to serve the second page when the browser requests it. Note: in order to have the browser display HTML properly, you'll need to set the Content-Type field to text/html.
 

@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>16.6. Unix way - parse_gps &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="17. Exercises" href="ex_index.html" />
+    <link rel="prev" title="16.5. Unix way - sched" href="sched.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="unix-way-parse-gps">
+<h1>16.6. Unix way - parse_gps<a class="headerlink" href="#unix-way-parse-gps" title="Permalink to this headline">¶</a></h1>
+<p>Let&#8217;s take a look at our software architecture diagram again:</p>
+<img alt="_images/plan3.png" src="_images/plan3.png" />
+<p>Before we implemented the schedule data parsing and screen drawing boxes. Let&#8217;s implement the GPS data parsing next.</p>
+<p>Parsing the GPS data takes both historical as well as current GPS data as input and outputs a description of buses expected to arrive soon in the same format as sched. The requirements specification gives some input as to how exactly the input format should look like, for both historical and current GPS data:</p>
+<p>&#8220;[...] Each line has four numbers separated by spaces. The first integer identifies the route. The second is the time it took for the bus to reach the bus stop at the time the data was collected. The third and fourth are the position coordinates relative to the bus stop. They&#8217;ve been normalised such that the unit is in meters as opposed to degrees.</p>
+<p>[...] Each line has at least five numbers separated by spaces. [...] The first number identifies the route. The second identifies the start number as is used in the schedule file. The third and fourth provide the relative position of the bus to the bus stop as is used in the historical GPS file. The fifth identifies whether the bus has already passed the bus stop.&#8221;</p>
+<p>The specification furthermore explains the desired logic for predicting the bus arrival time:</p>
+<p>&#8220;The time to reach the bus stop is assumed to be the average time of all the points in the historical data within 100 meters of the current bus position for the route of the bus.&#8221;</p>
+<p>How would you go about implementing this program? Have a think.</p>
+<p>As with sched, let&#8217;s imagine some testing data, sketch the plan for the software top down and implement it bottom up, i.e. the most detailed part first.</p>
+<p>For the historical data, we can e.g. put together just six data points, such that we have two routes with three data points each, at different locations. For example:</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mf">5.5</span> <span class="mf">100.0</span> <span class="mf">100.0</span>
+<span class="mi">3</span> <span class="mf">6.5</span> <span class="mf">150.0</span> <span class="mf">150.0</span>
+<span class="mi">3</span> <span class="mf">9.5</span> <span class="mf">500.0</span> <span class="mf">500.0</span>
+<span class="mi">4</span> <span class="mf">5.5</span> <span class="mf">100.0</span> <span class="mf">100.0</span>
+<span class="mi">4</span> <span class="mf">6.5</span> <span class="mf">150.0</span> <span class="mf">150.0</span>
+<span class="mi">4</span> <span class="mf">9.5</span> <span class="mf">500.0</span> <span class="mf">500.0</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Here, we have mock-up data for bus routes 3 and 4; three data points each. Let&#8217;s mock up some relevant current GPS data:</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">30</span> <span class="mf">120.0</span> <span class="mf">120.0</span> <span class="mi">0</span>
+<span class="mi">4</span> <span class="mi">30</span> <span class="mf">475.0</span> <span class="mf">475.0</span> <span class="mi">0</span>
+<span class="mi">5</span> <span class="mi">30</span> <span class="mf">130.0</span> <span class="mf">130.0</span> <span class="mi">0</span>
+<span class="mi">3</span> <span class="mi">29</span> <span class="mf">320.0</span> <span class="mf">320.0</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Here, we have information about four buses:</p>
+<ul class="simple">
+<li>Bus with start number 30 from route 3 is at location (120, 120) and has not yet passed the bus stop. We&#8217;d expect our program to see that there are two historical data points which can be used for this bus, as those two data points are for route 3 and within 100 meters of the current location. How many minutes should our program estimate this bus to take before arriving at the bus stop?</li>
+<li>Bus with start number 30 from route 4 is at location (125, 125). We have one historical data point that our program is able to use to predict the arrival time.</li>
+<li>Bus from route 5 is included but we have no historical data for this bus.</li>
+<li>Bus with start number 29 from route 3 has already passed the stop.</li>
+</ul>
+<p><em>Exercise</em>: Write down what the expected output for the program would be for this input data. The program will receive some timestamp (hour and minute) as an input parameter; pick some numbers. Check that the output data format matches with the data from sched.</p>
+<p>Now, how would we implement software to perform this operation? Again, let&#8217;s break this down to sub-tasks:</p>
+<ul class="simple">
+<li>We need to parse the command line arguments and read in the input data</li>
+<li>We need to loop through the current bus information</li>
+<li>For each current bus, we need to decide what the output should be
+* For a bus that has passed we simply output the fact that the bus has passed
+* We should output the estimated arrival time whenever we have the historical data to be able to calculate the estimation
+* For other buses we won&#8217;t be able to output anything</li>
+<li>We finally output the results in the required format</li>
+</ul>
+<p>The most complex part of deciding what the output should be, the pseudocode could look something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">bus</span> <span class="ow">in</span> <span class="n">current_gps_data</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">bus</span><span class="o">.</span><span class="n">passed</span><span class="p">:</span>
+        <span class="c1"># don&#39;t try to predict the arrival time but note that we need to include this bus in the output</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># find historical data points for this route</span>
+        <span class="n">historical_data_points</span> <span class="o">=</span>
+            <span class="p">[</span><span class="n">data_point</span> <span class="k">for</span> <span class="n">data_point</span> <span class="ow">in</span> <span class="n">historical_data</span> <span class="k">if</span>
+                <span class="n">data_point</span><span class="o">.</span><span class="n">route_number</span> <span class="o">==</span> <span class="n">bus</span><span class="o">.</span><span class="n">route_number</span><span class="p">]</span>
+        <span class="c1"># only include data points that are within 100 meters of current position</span>
+        <span class="n">close_historical_data_points</span> <span class="o">=</span>
+            <span class="p">[</span><span class="n">data_point</span> <span class="k">for</span> <span class="n">data_point</span> <span class="ow">in</span> <span class="n">historical_data_points</span> <span class="k">if</span>
+                <span class="n">distance</span><span class="p">(</span><span class="n">bus</span><span class="o">.</span><span class="n">position</span><span class="p">,</span> <span class="n">data_point</span><span class="o">.</span><span class="n">position</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">100.0</span><span class="p">]</span>
+        <span class="n">bus</span><span class="o">.</span><span class="n">estimated_time_from_now</span> <span class="o">=</span> <span class="n">calculate_average</span><span class="p">(</span><span class="n">close_historical_data_points</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In other words, we need to find the relevant historical data points (matching route number and close enough to the current bus location), and then calculate the average arrival time based on them. Once we have this information we can print it out.</p>
+<p><em>Exercise</em>: Put together the skeleton for the program: parse the command line arguments, open the files, read in the information from the files to lists. Feel free to either store a data point (a row in either file) either to a tuple or using a class and member variables. You can convert a string to a floating point value by using e.g. &#8220;f = float(s)&#8221;. Your program doesn&#8217;t need to output anything yet.</p>
+<p>Now that we have the skeleton in place, we can try to implement the core logic. There are a couple of primitives that our core logic requires, namely calculating an average of a list of numbers and calculating the distance between two coordinates; it might be interesting to implement these first.</p>
+<p><em>Exercise</em>: Implement and test a function to calculate the average of numbers in a list. You can use the built-in function &#8220;sum&#8221; to sum all the values in a list. Note that you probably want to cast the denominator to a floating point number to ensure the result is also a floating point number.</p>
+<p><em>Exercise</em>: Implement and test a function to calculate the distance between two coordinates. Use the Pythagorean theorem for this: distance = math.sqrt((x_diff ** 2) + (y_diff ** 2)). You need to import math to have access to the sqrt function.</p>
+<p>It seems like we&#8217;re starting to have all the pieces together so we can put our program together.</p>
+<p><em>Exercise</em>: Implement the rest of your program. Test it with the mock-up data first. If that passes, see what output you get for the larger test files that were provided.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="design_index.html">16. Larger software</a><ul>
+      <li>Previous: <a href="sched.html" title="previous chapter">16.5. Unix way - sched</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">17. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/parse_gps.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/parse_gps.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

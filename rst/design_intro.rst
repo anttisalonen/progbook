@@ -88,7 +88,7 @@ The following is the requirement specification for the software. It's written by
    3 2 5 16
    [...]
 
-  In other words, each line has four integers separated by spaces. The first integer identifies the route. The second is a counter for the bus for this route for each day. The third and fourth integers represent the time the bus is expected to arrive at the stop.
+  In other words, each line has four integers separated by spaces. The first integer identifies the route. The second is a counter for the bus for this route for each day (start number). The third and fourth integers represent the time the bus is expected to arrive at the stop.
 
   The schedule is the same for all days of the week.
 

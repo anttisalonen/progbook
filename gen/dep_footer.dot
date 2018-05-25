@@ -67,4 +67,5 @@
     components -> sdl;
     sdl -> sdl2;
     sdl2 -> sched;
+    sched -> parse_gps;
 }
