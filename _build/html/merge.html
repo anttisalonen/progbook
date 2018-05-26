@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>16.7. Unix way - merge &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="17. Exercises" href="ex_index.html" />
+    <link rel="prev" title="16.6. Unix way - parse_gps" href="parse_gps.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="unix-way-merge">
+<h1>16.7. Unix way - merge<a class="headerlink" href="#unix-way-merge" title="Permalink to this headline">¶</a></h1>
+<p>Now we have all pieces of our software except merge. Merge is expected to take the outputs of both sched and parse_gps and produce the input for display. The output will need to show the estimated bus arrival time where possible and the scheduled bus arrival time otherwise, and sort the buses based on the arrival time, i.e. interleave the estimated and scheduled arrival times as needed. Have a think about how you would design this software.</p>
+<p>As before, let&#8217;s break this down:</p>
+<ul class="simple">
+<li>Parse the command line parameters and read in the input data, either to a list of tuples or a list of classes</li>
+<li>Implement the core logic to handle the input data<ul>
+<li>If a bus is scheduled but the GPS data says it&#8217;s already passed, don&#8217;t show it</li>
+<li>If a bus is scheduled and there is no GPS data, include the scheduled time in the output</li>
+<li>If there is GPS data for a bus, include the estimated time in the output</li>
+<li>Sort the output by time difference to current time (given as command line parameter)</li>
+</ul>
+</li>
+<li>Output the final result according to the specified data format</li>
+</ul>
+<p>There are a few interesting tidbits that arise during the implementation:</p>
+<ul class="simple">
+<li>The output will need to include the actual bus route names. The names for the routes are defined in the requirement specification but we haven&#8217;t used them in our code before. An easy way to go about this is to define a Python dictionary where the keys are route numbers and values are route names. This way we can easily convert a route number to its name when needed.</li>
+<li>Because we need to sort the output by the arrival time, we&#8217;ll be needing to calculate the time difference between two time stamps again. We already implemented this as part of sched. Instead of implementing this again, we can <em>reuse our old code</em> by running e.g. &#8220;import sched&#8221; and then calling the function e.g. &#8220;sched.diff_time&#8221;.</li>
+<li>As part of the implementation, we&#8217;ll need to ask the question &#8220;has a bus with this route number and start number already passed our bus stop?&#8221; Such questions can be dealt with by defining a Python set of buses (e.g. route number and start number tuples) e.g. with &#8220;my_passed_set = set(l)&#8221; where l is our list of buses that have passed the bus stop. One can then check whether a tuple exists in the set by e.g. using &#8220;(routenr, startnr) in my_passed_set&#8221;. This expression will return true if the tuple exists in the set.</li>
+<li>The type of data entry (GPS based data, scheduled data, or passed) is a good candidate for an <em>enum</em>. An enum (short for enumeration) is a simple data type which simply assigns a name to a set of constants. In our case, the constant 0 means GPS based data, 1 means scheduled data and 2 means passed data. We can construct an enum in Python using the following syntax:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Kind</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">GPS</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Schedule</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Passed</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Here, we define a class with three class variables. Now, we can simply e.g. type Kind.GPS in our code which means 0. This has the benefit that instead of having code where we have numbers like 0, 1 and 2 littered around, by typing e.g. Kind.Passed instead the code becomes easier to understand when reading it.</p>
+<ul class="simple">
+<li>We&#8217;ll need to output the time stamps in proper time format. Python has support for this; e.g.:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="s1">&#39;</span><span class="si">%02d</span><span class="s1">:</span><span class="si">%02d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This print statement will print two integers with a colon in between, but if either of the integers are less than 10 it will <em>pad</em> the output by leading zeroes, such that e.g. the number 5 will be printed as 05.</p>
+<p>Now we should have what we need to implement this program.</p>
+<p><em>Exercise</em>: Put together some mock-up data for merge. You can create this by running the sched and parse_gps programs. Modify the inputs of these programs such that you have a good input data set: a bus that is included in the schedule but has already passed; a bus that&#8217;s included in the schedule but GPS data for a prediction exists as well; a bus that&#8217;s included in the schedule but no GPS data for it exists.</p>
+<p><em>Exercise</em>: Implement merge as planned.</p>
+<div class="section" id="gluing-everything-together">
+<h2>16.7.1. Gluing everything together<a class="headerlink" href="#gluing-everything-together" title="Permalink to this headline">¶</a></h2>
+<p>We now have a few programs where we can take inputs, generate outputs, provide these as inputs again etc. Let&#8217;s put together a simple shell script that we can use to save us from repetitive work, and also to help document the flow. One way to go about this is to copy-paste all the commands you run to a file, add any boilerplate at the top, and then replace any repetitions with variables. You might end up with something like this:</p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nb">set</span> -e
+<span class="nb">set</span> -u
+
+<span class="nv">TIME</span><span class="o">=</span><span class="s2">&quot;05:15&quot;</span>
+<span class="nv">SCHED_OUT</span><span class="o">=</span>sched_out.txt
+<span class="nv">GPS_OUT</span><span class="o">=</span>gps_out.txt
+<span class="nv">MERGE_OUT</span><span class="o">=</span>merge_out.txt
+
+./sched_ex.py <span class="nv">$TIME</span> sched_test.txt &gt; <span class="nv">$SCHED_OUT</span>
+./parse_gps_ex.py <span class="nv">$TIME</span> current_gps_ex.txt historical_gps_ex.txt &gt; <span class="nv">$GPS_OUT</span>
+./merge_ex.py <span class="s2">&quot;My stop&quot;</span> <span class="nv">$TIME</span> <span class="nv">$GPS_OUT</span> <span class="nv">$SCHED_OUT</span> &gt; <span class="nv">$MERGE_OUT</span>
+./bus <span class="nv">$MERGE_OUT</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let&#8217;s go through this line by line:</p>
+<ul class="simple">
+<li>Line 1: Shebang</li>
+<li>Lines 3-4: We set some bash settings to make our code safer: set -e causes the script execution to terminate immediately when a command returns with a non-zero exit code. This means that if we have a bug and a Python script raises an exception, the following commands will not be executed. This is often practical as the following commands may not be sensical if a previous command failed, making it more difficult to spot the actual issue. set -u causes bash to terminate the execution if a variable is used before it is set.</li>
+<li>Lines 6-9: We define some variables that reduce redundancy in our script.</li>
+<li>Lines 11-14: We run our program one after the other, resulting in the display program being run.</li>
+</ul>
+<p><em>Exercise</em>: Write a shell script or modify the above one to fit your environment so that you can run all your code in one command.</p>
+</div>
+<div class="section" id="makefiles">
+<h2>16.7.2. Makefiles<a class="headerlink" href="#makefiles" title="Permalink to this headline">¶</a></h2>
+<p>Make is a traditional Unix program that runs commands in a sequence based on whether a file has been updated or not. It&#8217;s often used to run a compiler to compile source files to an executable after source code changes. It can also run tests or anything else, depending on what you tell it to run. Here, we&#8217;ll use it to compile our C++ program and run the script we just wrote.</p>
+<p>You execute make by running &#8220;make&#8221; in your shell:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ make
+make: *** No targets specified and no makefile found.  Stop.
+</pre></div>
+</div>
+<p>Make looks for a file called &#8220;Makefile&#8221; in your current directory and executes commands specified in it. As we have no makefile it won&#8217;t do anything. Let&#8217;s fix this by writing a makefile:</p>
+<div class="highlight-make"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nf">default</span><span class="o">:</span> <span class="n">bus</span>
+	./run_ex.sh
+
+<span class="nf">bus</span><span class="o">:</span> <span class="n">sdl_sched</span>2.<span class="n">cpp</span>
+	g++ -Wall -g3 -O2 <span class="k">$(</span>shell sdl2-config --cflags --libs<span class="k">)</span> -lSDL2_ttf -o bus sdl_sched2.cpp
+</pre></div>
+</td></tr></table></div>
+<p>Here, we define two <em>targets</em>. Normally, defining a target means that a file with the name of the target will be created by running the given command or commands. Our second target is a target called &#8220;bus&#8221;: by running the compiler (g++), a file called bus is created. This is our C++ executable. We also tell Make that the file depends on sdl_sched2.cpp; this is our source file.</p>
+<p>A caveat on Makefiles is that the whitespace before the commands <em>must</em> be a tab. Spaces are not allowed.</p>
+<p>Our first target (the first target is also the default target for Make) is called &#8220;default&#8221;. It depends on the bus executable and simply runs our shell script.</p>
+<p>Now, with this makefile, running &#8220;make&#8221; gives the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ make
+g++ -Wall -g3 -O2 -I/usr/include/SDL2 -D_REENTRANT -L/usr/lib -lSDL2 -lSDL2_ttf -o bus sdl_sched2.cpp
+./run_ex.sh
+$
+</pre></div>
+</div>
+<p>In other words, it runs the C++ compiler to generate the executable &#8220;bus&#8221;, followed by running our shell script, provided the compilation succeeds.</p>
+<p>Now, if you were to run make again without making changes to the C++ source file, you get this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ make
+./run_ex.sh
+$
+</pre></div>
+</div>
+<p>In other words, Make detects that recompiling the C++ file is not necessary and simply runs the script.</p>
+<p>If you do want to run the C++ compiler without making changes to the source file, you can either simply save the file, or use the Unix command &#8220;touch&#8221;, e.g. &#8220;touch sdl_sched2.cpp&#8221;. Either action will update the file modification timstamp which Make uses to detect whether the command to generate the target needs to be re-run or not.</p>
+<p>Make can be used for lots of things and there&#8217;s <em>a lot</em> more to Make than this short section might suggest; but some important properties of Make were introduced here. The main takeaway is that Make can be used to drive the build and test process.</p>
+<p><em>Exercise</em>: Put together your Makefile to compile your C++ code as well as for running your Python and C++ programs.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">16.7. Unix way - merge</a><ul>
+<li><a class="reference internal" href="#gluing-everything-together">16.7.1. Gluing everything together</a></li>
+<li><a class="reference internal" href="#makefiles">16.7.2. Makefiles</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="design_index.html">16. Larger software</a><ul>
+      <li>Previous: <a href="parse_gps.html" title="previous chapter">16.6. Unix way - parse_gps</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">17. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/merge.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/merge.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

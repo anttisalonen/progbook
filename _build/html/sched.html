@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="17. Exercises" href="ex_index.html" />
+    <link rel="next" title="16.6. Unix way - parse_gps" href="parse_gps.html" />
     <link rel="prev" title="16.4. Drawing the schedule screen using SDL2" href="sdl2.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -154,7 +154,7 @@
     <span class="n">entries</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-            <span class="c1"># parse line</span>
+            <span class="c1"># TODO: parse line here</span>
             <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">route</span><span class="p">,</span> <span class="n">startnr</span><span class="p">,</span> <span class="n">time_diff</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">))</span>
 
     <span class="n">entries</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="p">(</span><span class="n">route</span><span class="p">,</span> <span class="n">startnr</span><span class="p">,</span> <span class="n">time_diff</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">):</span> <span class="n">time_diff</span><span class="p">)</span>
@@ -201,7 +201,7 @@
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="design_index.html">16. Larger software</a><ul>
       <li>Previous: <a href="sdl2.html" title="previous chapter">16.4. Drawing the schedule screen using SDL2</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">17. Exercises</a></li>
+      <li>Next: <a href="parse_gps.html" title="next chapter">16.6. Unix way - parse_gps</a></li>
   </ul></li>
   </ul></li>
 </ul>

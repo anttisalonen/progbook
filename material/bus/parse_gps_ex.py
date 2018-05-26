@@ -37,7 +37,7 @@ def get_running_buses(filename, hist):
             startnr = int(l[1])
             gx = float(l[2])
             gy = float(l[3])
-            passed = l[4] == '2'
+            passed = l[4].strip() == '2'
 
             if passed:
                 passed_buses.append((routenr, startnr))

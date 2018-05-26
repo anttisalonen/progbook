@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="17. Exercises" href="ex_index.html" />
+    <link rel="next" title="16.7. Unix way - merge" href="merge.html" />
     <link rel="prev" title="16.5. Unix way - sched" href="sched.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -60,37 +60,39 @@
 <div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mf">5.5</span> <span class="mf">100.0</span> <span class="mf">100.0</span>
 <span class="mi">3</span> <span class="mf">6.5</span> <span class="mf">150.0</span> <span class="mf">150.0</span>
 <span class="mi">3</span> <span class="mf">9.5</span> <span class="mf">500.0</span> <span class="mf">500.0</span>
-<span class="mi">4</span> <span class="mf">5.5</span> <span class="mf">100.0</span> <span class="mf">100.0</span>
-<span class="mi">4</span> <span class="mf">6.5</span> <span class="mf">150.0</span> <span class="mf">150.0</span>
-<span class="mi">4</span> <span class="mf">9.5</span> <span class="mf">500.0</span> <span class="mf">500.0</span>
+<span class="mi">6</span> <span class="mf">5.5</span> <span class="mf">100.0</span> <span class="mf">100.0</span>
+<span class="mi">6</span> <span class="mf">6.5</span> <span class="mf">150.0</span> <span class="mf">150.0</span>
+<span class="mi">6</span> <span class="mf">9.5</span> <span class="mf">500.0</span> <span class="mf">500.0</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Here, we have mock-up data for bus routes 3 and 4; three data points each. Let&#8217;s mock up some relevant current GPS data:</p>
+<p>Here, we have mock-up data for bus routes 3 and 6; three data points each. Let&#8217;s mock up some relevant current GPS data:</p>
 <blockquote>
-<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">30</span> <span class="mf">120.0</span> <span class="mf">120.0</span> <span class="mi">0</span>
-<span class="mi">4</span> <span class="mi">30</span> <span class="mf">475.0</span> <span class="mf">475.0</span> <span class="mi">0</span>
-<span class="mi">5</span> <span class="mi">30</span> <span class="mf">130.0</span> <span class="mf">130.0</span> <span class="mi">0</span>
-<span class="mi">3</span> <span class="mi">29</span> <span class="mf">320.0</span> <span class="mf">320.0</span> <span class="mi">2</span>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">3</span> <span class="mf">120.0</span> <span class="mf">120.0</span> <span class="mi">0</span>
+<span class="mi">6</span> <span class="mi">3</span> <span class="mf">475.0</span> <span class="mf">475.0</span> <span class="mi">0</span>
+<span class="mi">5</span> <span class="mi">3</span> <span class="mf">130.0</span> <span class="mf">130.0</span> <span class="mi">0</span>
+<span class="mi">3</span> <span class="mi">2</span> <span class="mf">320.0</span> <span class="mf">320.0</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p>Here, we have information about four buses:</p>
 <ul class="simple">
-<li>Bus with start number 30 from route 3 is at location (120, 120) and has not yet passed the bus stop. We&#8217;d expect our program to see that there are two historical data points which can be used for this bus, as those two data points are for route 3 and within 100 meters of the current location. How many minutes should our program estimate this bus to take before arriving at the bus stop?</li>
-<li>Bus with start number 30 from route 4 is at location (125, 125). We have one historical data point that our program is able to use to predict the arrival time.</li>
+<li>Bus with start number 3 from route 3 is at location (120, 120) and has not yet passed the bus stop. We&#8217;d expect our program to see that there are two historical data points which can be used for this bus, as those two data points are for route 3 and within 100 meters of the current location. How many minutes should our program estimate this bus to take before arriving at the bus stop?</li>
+<li>Bus with start number 3 from route 6 is at location (125, 125). We have one historical data point that our program is able to use to predict the arrival time.</li>
 <li>Bus from route 5 is included but we have no historical data for this bus.</li>
-<li>Bus with start number 29 from route 3 has already passed the stop.</li>
+<li>Bus with start number 2 from route 3 has already passed the stop.</li>
 </ul>
 <p><em>Exercise</em>: Write down what the expected output for the program would be for this input data. The program will receive some timestamp (hour and minute) as an input parameter; pick some numbers. Check that the output data format matches with the data from sched.</p>
 <p>Now, how would we implement software to perform this operation? Again, let&#8217;s break this down to sub-tasks:</p>
 <ul class="simple">
 <li>We need to parse the command line arguments and read in the input data</li>
 <li>We need to loop through the current bus information</li>
-<li>For each current bus, we need to decide what the output should be
-* For a bus that has passed we simply output the fact that the bus has passed
-* We should output the estimated arrival time whenever we have the historical data to be able to calculate the estimation
-* For other buses we won&#8217;t be able to output anything</li>
+<li>For each current bus, we need to decide what the output should be<ul>
+<li>For a bus that has passed we simply output the fact that the bus has passed</li>
+<li>We should output the estimated arrival time whenever we have the historical data to be able to calculate the estimation</li>
+<li>For other buses we won&#8217;t be able to output anything</li>
+</ul>
+</li>
 <li>We finally output the results in the required format</li>
 </ul>
 <p>The most complex part of deciding what the output should be, the pseudocode could look something like this:</p>
@@ -110,7 +112,7 @@
 </pre></div>
 </div>
 <p>In other words, we need to find the relevant historical data points (matching route number and close enough to the current bus location), and then calculate the average arrival time based on them. Once we have this information we can print it out.</p>
-<p><em>Exercise</em>: Put together the skeleton for the program: parse the command line arguments, open the files, read in the information from the files to lists. Feel free to either store a data point (a row in either file) either to a tuple or using a class and member variables. You can convert a string to a floating point value by using e.g. &#8220;f = float(s)&#8221;. Your program doesn&#8217;t need to output anything yet.</p>
+<p><em>Exercise</em>: Put together the skeleton for the program: parse the command line arguments, open the files, read in the information from the files to lists. Feel free to either store a data point (a row in either file) either to a tuple or using a class and member variables. You can convert a string to a floating point value by using e.g. &#8220;f = float(s)&#8221;. You can remove all whitespace (line breaks, spaces etc.) from a string by using the &#8220;strip&#8221; string member function, e.g. s.strip(). Your program doesn&#8217;t need to output anything yet.</p>
 <p>Now that we have the skeleton in place, we can try to implement the core logic. There are a couple of primitives that our core logic requires, namely calculating an average of a list of numbers and calculating the distance between two coordinates; it might be interesting to implement these first.</p>
 <p><em>Exercise</em>: Implement and test a function to calculate the average of numbers in a list. You can use the built-in function &#8220;sum&#8221; to sum all the values in a list. Note that you probably want to cast the denominator to a floating point number to ensure the result is also a floating point number.</p>
 <p><em>Exercise</em>: Implement and test a function to calculate the distance between two coordinates. Use the Pythagorean theorem for this: distance = math.sqrt((x_diff ** 2) + (y_diff ** 2)). You need to import math to have access to the sqrt function.</p>
@@ -129,7 +131,7 @@
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="design_index.html">16. Larger software</a><ul>
       <li>Previous: <a href="sched.html" title="previous chapter">16.5. Unix way - sched</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">17. Exercises</a></li>
+      <li>Next: <a href="merge.html" title="next chapter">16.7. Unix way - merge</a></li>
   </ul></li>
   </ul></li>
 </ul>

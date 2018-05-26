@@ -28,25 +28,25 @@ For the historical data, we can e.g. put together just six data points, such tha
    3 5.5 100.0 100.0
    3 6.5 150.0 150.0
    3 9.5 500.0 500.0
-   4 5.5 100.0 100.0
-   4 6.5 150.0 150.0
-   4 9.5 500.0 500.0
+   6 5.5 100.0 100.0
+   6 6.5 150.0 150.0
+   6 9.5 500.0 500.0
 
-Here, we have mock-up data for bus routes 3 and 4; three data points each. Let's mock up some relevant current GPS data:
+Here, we have mock-up data for bus routes 3 and 6; three data points each. Let's mock up some relevant current GPS data:
 
   :: 
 
-   3 30 120.0 120.0 0
-   4 30 475.0 475.0 0
-   5 30 130.0 130.0 0
-   3 29 320.0 320.0 2
+   3 3 120.0 120.0 0
+   6 3 475.0 475.0 0
+   5 3 130.0 130.0 0
+   3 2 320.0 320.0 2
 
 Here, we have information about four buses:
 
-* Bus with start number 30 from route 3 is at location (120, 120) and has not yet passed the bus stop. We'd expect our program to see that there are two historical data points which can be used for this bus, as those two data points are for route 3 and within 100 meters of the current location. How many minutes should our program estimate this bus to take before arriving at the bus stop?
-* Bus with start number 30 from route 4 is at location (125, 125). We have one historical data point that our program is able to use to predict the arrival time.
+* Bus with start number 3 from route 3 is at location (120, 120) and has not yet passed the bus stop. We'd expect our program to see that there are two historical data points which can be used for this bus, as those two data points are for route 3 and within 100 meters of the current location. How many minutes should our program estimate this bus to take before arriving at the bus stop?
+* Bus with start number 3 from route 6 is at location (125, 125). We have one historical data point that our program is able to use to predict the arrival time.
 * Bus from route 5 is included but we have no historical data for this bus.
-* Bus with start number 29 from route 3 has already passed the stop.
+* Bus with start number 2 from route 3 has already passed the stop.
 
 *Exercise*: Write down what the expected output for the program would be for this input data. The program will receive some timestamp (hour and minute) as an input parameter; pick some numbers. Check that the output data format matches with the data from sched.
 
@@ -55,9 +55,11 @@ Now, how would we implement software to perform this operation? Again, let's bre
 * We need to parse the command line arguments and read in the input data
 * We need to loop through the current bus information
 * For each current bus, we need to decide what the output should be
+
   * For a bus that has passed we simply output the fact that the bus has passed
   * We should output the estimated arrival time whenever we have the historical data to be able to calculate the estimation
   * For other buses we won't be able to output anything
+
 * We finally output the results in the required format
   
 The most complex part of deciding what the output should be, the pseudocode could look something like this:
@@ -80,7 +82,7 @@ The most complex part of deciding what the output should be, the pseudocode coul
 
 In other words, we need to find the relevant historical data points (matching route number and close enough to the current bus location), and then calculate the average arrival time based on them. Once we have this information we can print it out.
 
-*Exercise*: Put together the skeleton for the program: parse the command line arguments, open the files, read in the information from the files to lists. Feel free to either store a data point (a row in either file) either to a tuple or using a class and member variables. You can convert a string to a floating point value by using e.g. "f = float(s)". Your program doesn't need to output anything yet.
+*Exercise*: Put together the skeleton for the program: parse the command line arguments, open the files, read in the information from the files to lists. Feel free to either store a data point (a row in either file) either to a tuple or using a class and member variables. You can convert a string to a floating point value by using e.g. "f = float(s)". You can remove all whitespace (line breaks, spaces etc.) from a string by using the "strip" string member function, e.g. s.strip(). Your program doesn't need to output anything yet.
 
 Now that we have the skeleton in place, we can try to implement the core logic. There are a couple of primitives that our core logic requires, namely calculating an average of a list of numbers and calculating the distance between two coordinates; it might be interesting to implement these first.
 

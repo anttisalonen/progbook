@@ -125,7 +125,7 @@ As a reminder, here are some building blocks to get you started:
         entries = list()
         with open(sys.argv[2], 'r') as f:
             for line in f:
-                # parse line
+                # TODO: parse line here
                 entries.append((route, startnr, time_diff, hour, minute))
 
         entries.sort(key=lambda (route, startnr, time_diff, hour, minute): time_diff)

@@ -17,6 +17,5 @@ Exercises
    ex_png
    ex_sudoku
    ex_sdl
-   ex_sched
-   ex_parse_gps
+   ex_bus_unix
 

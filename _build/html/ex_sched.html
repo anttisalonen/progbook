@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>17.14. Solutions to exercises: Unix way - sched &#8212; guide 0.1 documentation</title>
+    <title>&lt;no title&gt; &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,6 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="18. Chapter dependencies" href="dep.html" />
-    <link rel="prev" title="17.13. Solutions to exercises: SDL" href="ex_sdl.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,57 +41,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="solutions-to-exercises-unix-way-sched">
-<h1>17.14. Solutions to exercises: Unix way - sched<a class="headerlink" href="#solutions-to-exercises-unix-way-sched" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python2</span>
-
-<span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="c1"># return how many minutes t2 is ahead of t1</span>
-<span class="k">def</span> <span class="nf">diff_time</span><span class="p">((</span><span class="n">t1h</span><span class="p">,</span> <span class="n">t1m</span><span class="p">),</span> <span class="p">(</span><span class="n">t2h</span><span class="p">,</span> <span class="n">t2m</span><span class="p">)):</span>
-    <span class="n">hd</span> <span class="o">=</span> <span class="n">t2h</span> <span class="o">-</span> <span class="n">t1h</span>
-    <span class="n">md</span> <span class="o">=</span> <span class="n">t2m</span> <span class="o">-</span> <span class="n">t1m</span>
-    <span class="n">diff</span> <span class="o">=</span> <span class="n">hd</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">md</span>
-    <span class="c1"># wrap around</span>
-    <span class="k">if</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">720</span><span class="p">:</span>
-        <span class="n">diff</span> <span class="o">+=</span> <span class="mi">1440</span>
-    <span class="k">return</span> <span class="n">diff</span>
-
-<span class="k">def</span> <span class="nf">get_entries</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-    <span class="n">now_hr</span><span class="p">,</span> <span class="n">now_minute</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">time</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)]</span>
-
-    <span class="n">entries</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">route</span><span class="p">,</span> <span class="n">startnr</span><span class="p">,</span> <span class="n">hr</span><span class="p">,</span> <span class="n">mn</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)]</span>
-            <span class="n">dt</span> <span class="o">=</span> <span class="n">diff_time</span><span class="p">((</span><span class="n">now_hr</span><span class="p">,</span> <span class="n">now_minute</span><span class="p">),</span> <span class="p">(</span><span class="n">hr</span><span class="p">,</span> <span class="n">mn</span><span class="p">))</span>
-            <span class="k">if</span> <span class="n">dt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">route</span><span class="p">,</span> <span class="n">startnr</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">hr</span><span class="p">,</span> <span class="n">mn</span><span class="p">))</span>
-
-    <span class="n">entries</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">hr</span><span class="p">,</span> <span class="n">mn</span><span class="p">):</span> <span class="n">dt</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">entries</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-
-    <span class="n">entries</span> <span class="o">=</span> <span class="n">get_entries</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">tm</span><span class="p">)</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">tm</span><span class="p">,</span> <span class="mi">1</span>
-
-    <span class="n">test</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="n">diff_time</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span> <span class="o">==</span> <span class="mi">6</span>
-    <span class="k">assert</span> <span class="n">diff_time</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">34</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">6</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-
+  
 
           </div>
         </div>
@@ -103,10 +51,6 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="ex_index.html">17. Exercises</a><ul>
-      <li>Previous: <a href="ex_sdl.html" title="previous chapter">17.13. Solutions to exercises: SDL</a></li>
-      <li>Next: <a href="dep.html" title="next chapter">18. Chapter dependencies</a></li>
-  </ul></li>
   </ul></li>
 </ul>
 </div>

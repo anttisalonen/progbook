@@ -10,4 +10,5 @@ Larger software
    sdl2
    sched
    parse_gps
+   merge
 

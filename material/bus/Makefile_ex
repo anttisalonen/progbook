@@ -1,0 +1,5 @@
+default: bus
+	./run_ex.sh
+
+bus: sdl_sched2.cpp
+	g++ -Wall -g3 -O2 $(shell sdl2-config --cflags --libs) -lSDL2_ttf -o bus sdl_sched2.cpp

@@ -84,7 +84,7 @@
             <span class="n">startnr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">gx</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
             <span class="n">gy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-            <span class="n">passed</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span>
+            <span class="n">passed</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span>
 
             <span class="k">if</span> <span class="n">passed</span><span class="p">:</span>
                 <span class="n">passed_buses</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">routenr</span><span class="p">,</span> <span class="n">startnr</span><span class="p">))</span>
