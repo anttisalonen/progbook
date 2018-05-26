@@ -11,4 +11,5 @@ Larger software
    sched
    parse_gps
    merge
+   bus2
 

@@ -69,4 +69,5 @@
     sdl2 -> sched;
     sched -> parse_gps;
     parse_gps -> merge;
+    merge -> bus2;
 }
