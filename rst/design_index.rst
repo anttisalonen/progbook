@@ -12,4 +12,5 @@ Larger software
    parse_gps
    merge
    bus2
+   bus3
 

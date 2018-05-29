@@ -301,7 +301,7 @@ void App::update_sched_info()
         }
     }
     std::sort(m_sched_info.begin(), m_sched_info.end(),
-        [](const BusInfo& b1, const BusInfo& b2) {
+        [](const auto& b1, const auto& b2) {
             return time_diff(b2.time, b1.time) < 0;
         });
     if(m_sched_info.size() > 50)
@@ -328,19 +328,19 @@ void App::update_bus_info()
     }
 
     std::remove_if(m_bus_info.begin(), m_bus_info.end(),
-            [&](const BusInfo& bi) {
+            [&](const auto& bi) {
                 return std::find(passed.begin(), passed.end(),
                         std::make_tuple(bi.route_nr, bi.start_nr)) != passed.end();
             });
 
     std::remove_if(m_bus_info.begin(), m_bus_info.end(),
-            [&](const BusInfo& bi) {
+            [&](const auto& bi) {
                 return bi.kind == Kind::Schedule && std::find(have_gps.begin(), have_gps.end(),
                         std::make_tuple(bi.route_nr, bi.start_nr)) != have_gps.end();
             });
 
     std::sort(m_bus_info.begin(), m_bus_info.end(),
-        [&](const BusInfo& b1, const BusInfo& b2) {
+        [&](const auto& b1, const auto& b2) {
             return time_diff(m_time, b1.time) < time_diff(m_time, b2.time);
         });
 }

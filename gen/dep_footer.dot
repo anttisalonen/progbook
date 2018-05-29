@@ -70,4 +70,5 @@
     sched -> parse_gps;
     parse_gps -> merge;
     merge -> bus2;
+    bus2 -> bus3;
 }
