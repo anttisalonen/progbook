@@ -18,4 +18,5 @@ Exercises
    ex_sudoku
    ex_sdl
    ex_bus_unix
+   ex_bus_cpp
 

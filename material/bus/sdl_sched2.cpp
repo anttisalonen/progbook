@@ -14,18 +14,18 @@ const int height = 480;
 const int num_labels = 23;
 
 class SDL_Schedule {
-	public:
-		SDL_Schedule(const std::string& filename);
-		~SDL_Schedule();
-		void render();
+    public:
+        SDL_Schedule(const std::string& filename);
+        ~SDL_Schedule();
+        void render();
 
-	private:
-		TTF_Font *font;
-		SDL_Window *screen;
-		SDL_Renderer *renderer;
-		SDL_Color col_white;
-		SDL_Color col_yellow;
-		SDL_Rect dest;
+    private:
+        TTF_Font *font;
+        SDL_Window *screen;
+        SDL_Renderer *renderer;
+        SDL_Color col_white;
+        SDL_Color col_yellow;
+        SDL_Rect dest;
         std::string file;
         std::array<SDL_Rect, num_labels> rects;
 };
@@ -36,30 +36,30 @@ SDL_Schedule::SDL_Schedule(const std::string& filename)
     SDL_Init(SDL_INIT_VIDEO);
     if(SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Could not init SDL: %s\n", SDL_GetError());
-		throw std::runtime_error("error");
+        throw std::runtime_error("error");
     }
     if(TTF_Init() != 0) {
         fprintf(stderr, "Couldn't init SDL_ttf: %s\n", TTF_GetError());
-		throw std::runtime_error("error");
+        throw std::runtime_error("error");
     }
     font = TTF_OpenFont("DejaVuSans.ttf", 36);
     if(!font) {
         fprintf(stderr, "Couldn't load font\n");
-		throw std::runtime_error("error");
+        throw std::runtime_error("error");
     }
     screen = SDL_CreateWindow("My application",
-                          SDL_WINDOWPOS_UNDEFINED,
-                          SDL_WINDOWPOS_UNDEFINED,
-                          width, height,
-                          0);
+            SDL_WINDOWPOS_UNDEFINED,
+            SDL_WINDOWPOS_UNDEFINED,
+            width, height,
+            0);
     if(!screen) {
         fprintf(stderr, "Could not create window\n");
-		throw std::runtime_error("error");
+        throw std::runtime_error("error");
     }
     renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_SOFTWARE);
     if(!renderer) {
         fprintf(stderr, "Could not create renderer\n");
-		throw std::runtime_error("error");
+        throw std::runtime_error("error");
     }
 
     col_white.r = 255;
@@ -129,12 +129,12 @@ void SDL_Schedule::render()
 
 int main(int argc, char** argv)
 {
-	if(argc != 2) {
-		fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
-		return 1;
-	}
-	SDL_Schedule sched(argv[1]);
-	sched.render();
+    if(argc != 2) {
+        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+        return 1;
+    }
+    SDL_Schedule sched(argv[1]);
+    sched.render();
     SDL_Delay(3000);
 
     return 0;

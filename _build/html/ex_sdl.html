@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="17.14. Solutions to exercises: Unix way - sched" href="ex_sched.html" />
+    <link rel="next" title="17.14. Solutions to exercises: Unix way" href="ex_bus_unix.html" />
     <link rel="prev" title="17.12. Solutions to exercises: Sudoku" href="ex_sudoku.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -69,10 +69,10 @@
         <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="n">SDL_Window</span> <span class="o">*</span><span class="n">screen</span> <span class="o">=</span> <span class="n">SDL_CreateWindow</span><span class="p">(</span><span class="s">&quot;My application&quot;</span><span class="p">,</span>
-                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
-                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
-                          <span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span>
-                          <span class="mi">0</span><span class="p">);</span>
+            <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+            <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+            <span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">screen</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create window</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
         <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
@@ -140,65 +140,65 @@
 
 <span class="n">SDL_Schedule</span><span class="o">::</span><span class="n">SDL_Schedule</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">filename</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not init SDL: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SDL_GetError</span><span class="p">());</span>
+	<span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not init SDL: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SDL_GetError</span><span class="p">());</span>
 		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">TTF_Init</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t init SDL_ttf: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">TTF_GetError</span><span class="p">());</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">TTF_Init</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t init SDL_ttf: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">TTF_GetError</span><span class="p">());</span>
 		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">font</span> <span class="o">=</span> <span class="n">TTF_OpenFont</span><span class="p">(</span><span class="s">&quot;DejaVuSans.ttf&quot;</span><span class="p">,</span> <span class="mi">72</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">font</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t load font</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">font</span> <span class="o">=</span> <span class="n">TTF_OpenFont</span><span class="p">(</span><span class="s">&quot;DejaVuSans.ttf&quot;</span><span class="p">,</span> <span class="mi">72</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">font</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t load font</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">screen</span> <span class="o">=</span> <span class="n">SDL_CreateWindow</span><span class="p">(</span><span class="s">&quot;My application&quot;</span><span class="p">,</span>
-                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
-                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
-                          <span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span>
-                          <span class="mi">0</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">screen</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create window</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">screen</span> <span class="o">=</span> <span class="n">SDL_CreateWindow</span><span class="p">(</span><span class="s">&quot;My application&quot;</span><span class="p">,</span>
+			<span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+			<span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+			<span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span>
+			<span class="mi">0</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">screen</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create window</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">renderer</span> <span class="o">=</span> <span class="n">SDL_CreateRenderer</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">SDL_RENDERER_SOFTWARE</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">renderer</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create renderer</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">renderer</span> <span class="o">=</span> <span class="n">SDL_CreateRenderer</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">SDL_RENDERER_SOFTWARE</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">renderer</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create renderer</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
+	<span class="p">}</span>
 
-    <span class="n">col_white</span><span class="p">.</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
-    <span class="n">col_white</span><span class="p">.</span><span class="n">g</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
-    <span class="n">col_white</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
-    <span class="n">col_white</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+	<span class="n">col_white</span><span class="p">.</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+	<span class="n">col_white</span><span class="p">.</span><span class="n">g</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+	<span class="n">col_white</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+	<span class="n">col_white</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="n">SDL_Schedule</span><span class="o">::~</span><span class="n">SDL_Schedule</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="n">SDL_DestroyWindow</span><span class="p">(</span><span class="n">screen</span><span class="p">);</span>
-    <span class="n">TTF_CloseFont</span><span class="p">(</span><span class="n">font</span><span class="p">);</span>
-    <span class="n">TTF_Quit</span><span class="p">();</span>
-    <span class="n">SDL_Quit</span><span class="p">();</span>
+	<span class="n">SDL_DestroyWindow</span><span class="p">(</span><span class="n">screen</span><span class="p">);</span>
+	<span class="n">TTF_CloseFont</span><span class="p">(</span><span class="n">font</span><span class="p">);</span>
+	<span class="n">TTF_Quit</span><span class="p">();</span>
+	<span class="n">SDL_Quit</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="n">SDL_Schedule</span><span class="o">::</span><span class="n">render</span><span class="p">()</span>
 <span class="p">{</span>
 	<span class="n">SDL_Surface</span> <span class="o">*</span><span class="n">text</span> <span class="o">=</span> <span class="n">TTF_RenderUTF8_Blended</span><span class="p">(</span><span class="n">font</span><span class="p">,</span> <span class="s">&quot;Hello world&quot;</span><span class="p">,</span> <span class="n">col_white</span><span class="p">);</span>
-    <span class="n">SDL_SetRenderDrawColor</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">);</span>
-    <span class="n">SDL_RenderClear</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
-    <span class="n">SDL_Texture</span> <span class="o">*</span><span class="n">texture</span> <span class="o">=</span> <span class="n">SDL_CreateTextureFromSurface</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">text</span><span class="p">);</span>
-    <span class="n">SDL_FreeSurface</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="n">SDL_Rect</span> <span class="n">dest</span><span class="p">;</span>
-    <span class="n">dest</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-    <span class="n">dest</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-    <span class="n">SDL_QueryTexture</span><span class="p">(</span><span class="n">texture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">.</span><span class="n">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">.</span><span class="n">h</span><span class="p">);</span>
-    <span class="n">SDL_RenderCopy</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">);</span>
-    <span class="n">SDL_DestroyTexture</span><span class="p">(</span><span class="n">texture</span><span class="p">);</span>
-    <span class="n">texture</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="n">SDL_RenderPresent</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
+	<span class="n">SDL_SetRenderDrawColor</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">);</span>
+	<span class="n">SDL_RenderClear</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
+	<span class="n">SDL_Texture</span> <span class="o">*</span><span class="n">texture</span> <span class="o">=</span> <span class="n">SDL_CreateTextureFromSurface</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">text</span><span class="p">);</span>
+	<span class="n">SDL_FreeSurface</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+	<span class="n">text</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+	<span class="n">SDL_Rect</span> <span class="n">dest</span><span class="p">;</span>
+	<span class="n">dest</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="n">dest</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="n">SDL_QueryTexture</span><span class="p">(</span><span class="n">texture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">.</span><span class="n">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">.</span><span class="n">h</span><span class="p">);</span>
+	<span class="n">SDL_RenderCopy</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">);</span>
+	<span class="n">SDL_DestroyTexture</span><span class="p">(</span><span class="n">texture</span><span class="p">);</span>
+	<span class="n">texture</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+	<span class="n">SDL_RenderPresent</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
@@ -209,9 +209,9 @@
 	<span class="p">}</span>
 	<span class="n">SDL_Schedule</span> <span class="n">sched</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 	<span class="n">sched</span><span class="p">.</span><span class="n">render</span><span class="p">();</span>
-    <span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+	<span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
 
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -234,18 +234,18 @@
 <span class="k">const</span> <span class="kt">int</span> <span class="n">num_labels</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">SDL_Schedule</span> <span class="p">{</span>
-	<span class="k">public</span><span class="o">:</span>
-		<span class="n">SDL_Schedule</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">filename</span><span class="p">);</span>
-		<span class="o">~</span><span class="n">SDL_Schedule</span><span class="p">();</span>
-		<span class="kt">void</span> <span class="nf">render</span><span class="p">();</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="n">SDL_Schedule</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">filename</span><span class="p">);</span>
+        <span class="o">~</span><span class="n">SDL_Schedule</span><span class="p">();</span>
+        <span class="kt">void</span> <span class="nf">render</span><span class="p">();</span>
 
-	<span class="k">private</span><span class="o">:</span>
-		<span class="n">TTF_Font</span> <span class="o">*</span><span class="n">font</span><span class="p">;</span>
-		<span class="n">SDL_Window</span> <span class="o">*</span><span class="n">screen</span><span class="p">;</span>
-		<span class="n">SDL_Renderer</span> <span class="o">*</span><span class="n">renderer</span><span class="p">;</span>
-		<span class="n">SDL_Color</span> <span class="n">col_white</span><span class="p">;</span>
-		<span class="n">SDL_Color</span> <span class="n">col_yellow</span><span class="p">;</span>
-		<span class="n">SDL_Rect</span> <span class="n">dest</span><span class="p">;</span>
+    <span class="k">private</span><span class="o">:</span>
+        <span class="n">TTF_Font</span> <span class="o">*</span><span class="n">font</span><span class="p">;</span>
+        <span class="n">SDL_Window</span> <span class="o">*</span><span class="n">screen</span><span class="p">;</span>
+        <span class="n">SDL_Renderer</span> <span class="o">*</span><span class="n">renderer</span><span class="p">;</span>
+        <span class="n">SDL_Color</span> <span class="n">col_white</span><span class="p">;</span>
+        <span class="n">SDL_Color</span> <span class="n">col_yellow</span><span class="p">;</span>
+        <span class="n">SDL_Rect</span> <span class="n">dest</span><span class="p">;</span>
         <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">file</span><span class="p">;</span>
         <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">SDL_Rect</span><span class="p">,</span> <span class="n">num_labels</span><span class="o">&gt;</span> <span class="n">rects</span><span class="p">;</span>
 <span class="p">};</span>
@@ -256,30 +256,30 @@
     <span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span><span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not init SDL: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SDL_GetError</span><span class="p">());</span>
-		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="k">if</span><span class="p">(</span><span class="n">TTF_Init</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t init SDL_ttf: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">TTF_GetError</span><span class="p">());</span>
-		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="n">font</span> <span class="o">=</span> <span class="n">TTF_OpenFont</span><span class="p">(</span><span class="s">&quot;DejaVuSans.ttf&quot;</span><span class="p">,</span> <span class="mi">36</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">font</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t load font</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="n">screen</span> <span class="o">=</span> <span class="n">SDL_CreateWindow</span><span class="p">(</span><span class="s">&quot;My application&quot;</span><span class="p">,</span>
-                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
-                          <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
-                          <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
-                          <span class="mi">0</span><span class="p">);</span>
+            <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+            <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span>
+            <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">screen</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create window</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="n">renderer</span> <span class="o">=</span> <span class="n">SDL_CreateRenderer</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">SDL_RENDERER_SOFTWARE</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">renderer</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not create renderer</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-		<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="n">col_white</span><span class="p">.</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
@@ -349,12 +349,12 @@
 
 <span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
 <span class="p">{</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Usage: %s &lt;filename&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="n">SDL_Schedule</span> <span class="n">sched</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-	<span class="n">sched</span><span class="p">.</span><span class="n">render</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Usage: %s &lt;filename&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">SDL_Schedule</span> <span class="n">sched</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="n">sched</span><span class="p">.</span><span class="n">render</span><span class="p">();</span>
     <span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -385,7 +385,7 @@
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="ex_index.html">17. Exercises</a><ul>
       <li>Previous: <a href="ex_sudoku.html" title="previous chapter">17.12. Solutions to exercises: Sudoku</a></li>
-      <li>Next: <a href="ex_sched.html" title="next chapter">17.14. Solutions to exercises: Unix way - sched</a></li>
+      <li>Next: <a href="ex_bus_unix.html" title="next chapter">17.14. Solutions to exercises: Unix way</a></li>
   </ul></li>
   </ul></li>
 </ul>

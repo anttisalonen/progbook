@@ -20,10 +20,10 @@ int main()
         return 1;
     }
     SDL_Window *screen = SDL_CreateWindow("My application",
-                          SDL_WINDOWPOS_UNDEFINED,
-                          SDL_WINDOWPOS_UNDEFINED,
-                          640, 480,
-                          0);
+            SDL_WINDOWPOS_UNDEFINED,
+            SDL_WINDOWPOS_UNDEFINED,
+            640, 480,
+            0);
     if(!screen) {
         fprintf(stderr, "Could not create window\n");
         return 1;
