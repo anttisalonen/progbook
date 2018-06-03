@@ -230,7 +230,7 @@ $ ld -L/usr/lib -lSDL2 -lSDL2_ttf -o hello file1.o file2.o
 <p>Here, we pass the include path to the compiler while compiling using the -I switch, such that the compiler will be able to find the SDL2 header files.</p>
 <p>After compilation, we pass the linker the path where to find libraries using the -L switch, and tell it which libraries to link using the -l switch (in this case, SDL2 and SDL2_ttf).</p>
 <p>SDL2 provides us with the helper tool sdl2-config which can generate these for us. sdl2-config &#8211;cflags generates the correct -I line (and more) while sdl2-config &#8211;libs generates the switches required by the linker. This is the reason we call and expand sdl2-config we compile our code that uses SDL2.</p>
-<p><em>Exercise</em>: Use our SDL code from our bus logic code. Create a new header file or files as necessary. Compile and run your code. Fill out all the holes so that your code will do everything: parse the input files, generate the labels required for the display and display the labels.</p>
+<p><em>Exercise</em>: Use our SDL code from our bus logic code. Create a new header file or files as necessary. Compile and run your code. Fill out all the holes so that your code will do everything: parse the input files, generate the labels required for the display and display the labels. Create an std::map to map route numbers to names.</p>
 <p>If you made it here, congratulations.</p>
 </div>
 </div>

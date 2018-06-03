@@ -8,7 +8,7 @@ Let's practice this a bit. We created a repository the last time by running "git
 .. code-block:: bash
 
     $ mkdir my_clone
-    $ cd clone
+    $ cd my_clone
     $ git clone ../my_project
     Cloning into 'my_project'...
     done.
@@ -38,7 +38,7 @@ Now, let's make a change in our clone:
 .. code-block:: bash
 
     $ echo "print 'hello world'" >> hello.py
-    git commit hello.py -m "add third print"
+    $ git commit hello.py -m "add third print"
     [master bc6ef9e] add third print
      1 file changed, 1 insertion(+)
 
@@ -74,9 +74,7 @@ Now, let's make two branches from master, such that both branches have some chan
 
 Let's then merge the two branches in master. As there's no obvious way to merge the two branches we'll end up in conflict which we'll have to resolve manually.
 
-Why would you do this? This could happen because we're confused with what we're doing, or because we're working in a team and making conflicting changes, or because we want to pick different changes from different versions to create a new version. While we'll do this work on local branches, in general the workflow is the same when working with remote code, e.g. code from other people.
-
-Let's first create the branch off of "master" and a new commit with our changes:
+Why would you do this? This could happen because we're confused with what we're doing, or because we're working in a team and making conflicting changes, or because we want to pick different changes from different versions to create a new version. While we'll do this work on local branches, in general the principle is the same when working with remote code, e.g. code from other people.
 
 Let's then create a new branch where we want to change the values that are being saved in the file such that they're 0.0 and 1.0:
 

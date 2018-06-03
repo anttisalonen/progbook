@@ -186,6 +186,6 @@ After compilation, we pass the linker the path where to find libraries using the
 
 SDL2 provides us with the helper tool sdl2-config which can generate these for us. sdl2-config --cflags generates the correct -I line (and more) while sdl2-config --libs generates the switches required by the linker. This is the reason we call and expand sdl2-config we compile our code that uses SDL2.
 
-*Exercise*: Use our SDL code from our bus logic code. Create a new header file or files as necessary. Compile and run your code. Fill out all the holes so that your code will do everything: parse the input files, generate the labels required for the display and display the labels.
+*Exercise*: Use our SDL code from our bus logic code. Create a new header file or files as necessary. Compile and run your code. Fill out all the holes so that your code will do everything: parse the input files, generate the labels required for the display and display the labels. Create an std::map to map route numbers to names.
 
 If you made it here, congratulations.

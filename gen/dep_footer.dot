@@ -1,6 +1,7 @@
     unix -> vim;
     vim -> vim2;
     python_generate_file -> unix;
+    intro -> learn;
     learn -> unix;
     unix -> vcs;
     unix -> regex;
