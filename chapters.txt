@@ -3,7 +3,7 @@ Intro
 What is programming - CPUs, asm
 Python fizzbuzz
 Python flask
-quadratic formula
+quadratic formula (c + python)
 
 Have enough of
 osi model
@@ -46,11 +46,15 @@ gpgpu
 machine learning
 ffi
 timestamp sort
+online shop - sql, json
+http server revisited - sw design in c
 
 Missing
 profiling
 chat web site
 open source licenses
+unit testing - bus schedule?
+data visualisation - bus schedule?
 
 Will have
 processes - unit testing, code reviews, q&a, ci
@@ -63,12 +67,10 @@ quadratic formula - generate text data, generate json, read json, plot using plo
 guess number - js, binary search
 web server - sockets, pointers, osi
 sudoku - dfs, recursion, classes, propagate + search
+bus schedule - software design, strong+static languages, more algorithms, make, kiss (wiki/unix_philosophy)
 
 Projects left
-crawler - regexes + concurrent programming + bfs + tagsoup
 dot parsing  - regexes, fsm, proper parser, backus naur, graphs, bfs, topological sort
-bus schedule - software design, strong+static languages, more algorithms, make, kiss (wiki/unix_philosophy), processes (unit testing), data visualisation
-http server revisited - sw design in c
-tech behind the book
-online shop - sql, json
 print return receipt - scan code, pdf, sql
+crawler - regexes + concurrent programming + bfs + tagsoup
+tech behind the book

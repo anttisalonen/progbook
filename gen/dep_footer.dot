@@ -73,4 +73,7 @@
     merge -> bus2;
     bus2 -> bus3;
     bus3 -> bus4;
+    regex -> py4;
+    ds2 -> py4;
+    hiscore_table -> py4;
 }

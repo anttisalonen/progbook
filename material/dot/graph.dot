@@ -1,0 +1,8 @@
+digraph g {
+    A -> B;
+    A -> C;
+    B -> D;
+    C -> D;
+    D -> E;
+    A -> E;
+}

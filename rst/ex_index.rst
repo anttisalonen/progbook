@@ -19,4 +19,5 @@ Exercises
    ex_sdl
    ex_bus_unix
    ex_bus_cpp
+   ex_py4
 

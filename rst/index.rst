@@ -31,6 +31,7 @@ Software development fundamentals
    strong_index
    sud_index
    design_index
+   py4_index
    ex_index
 
    dep
