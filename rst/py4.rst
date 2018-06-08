@@ -1,7 +1,7 @@
 Graphs
 ------
 
-In this subchapter we'll learn a bit about *graphs*.
+In this section we'll learn a bit about *graphs*.
 
 A graph is a collection of *nodes* as well as *edges* that connect nodes. There are lots of different kinds of graphs:
 
@@ -62,7 +62,7 @@ As you can see, dot takes the output format as a parameter, can read dot files f
 
 As you can see, the dot language is fairly simple, at least in this case, and fairly intuitive.
 
-Here's a bit more complex example of a dot file - it's the source for the graph at the beginning of this subchapter:
+Here's a bit more complex example of a dot file - it's the source for the graph at the beginning of this section:
 
 .. literalinclude:: ../material/dot/dep2.dot
 
@@ -80,7 +80,7 @@ There are several ways to approach parsing dot files. We'll introduce and implem
 * The "hacky" way is faster to implement
 * However, the "hacky" way is designed to only work with dot files that are structurally very similar to the ones above; adding support for more dot features will be very difficult
 
-Conversely, the more accurate way is somewhat more difficult to implement but is closer to a "real" dot parser, such that extending it later will result in more maintainable code. In our case, the hacky way results in about 30 lines of Python code while the more accurate way will be about 160 lines. These numbers include not only parsing but also applying the algorithm to remove unnecessary edges.
+Conversely, the more accurate way is somewhat more difficult to implement but is closer to a "real" dot parser, such that extending it later will result in more maintainable code. In our case, the hacky way results in about 30 lines of Python code while the more accurate way will be about 150 lines. These numbers include not only parsing but also applying the algorithm to remove unnecessary edges.
 
 The hacky way
 =============
@@ -208,3 +208,7 @@ You may recall that function calls are also stored in a stack, such that the com
 We should now have all the pieces we need to finish our program.
 
 *Exercise*: Finish the program to remove unnecessary edges. See the pseudocode above for the principle. Use your traversal function to determine whether a node depends on another.
+
+By the way, the Graphviz suite also includes a tool called "tred" which performs transitive reduction similarly to our code. You can also use this to validate the output of your program.
+
+*Exercise*: Look up the source code for "tred" in the Graphviz source.

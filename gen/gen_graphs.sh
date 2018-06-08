@@ -1,5 +1,5 @@
 #!/bin/bash
 
-dot -Tpng gen/dep.dot > gen/dependencies.png
-dot -Tpng gen/dep2.dot > gen/dependencies2.png
+python2 material/dot/dot2.py < gen/dep.dot  | dot -Tpng > gen/dependencies.png
+python2 material/dot/dot2.py < gen/dep2.dot | dot -Tpng > gen/dependencies2.png
 

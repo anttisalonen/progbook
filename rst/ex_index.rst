@@ -20,4 +20,5 @@ Exercises
    ex_bus_unix
    ex_bus_cpp
    ex_py4
+   ex_parse
 

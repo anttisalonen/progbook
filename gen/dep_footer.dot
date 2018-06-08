@@ -76,4 +76,7 @@
     regex -> py4;
     ds2 -> py4;
     hiscore_table -> py4;
+    sud4 -> py4;
+    png2 -> py4;
+    py4 -> parse;
 }

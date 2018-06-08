@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>17.2. Parsing &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="18. Exercises" href="ex_index.html" />
+    <link rel="prev" title="17.1. Graphs" href="py4.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="parsing">
+<h1>17.2. Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h1>
+<p>Now that we have the hacky solution, let&#8217;s see what a nicer solution would look like.</p>
+<p>One problem that our hacky solution had was that it made fairly strict assumptions about the input data. For example, in dot, as the semicolon is the delimiter between statements, it&#8217;s not necessary for the left hand side and the right hand side of an arrow to be on the same line. That means, e.g. the following file is a valid dot file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>digraph dep2 <span class="o">{</span>
+    A
+-&gt;
+        B
+     <span class="p">;</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>If given to dot, it would display a graph showing an arrow from A to B as expected. But our hacky solution would be unable to parse this. Furthermore, it could be fairly non-trivial to improve our solution to work on all dot files with different formatting. For this, proper parsing is necessary.</p>
+<div class="section" id="grammar">
+<h2>17.2.1. Grammar<a class="headerlink" href="#grammar" title="Permalink to this headline">¶</a></h2>
+<p>Now, parsing means turning an input (text) stream into a data structure. We did this in our hacky solution, but another attribute of parsing is that the input is parsed according to a certain <em>formal grammar</em>. Grammar is often described using the <em>Backus-Naur form</em> (BNF). We could define a grammar for the subset of dot files we want to parse using Backus-Naur form by e.g. the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>graph        ::<span class="o">=</span> <span class="s2">&quot;digraph&quot;</span> characters <span class="s1">&#39;{&#39;</span> statements <span class="s1">&#39;}&#39;</span>
+statements   ::<span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="p">|</span> statement statements
+statement    ::<span class="o">=</span> label <span class="p">|</span> edge
+label        ::<span class="o">=</span> characters labelname
+labelname    ::<span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="s2">&quot;label&quot;</span> <span class="s1">&#39;=&#39;</span> quotedstring <span class="s1">&#39;]&#39;</span> <span class="s2">&quot;;&quot;</span>
+quotedstring ::<span class="o">=</span> <span class="s1">&#39;&quot;&#39;</span> labelstring <span class="s1">&#39;&quot;&#39;</span>
+labelstring  ::<span class="o">=</span> characters <span class="p">|</span> <span class="s1">&#39; &#39;</span> labelstring <span class="p">|</span> characters labelstring
+edge         ::<span class="o">=</span> characters <span class="s2">&quot;-&gt;&quot;</span> characters <span class="s2">&quot;;&quot;</span>
+characters   ::<span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="p">|</span> <span class="s1">&#39;a-zA-Z0-9_-&#39;</span> characters
+</pre></div>
+</div>
+<p>This defines the formal grammar for our dot files recursively. For example:</p>
+<ul class="simple">
+<li>A graph is parsed when the following is encountered: the string &#8220;digraph&#8221;, followed by characters, followed by the character &#8216;{&#8216;, followed by statements, followed by the character &#8216;}&#8217;</li>
+<li>Characters is defined either by nothing, or any printable letter from the English alphabet, or a digit, or an underscore or a hyphen (&#8216;-&#8216;), followed by characters</li>
+<li>Statements is defined either by nothing, or a statement followed by statements</li>
+<li>A statement is defined as either label or edge</li>
+</ul>
+<p>...and so forth. (Note that the above strictly speaking isn&#8217;t valid BNF as for example the regular expression-like definition in characters isn&#8217;t included in the original BNF definition. Many variations of the original BNF are used in practice.)</p>
+<p><em>Exercise</em>: The Graphviz project also document the full grammar for the dot language. Look it up online.</p>
+</div>
+<div class="section" id="lexing">
+<h2>17.2.2. Lexing<a class="headerlink" href="#lexing" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our grammar defined, we can almost start writing the actual parsing code. However, if you try this you&#8217;ll see it&#8217;s more difficult than you&#8217;d expect: there&#8217;s a lot of <em>state</em> to keep track of when going through your input file character by character. For example, if you encounter a quotation mark (&#8221;), you need to note that you&#8217;re now inside a quoted string. If you encounter a character, you need to know whether you&#8217;re parsing a graph, or the &#8220;digraph&#8221; word of the graph, or the name of the graph (characters), etc. Writing a parser this way can become cumbersome very quickly.</p>
+<p>A way around this is to split one part out and preprocess the input: <em>lexical analysis</em> or <em>lexing</em> first turns the character-by-character input stream to <em>lexemes</em> or <em>tokens</em> which are much easier to work with when parsing. In our case, the following could be our tokens:</p>
+<ul class="simple">
+<li>The word &#8220;digraph&#8221;</li>
+<li>characters (an identifier)</li>
+<li>The character &#8216;{&#8216;</li>
+<li>The symbol &#8220;-&gt;&#8221;</li>
+<li>A quoted string</li>
+<li>Etc.</li>
+</ul>
+<p>After the lexical analysis, instead of handing our parser a list of characters, we hand it a list of tokens. Then, our parser needs to check that the input tokens are correct and store the data in the correct data structures as necessary, making this a much easier task.</p>
+<p>How would we start? We can first define tokens as an enumeration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Token</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">EQUALS</span> <span class="o">=</span> <span class="mi">0</span>     <span class="c1"># the character &#39;=&#39;</span>
+    <span class="n">DIGRAPH</span> <span class="o">=</span> <span class="mi">1</span>    <span class="c1"># the word &quot;digraph&quot;</span>
+    <span class="n">IDENTIFIER</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># characters</span>
+    <span class="n">QUOTE</span> <span class="o">=</span> <span class="mi">3</span>      <span class="c1"># quoted string</span>
+    <span class="n">OPEN_CURLY</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># the character &#39;{&#39;</span>
+    <span class="c1"># and so forth</span>
+</pre></div>
+</div>
+<p>Now, when reading in a text stream, how would we know whether we&#8217;ve encountered a token? With a regular expression! Furthermore, as we learnt in &#8220;PNG files&#8221;, we can apply <em>data driven programming</em> by defining a list which defines a regular expression for each token:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">),</span> <span class="n">Token</span><span class="o">.</span><span class="n">EQUALS</span><span class="p">),</span>
+          <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[ </span><span class="se">\n\t</span><span class="s1">]+&#39;</span><span class="p">),</span> <span class="bp">None</span><span class="p">),</span>
+          <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;digraph&#39;</span><span class="p">),</span> <span class="n">Token</span><span class="o">.</span><span class="n">DIGRAPH</span><span class="p">),</span>
+          <span class="c1"># and so forth</span>
+</pre></div>
+</div>
+<p>Here, we define a list with the following characteristics:</p>
+<ul class="simple">
+<li>The first element in the tuple for each element in the list is a regular expression: this may either match or not.</li>
+<li>The second element in the tuple describes which token the regular expression should generate when it matches. Note that we also parse whitespace but don&#8217;t associate it with a token. This way we can consume all whitespace out of the way.</li>
+</ul>
+<p>Now that we have our tokens defined we can start with the lexical analysis:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">lexer_output</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_stream</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">regex</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+        <span class="c1"># TODO: check for match with regex</span>
+        <span class="c1"># Use input_stream[pos:] as the input</span>
+        <span class="c1"># At match:</span>
+        <span class="c1"># 1. Store token and what was matched to lexer_output</span>
+        <span class="c1"># 2. Advance position by the length of what was matched</span>
+        <span class="c1"># Note: what was matched can be retrieved with result.group(),</span>
+        <span class="c1">#       where &quot;result&quot; is the return value of re.match()</span>
+        <span class="c1"># Raise an error if no regular expression matched</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Finish and test the lexer. If you prefer you can start with a simpler form of dot files first, i.e. without labels but instead only the &#8220;A -&gt; B;&#8221; form.</p>
+</div>
+<div class="section" id="data-structures">
+<h2>17.2.3. Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our lexer output, we could parse it. However, as we want the output of our parsing to be stored in data structures, we should define these first. Classes seem like a good way to do this, and our classes should also somewhat reflect the data that we can expect to find in our dot files. This means we can be inspired by our grammar definition when defining our classes. E.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Graph</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">statements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Label</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+
+<span class="c1"># TODO: include other necessary classes such as Edge</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Implement the necessary data structures for storing the parsed data.</p>
+</div>
+<div class="section" id="id1">
+<h2>17.2.4. Parsing<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Now we can finally actually parse our lexer output. We need to write a loop that goes through the list, keeps track of the current <em>state</em>, i.e. what&#8217;s expected, checks the input for validity, and stores the parser output to data structures.</p>
+<p><em>Exercise</em>: Give this a try. Don&#8217;t worry if it doesn&#8217;t work; the next section will provide help.</p>
+<p>Now, when writing a parser, there are several patterns that come up. For example:</p>
+<ul class="simple">
+<li>Getting the next token</li>
+<li>Checking whether the next token is as expected</li>
+<li>Extracting information from a token; for example, a token holding characters may be an identifier which we want to store as the name of a graph</li>
+</ul>
+<p>It&#8217;s often helpful to write helper functions for these. Furthermore, it may clarify the code to have the parser state like how far the parser has progressed by having this state stored as member variables of a class.</p>
+<p>The parser you wrote at the previous exercise may work but you may be able to make your code cleaner by restructuring it e.g. as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Parser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lexer_output</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lex</span> <span class="o">=</span> <span class="n">lexer_output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lex</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lex</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lex</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">char</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Expected &quot;</span><span class="si">%s</span><span class="s1">&quot;, received &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>With this, writing the parser becomes relatively simple as we need to use our primitives to progress through the input, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">Token</span><span class="o">.</span><span class="n">DIGRAPH</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="p">()</span> <span class="c1"># TODO: implement</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">Token</span><span class="o">.</span><span class="n">OPEN_CURLY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">statements</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">Token</span><span class="o">.</span><span class="n">CLOSE_CURLY</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">statements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Token</span><span class="o">.</span><span class="n">CLOSE_CURLY</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">Token</span><span class="o">.</span><span class="n">OPEN_SQUARE</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">Token</span><span class="o">.</span><span class="n">OPEN_SQUARE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">Token</span><span class="o">.</span><span class="n">LABEL</span><span class="p">)</span>
+            <span class="c1"># TODO: write the rest</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">Token</span><span class="o">.</span><span class="n">ARROW</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">Token</span><span class="o">.</span><span class="n">ARROW</span><span class="p">)</span>
+            <span class="n">name2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="p">()</span>
+            <span class="c1"># TODO: write the rest</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Expected statement, received &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can write the rest of the parser.</p>
+<p><em>Exercise</em>: If your parser didn&#8217;t work after the previous exercise, make it work using the code snippets above. Also try giving it some invalid input.</p>
+<p>Now, if all has gone well, we have the contents of the dot file in our data structures and can proceed with the following:</p>
+<ul class="simple">
+<li>Remove unnecessary edges using the algorithm from the previous section</li>
+<li><em>Serialise</em> our data structures to a dot file, i.e. write out the contents of our data structures in the proper format</li>
+</ul>
+<p><em>Exercise</em>: Write a member function of the Graph class that removes unnecessary edges and test it.</p>
+<p>There are a few ways we could serialise our data. Ideally we&#8217;d be able to do this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">g</span> <span class="c1"># this statement writes out the graph as a dot file to stdout</span>
+</pre></div>
+</div>
+<p>How &#8220;print&#8221; works in Python is that it calls the member function __str__ of your class, expects a string as an output of that function, and then writes that output to stdout. Despite a name with several underscores, we can define this function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Graph</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">statements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ret</span>  <span class="o">=</span> <span class="s1">&#39;digraph </span><span class="si">%s</span><span class="s1"> {</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">name</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">statements</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s1">&#39;}&#39;</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+</div>
+<p>Now, all we need to do is define __str__ for all our classes.</p>
+<p><em>Exercise</em>: Serialise your data to a dot file by implementing the necessary __str__ member functions. Tie everything together by lexing and parsing the input dot file, removing unnecessary edges and serialising the output. Check that the output matches the output of the previous section.</p>
+<p>Congratulations, you&#8217;ve now written a parser. More specifically, this is a <em>top down parser</em> as it parses the top level data first before proceeding to further levels. Even more specifically, this could be a <em>recursive descent parser</em> because our grammar is defined in a recursive manner (e.g. characters), though in practice your implementation probably doesn&#8217;t use recursion as our lexical analysis merged tokens such that no recursion during parsing is necessary.</p>
+<p>Parsers are fairly common in that they&#8217;re part of the implementation of compilers, interpreters including for languages such as Python and Javascript, HTML renderers, regular expression engines, editors (syntax highlighting and indenting) and more. As such, during this book we&#8217;ve already indirectly used several different parsers.</p>
+<p>Another tidbit is that the formal grammar we defined is a <em>context free grammar</em> which has an interesting mathematical definition but in practice means, among other things, that one can define the grammar in BNF form. Context free is opposed to <em>context sensitive grammar</em> where context matters; tokens before or after a token determine what the token means. For example parsing the C language is context sensitive because e.g. the asterisk (&#8220;*&#8221;) may mean either part of a pointer variable declaration, pointer dereferencing or multiplication depending on context.</p>
+<p>A subset of context free grammars is a <em>regular grammar</em>. A language described by a regular grammar is called a <em>regular language</em>. A concise way to describe a regular language is by using a <em>regular expression</em>. In other words, a regular expression like e.g. &#8220;[a-z]+&#8221; is, like BNF, a way of defining a formal language (in this case one or more lower case letters), and evaluating a regular expression is equivalent to parsing a string with the regular expression as the grammar and returning whether the input conforms to the language or not.</p>
+<p>Because regular grammar is a subset of context free grammars, context free grammars generally cannot be parsed using regular expressions, similarly to how context sensitive grammars generally cannot be parsed using context free parsers. (This grammar hierarchy is also known as <em>Chomsky hierarchy</em>.)</p>
+<p><em>Exercise</em>: Is it possible to parse HTML with regular expressions?</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">17.2. Parsing</a><ul>
+<li><a class="reference internal" href="#grammar">17.2.1. Grammar</a></li>
+<li><a class="reference internal" href="#lexing">17.2.2. Lexing</a></li>
+<li><a class="reference internal" href="#data-structures">17.2.3. Data structures</a></li>
+<li><a class="reference internal" href="#id1">17.2.4. Parsing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="py4_index.html">17. A fistful of Python exercises</a><ul>
+      <li>Previous: <a href="py4.html" title="previous chapter">17.1. Graphs</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">18. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/parse.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/parse.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
