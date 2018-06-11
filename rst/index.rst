@@ -32,6 +32,7 @@ Software development fundamentals
    sud_index
    design_index
    py4_index
+   sql_index
    ex_index
 
    dep

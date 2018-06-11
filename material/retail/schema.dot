@@ -1,0 +1,24 @@
+digraph schema {
+    splines=true;
+    overlap=portho;
+    model=subset;
+
+    edge [color=gray50, fontname=Calibri, fontsize=11];
+    node [shape=record, fontname=Calibri, fontsize=11];
+
+    customers [label="{{Customers}|{ID}|{Name}|{Address}|{Zip code}|{City}}"];
+    products [label="{{Products}|{ID}|{Name}|{Size}}"];
+    orders [label="{{Orders}|{ID}|{Date}|{Customer ID}}"];
+    products_ordered [label="{{Products ordered}|{ID}|{Order ID}|{Product ID}}"];
+    returns [label="{{Returns}|{ID}|{Order ID}}"];
+    return_reasons [label="{{Return reasons}|{ID}|{Description}}"];
+    products_returned [label="{{Products returned}|{ID}|{Return ID}|{Return reason ID}|{Product order ID}}"];
+
+    orders -> customers [label="1:*"];
+    products_ordered -> orders [label="1:*"];
+    products_ordered -> products [label="1:*"];
+    returns -> orders [label="1:1"];
+    products_returned -> returns [label="1:*"];
+    products_returned -> return_reasons [label="1:*"];
+    products_returned -> products_ordered [label="1:*"];
+}

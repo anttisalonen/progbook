@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>18. SQL and its relationship with online shops &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="18.1. Introduction to SQL" href="webshop.html" />
+    <link rel="prev" title="17.2. Parsing" href="parse.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sql-and-its-relationship-with-online-shops">
+<h1>18. SQL and its relationship with online shops<a class="headerlink" href="#sql-and-its-relationship-with-online-shops" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="webshop.html">18.1. Introduction to SQL</a></li>
+</ul>
+</div>
+<p>If you&#8217;ve ever shopped for clothes online, you may be familiar with the return form for returning products you don&#8217;t want to have: you order something, decide for whatever reason you don&#8217;t want to keep some products, and, along with some piece of paper, send the products you don&#8217;t want back. The piece of paper may either be a form you fill out yourself or something you receive pre-filled from the online shop and print yourself.</p>
+<p>In this section we&#8217;ll assume the role of an online clothing shop and write some code to generate that return form in PDF format. Our business works like this:</p>
+<ul class="simple">
+<li>Our products are all stored in a warehouse which is automated as much as possible to save money and give a competitive advantage, with robots moving products from the massive warehouse to conveyor belts which further transport the products to workers which actually package and send the packages.</li>
+<li>Upon receiving a return package, a worker will look for the return form in the package which will include a <em>bar code</em> which the worker will scan. The bar code will contain information about which products were returned such that the worker can then hand the products directly over to a robot.</li>
+</ul>
+<p>From customers&#8217; point of view, it looks like this:</p>
+<ul class="simple">
+<li>When a customer orders something, we send the products to them, and note the order in the database</li>
+<li>When a customer decides to return something, they enter a web page where they can enter which products they want to return, and why. We&#8217;ll store this information in the database. The customer will then receive a PDF for printing which they&#8217;ll send to us alongside the products.</li>
+</ul>
+<p>This all furthermore implies that we have a database with a bunch of relevant information, like who our customers are, what our products are, who has ordered or returned what etc.</p>
+<p>From technical point of view, in this section we&#8217;ll learn about the following:</p>
+<ul class="simple">
+<li>SQL - schemas, adding, modifying and querying data</li>
+<li>Generating a bunch of random test data</li>
+<li>Generating PDFs and barcodes using Python</li>
+<li>Primitive business analytics</li>
+<li>Displaying database contents, filling forms and sending PDFs using Flask (again - but this time without Javascript)</li>
+</ul>
+<p>The whole thing will end up at about 300-400 lines of Python, with a good chunk of it being SQL statements.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="parse.html" title="previous chapter">17.2. Parsing</a></li>
+      <li>Next: <a href="webshop.html" title="next chapter">18.1. Introduction to SQL</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/sql_index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/sql_index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
