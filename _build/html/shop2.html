@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19. Exercises" href="ex_index.html" />
+    <link rel="next" title="18.3. Querying SQL databases" href="shop3.html" />
     <link rel="prev" title="18.1. Introduction to SQL" href="webshop.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -100,12 +100,11 @@
 <p>However, the difference is that the Python string syntax (%s) inserts the variable contents in the string blindly while the SQLite built in syntax (?) <em>sanitises</em> the input first. This means that using the SQLite syntax is not a security hole unlike when the Python string syntax is used: if the variable name contents were dependent on user input, an attacker could craft an input string such as &#8220;foo&#8217;); DROP TABLE users; &#8211;&#8221; which, if inserted into the SQL statement blindly, would delete the table &#8220;users&#8221; in the database. Depending on the database the attacker could e.g. change or read passwords or other sensitive data. This kind of an attack is known as an <em>SQL injection</em>. To avoid this, use the SQLite built in syntax (?) when substituting variables in SQL statements.</p>
 <p>Now that we have some mock products in our database, let&#8217;s add some mock customers.</p>
 <p><em>Exercise</em>: Include the above snippet in a script that generates data in your database. Add another snippet that generates random customers: you&#8217;ll need to generate and insert names, addresses, zip codes and cities for them. You can also use the function random.randint(a, b) which generates a random integer between a and b (both numbers inclusive), or random.shuffle() which randomly shuffles a list.</p>
+<p><em>Note</em>: You can set the <em>seed</em> of the Python random generator. E.g. running &#8220;random.seed(21)&#8221; before will set the seed to 21 for all future random numbers. This means that the random numbers will be <em>deterministic</em>, i.e. the output of the random functions will be the same every time you run your code. This can be useful for debugging and development purposes.</p>
 <p>We now have some products and customers but there are no references between data. Generating some orders will help here. An order has a date column as well as a foreign key to the customer ID. Once we have generated a random year, month and day, we can turn them into a string using the following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">python</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">date</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%04d</span><span class="s2">-</span><span class="si">%02d</span><span class="s2">-</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
 </pre></div>
 </div>
-<blockquote>
-<div>date = &#8220;%04d-%02d-%02d&#8221; % (year, month, day)</div></blockquote>
 <p>And once we have this and the customer ID, we can insert a new row in the &#8220;orders&#8221; table like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT INTO orders(date, customer_id) VALUES(?, ?)&#39;</span><span class="p">,</span>
         <span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span>
@@ -148,7 +147,7 @@
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="sql_index.html">18. SQL and its relationship with online shops</a><ul>
       <li>Previous: <a href="webshop.html" title="previous chapter">18.1. Introduction to SQL</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">19. Exercises</a></li>
+      <li>Next: <a href="shop3.html" title="next chapter">18.3. Querying SQL databases</a></li>
   </ul></li>
   </ul></li>
 </ul>

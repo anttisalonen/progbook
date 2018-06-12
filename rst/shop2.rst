@@ -55,7 +55,9 @@ Now that we have some mock products in our database, let's add some mock custome
 
 *Exercise*: Include the above snippet in a script that generates data in your database. Add another snippet that generates random customers: you'll need to generate and insert names, addresses, zip codes and cities for them. You can also use the function random.randint(a, b) which generates a random integer between a and b (both numbers inclusive), or random.shuffle() which randomly shuffles a list.
 
-We now have some products and customers but there are no references between data. Generating some orders will help here. An order has a date column as well as a foreign key to the customer ID. Once we have generated a random year, month and day, we can turn them into a string using the following::
+*Note*: You can set the *seed* of the Python random generator. E.g. running "random.seed(21)" before will set the seed to 21 for all future random numbers. This means that the random numbers will be *deterministic*, i.e. the output of the random functions will be the same every time you run your code. This can be useful for debugging and development purposes.
+
+We now have some products and customers but there are no references between data. Generating some orders will help here. An order has a date column as well as a foreign key to the customer ID. Once we have generated a random year, month and day, we can turn them into a string using the following:
 
 .. code-block:: python
 

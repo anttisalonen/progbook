@@ -21,4 +21,6 @@ Exercises
    ex_bus_cpp
    ex_py4
    ex_parse
+   ex_shop2
+   ex_shop3
 

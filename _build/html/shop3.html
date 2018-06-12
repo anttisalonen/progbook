@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>18.3. Querying SQL databases &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="19. Exercises" href="ex_index.html" />
+    <link rel="prev" title="18.2. Adding data to an SQL database" href="shop2.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="querying-sql-databases">
+<h1>18.3. Querying SQL databases<a class="headerlink" href="#querying-sql-databases" title="Permalink to this headline">¶</a></h1>
+<p>In this section we&#8217;ll learn how to query, or get data from our SQL database.</p>
+<p>Querying an SQL database can be done using the select statement. We&#8217;ve already seen a couple of uses of this, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM products&#39;</span><span class="p">)</span>
+<span class="n">all_rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">all_rows</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">row</span>
+</pre></div>
+</div>
+<p>This snippet will get all the product IDs from the database into a list of one-tuples and print the contents of those tuples.</p>
+<p>Here&#8217;s another query:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT count(id) FROM products&#39;</span><span class="p">)</span>
+<span class="n">row</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">row</span> <span class="c1"># will print e.g. (400, )</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>We tell SQLite we want to query for the <em>count</em> of IDs in the products table. The number of product IDs corresponds to the number of rows in the table so the result will indicate how many products we have stored in the database.</li>
+<li>Instead of using fetchall(), we can use fetchone() which will only give the first (and in this case, only) row of the query result.</li>
+<li>As before, the result will be a tuple, with one element in the tuple per column that was queried for. In this case, the result will be a one-tuple with an integer, namely the number of products.</li>
+</ul>
+<p>Here&#8217;s a bit more complicated query:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="s1">&#39;distribution of return reasons:&#39;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT   return_reason_id, count(products_returned.id)</span>
+<span class="s1">                  FROM     products_returned</span>
+<span class="s1">                  GROUP BY return_reason_id</span>
+<span class="s1">                  LIMIT    5&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">():</span>
+    <span class="k">print</span> <span class="n">row</span>
+</pre></div>
+</div>
+<p>There are a few points to make here:</p>
+<ul class="simple">
+<li>We select the return_reason_id and the count of ids. The column names listed between SELECT and FROM define which columns are included in the table that will be returned.</li>
+<li>We specify we want to receive the count of the column &#8220;products_returned.id&#8221;. In this case, simply typing &#8220;id&#8221; would&#8217;ve been enough. Generally, the table can be written before the column name to be clearer about which column you mean. In some cases, as we shall see, you must type the table name in order to clear ambiguity. (SQLite will return an error when the table name was required but not provided.)</li>
+<li>We want to <em>group</em> the result by the column &#8220;return_reason_id&#8221;. This means that SQLite will, on the table that is the query result, group the column &#8220;return_reason_id&#8221; such that each ID will only appear once. In other words, the resulting table (the list that is returned by fetchall()) won&#8217;t have any more elements than the number of return reasons we have in the database.</li>
+<li>We furthermore <em>limit</em> the number of rows in the resulting table to 5. This means, we only query for and receive the data for the first five reason codes.</li>
+</ul>
+<p><em>Exercise</em>: What would you expect the output of the above code snippet to be? Try it out.</p>
+<p>You may ask yourself, for business analytics to be more useful, if you wanted to limit the output of the above query at all, you wouldn&#8217;t limit it based on the reason code. Instead you&#8217;d want to know e.g. the most common return reasons. This can be done as well:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT   return_reason_id, count(products_returned.id)</span>
+<span class="s1">                  FROM     products_returned</span>
+<span class="s1">                  GROUP BY return_reason_id</span>
+<span class="s1">                  ORDER BY count(products_returned.id) DESC</span>
+<span class="s1">                  LIMIT    3&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">():</span>
+    <span class="k">print</span> <span class="n">row</span>
+</pre></div>
+</div>
+<p>Here, we include the keywords <em>order by</em>. This means we want to order by the count of the products returned ID, i.e. the number of products that were returned. If you wonder which column to order by, it may help to imagine the resulting table: we define the columns in the result after the SELECT keyword, so our table will have the columns &#8220;return_reason_id&#8221; and &#8220;count(products_returned.id)&#8221;. As we furthermore group the return_reason_id i.e. have at most only one row per return reason, the column we&#8217;d want to order by would result to be the number of products returned.</p>
+<p>The keyword &#8220;DESC&#8221; means we want to order in descending order, i.e. from the most to the least. (Alternatively the keyword &#8220;ASC&#8221; could be used for the opposite direction.)</p>
+<div class="section" id="joins">
+<h2>18.3.1. Joins<a class="headerlink" href="#joins" title="Permalink to this headline">¶</a></h2>
+<p>Querying a single database table is fun enough, but things get more interesting when combining multiple tables.</p>
+<p>Let&#8217;s say we want to find out our top five ordered products. How would we imagine the table to look like? We&#8217;d want to know the product ID, name, size and how often it was ordered, sort by the number of orders, and group by the product ID as we&#8217;d want no more than one row per product. The first three columns we can retrieve from the products table, while the fourth one (how often it was ordered) we can, as may be apparent from our database schema, retrieve by counting the products_ordered.id column.</p>
+<p>This query would then look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT     products.id, products.name, products.size, count(products_ordered.id)</span>
+<span class="s1">                  FROM       products</span>
+<span class="s1">                  INNER JOIN products_ordered ON products_ordered.product_id = products.id</span>
+<span class="s1">                  GROUP BY   products.id</span>
+<span class="s1">                  ORDER BY   count(products_ordered.id) DESC</span>
+<span class="s1">                  LIMIT      5&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, this is similar to the previous example but we have two new interesting characteristics:</p>
+<ul class="simple">
+<li>On the first line we describe not only columns from the table we&#8217;re querying data from, but also <em>another</em> table, namely &#8220;products_ordered&#8221;.</li>
+<li>Because we need a column from another table in our result, we need to <em>join</em> the other table. Hence we include the keywords &#8220;INNER JOIN&#8221; to join the table &#8220;products_ordered&#8221;.</li>
+<li>We need to tell SQLite <em>how</em> to join the other table, so we tell it to join &#8220;ON products_ordered.product_id = products.id&#8221; - meaning, if a row from the &#8220;products&#8221; table has the same ID as the &#8220;product_id&#8221; column in the &#8220;products_ordered&#8221; table then the two rows will be joined into one in the query result.</li>
+</ul>
+<p>There are different kinds of joins like outer join, left join etc. but in practice inner join, where two tables are joined at the intersection (i.e. when a foreign key matches the primary key of a row in another table) is the most common.</p>
+<p><em>Exercise</em>: Try out the above statement.</p>
+<p>But there&#8217;s more! You can also join <em>multiple</em> tables using multiple joins in one statement. For example, if you wanted to find out which products were returned the most, you&#8217;d need to have the product ID in your query result and order by the number of products returned, i.e. products_returned.id. However, there&#8217;s no direct link from the &#8220;products&#8221; table to the &#8220;products_returned&#8221; table because of the many-to-many relationship, so we&#8217;d need to also join the &#8220;products_ordered&#8221; table. In practice this query would look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT     products.id, products.name, products.size, count(products_returned.id)</span>
+<span class="s1">                  FROM       products_returned</span>
+<span class="s1">                  INNER JOIN products_ordered ON products_ordered.id = products_returned.product_order_id</span>
+<span class="s1">                  INNER JOIN products         ON products.id         = products_ordered.product_id</span>
+<span class="s1">                  GROUP BY   products.id</span>
+<span class="s1">                  ORDER BY   count(products_returned.id) DESC</span>
+<span class="s1">                  LIMIT      5&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is very similar to the previous statement, but it has two joins: we query the table &#8220;products_returned&#8221;, but join the table &#8220;products_ordered&#8221; to it such that the product order ID matches. We then join the &#8220;products&#8221; table such that the product ID between the &#8220;products&#8221; table and the &#8220;products_ordered&#8221; table matches.</p>
+<p><em>Exercise</em>: Try out the above statement.</p>
+<p><em>Exercise</em>: Find out which customers have put in the most orders. You&#8217;ll need to select the customer ID as well as the customer name and the number of order IDs. Join the &#8220;orders&#8221; table with the &#8220;customers&#8221; table. Group by the customer ID. Order by the number of order IDs.</p>
+<p><em>Exercise</em>: Find out who has ordered most products. The query is similar to the previous exercise but you also need to join the &#8220;products_ordered&#8221; table.</p>
+<p><em>Exercise</em>: Find out the top five customers who have returned most products.</p>
+<p>Another useful keyword is &#8220;WHERE&#8221; which allows you to filter which data you want in the result database. For example, we might want to see the details for the product with ID 123:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">product_id</span> <span class="o">=</span> <span class="mi">123</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT *</span>
+<span class="s1">                  FROM   products</span>
+<span class="s1">                  WHERE  products.id = ?&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">product_id</span><span class="p">,</span> <span class="p">))</span>
+</pre></div>
+</div>
+<p>Here, we supply the wildcard &#8220;*&#8221; to SELECT which tells SQLite that we want all the columns from the queried tables. This way we don&#8217;t need to specify all the columns manually.</p>
+<p>Besides only looking for columns with a specific value, WHERE also allows for different operators such as boolean (AND, OR), arithmetic operators (&gt;, &lt;, etc.) or keywords like BETWEEN (values within a range) etc. You can look up the details at an SQL reference if you&#8217;re interested.</p>
+<p><em>Exercise</em>: List the products ordered by customer 123.</p>
+<p>We now have some knowledge around querying useful data from the database. In the next section we can put together some code to generate a return form.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">18.3. Querying SQL databases</a><ul>
+<li><a class="reference internal" href="#joins">18.3.1. Joins</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="sql_index.html">18. SQL and its relationship with online shops</a><ul>
+      <li>Previous: <a href="shop2.html" title="previous chapter">18.2. Adding data to an SQL database</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">19. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/shop3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/shop3.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
