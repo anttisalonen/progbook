@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19. Exercises" href="ex_index.html" />
+    <link rel="next" title="18.2. Adding data to an SQL database" href="shop2.html" />
     <link rel="prev" title="18. SQL and its relationship with online shops" href="sql_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -63,7 +63,7 @@
 <li>The core SQL syntax is more or less the same for all SQL databases. While each database has their own features and extensions to SQL, we will focus on the basics (like for everything else in this book) and won&#8217;t go very much into database specific features.</li>
 </ul>
 <p>There are a few ways to use SQLite. It includes a command line program which supports all database operations including creating a new database. For example, after you&#8217;ve installed SQLite, you can run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sqlite3 my_db
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sqlite3 my_db
 SQLite version <span class="m">3</span>.16.2 <span class="m">2017</span>-01-06 <span class="m">16</span>:32:41
 Enter <span class="s2">&quot;.help&quot;</span> <span class="k">for</span> usage hints.
 sqlite&gt; create table my_table<span class="o">(</span>my_number integer<span class="o">)</span><span class="p">;</span>
@@ -135,7 +135,8 @@ sqlite&gt;
 12
 13
 14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
 
 <span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
@@ -150,6 +151,7 @@ sqlite&gt;
 <span class="s1">                               zipcode TEXT,</span>
 <span class="s1">                               city TEXT)&#39;&#39;&#39;</span><span class="p">)</span>
 <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div>
 <p>Let&#8217;s go through this line by line:</p>
@@ -161,6 +163,7 @@ sqlite&gt;
 <li>Line 7: We <em>commit</em> our changes, i.e. write them in the file. Before this, the table removal was only stored in RAM but not written to the database file.</li>
 <li>Lines 9-14: We run our SQL statement to create a table. This uses Python multi-line strings using the &#8216;&#8217;&#8217; notation.</li>
 <li>Line 15: We commit our change to create the table.</li>
+<li>Line 16: We close the connection to the database.</li>
 </ul>
 <p><em>Exercise</em>: Run the above code. In addition, add code to create a table for the products. Call it &#8220;products&#8221;. Each product should have an ID as the primary key, as well as name and size. The name and size can both be stored as text.</p>
 <p>How about the relationships? There might not need to be a direct relationship e.g. between a customer and a product, but an order is always made by a specific customer. That means that the &#8220;orders&#8221; table will need to have another column, namely a value to <em>reference</em> the customer number of the customer who made the order. Furthermore we should tell SQLite that we intend to use this column to refer to an ID from another table as this way SQLite is able to prevent invalid data which could occur if some rows were removed in one table but not in the other. Such a column is called a <em>foreign key</em>.</p>
@@ -212,7 +215,7 @@ sqlite&gt;
 </tbody>
 </table>
 </div></blockquote>
-<p>In this example we have three rows. The first two have the same order ID so they describe the order number 34. For that order, products 977 and 755 were ordered. The last row describes order 35 for which product 854 was ordered.</p>
+<p>In this example we have three rows. The first two have the same order ID so they both describe the order number 34. For that order, products 977 and 755 were ordered. The last row describes order 35 for which product 854 was ordered.</p>
 <p>Now, the only tables we&#8217;re missing are those related to returning products. Remember, we want to note in the database when a customer wants to return products after ordering them for more automated return workflow at the warehouse. Here&#8217;s one way we could define the table holding this information:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">        CREATE TABLE returns(id INTEGER PRIMARY KEY,</span>
@@ -220,13 +223,14 @@ sqlite&gt;
 <span class="s1">                             FOREIGN KEY(order_id) REFERENCES orders(id))&#39;&#39;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here, we define a table with two columns. The first one, &#8220;id&#8221; is our primary key like before. The second one, &#8220;order_id&#8221; is a foreign key almost like before, but we also include the keyword &#8220;UNIQUE&#8221;. This causes SQLite to check that no two rows in this table have the same order_id. In practice this means our customers won&#8217;t be able to send more than one return package from one order. We could enforce a policy like this to save shipping costs, but it also simplifies our later code.</p>
+<p>Here, we define a table with two columns. The first one, &#8220;id&#8221; is our primary key like before. The second one, &#8220;order_id&#8221; is a foreign key almost like before, but we also include the keyword &#8220;UNIQUE&#8221;. This causes SQLite to check that no two rows in this table have the same order_id. In practice this means our customers won&#8217;t be able to send more than one return package from one order. We could enforce a policy like this to save shipping costs, but it also simplifies our code later.</p>
 <p>The above table doesn&#8217;t describe which products will be returned, or the reason for returning.</p>
 <p><em>Exercise</em>: Create a table for describing the return reasons. It needs to have an ID as a primary key as well as a text column that describes the reason.</p>
 <p><em>Exercise</em>: Create a table that describes which products were returned. It needs to describe the many-to-many relationship between ordered products and returns. Hence, apart from the ID as the primary key, it needs three more columns, all of which need to be foreign keys: the return ID, the reason ID and the ID to the table in &#8220;products_ordered&#8221;, our mapping table describing the products in an order.</p>
 <p>We now have our schema defined in code. It&#8217;s often useful to also draw a diagram of the schema. In our case, it could look like this:</p>
 <img alt="_images/schema.png" src="_images/schema.png" />
 <p>Here, we have one box for each table, and one arrow for each foreign key reference. The labels describe the relationship between the tables, e.g. &#8220;1:*&#8221; between orders and customers reads as &#8220;one customer can have many orders&#8221;. All relationships between the tables are one-to-many except the relationship between and order where each order can have (up to) one return. Several one-to-many relationships between tables lead to many-to-many relationships via junction tables, such that we have a many-to-many relationship e.g. between products and orders.</p>
+<p>Now that we have our schema defined, the next step is using it by adding data to it.</p>
 </div>
 </div>
 
@@ -249,7 +253,7 @@ sqlite&gt;
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="sql_index.html">18. SQL and its relationship with online shops</a><ul>
       <li>Previous: <a href="sql_index.html" title="previous chapter">18. SQL and its relationship with online shops</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">19. Exercises</a></li>
+      <li>Next: <a href="shop2.html" title="next chapter">18.2. Adding data to an SQL database</a></li>
   </ul></li>
   </ul></li>
 </ul>

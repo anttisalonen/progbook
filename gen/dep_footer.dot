@@ -79,4 +79,7 @@
     sud4 -> py4;
     png2 -> py4;
     py4 -> parse;
+    py4 -> webshop;
+    webshop -> shop2;
+    sec -> shop2;
 }

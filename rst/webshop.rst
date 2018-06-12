@@ -22,7 +22,7 @@ There are a few ways to use SQLite. It includes a command line program which sup
 
 .. code-block:: bash
 
-    $ sqlite3 my_db
+    $ sqlite3 my_db
     SQLite version 3.16.2 2017-01-06 16:32:41
     Enter ".help" for usage hints.
     sqlite> create table my_table(my_number integer);
@@ -107,6 +107,7 @@ Now, you could run the above command in the SQLite shell, but another way to do 
                                    zipcode TEXT,
                                    city TEXT)''')
     db.commit()
+    db.close()
 
 Let's go through this line by line:
 
@@ -117,6 +118,7 @@ Let's go through this line by line:
 * Line 7: We *commit* our changes, i.e. write them in the file. Before this, the table removal was only stored in RAM but not written to the database file.
 * Lines 9-14: We run our SQL statement to create a table. This uses Python multi-line strings using the ''' notation.
 * Line 15: We commit our change to create the table.
+* Line 16: We close the connection to the database.
 
 *Exercise*: Run the above code. In addition, add code to create a table for the products. Call it "products". Each product should have an ID as the primary key, as well as name and size. The name and size can both be stored as text.
 

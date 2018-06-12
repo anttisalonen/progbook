@@ -5,6 +5,7 @@ SQL and its relationship with online shops
    :maxdepth: 1
 
    webshop
+   shop2
 
 If you've ever shopped for clothes online, you may be familiar with the return form for returning products you don't want to have: you order something, decide for whatever reason you don't want to keep some products, and, along with some piece of paper, send the products you don't want back. The piece of paper may either be a form you fill out yourself or something you receive pre-filled from the online shop and print yourself.
 

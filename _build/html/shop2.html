@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &#8212; guide 0.1 documentation</title>
+    <title>18.2. Adding data to an SQL database &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="19. Exercises" href="ex_index.html" />
+    <link rel="prev" title="18.1. Introduction to SQL" href="webshop.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -41,7 +43,100 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  
+  <div class="section" id="adding-data-to-an-sql-database">
+<h1>18.2. Adding data to an SQL database<a class="headerlink" href="#adding-data-to-an-sql-database" title="Permalink to this headline">¶</a></h1>
+<p>Now, we don&#8217;t really have an online shop with products and customers so we have to generate some mock data. Python with its random number generator come into rescue here.</p>
+<p>For example, for our products we have two columns we need to generate data for: the product name and size. Here&#8217;s an example code snippet to generate 400 different products:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># ... get hold of the database and the cursor here</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Red&#39;</span><span class="p">,</span> <span class="s1">&#39;Green&#39;</span><span class="p">,</span> <span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;Black&#39;</span><span class="p">,</span> <span class="s1">&#39;White&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;Men&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;Women&#39;s&quot;</span><span class="p">])</span>
+    <span class="n">clothing</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Jeans&#39;</span><span class="p">,</span> <span class="s1">&#39;Shirt&#39;</span><span class="p">,</span> <span class="s1">&#39;T-Shirt&#39;</span><span class="p">,</span> <span class="s1">&#39;Cardigan&#39;</span><span class="p">,</span> <span class="s1">&#39;Skirt&#39;</span><span class="p">,</span> <span class="s1">&#39;Dress&#39;</span><span class="p">,</span> <span class="s1">&#39;Belt&#39;</span><span class="p">])</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">clothing</span><span class="p">)</span>
+    <span class="n">sizes</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([[</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;XL&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;36&#39;</span><span class="p">,</span> <span class="s1">&#39;38&#39;</span><span class="p">,</span> <span class="s1">&#39;40&#39;</span><span class="p">,</span> <span class="s1">&#39;42&#39;</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">:</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT INTO products(name, size) VALUES(?, ?)&#39;</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let&#8217;s go through this line by line:</p>
+<ul class="simple">
+<li>Line 1: We import random, the Python random number generator library</li>
+<li>Line 5: We have a loop we loop through a 100 times</li>
+<li>Line 6: We select a random string, each describing a colour. The Python function random.choice() will select one item from a given list at random.</li>
+<li>Lines 7-8: We repeat the above for more descriptions of a clothing.</li>
+<li>Line 9: We combine our three words to one possibly not very sensical product name.</li>
+<li>Line 10: We select a list by random: either a list with elements &#8216;S&#8217;, &#8216;M&#8217;, &#8216;L&#8217;, &#8216;XL&#8217; or with elements &#8216;36&#8217;, &#8216;38&#8217;, &#8216;40&#8217;, &#8216;42&#8217;. Either way, a list of strings.</li>
+<li>Lines 11-13: We execute our SQL insert statement which inserts a new row into our &#8220;products&#8221; table, with our name and size as values.</li>
+</ul>
+<p>Note that you&#8217;ll need to run db.commit() before the changes are actually made persistent.</p>
+<p>The insert statement deserves a bit more attention. There are the following things to take note of:</p>
+<ul class="simple">
+<li>One insert statement adds one row in the table. You need to supply the table you want the new data to be added for, and exactly what data you want to add.</li>
+<li>The columns for which data is added are provided in parentheses after the table name. In our case, these are &#8220;name&#8221; and &#8220;size&#8221;. For the first column, &#8220;id&#8221;, SQLite generates a number automatically (by picking a number not used before, typically one larger than the largest one currently in the database).</li>
+<li>We then provide the values for the columns in parentheses after the &#8220;VALUES&#8221; keyword. Because we want to read the values from our variables, we use the question marks as <em>placeholders</em> instead, and provide the variables as another parameter, in a tuple. SQLite will then replace the placeholders with the contents of the variables.</li>
+</ul>
+<p>Hence, the insert statement will add random product data to our database.</p>
+<p>The variable contents could also have been included in the insert statement using Python string syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Do NOT do this ever</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT INTO products(name, size) VALUES(</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>However, the difference is that the Python string syntax (%s) inserts the variable contents in the string blindly while the SQLite built in syntax (?) <em>sanitises</em> the input first. This means that using the SQLite syntax is not a security hole unlike when the Python string syntax is used: if the variable name contents were dependent on user input, an attacker could craft an input string such as &#8220;foo&#8217;); DROP TABLE users; &#8211;&#8221; which, if inserted into the SQL statement blindly, would delete the table &#8220;users&#8221; in the database. Depending on the database the attacker could e.g. change or read passwords or other sensitive data. This kind of an attack is known as an <em>SQL injection</em>. To avoid this, use the SQLite built in syntax (?) when substituting variables in SQL statements.</p>
+<p>Now that we have some mock products in our database, let&#8217;s add some mock customers.</p>
+<p><em>Exercise</em>: Include the above snippet in a script that generates data in your database. Add another snippet that generates random customers: you&#8217;ll need to generate and insert names, addresses, zip codes and cities for them. You can also use the function random.randint(a, b) which generates a random integer between a and b (both numbers inclusive), or random.shuffle() which randomly shuffles a list.</p>
+<p>We now have some products and customers but there are no references between data. Generating some orders will help here. An order has a date column as well as a foreign key to the customer ID. Once we have generated a random year, month and day, we can turn them into a string using the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">python</span>
+</pre></div>
+</div>
+<blockquote>
+<div>date = &#8220;%04d-%02d-%02d&#8221; % (year, month, day)</div></blockquote>
+<p>And once we have this and the customer ID, we can insert a new row in the &#8220;orders&#8221; table like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT INTO orders(date, customer_id) VALUES(?, ?)&#39;</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now, how do we get the customer ID? We could query for one, but there&#8217;s another way. After an insert statement, SQLite provides the means to retrieve the primary key of the row that was just inserted like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT INTO customers(name, address, zipcode, city) VALUES(?, ?, ?, ?)&#39;</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">zipcode</span><span class="p">,</span> <span class="n">city</span><span class="p">))</span>
+<span class="n">customer_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+</pre></div>
+</div>
+<p>That is, the attribute &#8220;lastrowid&#8221; of the cursor object will provide the primary key.</p>
+<p><em>Exercise</em>: Generate some orders for your customers.</p>
+<p>We now have some orders but the orders don&#8217;t include any products so let&#8217;s fix that. We can do this by generating some rows for the &#8220;products_ordered&#8221; table. What we&#8217;ll need for this are the order ID as well as the product ID. How would we know what product IDs there are? One way is to store the returned primary key for each product table insert statement in a list. Alternatively, you can also <em>query</em> the product IDs after you&#8217;ve inserted them. The following code queries all product IDs in the database:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM products&#39;</span><span class="p">)</span>
+<span class="n">all_product_ids</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">all_product_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,)</span> <span class="ow">in</span> <span class="n">all_product_ids</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>The first line asks SQLite to execute a query to the &#8220;products&#8221; table such that the result of the query includes only the &#8220;id&#8221; column</li>
+<li>The second line fetches all the results of the query and stores them in a list</li>
+<li>When storing the results of a query, SQLite returns a list of tuples where each element in the tuple is one column of the row. When we query for only one column, the result is a list of tuples where each tuple has only one element (yes, such tuples exist, at least in Python). The third line converts this list of tuples to a list of integers using list comprehension.</li>
+</ul>
+<p><em>Exercise</em>: Generate a few rows for the &#8220;products_ordered&#8221; table. Use the order ID from the orders you&#8217;ve generated. You can either store the product ID in a list after inserting a product and reuse those, or query for the product IDs.</p>
+<p>We now have customers, products, and customers ordering products. The final bit is returns.</p>
+<p><em>Exercise</em>: Generate some rows as return reasons for the &#8220;return_reasons&#8221; table. Note that SQLite requires the placeholder parameter for the insert statement to be a tuple so you may need a tuple with only one element.</p>
+<p><em>Exercise</em>: Generate some rows for the &#8220;returns&#8221; and the &#8220;products_returned&#8221; tables. You will need to keep hold of the order ID and the ID for the &#8220;products_ordered&#8221; table.</p>
+<p>We now have some nice mock data. In the next section we&#8217;ll learn how to query it in detail.</p>
+</div>
+
 
           </div>
         </div>
@@ -51,6 +146,10 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="sql_index.html">18. SQL and its relationship with online shops</a><ul>
+      <li>Previous: <a href="webshop.html" title="previous chapter">18.1. Introduction to SQL</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">19. Exercises</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
