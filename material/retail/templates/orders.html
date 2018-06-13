@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width">
+<html> 
+    <head><title>Orders</title></head>
+    <body> 
+        <p>
+        List of all orders
+        </p>
+        <p>
+        Customer: {{ customer_id }}
+        </p>
+
+        <table border="1">
+            <tr>
+                <td>Order ID</td>
+                <td>Date</td>
+                <td>Show</td>
+            </tr>
+            {% for order in order_list %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.date }}</td>
+                <td><a href="/order?order_id={{ order.id }}">Show details</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body> 
+</html> 
+

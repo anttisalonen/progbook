@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>18.5. Web UI for our return form &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="19. Exercises" href="ex_index.html" />
+    <link rel="prev" title="18.4. Generating a return form" href="shop4.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="web-ui-for-our-return-form">
+<h1>18.5. Web UI for our return form<a class="headerlink" href="#web-ui-for-our-return-form" title="Permalink to this headline">¶</a></h1>
+<p>Let&#8217;s finish this chapter by putting together a simple (but ugly) web UI that allows a user to generate a return form.</p>
+<p>We&#8217;ll be using Flask for this exercise, and to keep things simple, we&#8217;ll skip the Javascript bit and <em>generate</em> all HTML on the server side. Flask makes this fairly easy as it integrates with the Jinja 2 templating language.</p>
+<div class="section" id="products">
+<h2>18.5.1. Products<a class="headerlink" href="#products" title="Permalink to this headline">¶</a></h2>
+<p>To start things off, as an example, let&#8217;s see how we could generate and display an HTML table consisting of Python data. Here&#8217;s the relevant Python snippet:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">make_response</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/products/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">products</span><span class="p">():</span>
+    <span class="n">my_list</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}]</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;products.html&#39;</span><span class="p">,</span> <span class="n">my_list</span><span class="o">=</span><span class="n">my_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This references the file &#8220;products.html&#8221; which Flask will look for in the &#8220;templates&#8221; directory. This could look e.g. like the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Products<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        List of all products
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">table</span> <span class="na">border</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>b<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+            {% for elem in my_list %}
+            <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ elem.a }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ elem.b }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+            {% endfor %}
+        <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>This makes use of the Jinja 2 <em>for</em> statement which will loop through a list provided to the template. In this case, it&#8217;ll access the dictionary keys &#8220;a&#8221; and &#8220;b&#8221; of the input list and display the numbers 1, 2, 3 and 4 in the table.</p>
+<p>You can include your SQLite database in your Flask application by calling the relevant functions at the top level, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">make_response</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="c1"># the rest of the code goes here</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Create the &#8220;products&#8221; page. Query your database for the products. Turn the result to a dictionary, write an HTML template and pass your data to your template. The page should display all the columns for all your products.</p>
+</div>
+<div class="section" id="orders">
+<h2>18.5.2. Orders<a class="headerlink" href="#orders" title="Permalink to this headline">¶</a></h2>
+<p>Now, it would be nice to be able to see all the orders by a customer. It would be nice to be able to write a URL like e.g. &#8220;<a class="reference external" href="http://127.0.0.1:5000/orders?customer_id=123">http://127.0.0.1:5000/orders?customer_id=123</a>&#8221; and get an overview of the orders made by customer 123. Let&#8217;s do this next.</p>
+<p>The part in the URL after the &#8221;?&#8221; is the query string and is accessible in Flask using the function &#8220;request.args.get()&#8221;. In our case, the following line is what we need:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># default to 1 if not given</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Create the Python handler for displaying the orders of a customer. Perform the relevant SQL query. Write an HTML template and provide the relevant data to the template. Also have the HTML display the customer ID for which the orders are shown. Do this by passing the customer_id variable to the template. You&#8217;ll then be able to access the value in HTML using e.g. {{ customer_id }}.</p>
+<p>Now that we&#8217;re able to see what orders a customer has made, it would be nice to see the details of an order.</p>
+<p><em>Exercise</em>: In your table showing the orders, add another column which is a link to a more detailed page about the order. (We don&#8217;t have the page yet so clicking on the link would make Flask return 404; this is fine for now.) You can create a suitable link using e.g. &lt;a href=&#8221;/order?order_id={{ order.id }}&#8221;&gt;Show details&lt;/a&gt;.</p>
+</div>
+<div class="section" id="order-details">
+<h2>18.5.3. Order details<a class="headerlink" href="#order-details" title="Permalink to this headline">¶</a></h2>
+<p>We can now click on a link that would show order details but that page doesn&#8217;t exist yet so let&#8217;s create it. To make things more interesting, we can imagine we&#8217;re writing this page for the customer with the goal that the customer should be able to start the return process from this page. In other words, the page should look e.g. like this:</p>
+<img alt="_images/order.png" src="_images/order.png" />
+<p>We have a few elements here:</p>
+<ul class="simple">
+<li>The order ID is shown</li>
+<li>A table listing all the products for the order is shown</li>
+<li>This page includes a <em>form</em>; the user can select a number of products using the checkboxes and submit the selection to the server by pressing the button labeled &#8220;Return&#8221;</li>
+</ul>
+<p>We should have a grip on displaying the order ID and the table without the checkboxes by now. We can put together a form that sends the contents of the checkboxes as well as the order ID using e.g. the following HTML:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/return.html&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;GET&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;order_id&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ order_id }}&quot;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">table</span> <span class="na">border</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Product ID<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Name<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Size<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Return<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+        {% for product in product_list %}
+        <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ product.id }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ product.name }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ product.size }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;{{ product.id }}&quot;</span><span class="p">/&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+        {% endfor %}
+    <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Return&quot;</span><span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>That is, we do the following:</p>
+<ul class="simple">
+<li>All the elements that are part of the form, including the submit button and the checkboxes must be within the &lt;form&gt; tag</li>
+<li>The form tag should, with the &#8220;action&#8221; attribute, describe which URL will be loaded on the server side when the form is sent, i.e. to which URL the form contents are sent to</li>
+<li>The contents of the form can be defined using the &lt;input&gt; tag</li>
+<li>On line 15, we have an &lt;input&gt; tag describing the checkbox. We identify this checkbox by using the product ID which will be necessary later on.</li>
+<li>On line 19, we have another &lt;input&gt; tag which is the button to submit the form.</li>
+<li>On line 2, we have a <em>hidden</em> &lt;input&gt; tag which simply says the form will include the order ID.</li>
+</ul>
+<p><em>Exercise</em>: Put together the page to show the order details. Include the form. Submitting the form should result in requesting the page &#8220;return.html&#8221; with a query string including all the form information, but we don&#8217;t have this page yet; this is fine for now.</p>
+</div>
+<div class="section" id="returning">
+<h2>18.5.4. Returning<a class="headerlink" href="#returning" title="Permalink to this headline">¶</a></h2>
+<p>The previous page should lead the user to a page where the user can describe the reason for returning each item and download the return form. It should look e.g. like this:</p>
+<img alt="_images/return.png" src="_images/return.png" />
+<p>Now, this is similar to the previous one but with a few differences:</p>
+<ul class="simple">
+<li>Instead of including all products from the order in the table, we only display the products for which the user checked the checkbox</li>
+<li>We display the different return reasons as <em>radio buttons</em>. The first one is selected as the default. We&#8217;ll need to send the information about which radio button was selected as the form is sent.</li>
+</ul>
+<p>How would we know which products the user checked the checkbox for? The URL provides a hint: this information is included in the query string, which, again, is accessible in Flask using the request.args.get() function. As revealed by Flask documentation or general online search, the following statement will evaluate to True if the checkbox for ID 123 was checked and False otherwise:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The parameter for get() must match the name given to the checkbox in the HTML. You&#8217;ll need to use this to filter the list of products that are used for HTML generation.</p>
+<p>As for the radio buttons, they can be displayed using e.g.:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;radio_button_1&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Enable&quot;</span><span class="p">&gt;</span>Enable widget<span class="p">&lt;/</span><span class="nt">input</span><span class="p">&gt;&lt;/</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;radio_button_1&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Disable&quot;</span><span class="p">&gt;</span>Disable widget<span class="p">&lt;/</span><span class="nt">input</span><span class="p">&gt;&lt;/</span><span class="nt">br</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The above will create one selection with two radio buttons such that the form query string will either include &#8220;radio_button_1=Enable&#8221; or &#8220;radio_button_2=Disable&#8221;. In other words, the attribute &#8220;name&#8221;, like with checkboxes, defines the identifier for the radio box so your form handling code knows which variable is which. The attribute &#8220;value&#8221; describes the value that will be stored in the form if that button was selected.</p>
+<p>In your code, you&#8217;ll need to replace parts of the above using templates.</p>
+<p>How would one define the default setting? This can be done using e.g. the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;radio_button_1&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Enable&quot;</span> <span class="na">checked</span><span class="o">=</span><span class="s">&quot;checked&quot;</span><span class="p">&gt;</span>Enable widget<span class="p">&lt;/</span><span class="nt">input</span><span class="p">&gt;&lt;/</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;radio_button_1&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Disable&quot;</span><span class="p">&gt;</span>Disable widget<span class="p">&lt;/</span><span class="nt">input</span><span class="p">&gt;&lt;/</span><span class="nt">br</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>In other words, setting the attribute &#8220;checked&#8221; to &#8220;checked&#8221; will make the radio button the default for that selection.</p>
+<p><em>Exercise</em>: Create the return page. Submitting the form can result in 404 for now. The page should display the products the user checked for returning, and include radio buttons to select the reason. Query the result reasons from the database. As submitting the form will eventually cause database changes, the form should perform a POST, not a GET. Again, include the order ID as part of your form as a hidden variable. To make a radio button the default, you can use the if-statement from Jinja 2. E.g.:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span>{% if variable %}
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;TODO&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;TODO&quot;</span> <span class="na">checked</span><span class="o">=</span><span class="s">&quot;checked&quot;</span><span class="p">&gt;</span>TODO<span class="p">&lt;/</span><span class="nt">input</span><span class="p">&gt;&lt;/</span><span class="nt">br</span><span class="p">&gt;</span>
+{% else %}
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;TODO&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;TODO&quot;</span><span class="p">&gt;</span>TODO<span class="p">&lt;/</span><span class="nt">input</span><span class="p">&gt;&lt;/</span><span class="nt">br</span><span class="p">&gt;</span>
+{% endif %}
+</pre></div>
+</div>
+<p>You&#8217;ll need to set the variable to determine which radio button is the default in your Python code accordingly.</p>
+</div>
+<div class="section" id="return-form">
+<h2>18.5.5. Return form<a class="headerlink" href="#return-form" title="Permalink to this headline">¶</a></h2>
+<p>Now we have all the information from the user: which order ID they want to return products for, which products they want to return and why. Clicking the submit button on the previous page should result in the following:</p>
+<ul class="simple">
+<li>A new row is added in the database in the &#8220;returns&#8221; column, unless it already existed</li>
+<li>If any existing entries existed in the database already about returning products for this order, they should be removed, namely from the &#8220;products_returned&#8221; table</li>
+<li>We should add one row in the &#8220;products_returned&#8221; table for each product that will be returned, and commit this in the database</li>
+<li>We should then generate a PDF based on the order ID that we&#8217;ve been provided, reusing our existing PDF generation code</li>
+<li>We should finally send the generated PDF to the client</li>
+</ul>
+<p>There are a few new concepts here so let&#8217;s go through them one by one.</p>
+<div class="section" id="add-a-new-row-except-if-it-already-existed">
+<h3>18.5.5.1. Add a new row except if it already existed<a class="headerlink" href="#add-a-new-row-except-if-it-already-existed" title="Permalink to this headline">¶</a></h3>
+<p>SQLite provides a practical way to do this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO returns(order_id) VALUES (?)&#39;</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">order_id</span><span class="p">,</span> <span class="p">))</span>
+</pre></div>
+</div>
+<p>The above statement does what you&#8217;d expect: it inserts a new row in the table &#8220;returns&#8221; with the column &#8220;order_id&#8221; set to the value of the variable &#8220;order_id&#8221; - but, if this is not possible because it would violate our &#8220;UNIQUE&#8221; constraint - that is, that the &#8220;order_id&#8221; must be unique for all rows in the table as per our database schema definition from our &#8220;CREATE TABLE&#8221; statement at the beginning - then the insertion statement is simply ignored.</p>
+<p>After the above statement, we can query for the &#8220;id&#8221; column in the &#8220;returns&#8221; table to retrieve the ID of the return for this order ID.</p>
+</div>
+<div class="section" id="deleting-data-in-an-sql-database">
+<h3>18.5.5.2. Deleting data in an SQL database<a class="headerlink" href="#deleting-data-in-an-sql-database" title="Permalink to this headline">¶</a></h3>
+<p>Now, if the user has already let us know that they&#8217;ll be returning some products from an order but are now telling us they want to return some other products instead, then what we might want to do as a real online shop is to insist that the original return form, which might already have been received by our company, is the final one and no updates are required. However, as we&#8217;re building our UI for testing and development purposes, it seems like the best way to handle this is to simply delete all references to old data and start afresh. This allows us to try out different things in our UI without polluting our database with conflicting data.</p>
+<p>The following command would delete rows in the table &#8220;products_returned&#8221;, namely those rows where the &#8220;return_id&#8221; field is set to the according variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE FROM products_returned WHERE return_id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">return_id</span><span class="p">,</span> <span class="p">))</span>
+</pre></div>
+</div>
+<p>After this we&#8217;re ready to add the correct data in the database and commit our changes.</p>
+</div>
+<div class="section" id="reusing-our-existing-pdf-code-to-generate-a-pdf">
+<h3>18.5.5.3. Reusing our existing PDF code to generate a PDF<a class="headerlink" href="#reusing-our-existing-pdf-code-to-generate-a-pdf" title="Permalink to this headline">¶</a></h3>
+<p>Now, we already have a module in place for generating a PDF. If that file is in the same directory as our Flask code, then we can simply do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">print_return</span> <span class="c1"># this assumes the file is called print_return.py</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">print_return</span><span class="o">.</span><span class="n">generate_pdf</span><span class="p">(</span><span class="n">return_id</span><span class="p">)</span>
+    <span class="c1"># do something with pdf</span>
+</pre></div>
+</div>
+<p>In other words, we can simply import the file and then call a function defined within that file. Note that you don&#8217;t want to have any code defined at the top level of that file as that code would be run automatically at the import time. If you want code to be run when running the file directly, e.g. with &#8220;python print_return.py&#8221;, then you can enclose that code in an if-statement, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_label</span><span class="p">(</span><span class="n">return_id</span><span class="p">):</span>
+    <span class="c1"># code here</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">generate_label</span><span class="p">(</span><span class="n">return_id</span><span class="p">)</span>
+    <span class="c1"># do something with pdf</span>
+</pre></div>
+</div>
+<p>You may now be able to run your existing PDF code, or you may need to refactor the old code first, but the question remains: Once you have the PDF (either file or object), what do you do with it?</p>
+</div>
+<div class="section" id="sending-the-pdf-to-the-client">
+<h3>18.5.5.4. Sending the PDF to the client<a class="headerlink" href="#sending-the-pdf-to-the-client" title="Permalink to this headline">¶</a></h3>
+<p>As an online search will tell you, a good way to send a file to the client via HTTP using Flask is to have the file contents available as a binary stream, tell Flask to turn this binary stream into a response, set the response headers accordingly and then return this response in our Python code. Long story short, the code could look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">my_binary_stream</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;application/pdf&#39;</span>
+<span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;inline; filename=return.pdf&#39;</span>
+<span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+<p>That is, instead of using render_template() to send HTML to the client, we craft a response from binary data and send that instead.</p>
+<p>If you&#8217;re wondering how to get a binary stream from our PDF, then you&#8217;re in luck because the pyfpdf library provides means to do exactly this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># pdf is the pdf object, i.e. the return value from the function FPDF()</span>
+<span class="n">my_binary_stream</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we should have everything we need to finish this task:</p>
+<p><em>Exercise</em>: Put everything together and see if you can download the PDF. You&#8217;ll need to do the following:</p>
+<ul class="simple">
+<li>Call your existing code to generate a PDF. You should be able to call a function which takes a return ID as the input parameter and returns a PDF object (not a file). Refactor your existing code if necessary. Make sure you set the SQL database contents correctly beforehand.</li>
+<li>Convert the PDF object to a binary stream.</li>
+<li>Send the binary stream to the client using Flask.</li>
+</ul>
+<p>If you succeeded in the above exercise, you&#8217;ve finished our chapter around SQL and return forms. Congratulations! As you may have seen, our simple UI is nice for demonstration purposes but it lacks some features, like authentication, and as such should not be used for real online shops without significant additions. However the code does serve to demonstrate the key concepts around displaying, using and updating database contents.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">18.5. Web UI for our return form</a><ul>
+<li><a class="reference internal" href="#products">18.5.1. Products</a></li>
+<li><a class="reference internal" href="#orders">18.5.2. Orders</a></li>
+<li><a class="reference internal" href="#order-details">18.5.3. Order details</a></li>
+<li><a class="reference internal" href="#returning">18.5.4. Returning</a></li>
+<li><a class="reference internal" href="#return-form">18.5.5. Return form</a><ul>
+<li><a class="reference internal" href="#add-a-new-row-except-if-it-already-existed">18.5.5.1. Add a new row except if it already existed</a></li>
+<li><a class="reference internal" href="#deleting-data-in-an-sql-database">18.5.5.2. Deleting data in an SQL database</a></li>
+<li><a class="reference internal" href="#reusing-our-existing-pdf-code-to-generate-a-pdf">18.5.5.3. Reusing our existing PDF code to generate a PDF</a></li>
+<li><a class="reference internal" href="#sending-the-pdf-to-the-client">18.5.5.4. Sending the PDF to the client</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="sql_index.html">18. SQL and its relationship with online shops</a><ul>
+      <li>Previous: <a href="shop4.html" title="previous chapter">18.4. Generating a return form</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">19. Exercises</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/shop5.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/shop5.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

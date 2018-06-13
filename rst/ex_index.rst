@@ -24,4 +24,5 @@ Exercises
    ex_shop2
    ex_shop3
    ex_shop4
+   ex_shop5
 
