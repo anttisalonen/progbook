@@ -68,9 +68,9 @@ guess number - js, binary search
 web server - sockets, pointers, osi
 sudoku - dfs, recursion, classes, propagate + search
 bus schedule - software design, strong+static languages, more algorithms, make, kiss (wiki/unix_philosophy)
+dot parsing  - regexes, fsm, proper parser, backus naur, graphs, bfs, topological sort
 
 Projects left
-dot parsing  - regexes, fsm, proper parser, backus naur, graphs, bfs, topological sort
 print return receipt - scan code, pdf, sql
 crawler - regexes + concurrent programming + bfs + tagsoup
 tech behind the book
