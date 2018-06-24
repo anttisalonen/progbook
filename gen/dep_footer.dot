@@ -2,7 +2,8 @@
     vim -> vim2;
     python_generate_file -> unix;
     intro -> sw;
-    sw -> learn;
+    sw -> cpu;
+    cpu -> learn;
     learn -> unix;
     unix -> vcs;
     unix -> regex;

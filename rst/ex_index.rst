@@ -4,6 +4,7 @@ Exercises
 .. toctree::
    :maxdepth: 1
 
+   ex_cpu
    ex_python_generate_file
    ex_regex
    ex_js

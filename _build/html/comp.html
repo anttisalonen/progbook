@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How does a computer work? &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-does-a-computer-work">
+<h1>How does a computer work?<a class="headerlink" href="#how-does-a-computer-work" title="Permalink to this headline">¶</a></h1>
+<p>The previous chapter was a &#8220;hook&#8221; in that it attempted to get the reader interested without really going into technical details. This chapter is a bit different. As is characteristic for this book, we won&#8217;t go very much into details but we will cover the essentials about understanding computers as is required for software development.</p>
+<p>To reduce the modern computer to the essentials, let&#8217;s imagine a following, very simple device: a hand-held device with a touch screen. The device has very simple functionality: if the user taps on the left half of the screen, the screen turns green. If the user taps on the right half of the screen, the screen turns red. This device is very simple but will cover the same principles shared by nearly all computers, as we shall see.</p>
+<p>The following diagram explains the general concept for computers:</p>
+<img alt="_images/io.png" src="_images/io.png" />
+<p>In other words, there&#8217;s some input, some <em>logic</em> processing the input and creating some output. In our hypothetical device, the input is taps on the touch screen, and the output is what&#8217;s shown on the display. In our &#8220;Hello world&#8221; program, there was no input, and the output was a text in the terminal.</p>
+<p>To be more specific, the input and output blocks like a touch screen and a display are <em>digital devices</em>; they <em>communicate</em> with the logic part using <em>logic signals</em>. A logic signal is an electric signal where its voltage is either 0 volts or some fixed, small voltage like 5 volts or 3.3 volts. Typically, instead of talking about voltages we instead talk about the value of a digital signal, such that e.g. 0 volts would mean 0, or <em>false</em>, and the higher voltage would mean 1, or <em>true</em>. (Logic signals are also called binary signals, whereby binary refers to a numeral system with only two symbols, 0 and 1, or binary digits, or <em>bits</em>.)</p>
+<p>Generally speaking, the input and output devices come with some kind of a <em>technical specification</em> or <em>data sheet</em> which describe how to interact with them. For example, the data sheet for the touch screen could contain e.g. the following (somewhat simplified):</p>
+<p>&#8220;The X coordinate of the latest tap is available at touch screen address 1. The value is between 0 (left border of the screen) and 100 (right border).&#8221;</p>
+<p>Similarly the data sheet for the display could contain e.g.:</p>
+<p>&#8220;To set the colour of the display, write the desired code to display address 1. The possible codes are: 0 = black; 1 = green; 2 = red; 3 = blue.&#8221;</p>
+<p>(This display can only show one colour across the whole screen, i.e. it only has one pixel.)</p>
+<p>The logic part in the middle ends up doing at least three things:</p>
+<ul class="simple">
+<li>Receives information from the input blocks using logic signals</li>
+<li>Performs the actual logic (in our case, mapping the position of the tap to the output colour)</li>
+<li>Sends information to the output blocks using logic signals</li>
+</ul>
+<p>This logic part is called the <em>Central Processing Unit</em>, or <em>CPU</em>. Its main responsibility is to execute the instructions (logic) provided to it, which typically causes communication with the input and output devices as a side effect.</p>
+<p>In our case, the logic could look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">user_tap_x_coordinate</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>
+    <span class="n">screen_color</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">screen_color</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Here, the variable &#8220;user_tap_x_coordinate&#8221; represents the touch screen address 1 which holds the X coordinate of the position where the user tapped last. The variable &#8220;screen_color&#8221; represents the display address 1 which is used to control the colour shown on the display.</p>
+<p>Then, &#8220;all&#8221; the CPU needs to do is read the value from the touch screen address, compare this with 50, and depending on the result of the comparison, write either 1 or 2 to the display address.</p>
+<p>We now have some very rough understanding of how a computer works, but still haven&#8217;t really covered how a CPU works.</p>
+<div class="section" id="cpu">
+<h2>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h2>
+<p>A CPU receives some code in some form and must execute it. Before we can understand how it performs this, we must understand <em>digital logic</em>.</p>
+<div class="section" id="digital-logic">
+<h3>Digital logic<a class="headerlink" href="#digital-logic" title="Permalink to this headline">¶</a></h3>
+<p>CPUs are made of transistors. Transistors are semiconductor devices which have a few interesting properties. One of them is that it&#8217;s possible to build <em>logic gates</em> using transistors.</p>
+<p>Here&#8217;s an example diagram of a logic gate that performs the logical <em>and</em> operation:</p>
+<img alt="_images/and.png" src="_images/and.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How does a computer work?</a><ul>
+<li><a class="reference internal" href="#cpu">CPU</a><ul>
+<li><a class="reference internal" href="#digital-logic">Digital logic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/comp.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/comp.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

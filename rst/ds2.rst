@@ -66,6 +66,8 @@ C doesn't have built in support for sets (although C++ does). In Python, sets ca
     >>> 6 in my_set
     False
 
+*Exercise*: Look up the definition of a red-black tree online.
+
 Dictionaries
 ============
 

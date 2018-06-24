@@ -13,14 +13,14 @@ In general, a hash function takes any data as input and creates a hash value of 
     $ sha1sum with.py
     4f2fb68a29c3a1f9978be115a1798371a57e9ae9  with.py
 
-Here, we run the command sha1sum which calculates the SHA-1 hash of the file with.py. If you don't have sha1sum you may try e.g. md5sum. Hash functions can have the following properties:
+Here, we run the command sha1sum which calculates the SHA-1 hash of the file with.py. If you don't have sha1sum you may try e.g. md5sum (or possibly md5 on Mac). Hash functions can have the following properties:
 
 * Changing a file insignificantly (e.g. by adding one byte) may significantly change the hash (e.g. result in a completely different hash)
 * The hash function may be *cryptographically secure* - i.e. it is difficult or impossible to modify the input data such that the resulting hash would still be the same
 
 In general, if you know the hash of a file, you can calculate the hash to check whether the file has been modified or corrupted. git uses hashes to uniquely identify commits and to protect against data corruption.
 
-*Exercise*: Look up the definition of SHA-1 hash function online.
+*Exercise*: Look up the definition of SHA-1 hash function online. You can e.g. find an implementation in pseudocode.
 
 diff and patch
 ==============

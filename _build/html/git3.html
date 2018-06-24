@@ -53,13 +53,13 @@
 4f2fb68a29c3a1f9978be115a1798371a57e9ae9  with.py
 </pre></div>
 </div>
-<p>Here, we run the command sha1sum which calculates the SHA-1 hash of the file with.py. If you don&#8217;t have sha1sum you may try e.g. md5sum. Hash functions can have the following properties:</p>
+<p>Here, we run the command sha1sum which calculates the SHA-1 hash of the file with.py. If you don&#8217;t have sha1sum you may try e.g. md5sum (or possibly md5 on Mac). Hash functions can have the following properties:</p>
 <ul class="simple">
 <li>Changing a file insignificantly (e.g. by adding one byte) may significantly change the hash (e.g. result in a completely different hash)</li>
 <li>The hash function may be <em>cryptographically secure</em> - i.e. it is difficult or impossible to modify the input data such that the resulting hash would still be the same</li>
 </ul>
 <p>In general, if you know the hash of a file, you can calculate the hash to check whether the file has been modified or corrupted. git uses hashes to uniquely identify commits and to protect against data corruption.</p>
-<p><em>Exercise</em>: Look up the definition of SHA-1 hash function online.</p>
+<p><em>Exercise</em>: Look up the definition of SHA-1 hash function online. You can e.g. find an implementation in pseudocode.</p>
 </div>
 <div class="section" id="diff-and-patch">
 <h2>8.2.2. diff and patch<a class="headerlink" href="#diff-and-patch" title="Permalink to this headline">¶</a></h2>
