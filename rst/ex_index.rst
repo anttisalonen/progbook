@@ -5,6 +5,7 @@ Exercises
    :maxdepth: 1
 
    ex_cpu
+   ex_comp
    ex_python_generate_file
    ex_regex
    ex_js

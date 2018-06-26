@@ -5,7 +5,7 @@ The previous chapter was a "hook" in that it attempted to get the reader interes
 
 In order to understand how a computer works, we must first learn a bit about *digital logic*.
 
-The way computers work is mostly defined by physics, and what is possible in electronics. The key is the *transistor*, which is a semiconductor device which makes it possible to construct *logic gates*.
+The way computers work is mostly defined by physics, and what is possible in electronics. The key is the *transistor*, which is a semiconductor device which makes it possible to construct *logic gates*. Logic gates are physical, very small devices that perform logical operations.
 
 Logic gates take one or more *inputs* and have one or more *outputs*. The inputs and outputs typically are *binary signals*; they're either an electric signal with a low voltage (e.g. 0 volts) or a high voltage (e.g. 3.3 volts). Binary means that there are two possible values, often called 0 (*false*) and 1 (*true*). (One binary digit is also called a *bit*.)
 
@@ -63,7 +63,7 @@ It *negates* its input and, in a diagram, would look like this:
 
 .. image:: ../material/intro/not.png
 
-These gates are enough to build complex digital devices including computers.
+These gates are enough to build complex digital devices including computers (though several million of them may be necessary).
 
 Let's say we wanted to put together a circuit with the following truth table:
 
@@ -212,3 +212,5 @@ How about comparing whether one number is larger than another one? E.g. for one-
 Here, X is 1 when A is greater than B and 0 otherwise. This, too, can be done using digital circuits.
 
 *Exercise*: Come up with a design for a comparator matching the above truth table.
+
+Now that we're able to construct digital circuits, let's see how they can be used to put together a device with some characteristics not completely unlike those of a smartphone. This is the topic for the next chapter.

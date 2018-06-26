@@ -3,7 +3,8 @@
     python_generate_file -> unix;
     intro -> sw;
     sw -> cpu;
-    cpu -> learn;
+    cpu -> comp;
+    comp -> learn;
     learn -> unix;
     unix -> vcs;
     unix -> regex;

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How does a computer work? &#8212; guide 0.1 documentation</title>
+    <title>1.4. Ok, but seriously, how does a computer work? &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1.5. Learning to learn" href="learn.html" />
+    <link rel="prev" title="1.3. How does a computer work?" href="cpu.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -41,18 +43,52 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="how-does-a-computer-work">
-<h1>How does a computer work?<a class="headerlink" href="#how-does-a-computer-work" title="Permalink to this headline">¶</a></h1>
-<p>The previous chapter was a &#8220;hook&#8221; in that it attempted to get the reader interested without really going into technical details. This chapter is a bit different. As is characteristic for this book, we won&#8217;t go very much into details but we will cover the essentials about understanding computers as is required for software development.</p>
-<p>To reduce the modern computer to the essentials, let&#8217;s imagine a following, very simple device: a hand-held device with a touch screen. The device has very simple functionality: if the user taps on the left half of the screen, the screen turns green. If the user taps on the right half of the screen, the screen turns red. This device is very simple but will cover the same principles shared by nearly all computers, as we shall see.</p>
+  <div class="section" id="ok-but-seriously-how-does-a-computer-work">
+<h1>1.4. Ok, but seriously, how does a computer work?<a class="headerlink" href="#ok-but-seriously-how-does-a-computer-work" title="Permalink to this headline">¶</a></h1>
+<p>To reduce the modern computer to the essentials, let&#8217;s build a following, very simple device: a hand-held device with a touch screen. We need to implement very simple functionality for the device:</p>
+<ul class="simple">
+<li>If the user taps on the bottom half of the screen, the screen must turn green.</li>
+<li>If the user taps on the top half of the screen, the screen must turn red.</li>
+</ul>
+<p>This device is very simple but will cover the same principles shared by nearly all computers, as we shall see.</p>
 <p>The following diagram explains the general concept for computers:</p>
 <img alt="_images/io.png" src="_images/io.png" />
-<p>In other words, there&#8217;s some input, some <em>logic</em> processing the input and creating some output. In our hypothetical device, the input is taps on the touch screen, and the output is what&#8217;s shown on the display. In our &#8220;Hello world&#8221; program, there was no input, and the output was a text in the terminal.</p>
-<p>To be more specific, the input and output blocks like a touch screen and a display are <em>digital devices</em>; they <em>communicate</em> with the logic part using <em>logic signals</em>. A logic signal is an electric signal where its voltage is either 0 volts or some fixed, small voltage like 5 volts or 3.3 volts. Typically, instead of talking about voltages we instead talk about the value of a digital signal, such that e.g. 0 volts would mean 0, or <em>false</em>, and the higher voltage would mean 1, or <em>true</em>. (Logic signals are also called binary signals, whereby binary refers to a numeral system with only two symbols, 0 and 1, or binary digits, or <em>bits</em>.)</p>
-<p>Generally speaking, the input and output devices come with some kind of a <em>technical specification</em> or <em>data sheet</em> which describe how to interact with them. For example, the data sheet for the touch screen could contain e.g. the following (somewhat simplified):</p>
-<p>&#8220;The X coordinate of the latest tap is available at touch screen address 1. The value is between 0 (left border of the screen) and 100 (right border).&#8221;</p>
-<p>Similarly the data sheet for the display could contain e.g.:</p>
-<p>&#8220;To set the colour of the display, write the desired code to display address 1. The possible codes are: 0 = black; 1 = green; 2 = red; 3 = blue.&#8221;</p>
+<p>In other words, there&#8217;s some input, some logic processing the input and creating some output. In our hypothetical device, the input is taps on the touch screen, and the output is what&#8217;s shown on the display. In our &#8220;Hello world&#8221; program, there was no input, and the output was a text in the terminal.</p>
+<p>To be more specific, the input and output blocks like a touch screen and a display are <em>digital devices</em>; they <em>communicate</em> with the logic part using binary signals. Generally speaking, the input and output devices come with some kind of a <em>technical specification</em> or <em>data sheet</em> which describe how to interact with them. In our case, the hypothetical data sheet for our hypothetical touch screen contains the following:</p>
+<p>&#8220;The X coordinate of the latest tap is output at signal A. The value is either 0 (bottom half of the screen) or 1 (top half).&#8221;</p>
+<p>Similarly the hypothetical data sheet for the hypothetical display contains:</p>
+<p>&#8220;To set the colour of the display, set the signals X and Y as desired. The colour is displayed as based on the following table:&#8221;</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">X</th>
+<th class="head">Y</th>
+<th class="head">Colour shown on the display</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>0</td>
+<td>Black</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>1</td>
+<td>Green</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>0</td>
+<td>Red</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>1</td>
+<td>Blue</td>
+</tr>
+</tbody>
+</table>
 <p>(This display can only show one colour across the whole screen, i.e. it only has one pixel.)</p>
 <p>The logic part in the middle ends up doing at least three things:</p>
 <ul class="simple">
@@ -60,26 +96,57 @@
 <li>Performs the actual logic (in our case, mapping the position of the tap to the output colour)</li>
 <li>Sends information to the output blocks using logic signals</li>
 </ul>
-<p>This logic part is called the <em>Central Processing Unit</em>, or <em>CPU</em>. Its main responsibility is to execute the instructions (logic) provided to it, which typically causes communication with the input and output devices as a side effect.</p>
-<p>In our case, the logic could look like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">user_tap_x_coordinate</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>
+<p>In our case, the logic in Python-like code could look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">user_tap_x_coordinate</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
     <span class="n">screen_color</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">screen_color</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
-<p>Here, the variable &#8220;user_tap_x_coordinate&#8221; represents the touch screen address 1 which holds the X coordinate of the position where the user tapped last. The variable &#8220;screen_color&#8221; represents the display address 1 which is used to control the colour shown on the display.</p>
-<p>Then, &#8220;all&#8221; the CPU needs to do is read the value from the touch screen address, compare this with 50, and depending on the result of the comparison, write either 1 or 2 to the display address.</p>
-<p>We now have some very rough understanding of how a computer works, but still haven&#8217;t really covered how a CPU works.</p>
-<div class="section" id="cpu">
-<h2>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h2>
-<p>A CPU receives some code in some form and must execute it. Before we can understand how it performs this, we must understand <em>digital logic</em>.</p>
-<div class="section" id="digital-logic">
-<h3>Digital logic<a class="headerlink" href="#digital-logic" title="Permalink to this headline">¶</a></h3>
-<p>CPUs are made of transistors. Transistors are semiconductor devices which have a few interesting properties. One of them is that it&#8217;s possible to build <em>logic gates</em> using transistors.</p>
-<p>Here&#8217;s an example diagram of a logic gate that performs the logical <em>and</em> operation:</p>
-<img alt="_images/and.png" src="_images/and.png" />
+<p>Here, the variable &#8220;user_tap_x_coordinate&#8221; represents the touch screen input which holds the X coordinate of the position where the user tapped last. The variable &#8220;screen_color&#8221; represents the display output which is used to control the colour shown on the display.</p>
+<p>In other words, all the logic needs to do is read the input from the touch screen, compare this with predefined values, and depending on the result of the comparison, set the correct signal for the display colour.</p>
+<p><em>Exercise</em>: Write the truth table for this logic. It should have A as the input signal and X and Y as the output signals.</p>
+<p><em>Exercise</em>: Design, using pen and paper, the circuit for this logic.</p>
+<div class="section" id="software-and-hardware">
+<h2>1.4.1. Software and hardware<a class="headerlink" href="#software-and-hardware" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ve now designed a device that will display different colours depending on where the user taps the screen. Let&#8217;s further imagine we mass produce thousands of these devices. The device is an instant hit but a new feature requirement appears: some users would like to change the way the display shows the colours. For example, a user would want the device to show black if the device is tapped anywhere on the bottom half of the screen and blue otherwise. (This is the principle that e.g. allows app development on current smartphones.)</p>
+<p>Because we designed the logic that decides the display colour in the hardware, that is, in the digital logic using logic gates, making this change isn&#8217;t possible without actually changing the logic and manufacturing a new device with a changed logic. To circumvent this and to make it possible to change the way the colours are displayed without having to manufacture a new device, we can make our device <em>programmable</em>.</p>
+<p>When a device is made programmable, it doesn&#8217;t contain the logic for its primary purpose in hardware using logic gates. Instead, the logic is stored somewhere else as <em>instructions</em>, and the device instead has logic to perform operations <em>depending on</em> these instructions. Then, by changing the instructions one can change the behaviour of the device without having to manufacture a new device. We also have to include <em>memory</em> on the device. This is where the instructions are stored.</p>
+<p>In other words, what&#8217;s required is:</p>
+<ul class="simple">
+<li>Removing the logic in hardware for the primary purpose of the device</li>
+<li>Encoding this logic in a list of instructions instead</li>
+<li>Adding some memory to the device which holds the list of instructions</li>
+<li>Adding logic in the hardware to read and understand these instructions</li>
+<li>Making it possible to change the list of instructions later</li>
+</ul>
+<p>Here, the list of instructions is the <em>software</em> and the logic that reads and understands these instructions is the <em>Central Processing Unit</em>, or <em>CPU</em>. Each bit in memory can be implemented using logic gates. Memory can be seen as an array of boxes, each holding either a 1 or a 0, with the ability to change the contents as needed using signals.</p>
+<p>We&#8217;ve now covered some aspects as to how a computer works, but haven&#8217;t yet covered how a CPU works.</p>
 </div>
+<div class="section" id="cpu">
+<h2>1.4.2. CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h2>
+<p>A CPU receives some code in some form and must execute it. Let&#8217;s take a look at our logic for our original program again:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">user_tap_x_coordinate</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">screen_color</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">screen_color</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Now, the above is possibly somewhat understandable to us as humans but it&#8217;s not really a list. Typically, converting this to a list of instructions would make it look more like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="m">1</span>: COMPARE A WITH <span class="m">0</span>
+<span class="m">2</span>: IF FALSE THEN JUMP TO <span class="m">6</span>
+<span class="m">3</span>: SET X TO <span class="m">0</span>
+<span class="m">4</span>: SET Y TO <span class="m">1</span>
+<span class="m">5</span>: JUMP TO INSTRUCTION <span class="m">1</span>
+<span class="m">6</span>: SET X TO <span class="m">1</span>
+<span class="m">7</span>: SET Y TO <span class="m">0</span>
+<span class="m">8</span>: JUMP TO INSTRUCTION <span class="m">1</span>
+</pre></div>
+</div>
+<p>Here, e.g. the first instruction, COMPARE, compares the two operands given to it, and stores the result in memory to be used for the next instruction.</p>
+<p>Typically, a CPU needs to <em>decode</em> the instructions from the memory. For example, the instruction COMPARE may be defined as the input values &#8220;001&#8221;. This means that the digital logic would read three bits from memory, see if they match the values &#8220;001&#8221;, and if so, perform the comparison. Each instruction has a number that it corresponds to, and when storing the software in memory, the software would need to be stored as the hardware expects it for the system to function correctly.</p>
+<p>We now have a list of instructions such that each kind of instruction, e.g. COMPARE, SET etc. can be implemented in hardware using logic gates. By implementing each instruction in the hardware and making it possible to modify the list of instructions independently of the hardware we&#8217;ve made our device programmable.</p>
+<p>This was a rather high level overview of how a computer and a CPU work, but it should do for now, such that we can start to investigate how to actually write software.</p>
 </div>
 </div>
 
@@ -91,11 +158,9 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">How does a computer work?</a><ul>
-<li><a class="reference internal" href="#cpu">CPU</a><ul>
-<li><a class="reference internal" href="#digital-logic">Digital logic</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">1.4. Ok, but seriously, how does a computer work?</a><ul>
+<li><a class="reference internal" href="#software-and-hardware">1.4.1. Software and hardware</a></li>
+<li><a class="reference internal" href="#cpu">1.4.2. CPU</a></li>
 </ul>
 </li>
 </ul>
@@ -103,6 +168,10 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="intro_index.html">1. Introduction</a><ul>
+      <li>Previous: <a href="cpu.html" title="previous chapter">1.3. How does a computer work?</a></li>
+      <li>Next: <a href="learn.html" title="next chapter">1.5. Learning to learn</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>

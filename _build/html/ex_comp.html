@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>19.9. Solutions to exercises: JSON &#8212; guide 0.1 documentation</title>
+    <title>19.2. Solutions to exercises: Ok, but seriously, how does a computer work? &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19.10. Solutions to exercises: AJAX" href="ex_ajax.html" />
-    <link rel="prev" title="19.8. Solutions to exercises: Writing a toy web server" href="ex_httpserv.html" />
+    <link rel="next" title="19.3. Solutions to exercises: Generating input data using Python" href="ex_python_generate_file.html" />
+    <link rel="prev" title="19.1. Solutions to exercises: How does a computer work?" href="ex_cpu.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,24 +43,42 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="solutions-to-exercises-json">
-<h1>19.9. Solutions to exercises: JSON<a class="headerlink" href="#solutions-to-exercises-json" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python2</span>
-
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-<span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">-</span> <span class="mf">10.0</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">-</span> <span class="mf">10.0</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">-</span> <span class="mf">10.0</span>
-    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
-
-<span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
+  <div class="section" id="solutions-to-exercises-ok-but-seriously-how-does-a-computer-work">
+<h1>19.2. Solutions to exercises: Ok, but seriously, how does a computer work?<a class="headerlink" href="#solutions-to-exercises-ok-but-seriously-how-does-a-computer-work" title="Permalink to this headline">¶</a></h1>
+<p>Truth table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">A</th>
+<th class="head">X</th>
+<th class="head">Y</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Design:</p>
+<img alt="_images/comp2.png" src="_images/comp2.png" />
 </div>
 
 
@@ -73,8 +91,8 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="ex_index.html">19. Exercises</a><ul>
-      <li>Previous: <a href="ex_httpserv.html" title="previous chapter">19.8. Solutions to exercises: Writing a toy web server</a></li>
-      <li>Next: <a href="ex_ajax.html" title="next chapter">19.10. Solutions to exercises: AJAX</a></li>
+      <li>Previous: <a href="ex_cpu.html" title="previous chapter">19.1. Solutions to exercises: How does a computer work?</a></li>
+      <li>Next: <a href="ex_python_generate_file.html" title="next chapter">19.3. Solutions to exercises: Generating input data using Python</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -82,7 +100,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/ex_json.rst.txt"
+      <li><a href="_sources/ex_comp.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -108,7 +126,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/ex_json.rst.txt"
+      <a href="_sources/ex_comp.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

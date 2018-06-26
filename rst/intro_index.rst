@@ -7,6 +7,7 @@ Introduction
    intro
    sw
    cpu
+   comp
    learn
    python_generate_file
 

@@ -1,0 +1,8 @@
+digraph io {
+    rankdir="LR";
+    Input [shape=box];
+    Logic [shape=box];
+    Output [shape=box];
+    Input -> Logic;
+    Logic -> Output;
+}
