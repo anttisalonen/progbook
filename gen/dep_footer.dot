@@ -4,7 +4,8 @@
     intro -> sw;
     sw -> cpu;
     cpu -> comp;
-    comp -> learn;
+    comp -> prog;
+    prog -> learn;
     learn -> unix;
     unix -> vcs;
     unix -> regex;

@@ -8,6 +8,7 @@ Introduction
    sw
    cpu
    comp
+   prog
    learn
    python_generate_file
 
