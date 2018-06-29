@@ -1,0 +1,6 @@
+digraph tc {
+    rankdir="LR";
+    "C source file" -> "Assembly file" [label="Compiler"];
+    "Assembly file" -> "Object file" [label="Assembler"];
+    "Object file" -> "Executable" [label="Linker"];
+}

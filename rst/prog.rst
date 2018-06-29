@@ -1,5 +1,5 @@
 The basics of programming
-------------------------------
+-------------------------
 
 It's debatable what the basics of programming are. This chapter presents the author's view and will cover:
 

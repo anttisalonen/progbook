@@ -5,7 +5,9 @@
     sw -> cpu;
     cpu -> comp;
     comp -> prog;
-    prog -> learn;
+    prog -> prog2;
+    prog2 -> prog3;
+    prog3 -> learn;
     learn -> unix;
     unix -> vcs;
     unix -> regex;

@@ -9,6 +9,8 @@ Introduction
    cpu
    comp
    prog
+   prog2
+   prog3
    learn
    python_generate_file
 

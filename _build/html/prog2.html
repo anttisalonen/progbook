@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.6. Setting up the C toolchain &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1.7. The basics of programming in C" href="prog3.html" />
+    <link rel="prev" title="1.5. The basics of programming" href="prog.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="setting-up-the-c-toolchain">
+<h1>1.6. Setting up the C toolchain<a class="headerlink" href="#setting-up-the-c-toolchain" title="Permalink to this headline">¶</a></h1>
+<p>In the previous chapters we learnt some basic programming using Python. In order to get a better understanding of what is general in programming and what is specific to a programming language, we&#8217;ll learn some basic programming using another programming language, namely C.</p>
+<p>We&#8217;ll start by setting up the C <em>toolchain</em>. A toolchain is a set of tools that are used in a chain with the purpose of compiling and running code written in a specific programming language. As you may have noticed, with Python, we executed our Python programs by passing our Python file to the Python interpreter. What happened there, in a nutshell, was that the Python interpreter <em>interpreted</em> our code, i.e. read it through and then executed it. C is typically not interpreted but <em>compiled</em>. What this means is that the C code is run through a <em>compiler</em> which generates an <em>executable file</em>, that is, a file with the CPU instructions which the CPU should execute. Only after we&#8217;ve created this executable file we can run it which in turn runs our program. (The Python intepreter is an executable. The official Python interpreter is written in C.)</p>
+<p>Now, the C toolchain is a toolchain because in addition to the compiler, you also need the <em>standard library</em> which contains the implementations of standard functions in binary form (CPU instructions), the <em>assembler</em>, because technically the compiler outputs <em>assembly language</em>, which is a human readable format for the CPU instructions which is converted to the actual binary CPU instructions by the assembler (also called the <em>object file</em>), and finally the <em>linker</em> which links the standard library, our object files and possibly other libraries together to form the final executable. In short, the toolchain looks like this:</p>
+<img alt="_images/tc.png" src="_images/tc.png" />
+<p>...however, modern C toolchains typically combine all of it in one Unix command so you can usually go from the C source file to the executable in one step. Because of this, in this chapter from now on, the terms &#8220;compiler&#8221; and &#8220;toolchain&#8221; are used interexchangeably.</p>
+<p>Things do look a bit different if you have several C source files and libraries, namely like this:</p>
+<img alt="_images/tc2.png" src="_images/tc2.png" />
+<p>Here, the compiler needs to be called multiple times. But our programs will be one file only, at least for now.</p>
+<div class="section" id="writing-hello-world-in-c">
+<h2>1.6.1. Writing &#8220;Hello world&#8221; in C<a class="headerlink" href="#writing-hello-world-in-c" title="Permalink to this headline">¶</a></h2>
+<p>Here&#8217;s the &#8220;Hello world&#8221; program in C:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let&#8217;s go through this line by line:</p>
+<ul class="simple">
+<li>Line 1: We <em>include</em> the <em>header file</em> called &#8220;stdio.h&#8221; (standard input and output). The angle brackets (&#8220;&lt;&#8221; and &#8220;&gt;&#8221;) indicate this header file is expected to be part of the system (as opposed to something we wrote ourselves). Including a file using &#8220;#include&#8221; causes the <em>preprocessor</em> (which is a part of the compiler) to simply include all the contents of that file during compilation. Header file is typically a file that includes <em>function declarations</em> of functions that are located in a library; including the relevant header file is recommended when functions of a library are used. In our case, we want to use the <em>printf</em> function which outputs text and is part of the C standard library.</li>
+<li>Lines 3-6: We <em>define</em> the function called &#8220;main&#8221;. Every C program must have exactly one function called &#8220;main&#8221; which is the entry point to the program, i.e. the start of the program execution. The keyword &#8220;int&#8221; means our &#8220;main&#8221; function returns an integer (as is mandated by the standard) but this isn&#8217;t relevant for us now. The keyword &#8220;void&#8221; means our function doesn&#8217;t receive any parameters. We must start and end the function definition with curly brackets (&#8220;{&#8221; and &#8220;}&#8221;).</li>
+<li>Line 5: We call the function printf(). We pass it one parameter, namely the <em>string</em> &#8220;Hello world\n&#8221;. This causes the function to print the text &#8220;Hello world&#8221; followed by a <em>newline character</em>, a special character that corresponds to enter, or line feed. We must enter the semicolon (&#8221;;&#8221;) after the function call to denote the end of the <em>statement</em>.</li>
+</ul>
+<p><em>Exercise</em>: Type (don&#8217;t copy-paste) the above program to a file. Call the file &#8220;hello.c&#8221;.</p>
+</div>
+<div class="section" id="installing-a-c-compiler">
+<h2>1.6.2. Installing a C compiler<a class="headerlink" href="#installing-a-c-compiler" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s now ensure we have a C compiler (which in our case includes the assembler, the linker and the standard library) installed.</p>
+<p>You may already have one installed. The most common C compilers at the time of writing in Unix systems are <em>gcc</em> and <em>clang</em>. For now it&#8217;s not relevant which one you use. You can test if you have gcc installed by running e.g. the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -o hello hello.c
+</pre></div>
+</div>
+<p>If you get no output, then you have gcc installed. You should then have the file &#8220;hello&#8221; in the current working directory. This is our binary file.</p>
+<p>You can also try if you have clang installed using e.g. the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ clang -o hello hello.c
+</pre></div>
+</div>
+<p>Again, no output implies clang having successfully run and compiled the program. For both compilers we passed the <em>command line flag</em> &#8220;-o&#8221; which makes it possible for us to define the output file, which we define in the following parameter to be &#8220;hello&#8221;. The last parameter to the compiler is the input C source file.</p>
+<p>If you have neither gcc nor clang installed, please install one of them. Again, I cannot tell you how as it is platform dependent; please perform the relevant online searches as necessary.</p>
+<p>Once you have been able to compile the &#8220;Hello world&#8221; program successfully, you can then run the resulting binary file with the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./hello
+Hello world!
+</pre></div>
+</div>
+<p>Here, the prefix &#8221;./&#8221; means we want to run an executable file in the current directory. As we see, the output is what we passed to printf().</p>
+<p><em>Exercise</em>: Compile and run the &#8220;Hello world&#8221; program.</p>
+<p><em>Exercise</em>: Remove the characters &#8220;\n&#8221; from the parameter to printf(). Compile and run again. What changed?</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.6. Setting up the C toolchain</a><ul>
+<li><a class="reference internal" href="#writing-hello-world-in-c">1.6.1. Writing &#8220;Hello world&#8221; in C</a></li>
+<li><a class="reference internal" href="#installing-a-c-compiler">1.6.2. Installing a C compiler</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="intro_index.html">1. Introduction</a><ul>
+      <li>Previous: <a href="prog.html" title="previous chapter">1.5. The basics of programming</a></li>
+      <li>Next: <a href="prog3.html" title="next chapter">1.7. The basics of programming in C</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/prog2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/prog2.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

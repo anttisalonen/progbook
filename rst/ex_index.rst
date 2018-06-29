@@ -7,6 +7,7 @@ Exercises
    ex_cpu
    ex_comp
    ex_prog
+   ex_prog3
    ex_python_generate_file
    ex_regex
    ex_js

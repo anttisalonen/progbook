@@ -1,0 +1,12 @@
+digraph tc2 {
+    rankdir="LR";
+    "C source file #1" -> "Object file #1" [label="Compiler"];
+    "C source file #2" -> "Object file #2" [label="Compiler"];
+    "C source file #n" -> "Object file #n" [label="Compiler"];
+    "Object file #1" -> "Executable";
+    "Object file #2" -> "Executable";
+    "Object file #n" -> "Executable" [label="Linker"];
+    "Library object file #1" -> "Executable";
+    "Library object file #2" -> "Executable";
+    "Library object file #n" -> "Executable";
+}

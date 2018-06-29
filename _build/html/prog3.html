@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.7. The basics of programming in C &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1.8. Learning to learn" href="learn.html" />
+    <link rel="prev" title="1.6. Setting up the C toolchain" href="prog2.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-basics-of-programming-in-c">
+<h1>1.7. The basics of programming in C<a class="headerlink" href="#the-basics-of-programming-in-c" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="variables-in-c">
+<h2>1.7.1. Variables in C<a class="headerlink" href="#variables-in-c" title="Permalink to this headline">¶</a></h2>
+<p>Now that we&#8217;re able to compile and run C programs, let&#8217;s see how to use variables.</p>
+<p>A variable is defined in C by first defining the <em>type</em> of the variable, followed by the name of the variable. Optionally, the value of the variable can be set when defining the variable. Associating a type with a variable is a way of the programmer telling the compiler how the data is intended to be used. There are several possible types and programs can define new types. For example, <em>int</em> and <em>float</em> are types (integers and floating point numbers respectively, whereby the number of bits used for storing the data, i.e. the minimum and maximum integer values and the floating point number precision are platform specific).</p>
+<p>Once a variable has been defined, it can be used by <em>assigning</em> a value to it, using standard operations and functions such as arithmetic and passed to functions such as printf(). Here&#8217;s an example of defining and using variables:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">z</span><span class="p">;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;z is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let&#8217;s go through this line by line again:</p>
+<ul class="simple">
+<li>Line 5: We define a variable named &#8220;x&#8221;. It has type &#8220;int&#8221;. We assign the value 5 to it.</li>
+<li>Line 6: We define a variable named &#8220;y&#8221;. It has type &#8220;int&#8221;. We assign the value 42 to it.</li>
+<li>Line 7: We define a variable named &#8220;z&#8221;. It has type &#8220;int&#8221;. We don&#8217;t assign any value to it. As a result, its contents are <em>undefined</em>; it can contain anything.</li>
+<li>Line 8: We assign a value to the variable &#8220;z&#8221;, namely the result of arithemtic operations.</li>
+<li>Line 9: We print the value of &#8220;z&#8221;. We pass the <em>placeholder</em> &#8220;%d&#8221; to printf(). printf() is a function which takes a <em>variable number of parameters</em>. Each parameter is separated by a comma (&#8221;,&#8221;). Here, we pass printf() two parameters; the first one is (and must be) the format string. The number of placeholders in the format string defines the number of extra parameters that must be passed. Because we have one placeholder, we must pass one extra parameter. Here, our second parameter is &#8220;z&#8221;. This results in printf() printing the value of &#8220;z&#8221;.</li>
+</ul>
+<p><em>Exercise</em>: Type (don&#8217;t copy-paste) the above program into a file. Compile it and run the generated executable file.</p>
+<p><em>Exercise</em>: Create a new variable of type &#8220;int&#8221;. Assign a value to it which is dependent on &#8220;x&#8221;, &#8220;y&#8221; and &#8220;z&#8221;. Print out its value.</p>
+<p><em>Exercise</em>: Create a new variable of type &#8220;int&#8221;. Assign a very large number to it (e.g. 9999999999) and print out its value. Compile and run. What is the output? (If the output is unexpected, this is because the value <em>overflowed</em>; the number required more bits than your system allocated for &#8220;int&#8221;.)</p>
+</div>
+<div class="section" id="loops">
+<h2>1.7.2. Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
+<p>There are several ways to define a loop in C. They&#8217;re all equivalent but have somewhat different syntax.</p>
+<p>A <em>for loop</em> has three clauses; the initialisation clause, the controlling expression and the expression to be performed after each iteration. An example may be the best way to illustrate this:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Line 5: We define our loop. The keyword <em>for</em> is followed by parentheses, and the parentheses contain the three clauses. The first one defines a variable called &#8220;i&#8221;. Defining a variable here only makes it available within the loop; using it after the loop would cause a <em>compiler error</em>. (It&#8217;s said that its <em>scope</em> is limited to the loop body.) The second clause is an expression that, if evaluated to false, will terminate the loop. The third clause is an expression that is performed after each loop iteration. The syntax &#8220;i++&#8221; is shorthand for &#8220;i = i + 1&#8221;; it means &#8220;i&#8221; is incremented by one.</li>
+<li>Line 6: This is the body of the loop. We print out the value of &#8220;i&#8221; for each iteration.</li>
+</ul>
+<p>The curly brackets (&#8220;{&#8221; and &#8220;}&#8221;) can optionally be omitted if the loop body is a single statement (like in this case). However, it&#8217;s often beneficial to always include the curly brackets for clarity.</p>
+<p><em>Exercise</em>: Type (don&#8217;t copy-paste) the code to a file. Compile it and run it. What&#8217;s the output?</p>
+<p>Here&#8217;s a for loop which also prints out the value of &#8220;i&#8221;, but in reverse order:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As you can see, it&#8217;s similar, but the variable &#8220;i&#8221; is instead initialised at 9, the condition is changed such that the loop is repeated as long as the value of &#8220;i&#8221; is 0 or higher, and the value of &#8220;i&#8221; is decremented at each iteration.</p>
+<p>A <em>while loop</em> is similar to the for loop but in some ways simplified. The following program is functionally equivalent to the first for loop example:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Line 5: We define a variable &#8220;i&#8221; of type &#8220;int&#8221; and assign the value 0 to it.</li>
+<li>Line 6: We define our <em>while loop</em> by using the keyword &#8220;while&#8221;, followed by parentheses which include the controlling expression similar to the for loop, followed by the loop body.</li>
+<li>Line 7: We print out the value of the variable &#8220;i&#8221;.</li>
+<li>Line 8: We increment the value of &#8220;i&#8221;.</li>
+</ul>
+<p><em>Exercise</em>: Type the above code to a file. Compile it and run it.</p>
+<p><em>Exercise</em>: Rewrite the second for loop example (printing out the value of &#8220;i&#8221; in reverse order) by replacing the for loop with a while loop.</p>
+<p>The third loop construct in C is the <em>do loop</em>. It&#8217;s very similar to the <em>while</em> loop but ensures the loop body is executed at least once. Here&#8217;s an example:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>This is functionally equivalent to the while loop example from above. Here, the loop body is executed once before checking whether the control expression evaluates to true. The control expression is evaluated after each following iteration.</p>
+<div class="topic">
+<p class="topic-title first">Whitespace in C</p>
+<p>C is not whitespace sensitive. This means that the number of spaces and newlines between tokens is not relevant. Hence e.g. the first for loop example could equivalently be written like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+
+<span class="k">for</span><span class="p">(</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span>
+                <span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="n">i</span>
+              <span class="p">)</span>
+        <span class="p">;</span>
+    <span class="p">}</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>This will behave exactly the same as the original example. Generally it makes sense to pick one form of indentation and stick with it.</p>
+</div>
+<p>Loops can also contain loops:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">added</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d + %d = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">added</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Print the multiplication table for numbers from 1 to 10. I.e. the numbers 1 * 1, 1 * 2 etc. up to 10 * 10.</p>
+</div>
+<div class="section" id="branches">
+<h2>1.7.3. Branches<a class="headerlink" href="#branches" title="Permalink to this headline">¶</a></h2>
+<p>Branches in C are defined using the &#8220;if&#8221; and &#8220;else&#8221; keywords. For example:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is smaller than 20</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">40</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is smaller than 40</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is larger than or equal to 40</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Type, compile and run the above program.</p>
+<p>As is expected, branches and loops can be freely combined. Here&#8217;s a branch within a loop:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i is larger than 5</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: What does the above print? Try it out.</p>
+<p>Like in Python, equality between two values can be checked for using double equality sign (&#8220;==&#8221;).</p>
+<p>Furthermore, the tokens &#8220;||&#8221; and &#8220;&amp;&amp;&#8221; can be used to combine conditions. &#8220;||&#8221; means &#8220;or&#8221; and &#8220;&amp;&amp;&#8221; means &#8220;and&#8221;:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is between 0 and 10</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is either negative or larger than 10</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Write a program that has a loop within a branch.</p>
+<p><em>Exercise</em>: Write a program that prints &#8220;Hello world&#8221; five times, followed by printing &#8220;Hallo Welt&#8221; five times. Note that this can be written either with or without using a branch. Write both versions.</p>
+</div>
+<div class="section" id="functions">
+<h2>1.7.4. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ve already seen a function definition with the definition of &#8220;main&#8221;. Here&#8217;s a definition of a function that takes an int as a parameter and doesn&#8217;t return anything:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">my_func</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Parameter: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">my_func</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+    <span class="n">my_func</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Lines 3-6: We define our function called &#8220;my_func&#8221;. &#8220;void&#8221; means it doesn&#8217;t return anything. &#8220;int x&#8221; in parentheses means it receives one input variable of type int, which will be named &#8220;x&#8221; within the function.</li>
+<li>Line 5: We print out the value of the parameter passed to the function.</li>
+<li>Line 10: We call our function.</li>
+<li>Lines 11-12: We call our function again.</li>
+</ul>
+<p><em>Exercise</em>: Type, compile and run the above program.</p>
+<p>Here&#8217;s an example of a function that returns a value:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">square</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">x_squared</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d squared is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_squared</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Here, on line 5, we can see the use of the &#8220;return&#8221; keyword. Using this will cause the execution of the function to stop and the value after the return keyword to be assigned to the caller of the function, in our case to the variable &#8220;x_squared&#8221; on line 11.</p>
+<p><em>Exercise</em>: Type, compile and run the above program.</p>
+<p>Functions can be combined with branches and loops:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">square</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">i_squared</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i_squared</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i_squared</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: What does the above program print? Try it out.</p>
+<p>As an aside, here&#8217;s an example use of a floating point number:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">3.4f</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">4.2f</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">2.2f</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;z is %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;z with two digits after the decimal point: %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here we define some floating point variables using the keyword &#8220;float&#8221;. Note that we need to use the letter &#8220;f&#8221; after the numeric literal to denote a (single precision) floating point number. We can pass a floating point number to printf() using &#8220;%f&#8221; as the placeholder.</p>
+<p>With floating point numbers, it&#8217;s possible that printf() by default includes several digits after the comma, making numbers more difficult to read. The above code illustrates modifying the placeholder to &#8220;%.2f&#8221; which tells printf() to only display two digits after the decimal point.</p>
+<p><em>Exercise</em>: Type, compile and run the above program.</p>
+<p><em>Exercise</em>: Define and use a function that calculates the area of a circle. The function should receive the radius as the input and return the area as the output. The types should be float for both input and output. Use the formula &#8220;area = 3.14 * radius * radius&#8221;.</p>
+<p><em>Exercise</em>: Use the above function to print out the areas of circles with radius 1, 2, 3... up to 10. Note that you can pass an integer to a function that expects a float as an input parameter. The compiler will <em>implicitly</em> convert an int to a float.</p>
+<p><em>Exercise</em>: Write a program that, for numbers from 1 to 10, will print the area of the circle with that radius if the area is between 10 and 100.</p>
+<p>Similarly to Python, C supports operators such as / (division) and % (modulo, or remainder).</p>
+<p><em>Exercise</em>: Write a program that prints out the numbers between 1 to 10 which, after being divided by 3, have a remainder of 1.</p>
+<p>As before, we should now have everything we need to write FizzBuzz.</p>
+<p><em>Exercise</em>: Write the code to solve FizzBuzz in C.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.7. The basics of programming in C</a><ul>
+<li><a class="reference internal" href="#variables-in-c">1.7.1. Variables in C</a></li>
+<li><a class="reference internal" href="#loops">1.7.2. Loops</a></li>
+<li><a class="reference internal" href="#branches">1.7.3. Branches</a></li>
+<li><a class="reference internal" href="#functions">1.7.4. Functions</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="intro_index.html">1. Introduction</a><ul>
+      <li>Previous: <a href="prog2.html" title="previous chapter">1.6. Setting up the C toolchain</a></li>
+      <li>Next: <a href="learn.html" title="next chapter">1.8. Learning to learn</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/prog3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/prog3.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
