@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>7.5. C and strings &#8212; guide 0.1 documentation</title>
+    <title>8.5. C and strings &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="7.6. Writing a toy web server" href="httpserv.html" />
-    <link rel="prev" title="7.4. Dynamic memory allocation" href="c_dyn.html" />
+    <link rel="next" title="8.6. Writing a toy web server" href="httpserv.html" />
+    <link rel="prev" title="8.4. Dynamic memory allocation" href="c_dyn.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,10 +44,10 @@
           <div class="body" role="main">
             
   <div class="section" id="c-and-strings">
-<h1>7.5. C and strings<a class="headerlink" href="#c-and-strings" title="Permalink to this headline">¶</a></h1>
+<h1>8.5. C and strings<a class="headerlink" href="#c-and-strings" title="Permalink to this headline">¶</a></h1>
 <p>This chapter goes in depth around strings (and buffers in general) in C.</p>
 <div class="section" id="c-string-handling">
-<h2>7.5.1. C string handling<a class="headerlink" href="#c-string-handling" title="Permalink to this headline">¶</a></h2>
+<h2>8.5.1. C string handling<a class="headerlink" href="#c-string-handling" title="Permalink to this headline">¶</a></h2>
 <p>Before we continue with C, there are a couple of building blocks regarding string handling that you should know about. Let&#8217;s first cover through some basics about strings in C.</p>
 <p>C doesn&#8217;t really have strings. What it has are buffers (allocation of continuous memory), chars or characters (one byte, representing one ASCII character, meaning English letters, numbers or other symbols) and pointers. Mixing these conceptually results in something like a string. See the below diagram which is a continuous buffer i.e. array with eight slots, each holding one byte (character):</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
@@ -104,7 +104,7 @@
 <p>Here, &#8220;my_function&#8221; cannot by itself know how long the string (character buffer) pointed to by &#8220;str&#8221; is, and must take a second parameter &#8220;len&#8221; which must have this information. The &#8220;sizeof&#8221; operator only tells the size of the array (in bytes) at the site where the array is allocated, not where only a pointer is available.</p>
 </div>
 <div class="section" id="pointer-arithmetic-and-substrings">
-<h2>7.5.2. Pointer arithmetic and substrings<a class="headerlink" href="#pointer-arithmetic-and-substrings" title="Permalink to this headline">¶</a></h2>
+<h2>8.5.2. Pointer arithmetic and substrings<a class="headerlink" href="#pointer-arithmetic-and-substrings" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s say we want to modify the array by a character. We can do this:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
 <span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span>
@@ -146,7 +146,7 @@
 <p><em>Exercise</em>: Extend your function from the previous exercise such that the character to count occurrences for is given as an additional input parameter.</p>
 </div>
 <div class="section" id="string-comparisons">
-<h2>7.5.3. String comparisons<a class="headerlink" href="#string-comparisons" title="Permalink to this headline">¶</a></h2>
+<h2>8.5.3. String comparisons<a class="headerlink" href="#string-comparisons" title="Permalink to this headline">¶</a></h2>
 <p>You can check if two strings are the same by using the &#8220;strncmp&#8221; function:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
 <span class="kt">char</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
@@ -215,10 +215,10 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">7.5. C and strings</a><ul>
-<li><a class="reference internal" href="#c-string-handling">7.5.1. C string handling</a></li>
-<li><a class="reference internal" href="#pointer-arithmetic-and-substrings">7.5.2. Pointer arithmetic and substrings</a></li>
-<li><a class="reference internal" href="#string-comparisons">7.5.3. String comparisons</a></li>
+<li><a class="reference internal" href="#">8.5. C and strings</a><ul>
+<li><a class="reference internal" href="#c-string-handling">8.5.1. C string handling</a></li>
+<li><a class="reference internal" href="#pointer-arithmetic-and-substrings">8.5.2. Pointer arithmetic and substrings</a></li>
+<li><a class="reference internal" href="#string-comparisons">8.5.3. String comparisons</a></li>
 </ul>
 </li>
 </ul>
@@ -226,9 +226,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_c_index.html">7. Intermediate C</a><ul>
-      <li>Previous: <a href="c_dyn.html" title="previous chapter">7.4. Dynamic memory allocation</a></li>
-      <li>Next: <a href="httpserv.html" title="next chapter">7.6. Writing a toy web server</a></li>
+  <li><a href="int_c_index.html">8. Intermediate C</a><ul>
+      <li>Previous: <a href="c_dyn.html" title="previous chapter">8.4. Dynamic memory allocation</a></li>
+      <li>Next: <a href="httpserv.html" title="next chapter">8.6. Writing a toy web server</a></li>
   </ul></li>
   </ul></li>
 </ul>

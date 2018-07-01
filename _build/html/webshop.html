@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>18.1. Introduction to SQL &#8212; guide 0.1 documentation</title>
+    <title>19.1. Introduction to SQL &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="18.2. Adding data to an SQL database" href="shop2.html" />
-    <link rel="prev" title="18. SQL and its relationship with online shops" href="sql_index.html" />
+    <link rel="next" title="19.2. Adding data to an SQL database" href="shop2.html" />
+    <link rel="prev" title="19. SQL and its relationship with online shops" href="sql_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="introduction-to-sql">
-<h1>18.1. Introduction to SQL<a class="headerlink" href="#introduction-to-sql" title="Permalink to this headline">¶</a></h1>
+<h1>19.1. Introduction to SQL<a class="headerlink" href="#introduction-to-sql" title="Permalink to this headline">¶</a></h1>
 <p>As mentioned in section &#8220;Redis&#8221;, SQL is a language for querying databases, and there are several SQL databases which support this language, or their own dialect thereof, for the database operations. There are several reasons to use or not use an SQL database vs. a no-SQL database, but some reasons why we might want to use an SQL database for this kind of an application are:</p>
 <ul class="simple">
 <li>The data is relatively heavily <em>relational</em> - there are relationships between e.g. products and orders, orders and customers, and returns and orders. SQL has built in support for working with relations.</li>
@@ -78,7 +78,7 @@ sqlite&gt;
 <p>The above creates a new database called &#8220;my_db&#8221; with one table called &#8220;my_table&#8221; which has one column &#8220;my_number&#8221; which holds integers, and two rows with values 5 and 7. You can then find a file with the name &#8220;my_db&#8221; which is the database. (You can think of tables a bit like sheets in a spreadsheet program; they have a fixed number of columns, and you can add, remove and query for rows in the table.)</p>
 <p><em>Exercise</em>: Install SQLite and try it out. Bonus points if you compile it from source.</p>
 <div class="section" id="database-schemas">
-<h2>18.1.1. Database schemas<a class="headerlink" href="#database-schemas" title="Permalink to this headline">¶</a></h2>
+<h2>19.1.1. Database schemas<a class="headerlink" href="#database-schemas" title="Permalink to this headline">¶</a></h2>
 <p>Now that we&#8217;re able to use SQLite let&#8217;s consider what we need to store there. As our focus is generating the return form PDF, let&#8217;s take a look at what the expected output could be like: <a class="reference download internal" href="_downloads/example.pdf" download=""><code class="xref download docutils literal"><span class="pre">pdf</span></code></a></p>
 <p>Don&#8217;t focus on the details (e.g. the U.S. zip code &#8220;15443&#8221; is actually in Pennsylvania, not in Washington D.C.) but the objects we want to include are:</p>
 <ul class="simple">
@@ -242,8 +242,8 @@ sqlite&gt;
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">18.1. Introduction to SQL</a><ul>
-<li><a class="reference internal" href="#database-schemas">18.1.1. Database schemas</a></li>
+<li><a class="reference internal" href="#">19.1. Introduction to SQL</a><ul>
+<li><a class="reference internal" href="#database-schemas">19.1.1. Database schemas</a></li>
 </ul>
 </li>
 </ul>
@@ -251,9 +251,9 @@ sqlite&gt;
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="sql_index.html">18. SQL and its relationship with online shops</a><ul>
-      <li>Previous: <a href="sql_index.html" title="previous chapter">18. SQL and its relationship with online shops</a></li>
-      <li>Next: <a href="shop2.html" title="next chapter">18.2. Adding data to an SQL database</a></li>
+  <li><a href="sql_index.html">19. SQL and its relationship with online shops</a><ul>
+      <li>Previous: <a href="sql_index.html" title="previous chapter">19. SQL and its relationship with online shops</a></li>
+      <li>Next: <a href="shop2.html" title="next chapter">19.2. Adding data to an SQL database</a></li>
   </ul></li>
   </ul></li>
 </ul>

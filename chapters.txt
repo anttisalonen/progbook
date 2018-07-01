@@ -58,9 +58,17 @@ data visualisation - bus schedule?
 
 Will have
 processes - unit testing, code reviews, q&a, ci
-plotting (plotly)
-parallel programming - threads
+jupyter + pandas + plotly
+parallel programming - threads, mutexes
 esr
+processes + virtual memory?
+np complete (knapsack)
+utf-8
+
+Exercises
+graphics programming
+device drivers
+neural networks
 
 Projects done
 quadratic formula - generate text data, generate json, read json, plot using plotly, store to nosql, show stats

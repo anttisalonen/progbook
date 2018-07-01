@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>13.2. Finishing our simple PNG parser &#8212; guide 0.1 documentation</title>
+    <title>14.2. Finishing our simple PNG parser &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14. Strongly, statically typed languages" href="strong_index.html" />
-    <link rel="prev" title="13.1. PNG files" href="png.html" />
+    <link rel="next" title="15. Strongly, statically typed languages" href="strong_index.html" />
+    <link rel="prev" title="14.1. PNG files" href="png.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,11 +44,11 @@
           <div class="body" role="main">
             
   <div class="section" id="finishing-our-simple-png-parser">
-<h1>13.2. Finishing our simple PNG parser<a class="headerlink" href="#finishing-our-simple-png-parser" title="Permalink to this headline">¶</a></h1>
+<h1>14.2. Finishing our simple PNG parser<a class="headerlink" href="#finishing-our-simple-png-parser" title="Permalink to this headline">¶</a></h1>
 <p>We&#8217;re now able to do some preliminary parsing of a PNG file, but we&#8217;re still lacking the parsing of the actual blocks.</p>
 <p>We won&#8217;t parse all blocks - most notably, we won&#8217;t parse the actual image data - but we can get some information out of some of the other blocks. For example, the header block (IHDR), the background colour block (bKGD) and last modification block (tIME) give us some good cases for practising our programming skills. For such blocks, we can set the goal of simply printing out the contents to stdout.</p>
 <div class="section" id="data-driven-programming">
-<h2>13.2.1. Data driven programming<a class="headerlink" href="#data-driven-programming" title="Permalink to this headline">¶</a></h2>
+<h2>14.2.1. Data driven programming<a class="headerlink" href="#data-driven-programming" title="Permalink to this headline">¶</a></h2>
 <p>Now, we have code to tell when we&#8217;ve stumbled upon a block, we know how long a block is in bytes, and we know where to find the contents of the block. What we could do is simply check the type of the block and then have some logic to react to it, i.e.:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;chunk: %s - len: %d (%d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">chunkbuf</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">12</span><span class="p">));</span>
 <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">chunkbuf</span><span class="p">,</span> <span class="s">&quot;IHDR&quot;</span><span class="p">))</span> <span class="p">{</span>
@@ -70,7 +70,7 @@
 <p>Let&#8217;s illustrate this.</p>
 </div>
 <div class="section" id="typedefs">
-<h2>13.2.2. Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h2>
+<h2>14.2.2. Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h2>
 <p>First of all, when working with function pointers in C, it&#8217;s often practical to define the type of the function in a <em>typedef</em>. This is mainly because the syntax of declaring function pointers in C can be seen as a bit complex, and with a typedef we can capture this complexity in one place. What typedef does is simply assign another name to a type. In our case, our type is a function pointer.</p>
 <p>We want a separate function for each type of chunk, and our typedef should describe the type for such a function. Our function should return nothing (void), and it should take a const pointer to an input buffer plus its length as parameters. Here&#8217;s an example declaration of such a function:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">time_handler</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">);</span>
@@ -129,7 +129,7 @@
 <p><em>Exercise</em>: Put all of the above together. Your handlers don&#8217;t need to do anything with the data yet but your code will need to compile.</p>
 </div>
 <div class="section" id="parsing-the-chunks">
-<h2>13.2.3. Parsing the chunks<a class="headerlink" href="#parsing-the-chunks" title="Permalink to this headline">¶</a></h2>
+<h2>14.2.3. Parsing the chunks<a class="headerlink" href="#parsing-the-chunks" title="Permalink to this headline">¶</a></h2>
 <p>We can now implement our first chunk handler - the handler for the header. We simply need to validate the input to ensure we&#8217;re not reading past the end of the buffer, then call &#8220;printf&#8221; for the relevant data as per the file format specification. The chunk handler can start like this:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -163,7 +163,7 @@
 <p>Once we have this, we can set the &#8220;color_type&#8221; variable in the header handler, and read its value in the background colour handler. (As we&#8217;ll pass a pointer to the struct to the functions, we can access it with the -&gt; syntax, e.g. png-&gt;color_type.)</p>
 <p><em>Exercise</em>: Add the background colour handler function to your program. Depending on the file, it should print either the palette index, grey colour value or the red, green and blue background colour values.</p>
 <div class="section" id="slight-digression-switch-case">
-<h3>13.2.3.1. Slight digression: switch-case<a class="headerlink" href="#slight-digression-switch-case" title="Permalink to this headline">¶</a></h3>
+<h3>14.2.3.1. Slight digression: switch-case<a class="headerlink" href="#slight-digression-switch-case" title="Permalink to this headline">¶</a></h3>
 <p>You may have implemented the background colour handler using something like this:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">png</span><span class="o">-&gt;</span><span class="n">color_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
@@ -250,11 +250,11 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">13.2. Finishing our simple PNG parser</a><ul>
-<li><a class="reference internal" href="#data-driven-programming">13.2.1. Data driven programming</a></li>
-<li><a class="reference internal" href="#typedefs">13.2.2. Typedefs</a></li>
-<li><a class="reference internal" href="#parsing-the-chunks">13.2.3. Parsing the chunks</a><ul>
-<li><a class="reference internal" href="#slight-digression-switch-case">13.2.3.1. Slight digression: switch-case</a></li>
+<li><a class="reference internal" href="#">14.2. Finishing our simple PNG parser</a><ul>
+<li><a class="reference internal" href="#data-driven-programming">14.2.1. Data driven programming</a></li>
+<li><a class="reference internal" href="#typedefs">14.2.2. Typedefs</a></li>
+<li><a class="reference internal" href="#parsing-the-chunks">14.2.3. Parsing the chunks</a><ul>
+<li><a class="reference internal" href="#slight-digression-switch-case">14.2.3.1. Slight digression: switch-case</a></li>
 </ul>
 </li>
 </ul>
@@ -264,9 +264,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="bin_index.html">13. Working with binary data</a><ul>
-      <li>Previous: <a href="png.html" title="previous chapter">13.1. PNG files</a></li>
-      <li>Next: <a href="strong_index.html" title="next chapter">14. Strongly, statically typed languages</a></li>
+  <li><a href="bin_index.html">14. Working with binary data</a><ul>
+      <li>Previous: <a href="png.html" title="previous chapter">14.1. PNG files</a></li>
+      <li>Next: <a href="strong_index.html" title="next chapter">15. Strongly, statically typed languages</a></li>
   </ul></li>
   </ul></li>
 </ul>

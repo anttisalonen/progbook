@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>16.10. Monolithic way - merging and putting it all together &#8212; guide 0.1 documentation</title>
+    <title>17.10. Monolithic way - merging and putting it all together &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="17. A fistful of Python exercises" href="py4_index.html" />
-    <link rel="prev" title="16.9. Monolithic way - scheduled arrivals and GPS data" href="bus3.html" />
+    <link rel="next" title="18. A fistful of Python exercises" href="py4_index.html" />
+    <link rel="prev" title="17.9. Monolithic way - scheduled arrivals and GPS data" href="bus3.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="monolithic-way-merging-and-putting-it-all-together">
-<h1>16.10. Monolithic way - merging and putting it all together<a class="headerlink" href="#monolithic-way-merging-and-putting-it-all-together" title="Permalink to this headline">¶</a></h1>
+<h1>17.10. Monolithic way - merging and putting it all together<a class="headerlink" href="#monolithic-way-merging-and-putting-it-all-together" title="Permalink to this headline">¶</a></h1>
 <p>We now have the logic to create incoming bus data from GPS as well as from the schedules. Let&#8217;s merge these to the final output that will be shown on the display.</p>
 <p>Like in Python, our merging logic could work e.g. the following way:</p>
 <ul class="simple">
@@ -82,7 +82,7 @@
 </div>
 <p><em>Exercise</em>: Implement the merge function and test it.</p>
 <div class="section" id="parsing-a-timestamp">
-<h2>16.10.1. Parsing a timestamp<a class="headerlink" href="#parsing-a-timestamp" title="Permalink to this headline">¶</a></h2>
+<h2>17.10.1. Parsing a timestamp<a class="headerlink" href="#parsing-a-timestamp" title="Permalink to this headline">¶</a></h2>
 <p>We&#8217;re starting to have a decent program but it&#8217;s not yet parsing the command line options (unless you already added it). One question when implementing the command line parsing might be about parsing a timestamp in format &#8220;hh:mm&#8221;. We need to split this string by the &#8221;:&#8221; character, similarly to s.split(&#8216;:&#8217;) in Python. This can be done in C++ e.g. using the following code:</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -113,7 +113,7 @@
 <p><em>Exercise</em>: Add command line argument parsing to your code. It should receive the current timestamp in &#8220;hh:mm&#8221; format, the name of the bus stop to display, and three file names for the schedule data, historical and current GPS data respectively. Check the value of argc to ensure you&#8217;re receiving the correct number of parameters. Exit with an error message and a return value of 1 otherwise.</p>
 </div>
 <div class="section" id="displaying-the-labels">
-<h2>16.10.2. Displaying the labels<a class="headerlink" href="#displaying-the-labels" title="Permalink to this headline">¶</a></h2>
+<h2>17.10.2. Displaying the labels<a class="headerlink" href="#displaying-the-labels" title="Permalink to this headline">¶</a></h2>
 <p>As part of our chapters around SDL we put together a program that will display the labels as required, and take a filename as input which must contain the labels to be displayed. While we could generate such a file in our C++ program and then call that program, the cleaner way seems to be to call the existing code directly.</p>
 <p>What we need to do for this is:</p>
 <ul class="simple">
@@ -128,7 +128,7 @@
 </ul>
 <p>As the first one introduces duplicate code we&#8217;ll go with the second option.</p>
 <div class="section" id="header-files">
-<h3>16.10.2.1. Header files<a class="headerlink" href="#header-files" title="Permalink to this headline">¶</a></h3>
+<h3>17.10.2.1. Header files<a class="headerlink" href="#header-files" title="Permalink to this headline">¶</a></h3>
 <p>A header file in C and C++ typically describes the interface of the functionality implemented in the corresponding .cpp file. This means that it shouldn&#8217;t have any function definitions but it should declare the functions that are defined in the .c or .cpp file and define the data structures (including classes) that may be used from other files.</p>
 <p>In our case, our header for exposing the SDL functionality could look like this:</p>
 <div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -244,10 +244,10 @@ $ ld -L/usr/lib -lSDL2 -lSDL2_ttf -o hello file1.o file2.o
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">16.10. Monolithic way - merging and putting it all together</a><ul>
-<li><a class="reference internal" href="#parsing-a-timestamp">16.10.1. Parsing a timestamp</a></li>
-<li><a class="reference internal" href="#displaying-the-labels">16.10.2. Displaying the labels</a><ul>
-<li><a class="reference internal" href="#header-files">16.10.2.1. Header files</a></li>
+<li><a class="reference internal" href="#">17.10. Monolithic way - merging and putting it all together</a><ul>
+<li><a class="reference internal" href="#parsing-a-timestamp">17.10.1. Parsing a timestamp</a></li>
+<li><a class="reference internal" href="#displaying-the-labels">17.10.2. Displaying the labels</a><ul>
+<li><a class="reference internal" href="#header-files">17.10.2.1. Header files</a></li>
 </ul>
 </li>
 </ul>
@@ -257,9 +257,9 @@ $ ld -L/usr/lib -lSDL2 -lSDL2_ttf -o hello file1.o file2.o
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="design_index.html">16. Larger software</a><ul>
-      <li>Previous: <a href="bus3.html" title="previous chapter">16.9. Monolithic way - scheduled arrivals and GPS data</a></li>
-      <li>Next: <a href="py4_index.html" title="next chapter">17. A fistful of Python exercises</a></li>
+  <li><a href="design_index.html">17. Larger software</a><ul>
+      <li>Previous: <a href="bus3.html" title="previous chapter">17.9. Monolithic way - scheduled arrivals and GPS data</a></li>
+      <li>Next: <a href="py4_index.html" title="next chapter">18. A fistful of Python exercises</a></li>
   </ul></li>
   </ul></li>
 </ul>

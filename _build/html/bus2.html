@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>16.8. Monolithic way - parsing &#8212; guide 0.1 documentation</title>
+    <title>17.8. Monolithic way - parsing &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="16.9. Monolithic way - scheduled arrivals and GPS data" href="bus3.html" />
-    <link rel="prev" title="16.7. Unix way - merge" href="merge.html" />
+    <link rel="next" title="17.9. Monolithic way - scheduled arrivals and GPS data" href="bus3.html" />
+    <link rel="prev" title="17.7. Unix way - merge" href="merge.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="monolithic-way-parsing">
-<h1>16.8. Monolithic way - parsing<a class="headerlink" href="#monolithic-way-parsing" title="Permalink to this headline">¶</a></h1>
+<h1>17.8. Monolithic way - parsing<a class="headerlink" href="#monolithic-way-parsing" title="Permalink to this headline">¶</a></h1>
 <p>Now that we&#8217;re to a large part done with the Unix way, let&#8217;s shift focus on the monolithic way where we implement the functionality of our three Python programs in one C++ program.</p>
 <p>The basic principle of designing the software top down still applies. Let&#8217;s start with writing down all the things we need to do:</p>
 <ul>
@@ -77,7 +77,7 @@
 <p>In C++ (and in many other languages) it often makes sense to think of each kind of data type as a class. For example, we could have a class for timestamp, with member variables &#8220;hour&#8221; and &#8220;minute&#8221; (both integers), and a function that returns the difference in minutes between two given timestamps.</p>
 <p><em>Exercise</em>: Think about the data types listed above. What data (member variables) would they hold? What operations would exist for them?</p>
 <div class="section" id="timestamps">
-<h2>16.8.1. Timestamps<a class="headerlink" href="#timestamps" title="Permalink to this headline">¶</a></h2>
+<h2>17.8.1. Timestamps<a class="headerlink" href="#timestamps" title="Permalink to this headline">¶</a></h2>
 <p>We can then go about implementing each of these classes, one by one, along with the relevant logic. For example, for a timestamp, we could come up with the following class definition:</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Time</span> <span class="p">{</span>
     <span class="k">public</span><span class="o">:</span>
@@ -110,7 +110,7 @@
 <p><em>Exercise</em>: Implement this function and test it.</p>
 </div>
 <div class="section" id="schedule-entry">
-<h2>16.8.2. Schedule entry<a class="headerlink" href="#schedule-entry" title="Permalink to this headline">¶</a></h2>
+<h2>17.8.2. Schedule entry<a class="headerlink" href="#schedule-entry" title="Permalink to this headline">¶</a></h2>
 <p>The requirements spec defined the schedule entry to have a route number, a start number and a timestamp. We&#8217;ve identified one task as parsing the schedule information, in other words, reading the relevant file contents and generating a list (std::vector) of schedule entries. For this we need to do the following:</p>
 <ul class="simple">
 <li>Declare the schedule entry class</li>
@@ -242,9 +242,9 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">16.8. Monolithic way - parsing</a><ul>
-<li><a class="reference internal" href="#timestamps">16.8.1. Timestamps</a></li>
-<li><a class="reference internal" href="#schedule-entry">16.8.2. Schedule entry</a></li>
+<li><a class="reference internal" href="#">17.8. Monolithic way - parsing</a><ul>
+<li><a class="reference internal" href="#timestamps">17.8.1. Timestamps</a></li>
+<li><a class="reference internal" href="#schedule-entry">17.8.2. Schedule entry</a></li>
 </ul>
 </li>
 </ul>
@@ -252,9 +252,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="design_index.html">16. Larger software</a><ul>
-      <li>Previous: <a href="merge.html" title="previous chapter">16.7. Unix way - merge</a></li>
-      <li>Next: <a href="bus3.html" title="next chapter">16.9. Monolithic way - scheduled arrivals and GPS data</a></li>
+  <li><a href="design_index.html">17. Larger software</a><ul>
+      <li>Previous: <a href="merge.html" title="previous chapter">17.7. Unix way - merge</a></li>
+      <li>Next: <a href="bus3.html" title="next chapter">17.9. Monolithic way - scheduled arrivals and GPS data</a></li>
   </ul></li>
   </ul></li>
 </ul>

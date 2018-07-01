@@ -12,5 +12,4 @@ Introduction
    prog2
    prog3
    learn
-   python_generate_file
 

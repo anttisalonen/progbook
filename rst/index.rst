@@ -16,6 +16,7 @@ Software development fundamentals
    :numbered:
 
    intro_index
+   quad_index
    unix_index
    edit_index
    lang_index

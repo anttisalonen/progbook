@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>17.1. Graphs &#8212; guide 0.1 documentation</title>
+    <title>18.1. Graphs &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="17.2. Parsing" href="parse.html" />
-    <link rel="prev" title="17. A fistful of Python exercises" href="py4_index.html" />
+    <link rel="next" title="18.2. Parsing" href="parse.html" />
+    <link rel="prev" title="18. A fistful of Python exercises" href="py4_index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="graphs">
-<h1>17.1. Graphs<a class="headerlink" href="#graphs" title="Permalink to this headline">¶</a></h1>
+<h1>18.1. Graphs<a class="headerlink" href="#graphs" title="Permalink to this headline">¶</a></h1>
 <p>In this section we&#8217;ll learn a bit about <em>graphs</em>.</p>
 <p>A graph is a collection of <em>nodes</em> as well as <em>edges</em> that connect nodes. There are lots of different kinds of graphs:</p>
 <ul class="simple">
@@ -71,7 +71,7 @@
 <p>It&#8217;s probably a good idea to draw the above on paper to get an understanding of how it would work.</p>
 <p>Now that we have a very rough description of an algorithm in place, we can consider the question about how we actually would create or modify a graph.</p>
 <div class="section" id="graphviz-and-dot">
-<h2>17.1.1. Graphviz and dot<a class="headerlink" href="#graphviz-and-dot" title="Permalink to this headline">¶</a></h2>
+<h2>18.1.1. Graphviz and dot<a class="headerlink" href="#graphviz-and-dot" title="Permalink to this headline">¶</a></h2>
 <p>Graphviz is a software suite for working with graphs. Dot is a program which is part of graphviz that produces images of graphs specified in the <em>dot</em> language. Here&#8217;s an example graph described in the dot language:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">digraph</span> <span class="n">g</span> <span class="p">{</span>
     <span class="n">A</span> <span class="o">-&gt;</span> <span class="n">B</span><span class="p">;</span>
@@ -150,7 +150,7 @@
 <p>How would you go about this problem in practice? Go ahead and give it a try using the dot file from above. The next section will walk you through solving this.</p>
 </div>
 <div class="section" id="parsing-dot-files">
-<h2>17.1.2. Parsing dot files<a class="headerlink" href="#parsing-dot-files" title="Permalink to this headline">¶</a></h2>
+<h2>18.1.2. Parsing dot files<a class="headerlink" href="#parsing-dot-files" title="Permalink to this headline">¶</a></h2>
 <p>There are several ways to approach parsing dot files. We&#8217;ll introduce and implement two ways as part of this book: the <em>hacky</em> way and the <em>more accurate</em> way. Here are the pros and cons:</p>
 <ul class="simple">
 <li>The &#8220;hacky&#8221; way is faster to implement</li>
@@ -159,7 +159,7 @@
 <p>Conversely, the more accurate way is somewhat more difficult to implement but is closer to a &#8220;real&#8221; dot parser, such that extending it later will result in more maintainable code. In our case, the hacky way results in about 30 lines of Python code while the more accurate way will be about 150 lines. These numbers include not only parsing but also applying the algorithm to remove unnecessary edges.</p>
 </div>
 <div class="section" id="the-hacky-way">
-<h2>17.1.3. The hacky way<a class="headerlink" href="#the-hacky-way" title="Permalink to this headline">¶</a></h2>
+<h2>18.1.3. The hacky way<a class="headerlink" href="#the-hacky-way" title="Permalink to this headline">¶</a></h2>
 <p>The hacky way involves heavy use of regular expressions.</p>
 <p>The principle is simple:</p>
 <ul class="simple">
@@ -227,7 +227,7 @@
 <p><em>Exercise</em>: Implement this hacky method to &#8220;parse&#8221; a dot file. You don&#8217;t need to remove the unnecessary edges yet. Write the output of your program to a file and diff against the original. They should match except possibly for line ordering and whitespace. You can sort the lines in both files alphabetically using the &#8220;sort&#8221; Unix command for easier comparison. Feel free to reach out to a reference on regular expressions if needed.</p>
 </div>
 <div class="section" id="removing-unnecessary-edges">
-<h2>17.1.4. Removing unnecessary edges<a class="headerlink" href="#removing-unnecessary-edges" title="Permalink to this headline">¶</a></h2>
+<h2>18.1.4. Removing unnecessary edges<a class="headerlink" href="#removing-unnecessary-edges" title="Permalink to this headline">¶</a></h2>
 <p>This process, after searching online, reveals to be called <em>transitive reduction</em>.</p>
 <p><em>Exercise</em>: look up transitive reduction online.</p>
 <p>We already roughly described an algorithm to remove unnecessary edges in pseudocode. Let&#8217;s see what we need to do in order to turn it into real code:</p>
@@ -239,7 +239,7 @@
 <p>Let&#8217;s implement this algorithm: we need to <em>traverse</em> the graph to be able to tell whether a node depends on another. There are two major kinds of graph traverals, <em>depth first search</em> and <em>breadth first search</em>. In this case it doesn&#8217;t matter which one we pick.</p>
 </div>
 <div class="section" id="graph-traversal">
-<h2>17.1.5. Graph traversal<a class="headerlink" href="#graph-traversal" title="Permalink to this headline">¶</a></h2>
+<h2>18.1.5. Graph traversal<a class="headerlink" href="#graph-traversal" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s take a look at the simpler graph from before again:</p>
 <img alt="_images/graph.png" src="_images/graph.png" />
 <p>If we were to start our traversal from node A, the depth first traversal, which, as the name says, goes into depth when traversing, would traverse the nodes e.g. in the following order:</p>
@@ -268,12 +268,12 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">17.1. Graphs</a><ul>
-<li><a class="reference internal" href="#graphviz-and-dot">17.1.1. Graphviz and dot</a></li>
-<li><a class="reference internal" href="#parsing-dot-files">17.1.2. Parsing dot files</a></li>
-<li><a class="reference internal" href="#the-hacky-way">17.1.3. The hacky way</a></li>
-<li><a class="reference internal" href="#removing-unnecessary-edges">17.1.4. Removing unnecessary edges</a></li>
-<li><a class="reference internal" href="#graph-traversal">17.1.5. Graph traversal</a></li>
+<li><a class="reference internal" href="#">18.1. Graphs</a><ul>
+<li><a class="reference internal" href="#graphviz-and-dot">18.1.1. Graphviz and dot</a></li>
+<li><a class="reference internal" href="#parsing-dot-files">18.1.2. Parsing dot files</a></li>
+<li><a class="reference internal" href="#the-hacky-way">18.1.3. The hacky way</a></li>
+<li><a class="reference internal" href="#removing-unnecessary-edges">18.1.4. Removing unnecessary edges</a></li>
+<li><a class="reference internal" href="#graph-traversal">18.1.5. Graph traversal</a></li>
 </ul>
 </li>
 </ul>
@@ -281,9 +281,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="py4_index.html">17. A fistful of Python exercises</a><ul>
-      <li>Previous: <a href="py4_index.html" title="previous chapter">17. A fistful of Python exercises</a></li>
-      <li>Next: <a href="parse.html" title="next chapter">17.2. Parsing</a></li>
+  <li><a href="py4_index.html">18. A fistful of Python exercises</a><ul>
+      <li>Previous: <a href="py4_index.html" title="previous chapter">18. A fistful of Python exercises</a></li>
+      <li>Next: <a href="parse.html" title="next chapter">18.2. Parsing</a></li>
   </ul></li>
   </ul></li>
 </ul>

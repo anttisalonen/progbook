@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.1. Quadratic formula in C &#8212; guide 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2.2. Generating input data using Python" href="python_generate_file.html" />
+    <link rel="prev" title="2. Quadratic formula" href="quad_index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="quadratic-formula-in-c">
+<h1>2.1. Quadratic formula in C<a class="headerlink" href="#quadratic-formula-in-c" title="Permalink to this headline">¶</a></h1>
+<p>Now that we&#8217;re able to create some C programs, let&#8217;s try a bit more complicated one. Let&#8217;s write a program to solve a quadratic equation.</p>
+<p>As you may know, a quadratic equation is an equation ax<sup>2</sup>+bx+c=0, whereby a, b and c are constants. A quadratic function, when plotted, may look e.g. like this:</p>
+<img alt="_images/quad.png" src="_images/quad.png" />
+<p>Solving the quadratic equation provides the <em>roots</em> of the equation, i.e. the x values at which the x-axis is crossed. For the above function, the roots are at points x=-0.72 and x=1.39. There may be 0, 1 or 2 roots, and the formula to solve the quadratic equation is:</p>
+<img alt="_images/formula.png" src="_images/formula.png" />
+<p>This mathematical formula can be implemented in C. For example like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">-</span> <span class="mf">4.0f</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0f</span> <span class="o">*</span> <span class="n">a</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The +/- part of the formula causes up to two possible solutions for x to be available; the above C formulation only identifies one.</p>
+<p>There may be 0, 1 or 2 roots; the case of 0 roots occurs when the part for which the square root is calculated (also called the <em>determinant</em>) is negative, as a negative number cannot have a real square root. The case of 1 root occurs when the determinant is exactly 0.</p>
+<p>The C function sqrt() is part of the standard C library but there&#8217;s a twist: in order to use the function, the header file &lt;math.h&gt; should be included. Furthermore, you may need to link your program against the <em>math library</em> by passing &#8220;-lm&#8221; to your C compiler when compiling.</p>
+<p><em>Exercise</em>: Write a program that solves the quadratic equation for a=3.0, b=-2.0, c=-3.0. Print out the number of roots as well as all found roots.</p>
+<p>Ok, so we now have a program that solves the quadratic equation for some values. What if I asked you to solve the quadratic equation for three, or ten, different functions (a, b and c values), in the same program? There are several ways to approach this but one thing we should avoid is copy-pasting the code to solve the equation multiple times. Instead we should capture this logic in a <em>function</em>.</p>
+<p>What we require is a function which takes a, b and c as input parameters and returns the roots, as well as an indication as to how many roots were found. Once we have this function we can then call it with different parameters and write out the information about the roots after each call.</p>
+<p>Now, there are a few ways this could be approached. An interesting limitation we arrive at is that C can only return one value in a function. However, we can still write our function by using <em>pointers</em>.</p>
+<div class="section" id="pointers">
+<h2>2.1.1. Pointers<a class="headerlink" href="#pointers" title="Permalink to this headline">¶</a></h2>
+<p>Every variable in C has an <em>address</em> in memory. Speaking in metaphors, if a variable was a house, then the value of the variable would be the contents of the house, and the memory address would be the address of the house. A pointer in C is a variable for which the value can be the address of another variable.</p>
+<p>Here&#8217;s an example:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+        <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">45</span><span class="p">;</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The value of a is: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The value of p is: %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The value of what p points to is: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Line 5: We define an integer variable called &#8220;a&#8221;.</li>
+<li>Line 6: We define a variable called &#8220;p&#8221; which is a pointer to an integer. The asterisk (&#8220;*&#8221;) means the type is a pointer.</li>
+<li>Line 7: We assign a value to &#8220;p&#8221;, namely <em>the address of</em> a. The ampersand (&#8220;&amp;&#8221;) means &#8220;address of&#8221;.</li>
+<li>Line 8: We assign a value to <em>what &#8220;p&#8221; points to</em>. The asterisk operator (&#8220;*&#8221;) means <em>dereferencing</em> the pointer.</li>
+<li>Lines 9-11: We print out the values of &#8220;a&#8221;, &#8220;p&#8221; and &#8220;*p&#8221;.</li>
+</ul>
+<p><em>Exercise</em>: What would you expect the output to be? Try it out.</p>
+<p>In this example, using the pointer wasn&#8217;t necessary because if we wanted to change the value of &#8220;a&#8221;, we could have done it directly. However, if you want to change the value of a variable of another function then pointers become useful. What you can do is pass the address of a variable to the other function. The other function can then modify the value of that variable. In this way we can &#8220;return&#8221; multiple values from a single function.</p>
+<p>The following example illustrates the principle:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">increment_by_one</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">p1</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p2</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="o">*</span><span class="n">p1</span> <span class="o">=</span> <span class="o">*</span><span class="n">p1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="o">*</span><span class="n">p2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="n">increment_by_one</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The value of a is: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The value of b is: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>Lines 3-7: We define a function called &#8220;increment_by_one&#8221; which doesn&#8217;t have a return value and takes two input parameters. Both input parameters are pointers to int.</li>
+<li>Line 5: We assign the value of what &#8220;p1&#8221; points to plus one to what &#8220;p1&#8221; points to.</li>
+<li>Line 6: The same for &#8220;p2&#8221;.</li>
+<li>Lines 11-13: In our main function, we define two int variables, and pass the addresses of these to the &#8220;increment_by_one&#8221; function.</li>
+</ul>
+<p>Here, we have a function that takes two pointers and increments the values of the variables that are pointed to by one.</p>
+<p>We should now have what we need to create a function that solves the quadratic equation.</p>
+<p><em>Exercise</em>: Write such a function. It should have parameters a, b and c (all floats) as well as r1 and r2 (pointers to floats). It should return an int which is the number of roots found for the given function. In other words, its function <em>signature</em> should be e.g. &#8220;int quad(float a, float b, float c, float *r1, float *r2)&#8221;. In your main function, define the variables a, b, c, r1, r2 and number_of_roots. Set the variables such that you can solve the quadratic equation for a=3.0, b=-2.0, c=-3.0. Print out the roots found. Only call printf() within main.</p>
+<p><em>Exercise</em>: Modify your code to solve the quadratic equation for a=3.0, b=-2.0, c=3.0 (positive c instead of negative). This equation has no roots. What happens if you print out the values of r1 and r2?</p>
+<p>Now that we have a function that can solve the quadratic equation, we should try solving several equations and outputting the results. For the next exercise, let&#8217;s assume our goal is to provide the roots for three different quadratic equations, namely.</p>
+<ul class="simple">
+<li>x<sup>2</sup>-2x-3</li>
+<li>-x<sup>2</sup>-x-1</li>
+<li>2x<sup>2</sup>+2x+0.5</li>
+</ul>
+<p>How should we structure the code for this? We should keep our solver function clean of side effects by not using printf() in it. Indeed, the ideal main function for this task could look like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">solve_and_print</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0f</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0f</span><span class="p">);</span>
+    <span class="n">solve_and_print</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0f</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0f</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0f</span><span class="p">);</span>
+    <span class="n">solve_and_print</span><span class="p">(</span><span class="mf">2.0f</span><span class="p">,</span> <span class="mf">2.0f</span><span class="p">,</span> <span class="mf">0.5f</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In other words, for each of the functions to find the roots for, we call a function which does the solving and the printing. We already have a function that can solve the equation so what&#8217;s left to implement is capturing the behaviour of using the solver function and printing the results.</p>
+<p><em>Exercise</em>: Write a program that solves the quadratic equation for the three functions listed above, and prints the results. Your main function should look like the one above. The function solve_and_print() should take three parameters, a, b and c, call the solver function and print the results of the solver function.</p>
+</div>
+<div class="section" id="files">
+<h2>2.1.2. Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
+<p>Now that we&#8217;re able to solve multiple quadratic equations, let&#8217;s step it up one notch. Let&#8217;s have the goal of calculating the roots of 10,000 quadratic equations and finding the function with the largest root, whereby the definitions of all functions are stored in a file.</p>
+<p>To get started, here&#8217;s a file with one function definition in it: <a class="reference download internal" href="_downloads/test1.txt" download=""><code class="xref download docutils literal"><span class="pre">download</span> <span class="pre">text</span> <span class="pre">file</span></code></a></p>
+<p>This file looks like the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>-2.892091 -2.197815 -4.943323
+</pre></div>
+</div>
+<p>In other words, it&#8217;s a file with one line. The line has three floating point numbers. The numbers represent a quadratic function with values a, b and c respectively.</p>
+<p>The C standard library provides an interface for opening, reading, writing and closing files. A file can be opened like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">FILE</span> <span class="o">*</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not open file.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In other words, there&#8217;s a standard function called fopen() (for &#8220;file open&#8221;) which takes two parameters. The first parameter is the path and name of the file to open. If no path is given, it is expected that the file is located in the current working directory. The second parameter takes a string which identifies what should be done with the file. The string &#8220;r&#8221; means the file should be opened for reading only. The string &#8220;w&#8221; would mean the file is opened for writing; opening a file for writing this way would delete its previous contents. The function fopen() returns a value of type pointer to &#8220;FILE&#8221;. &#8220;FILE&#8221; is a special type which can be used when reading or writing to a file, or closing it.</p>
+<p>If the file could not be opened, a special pointer called <em>NULL pointer</em> is returned instead. <em>NULL pointer</em> is a pointer which is invalid. We can check whether the pointer is a NULL pointer by using the code like above. The convention is that error messages are written out to <em>standard error</em> instead of <em>standard output</em> using the fprintf() function like above for reasons that will be expanded upon later in this book.</p>
+<p><em>Exercise</em>: Look up the man page for fopen().</p>
+<p>Once you have a file open, you can close it using the following code:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Look up the man page for fclose().</p>
+<p>How about reading a file? There are several ways to do this. One way we could use is to use the function fread(), but in our case, the function fscanf() suits better. fscanf() is a bit like the inverse of printf(): it takes a format string and the addresses of variables where the contents of the string should be stored, according to the placeholders in the format string. An example is probably the best way to illustrate this:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="n">a</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">b</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">c</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">num_read</span> <span class="o">=</span> <span class="n">fscanf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s">&quot;%f %f %f&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">num_read</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not read three numbers.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let&#8217;s go through this line by line:</p>
+<ul class="simple">
+<li>Lines 1-3: We define three variables of type float.</li>
+<li>Line 4: We use fscanf() to <em>read in</em> the contents of the file. We pass fscanf() five parameters: The first one is the FILE pointer. The second one is the format string. In our format string, we say we&#8217;re expecting the file to contain three floating point numbers, separated by a space. The last three parameters are the addresses of our floating point variables. We tell fscanf() that we&#8217;d like to store the contents of the three floating point numbers from the file to these variables.</li>
+<li>Line 5: We check the <em>return value</em> of fscanf(). fscanf() returns the number of variables for which the data could be stored. We passed in three addresses so we expect it to have stored data for three variables. If the return value is not three then something went wrong during reading of the file; for example, only two numbers were available in the file.</li>
+</ul>
+<p><em>Exercise</em>: Look up the man page for fread() and fscanf().</p>
+<p>We should now have what we need in order to read a quadratic equation definition from the file referenced above, and calculate its roots.</p>
+<p><em>Exercise</em>: Download the above text file in your computer. Add code in your program to open that file. Read in the contents of that file to three variables. Use your previously written function solve_and_print() to solve that quadratic equation and print the roots.</p>
+</div>
+<div class="section" id="larger-files">
+<h2>2.1.3. Larger files<a class="headerlink" href="#larger-files" title="Permalink to this headline">¶</a></h2>
+<p>Now that we&#8217;re able to read in one quadratic equation definition from a file, let&#8217;s try this for 10,000 equations. See this file: <a class="reference download internal" href="_downloads/test.txt" download=""><code class="xref download docutils literal"><span class="pre">download</span> <span class="pre">text</span> <span class="pre">file</span></code></a></p>
+<p>That file contains 10,000 lines, each containing three floating point numbers, each representing a, b and c respectively. Let&#8217;s see if we can find the equation with the largest root.</p>
+<p><em>Exercise</em>: Download the above file. Modify your program to open that file. Add a loop in your program to loop through your code that reads in the values a, b and c and solves the root for that quadratic equation such that your program reads through all the 10,000 equations and calculates the root for all of them. Note: you may want to <em>not</em> print out the roots for all equations as that could create a lot of output.</p>
+</div>
+<div class="section" id="aside-arrays">
+<h2>2.1.4. Aside: Arrays<a class="headerlink" href="#aside-arrays" title="Permalink to this headline">¶</a></h2>
+<p>While this problem can be solved without arrays, you may find it useful to use them.</p>
+<p>An array simply contains multiple variables of the same type, such that the variables are all stored next to each other. They can be useful if you need multiple variables of the same type. In other words, instead of writing e.g.:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cm">/* don&#39;t do this */</span>
+<span class="kt">int</span> <span class="n">a0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a1</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a2</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a3</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a4</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>...you can write:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>(The text between /* and */ is a <em>comment</em>; you can use these to explain your code.) We don&#8217;t save very much typing with just five elements, but the more elements you have, the more is saved by using arrays.</p>
+<p>Now we can try to find the equation with the largest root, i.e. the equation where we find a root that is arithmetically larger than any other root.</p>
+<p><em>Exercise</em>: Find the equation with the largest root. To do this, you need to note the largest root by having a variable to store this <em>outside</em> the loop. For all the roots found for an equation, compare those roots with the largest root found so far. If the root for the current equation is larger than the largest found so far, make note of it by modifying the variable which holds the largest root. Similarly, keep track of the variables a, b and c for the equation with the largest root. Print the a, b and c values of the equation with the largest root at the end.</p>
+<p>Phew! We&#8217;ve learned a lot in this chapter.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2.1. Quadratic formula in C</a><ul>
+<li><a class="reference internal" href="#pointers">2.1.1. Pointers</a></li>
+<li><a class="reference internal" href="#files">2.1.2. Files</a></li>
+<li><a class="reference internal" href="#larger-files">2.1.3. Larger files</a></li>
+<li><a class="reference internal" href="#aside-arrays">2.1.4. Aside: Arrays</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="quad_index.html">2. Quadratic formula</a><ul>
+      <li>Previous: <a href="quad_index.html" title="previous chapter">2. Quadratic formula</a></li>
+      <li>Next: <a href="python_generate_file.html" title="next chapter">2.2. Generating input data using Python</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/quad1.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Antti Salonen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/quad1.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

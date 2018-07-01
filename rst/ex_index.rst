@@ -8,6 +8,7 @@ Exercises
    ex_comp
    ex_prog
    ex_prog3
+   ex_quad1
    ex_python_generate_file
    ex_regex
    ex_js

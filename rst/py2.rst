@@ -17,6 +17,7 @@ In Python, data types are defined using the "class" keyword:
 
 .. literalinclude:: ../material/py/cl1.py
    :language: python
+   :linenos:
 
 Let's go through this line by line:
 
@@ -45,6 +46,7 @@ Here's a bit larger example:
 
 .. literalinclude:: ../material/py/cl.py
    :language: python
+   :linenos:
 
 Let's go through this line by line:
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>18.5. Web UI for our return form &#8212; guide 0.1 documentation</title>
+    <title>19.5. Web UI for our return form &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19. Exercises" href="ex_index.html" />
-    <link rel="prev" title="18.4. Generating a return form" href="shop4.html" />
+    <link rel="next" title="20. Exercises" href="ex_index.html" />
+    <link rel="prev" title="19.4. Generating a return form" href="shop4.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,11 +44,11 @@
           <div class="body" role="main">
             
   <div class="section" id="web-ui-for-our-return-form">
-<h1>18.5. Web UI for our return form<a class="headerlink" href="#web-ui-for-our-return-form" title="Permalink to this headline">¶</a></h1>
+<h1>19.5. Web UI for our return form<a class="headerlink" href="#web-ui-for-our-return-form" title="Permalink to this headline">¶</a></h1>
 <p>Let&#8217;s finish this chapter by putting together a simple (but ugly) web UI that allows a user to generate a return form.</p>
 <p>We&#8217;ll be using Flask for this exercise, and to keep things simple, we&#8217;ll skip the Javascript bit and <em>generate</em> all HTML on the server side. Flask makes this fairly easy as it integrates with the Jinja 2 templating language.</p>
 <div class="section" id="products">
-<h2>18.5.1. Products<a class="headerlink" href="#products" title="Permalink to this headline">¶</a></h2>
+<h2>19.5.1. Products<a class="headerlink" href="#products" title="Permalink to this headline">¶</a></h2>
 <p>To start things off, as an example, let&#8217;s see how we could generate and display an HTML table consisting of Python data. Here&#8217;s the relevant Python snippet:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">make_response</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -101,7 +101,7 @@
 <p><em>Exercise</em>: Create the &#8220;products&#8221; page. Query your database for the products. Turn the result to a dictionary, write an HTML template and pass your data to your template. The page should display all the columns for all your products.</p>
 </div>
 <div class="section" id="orders">
-<h2>18.5.2. Orders<a class="headerlink" href="#orders" title="Permalink to this headline">¶</a></h2>
+<h2>19.5.2. Orders<a class="headerlink" href="#orders" title="Permalink to this headline">¶</a></h2>
 <p>Now, it would be nice to be able to see all the orders by a customer. It would be nice to be able to write a URL like e.g. &#8220;<a class="reference external" href="http://127.0.0.1:5000/orders?customer_id=123">http://127.0.0.1:5000/orders?customer_id=123</a>&#8221; and get an overview of the orders made by customer 123. Let&#8217;s do this next.</p>
 <p>The part in the URL after the &#8221;?&#8221; is the query string and is accessible in Flask using the function &#8220;request.args.get()&#8221;. In our case, the following line is what we need:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># default to 1 if not given</span>
@@ -112,7 +112,7 @@
 <p><em>Exercise</em>: In your table showing the orders, add another column which is a link to a more detailed page about the order. (We don&#8217;t have the page yet so clicking on the link would make Flask return 404; this is fine for now.) You can create a suitable link using e.g. &lt;a href=&#8221;/order?order_id={{ order.id }}&#8221;&gt;Show details&lt;/a&gt;.</p>
 </div>
 <div class="section" id="order-details">
-<h2>18.5.3. Order details<a class="headerlink" href="#order-details" title="Permalink to this headline">¶</a></h2>
+<h2>19.5.3. Order details<a class="headerlink" href="#order-details" title="Permalink to this headline">¶</a></h2>
 <p>We can now click on a link that would show order details but that page doesn&#8217;t exist yet so let&#8217;s create it. To make things more interesting, we can imagine we&#8217;re writing this page for the customer with the goal that the customer should be able to start the return process from this page. In other words, the page should look e.g. like this:</p>
 <img alt="_images/order.png" src="_images/order.png" />
 <p>We have a few elements here:</p>
@@ -175,7 +175,7 @@
 <p><em>Exercise</em>: Put together the page to show the order details. Include the form. Submitting the form should result in requesting the page &#8220;return.html&#8221; with a query string including all the form information, but we don&#8217;t have this page yet; this is fine for now.</p>
 </div>
 <div class="section" id="returning">
-<h2>18.5.4. Returning<a class="headerlink" href="#returning" title="Permalink to this headline">¶</a></h2>
+<h2>19.5.4. Returning<a class="headerlink" href="#returning" title="Permalink to this headline">¶</a></h2>
 <p>The previous page should lead the user to a page where the user can describe the reason for returning each item and download the return form. It should look e.g. like this:</p>
 <img alt="_images/return.png" src="_images/return.png" />
 <p>Now, this is similar to the previous one but with a few differences:</p>
@@ -212,7 +212,7 @@
 <p>You&#8217;ll need to set the variable to determine which radio button is the default in your Python code accordingly.</p>
 </div>
 <div class="section" id="return-form">
-<h2>18.5.5. Return form<a class="headerlink" href="#return-form" title="Permalink to this headline">¶</a></h2>
+<h2>19.5.5. Return form<a class="headerlink" href="#return-form" title="Permalink to this headline">¶</a></h2>
 <p>Now we have all the information from the user: which order ID they want to return products for, which products they want to return and why. Clicking the submit button on the previous page should result in the following:</p>
 <ul class="simple">
 <li>A new row is added in the database in the &#8220;returns&#8221; column, unless it already existed</li>
@@ -223,7 +223,7 @@
 </ul>
 <p>There are a few new concepts here so let&#8217;s go through them one by one.</p>
 <div class="section" id="add-a-new-row-except-if-it-already-existed">
-<h3>18.5.5.1. Add a new row except if it already existed<a class="headerlink" href="#add-a-new-row-except-if-it-already-existed" title="Permalink to this headline">¶</a></h3>
+<h3>19.5.5.1. Add a new row except if it already existed<a class="headerlink" href="#add-a-new-row-except-if-it-already-existed" title="Permalink to this headline">¶</a></h3>
 <p>SQLite provides a practical way to do this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO returns(order_id) VALUES (?)&#39;</span><span class="p">,</span>
         <span class="p">(</span><span class="n">order_id</span><span class="p">,</span> <span class="p">))</span>
@@ -233,7 +233,7 @@
 <p>After the above statement, we can query for the &#8220;id&#8221; column in the &#8220;returns&#8221; table to retrieve the ID of the return for this order ID.</p>
 </div>
 <div class="section" id="deleting-data-in-an-sql-database">
-<h3>18.5.5.2. Deleting data in an SQL database<a class="headerlink" href="#deleting-data-in-an-sql-database" title="Permalink to this headline">¶</a></h3>
+<h3>19.5.5.2. Deleting data in an SQL database<a class="headerlink" href="#deleting-data-in-an-sql-database" title="Permalink to this headline">¶</a></h3>
 <p>Now, if the user has already let us know that they&#8217;ll be returning some products from an order but are now telling us they want to return some other products instead, then what we might want to do as a real online shop is to insist that the original return form, which might already have been received by our company, is the final one and no updates are required. However, as we&#8217;re building our UI for testing and development purposes, it seems like the best way to handle this is to simply delete all references to old data and start afresh. This allows us to try out different things in our UI without polluting our database with conflicting data.</p>
 <p>The following command would delete rows in the table &#8220;products_returned&#8221;, namely those rows where the &#8220;return_id&#8221; field is set to the according variable:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE FROM products_returned WHERE return_id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">return_id</span><span class="p">,</span> <span class="p">))</span>
@@ -242,7 +242,7 @@
 <p>After this we&#8217;re ready to add the correct data in the database and commit our changes.</p>
 </div>
 <div class="section" id="reusing-our-existing-pdf-code-to-generate-a-pdf">
-<h3>18.5.5.3. Reusing our existing PDF code to generate a PDF<a class="headerlink" href="#reusing-our-existing-pdf-code-to-generate-a-pdf" title="Permalink to this headline">¶</a></h3>
+<h3>19.5.5.3. Reusing our existing PDF code to generate a PDF<a class="headerlink" href="#reusing-our-existing-pdf-code-to-generate-a-pdf" title="Permalink to this headline">¶</a></h3>
 <p>Now, we already have a module in place for generating a PDF. If that file is in the same directory as our Flask code, then we can simply do:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">print_return</span> <span class="c1"># this assumes the file is called print_return.py</span>
 
@@ -264,7 +264,7 @@
 <p>You may now be able to run your existing PDF code, or you may need to refactor the old code first, but the question remains: Once you have the PDF (either file or object), what do you do with it?</p>
 </div>
 <div class="section" id="sending-the-pdf-to-the-client">
-<h3>18.5.5.4. Sending the PDF to the client<a class="headerlink" href="#sending-the-pdf-to-the-client" title="Permalink to this headline">¶</a></h3>
+<h3>19.5.5.4. Sending the PDF to the client<a class="headerlink" href="#sending-the-pdf-to-the-client" title="Permalink to this headline">¶</a></h3>
 <p>As an online search will tell you, a good way to send a file to the client via HTTP using Flask is to have the file contents available as a binary stream, tell Flask to turn this binary stream into a response, set the response headers accordingly and then return this response in our Python code. Long story short, the code could look like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">my_binary_stream</span><span class="p">)</span>
 <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;application/pdf&#39;</span>
@@ -298,16 +298,16 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">18.5. Web UI for our return form</a><ul>
-<li><a class="reference internal" href="#products">18.5.1. Products</a></li>
-<li><a class="reference internal" href="#orders">18.5.2. Orders</a></li>
-<li><a class="reference internal" href="#order-details">18.5.3. Order details</a></li>
-<li><a class="reference internal" href="#returning">18.5.4. Returning</a></li>
-<li><a class="reference internal" href="#return-form">18.5.5. Return form</a><ul>
-<li><a class="reference internal" href="#add-a-new-row-except-if-it-already-existed">18.5.5.1. Add a new row except if it already existed</a></li>
-<li><a class="reference internal" href="#deleting-data-in-an-sql-database">18.5.5.2. Deleting data in an SQL database</a></li>
-<li><a class="reference internal" href="#reusing-our-existing-pdf-code-to-generate-a-pdf">18.5.5.3. Reusing our existing PDF code to generate a PDF</a></li>
-<li><a class="reference internal" href="#sending-the-pdf-to-the-client">18.5.5.4. Sending the PDF to the client</a></li>
+<li><a class="reference internal" href="#">19.5. Web UI for our return form</a><ul>
+<li><a class="reference internal" href="#products">19.5.1. Products</a></li>
+<li><a class="reference internal" href="#orders">19.5.2. Orders</a></li>
+<li><a class="reference internal" href="#order-details">19.5.3. Order details</a></li>
+<li><a class="reference internal" href="#returning">19.5.4. Returning</a></li>
+<li><a class="reference internal" href="#return-form">19.5.5. Return form</a><ul>
+<li><a class="reference internal" href="#add-a-new-row-except-if-it-already-existed">19.5.5.1. Add a new row except if it already existed</a></li>
+<li><a class="reference internal" href="#deleting-data-in-an-sql-database">19.5.5.2. Deleting data in an SQL database</a></li>
+<li><a class="reference internal" href="#reusing-our-existing-pdf-code-to-generate-a-pdf">19.5.5.3. Reusing our existing PDF code to generate a PDF</a></li>
+<li><a class="reference internal" href="#sending-the-pdf-to-the-client">19.5.5.4. Sending the PDF to the client</a></li>
 </ul>
 </li>
 </ul>
@@ -317,9 +317,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="sql_index.html">18. SQL and its relationship with online shops</a><ul>
-      <li>Previous: <a href="shop4.html" title="previous chapter">18.4. Generating a return form</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">19. Exercises</a></li>
+  <li><a href="sql_index.html">19. SQL and its relationship with online shops</a><ul>
+      <li>Previous: <a href="shop4.html" title="previous chapter">19.4. Generating a return form</a></li>
+      <li>Next: <a href="ex_index.html" title="next chapter">20. Exercises</a></li>
   </ul></li>
   </ul></li>
 </ul>

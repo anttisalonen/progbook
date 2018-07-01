@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>16.5. Unix way - sched &#8212; guide 0.1 documentation</title>
+    <title>17.5. Unix way - sched &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="16.6. Unix way - parse_gps" href="parse_gps.html" />
-    <link rel="prev" title="16.4. Drawing the schedule screen using SDL2" href="sdl2.html" />
+    <link rel="next" title="17.6. Unix way - parse_gps" href="parse_gps.html" />
+    <link rel="prev" title="17.4. Drawing the schedule screen using SDL2" href="sdl2.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,13 +44,13 @@
           <div class="body" role="main">
             
   <div class="section" id="unix-way-sched">
-<h1>16.5. Unix way - sched<a class="headerlink" href="#unix-way-sched" title="Permalink to this headline">¶</a></h1>
+<h1>17.5. Unix way - sched<a class="headerlink" href="#unix-way-sched" title="Permalink to this headline">¶</a></h1>
 <p>We now have a C++ program that can display labels provided in a text file. Let&#8217;s take another look at our high level architecture:</p>
 <img alt="_images/plan3.png" src="_images/plan3.png" />
 <p>Furthermore, let&#8217;s implement the Unix way i.e. engineering spec 1 first.</p>
 <p>The input to our screen drawing program should be given by a program called &#8220;merge&#8221;. However, &#8220;merge&#8221; requires incoming bus data which we don&#8217;t yet have so let&#8217;s implement the programs to generate this data from the original input i.e. schedule information and GPS data first.</p>
 <div class="section" id="sched">
-<h2>16.5.1. sched<a class="headerlink" href="#sched" title="Permalink to this headline">¶</a></h2>
+<h2>17.5.1. sched<a class="headerlink" href="#sched" title="Permalink to this headline">¶</a></h2>
 <p>As per the requirements document, the schedule information, which is the input to sched, will look like the following:</p>
 <blockquote>
 <div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">6</span>
@@ -77,7 +77,7 @@
 <li>For all the entries, print them out to stdout in the given format</li>
 </ul>
 <div class="section" id="command-line-arguments">
-<h3>16.5.1.1. Command line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h3>
+<h3>17.5.1.1. Command line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h3>
 <p>Accessing command line arguments in Python can be done using the sys.argv list:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 
@@ -98,7 +98,7 @@
 </ul>
 </div>
 <div class="section" id="working-with-bus-schedule-entries">
-<h3>16.5.1.2. Working with bus schedule entries<a class="headerlink" href="#working-with-bus-schedule-entries" title="Permalink to this headline">¶</a></h3>
+<h3>17.5.1.2. Working with bus schedule entries<a class="headerlink" href="#working-with-bus-schedule-entries" title="Permalink to this headline">¶</a></h3>
 <p>One potentially tricky thing is finding out whether an entry is in the past or not. How would you go about it? Have a think.</p>
 <p>What we have is two time stamps, both having two integer values (hour and minute). The first one is the current time while the second one is the time stamp of an entry. We need to find out whether the second one is before or after the first one.</p>
 <p>Now, because the time of day is circular, a time stamp can be said to always be after another one: it could just be 23 hours and 59 minutes after. We can break this cycle by agreeing e.g. that only the entries 12 hours after the current time are actually considered to be in the future. We should also ensure we handle midnight correctly such that e.g. the time 00:02 is treated as after 23:58; we want the bus schedule display to show buses traveling right after midnight even if it&#8217;s right before midnight.</p>
@@ -186,10 +186,10 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">16.5. Unix way - sched</a><ul>
-<li><a class="reference internal" href="#sched">16.5.1. sched</a><ul>
-<li><a class="reference internal" href="#command-line-arguments">16.5.1.1. Command line arguments</a></li>
-<li><a class="reference internal" href="#working-with-bus-schedule-entries">16.5.1.2. Working with bus schedule entries</a></li>
+<li><a class="reference internal" href="#">17.5. Unix way - sched</a><ul>
+<li><a class="reference internal" href="#sched">17.5.1. sched</a><ul>
+<li><a class="reference internal" href="#command-line-arguments">17.5.1.1. Command line arguments</a></li>
+<li><a class="reference internal" href="#working-with-bus-schedule-entries">17.5.1.2. Working with bus schedule entries</a></li>
 </ul>
 </li>
 </ul>
@@ -199,9 +199,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="design_index.html">16. Larger software</a><ul>
-      <li>Previous: <a href="sdl2.html" title="previous chapter">16.4. Drawing the schedule screen using SDL2</a></li>
-      <li>Next: <a href="parse_gps.html" title="next chapter">16.6. Unix way - parse_gps</a></li>
+  <li><a href="design_index.html">17. Larger software</a><ul>
+      <li>Previous: <a href="sdl2.html" title="previous chapter">17.4. Drawing the schedule screen using SDL2</a></li>
+      <li>Next: <a href="parse_gps.html" title="next chapter">17.6. Unix way - parse_gps</a></li>
   </ul></li>
   </ul></li>
 </ul>

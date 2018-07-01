@@ -1,5 +1,6 @@
     unix -> vim;
     vim -> vim2;
+    quad1 -> python_generate_file;
     python_generate_file -> unix;
     intro -> sw;
     sw -> cpu;
@@ -9,11 +10,13 @@
     prog2 -> prog3;
     prog3 -> learn;
     learn -> unix;
+    learn -> quad1;
+    prog3 -> quad1;
     unix -> vcs;
     unix -> regex;
-    c_quadr -> lang;
+    quad1 -> lang;
     lang -> sec;
-    c_quadr -> o_not;
+    quad1 -> o_not;
     o_not -> js2;
     learn -> js2;
     lang -> js;

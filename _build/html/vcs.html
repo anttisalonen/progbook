@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.2. Version control &#8212; guide 0.1 documentation</title>
+    <title>3.2. Version control &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2.3. Regular expressions" href="regex.html" />
-    <link rel="prev" title="2.1. Basic Unix shell scripting" href="unix.html" />
+    <link rel="next" title="3.3. Regular expressions" href="regex.html" />
+    <link rel="prev" title="3.1. Basic Unix shell scripting" href="unix.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="version-control">
-<h1>2.2. Version control<a class="headerlink" href="#version-control" title="Permalink to this headline">¶</a></h1>
+<h1>3.2. Version control<a class="headerlink" href="#version-control" title="Permalink to this headline">¶</a></h1>
 <p>Have you ever had the feeling that you want to make large scale changes to your code, but are afraid of breaking something? Has the thought crossed your mind that you could copy your source file or files to another directory, so that you have a backup in case something goes wrong?</p>
 <p>If so then that&#8217;s perfectly normal. You might, however, imagine that if you were to work on a project for a longer time, say, several weeks, the number of backup directories would become difficult to have an overview of, and if you actually had to revert some changes from the past, it might be difficult to remember which directory contained which changes.</p>
 <p>Version control systems (VCS) have been implemented to help solve these issues, as well as help developers collaborate on the same source code.</p>
@@ -53,7 +53,7 @@
 <p>Git has several pros, and a significant one is how it scales: it&#8217;s very practical to use in hobby projects of individual developers, but is also being used to version control some of the world&#8217;s largest source code repositories.</p>
 <p>There is lots that can be learned about git; this book will cover the basic fundamentals.</p>
 <div class="section" id="creating-a-git-repository">
-<h2>2.2.1. Creating a git repository<a class="headerlink" href="#creating-a-git-repository" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.1. Creating a git repository<a class="headerlink" href="#creating-a-git-repository" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s assume you have a directory which is otherwise empty except a file you&#8217;ve written, hello.py, which contains &#8220;print &#8216;hello world&#8217;&#8221;. Let&#8217;s turn this directory into a git repository:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ git init
 Initialized empty Git repository in /home/antti/book/my_project/.git/
@@ -102,7 +102,7 @@ nothing to commit, working tree clean
 <p>This means that the latest version git has stored matches the contents of our files (in this case, hello.py).</p>
 </div>
 <div class="section" id="further-commits">
-<h2>2.2.2. Further commits<a class="headerlink" href="#further-commits" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.2. Further commits<a class="headerlink" href="#further-commits" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s now assume we want to make a change to our hello.py, by appending &#8220;print &#8216;hello world&#8217;&#8221; to it:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;print &#39;hello world&#39;&quot;</span> &gt;&gt; hello.py
 </pre></div>
@@ -157,7 +157,7 @@ Date:   Fri Feb <span class="m">9</span> <span class="m">00</span>:35:05 <span c
 <p>The log will show the summary of each commit as well as the <em>commit hash</em>, which uniquely identifies each commit.</p>
 </div>
 <div class="section" id="git-reset">
-<h2>2.2.3. git reset<a class="headerlink" href="#git-reset" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.3. git reset<a class="headerlink" href="#git-reset" title="Permalink to this headline">¶</a></h2>
 <p>Now comes the interesting part: let&#8217;s say we want to go back to the previous version, before we added the second &#8220;print &#8216;hello world&#8217;&#8221; to the end of hello.py. One way to do this is the following:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ git reset --hard b279b4f
 HEAD is now at b279b4f initial commit
@@ -187,7 +187,7 @@ print <span class="s1">&#39;hello world&#39;</span>
 </div>
 </div>
 <div class="section" id="staging-area">
-<h2>2.2.4. Staging area<a class="headerlink" href="#staging-area" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.4. Staging area<a class="headerlink" href="#staging-area" title="Permalink to this headline">¶</a></h2>
 <p>If you&#8217;re about to commit changes to git, but want to review the changes before, this is possible too. First, mark the changes you want to add with &#8220;git add&#8221;:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ git add hello.py
 </pre></div>
@@ -228,11 +228,11 @@ Changes to be committed:
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">2.2. Version control</a><ul>
-<li><a class="reference internal" href="#creating-a-git-repository">2.2.1. Creating a git repository</a></li>
-<li><a class="reference internal" href="#further-commits">2.2.2. Further commits</a></li>
-<li><a class="reference internal" href="#git-reset">2.2.3. git reset</a></li>
-<li><a class="reference internal" href="#staging-area">2.2.4. Staging area</a></li>
+<li><a class="reference internal" href="#">3.2. Version control</a><ul>
+<li><a class="reference internal" href="#creating-a-git-repository">3.2.1. Creating a git repository</a></li>
+<li><a class="reference internal" href="#further-commits">3.2.2. Further commits</a></li>
+<li><a class="reference internal" href="#git-reset">3.2.3. git reset</a></li>
+<li><a class="reference internal" href="#staging-area">3.2.4. Staging area</a></li>
 </ul>
 </li>
 </ul>
@@ -240,9 +240,9 @@ Changes to be committed:
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="unix_index.html">2. Unix shell</a><ul>
-      <li>Previous: <a href="unix.html" title="previous chapter">2.1. Basic Unix shell scripting</a></li>
-      <li>Next: <a href="regex.html" title="next chapter">2.3. Regular expressions</a></li>
+  <li><a href="unix_index.html">3. Unix shell</a><ul>
+      <li>Previous: <a href="unix.html" title="previous chapter">3.1. Basic Unix shell scripting</a></li>
+      <li>Next: <a href="regex.html" title="next chapter">3.3. Regular expressions</a></li>
   </ul></li>
   </ul></li>
 </ul>

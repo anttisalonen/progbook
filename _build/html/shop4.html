@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>18.4. Generating a return form &#8212; guide 0.1 documentation</title>
+    <title>19.4. Generating a return form &#8212; guide 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19. Exercises" href="ex_index.html" />
-    <link rel="prev" title="18.3. Querying SQL databases" href="shop3.html" />
+    <link rel="next" title="19.5. Web UI for our return form" href="shop5.html" />
+    <link rel="prev" title="19.3. Querying SQL databases" href="shop3.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,7 +44,7 @@
           <div class="body" role="main">
             
   <div class="section" id="generating-a-return-form">
-<h1>18.4. Generating a return form<a class="headerlink" href="#generating-a-return-form" title="Permalink to this headline">¶</a></h1>
+<h1>19.4. Generating a return form<a class="headerlink" href="#generating-a-return-form" title="Permalink to this headline">¶</a></h1>
 <p>We now get to the meat of the chapter: generating the return form. We should have a program which has the following characteristics:</p>
 <ul class="simple">
 <li>As input, it should take the return ID</li>
@@ -58,7 +58,7 @@
 <li>Create an empty PDF, add all the data to it and save it</li>
 </ul>
 <div class="section" id="fetching-the-data">
-<h2>18.4.1. Fetching the data<a class="headerlink" href="#fetching-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>19.4.1. Fetching the data<a class="headerlink" href="#fetching-the-data" title="Permalink to this headline">¶</a></h2>
 <p>We&#8217;ll be needing the following columns:</p>
 <ul class="simple">
 <li>Customer name and full address</li>
@@ -71,7 +71,7 @@
 <p><em>Exercise</em>: Fetch the return reason codes and descriptions.</p>
 </div>
 <div class="section" id="generating-the-bar-code">
-<h2>18.4.2. Generating the bar code<a class="headerlink" href="#generating-the-bar-code" title="Permalink to this headline">¶</a></h2>
+<h2>19.4.2. Generating the bar code<a class="headerlink" href="#generating-the-bar-code" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s generate the bar code next. Let&#8217;s first recap the motivation for the bar code: the worst case would be the worker having to pick each returned item, walk to the correct place in our huge warehouse and put the item in the correct box. The ideal workflow would be that the worker who unpacks the return package can put each returned item into a box on a conveyor belt, such that a robot would then come and pick up each box and store it in the correct place in our warehouse. How would we achieve this? The worker should be able to easily let the robot system know that they will send a number of boxes to the robots, each box holding one specific item, and the robots then pick up the boxes and store the items correctly. In order to transfer the information, the act of scanning a bar code should inform the system of what products are incoming.</p>
 <p>What should the bar code encode? It seems the easiest way to communicate the information about the products returned is the return ID. How can we do this? A quick search online for a Python barcode library reveals the existence of pyBarcode which can be installed using &#8220;pip install pybarcode&#8221;. We&#8217;ll furthermore need to decide what kind of bar code we use. The library seems to support a few, e.g. EAN-13, ISBN and Code 39. Now, from software development point of view it doesn&#8217;t really matter which one we use but Code 39 seems to be general purpose enough that it&#8217;s suitable for our purposes.</p>
 <p>Looking at the pyBarcode documentation and adapting it a bit, we can then end up with this snippet:</p>
@@ -87,7 +87,7 @@
 <p><em>Exercise</em>: Create a barcode image with the return ID. You&#8217;ll need to convert the ID from integer to string using str(number).</p>
 </div>
 <div class="section" id="creating-the-pdf">
-<h2>18.4.3. Creating the PDF<a class="headerlink" href="#creating-the-pdf" title="Permalink to this headline">¶</a></h2>
+<h2>19.4.3. Creating the PDF<a class="headerlink" href="#creating-the-pdf" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have our data and our barcode, the last bit is creating the PDF. Again searching online it seems there are several Python libraries for generating PDF files. For the purposes of this book I picked pyfpdf. It can be installed using &#8220;pip install fpdf&#8221;.</p>
 <p><em>Exercise</em>: Install pyfpdf. Look up its reference online.</p>
 <p>Now, the interface that pyfpdf provides for creating PDF files is quite a bit wider than the one from pyBarcode. We can create a very simple PDF file with the following code:</p>
@@ -192,10 +192,10 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">18.4. Generating a return form</a><ul>
-<li><a class="reference internal" href="#fetching-the-data">18.4.1. Fetching the data</a></li>
-<li><a class="reference internal" href="#generating-the-bar-code">18.4.2. Generating the bar code</a></li>
-<li><a class="reference internal" href="#creating-the-pdf">18.4.3. Creating the PDF</a></li>
+<li><a class="reference internal" href="#">19.4. Generating a return form</a><ul>
+<li><a class="reference internal" href="#fetching-the-data">19.4.1. Fetching the data</a></li>
+<li><a class="reference internal" href="#generating-the-bar-code">19.4.2. Generating the bar code</a></li>
+<li><a class="reference internal" href="#creating-the-pdf">19.4.3. Creating the PDF</a></li>
 </ul>
 </li>
 </ul>
@@ -203,9 +203,9 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="sql_index.html">18. SQL and its relationship with online shops</a><ul>
-      <li>Previous: <a href="shop3.html" title="previous chapter">18.3. Querying SQL databases</a></li>
-      <li>Next: <a href="ex_index.html" title="next chapter">19. Exercises</a></li>
+  <li><a href="sql_index.html">19. SQL and its relationship with online shops</a><ul>
+      <li>Previous: <a href="shop3.html" title="previous chapter">19.3. Querying SQL databases</a></li>
+      <li>Next: <a href="shop5.html" title="next chapter">19.5. Web UI for our return form</a></li>
   </ul></li>
   </ul></li>
 </ul>
