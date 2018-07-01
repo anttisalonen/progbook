@@ -1,4 +1,5 @@
-    unix -> vim;
+    unix -> unix2;
+    unix2 -> vim;
     vim -> vim2;
     quad1 -> python_generate_file;
     python_generate_file -> unix;
@@ -12,8 +13,8 @@
     learn -> unix;
     learn -> quad1;
     prog3 -> quad1;
-    unix -> vcs;
-    unix -> regex;
+    unix2 -> vcs;
+    unix2 -> regex;
     quad1 -> lang;
     lang -> sec;
     quad1 -> o_not;

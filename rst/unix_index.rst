@@ -5,6 +5,7 @@ Unix shell
    :maxdepth: 1
 
    unix
+   unix2
    vcs
    regex
 

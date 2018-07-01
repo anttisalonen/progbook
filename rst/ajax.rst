@@ -21,7 +21,7 @@ From a high level software architecture point of view, then, this is how the flo
 3. The user plays the game happily in the browser, executing Javascript, without the server being aware
 4. Once the user guesses the right answer, Javascript sends the number of guesses and the player name to the server
 5. The server stores the number of guesses and the player name in the database
-6. The server fetches the high score list from the database, and send it to the client (Javascript)
+6. The server fetches the high score list from the database, and sends it to the client (Javascript)
 7. The client displays the high score list
 
 Seems simple, doesn't it?

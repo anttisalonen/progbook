@@ -12,7 +12,9 @@ How could we go about this? Let's define the use case first:
 What are the challenges around implementing this? It's often helpful to think about the interfaces, i.e. data exchanges between different components, including pages as well as the server and the client.
 
 * The "start new game" page will have to transfer the user name and the maximum number to the actual guessing game page.
+
   * We should GET the guessing game page as opposed to POST, as we're not changing the server state. This implies the parameters from the user will need to be transferred in the URL when loading the guessing game page.
+
 * The guessing game page will have to read in and use this information.
 
 How would we architect the implementation? There are (at least) two possibilities:
