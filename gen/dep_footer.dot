@@ -1,7 +1,7 @@
     unix -> unix2;
     unix2 -> vim;
     vim -> vim2;
-    quad1 -> python_generate_file;
+    quad2 -> python_generate_file;
     python_generate_file -> unix;
     intro -> sw;
     sw -> cpu;
@@ -15,7 +15,8 @@
     prog3 -> quad1;
     unix2 -> vcs;
     unix2 -> regex;
-    quad1 -> lang;
+    quad1 -> quad2;
+    quad2 -> lang;
     lang -> sec;
     quad1 -> o_not;
     o_not -> js2;

@@ -64,6 +64,9 @@ esr
 processes + virtual memory?
 np complete (knapsack)
 utf-8
+structs?
+btree
+ring buffer
 
 Exercises
 graphics programming

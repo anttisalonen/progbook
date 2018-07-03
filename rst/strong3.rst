@@ -92,4 +92,4 @@ To summarise, Rust allows fairly direct control over allocation and its type sys
 
 *Exercise*: Out of the six new languages described in this and the previous chapter, pick one that seems to appeal to you the most, and one that seems to appeal to you the least.
 
-*Exercise*: For both of the two languages you picked, implement Fizz Buzz and some other simple application. Note that for most of the languages you don't necessarily have to install the compiler on your computer; there are several web pages that provide an interactive code editor and compiler for testing out a language. Try searching for e.g. "rust online" or "rust playground".
+*Exercise*: For both of the two languages you picked, implement Fizz Buzz and the quadratic equation exercise of finding the largest root in a file of 10,000 equations. Note that for most of the languages you don't necessarily have to install the compiler on your computer; there are several web pages that provide an interactive code editor and compiler for testing out a language. Try searching for e.g. "rust online" or "rust playground".

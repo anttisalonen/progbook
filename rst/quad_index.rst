@@ -5,5 +5,6 @@ Quadratic formula
    :maxdepth: 1
 
    quad1
+   quad2
    python_generate_file
 

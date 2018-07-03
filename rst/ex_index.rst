@@ -9,6 +9,7 @@ Exercises
    ex_prog
    ex_prog3
    ex_quad1
+   ex_quad2
    ex_python_generate_file
    ex_regex
    ex_js
