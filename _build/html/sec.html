@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.7. Security &#8212; guide 0.1 documentation</title>
+    <title>2.4.7. Security &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,57 +25,42 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. Some more git" href="git_index.html" />
-    <link rel="prev" title="8.6. Writing a toy web server" href="httpserv.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="2.5. Some more git" href="git_index.html" />
+    <link rel="prev" title="2.4.6. Writing a toy web server" href="httpserv.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="security">
-<h1>8.7. Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h1>
-<p>In the chapter &#8220;Writing a toy web server&#8221;, I warned about potential security holes when writing C. Let&#8217;s take a look at the following code, which attempts to copy a string represented by a char pointer to a 20-element char array:</p>
-<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="cm">/* ... */</span><span class="p">;</span> <span class="cm">/* some string which is somehow dependent on user input */</span>
-<span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
-<span class="n">strcpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
-</pre></div>
-</td></tr></table></div>
-<p>This code is a potential security hole. Can you spot why?</p>
-<p>What happens if the string is longer than 20 characters? The function strcpy() will copy past the end of the 20-element array, overwriting something else. Technically, according to the C language standard, the behaviour is undefined, meaning that anything can happen. In practice, some data in stack will be overwritten, like another variable, or the address to return to when the function returns. The attacker needs to construct a suitable input to modify the variables such that some code that the attacker wants to execute will get executed, typically leading to the attacker gaining full access to the system. The attacker can then e.g. read any passwords, credit card numbers or any other sensitive data available on the system.</p>
-<p>This is possible in C and some other languages like C++ because of lack of <em>memory safety</em>; memory can be accidentally read or written. It&#8217;s a good reason to consider using another language for the task at hand, if possible.</p>
-<p><em>Exercise</em>: Take a look at your HTTP server code and see if you can spot any security issues.</p>
-</div>
-
-
-          </div>
-        </div>
-      </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="git_index.html" title="2.5. Some more git"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="httpserv.html" title="2.4.6. Writing a toy web server"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_c_index.html" accesskey="U">2.4. Intermediate C</a> &#187;</li> 
+      </ul>
+    </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_c_index.html">8. Intermediate C</a><ul>
-      <li>Previous: <a href="httpserv.html" title="previous chapter">8.6. Writing a toy web server</a></li>
-      <li>Next: <a href="git_index.html" title="next chapter">9. Some more git</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="httpserv.html"
+                        title="previous chapter">2.4.6. Writing a toy web server</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="git_index.html"
+                        title="next chapter">2.5. Some more git</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -94,22 +80,54 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="security">
+<h1>2.4.7. Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h1>
+<p>In the chapter &#8220;Writing a toy web server&#8221;, I warned about potential security holes when writing C. Let&#8217;s take a look at the following code, which attempts to copy a string represented by a char pointer to a 20-element char array:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="cm">/* ... */</span><span class="p">;</span> <span class="cm">/* some string which is somehow dependent on user input */</span>
+<span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+<span class="n">strcpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>This code is a potential security hole. Can you spot why?</p>
+<p>What happens if the string is longer than 20 characters? The function strcpy() will copy past the end of the 20-element array, overwriting something else. Technically, according to the C language standard, the behaviour is undefined, meaning that anything can happen. In practice, some data in stack will be overwritten, like another variable, or the address to return to when the function returns. The attacker needs to construct a suitable input to modify the variables such that some code that the attacker wants to execute will get executed, typically leading to the attacker gaining full access to the system. The attacker can then e.g. read any passwords, credit card numbers or any other sensitive data available on the system.</p>
+<p>This is possible in C and some other languages like C++ because of lack of <em>memory safety</em>; memory can be accidentally read or written. It&#8217;s a good reason to consider using another language for the task at hand, if possible.</p>
+<p><em>Exercise</em>: Take a look at your HTTP server code and see if you can spot any security issues.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/sec.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="git_index.html" title="2.5. Some more git"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="httpserv.html" title="2.4.6. Writing a toy web server"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_c_index.html" >2.4. Intermediate C</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

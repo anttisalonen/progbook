@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.6. Setting up the C toolchain &#8212; guide 0.1 documentation</title>
+    <title>1.1.6. Setting up the C toolchain &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,70 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1.7. The basics of programming in C" href="prog3.html" />
-    <link rel="prev" title="1.5. The basics of programming" href="prog.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="1.1.7. The basics of programming in C" href="prog3.html" />
+    <link rel="prev" title="1.1.5. The basics of programming" href="prog.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="prog3.html" title="1.1.7. The basics of programming in C"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="prog.html" title="1.1.5. The basics of programming"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="intro_index.html" accesskey="U">1.1. Introduction</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.1.6. Setting up the C toolchain</a><ul>
+<li><a class="reference internal" href="#writing-hello-world-in-c">1.1.6.1. Writing &#8220;Hello world&#8221; in C</a></li>
+<li><a class="reference internal" href="#installing-a-c-compiler">1.1.6.2. Installing a C compiler</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="prog.html"
+                        title="previous chapter">1.1.5. The basics of programming</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="prog3.html"
+                        title="next chapter">1.1.7. The basics of programming in C</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/prog2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +96,7 @@
           <div class="body" role="main">
             
   <div class="section" id="setting-up-the-c-toolchain">
-<h1>1.6. Setting up the C toolchain<a class="headerlink" href="#setting-up-the-c-toolchain" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.6. Setting up the C toolchain<a class="headerlink" href="#setting-up-the-c-toolchain" title="Permalink to this headline">¶</a></h1>
 <p>In the previous chapters we learnt some basic programming using Python. In order to get a better understanding of what is general in programming and what is specific to a programming language, we&#8217;ll learn some basic programming using another programming language, namely C.</p>
 <p>We&#8217;ll start by setting up the C <em>toolchain</em>. A toolchain is a set of tools that are used in a chain with the purpose of compiling and running code written in a specific programming language. As you may have noticed, with Python, we executed our Python programs by passing our Python file to the Python interpreter. What happened there, in a nutshell, was that the Python interpreter <em>interpreted</em> our code, i.e. read it through and then executed it. C is typically not interpreted but <em>compiled</em>. What this means is that the C code is run through a <em>compiler</em> which generates an <em>executable file</em>, that is, a file with the CPU instructions which the CPU should execute. Only after we&#8217;ve created this executable file we can run it which in turn runs our program. (The Python intepreter is an executable. The official Python interpreter is written in C.)</p>
 <p>Now, the C toolchain is a toolchain because in addition to the compiler, you also need the <em>standard library</em> which contains the implementations of standard functions in binary form (CPU instructions), the <em>assembler</em>, because technically the compiler outputs <em>assembly language</em>, which is a human readable format for the CPU instructions which is converted to the actual binary CPU instructions by the assembler (also called the <em>object file</em>), and finally the <em>linker</em> which links the standard library, our object files and possibly other libraries together to form the final executable. In short, the toolchain looks like this:</p>
@@ -54,7 +106,7 @@
 <img alt="_images/tc2.png" src="_images/tc2.png" />
 <p>Here, the compiler needs to be called multiple times. But our programs will be one file only, at least for now.</p>
 <div class="section" id="writing-hello-world-in-c">
-<h2>1.6.1. Writing &#8220;Hello world&#8221; in C<a class="headerlink" href="#writing-hello-world-in-c" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.6.1. Writing &#8220;Hello world&#8221; in C<a class="headerlink" href="#writing-hello-world-in-c" title="Permalink to this headline">¶</a></h2>
 <p>Here&#8217;s the &#8220;Hello world&#8221; program in C:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -78,7 +130,7 @@
 <p><em>Exercise</em>: Type (don&#8217;t copy-paste) the above program to a file. Call the file &#8220;hello.c&#8221;.</p>
 </div>
 <div class="section" id="installing-a-c-compiler">
-<h2>1.6.2. Installing a C compiler<a class="headerlink" href="#installing-a-c-compiler" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.6.2. Installing a C compiler<a class="headerlink" href="#installing-a-c-compiler" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s now ensure we have a C compiler (which in our case includes the assembler, the linker and the standard library) installed.</p>
 <p>You may already have one installed. The most common C compilers at the time of writing in Unix systems are <em>gcc</em> and <em>clang</em>. For now it&#8217;s not relevant which one you use. You can test if you have gcc installed by running e.g. the following:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -o hello hello.c
@@ -106,62 +158,28 @@ Hello world!
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">1.6. Setting up the C toolchain</a><ul>
-<li><a class="reference internal" href="#writing-hello-world-in-c">1.6.1. Writing &#8220;Hello world&#8221; in C</a></li>
-<li><a class="reference internal" href="#installing-a-c-compiler">1.6.2. Installing a C compiler</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="intro_index.html">1. Introduction</a><ul>
-      <li>Previous: <a href="prog.html" title="previous chapter">1.5. The basics of programming</a></li>
-      <li>Next: <a href="prog3.html" title="next chapter">1.7. The basics of programming in C</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/prog2.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/prog2.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="prog3.html" title="1.1.7. The basics of programming in C"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="prog.html" title="1.1.5. The basics of programming"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="intro_index.html" >1.1. Introduction</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

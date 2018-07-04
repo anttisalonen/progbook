@@ -1,5 +1,5 @@
-Solutions to exercises: Quadratic formula in Python
----------------------------------------------------
+Quadratic formula in Python
+---------------------------
 
 Quadratic formula:
 

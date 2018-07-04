@@ -1,5 +1,5 @@
-Solutions to exercises: Unix way
---------------------------------
+Unix way
+--------
 
 sched:
 

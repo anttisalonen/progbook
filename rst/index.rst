@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Software development fundamentals
-=================================
+Software Development: A Pragmatic Approach
+==========================================
 
 .. raw:: html
 
@@ -15,25 +15,11 @@ Software development fundamentals
    :caption: Contents:
    :numbered:
 
-   intro_index
-   quad_index
-   unix_index
-   edit_index
-   lang_index
-   ds_index
-   js_index
-   int_c_index
-   git_index
-   ds3_index
-   int_py_index
-   func_index
-   int_web_index
-   bin_index
-   strong_index
-   sud_index
-   design_index
-   py4_index
-   sql_index
+   ch1_index
+   ch2_index
+   ch3_index
+   ch4_index
+
    ex_index
 
    dep

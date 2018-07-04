@@ -1,5 +1,5 @@
-Exercises
-=========
+Solutions to exercises
+======================
 
 .. toctree::
    :maxdepth: 1
@@ -9,9 +9,12 @@ Exercises
    ex_prog
    ex_prog3
    ex_quad1
+   ex_quad1b
    ex_quad2
    ex_python_generate_file
    ex_regex
+   ex_flask
+   ex_flask2
    ex_js
    ex_js2
    ex_st

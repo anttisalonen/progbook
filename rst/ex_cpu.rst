@@ -1,5 +1,5 @@
-Solutions to exercises: How does a computer work?
--------------------------------------------------
+How does a computer work?
+-------------------------
 
 Comparator:
 

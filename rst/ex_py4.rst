@@ -1,5 +1,5 @@
-Solutions to exercises: Graphs
-------------------------------
+Graphs
+------
 
 .. literalinclude:: ../material/dot/dot.py
    :language: python

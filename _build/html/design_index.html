@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>17. Larger software &#8212; guide 0.1 documentation</title>
+    <title>4.1. Larger software &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,57 +25,41 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="17.1. Introduction to larger software" href="design_intro.html" />
-    <link rel="prev" title="16.4. Finding Sudoku peers" href="sud4.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="4.1.1. Introduction to larger software" href="design_intro.html" />
+    <link rel="prev" title="4. Stage 2" href="ch4_index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="larger-software">
-<h1>17. Larger software<a class="headerlink" href="#larger-software" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="design_intro.html">17.1. Introduction to larger software</a></li>
-<li class="toctree-l1"><a class="reference internal" href="components.html">17.2. Breaking software down to components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sdl.html">17.3. Drawing to a screen using SDL2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sdl2.html">17.4. Drawing the schedule screen using SDL2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sched.html">17.5. Unix way - sched</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parse_gps.html">17.6. Unix way - parse_gps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="merge.html">17.7. Unix way - merge</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bus2.html">17.8. Monolithic way - parsing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bus3.html">17.9. Monolithic way - scheduled arrivals and GPS data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bus4.html">17.10. Monolithic way - merging and putting it all together</a></li>
-</ul>
-</div>
-</div>
-
-
-          </div>
-        </div>
-      </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="design_intro.html" title="4.1.1. Introduction to larger software"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ch4_index.html" title="4. Stage 2"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch4_index.html" accesskey="U">4. Stage 2</a> &#187;</li> 
+      </ul>
+    </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="sud4.html" title="previous chapter">16.4. Finding Sudoku peers</a></li>
-      <li>Next: <a href="design_intro.html" title="next chapter">17.1. Introduction to larger software</a></li>
-  </ul></li>
-</ul>
-</div>
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ch4_index.html"
+                        title="previous chapter">4. Stage 2</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="design_intro.html"
+                        title="next chapter">4.1.1. Introduction to larger software</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -94,22 +79,55 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="larger-software">
+<h1>4.1. Larger software<a class="headerlink" href="#larger-software" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="design_intro.html">4.1.1. Introduction to larger software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">4.1.2. Breaking software down to components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdl.html">4.1.3. Drawing to a screen using SDL2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdl2.html">4.1.4. Drawing the schedule screen using SDL2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sched.html">4.1.5. Unix way - sched</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parse_gps.html">4.1.6. Unix way - parse_gps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge.html">4.1.7. Unix way - merge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bus2.html">4.1.8. Monolithic way - parsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bus3.html">4.1.9. Monolithic way - scheduled arrivals and GPS data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bus4.html">4.1.10. Monolithic way - merging and putting it all together</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/design_index.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="design_intro.html" title="4.1.1. Introduction to larger software"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ch4_index.html" title="4. Stage 2"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

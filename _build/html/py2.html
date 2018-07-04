@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>11.1. Object oriented programming &#8212; guide 0.1 documentation</title>
+    <title>2.7.1. Object oriented programming &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,72 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="11.2. JSON" href="json.html" />
-    <link rel="prev" title="11. Useful Python tips" href="int_py_index.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="2.7.2. JSON" href="json.html" />
+    <link rel="prev" title="2.7. Useful Python tips" href="int_py_index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="json.html" title="2.7.2. JSON"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="int_py_index.html" title="2.7. Useful Python tips"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_py_index.html" accesskey="U">2.7. Useful Python tips</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2.7.1. Object oriented programming</a><ul>
+<li><a class="reference internal" href="#defining-your-own-data-types">2.7.1.1. Defining your own data types</a><ul>
+<li><a class="reference internal" href="#duck-typing-revisited">2.7.1.1.1. Duck typing revisited</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="int_py_index.html"
+                        title="previous chapter">2.7. Useful Python tips</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="json.html"
+                        title="next chapter">2.7.2. JSON</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/py2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +98,7 @@
           <div class="body" role="main">
             
   <div class="section" id="object-oriented-programming">
-<h1>11.1. Object oriented programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">¶</a></h1>
+<h1>2.7.1. Object oriented programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">¶</a></h1>
 <p>Object oriented programming is fairly common in Python, and we&#8217;ve used it pretty much from the beginning. See for example this code:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
@@ -54,7 +108,7 @@
 <p>Here, &#8220;f&#8221; is a file object and &#8220;write&#8221; is a <em>member function</em> of the file class.</p>
 <p>In general, in many languages including Python, if you call a function such that the function syntactically appears to &#8220;belong&#8221; to a variable, like with &#8220;f.write()&#8221;, then you&#8217;re probably calling a member function of a class.</p>
 <div class="section" id="defining-your-own-data-types">
-<h2>11.1.1. Defining your own data types<a class="headerlink" href="#defining-your-own-data-types" title="Permalink to this headline">¶</a></h2>
+<h2>2.7.1.1. Defining your own data types<a class="headerlink" href="#defining-your-own-data-types" title="Permalink to this headline">¶</a></h2>
 <p>In Python, data types are defined using the &#8220;class&#8221; keyword:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -108,7 +162,7 @@ A called - my foo is: <span class="m">43</span>
 </pre></div>
 </div>
 <div class="section" id="duck-typing-revisited">
-<h3>11.1.1.1. Duck typing revisited<a class="headerlink" href="#duck-typing-revisited" title="Permalink to this headline">¶</a></h3>
+<h3>2.7.1.1.1. Duck typing revisited<a class="headerlink" href="#duck-typing-revisited" title="Permalink to this headline">¶</a></h3>
 <p>Here&#8217;s a bit larger example:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -173,64 +227,28 @@ B called
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">11.1. Object oriented programming</a><ul>
-<li><a class="reference internal" href="#defining-your-own-data-types">11.1.1. Defining your own data types</a><ul>
-<li><a class="reference internal" href="#duck-typing-revisited">11.1.1.1. Duck typing revisited</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_py_index.html">11. Useful Python tips</a><ul>
-      <li>Previous: <a href="int_py_index.html" title="previous chapter">11. Useful Python tips</a></li>
-      <li>Next: <a href="json.html" title="next chapter">11.2. JSON</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/py2.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/py2.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="json.html" title="2.7.2. JSON"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="int_py_index.html" title="2.7. Useful Python tips"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_py_index.html" >2.7. Useful Python tips</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

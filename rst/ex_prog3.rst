@@ -1,5 +1,5 @@
-Solutions to exercises: The basics of programming in C
-------------------------------------------------------
+The basics of programming in C
+------------------------------
 
 Hallo Welt:
 

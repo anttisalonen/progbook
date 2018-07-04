@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.1. Basic Unix shell usage &#8212; guide 0.1 documentation</title>
+    <title>1.3.1. Basic Unix shell usage &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,81 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3.2. Unix shell scripting" href="unix2.html" />
-    <link rel="prev" title="3. Unix shell" href="unix_index.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="1.3.2. Unix shell scripting" href="unix2.html" />
+    <link rel="prev" title="1.3. Unix shell" href="unix_index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="unix2.html" title="1.3.2. Unix shell scripting"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="unix_index.html" title="1.3. Unix shell"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="unix_index.html" accesskey="U">1.3. Unix shell</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.3.1. Basic Unix shell usage</a><ul>
+<li><a class="reference internal" href="#unix-pipelines">1.3.1.1. Unix pipelines</a></li>
+<li><a class="reference internal" href="#further-unix-shell-tips-and-tricks">1.3.1.2. Further Unix shell tips and tricks</a><ul>
+<li><a class="reference internal" href="#man">1.3.1.2.1. man</a></li>
+<li><a class="reference internal" href="#sort">1.3.1.2.2. sort</a></li>
+<li><a class="reference internal" href="#variables">1.3.1.2.3. Variables</a></li>
+<li><a class="reference internal" href="#echo-and-cat">1.3.1.2.4. echo and cat</a></li>
+<li><a class="reference internal" href="#exit-codes">1.3.1.2.5. Exit codes</a></li>
+<li><a class="reference internal" href="#multiple-commands">1.3.1.2.6. Multiple commands</a></li>
+<li><a class="reference internal" href="#globbing">1.3.1.2.7. Globbing</a></li>
+<li><a class="reference internal" href="#seq">1.3.1.2.8. Seq</a></li>
+<li><a class="reference internal" href="#find">1.3.1.2.9. Find</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="unix_index.html"
+                        title="previous chapter">1.3. Unix shell</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="unix2.html"
+                        title="next chapter">1.3.2. Unix shell scripting</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/unix.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +107,7 @@
           <div class="body" role="main">
             
   <div class="section" id="basic-unix-shell-usage">
-<h1>3.1. Basic Unix shell usage<a class="headerlink" href="#basic-unix-shell-usage" title="Permalink to this headline">¶</a></h1>
+<h1>1.3.1. Basic Unix shell usage<a class="headerlink" href="#basic-unix-shell-usage" title="Permalink to this headline">¶</a></h1>
 <p>Basic Unix shell commands are quite useful in day to day software development.</p>
 <p>Let&#8217;s assume you have the file with 10,000 lines defining the functions as discussed in &#8220;Quadratic formula&#8221;. In order to inspect this file, you could open it in the text editor, but there are also other, typically easier, ways to achieve this.</p>
 <p>In the following, the character &#8216;$&#8217; means the shell prompt, i.e. you typically type in the shell whatever comes after &#8216;$&#8217;.</p>
@@ -155,7 +218,7 @@
 </pre></div>
 </div>
 <div class="section" id="unix-pipelines">
-<h2>3.1.1. Unix pipelines<a class="headerlink" href="#unix-pipelines" title="Permalink to this headline">¶</a></h2>
+<h2>1.3.1.1. Unix pipelines<a class="headerlink" href="#unix-pipelines" title="Permalink to this headline">¶</a></h2>
 <p>The &#8216;awk&#8217; command above lists the first column for all 10,000 lines which might not be what you want. Let&#8217;s say you only wanted to see the first ten lines, i.e. apply the &#8216;head&#8217; command to the output of the &#8216;awk&#8217; command. You can achieve this using pipelines:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{print $1}&#39;</span> test.txt <span class="p">|</span> head
 <span class="m">7</span>.269553
@@ -170,9 +233,9 @@
 <p><em>Exercise</em>: Find out how many lines in the file have no &#8216;0&#8217; character in them.</p>
 </div>
 <div class="section" id="further-unix-shell-tips-and-tricks">
-<h2>3.1.2. Further Unix shell tips and tricks<a class="headerlink" href="#further-unix-shell-tips-and-tricks" title="Permalink to this headline">¶</a></h2>
+<h2>1.3.1.2. Further Unix shell tips and tricks<a class="headerlink" href="#further-unix-shell-tips-and-tricks" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="man">
-<h3>3.1.2.1. man<a class="headerlink" href="#man" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1.2.1. man<a class="headerlink" href="#man" title="Permalink to this headline">¶</a></h3>
 <p>The command &#8220;man&#8221; (short for &#8220;manual&#8221;) allows you to browse the documentation of different tools. For example, running &#8220;man grep&#8221; will display the documentation for grep. The documentation is opened using &#8220;less&#8221;, such that you can browse the text freely and exit with &#8216;q&#8217;.</p>
 <p>There can be multiple man pages for a single command. For example, &#8220;man signal&#8221; can mean either looking up the signal() C standard library functions or the general overview of signals. The man pages are categorised by type, such that for example category 1 means commands that can be run, 3 means C standard library functions and 7 means miscellaneous documentation. You can specify which category you mean by including it in your command, for example:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ man <span class="m">7</span> signal
@@ -183,7 +246,7 @@
 <p><em>Exercise</em>: Look up the man page for the C function call &#8220;printf&#8221;.</p>
 </div>
 <div class="section" id="sort">
-<h3>3.1.2.2. sort<a class="headerlink" href="#sort" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1.2.2. sort<a class="headerlink" href="#sort" title="Permalink to this headline">¶</a></h3>
 <p>The tool &#8220;sort&#8221; sorts its input line by line. By default it sorts alphabetically, but by passing the switch &#8220;-n&#8221; it will interpret its input data numerically. It by default sorts based on the beginning of each line but this can be changed:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ sort -n test.txt <span class="p">|</span> head
 -9.995596 <span class="m">8</span>.887278 <span class="m">2</span>.325502
@@ -205,7 +268,7 @@
 <p>&#8220;sort&#8221; also allows redefining the delimiter character using the &#8220;-t&#8221; switch. For more information, run &#8220;man sort&#8221;.</p>
 </div>
 <div class="section" id="variables">
-<h3>3.1.2.3. Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1.2.3. Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
 <p>Variable support is typically something that Unix shells have built in. That is, defining variables isn&#8217;t executing a program per se, but rather using a feature of the shell itself.</p>
 <p>Terminology wise, there are different Unix shells (called for example bash, tcsh, zsh), each with different characteristics and quirks, but each one typically implements the same core functionality, namely being compatible with the original Unix shell (sh) and conforming to the POSIX shell specification.</p>
 <p>This example defines a variable in bash:</p>
@@ -224,7 +287,7 @@ test.txt
 </div>
 </div>
 <div class="section" id="echo-and-cat">
-<h3>3.1.2.4. echo and cat<a class="headerlink" href="#echo-and-cat" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1.2.4. echo and cat<a class="headerlink" href="#echo-and-cat" title="Permalink to this headline">¶</a></h3>
 <p>The command &#8220;echo&#8221; simply prints its input. For example:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;hello&quot;</span>
 hello
@@ -245,7 +308,7 @@ abc def ghi
 </div>
 </div>
 <div class="section" id="exit-codes">
-<h3>3.1.2.5. Exit codes<a class="headerlink" href="#exit-codes" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1.2.5. Exit codes<a class="headerlink" href="#exit-codes" title="Permalink to this headline">¶</a></h3>
 <p>Whenever you&#8217;ve finished running a program in Unix, it will return an exit code. The convention is that the exit code 0 means success while non-0 means failure. You can typically see the conditions under which a program returns success or failure by looking at the documentation. For example, grep returns exit code 1 if the search string was not found at all. You can use the special built-in variable $? to access the exit code:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ grep <span class="m">2345</span> test.txt
 <span class="m">5</span>.145898 <span class="m">3</span>.219212 <span class="m">3</span>.234599
@@ -261,7 +324,7 @@ $ <span class="nb">echo</span> <span class="nv">$?</span>
 </div>
 </div>
 <div class="section" id="multiple-commands">
-<h3>3.1.2.6. Multiple commands<a class="headerlink" href="#multiple-commands" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1.2.6. Multiple commands<a class="headerlink" href="#multiple-commands" title="Permalink to this headline">¶</a></h3>
 <p>You can run multiple commands in series in one line. The following runs &#8220;head&#8221;, followed by &#8220;tail&#8221;:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ head -n <span class="m">1</span> test.txt <span class="p">;</span> tail -n <span class="m">1</span> test.txt
 <span class="m">7</span>.269553 <span class="m">3</span>.427526 <span class="m">6</span>.633603
@@ -281,7 +344,7 @@ not found
 </div>
 </div>
 <div class="section" id="globbing">
-<h3>3.1.2.7. Globbing<a class="headerlink" href="#globbing" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1.2.7. Globbing<a class="headerlink" href="#globbing" title="Permalink to this headline">¶</a></h3>
 <p>Globbing refers to using special characters to match multiple files. An example is &#8220;*.py&#8221; which means &#8220;all files with the extension .py in the current directory&#8221;. For example, to find out the number of lines in Python files:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ wc -l *.py
  <span class="m">156</span> conf.py
@@ -293,7 +356,7 @@ not found
 </div>
 </div>
 <div class="section" id="seq">
-<h3>3.1.2.8. Seq<a class="headerlink" href="#seq" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1.2.8. Seq<a class="headerlink" href="#seq" title="Permalink to this headline">¶</a></h3>
 <p>The command &#8220;seq&#8221; simply outputs a sequence of numbers:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ seq <span class="m">1</span> <span class="m">5</span>
 <span class="m">1</span>
@@ -306,7 +369,7 @@ not found
 <p>This might not be very useful by itself but can be handy when combined with other tools.</p>
 </div>
 <div class="section" id="find">
-<h3>3.1.2.9. Find<a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1.2.9. Find<a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h3>
 <p>Find is useful for finding files, and optionally performing operations on them.</p>
 <p>For example, let&#8217;s assume you have a directory with subdirectories, with the directory and subdirectories having lots of Python files. Let&#8217;s further assume you had used the Python &#8220;with&#8221; statement in some of the files and would like to see how, but you can&#8217;t remember which files exactly use &#8220;with&#8221;. Find and grep to the rescue:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ find . -name <span class="s1">&#39;*.py&#39;</span> -exec grep with <span class="o">{}</span> +
@@ -340,73 +403,28 @@ not found
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">3.1. Basic Unix shell usage</a><ul>
-<li><a class="reference internal" href="#unix-pipelines">3.1.1. Unix pipelines</a></li>
-<li><a class="reference internal" href="#further-unix-shell-tips-and-tricks">3.1.2. Further Unix shell tips and tricks</a><ul>
-<li><a class="reference internal" href="#man">3.1.2.1. man</a></li>
-<li><a class="reference internal" href="#sort">3.1.2.2. sort</a></li>
-<li><a class="reference internal" href="#variables">3.1.2.3. Variables</a></li>
-<li><a class="reference internal" href="#echo-and-cat">3.1.2.4. echo and cat</a></li>
-<li><a class="reference internal" href="#exit-codes">3.1.2.5. Exit codes</a></li>
-<li><a class="reference internal" href="#multiple-commands">3.1.2.6. Multiple commands</a></li>
-<li><a class="reference internal" href="#globbing">3.1.2.7. Globbing</a></li>
-<li><a class="reference internal" href="#seq">3.1.2.8. Seq</a></li>
-<li><a class="reference internal" href="#find">3.1.2.9. Find</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="unix_index.html">3. Unix shell</a><ul>
-      <li>Previous: <a href="unix_index.html" title="previous chapter">3. Unix shell</a></li>
-      <li>Next: <a href="unix2.html" title="next chapter">3.2. Unix shell scripting</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/unix.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/unix.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="unix2.html" title="1.3.2. Unix shell scripting"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="unix_index.html" title="1.3. Unix shell"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="unix_index.html" >1.3. Unix shell</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

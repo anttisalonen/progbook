@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>12.2. Functional programming &#8212; guide 0.1 documentation</title>
+    <title>2.8.2. Functional programming &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,69 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="13. Intermediate web development" href="int_web_index.html" />
-    <link rel="prev" title="12.1. Callbacks and anonymous functions" href="func.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="3. Stage 1.5" href="ch3_index.html" />
+    <link rel="prev" title="2.8.1. Callbacks and anonymous functions" href="func.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ch3_index.html" title="3. Stage 1.5"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="func.html" title="2.8.1. Callbacks and anonymous functions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="func_index.html" accesskey="U">2.8. Some concepts around functions</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2.8.2. Functional programming</a><ul>
+<li><a class="reference internal" href="#map-and-reduce">2.8.2.1. Map and reduce</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="func.html"
+                        title="previous chapter">2.8.1. Callbacks and anonymous functions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ch3_index.html"
+                        title="next chapter">3. Stage 1.5</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/func2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +95,7 @@
           <div class="body" role="main">
             
   <div class="section" id="functional-programming">
-<h1>12.2. Functional programming<a class="headerlink" href="#functional-programming" title="Permalink to this headline">¶</a></h1>
+<h1>2.8.2. Functional programming<a class="headerlink" href="#functional-programming" title="Permalink to this headline">¶</a></h1>
 <p>The programming languages we&#8217;ve used so far are all <em>imperative</em>; they&#8217;re based on the mental model of a computer executing instructions in a series, from a list, from the top, one by one. This is furthermore based on the mathematical model of a <em>Turing machine</em>, described by Alan Turing; a machine that points to an element on a memory tape and has instructions to move on the tape and modify elements on it.</p>
 <p>There are several programming paradigms other than imperative, but one of interest for us is <em>functional programming</em>. We won&#8217;t go to details and actually program in a functional programming language in this book, but there are some aspects you should know about. (Again, as this chapter is about different programming languages, several programmers will disagree with the contents.)</p>
 <p>Functional programming is based on <em>lambda calculus</em>, a formal system described by Alonzo Church in the 1930s. It was later hypothesised that the work by Turing and Church is actually equivalent; that is, a Turing machine can be formally translated to lambda calculus and vice versa.</p>
@@ -73,7 +124,7 @@
 <p>There&#8217;s been a trend since the 1960&#8217;s and continuing that mainstream (imperative) languages are slowly adopting features that Lisp and functional programming in general have pioneered. This is mostly because there are less limitations around computer hardware, and the focus is shifting to increasing programmer productivity and ergonomics. Indeed Python and Javascript as well as several other languages such as Java have incorporated one or more of the above list either as best practices, or as integral parts of the language.</p>
 <p>This chapter is mostly concerned with providing examples around best practices in Python which can often be applied for other languages as well, as a means to reduce the number of bugs, reduce typing, and make code easier to understand.</p>
 <div class="section" id="map-and-reduce">
-<h2>12.2.1. Map and reduce<a class="headerlink" href="#map-and-reduce" title="Permalink to this headline">¶</a></h2>
+<h2>2.8.2.1. Map and reduce<a class="headerlink" href="#map-and-reduce" title="Permalink to this headline">¶</a></h2>
 <p>Map and reduce are the most primitive operations to apply to lists (or arrays). As much of the power of computers and software development lies in the fact that once an operation has been described in code, it can easily be applied thousands or millions of times, it&#8217;s important to understand how to extend basic logic to be applied multiple times.</p>
 <p>&#8220;Map&#8221; relates to the general concept of applying a function that processes data over a list. For example, let&#8217;s have a simple function named &#8220;process&#8221; that tells how many digits are there in an integer, which would, for example, return 1 when given 5 as input, or 2 for 15, or 3 for 115.</p>
 <p><em>Exercise</em>: Implement the described function. (You can convert from string to integer using the int() function.)</p>
@@ -123,61 +174,28 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">12.2. Functional programming</a><ul>
-<li><a class="reference internal" href="#map-and-reduce">12.2.1. Map and reduce</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="func_index.html">12. Some concepts around functions</a><ul>
-      <li>Previous: <a href="func.html" title="previous chapter">12.1. Callbacks and anonymous functions</a></li>
-      <li>Next: <a href="int_web_index.html" title="next chapter">13. Intermediate web development</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/func2.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/func2.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ch3_index.html" title="3. Stage 1.5"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="func.html" title="2.8.1. Callbacks and anonymous functions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="func_index.html" >2.8. Some concepts around functions</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

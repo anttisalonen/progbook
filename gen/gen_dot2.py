@@ -30,7 +30,7 @@ def get_chap_desc():
     ret2 = dict()
     ret3 = dict()
     for fn in files:
-        if fn.startswith('rst/ex_'):
+        if fn.startswith('rst/ex_') or fn.startswith('rst/ch'):
             continue
         fn_clean = fn.strip('rst/').strip('.rst')
         have_header = False

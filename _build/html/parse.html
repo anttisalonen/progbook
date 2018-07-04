@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>18.2. Parsing &#8212; guide 0.1 documentation</title>
+    <title>4.2.2. Parsing &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,72 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19. SQL and its relationship with online shops" href="sql_index.html" />
-    <link rel="prev" title="18.1. Graphs" href="py4.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="4.3. SQL and its relationship with online shops" href="sql_index.html" />
+    <link rel="prev" title="4.2.1. Graphs" href="py4.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sql_index.html" title="4.3. SQL and its relationship with online shops"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="py4.html" title="4.2.1. Graphs"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="py4_index.html" accesskey="U">4.2. A fistful of Python exercises</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4.2.2. Parsing</a><ul>
+<li><a class="reference internal" href="#grammar">4.2.2.1. Grammar</a></li>
+<li><a class="reference internal" href="#lexing">4.2.2.2. Lexing</a></li>
+<li><a class="reference internal" href="#data-structures">4.2.2.3. Data structures</a></li>
+<li><a class="reference internal" href="#id1">4.2.2.4. Parsing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="py4.html"
+                        title="previous chapter">4.2.1. Graphs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sql_index.html"
+                        title="next chapter">4.3. SQL and its relationship with online shops</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/parse.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +98,7 @@
           <div class="body" role="main">
             
   <div class="section" id="parsing">
-<h1>18.2. Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h1>
+<h1>4.2.2. Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h1>
 <p>Now that we have the hacky solution, let&#8217;s see what a nicer solution would look like.</p>
 <p>One problem that our hacky solution had was that it made fairly strict assumptions about the input data. For example, in dot, as the semicolon is the delimiter between statements, it&#8217;s not necessary for the left hand side and the right hand side of an arrow to be on the same line. That means, e.g. the following file is a valid dot file:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>digraph dep2 <span class="o">{</span>
@@ -56,7 +110,7 @@
 </div>
 <p>If given to dot, it would display a graph showing an arrow from A to B as expected. But our hacky solution would be unable to parse this. Furthermore, it could be fairly non-trivial to improve our solution to work on all dot files with different formatting. For this, proper parsing is necessary.</p>
 <div class="section" id="grammar">
-<h2>18.2.1. Grammar<a class="headerlink" href="#grammar" title="Permalink to this headline">¶</a></h2>
+<h2>4.2.2.1. Grammar<a class="headerlink" href="#grammar" title="Permalink to this headline">¶</a></h2>
 <p>Now, parsing means turning an input (text) stream into a data structure. We did this in our hacky solution, but another attribute of parsing is that the input is parsed according to a certain <em>formal grammar</em>. Grammar is often described using the <em>Backus-Naur form</em> (BNF). We could define a grammar for the subset of dot files we want to parse using Backus-Naur form by e.g. the following:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>graph        ::<span class="o">=</span> <span class="s2">&quot;digraph&quot;</span> characters <span class="s1">&#39;{&#39;</span> statements <span class="s1">&#39;}&#39;</span>
 statements   ::<span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="p">|</span> statement statements
@@ -80,7 +134,7 @@ characters   ::<span class="o">=</span> <span class="s1">&#39;&#39;</span> <span
 <p><em>Exercise</em>: The Graphviz project also document the full grammar for the dot language. Look it up online.</p>
 </div>
 <div class="section" id="lexing">
-<h2>18.2.2. Lexing<a class="headerlink" href="#lexing" title="Permalink to this headline">¶</a></h2>
+<h2>4.2.2.2. Lexing<a class="headerlink" href="#lexing" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have our grammar defined, we can almost start writing the actual parsing code. However, if you try this you&#8217;ll see it&#8217;s more difficult than you&#8217;d expect: there&#8217;s a lot of <em>state</em> to keep track of when going through your input file character by character. For example, if you encounter a quotation mark (&#8221;), you need to note that you&#8217;re now inside a quoted string. If you encounter a character, you need to know whether you&#8217;re parsing a graph, or the &#8220;digraph&#8221; word of the graph, or the name of the graph (characters), etc. Writing a parser this way can become cumbersome very quickly.</p>
 <p>A way around this is to split one part out and preprocess the input: <em>lexical analysis</em> or <em>lexing</em> first turns the character-by-character input stream to <em>lexemes</em> or <em>tokens</em> which are much easier to work with when parsing. In our case, the following could be our tokens:</p>
 <ul class="simple">
@@ -132,7 +186,7 @@ characters   ::<span class="o">=</span> <span class="s1">&#39;&#39;</span> <span
 <p><em>Exercise</em>: Finish and test the lexer. If you prefer you can start with a simpler form of dot files first, i.e. without labels but instead only the &#8220;A -&gt; B;&#8221; form.</p>
 </div>
 <div class="section" id="data-structures">
-<h2>18.2.3. Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h2>
+<h2>4.2.2.3. Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have our lexer output, we could parse it. However, as we want the output of our parsing to be stored in data structures, we should define these first. Classes seem like a good way to do this, and our classes should also somewhat reflect the data that we can expect to find in our dot files. This means we can be inspired by our grammar definition when defining our classes. E.g.:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Graph</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -150,7 +204,7 @@ characters   ::<span class="o">=</span> <span class="s1">&#39;&#39;</span> <span
 <p><em>Exercise</em>: Implement the necessary data structures for storing the parsed data.</p>
 </div>
 <div class="section" id="id1">
-<h2>18.2.4. Parsing<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>4.2.2.4. Parsing<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Now we can finally actually parse our lexer output. We need to write a loop that goes through the list, keeps track of the current <em>state</em>, i.e. what&#8217;s expected, checks the input for validity, and stores the parser output to data structures.</p>
 <p><em>Exercise</em>: Give this a try. Don&#8217;t worry if it doesn&#8217;t work; the next section will provide help.</p>
 <p>Now, when writing a parser, there are several patterns that come up. For example:</p>
@@ -244,64 +298,28 @@ characters   ::<span class="o">=</span> <span class="s1">&#39;&#39;</span> <span
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">18.2. Parsing</a><ul>
-<li><a class="reference internal" href="#grammar">18.2.1. Grammar</a></li>
-<li><a class="reference internal" href="#lexing">18.2.2. Lexing</a></li>
-<li><a class="reference internal" href="#data-structures">18.2.3. Data structures</a></li>
-<li><a class="reference internal" href="#id1">18.2.4. Parsing</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="py4_index.html">18. A fistful of Python exercises</a><ul>
-      <li>Previous: <a href="py4.html" title="previous chapter">18.1. Graphs</a></li>
-      <li>Next: <a href="sql_index.html" title="next chapter">19. SQL and its relationship with online shops</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/parse.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/parse.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sql_index.html" title="4.3. SQL and its relationship with online shops"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="py4.html" title="4.2.1. Graphs"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="py4_index.html" >4.2. A fistful of Python exercises</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

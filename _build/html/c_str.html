@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.5. C and strings &#8212; guide 0.1 documentation</title>
+    <title>2.4.5. C and strings &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,71 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8.6. Writing a toy web server" href="httpserv.html" />
-    <link rel="prev" title="8.4. Dynamic memory allocation" href="c_dyn.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="2.4.6. Writing a toy web server" href="httpserv.html" />
+    <link rel="prev" title="2.4.4. Dynamic memory allocation" href="c_dyn.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="httpserv.html" title="2.4.6. Writing a toy web server"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="c_dyn.html" title="2.4.4. Dynamic memory allocation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_c_index.html" accesskey="U">2.4. Intermediate C</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2.4.5. C and strings</a><ul>
+<li><a class="reference internal" href="#c-string-handling">2.4.5.1. C string handling</a></li>
+<li><a class="reference internal" href="#pointer-arithmetic-and-substrings">2.4.5.2. Pointer arithmetic and substrings</a></li>
+<li><a class="reference internal" href="#string-comparisons">2.4.5.3. String comparisons</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="c_dyn.html"
+                        title="previous chapter">2.4.4. Dynamic memory allocation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="httpserv.html"
+                        title="next chapter">2.4.6. Writing a toy web server</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/c_str.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,10 +97,10 @@
           <div class="body" role="main">
             
   <div class="section" id="c-and-strings">
-<h1>8.5. C and strings<a class="headerlink" href="#c-and-strings" title="Permalink to this headline">¶</a></h1>
+<h1>2.4.5. C and strings<a class="headerlink" href="#c-and-strings" title="Permalink to this headline">¶</a></h1>
 <p>This chapter goes in depth around strings (and buffers in general) in C.</p>
 <div class="section" id="c-string-handling">
-<h2>8.5.1. C string handling<a class="headerlink" href="#c-string-handling" title="Permalink to this headline">¶</a></h2>
+<h2>2.4.5.1. C string handling<a class="headerlink" href="#c-string-handling" title="Permalink to this headline">¶</a></h2>
 <p>Before we continue with C, there are a couple of building blocks regarding string handling that you should know about. Let&#8217;s first cover through some basics about strings in C.</p>
 <p>C doesn&#8217;t really have strings. What it has are buffers (allocation of continuous memory), chars or characters (one byte, representing one ASCII character, meaning English letters, numbers or other symbols) and pointers. Mixing these conceptually results in something like a string. See the below diagram which is a continuous buffer i.e. array with eight slots, each holding one byte (character):</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">+-----+-----+-----+-----+-----+------+---+---+</span>
@@ -104,7 +157,7 @@
 <p>Here, &#8220;my_function&#8221; cannot by itself know how long the string (character buffer) pointed to by &#8220;str&#8221; is, and must take a second parameter &#8220;len&#8221; which must have this information. The &#8220;sizeof&#8221; operator only tells the size of the array (in bytes) at the site where the array is allocated, not where only a pointer is available.</p>
 </div>
 <div class="section" id="pointer-arithmetic-and-substrings">
-<h2>8.5.2. Pointer arithmetic and substrings<a class="headerlink" href="#pointer-arithmetic-and-substrings" title="Permalink to this headline">¶</a></h2>
+<h2>2.4.5.2. Pointer arithmetic and substrings<a class="headerlink" href="#pointer-arithmetic-and-substrings" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s say we want to modify the array by a character. We can do this:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
 <span class="n">memset</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_array</span><span class="p">));</span>
@@ -146,7 +199,7 @@
 <p><em>Exercise</em>: Extend your function from the previous exercise such that the character to count occurrences for is given as an additional input parameter.</p>
 </div>
 <div class="section" id="string-comparisons">
-<h2>8.5.3. String comparisons<a class="headerlink" href="#string-comparisons" title="Permalink to this headline">¶</a></h2>
+<h2>2.4.5.3. String comparisons<a class="headerlink" href="#string-comparisons" title="Permalink to this headline">¶</a></h2>
 <p>You can check if two strings are the same by using the &#8220;strncmp&#8221; function:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
 <span class="kt">char</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
@@ -211,63 +264,28 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">8.5. C and strings</a><ul>
-<li><a class="reference internal" href="#c-string-handling">8.5.1. C string handling</a></li>
-<li><a class="reference internal" href="#pointer-arithmetic-and-substrings">8.5.2. Pointer arithmetic and substrings</a></li>
-<li><a class="reference internal" href="#string-comparisons">8.5.3. String comparisons</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_c_index.html">8. Intermediate C</a><ul>
-      <li>Previous: <a href="c_dyn.html" title="previous chapter">8.4. Dynamic memory allocation</a></li>
-      <li>Next: <a href="httpserv.html" title="next chapter">8.6. Writing a toy web server</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/c_str.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/c_str.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="httpserv.html" title="2.4.6. Writing a toy web server"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="c_dyn.html" title="2.4.4. Dynamic memory allocation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_c_index.html" >2.4. Intermediate C</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

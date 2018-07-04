@@ -1,5 +1,5 @@
-Solutions to exercises: Sudoku
-------------------------------
+Sudoku
+------
 
 .. literalinclude:: ../material/sudoku/sudoku.cpp
    :language: cpp

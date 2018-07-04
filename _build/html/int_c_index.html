@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8. Intermediate C &#8212; guide 0.1 documentation</title>
+    <title>2.4. Intermediate C &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,56 +25,41 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8.1. Records" href="c2.html" />
-    <link rel="prev" title="7.2. Javascript meets algorithms" href="js2.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="2.4.1. Records" href="c2.html" />
+    <link rel="prev" title="2.3.2. Javascript meets algorithms" href="js2.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="intermediate-c">
-<h1>8. Intermediate C<a class="headerlink" href="#intermediate-c" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="c2.html">8.1. Records</a></li>
-<li class="toctree-l1"><a class="reference internal" href="c_stack.html">8.2. C and the stack</a></li>
-<li class="toctree-l1"><a class="reference internal" href="c_stack2.html">8.3. More C and the stack</a></li>
-<li class="toctree-l1"><a class="reference internal" href="c_dyn.html">8.4. Dynamic memory allocation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="c_str.html">8.5. C and strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="httpserv.html">8.6. Writing a toy web server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sec.html">8.7. Security</a></li>
-</ul>
-</div>
-<p>We&#8217;ve now had our first touch with C. Let&#8217;s go a bit deeper.</p>
-<p>When writing C, it sometimes helps to think about the memory layout, and what the CPU actually does. If you consider that C is practically a thin layer abstracting the CPU, it may start to feel more logical.</p>
-</div>
-
-
-          </div>
-        </div>
-      </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="c2.html" title="2.4.1. Records"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="js2.html" title="2.3.2. Javascript meets algorithms"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" accesskey="U">2. Stage 1</a> &#187;</li> 
+      </ul>
+    </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="js2.html" title="previous chapter">7.2. Javascript meets algorithms</a></li>
-      <li>Next: <a href="c2.html" title="next chapter">8.1. Records</a></li>
-  </ul></li>
-</ul>
-</div>
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="js2.html"
+                        title="previous chapter">2.3.2. Javascript meets algorithms</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="c2.html"
+                        title="next chapter">2.4.1. Records</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -93,22 +79,54 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="intermediate-c">
+<h1>2.4. Intermediate C<a class="headerlink" href="#intermediate-c" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="c2.html">2.4.1. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_stack.html">2.4.2. C and the stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_stack2.html">2.4.3. More C and the stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_dyn.html">2.4.4. Dynamic memory allocation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_str.html">2.4.5. C and strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="httpserv.html">2.4.6. Writing a toy web server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec.html">2.4.7. Security</a></li>
+</ul>
+</div>
+<p>We&#8217;ve now had our first touch with C. Let&#8217;s go a bit deeper.</p>
+<p>When writing C, it sometimes helps to think about the memory layout, and what the CPU actually does. If you consider that C is practically a thin layer abstracting the CPU, it may start to feel more logical.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/int_c_index.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="c2.html" title="2.4.1. Records"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="js2.html" title="2.3.2. Javascript meets algorithms"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

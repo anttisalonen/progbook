@@ -1,0 +1,212 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.4.2. Making our web page work &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1.5. Editors" href="edit_index.html" />
+    <link rel="prev" title="1.4.1. Creating a simple web page" href="flask1.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="edit_index.html" title="1.5. Editors"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="flask1.html" title="1.4.1. Creating a simple web page"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="flask_index.html" accesskey="U">1.4. Python and libraries</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.4.2. Making our web page work</a><ul>
+<li><a class="reference internal" href="#streaming-mp3-files-on-the-command-line">1.4.2.1. Streaming mp3 files on the command line</a></li>
+<li><a class="reference internal" href="#python-subprocess">1.4.2.2. Python subprocess</a></li>
+<li><a class="reference internal" href="#controlling-playback-in-flask">1.4.2.3. Controlling playback in Flask</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="flask1.html"
+                        title="previous chapter">1.4.1. Creating a simple web page</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="edit_index.html"
+                        title="next chapter">1.5. Editors</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/flask2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="making-our-web-page-work">
+<h1>1.4.2. Making our web page work<a class="headerlink" href="#making-our-web-page-work" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="streaming-mp3-files-on-the-command-line">
+<h2>1.4.2.1. Streaming mp3 files on the command line<a class="headerlink" href="#streaming-mp3-files-on-the-command-line" title="Permalink to this headline">¶</a></h2>
+<p>In order to stream mp3 files on the command line, we need two things:</p>
+<ul class="simple">
+<li>An mp3 stream</li>
+<li>An mp3 player</li>
+</ul>
+<p>For the first one you can try to find a local, interesting radio station who provide an HTTP link to an mp3 stream. If you&#8217;re out of luck, you can also use one I found: the Norwegian public broadcasting company provides exactly this kinds of links for their radio stations, and some stations are also allowed to be heard and played from anywhere in the world. Here&#8217;s one such a link: :download:` <a class="reference external" href="http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h">http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h</a> &lt;<a class="reference external" href="http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h">http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h</a>&gt;`</p>
+<p>If you try accessing this link from your browser, and have the audio replay set up, you may be able to hear some Norwegian local radio.</p>
+<p>Now that we have an mp3 stream, how about the player? There are several mp3 players for various Unix systems that are able to download and replay an mp3 stream via HTTP. Here&#8217;s an incomplete list:</p>
+<ul class="simple">
+<li>mpg123 (or mpg321)</li>
+<li>mplayer</li>
+<li>cvlc</li>
+<li>ffmpeg</li>
+</ul>
+<p>Typically, one could use one of these to replay an mp3 stream by passing the URL as the first parameter, e.g.:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ mpg123 http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h
+</pre></div>
+</div>
+<p>You can stop the replay by sending the signal SIGTERM i.e. signal 15, to the replayer, e.g. by hitting ctrl+c on most systems.</p>
+<p>However, some may not be able to read the mp3 stream via HTTP. If provided with the data, they could still be able to replay the mp3 though. Tools like &#8220;curl&#8221; come into rescue here:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h <span class="p">|</span> mpg123 -
+</pre></div>
+</div>
+<p>What we have here is a nice use of the Unix pipe: Curl is a program that can download files over the network e.g. using the HTTP protocol. We output the curl output to a pipe, such that on the other side the data is received by our mp3 player. The dash (&#8220;-&#8221;) at the end is the input &#8220;file&#8221; for the player; the dash generally means &#8220;standard input&#8221;, i.e. the output of curl in our case. This causes curl to download the stream, and the player to replay it.</p>
+<p><em>Exercise</em>: Install one of the above, or some other suitable mp3 player on your system. Replay the mp3 stream from the command line. Install curl if necessary.</p>
+<p>Now that we&#8217;re able to start and stop the playback on the command line, we can try to hook up our HTML buttons to these actions. But how can we use the command line from Python?</p>
+</div>
+<div class="section" id="python-subprocess">
+<h2>1.4.2.2. Python subprocess<a class="headerlink" href="#python-subprocess" title="Permalink to this headline">¶</a></h2>
+<p>Python provides a module called &#8220;subprocess&#8221; which allows us to run shell commands from Python. Here&#8217;s a simple example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-l&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This would run the command &#8220;ls -l&#8221; from Python and write the output to stdout.</p>
+<p>There&#8217;s a lot that can be written about subprocess.</p>
+<p><em>Exercise</em>: Look up the reference for &#8220;subprocess&#8221; online, or by running &#8220;help(subprocess)&#8221; in the Python interpreter.</p>
+<p>However, our use case is fairly simple: we want to be able to start an mp3 player in the background, and kill it.</p>
+<p>As per the subprocess documentation, a special optional parameter called &#8220;shell&#8221; exists. If set to true, the command will be interpreted by our shell. This can simplify our code when we want our command to run in the background, and can also be used for redirecting the command output. (In a real software project, as per the subprocess documentation, it might be better to refrain from using &#8220;shell=True&#8221; and instead use the subprocess methods for running commands in the background or capturing command output.)</p>
+<p>Using &#8220;shell=True&#8221; also implies that providing a list of parameters to subprocess.call() is no longer necessary. This means that if we wanted to e.g. run &#8220;ls -l&#8221; and redirect the output to a file called &#8220;out.txt&#8221;, we could write this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;ls -l &gt; out.txt&#39;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In order to start a command and keep it running in the background, we can add an ampersand (&#8220;&amp;&#8221;) at the end of the command. For example, to start the mp3 player mpg123 and keep it running in the background:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;mpg123 http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h &amp;&#39;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can use a Unix command to send a signal to a process to end it. For example, most Unix systems have a command &#8220;killall&#8221; which will send a signal (by default SIGTERM) to all processes with a given name. For example, the command &#8220;killall mpg123&#8221; will stop all mpg123 processes in the system (that the current user is permitted to stop). If killall is not available, another possible command to use is &#8220;pkill&#8221; which for this use case is equivalent with &#8220;killall&#8221;.</p>
+<p><em>Exercise</em>: Look up the man page of either &#8220;killall&#8221; or &#8220;pkill&#8221;.</p>
+<p><em>Exercise</em>: Try starting your mp3 player on one terminal. Kill it from another terminal using e.g. &#8220;killall&#8221;.</p>
+<p>We now know how to start and stop the player in Python. How will we know under which conditions our code to start and stop should be run?</p>
+</div>
+<div class="section" id="controlling-playback-in-flask">
+<h2>1.4.2.3. Controlling playback in Flask<a class="headerlink" href="#controlling-playback-in-flask" title="Permalink to this headline">¶</a></h2>
+<p>When we press the button &#8220;Start&#8221; or &#8220;Stop&#8221; on our HTML page, our Python code gets executed. This is done by Flask.</p>
+<p>In our Python code, we can find out whether a button has been pressed or whether the user simply entered the page, and if a button was pressed, which button it was.</p>
+<p>If a user simply opens the page, the browser sends a &#8220;GET&#8221; request. If a button was pressed, a &#8220;POST&#8221; request is sent instead. We can check whether a POST request was sent in our Python code with the following if statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>This is because our form in HTML states the method to use is POST.</p>
+<p>We can find out which button the user pressed using e.g. the following if statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Start&#39;</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>This line would evaluate to True if the button labeled &#8220;Start&#8221; was pressed. We know this because our HTML knows this. (The variable &#8220;request.form[&#8216;submit&#8217;]&#8221; is set to what we wrote in the &#8220;value&#8221; attribute for each button in our HTML.)</p>
+<p>For example, the following would print &#8220;Start pressed&#8221; whenever the user pressed the &#8220;Start&#8221; button, and would in any case render the HTML we wrote:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Start&#39;</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s2">&quot;Start pressed&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;radio.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Exercise</em>: Add code to your Python function such that if the &#8220;Stop&#8221; button was pressed, kill all existing music playing processes. The function should return &#8220;render_template(&#8216;radio.html&#8217;)&#8221; in any case (i.e. whether a GET or POST request was received.) Try your function out. If no music players were found, you should see a message along the lines of &#8220;mpg123: no process found&#8221;.</p>
+<p><em>Exercise</em>: Add code to your Python function such that if the &#8220;Start&#8221; button was pressed, kill all existing music playing processes (in case any exist) and start a new one.</p>
+<p>If everything worked out well, congratulations! You now have a music player controllable over a web page.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="edit_index.html" title="1.5. Editors"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="flask1.html" title="1.4.1. Creating a simple web page"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="flask_index.html" >1.4. Python and libraries</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

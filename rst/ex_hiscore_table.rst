@@ -1,5 +1,5 @@
-Solutions to exercises: Generating the high score table
--------------------------------------------------------
+Generating the high score table
+-------------------------------
 
 .. literalinclude:: ../material//guess/templates/guess3.html
    :language: html

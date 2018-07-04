@@ -1,5 +1,5 @@
-Solutions to exercises: AJAX
-----------------------------
+AJAX
+----
 
 .. literalinclude:: ../material//guess/templates/ajax_get.html
    :language: html

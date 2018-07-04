@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.7. The basics of programming in C &#8212; guide 0.1 documentation</title>
+    <title>1.1.7. The basics of programming in C &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,72 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1.8. Learning to learn" href="learn.html" />
-    <link rel="prev" title="1.6. Setting up the C toolchain" href="prog2.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="1.1.8. Learning to learn" href="learn.html" />
+    <link rel="prev" title="1.1.6. Setting up the C toolchain" href="prog2.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="learn.html" title="1.1.8. Learning to learn"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="prog2.html" title="1.1.6. Setting up the C toolchain"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="intro_index.html" accesskey="U">1.1. Introduction</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.1.7. The basics of programming in C</a><ul>
+<li><a class="reference internal" href="#variables-in-c">1.1.7.1. Variables in C</a></li>
+<li><a class="reference internal" href="#loops">1.1.7.2. Loops</a></li>
+<li><a class="reference internal" href="#branches">1.1.7.3. Branches</a></li>
+<li><a class="reference internal" href="#functions">1.1.7.4. Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="prog2.html"
+                        title="previous chapter">1.1.6. Setting up the C toolchain</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="learn.html"
+                        title="next chapter">1.1.8. Learning to learn</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/prog3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,9 +98,9 @@
           <div class="body" role="main">
             
   <div class="section" id="the-basics-of-programming-in-c">
-<h1>1.7. The basics of programming in C<a class="headerlink" href="#the-basics-of-programming-in-c" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.7. The basics of programming in C<a class="headerlink" href="#the-basics-of-programming-in-c" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="variables-in-c">
-<h2>1.7.1. Variables in C<a class="headerlink" href="#variables-in-c" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.7.1. Variables in C<a class="headerlink" href="#variables-in-c" title="Permalink to this headline">¶</a></h2>
 <p>Now that we&#8217;re able to compile and run C programs, let&#8217;s see how to use variables.</p>
 <p>A variable is defined in C by first defining the <em>type</em> of the variable, followed by the name of the variable. Optionally, the value of the variable can be set when defining the variable. Associating a type with a variable is a way of the programmer telling the compiler how the data is intended to be used. There are several possible types and programs can define new types. For example, <em>int</em> and <em>float</em> are types (integers and floating point numbers respectively, whereby the number of bits used for storing the data, i.e. the minimum and maximum integer values and the floating point number precision are platform specific).</p>
 <p>Once a variable has been defined, it can be used by <em>assigning</em> a value to it, using standard operations and functions such as arithmetic and passed to functions such as printf(). Here&#8217;s an example of defining and using variables:</p>
@@ -84,7 +138,7 @@
 <p><em>Exercise</em>: Create a new variable of type &#8220;int&#8221;. Assign a very large number to it (e.g. 9999999999) and print out its value. Compile and run. What is the output? (If the output is unexpected, this is because the value <em>overflowed</em>; the number required more bits than your system allocated for &#8220;int&#8221;.)</p>
 </div>
 <div class="section" id="loops">
-<h2>1.7.2. Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.7.2. Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
 <p>There are several ways to define a loop in C. They&#8217;re all equivalent but have somewhat different syntax.</p>
 <p>A <em>for loop</em> has three clauses; the initialisation clause, the controlling expression and the expression to be performed after each iteration. An example may be the best way to illustrate this:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -214,7 +268,7 @@
 <p><em>Exercise</em>: Print the multiplication table for numbers from 1 to 10. I.e. the numbers 1 * 1, 1 * 2 etc. up to 10 * 10.</p>
 </div>
 <div class="section" id="branches">
-<h2>1.7.3. Branches<a class="headerlink" href="#branches" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.7.3. Branches<a class="headerlink" href="#branches" title="Permalink to this headline">¶</a></h2>
 <p>Branches in C are defined using the &#8220;if&#8221; and &#8220;else&#8221; keywords. For example:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 
@@ -268,7 +322,7 @@
 <p><em>Exercise</em>: Write a program that prints &#8220;Hello world&#8221; five times, followed by printing &#8220;Hallo Welt&#8221; five times. Note that this can be written either with or without using a branch. Write both versions.</p>
 </div>
 <div class="section" id="functions">
-<h2>1.7.4. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.7.4. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
 <p>We&#8217;ve already seen a function definition with the definition of &#8220;main&#8221;. Here&#8217;s a definition of a function that takes an int as a parameter and doesn&#8217;t return anything:</p>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -384,64 +438,28 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">1.7. The basics of programming in C</a><ul>
-<li><a class="reference internal" href="#variables-in-c">1.7.1. Variables in C</a></li>
-<li><a class="reference internal" href="#loops">1.7.2. Loops</a></li>
-<li><a class="reference internal" href="#branches">1.7.3. Branches</a></li>
-<li><a class="reference internal" href="#functions">1.7.4. Functions</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="intro_index.html">1. Introduction</a><ul>
-      <li>Previous: <a href="prog2.html" title="previous chapter">1.6. Setting up the C toolchain</a></li>
-      <li>Next: <a href="learn.html" title="next chapter">1.8. Learning to learn</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/prog3.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/prog3.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="learn.html" title="1.1.8. Learning to learn"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="prog2.html" title="1.1.6. Setting up the C toolchain"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="intro_index.html" >1.1. Introduction</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

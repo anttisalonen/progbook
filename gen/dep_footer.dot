@@ -3,6 +3,9 @@
     vim -> vim2;
     quad2 -> python_generate_file;
     python_generate_file -> unix;
+    unix -> flask1;
+    flask1 -> flask2;
+    flask2 -> httpserv;
     intro -> sw;
     sw -> cpu;
     cpu -> comp;
@@ -12,13 +15,14 @@
     prog3 -> learn;
     learn -> unix;
     learn -> quad1;
+    quad1 -> quad1b;
     prog3 -> quad1;
     unix2 -> vcs;
     unix2 -> regex;
-    quad1 -> quad2;
+    quad1b -> quad2;
     quad2 -> lang;
     lang -> sec;
-    quad1 -> o_not;
+    quad1b -> o_not;
     o_not -> js2;
     learn -> js2;
     lang -> js;

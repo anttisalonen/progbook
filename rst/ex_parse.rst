@@ -1,5 +1,5 @@
-Solutions to exercises: Parsing
--------------------------------
+Parsing
+-------
 
 .. literalinclude:: ../material/dot/dot2.py
    :language: python

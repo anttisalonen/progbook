@@ -1,5 +1,5 @@
-Solutions to exercises: Monolithic way
---------------------------------------
+Monolithic way
+--------------
 
 main.cpp:
 

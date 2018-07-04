@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.4. Dynamic memory allocation &#8212; guide 0.1 documentation</title>
+    <title>2.4.4. Dynamic memory allocation &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,69 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8.5. C and strings" href="c_str.html" />
-    <link rel="prev" title="8.3. More C and the stack" href="c_stack2.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="2.4.5. C and strings" href="c_str.html" />
+    <link rel="prev" title="2.4.3. More C and the stack" href="c_stack2.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="c_str.html" title="2.4.5. C and strings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="c_stack2.html" title="2.4.3. More C and the stack"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_c_index.html" accesskey="U">2.4. Intermediate C</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2.4.4. Dynamic memory allocation</a><ul>
+<li><a class="reference internal" href="#dynamic-memory-allocation-gotchas">2.4.4.1. Dynamic memory allocation gotchas</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="c_stack2.html"
+                        title="previous chapter">2.4.3. More C and the stack</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="c_str.html"
+                        title="next chapter">2.4.5. C and strings</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/c_dyn.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +95,7 @@
           <div class="body" role="main">
             
   <div class="section" id="dynamic-memory-allocation">
-<h1>8.4. Dynamic memory allocation<a class="headerlink" href="#dynamic-memory-allocation" title="Permalink to this headline">¶</a></h1>
+<h1>2.4.4. Dynamic memory allocation<a class="headerlink" href="#dynamic-memory-allocation" title="Permalink to this headline">¶</a></h1>
 <p>You might ask yourself any of the following questions:</p>
 <ul class="simple">
 <li>The stack can hold up to eight megabytes. What if I need more memory?</li>
@@ -114,7 +165,7 @@
 <p>That is, we have two variables, &#8220;a&#8221; and &#8220;b&#8221;, whereby &#8220;a&#8221; points to the address of the first byte of the memory we allocated (and freed) and &#8220;b&#8221; points to an address eight bytes after. The function &#8220;malloc&#8221;, when allocating memory, will, with the help of the operating system, retrieve and provide the address to a block of memory somewhere in RAM, such that the address may look random but will <em>not</em> be in the stack. It is said that the memory is in this case allocated in the <em>heap</em>.</p>
 <p><em>Exercise</em>: Allocate some memory using &#8220;malloc&#8221;. Print out the address of the memory returned using printf(&#8220;%p\n&#8221;, pointer). Compare against the address of a variable you have in stack. Run your program multiple times. Do the addresses change?</p>
 <div class="section" id="dynamic-memory-allocation-gotchas">
-<h2>8.4.1. Dynamic memory allocation gotchas<a class="headerlink" href="#dynamic-memory-allocation-gotchas" title="Permalink to this headline">¶</a></h2>
+<h2>2.4.4.1. Dynamic memory allocation gotchas<a class="headerlink" href="#dynamic-memory-allocation-gotchas" title="Permalink to this headline">¶</a></h2>
 <p>There are a few things that could go wrong with dynamic memory allocations, providing job security for programmers for years to come.</p>
 <p>Use after free: As we saw in our program above, the variable &#8220;a&#8221;, which contained the address of memory allocated in heap stayed unchanged after freeing the memory. In principle there&#8217;s nothing preventing the programmer from accidentally reading the memory after freeing it, or writing to it. Reading it and then using the value, for example, in an &#8220;if&#8221; statement, will cause the code to randomly either branch into the &#8220;if&#8221; statement or not. Writing to it will possibly mess up some other memory in your program, e.g. accidentally changing some unrelated variable. This is all nasty.</p>
 <p>One way to prevent this is to always reset your pointers after freeing the memory that was pointed to. E.g.:</p>
@@ -134,61 +185,28 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">8.4. Dynamic memory allocation</a><ul>
-<li><a class="reference internal" href="#dynamic-memory-allocation-gotchas">8.4.1. Dynamic memory allocation gotchas</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_c_index.html">8. Intermediate C</a><ul>
-      <li>Previous: <a href="c_stack2.html" title="previous chapter">8.3. More C and the stack</a></li>
-      <li>Next: <a href="c_str.html" title="next chapter">8.5. C and strings</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/c_dyn.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/c_dyn.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="c_str.html" title="2.4.5. C and strings"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="c_stack2.html" title="2.4.3. More C and the stack"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_c_index.html" >2.4. Intermediate C</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

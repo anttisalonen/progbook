@@ -1,5 +1,5 @@
-Solutions to exercises: Regular expressions
--------------------------------------------
+Regular expressions
+-------------------
 
 .. code-block:: bash
 

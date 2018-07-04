@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>19.3. Querying SQL databases &#8212; guide 0.1 documentation</title>
+    <title>4.3.3. Querying SQL databases &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,69 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19.4. Generating a return form" href="shop4.html" />
-    <link rel="prev" title="19.2. Adding data to an SQL database" href="shop2.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="4.3.4. Generating a return form" href="shop4.html" />
+    <link rel="prev" title="4.3.2. Adding data to an SQL database" href="shop2.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="shop4.html" title="4.3.4. Generating a return form"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="shop2.html" title="4.3.2. Adding data to an SQL database"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sql_index.html" accesskey="U">4.3. SQL and its relationship with online shops</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4.3.3. Querying SQL databases</a><ul>
+<li><a class="reference internal" href="#joins">4.3.3.1. Joins</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="shop2.html"
+                        title="previous chapter">4.3.2. Adding data to an SQL database</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="shop4.html"
+                        title="next chapter">4.3.4. Generating a return form</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/shop3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +95,7 @@
           <div class="body" role="main">
             
   <div class="section" id="querying-sql-databases">
-<h1>19.3. Querying SQL databases<a class="headerlink" href="#querying-sql-databases" title="Permalink to this headline">¶</a></h1>
+<h1>4.3.3. Querying SQL databases<a class="headerlink" href="#querying-sql-databases" title="Permalink to this headline">¶</a></h1>
 <p>In this section we&#8217;ll learn how to query, or get data from our SQL database.</p>
 <p>Querying an SQL database can be done using the select statement. We&#8217;ve already seen a couple of uses of this, e.g.:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM products&#39;</span><span class="p">)</span>
@@ -96,7 +147,7 @@
 <p>Here, we include the keywords <em>order by</em>. This means we want to order by the count of the products returned ID, i.e. the number of products that were returned. If you wonder which column to order by, it may help to imagine the resulting table: we define the columns in the result after the SELECT keyword, so our table will have the columns &#8220;return_reason_id&#8221; and &#8220;count(products_returned.id)&#8221;. As we furthermore group the return_reason_id i.e. have at most only one row per return reason, the column we&#8217;d want to order by would result to be the number of products returned.</p>
 <p>The keyword &#8220;DESC&#8221; means we want to order in descending order, i.e. from the most to the least. (Alternatively the keyword &#8220;ASC&#8221; could be used for the opposite direction.)</p>
 <div class="section" id="joins">
-<h2>19.3.1. Joins<a class="headerlink" href="#joins" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.3.1. Joins<a class="headerlink" href="#joins" title="Permalink to this headline">¶</a></h2>
 <p>Querying a single database table is fun enough, but things get more interesting when combining multiple tables.</p>
 <p>Let&#8217;s say we want to find out our top five ordered products. How would we imagine the table to look like? We&#8217;d want to know the product ID, name, size and how often it was ordered, sort by the number of orders, and group by the product ID as we&#8217;d want no more than one row per product. The first three columns we can retrieve from the products table, while the fourth one (how often it was ordered) we can, as may be apparent from our database schema, retrieve by counting the products_ordered.id column.</p>
 <p>This query would then look like this:</p>
@@ -149,61 +200,28 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">19.3. Querying SQL databases</a><ul>
-<li><a class="reference internal" href="#joins">19.3.1. Joins</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="sql_index.html">19. SQL and its relationship with online shops</a><ul>
-      <li>Previous: <a href="shop2.html" title="previous chapter">19.2. Adding data to an SQL database</a></li>
-      <li>Next: <a href="shop4.html" title="next chapter">19.4. Generating a return form</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/shop3.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/shop3.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="shop4.html" title="4.3.4. Generating a return form"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="shop2.html" title="4.3.2. Adding data to an SQL database"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sql_index.html" >4.3. SQL and its relationship with online shops</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

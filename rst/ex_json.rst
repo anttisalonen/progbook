@@ -1,5 +1,5 @@
-Solutions to exercises: JSON
-----------------------------
+JSON
+----
 
 .. literalinclude:: ../material/py/gen_json.py
    :language: python

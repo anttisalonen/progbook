@@ -1,5 +1,5 @@
-Solutions to exercises: Web UI for our return form
---------------------------------------------------
+Web UI for our return form
+--------------------------
 
 shop.py:
 

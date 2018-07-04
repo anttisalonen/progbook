@@ -45,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'guide'
+project = u'Software Development: A Pragmatic Approach'
 copyright = u'2018, Antti Salonen'
 author = u'Antti Salonen'
 
@@ -82,7 +82,7 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'bizstyle'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -126,7 +126,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'guide.tex', u'guide Documentation',
+    (master_doc, 'guide.tex', project,
      u'Antti Salonen', 'manual'),
 ]
 
@@ -136,7 +136,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'guide', u'guide Documentation',
+    (master_doc, 'swpa', project,
      [author], 1)
 ]
 
@@ -147,8 +147,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'guide', u'guide Documentation',
-     author, 'guide', 'One line description of project.',
+    (master_doc, 'swpa', project,
+     author, 'swpa', project,
      'Miscellaneous'),
 ]
 

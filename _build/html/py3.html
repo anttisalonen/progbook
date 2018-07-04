@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>11.3. More useful Python constructs &#8212; guide 0.1 documentation</title>
+    <title>2.7.3. More useful Python constructs &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,73 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="12. Some concepts around functions" href="func_index.html" />
-    <link rel="prev" title="11.2. JSON" href="json.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="2.8. Some concepts around functions" href="func_index.html" />
+    <link rel="prev" title="2.7.2. JSON" href="json.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="func_index.html" title="2.8. Some concepts around functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="json.html" title="2.7.2. JSON"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_py_index.html" accesskey="U">2.7. Useful Python tips</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2.7.3. More useful Python constructs</a><ul>
+<li><a class="reference internal" href="#list-comprehensions">2.7.3.1. List comprehensions</a></li>
+<li><a class="reference internal" href="#slices">2.7.3.2. Slices</a></li>
+<li><a class="reference internal" href="#sorting">2.7.3.3. Sorting</a></li>
+<li><a class="reference internal" href="#useful-built-in-functions">2.7.3.4. Useful built in functions</a></li>
+<li><a class="reference internal" href="#tuples">2.7.3.5. Tuples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="json.html"
+                        title="previous chapter">2.7.2. JSON</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="func_index.html"
+                        title="next chapter">2.8. Some concepts around functions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/py3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +99,7 @@
           <div class="body" role="main">
             
   <div class="section" id="more-useful-python-constructs">
-<h1>11.3. More useful Python constructs<a class="headerlink" href="#more-useful-python-constructs" title="Permalink to this headline">¶</a></h1>
+<h1>2.7.3. More useful Python constructs<a class="headerlink" href="#more-useful-python-constructs" title="Permalink to this headline">¶</a></h1>
 <p>To demonstrate some of these constructs, let&#8217;s start by loading some data to work on. As before, let&#8217;s work on the 10,000 functions we defined before, and load this data from JSON.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/dev/stdin&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
 </pre></div>
@@ -68,7 +123,7 @@
 </pre></div>
 </div>
 <div class="section" id="list-comprehensions">
-<h2>11.3.1. List comprehensions<a class="headerlink" href="#list-comprehensions" title="Permalink to this headline">¶</a></h2>
+<h2>2.7.3.1. List comprehensions<a class="headerlink" href="#list-comprehensions" title="Permalink to this headline">¶</a></h2>
 <p>List comprehensions are a shorthand notation for doing things with lists. They spare you at times from having to write tedious for loops.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
 </pre></div>
@@ -88,7 +143,7 @@
 <p>In other words, while for delimiter separated data we could write a one-liner in awk to calculate the average, for JSON we&#8217;ll need to write about three lines of Python. On the other hand JSON is in general more powerful than delimiter separated data.</p>
 </div>
 <div class="section" id="slices">
-<h2>11.3.2. Slices<a class="headerlink" href="#slices" title="Permalink to this headline">¶</a></h2>
+<h2>2.7.3.2. Slices<a class="headerlink" href="#slices" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">first_hundred</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span> <span class="c1"># len(first_hundred) is 100</span>
 </pre></div>
 </div>
@@ -96,7 +151,7 @@
 <p>You can also slice the end of the list by using negative index.</p>
 </div>
 <div class="section" id="sorting">
-<h2>11.3.3. Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h2>
+<h2>2.7.3.3. Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h2>
 <p>Python has sorting built in:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
@@ -108,7 +163,7 @@
 </ul>
 </div>
 <div class="section" id="useful-built-in-functions">
-<h2>11.3.4. Useful built in functions<a class="headerlink" href="#useful-built-in-functions" title="Permalink to this headline">¶</a></h2>
+<h2>2.7.3.4. Useful built in functions<a class="headerlink" href="#useful-built-in-functions" title="Permalink to this headline">¶</a></h2>
 <p>&#8220;sum&#8221; sums up all the numbers in a list:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sum_of_all_numbers</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
 </pre></div>
@@ -126,7 +181,7 @@
 <p><em>Exercise</em>: For your data set, find the function where the sum of its values (a, b and c) is the highest <em>and</em> all values a, b and c are negative.</p>
 </div>
 <div class="section" id="tuples">
-<h2>11.3.5. Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">¶</a></h2>
+<h2>2.7.3.5. Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">¶</a></h2>
 <p>Tuples in Python are quite similar to lists, but the size of a tuple is fixed. This means that while you can remove or add elements to a list in Python, this isn&#8217;t possible with tuples, making tuples a nice way to implicitly document a fixed nature of some of your data.</p>
 <p>Tuples can be created using parentheses:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -157,65 +212,28 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">11.3. More useful Python constructs</a><ul>
-<li><a class="reference internal" href="#list-comprehensions">11.3.1. List comprehensions</a></li>
-<li><a class="reference internal" href="#slices">11.3.2. Slices</a></li>
-<li><a class="reference internal" href="#sorting">11.3.3. Sorting</a></li>
-<li><a class="reference internal" href="#useful-built-in-functions">11.3.4. Useful built in functions</a></li>
-<li><a class="reference internal" href="#tuples">11.3.5. Tuples</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="int_py_index.html">11. Useful Python tips</a><ul>
-      <li>Previous: <a href="json.html" title="previous chapter">11.2. JSON</a></li>
-      <li>Next: <a href="func_index.html" title="next chapter">12. Some concepts around functions</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/py3.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/py3.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="func_index.html" title="2.8. Some concepts around functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="json.html" title="2.7.2. JSON"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_py_index.html" >2.7. Useful Python tips</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

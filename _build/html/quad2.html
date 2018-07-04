@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.2. Quadratic formula in Python &#8212; guide 0.1 documentation</title>
+    <title>1.2.3. Quadratic formula in Python &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,19 +25,70 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2.3. Generating input data using Python" href="python_generate_file.html" />
-    <link rel="prev" title="2.1. Quadratic formula in C" href="quad1.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="1.2.4. Generating input data using Python" href="python_generate_file.html" />
+    <link rel="prev" title="1.2.2. Lots of quadratic equations" href="quad1b.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="python_generate_file.html" title="1.2.4. Generating input data using Python"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quad1b.html" title="1.2.2. Lots of quadratic equations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="quad_index.html" accesskey="U">1.2. Quadratic formula</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.2.3. Quadratic formula in Python</a><ul>
+<li><a class="reference internal" href="#functions-and-lists">1.2.3.1. Functions and lists</a></li>
+<li><a class="reference internal" href="#files">1.2.3.2. Files</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quad1b.html"
+                        title="previous chapter">1.2.2. Lots of quadratic equations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="python_generate_file.html"
+                        title="next chapter">1.2.4. Generating input data using Python</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/quad2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +96,7 @@
           <div class="body" role="main">
             
   <div class="section" id="quadratic-formula-in-python">
-<h1>2.2. Quadratic formula in Python<a class="headerlink" href="#quadratic-formula-in-python" title="Permalink to this headline">¶</a></h1>
+<h1>1.2.3. Quadratic formula in Python<a class="headerlink" href="#quadratic-formula-in-python" title="Permalink to this headline">¶</a></h1>
 <p>To improve our programming skills, let&#8217;s repeat the previous exercises in Python.</p>
 <p>This should be easier not only because Python is a higher level language but also because we&#8217;re already familiar with the problem domain.</p>
 <p>From this point on, the book will use Python 2. This is not because Python 3 is a worse language - in fact it&#8217;s very similar, and probably better - this is mostly due to the author being more used to Python 2. However, because the two languages are so similar you should have no problem picking up Python 3 later on when needed.</p>
@@ -75,7 +127,7 @@
 </div>
 <p><em>Exercise</em>: Write a Python program that solves the quadratic equation for a=3.0, b=-2.0, c=-3.0. Print out the number of roots as well as all found roots.</p>
 <div class="section" id="functions-and-lists">
-<h2>2.2.1. Functions and lists<a class="headerlink" href="#functions-and-lists" title="Permalink to this headline">¶</a></h2>
+<h2>1.2.3.1. Functions and lists<a class="headerlink" href="#functions-and-lists" title="Permalink to this headline">¶</a></h2>
 <p>Next up we should encapsulate our quadratic equation code to a function. As C doesn&#8217;t support returning multiple values from a function we resorted to using pointers. Python handles this differently as it can return <em>lists</em> which can contain any number of elements. (To be pedantic, C can return a programmer defined data structure or an array allocated in dynamic memory as well; these topics will be covered later.)</p>
 <p>Here are some examples around using lists in Python:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -123,7 +175,7 @@
 <p><em>Exercise</em>: Write a Python program that solves the quadratic equation for the three functions listed above, and prints the results. Your top level code should look like the one above. The function solve_and_print() should take three parameters, a, b and c, call the solver function and print the results of the solver function.</p>
 </div>
 <div class="section" id="files">
-<h2>2.2.2. Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
+<h2>1.2.3.2. Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
 <p>We can now consider reading files in Python. While files can be opened in Python by using open() followed by a close() to close the file in the end, we can do better by using the <em>with</em> statement which will automatically close the file when the &#8220;with&#8221; statement is exited. The following code snippet illustrates this by opening a file called &#8220;test1.txt&#8221; for reading and reads all its contents to a string variable called &#8220;text&#8221;:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test1.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -188,62 +240,28 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">2.2. Quadratic formula in Python</a><ul>
-<li><a class="reference internal" href="#functions-and-lists">2.2.1. Functions and lists</a></li>
-<li><a class="reference internal" href="#files">2.2.2. Files</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="quad_index.html">2. Quadratic formula</a><ul>
-      <li>Previous: <a href="quad1.html" title="previous chapter">2.1. Quadratic formula in C</a></li>
-      <li>Next: <a href="python_generate_file.html" title="next chapter">2.3. Generating input data using Python</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/quad2.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Antti Salonen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/quad2.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="python_generate_file.html" title="1.2.4. Generating input data using Python"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quad1b.html" title="1.2.2. Lots of quadratic equations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="quad_index.html" >1.2. Quadratic formula</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Antti Salonen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

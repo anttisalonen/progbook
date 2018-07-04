@@ -1,5 +1,5 @@
-Solutions to exercises: SDL
----------------------------
+SDL
+---
 
 SDL and font handling
 =====================

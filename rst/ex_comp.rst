@@ -1,5 +1,5 @@
-Solutions to exercises: Ok, but seriously, how does a computer work?
---------------------------------------------------------------------
+Ok, but seriously, how does a computer work?
+--------------------------------------------
 
 Truth table:
 
