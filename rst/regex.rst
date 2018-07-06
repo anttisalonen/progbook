@@ -1,6 +1,10 @@
 Regular expressions
 -------------------
 
+  Some people, when confronted with a problem, think "I know, I'll use regular expressions." Now they have two problems.
+
+  -- Jamie Zawinski
+
 A lot can be said about regular expressions. I'll stick to the essentials, bare minimum in this chapter.
 
 Regular expressions are an extension to the usual search and replace. For example, you might want to find any line in a file that ends with the digit 9:

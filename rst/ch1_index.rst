@@ -1,8 +1,8 @@
-Introduction
-============
+The beginning
+=============
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    intro_index
    quad_index

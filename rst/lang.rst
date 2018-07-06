@@ -1,6 +1,10 @@
 Typing
 ------
 
+  If someone claims to have the perfect programming language, he is either a fool or a salesman or both.
+
+  -- Bjarne Stroustrup
+
 Most programming languages come with a more or less sophisticated type systems. The type system defines how the types of variables and functions are used and interpreted.
 
 A common example is the following expression:

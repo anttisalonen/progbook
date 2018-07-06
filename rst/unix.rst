@@ -1,6 +1,10 @@
 Basic Unix shell usage
 ----------------------
 
+  UNIX is simple and coherent, but it takes a genius (or at any rate, a programmer) to understand and appreciate its simplicity.
+
+  -- Dennis Ritchie
+
 Basic Unix shell commands are quite useful in day to day software development.
 
 Let's assume you have the file with 10,000 lines defining the functions as discussed in "Quadratic formula". In order to inspect this file, you could open it in the text editor, but there are also other, typically easier, ways to achieve this.

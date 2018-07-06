@@ -2,7 +2,7 @@ Stage 1.5
 =========
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    int_web_index
    bin_index

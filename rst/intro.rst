@@ -1,6 +1,22 @@
 Why this book?
 --------------
 
+This book is aimed at readers who are interested in software development but have very little to no prior experience.
+
+The book doesn't have any new information compared to what you can find online or in other books; it has two purposes:
+
+1. It includes what I think is important for software development from a large variety of topics, saving the reader from the dilemma "what should I learn"
+2. It collates relevant information from lots of sources in one book, saving the reader from going through several separate web sites and books
+
+It aims to contain an overview of almost everything that I think is important for software developers. It doesn't contain *everything*; but it should contain enough for the reader to become understand software development, and to be able to read and understand any topic in further detail as needed.
+
+The book focuses on learning what software development is about, and the core principles around software development. It uses several technologies to this goal (e.g. C, Python, Javascript, HTML, etc.) but is not a book about technologies themselves. The reader will learn the basics (or in some cases more) of various technologies along the way, but the focus is on building a foundation for software development.
+
+I obviously can't guarantee a software development job for anyone, but this book does have the aim of supporting interested people in pursuing a job in software development. I'll expand on this further below.
+
+Why are you writing this book?
+==============================
+
 My wife was asking if she could become a software engineer like I did.
 
 I ended up checking the offerings around Computer Science at the local university. They basically have two kinds of degrees: the "traditional" Computer Science degree which is pretty good. It has a lot of useful things but it's also heavy on maths and a bunch of other stuff that I now think isn't very relevant for most software engineering jobs. As my wife has some (to some degree healthy) aversion to maths she wasn't too eager about it.
@@ -30,7 +46,7 @@ If I'm being completely selfish, it's because I'm hiring software engineers and 
 Do you mean, if I do the points above, I too can become a professional software engineer?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-I obviously can't guarantee anything. Actually getting a job depends on the economy and the job market, where you live, what you're willing to do and work for etc. But I do think that after doing all the above points, the reader should have enough or almost enough *technical* skills for many software engineering jobs.
+Again, I obviously can't guarantee anything. Actually getting a job depends on the economy and the job market, where you live, what you're willing to do and work for etc. But I do think that after doing all the above points, the reader should have enough or almost enough *technical* skills for many software engineering jobs.
 
 Apart from raising false hopes about getting a job as a software engineer, another reason for this book is that I'm not happy with how the gap between "techies" and "non-techies" is growing. I think more people should be familiar with software. I want to write a book that has very little prerequisites and teaches enough about software and technology so that a "non-techie" is able to get a better understanding about how software affects the world we live in. So even if you don't get a job, at least feel proud about having a better understanding of software and its role in the world.
 

@@ -1,6 +1,10 @@
 What is software?
 -----------------
 
+  Talk is cheap. Show me the code.
+  
+  -- Linus Torvalds
+
 Software is code that tells computer hardware what to do.
 
 To get started, let's write a very simple software program.

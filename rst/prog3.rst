@@ -1,6 +1,10 @@
 The basics of programming in C
 ------------------------------
 
+  It has nothing to do with dinosaurs. Good taste doesn't go out of style.
+
+  -- Linus Torvalds
+
 Variables in C
 ==============
 

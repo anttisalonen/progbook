@@ -1,6 +1,10 @@
 Intermediate C
 ==============
 
+  [C has] the power of assembly language and the convenience of ... assembly language.
+
+  -- Dennis Ritchie
+
 .. toctree::
    :maxdepth: 1
 

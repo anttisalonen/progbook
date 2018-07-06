@@ -2,7 +2,7 @@ Stage 2
 =======
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    design_index
    py4_index

@@ -1,6 +1,10 @@
 The basics of programming
 -------------------------
 
+  And programming computers was so fascinating. You create your own little universe, and then it does what you tell it to do.
+
+  -- Vint Cerf
+
 It's debatable what the basics of programming are. This chapter presents the author's view and will cover:
 
 * Variables

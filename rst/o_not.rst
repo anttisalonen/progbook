@@ -1,6 +1,10 @@
 Big O notation
 --------------
 
+  If you don't know anything about computers, just remember that they are machines that do exactly what you tell them but often surprise you in the result.
+
+  Richard Dawkins
+
 An algorithm is, succinctly put, a piece of code (or logic) which solves a class of problems.
 
 When discussing algorithms, it's handy to understand what big O notation is.

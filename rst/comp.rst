@@ -1,6 +1,10 @@
 Ok, but seriously, how does a computer work?
 --------------------------------------------
 
+  On two occasions, I have been asked [by members of Parliament], "Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?"...I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.
+
+  -- Charles Babbage (1864)
+
 To reduce the modern computer to the essentials, let's build a following, very simple device: a hand-held device with a touch screen. We need to implement very simple functionality for the device:
 
 * If the user taps on the bottom half of the screen, the screen must turn green.

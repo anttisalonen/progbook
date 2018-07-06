@@ -1,6 +1,10 @@
 Editors
 -------
 
+  I've seen [visual] editors like that, but I don't feel a need for them. I don't want to see the state of the file when I'm editing.
+
+  -- Ken Thompson
+
 .. toctree::
    :maxdepth: 1
 

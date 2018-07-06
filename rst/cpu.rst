@@ -1,6 +1,10 @@
 How does a computer work?
 -------------------------
 
+  Computers are good at following instructions, but not at reading your mind.
+
+  -- Donald Knuth
+
 The previous chapter was a "hook" in that it attempted to get the reader interested without really going into technical details. This chapter is a bit different. As is characteristic for this book, we won't go very much into specifics but we will cover the essentials about understanding computers as is required for software development.
 
 In order to understand how a computer works, we must first learn a bit about *digital logic*.

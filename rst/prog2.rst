@@ -1,6 +1,10 @@
 Setting up the C toolchain
 --------------------------
 
+  C is quirky, flawed, and an enormous success.
+
+  -- Dennis Ritchie
+
 In the previous chapters we learnt some basic programming using Python. In order to get a better understanding of what is general in programming and what is specific to a programming language, we'll learn some basic programming using another programming language, namely C.
 
 We'll start by setting up the C *toolchain*. A toolchain is a set of tools that are used in a chain with the purpose of compiling and running code written in a specific programming language. As you may have noticed, with Python, we executed our Python programs by passing our Python file to the Python interpreter. What happened there, in a nutshell, was that the Python interpreter *interpreted* our code, i.e. read it through and then executed it. C is typically not interpreted but *compiled*. What this means is that the C code is run through a *compiler* which generates an *executable file*, that is, a file with the CPU instructions which the CPU should execute. Only after we've created this executable file we can run it which in turn runs our program. (The Python intepreter is an executable. The official Python interpreter is written in C.)

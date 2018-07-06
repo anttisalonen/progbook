@@ -1,6 +1,10 @@
 Unix shell scripting
 --------------------
 
+  Those who don't understand Unix are condemned to reinvent it, poorly.
+
+  -- Henry Spencer
+
 Redirecting
 ===========
 
