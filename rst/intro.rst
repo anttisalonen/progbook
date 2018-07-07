@@ -8,22 +8,18 @@ The book doesn't have any new information compared to what you can find online o
 1. It includes what I think is important for software development from a large variety of topics, saving the reader from the dilemma "what should I learn"
 2. It collates relevant information from lots of sources in one book, saving the reader from going through several separate web sites and books
 
-It aims to contain an overview of almost everything that I think is important for software developers. It doesn't contain *everything*; but it should contain enough for the reader to become understand software development, and to be able to read and understand any topic in further detail as needed.
+It aims to contain an overview of almost everything that I think is important for software developers. It doesn't contain *everything*; but it should contain enough for the reader to understand software development, and to be able to read and understand any topic in further detail as needed.
 
 The book focuses on learning what software development is about, and the core principles around software development. It uses several technologies to this goal (e.g. C, Python, Javascript, HTML, etc.) but is not a book about technologies themselves. The reader will learn the basics (or in some cases more) of various technologies along the way, but the focus is on building a foundation for software development.
 
-I obviously can't guarantee a software development job for anyone, but this book does have the aim of supporting interested people in pursuing a job in software development. I'll expand on this further below.
+This book does have the aim of supporting interested people in pursuing a job in software development, though I obviously can't guarantee a job. I'll expand on this further below.
 
 Why are you writing this book?
 ==============================
 
 My wife was asking if she could become a software engineer like I did.
 
-I ended up checking the offerings around Computer Science at the local university. They basically have two kinds of degrees: the "traditional" Computer Science degree which is pretty good. It has a lot of useful things but it's also heavy on maths and a bunch of other stuff that I now think isn't very relevant for most software engineering jobs. As my wife has some (to some degree healthy) aversion to maths she wasn't too eager about it.
-
-The other kind of degree is more engineering and job market focused. Having interviewed some candidates with this degree I wasn't sure I could really recommend it; it seemed to be very limited in technical scope, and emphasise superficial learning of memorising facts instead of skills needed in software development. Plus, for whatever reason they have even more advanced maths than the traditional Computer Science degree.
-
-As I have some years of experience in software engineering, and also am now hiring and hence interviewing software engineers, it seemed to me like there's a bit of a gap between what industry needs and what the schools are producing, at least in my local area. To some extent this is expected: universities live in the academic world, often without an explicit goal of ensuring the graduates are employed by the industry. To mitigate, universities may offer degrees directed more towards real world, but, like the degree referenced above, these run into the risk of not being relevant or effective enough for the industry.
+I ended up checking the offerings around Computer Science at the local university. As I have some years of experience in software engineering, and also am now hiring and hence interviewing software engineers, it seemed to me like there's a bit of a gap between what industry needs and what the schools are producing, at least in my local area. To some extent this is expected: universities live in the academic world, often without an explicit goal of ensuring the graduates are employed by the industry. To mitigate, universities may offer degrees directed more towards real world, but these run into the risk of not being relevant or effective enough for the industry.
 
 So I ended up teaching my wife what I think is the right stuff. Now, since we also have a little daughter, finding time for both of us at the same time was sometimes difficult, so I'd write down some notes or exercises for her that she could dive into when she had time. I ended up writing more and more and structuring things better and all of it ended up being this book.
 
@@ -68,7 +64,7 @@ You say "engineering", "development" and "computer science" - what are the diffe
 
 This book teaches software development. This book doesn't teach engineering, but the term "software engineer" is used to describe a person who develops software because that's what we seem to have arrived at as an industry.
 
-More specifically, the terminology is defined as follows:
+More specifically, I'd define the terminology as follows:
 
 * Engineering is something that's very structured, and something you want to learn in a very structured way. In other words, this book definitely doesn't teach engineering.
 * Software development is about solving a problem using software: it's not very clean, it's usually not really engineering nor very scientific, but it's useful in practice and there's a demand for it.
@@ -82,7 +78,7 @@ You possibly can't have all the technical stuff that one needs in one book!
 
 No, but I can try.
 
-More seriously, whatever code you'll be writing after reading this book, you'll need to study the technology for that particular topic in more detail. The goal of this book is not to include everything; the goal is to put together a foundation so that the reader will be able to learn to write almost any software without signifant hurdles, as necessary.
+More seriously, whatever code you'll be writing after reading this book, you'll need to study the technology for that particular topic in more detail. The goal of this book is not to include everything; the goal is to put together a foundation so that the reader will be able to learn to write almost any software without significant hurdles, as necessary.
 
 What are the prerequisites for this book?
 =========================================
@@ -101,7 +97,7 @@ It's probably very helpful to have a tutor or someone who's familiar with softwa
 
 You must be able to find information online. Notice how I just dropped "IRC channels" into a sentence? If you ever do feel the need to ask a question and decide to investigate the IRC bit further, you need to use the Internet to a) find out what IRC is, b) find out what IRC channels there are e.g. for a programming language you're having trouble with, c) how to connect to such a channel and ask your question. This book won't have that information.
 
-The book is free and licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. This means that you're free to share the book in any medium and modify the book for any purpose, even commercially, as long as you give appropriate credit and your distribution uses the same license. See more details at http://creativecommons.org/licenses/by-sa/4.0/.
+The book is free and licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. This means that you're free to share the book in any medium and modify the book for any purpose, even commercially, as long as you give appropriate credit and your distribution uses the same license. See more details at http://creativecommons.org/licenses/by-sa/4.0/. The code in this book is licensed under the MIT license.
 
 How should I work with this book?
 =================================

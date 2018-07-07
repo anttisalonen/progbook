@@ -85,3 +85,11 @@ Projects left
 print return receipt - scan code, pdf, sql
 crawler - regexes + concurrent programming + bfs + tagsoup
 tech behind the book
+
+- create pdf
+- create epub
+- proof read
+- spell check
+- check image resolutions on pdf
+- initial formatting re: isbn, acknowledgements etc.
+- print

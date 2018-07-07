@@ -25,9 +25,12 @@ This references the file "products.html" which Flask will look for in the "templ
 .. code-block:: html
 
     <!DOCTYPE html>
-    <meta name="viewport" content="width=device-width">
-    <html> 
-        <head><title>Products</title></head>
+    <html lang="en"> 
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width">
+            <title>Products</title>
+        </head>
         <body> 
             <p>
             List of all products
@@ -102,7 +105,7 @@ We should have a grip on displaying the order ID and the table without the check
     :linenos:
 
     <form action="/return.html" method="GET">
-        <input type="hidden" name="order_id" value="{{ order_id }}"/>
+        <input type="hidden" name="order_id" value="{{ order_id }}">
         <table border="1">
             <tr>
                 <td>Product ID</td>
@@ -119,7 +122,7 @@ We should have a grip on displaying the order ID and the table without the check
             </tr>
             {% endfor %}
         </table>
-        <input type="submit" value="Return"/>
+        <input type="submit" value="Return">
     </form>
 
 That is, we do the following:
@@ -157,8 +160,8 @@ As for the radio buttons, they can be displayed using e.g.:
 
 .. code-block:: html
 
-    <input type="radio" name="radio_button_1" value="Enable">Enable widget</input></br>
-    <input type="radio" name="radio_button_1" value="Disable">Disable widget</input></br>
+    <input type="radio" name="radio_button_1" value="Enable">Enable widget<br/>
+    <input type="radio" name="radio_button_1" value="Disable">Disable widget<br/>
 
 The above will create one selection with two radio buttons such that the form query string will either include "radio_button_1=Enable" or "radio_button_2=Disable". In other words, the attribute "name", like with checkboxes, defines the identifier for the radio box so your form handling code knows which variable is which. The attribute "value" describes the value that will be stored in the form if that button was selected.
 
@@ -168,8 +171,8 @@ How would one define the default setting? This can be done using e.g. the follow
 
 .. code-block:: html
 
-    <input type="radio" name="radio_button_1" value="Enable" checked="checked">Enable widget</input></br>
-    <input type="radio" name="radio_button_1" value="Disable">Disable widget</input></br>
+    <input type="radio" name="radio_button_1" value="Enable" checked="checked">Enable widget<br/>
+    <input type="radio" name="radio_button_1" value="Disable">Disable widget<br/>
 
 In other words, setting the attribute "checked" to "checked" will make the radio button the default for that selection.
 
@@ -178,9 +181,9 @@ In other words, setting the attribute "checked" to "checked" will make the radio
 .. code-block:: html
 
     {% if variable %}
-    <input type="radio" name="TODO" value="TODO" checked="checked">TODO</input></br>
+    <input type="radio" name="TODO" value="TODO" checked="checked">TODO<br/>
     {% else %}
-    <input type="radio" name="TODO" value="TODO">TODO</input></br>
+    <input type="radio" name="TODO" value="TODO">TODO<br/>
     {% endif %}
 
 You'll need to set the variable to determine which radio button is the default in your Python code accordingly.

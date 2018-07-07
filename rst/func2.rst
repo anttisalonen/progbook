@@ -1,6 +1,10 @@
 Functional programming
 ----------------------
 
+  The most powerful programming language is Lisp. If you don't know Lisp (or its variant, Scheme), you don't appreciate what a powerful language is. Once you learn Lisp you will see what is missing in most other languages.
+
+  -- Richard Stallman
+
 The programming languages we've used so far are all *imperative*; they're based on the mental model of a computer executing instructions in a series, from a list, from the top, one by one. This is furthermore based on the mathematical model of a *Turing machine*, described by Alan Turing; a machine that points to an element on a memory tape and has instructions to move on the tape and modify elements on it.
 
 There are several programming paradigms other than imperative, but one of interest for us is *functional programming*. We won't go to details and actually program in a functional programming language in this book, but there are some aspects you should know about. (Again, as this chapter is about different programming languages, several programmers will disagree with the contents.)

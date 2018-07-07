@@ -154,7 +154,7 @@ We then issue the command "bg" which means the previous command should run in th
 
 On line 6 we can then do what we want, e.g. run "ls".
 
-On line 7, we have the prompt again and wait for some time, until we expect the copy command to have finished. We can check if this is indeed the case by hitting enter (doing nothing). Bash uses this opportunity to tell us that the copy operation indeed has finished (line 9).
+On line 8, we have the prompt again and wait for some time, until we expect the copy command to have finished. We can check if this is indeed the case by hitting enter (doing nothing). Bash uses this opportunity to tell us that the copy operation indeed has finished (line 9).
 
 If you're running a command and you want to start it on the background right away, you can add the & sign to the end of the command:
 
@@ -201,13 +201,13 @@ If you want to send a SIGTERM signal to another process than what's currently ru
 
 Note that bash tells you the PID of the newly started process when you start it on the background using &.
 
-Because a program can install a signal handler for SIGTERM, it's possible that sending SIGTERM to a program won't kill it. To force kill a program you need to send the signal SIGKILL (signal 9 as can be seen from the signal man page at "man 7 signal"):
+Because a program can install a signal handler for SIGTERM, it's possible that sending SIGTERM to a program won't kill it. To force kill a program you need to send the signal SIGKILL:
 
 .. code-block:: bash
 
     $ cp -i big_file.tgz /mnt &
     [1] 23937
-    $ kill -9 23937
+    $ kill -KILL 23937
     $
     [1]+  Killed                  cp -i big_file.tgz /mnt
     $

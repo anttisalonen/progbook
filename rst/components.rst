@@ -1,6 +1,10 @@
 Breaking software down to components
 ------------------------------------
 
+  Controlling complexity is the essence of computer programming.
+
+  -- Brian Kernighan
+
 So, we now have the requirements captured to the point where we can start specifying the software, i.e. how to fulfil the requirements.
 
 We have some understanding of the inputs and the outputs of our software: the output is the visual output on the screen. The main inputs, ignoring minor ones such as the name of the bus stop, are the bus schedules, the historical GPS data, and the current GPS data. The first two are fixed while the last one changes every ten seconds or so. How would we go about actually planning how to write this software?
@@ -46,11 +50,11 @@ Engineering specification
 
 Now, as mentioned before, we will write two different engineering specifications and have two different implementations to fulfil the requirements, for the purpose of understanding the different trade offs between software design decisions.
 
-The first specification will follow the *Unix philosophy*. The Unix philosophy originates from the developers of Unix, including Ken Thompson, Dennis Ritchie and Doug McIlroy, and emphasises minimalist, modular software development. It was later summarised by Peter H. Salus:
+The first specification will follow the *Unix philosophy*. The Unix philosophy originates from the developers of Unix, including Ken Thompson, Dennis Ritchie and Doug McIlroy, and emphasises minimalist, modular software development. It was later summarised this way:
 
-* Write programs that do one thing and do it well.
-* Write programs to work together.
-* Write programs to handle text streams, because that is a universal interface.
+  This is the Unix philosophy: Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface.
+
+  -- Doug McIlroy
 
 The Unix philosophy has also been summarised as "KISS", or "Keep it simple, stupid". Much has been written about the Unix philosophy but applying it to our problem at hand, we could arrive at the following engineering spec:
 

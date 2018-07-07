@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width">
-<html> 
+<html lang="en"> 
     <head> 
+        <title>"Guessing game</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
         <script> 
 function guessed() { 
     var xhr = new XMLHttpRequest();
@@ -29,8 +31,8 @@ function do_post() {
     </head> 
 
     <body> 
-        <input type="button" onclick="guessed()" value="GET" id="guess_button"> <br/>
-        <input type="button" onclick="do_post()" value="POST" id="guess_button"> <br/>
+        <input type="button" onclick="guessed()" value="GET"> <br/>
+        <input type="button" onclick="do_post()" value="POST"> <br/>
     </body> 
 </html> 
 

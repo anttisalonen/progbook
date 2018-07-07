@@ -68,57 +68,12 @@ More specifically, it should correctly implement an interface as used by this pr
         return 0;
     }
 
+.. topic:: Bounds checking
+
+  Similar to assertion, and relevant in C++, is *bounds checking*. Normally, when you access an element in an array (with e.g. "a[3]"), there's nothing stopping you from trying to access an element beyond the size of the array, leading to undefined behaviour. At a small (typically negligible these days) runtime cost you can, for the classes std::vector and std::array, have the bounds checked at each access by using e.g. "a.at(3)" instead. Now code will be called that will check whether the element is within the bounds and throw an exception if not, hopefully saving lots of debugging time in the future.
+
 *Exercise*: Implement the Cell class. You can use any data structure you like although either vector or set should be the easiest ones. Test it with the test code above.
 
 We may need some more member functions for our Cell class later, but we can implement these as we go along.
 
-Digression: debugging
-=====================
-
-Let's assume you try to run your program, and it crashes. What's going on?
-
-There are a few ways to find out. In the worst case, you simply get a segmentation fault, i.e. tried to access memory your program didn't have access to. There are a few ways to debug this:
-
-1. Code inspection and hardening - going through the code and adding useful *assertions* where necessary.
-2. Debug printf - inserting printf (or std::cout) calls to various places in your code, seeing which one gets executed, allowing you to pinpoint the line that is the cause for the crash.
-3. Using a *debugger* to show the root cause of the crash and the state of the program at the time of crash.
-
-Assertions seem like going through in more detail. For example, if you have an int variable named "foo", and you assume it should always be between 0 and 5, you can use this code (after #including <assert.h>):
-
-.. code-block:: cpp
-
-    assert(foo >= 0 && foo <= 5);
-
-Now, what happens is the program will always check, when executing the statement, whether your statement is true and if not, will immediately crash the program. This is helpful for detecting cases where your assumptions were wrong.
-
-Similar to assertion, and relevant in C++, is *bounds checking*. Normally, when you access an element in an array (with e.g. "a[3]"), there's nothing stopping you from trying to access an element beyond the size of the array, leading to undefined behaviour. At a small (typically negligible these days) runtime cost you can, for the classes std::vector and std::array, have the bounds checked at each access by using e.g. "a.at(3)" instead. Now code will be called that will check whether the element is within the bounds and throw an exception if not, hopefully saving lots of debugging time in the future.
-
-Finally, *debuggers* are programs which execute your program in a controlled environment with the ability to track and stop the program executiuon when necessary. One potentially useful debugger is *gdb*. There are many ways to use it but one way is to get a *backtrace* of the function calls leading to the crash, i.e. all the function calls in the stack at the time the crash occurred. This can be achieved by following these steps:
-
-  * Compile the program with "-g3" to get include debug data in the program which will be used by the debugger e.g. to display line numbers
-  * Possibly do not compile with optimisations, i.e. do not compile with "-O2" as this may cause the debugger output to be very different
-  * Instead of running the application with simply "./program abc", run "gdb --args ./program abc". This will launch gdb (assuming it's installed)
-  * gdb will display a prompt, allowing you to enter commands. Simply enter the command "r" (for "run") and hit enter. This will run the program.
-  * If the program crashes, gdb will let you know and also show the line that caused the crash. With the command "bt" ("backtrace") you can see the function stack leading up to the call.
-  * You can exit gdb with "q".
-      
-Here's an example gdb session:
-
-::
-
-    Reading symbols from ./segv...done.
-    (gdb) r
-    Starting program: ./segv 10 10000
-
-    Program received signal SIGSEGV, Segmentation fault.
-    0x0000000000400825 in run (size=10, loop_size=10000) at segv.cpp:9
-    9	        array[i] = i + array[i - 1];
-    (gdb) bt
-    #0  0x0000000000400825 in run (size=10, loop_size=10000) at segv.cpp:9
-    #1  0x00000000004008c1 in main (argc=3, argv=0x7fffffffe7d8) at segv.cpp:18
-    (gdb) 
-
-Here we can see the program crashed at line segv.cpp:9, in function "run", which was entered from function "main" at segv.cpp:18.
-
-Debuggers can do a lot more, e.g. set breakpoints, display variable names, and more.
 

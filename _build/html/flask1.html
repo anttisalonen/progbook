@@ -49,7 +49,7 @@
           <a href="flask_index.html" title="1.4. Python and libraries"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="flask_index.html" accesskey="U">1.4. Python and libraries</a> &#187;</li> 
       </ul>
     </div>
@@ -120,7 +120,7 @@
 <p>Flask has fairly straightforward installation instructions; at the time of writing, running &#8220;pip install Flask&#8221; might be enough.</p>
 <p><em>Exercise</em>: Look up the webpage for Flask, the Python microframework.</p>
 <p>There are several ways to install external libraries in Python. One very convenient way is to use <em>virtualenv</em>, or <em>virtual environment</em>: this tool allows you to install libraries without having to install them system-wide, potentially greatly simplifying installation.</p>
-<p>Virtualenv is a software that can be downloaded from the virtualenv web page. There are several ways to install it; at the time of writing, running &#8220;pip install virtualenv&#8221; might be enough.</p>
+<p>Virtualenv is software that can be downloaded from the virtualenv web page. There are several ways to install it; at the time of writing, running &#8220;pip install virtualenv&#8221; might be enough.</p>
 <p><em>Exercise</em>: Look up the webpage for virtualenv. Install it.</p>
 <p>Once you have virtualenv installed, you need to create a virtual environment and activate it. Once you&#8217;ve activated it, changes to Python libraries such as installing new ones will only affect the virtual environment. This means that installing libraries might be easier, but in order to use them you&#8217;ll need to have activated the virtual environment.</p>
 <p>At the time of writing, the command &#8220;virtualenv myve&#8221; creates a virtual environment to directory &#8220;myve&#8221;. This directory will be created as a subdirectory to the current working directory. After creating the virtual environment, it can be activated by running &#8220;source bin/activate&#8221; in the &#8220;myve&#8221; directory.</p>
@@ -152,12 +152,14 @@
 5
 6
 7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Radio<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Start&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">br</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Start&quot;</span><span class="p">&gt;&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
     <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
@@ -165,12 +167,13 @@
 <p>Let&#8217;s go through this line by line:</p>
 <ul class="simple">
 <li>Line 1 indicates to the browser which HTML version is used.</li>
-<li>Line 2 makes the page more readable on smartphones, as required by our use case.</li>
-<li>Line 3 <em>opens</em> the <em>html tag</em>. This tag is closed on line 8.</li>
-<li>Line 4 sets the page title.</li>
-<li>Lines 5-7 define our <em>form</em>: a button. By having a form (with POST method) the browser can submit information about button presses to our Python code.</li>
-<li>Line 6 creates a button with the text &#8220;Start&#8221;. The &#8220;&lt;br /&gt;&#8221; marks a line break; this causes any following items to be below the button.</li>
-<li>Line 7 ends our form.</li>
+<li>Line 2 <em>opens</em> the <em>html tag</em>. This tag is closed on line 9.</li>
+<li>Line 3 defines the file encoding. We&#8217;ll talk about encodings more later in this book.</li>
+<li>Line 4 makes the page more readable on smartphones, as required by our use case.</li>
+<li>Line 5 sets the page title.</li>
+<li>Lines 6-8 define our <em>form</em>: a button. By having a form (with POST method) the browser can submit information about button presses to our Python code.</li>
+<li>Line 7 creates a button with the text &#8220;Start&#8221;. The &#8220;&lt;br /&gt;&#8221; marks a line break; this causes any following items to be below the button.</li>
+<li>Line 8 ends our form.</li>
 </ul>
 <p><em>Exercise</em>: Type (don&#8217;t copy-paste) the above HTML file to a file. Save the file as &#8220;radio.html&#8221; in the &#8220;templates&#8221; directory.</p>
 <p>We can now ask Flask to display this HTML page. As per the Flask documentation, the following code should do the trick:</p>
@@ -223,7 +226,7 @@
           <a href="flask_index.html" title="1.4. Python and libraries"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="flask_index.html" >1.4. Python and libraries</a> &#187;</li> 
       </ul>
     </div>

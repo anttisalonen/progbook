@@ -11,7 +11,7 @@ Version control systems have a long history, and I won't go through all of that.
 
 This book will introduce the reader to one of the most useful ones, named git. Git was originally developed in 2005 by Linus Torvalds for the Linux kernel development, and has since become one of the most widely used version control systems worldwide.
 
-Git has several pros, and a significant one is how it scales: it's very practical to use in hobby projects of individual developers, but is also being used to version control some of the world's largest source code repositories.
+Git has several upsides, and a significant one is how it scales: it's very practical to use in hobby projects of individual developers, but is also being used to version control some of the world's largest source code repositories.
 
 There is lots that can be learned about git; this book will cover the basic fundamentals.
 

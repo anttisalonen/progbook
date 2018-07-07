@@ -71,7 +71,7 @@ We should now have what we need to create a function that solves the quadratic e
 
 *Exercise*: Modify your code to solve the quadratic equation for a=3.0, b=-2.0, c=3.0 (positive c instead of negative). This equation has no roots. What happens if you print out the values of r1 and r2?
 
-Now that we have a function that can solve the quadratic equation, we should try solving several equations and outputting the results. For the next exercise, let's assume our goal is to provide the roots for three different quadratic equations, namely.
+Now that we have a function that can solve the quadratic equation, we should try solving several equations and outputting the results. For the next exercise, let's assume our goal is to provide the roots for three different quadratic equations, namely:
 
 * x\ :sup:`2`\ -2x-3
 * -x\ :sup:`2`\ -x-1

@@ -96,6 +96,10 @@
             
   <div class="section" id="breaking-software-down-to-components">
 <h1>4.1.2. Breaking software down to components<a class="headerlink" href="#breaking-software-down-to-components" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Controlling complexity is the essence of computer programming.</p>
+<p class="attribution">&mdash;Brian Kernighan</p>
+</div></blockquote>
 <p>So, we now have the requirements captured to the point where we can start specifying the software, i.e. how to fulfil the requirements.</p>
 <p>We have some understanding of the inputs and the outputs of our software: the output is the visual output on the screen. The main inputs, ignoring minor ones such as the name of the bus stop, are the bus schedules, the historical GPS data, and the current GPS data. The first two are fixed while the last one changes every ten seconds or so. How would we go about actually planning how to write this software?</p>
 <p>As a thought exercise, we should further assume we have a team of software engineers, e.g. five people assigned to work on this. Ideally all of them would have something useful to do at all times.</p>
@@ -125,12 +129,11 @@
 <div class="section" id="engineering-specification">
 <h2>4.1.2.1. Engineering specification<a class="headerlink" href="#engineering-specification" title="Permalink to this headline">¶</a></h2>
 <p>Now, as mentioned before, we will write two different engineering specifications and have two different implementations to fulfil the requirements, for the purpose of understanding the different trade offs between software design decisions.</p>
-<p>The first specification will follow the <em>Unix philosophy</em>. The Unix philosophy originates from the developers of Unix, including Ken Thompson, Dennis Ritchie and Doug McIlroy, and emphasises minimalist, modular software development. It was later summarised by Peter H. Salus:</p>
-<ul class="simple">
-<li>Write programs that do one thing and do it well.</li>
-<li>Write programs to work together.</li>
-<li>Write programs to handle text streams, because that is a universal interface.</li>
-</ul>
+<p>The first specification will follow the <em>Unix philosophy</em>. The Unix philosophy originates from the developers of Unix, including Ken Thompson, Dennis Ritchie and Doug McIlroy, and emphasises minimalist, modular software development. It was later summarised this way:</p>
+<blockquote>
+<div><p>This is the Unix philosophy: Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface.</p>
+<p class="attribution">&mdash;Doug McIlroy</p>
+</div></blockquote>
 <p>The Unix philosophy has also been summarised as &#8220;KISS&#8221;, or &#8220;Keep it simple, stupid&#8221;. Much has been written about the Unix philosophy but applying it to our problem at hand, we could arrive at the following engineering spec:</p>
 <div class="topic">
 <p class="topic-title first">Engineering spec 1</p>

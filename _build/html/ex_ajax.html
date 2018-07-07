@@ -88,9 +88,11 @@
   <div class="section" id="ajax">
 <h1>5.17. AJAX<a class="headerlink" href="#ajax" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-html"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span> 
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span> 
     <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span> 
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>&quot;Guessing game<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width&quot;</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span> 
 <span class="kd">function</span> <span class="nx">guessed</span><span class="p">()</span> <span class="p">{</span> 
     <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
@@ -118,8 +120,8 @@
     <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span> 
 
     <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span> 
-        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;guessed()&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;GET&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;guess_button&quot;</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
-        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;do_post()&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;POST&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;guess_button&quot;</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;guessed()&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;GET&quot;</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;do_post()&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
     <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span> 
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span> 
 </pre></div>

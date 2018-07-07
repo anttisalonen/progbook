@@ -1,6 +1,10 @@
 Newer languages
 ---------------
 
+  Within C++, there is a much smaller and cleaner language struggling to get out.
+
+  -- Bjarne Stroustrup
+
 The previous section covered languages that are relatively established, with C++ originating from the 80s and Java and C# from mid-90s and early 2000s respectively. This section covers some of the languages which are a bit newer and hence somewhat less common, though still interesting. I should also point out that there are in fact hundreds if not thousands of new programming languages created in the past couple of decades so this section only covers a couple of hand picked ones, however there are several others that are widely used, to some extent more widely used than the selection here, and also arguably more different from other languages covered in this book.
 
 Go

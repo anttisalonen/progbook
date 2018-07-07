@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width">
-<html> 
-    <head><title>Return</title></head>
+<html lang="en"> 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Return</title>
+    </head>
     <body> 
         <p>
         Returning
@@ -27,9 +30,9 @@
                     <td>
                         {% for reason in reason_list %}
                         {% if reason.default %}
-                        <input type="radio" name="{{ product.id }}" value="{{ reason.id }}" checked="checked">{{ reason.description }}</input></br>
+                        <input type="radio" name="{{ product.id }}" value="{{ reason.id }}" checked="checked">{{ reason.description }}<br/>
                         {% else %}
-                        <input type="radio" name="{{ product.id }}" value="{{ reason.id }}">{{ reason.description }}</input></br>
+                        <input type="radio" name="{{ product.id }}" value="{{ reason.id }}">{{ reason.description }}<br/>
                         {% endif %}
                         {% endfor %}
                     </td>

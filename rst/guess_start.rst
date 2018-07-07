@@ -43,7 +43,11 @@ HTML forms are a fairly simple way to get simple data from a user. Here's an exa
     :linenos:
 
     <!DOCTYPE html>
-    <html> 
+    <html lang="en"> 
+        <head> 
+            <meta charset="UTF-8">
+            <title>Guessing game</title>
+        </head> 
         <body> 
             <form action="/guess/" method="get"> 
                 What's your name? <input type="text" name="user" value="User"> <br/>

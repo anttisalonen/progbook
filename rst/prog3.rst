@@ -43,7 +43,7 @@ A *for loop* has three clauses; the initialisation clause, the controlling expre
     :language: c
     :linenos:
 
-* Line 5: We define our loop. The keyword *for* is followed by parentheses, and the parentheses contain the three clauses. The first one defines a variable called "i". Defining a variable here only makes it available within the loop; using it after the loop would cause a *compiler error*. (It's said that its *scope* is limited to the loop body.) The second clause is an expression that, if evaluated to false, will terminate the loop. The third clause is an expression that is performed after each loop iteration. The syntax "i++" is shorthand for "i = i + 1"; it means "i" is incremented by one.
+* Line 5: We define our loop. The keyword *for* is followed by parentheses, and the parentheses contain the three clauses. The first one defines a variable called "i". Defining a variable here only makes it available within the loop; using it after the loop would cause a *compiler error*. (It's said that its *scope* is limited to the loop.) The second clause is an expression that, if evaluated to false, will terminate the loop. The third clause is an expression that is performed after each loop iteration. The syntax "i++" is shorthand for "i = i + 1"; it means "i" is incremented by one.
 * Line 6: This is the body of the loop. We print out the value of "i" for each iteration.
 
 The curly brackets ("{" and "}") can optionally be omitted if the loop body is a single statement (like in this case). However, it's often beneficial to always include the curly brackets for clarity.

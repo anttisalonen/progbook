@@ -66,9 +66,9 @@ In other words, all the logic needs to do is read the input from the touch scree
 Software and hardware
 =====================
 
-We've now designed a device that will display different colours depending on where the user taps the screen. Let's further imagine we mass produce thousands of these devices. The device is an instant hit but a new feature requirement appears: some users would like to change the way the display shows the colours. For example, a user would want the device to show black if the device is tapped anywhere on the bottom half of the screen and blue otherwise. (This is the principle that e.g. allows app development on current smartphones.)
+We've now designed a device that will display different colours depending on where the user taps the screen. Let's further imagine we mass produce thousands of these devices. The device is an instant hit but a new feature requirement appears: some users would like to change the way the display shows the colours. For example, a user would want the device to show black if the device is tapped anywhere on the bottom half of the screen and blue otherwise.
 
-Because we designed the logic that decides the display colour in the hardware, that is, in the digital logic using logic gates, making this change isn't possible without actually changing the logic and manufacturing a new device with a changed logic. To circumvent this and to make it possible to change the way the colours are displayed without having to manufacture a new device, we can make our device *programmable*.
+Because we designed the logic that decides the display colour in the hardware, that is, in the digital logic using logic gates, making this change isn't possible without actually changing the logic and manufacturing a new device with a changed logic. To circumvent this and to make it possible to change the way the colours are displayed without having to manufacture a new device, we can make our device *programmable*. (This e.g. allows app development on current smartphones, though smartphones also use software for e.g. the OS.)
 
 When a device is made programmable, it doesn't contain the logic for its primary purpose in hardware using logic gates. Instead, the logic is stored somewhere else as *instructions*, and the device instead has logic to perform operations *depending on* these instructions. Then, by changing the instructions one can change the behaviour of the device without having to manufacture a new device. We also have to include *memory* on the device. This is where the instructions are stored.
 
@@ -111,7 +111,7 @@ Now, the above is possibly somewhat understandable to us as humans but it's not 
 
 Here, e.g. the first instruction, COMPARE, compares the two operands given to it, and stores the result in memory to be used for the next instruction.
 
-Typically, a CPU needs to *decode* the instructions from the memory. For example, the instruction COMPARE may be defined as the input values "001". This means that the digital logic would read three bits from memory, see if they match the values "001", and if so, perform the comparison. Each instruction has a number that it corresponds to, and when storing the software in memory, the software would need to be stored as the hardware expects it for the system to function correctly.
+Typically, a CPU needs to *decode* the instructions from the memory. For example, the instruction COMPARE may be defined as the input values "001". This means that the digital logic would read three bits from memory, see if they match the values "001", and if so, perform the comparison. Each instruction has a number that it corresponds to, and when storing the software in memory, the software would need to be stored in the format that the hardware expects for the system to function correctly.
 
 We now have a list of instructions such that each kind of instruction, e.g. COMPARE, SET etc. can be implemented in hardware using logic gates. By implementing each instruction in the hardware and making it possible to modify the list of instructions independently of the hardware we've made our device programmable.
 

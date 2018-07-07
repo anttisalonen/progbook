@@ -245,7 +245,7 @@
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ man <span class="m">7</span> signal
 </pre></div>
 </div>
-<p>...will look up the man page on signal in category 7, providing the reader with an overview of signals in Unix.</p>
+<p>...will, on some Linux systems, look up the man page on signal in category 7, providing the reader with an overview of signals in Unix.</p>
 <p><em>Exercise</em>: Look up the man page for the command &#8220;man&#8221;.</p>
 <p><em>Exercise</em>: Look up the man page for the C function call &#8220;printf&#8221;.</p>
 </div>
@@ -386,7 +386,7 @@ not found
 <li>We execute find with several parameters</li>
 <li>The first parameter is &#8216;.&#8217;, i.e. search in the current working directory (as well as subdirectories)</li>
 <li>Search for files with the extension &#8216;.py&#8217;</li>
-<li>For each found file, run &#8220;grep with $filename&#8221;. The notation {} means the found file name will be used here, and the final &#8216;+&#8217; means the grep command will be run for once with all the files as parameters. For example, if the find command found three Python files, ./a.py, subdir/b.py and subdir2/c.py, it would execute &#8220;grep with ./a.py subdir/b.py subdir2/c.py&#8221;.</li>
+<li>For each found file, run &#8220;grep with $filename&#8221;. The notation {} means the found file name will be used here, and the final &#8216;+&#8217; means the grep command will be run once with all the files as parameters. For example, if the find command found three Python files, ./a.py, subdir/b.py and subdir2/c.py, it would execute &#8220;grep with ./a.py subdir/b.py subdir2/c.py&#8221;.</li>
 </ul>
 <p>The output has two lines: one with grep matching in conf.py, where a comment using the word &#8220;with&#8221;, and another in with.py where the Python with statement was used.</p>
 <p>If we only wanted to find the files with the Python extension without grepping, we simply leave out the -exec part:</p>

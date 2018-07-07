@@ -178,7 +178,7 @@ There can be multiple man pages for a single command. For example, "man signal" 
 
     $ man 7 signal
 
-...will look up the man page on signal in category 7, providing the reader with an overview of signals in Unix.
+...will, on some Linux systems, look up the man page on signal in category 7, providing the reader with an overview of signals in Unix.
 
 *Exercise*: Look up the man page for the command "man".
 
@@ -353,7 +353,7 @@ Let's go through this point by point:
 * We execute find with several parameters
 * The first parameter is '.', i.e. search in the current working directory (as well as subdirectories)
 * Search for files with the extension '.py'
-* For each found file, run "grep with $filename". The notation {} means the found file name will be used here, and the final '+' means the grep command will be run for once with all the files as parameters. For example, if the find command found three Python files, ./a.py, subdir/b.py and subdir2/c.py, it would execute "grep with ./a.py subdir/b.py subdir2/c.py".
+* For each found file, run "grep with $filename". The notation {} means the found file name will be used here, and the final '+' means the grep command will be run once with all the files as parameters. For example, if the find command found three Python files, ./a.py, subdir/b.py and subdir2/c.py, it would execute "grep with ./a.py subdir/b.py subdir2/c.py".
 
 The output has two lines: one with grep matching in conf.py, where a comment using the word "with", and another in with.py where the Python with statement was used.
 

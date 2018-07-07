@@ -32,7 +32,7 @@ Flask has fairly straightforward installation instructions; at the time of writi
 
 There are several ways to install external libraries in Python. One very convenient way is to use *virtualenv*, or *virtual environment*: this tool allows you to install libraries without having to install them system-wide, potentially greatly simplifying installation.
 
-Virtualenv is a software that can be downloaded from the virtualenv web page. There are several ways to install it; at the time of writing, running "pip install virtualenv" might be enough.
+Virtualenv is software that can be downloaded from the virtualenv web page. There are several ways to install it; at the time of writing, running "pip install virtualenv" might be enough.
 
 *Exercise*: Look up the webpage for virtualenv. Install it.
 
@@ -79,12 +79,13 @@ Here's a sample HTML file:
 Let's go through this line by line:
 
 * Line 1 indicates to the browser which HTML version is used.
-* Line 2 makes the page more readable on smartphones, as required by our use case.
-* Line 3 *opens* the *html tag*. This tag is closed on line 8.
-* Line 4 sets the page title.
-* Lines 5-7 define our *form*: a button. By having a form (with POST method) the browser can submit information about button presses to our Python code.
-* Line 6 creates a button with the text "Start". The "<br />" marks a line break; this causes any following items to be below the button.
-* Line 7 ends our form.
+* Line 2 *opens* the *html tag*. This tag is closed on line 9.
+* Line 3 defines the file encoding. We'll talk about encodings more later in this book.
+* Line 4 makes the page more readable on smartphones, as required by our use case.
+* Line 5 sets the page title.
+* Lines 6-8 define our *form*: a button. By having a form (with POST method) the browser can submit information about button presses to our Python code.
+* Line 7 creates a button with the text "Start". The "<br />" marks a line break; this causes any following items to be below the button.
+* Line 8 ends our form.
 
 *Exercise*: Type (don't copy-paste) the above HTML file to a file. Save the file as "radio.html" in the "templates" directory.
 

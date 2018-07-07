@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width">
-<html> 
-    <head><title>Order</title></head>
+<html lang="en"> 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Order</title>
+    </head>
     <body> 
         <p>
         List of products in an order
@@ -11,7 +14,7 @@
         </p>
 
         <form action="/return.html" method="GET">
-            <input type="hidden" name="order_id" value="{{ order_id }}"/>
+            <input type="hidden" name="order_id" value="{{ order_id }}">
             <table border="1">
                 <tr>
                     <td>Product ID</td>
@@ -28,7 +31,7 @@
                 </tr>
                 {% endfor %}
             </table>
-            <input type="submit" value="Return"/>
+            <input type="submit" value="Return">
         </form>
     </body> 
 </html> 

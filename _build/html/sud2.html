@@ -59,7 +59,6 @@
   <ul>
 <li><a class="reference internal" href="#">3.4.2. Containers for Sudoku</a><ul>
 <li><a class="reference internal" href="#cell-class">3.4.2.1. Cell class</a></li>
-<li><a class="reference internal" href="#digression-debugging">3.4.2.2. Digression: debugging</a></li>
 </ul>
 </li>
 </ul>
@@ -304,51 +303,12 @@
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="topic">
+<p class="topic-title first">Bounds checking</p>
+<p>Similar to assertion, and relevant in C++, is <em>bounds checking</em>. Normally, when you access an element in an array (with e.g. &#8220;a[3]&#8221;), there&#8217;s nothing stopping you from trying to access an element beyond the size of the array, leading to undefined behaviour. At a small (typically negligible these days) runtime cost you can, for the classes std::vector and std::array, have the bounds checked at each access by using e.g. &#8220;a.at(3)&#8221; instead. Now code will be called that will check whether the element is within the bounds and throw an exception if not, hopefully saving lots of debugging time in the future.</p>
+</div>
 <p><em>Exercise</em>: Implement the Cell class. You can use any data structure you like although either vector or set should be the easiest ones. Test it with the test code above.</p>
 <p>We may need some more member functions for our Cell class later, but we can implement these as we go along.</p>
-</div>
-<div class="section" id="digression-debugging">
-<h2>3.4.2.2. Digression: debugging<a class="headerlink" href="#digression-debugging" title="Permalink to this headline">¶</a></h2>
-<p>Let&#8217;s assume you try to run your program, and it crashes. What&#8217;s going on?</p>
-<p>There are a few ways to find out. In the worst case, you simply get a segmentation fault, i.e. tried to access memory your program didn&#8217;t have access to. There are a few ways to debug this:</p>
-<ol class="arabic simple">
-<li>Code inspection and hardening - going through the code and adding useful <em>assertions</em> where necessary.</li>
-<li>Debug printf - inserting printf (or std::cout) calls to various places in your code, seeing which one gets executed, allowing you to pinpoint the line that is the cause for the crash.</li>
-<li>Using a <em>debugger</em> to show the root cause of the crash and the state of the program at the time of crash.</li>
-</ol>
-<p>Assertions seem like going through in more detail. For example, if you have an int variable named &#8220;foo&#8221;, and you assume it should always be between 0 and 5, you can use this code (after #including &lt;assert.h&gt;):</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">assert</span><span class="p">(</span><span class="n">foo</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">foo</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Now, what happens is the program will always check, when executing the statement, whether your statement is true and if not, will immediately crash the program. This is helpful for detecting cases where your assumptions were wrong.</p>
-<p>Similar to assertion, and relevant in C++, is <em>bounds checking</em>. Normally, when you access an element in an array (with e.g. &#8220;a[3]&#8221;), there&#8217;s nothing stopping you from trying to access an element beyond the size of the array, leading to undefined behaviour. At a small (typically negligible these days) runtime cost you can, for the classes std::vector and std::array, have the bounds checked at each access by using e.g. &#8220;a.at(3)&#8221; instead. Now code will be called that will check whether the element is within the bounds and throw an exception if not, hopefully saving lots of debugging time in the future.</p>
-<p>Finally, <em>debuggers</em> are programs which execute your program in a controlled environment with the ability to track and stop the program executiuon when necessary. One potentially useful debugger is <em>gdb</em>. There are many ways to use it but one way is to get a <em>backtrace</em> of the function calls leading to the crash, i.e. all the function calls in the stack at the time the crash occurred. This can be achieved by following these steps:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Compile the program with &#8220;-g3&#8221; to get include debug data in the program which will be used by the debugger e.g. to display line numbers</li>
-<li>Possibly do not compile with optimisations, i.e. do not compile with &#8220;-O2&#8221; as this may cause the debugger output to be very different</li>
-<li>Instead of running the application with simply &#8221;./program abc&#8221;, run &#8220;gdb &#8211;args ./program abc&#8221;. This will launch gdb (assuming it&#8217;s installed)</li>
-<li>gdb will display a prompt, allowing you to enter commands. Simply enter the command &#8220;r&#8221; (for &#8220;run&#8221;) and hit enter. This will run the program.</li>
-<li>If the program crashes, gdb will let you know and also show the line that caused the crash. With the command &#8220;bt&#8221; (&#8220;backtrace&#8221;) you can see the function stack leading up to the call.</li>
-<li>You can exit gdb with &#8220;q&#8221;.</li>
-</ul>
-</div></blockquote>
-<p>Here&#8217;s an example gdb session:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Reading</span> <span class="n">symbols</span> <span class="kn">from</span> <span class="nn">.</span><span class="o">/</span><span class="n">segv</span><span class="o">...</span><span class="n">done</span><span class="o">.</span>
-<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">r</span>
-<span class="n">Starting</span> <span class="n">program</span><span class="p">:</span> <span class="o">./</span><span class="n">segv</span> <span class="mi">10</span> <span class="mi">10000</span>
-
-<span class="n">Program</span> <span class="n">received</span> <span class="n">signal</span> <span class="n">SIGSEGV</span><span class="p">,</span> <span class="n">Segmentation</span> <span class="n">fault</span><span class="o">.</span>
-<span class="mh">0x0000000000400825</span> <span class="ow">in</span> <span class="n">run</span> <span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">loop_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span> <span class="n">at</span> <span class="n">segv</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">9</span>
-<span class="mi">9</span>           <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
-<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">bt</span>
-<span class="c1">#0  0x0000000000400825 in run (size=10, loop_size=10000) at segv.cpp:9</span>
-<span class="c1">#1  0x00000000004008c1 in main (argc=3, argv=0x7fffffffe7d8) at segv.cpp:18</span>
-<span class="p">(</span><span class="n">gdb</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Here we can see the program crashed at line segv.cpp:9, in function &#8220;run&#8221;, which was entered from function &#8220;main&#8221; at segv.cpp:18.</p>
-<p>Debuggers can do a lot more, e.g. set breakpoints, display variable names, and more.</p>
 </div>
 </div>
 

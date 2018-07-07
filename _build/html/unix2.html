@@ -223,7 +223,7 @@ $
 <p>After waiting for some time, we get bored and want to do something else so we press ctrl+z. This is shown in the terminal with ^Z (line 2). Pressing this key combination will tell us that the copy command has been stopped (line 3), and drops us back in our shell (line 4).</p>
 <p>We then issue the command &#8220;bg&#8221; which means the previous command should run in the <em>background</em>, meaning it can run but should not prevent us from using the shell. Issuing this command tells us on line 5 that the copy command continues to run again, pointed out by the &amp; sign at the end of the command.</p>
 <p>On line 6 we can then do what we want, e.g. run &#8220;ls&#8221;.</p>
-<p>On line 7, we have the prompt again and wait for some time, until we expect the copy command to have finished. We can check if this is indeed the case by hitting enter (doing nothing). Bash uses this opportunity to tell us that the copy operation indeed has finished (line 9).</p>
+<p>On line 8, we have the prompt again and wait for some time, until we expect the copy command to have finished. We can check if this is indeed the case by hitting enter (doing nothing). Bash uses this opportunity to tell us that the copy operation indeed has finished (line 9).</p>
 <p>If you&#8217;re running a command and you want to start it on the background right away, you can add the &amp; sign to the end of the command:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ cp -i big_file.tgz /mnt <span class="p">&amp;</span>
 <span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="m">23904</span>
@@ -260,10 +260,10 @@ $
 </pre></div>
 </div>
 <p>Note that bash tells you the PID of the newly started process when you start it on the background using &amp;.</p>
-<p>Because a program can install a signal handler for SIGTERM, it&#8217;s possible that sending SIGTERM to a program won&#8217;t kill it. To force kill a program you need to send the signal SIGKILL (signal 9 as can be seen from the signal man page at &#8220;man 7 signal&#8221;):</p>
+<p>Because a program can install a signal handler for SIGTERM, it&#8217;s possible that sending SIGTERM to a program won&#8217;t kill it. To force kill a program you need to send the signal SIGKILL:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ cp -i big_file.tgz /mnt <span class="p">&amp;</span>
 <span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="m">23937</span>
-$ <span class="nb">kill</span> -9 <span class="m">23937</span>
+$ <span class="nb">kill</span> -KILL <span class="m">23937</span>
 $
 <span class="o">[</span><span class="m">1</span><span class="o">]</span>+  Killed                  cp -i big_file.tgz /mnt
 $

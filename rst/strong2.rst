@@ -1,6 +1,10 @@
 Established languages
 ---------------------
 
+  Java is C++ without the guns, knives, and clubs.
+
+  -- James Gosling
+
 C++
 ===
 

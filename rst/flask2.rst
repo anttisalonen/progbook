@@ -9,7 +9,7 @@ In order to stream mp3 files on the command line, we need two things:
 * An mp3 stream
 * An mp3 player
 
-For the first one you can try to find a local, interesting radio station who provide an HTTP link to an mp3 stream. If you're out of luck, you can also use one I found: the Norwegian public broadcasting company provides exactly this kinds of links for their radio stations, and some stations are also allowed to be heard and played from anywhere in the world. Here's one such a link: :download:` http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h <http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h>`
+For the first one you can try to find a local, interesting radio station who provide an HTTP link to an mp3 stream. If you're out of luck, you can also use one I found: the Norwegian public broadcasting company provides exactly this kinds of links for their radio stations, and some stations are also allowed to be heard and played from anywhere in the world. Here's one such a link: `http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h <http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h>`_
 
 If you try accessing this link from your browser, and have the audio replay set up, you may be able to hear some Norwegian local radio.
 
