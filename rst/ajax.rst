@@ -32,6 +32,8 @@ Before we get to AJAX in detail, you might have noticed that we talk about serve
 
 *Exercise*: Move your guessing game HTML to be served by Flask. To do this, as per Flask documentation, you need to 1) create a directory named "templates" and move your HTML file there; 2) Set up a Flask "hello world" program such that there's a URL which serves your HTML file (using render_template()); and 3) Start Flask and try it out to ensure everything is set up correctly.
 
+A note on security: As we've seen, we're not really in control of the Javascript code - a user can replace the Javascript code with whatever code they prefer. In this sense, were we to use this architecture in a real program, a user could easily replace the data sent to the server and fake their way to the top of the high score list. For educational purposes we assume we can trust the user in this case, but were one serious about such a game and offering it for the public, the game logic would have to be done on the server side, such that the correct number would be generated on the server and each guess would need to be sent to the server.
+
 Asynchronous execution
 ======================
 
@@ -68,7 +70,7 @@ What makes this asynchronous is that we define code which isn't run synchronousl
 XmlHttpRequest
 ==============
 
-XmlHttpRequest is the API that allows asynchronous communication with the server. It's now standardised across browsers such that all major browsers provide this API, allowing us as Javascript programmers to send and receive data from the server via HTTP. It's called XmlHttpRequest (probably) because it was originally mainly used to send and receive XML data, but in general it can be used to transfer any data. Specifically, we'll be using it to transfer JSON.
+XmlHttpRequest is an API that allows asynchronous communication with the server. It's now standardised across browsers such that all major browsers provide this API, allowing us as Javascript programmers to send and receive data from the server via HTTP. It's called XmlHttpRequest (probably) because it was originally mainly used to send and receive XML data, but in general it can be used to transfer any data. Specifically, we'll be using it to transfer JSON.
 
 .. topic:: XML and JSON
 
@@ -101,8 +103,8 @@ Here's an example of XmlHttpRequest in practice - how to get some data from the 
     
 Let's go through this line by line:
 
-* Line 1: We create a new object of type XMLHttpRequest which is the API for getting data from the server
-* Line 2: We specify that we want to GET data (as opposed to POST), namely by getting file.html
+* Line 1: We create a new object of type XMLHttpRequest which is an API for getting data from the server
+* Line 2: We specify that we want to send a GET request (as opposed to POST), namely the URL "file.html"
 * Line 3: We define the callback function which will be called when the server has its response. The syntax used here creates an *anonymous function* - a function that doesn't have a name but is defined. It's practical because we can define the function inline as opposed to defining it somewhere else and referencing it here, and it's also necessary as we can use variables in it that are in scope in this example (namely "xhr") that wouldn't be in scope if we defined it as a named function.
 * Line 4: We check the state of the request. We want it to be DONE and have the status code 200 (which means "OK" in HTTP).
 * Line 5: If this condition is satisfied then we write text in the console, including the response text from the server. This can be anything - plain text, JSON, XML, binary data - whatever the server is programmed to send.

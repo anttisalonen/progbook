@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>3.1.3. AJAX &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>2.9.3. AJAX &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3.1.4. Gluing AJAX and Redis together" href="redis_ajax_glue.html" />
-    <link rel="prev" title="3.1.2. Redis" href="redis.html" />
+    <link rel="next" title="2.9.4. Gluing AJAX and Redis together" href="redis_ajax_glue.html" />
+    <link rel="prev" title="2.9.2. Redis" href="redis.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,33 +30,33 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="redis_ajax_glue.html" title="3.1.4. Gluing AJAX and Redis together"
+          <a href="redis_ajax_glue.html" title="2.9.4. Gluing AJAX and Redis together"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="redis.html" title="3.1.2. Redis"
+          <a href="redis.html" title="2.9.2. Redis"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="int_web_index.html" accesskey="U">3.1. Intermediate web development</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_web_index.html" accesskey="U">2.9. A bit more web development</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.1.3. AJAX</a><ul>
-<li><a class="reference internal" href="#asynchronous-execution">3.1.3.1. Asynchronous execution</a></li>
-<li><a class="reference internal" href="#xmlhttprequest">3.1.3.2. XmlHttpRequest</a></li>
+<li><a class="reference internal" href="#">2.9.3. AJAX</a><ul>
+<li><a class="reference internal" href="#asynchronous-execution">2.9.3.1. Asynchronous execution</a></li>
+<li><a class="reference internal" href="#xmlhttprequest">2.9.3.2. XmlHttpRequest</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="redis.html"
-                        title="previous chapter">3.1.2. Redis</a></p>
+                        title="previous chapter">2.9.2. Redis</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="redis_ajax_glue.html"
-                        title="next chapter">3.1.4. Gluing AJAX and Redis together</a></p>
+                        title="next chapter">2.9.4. Gluing AJAX and Redis together</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -79,12 +66,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -96,8 +85,8 @@
           <div class="body" role="main">
             
   <div class="section" id="ajax">
-<h1>3.1.3. AJAX<a class="headerlink" href="#ajax" title="Permalink to this headline">¶</a></h1>
-<p>AJAX stands for Asynchronous Javascript and XmlHttpRequest which is quite a mouthful. Before we go through what it is, let&#8217;s explain why we need it.</p>
+<h1>2.9.3. AJAX<a class="headerlink" href="#ajax" title="Permalink to this headline">¶</a></h1>
+<p>AJAX stands for Asynchronous Javascript and XmlHttpRequest which is quite a mouthful. Before we go through what it is, let’s explain why we need it.</p>
 <p>Remember that what we wanted to do was have a high score list for our guessing game. We have the following constraints:</p>
 <ul class="simple">
 <li>The client (browser) displays HTML and executes JavaScript</li>
@@ -119,14 +108,15 @@
 <li>The server fetches the high score list from the database, and sends it to the client (Javascript)</li>
 <li>The client displays the high score list</li>
 </ol>
-<p>Seems simple, doesn&#8217;t it?</p>
-<p>Apart from entering the name, we&#8217;ve already covered steps 1-3 and to some extent step 5. In this chapter we&#8217;ll cover steps 4 and 6. They&#8217;re basically what AJAX is about.</p>
+<p>Seems simple, doesn’t it?</p>
+<p>Apart from entering the name, we’ve already covered steps 1-3 and to some extent step 5. In this chapter we’ll cover steps 4 and 6. They’re basically what AJAX is about.</p>
 <p>Before we get to AJAX in detail, you might have noticed that we talk about server and client here, however if we simply load our HTML guessing game in the browser there is no server, only client. This means that we will have to pull up Flask, our web microframework again, as it has the capability of running a web server which we need going forwards.</p>
-<p><em>Exercise</em>: Move your guessing game HTML to be served by Flask. To do this, as per Flask documentation, you need to 1) create a directory named &#8220;templates&#8221; and move your HTML file there; 2) Set up a Flask &#8220;hello world&#8221; program such that there&#8217;s a URL which serves your HTML file (using render_template()); and 3) Start Flask and try it out to ensure everything is set up correctly.</p>
+<p><em>Exercise</em>: Move your guessing game HTML to be served by Flask. To do this, as per Flask documentation, you need to 1) create a directory named “templates” and move your HTML file there; 2) Set up a Flask “hello world” program such that there’s a URL which serves your HTML file (using render_template()); and 3) Start Flask and try it out to ensure everything is set up correctly.</p>
+<p>A note on security: As we’ve seen, we’re not really in control of the Javascript code - a user can replace the Javascript code with whatever code they prefer. In this sense, were we to use this architecture in a real program, a user could easily replace the data sent to the server and fake their way to the top of the high score list. For educational purposes we assume we can trust the user in this case, but were one serious about such a game and offering it for the public, the game logic would have to be done on the server side, such that the correct number would be generated on the server and each guess would need to be sent to the server.</p>
 <div class="section" id="asynchronous-execution">
-<h2>3.1.3.1. Asynchronous execution<a class="headerlink" href="#asynchronous-execution" title="Permalink to this headline">¶</a></h2>
+<h2>2.9.3.1. Asynchronous execution<a class="headerlink" href="#asynchronous-execution" title="Permalink to this headline">¶</a></h2>
 <p>Asynchronous Javascript and XmlHttpRequest. Asynchronous means that the code is not run synchronously. So far all our code has run synchronously. For example here:</p>
-<div class="highlight-js"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-js notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="nx">x</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
@@ -134,7 +124,7 @@
 </pre></div>
 </td></tr></table></div>
 <p>Line 1 is executed before line 2, which is executed before line 3. Asynchronous execution changes this. Instead we have something like this (not real Javascript code):</p>
-<div class="highlight-js"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-js notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -151,16 +141,16 @@
 <li>Lines 2-4: We define the <em>callback</em> - a function which will be called later, but not now</li>
 <li>Line 5: We send the request to the server (via HTTP)</li>
 </ul>
-<p>After the request is sent to the server, the server (our Python code) will handle it and send something back (via HTTP). As this goes over the network it can take several milliseconds or even longer depending on what the server does. Once the server has sent the reply, the browser will receive it and its Javascript interpreter will call the function that was defined in lines 2-4 with the data from the server. In this case, the HTML element with ID &#8220;foo&#8221; will have its value changed, i.e. the result from the server is visible to the user.</p>
-<p>What makes this asynchronous is that we define code which isn&#8217;t run synchronously with the execution flow otherwise.</p>
+<p>After the request is sent to the server, the server (our Python code) will handle it and send something back (via HTTP). As this goes over the network it can take several milliseconds or even longer depending on what the server does. Once the server has sent the reply, the browser will receive it and its Javascript interpreter will call the function that was defined in lines 2-4 with the data from the server. In this case, the HTML element with ID “foo” will have its value changed, i.e. the result from the server is visible to the user.</p>
+<p>What makes this asynchronous is that we define code which isn’t run synchronously with the execution flow otherwise.</p>
 </div>
 <div class="section" id="xmlhttprequest">
-<h2>3.1.3.2. XmlHttpRequest<a class="headerlink" href="#xmlhttprequest" title="Permalink to this headline">¶</a></h2>
-<p>XmlHttpRequest is the API that allows asynchronous communication with the server. It&#8217;s now standardised across browsers such that all major browsers provide this API, allowing us as Javascript programmers to send and receive data from the server via HTTP. It&#8217;s called XmlHttpRequest (probably) because it was originally mainly used to send and receive XML data, but in general it can be used to transfer any data. Specifically, we&#8217;ll be using it to transfer JSON.</p>
+<h2>2.9.3.2. XmlHttpRequest<a class="headerlink" href="#xmlhttprequest" title="Permalink to this headline">¶</a></h2>
+<p>XmlHttpRequest is an API that allows asynchronous communication with the server. It’s now standardised across browsers such that all major browsers provide this API, allowing us as Javascript programmers to send and receive data from the server via HTTP. It’s called XmlHttpRequest (probably) because it was originally mainly used to send and receive XML data, but in general it can be used to transfer any data. Specifically, we’ll be using it to transfer JSON.</p>
 <div class="topic">
 <p class="topic-title first">XML and JSON</p>
-<p>You might wonder, what is this XML that I keep hearing about. XML (Extensible Markup Language) is a markup language that shares many similarities with HTML. Here&#8217;s an example XML document:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<p>You might wonder, what is this XML that I keep hearing about. XML (Extensible Markup Language) is a markup language that shares many similarities with HTML. Here’s an example XML document:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="nt">&lt;start_tag&gt;</span>
     <span class="nt">&lt;second_tag</span> <span class="na">attribute=</span><span class="s">&quot;value&quot;</span><span class="nt">&gt;</span>
         second tag body
@@ -168,10 +158,10 @@
 <span class="nt">&lt;/start_tag&gt;</span>
 </pre></div>
 </div>
-<p>In general, you can define all the values (tag names, attribute keys and values, the contents in the body of a tag) as you wish. In this sense XML can be used to transfer generic data between two programs or components. For this use case XML is very similar to JSON. We&#8217;re focusing on JSON in this book instead of XML because it&#8217;s generally simpler to work with, and seems to be at least as common as XML if not more.</p>
+<p>In general, you can define all the values (tag names, attribute keys and values, the contents in the body of a tag) as you wish. In this sense XML can be used to transfer generic data between two programs or components. For this use case XML is very similar to JSON. We’re focusing on JSON in this book instead of XML because it’s generally simpler to work with, and seems to be at least as common as XML if not more.</p>
 </div>
-<p>Here&#8217;s an example of XmlHttpRequest in practice - how to get some data from the server:</p>
-<div class="highlight-js"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<p>Here’s an example of XmlHttpRequest in practice - how to get some data from the server:</p>
+<div class="highlight-js notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -188,34 +178,34 @@
 <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 </pre></div>
 </td></tr></table></div>
-<p>Let&#8217;s go through this line by line:</p>
+<p>Let’s go through this line by line:</p>
 <ul class="simple">
-<li>Line 1: We create a new object of type XMLHttpRequest which is the API for getting data from the server</li>
-<li>Line 2: We specify that we want to GET data (as opposed to POST), namely by getting file.html</li>
-<li>Line 3: We define the callback function which will be called when the server has its response. The syntax used here creates an <em>anonymous function</em> - a function that doesn&#8217;t have a name but is defined. It&#8217;s practical because we can define the function inline as opposed to defining it somewhere else and referencing it here, and it&#8217;s also necessary as we can use variables in it that are in scope in this example (namely &#8220;xhr&#8221;) that wouldn&#8217;t be in scope if we defined it as a named function.</li>
-<li>Line 4: We check the state of the request. We want it to be DONE and have the status code 200 (which means &#8220;OK&#8221; in HTTP).</li>
+<li>Line 1: We create a new object of type XMLHttpRequest which is an API for getting data from the server</li>
+<li>Line 2: We specify that we want to send a GET request (as opposed to POST), namely the URL “file.html”</li>
+<li>Line 3: We define the callback function which will be called when the server has its response. The syntax used here creates an <em>anonymous function</em> - a function that doesn’t have a name but is defined. It’s practical because we can define the function inline as opposed to defining it somewhere else and referencing it here, and it’s also necessary as we can use variables in it that are in scope in this example (namely “xhr”) that wouldn’t be in scope if we defined it as a named function.</li>
+<li>Line 4: We check the state of the request. We want it to be DONE and have the status code 200 (which means “OK” in HTTP).</li>
 <li>Line 5: If this condition is satisfied then we write text in the console, including the response text from the server. This can be anything - plain text, JSON, XML, binary data - whatever the server is programmed to send.</li>
 <li>Line 8: We send the request to the server.</li>
 </ul>
-<p>Let&#8217;s try this out ourselves.</p>
-<p><em>Exercise</em>: Implement the above AJAX request. You&#8217;ll need the following:</p>
+<p>Let’s try this out ourselves.</p>
+<p><em>Exercise</em>: Implement the above AJAX request. You’ll need the following:</p>
 <ol class="arabic simple">
-<li>Create a new HTML file which has nothing but a button which calls a Javascript function (&lt;input type=&#8221;button&#8221; onclick=&#8221;my_function()&#8221; value=&#8221;Button to GET data&#8221;&gt;), and a Javascript function which does nothing more but the code from the block above.</li>
+<li>Create a new HTML file which has nothing but a button which calls a Javascript function (&lt;input type=”button” onclick=”my_function()” value=”Button to GET data”&gt;), and a Javascript function which does nothing more but the code from the block above.</li>
 <li>Add a function in your Python code to serve the above HTML page using Flask (render_template()).</li>
-<li>Add another function in your Python code to serve the URL that the AJAX request will request. In the example above, that URL is &#8220;file.html&#8221;. Note that the URL doesn&#8217;t need to have a file extension. That function should return a string, like &#8220;Hello world!&#8221;</li>
+<li>Add another function in your Python code to serve the URL that the AJAX request will request. In the example above, that URL is “file.html”. Note that the URL doesn’t need to have a file extension. That function should return a string, like “Hello world!”</li>
 <li>Run your Python code using Flask. Navigate to the HTML page that has the button. Open the Javascript console in the browser developer menu. Click the button. You should see the text from the Python server code in the console.</li>
 </ol>
 <div class="topic">
 <p class="topic-title first">GET vs. POST</p>
-<p>To summarise, GET and POST are both two &#8220;verbs&#8221; in HTTP - commands the client sends to the server. What are the differences?</p>
+<p>To summarise, GET and POST are both two “verbs” in HTTP - commands the client sends to the server. What are the differences?</p>
 <ul class="simple">
-<li>GET typically has no data attached to it from the client, except for the URL - it&#8217;s meant to say &#8220;I want to download a page or a file&#8221;</li>
-<li>POST can have data - any kind of data - attached to it - it&#8217;s meant to say &#8220;I want to upload data to the server&#8221;</li>
+<li>GET typically has no data attached to it from the client, except for the URL - it’s meant to say “I want to download a page or a file”</li>
+<li>POST can have data - any kind of data - attached to it - it’s meant to say “I want to upload data to the server”</li>
 </ul>
-<p>The rule of thumb is that if you&#8217;re only reading information from the server - but not changing anything in the server - you should use GET. You should use POST if the action results in changing something on the server, for example adding data in the database.</p>
+<p>The rule of thumb is that if you’re only reading information from the server - but not changing anything in the server - you should use GET. You should use POST if the action results in changing something on the server, for example adding data in the database.</p>
 </div>
-<p>The example above requests something from the server. We can also send data to the server by using the HTTP command POST. Here&#8217;s an example of sending a block of JSON:</p>
-<div class="highlight-js"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<p>The example above requests something from the server. We can also send data to the server by using the HTTP command POST. Here’s an example of sending a block of JSON:</p>
+<div class="highlight-js notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -236,13 +226,13 @@
 </td></tr></table></div>
 <p>This looks very similar to the GET request above. The differences are:</p>
 <ul class="simple">
-<li>Line 2: We use &#8216;POST&#8217; as the first parameter as opposed to &#8216;GET&#8217;</li>
-<li>Line 8: We have a new function call, namely setRequestHeader(). This sets the type of data we&#8217;re sending to JSON. We need this so that the server can handle the incoming data properly.</li>
+<li>Line 2: We use ‘POST’ as the first parameter as opposed to ‘GET’</li>
+<li>Line 8: We have a new function call, namely setRequestHeader(). This sets the type of data we’re sending to JSON. We need this so that the server can handle the incoming data properly.</li>
 <li>Line 9: We include the data we wish to send as a parameter to send(). We use JSON.stringify to convert JSON to a string. The server will need to parse the JSON when receiving the data.</li>
 </ul>
-<p><em>Exercise</em>: Add the above POST request in your HTML page. The server should return the same JSON data back but with the number multiplied by 2, e.g. if the client sends &#8220;{&#8216;my_number&#8217;: 42}&#8221; to the server then the server should send back &#8220;{&#8216;my_number&#8217;: 84}&#8221;. Here are some hints to get you started:</p>
+<p><em>Exercise</em>: Add the above POST request in your HTML page. The server should return the same JSON data back but with the number multiplied by 2, e.g. if the client sends “{‘my_number’: 42}” to the server then the server should send back “{‘my_number’: 84}”. Here are some hints to get you started:</p>
 <ul class="simple">
-<li>In your &#64;app.route Python decorator, you need to explicitly tell Flask you&#8217;re expecing POST requests. You can do this by defining the decorator e.g. like the following: &#64;app.route(&#8220;/post_test/&#8221;, methods=[&#8216;POST&#8217;])</li>
+<li>In your &#64;app.route Python decorator, you need to explicitly tell Flask you’re expecing POST requests. You can do this by defining the decorator e.g. like the following: &#64;app.route(“/post_test/”, methods=[‘POST’])</li>
 <li>In your function handling the POST request, Flask allows you to access the incoming JSON data by the request.get_json() function: data = request.get_json(). This will automatically parse the JSON data, returning a Python dictionary or a list, depending on the JSON.</li>
 <li>You can use json.dumps() to serialise the JSON data in Python to string to be returned from your function, causing the data to be sent to the client.</li>
 </ul>
@@ -262,19 +252,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="redis_ajax_glue.html" title="3.1.4. Gluing AJAX and Redis together"
+          <a href="redis_ajax_glue.html" title="2.9.4. Gluing AJAX and Redis together"
              >next</a> |</li>
         <li class="right" >
-          <a href="redis.html" title="3.1.2. Redis"
+          <a href="redis.html" title="2.9.2. Redis"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="int_web_index.html" >3.1. Intermediate web development</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_web_index.html" >2.9. A bit more web development</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

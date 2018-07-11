@@ -3,7 +3,9 @@ C and the stack
 
 We touched on stack briefly before. This chapter goes a bit more in depth on this. Arguably, if you understand the stack then you will also understand pointers and C memory management in general.
 
-The stack is a chunk of memory (buffer) that the compiler allocates for your program when the program is started. It's used for all your variables and function calls. You can imagine stack as a, well, stack where, whenever you declare a variable, or call a function, a sheet of paper is added on top. Whenever a variable exits the scope or the function call is over, the related sheets of paper are taken out of the stack again.
+You may remember that a CPU doesn't really have a concept of variables; it has memory accesses and registers. What happens, then, when we e.g. define an int in our C code, and use it? The value for each variable is stored either in a register or in RAM where it has a specific address, or a specific offset from an address. The C compiler reads our C code, sees that we e.g. define a variable, picks a register or a memory address for this variable and generates CPU instructions that use the variable.
+
+The stack is a chunk of memory (buffer) that the compiler allocates for your program when the program is started. It's used for all your variables and function calls. You can imagine the stack as a stack of papers where, whenever you declare a variable, or call a function, a sheet of paper is added on top. Each variable is a sheet of paper, and the data written on the paper is the value of the variable. Whenever a variable exits the scope or the function call is over, the related sheets of paper are taken out of the stack again.
 
 Let's imagine we have a toy program:
 
@@ -19,6 +21,8 @@ This code effectively generates a stack that looks like this when main is entere
     | 0x50000004 | 4        |
     | 0x50000000 | 3        |
 
+What we have here is our stack with three entries: The first one (from the bottom) resides in address 0x50000000 and has been set to 3, i.e. it represents our variable "a". The second one is our variable "b" and the third is our variable "x". (The specific number 0x50000000 is in reality OS and CPU dependent and often arbitrary; we use 0x50000000 here for illustration purposes.)
+
 .. topic:: What's the 0x
 
   0x denotes *hexadecimal numbers*. They're just like regular (decimal) numbers, but we include letters a-f for numbers 10-15.
@@ -33,8 +37,6 @@ This code effectively generates a stack that looks like this when main is entere
 
   Tip: You can easily convert between hex, binary and decimal in the Python interpreter. You can start it by running "python2"; e.g. running "hex(30)" will print the number 30 in hex, "bin(30)" will print it in binary, and running e.g. 0xee or 0b11 will convert hex or binary to decimal.
 
-What we have here is our stack with three entries: The first one (from the bottom) resides in address 0x50000000 and has been set to 3, i.e. it represents our variable "a". The second one is our variable "b" and the third is our variable "x".
-
 Because we just entered main and the addition hadn't been executed yet, "x" contains undefined data. After the main function has been executed, our stack looks like this:
 
 ::
@@ -47,7 +49,7 @@ Because we just entered main and the addition hadn't been executed yet, "x" cont
 Function calls
 ==============
 
-I said the stack is also used for functions. Let's have another example:
+I wrote the stack is also used for functions. Let's have another example:
 
 .. literalinclude:: ../material/stack/st3.c
    :language: c

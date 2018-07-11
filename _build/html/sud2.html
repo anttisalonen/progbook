@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>3.4.2. Containers for Sudoku &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.3.2. Containers for Sudoku &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3.4.3. Sudoku Puzzle class" href="sud3.html" />
-    <link rel="prev" title="3.4.1. Introduction to Sudoku" href="sud1.html" />
+    <link rel="next" title="3.3.3. Sudoku Puzzle class" href="sud3.html" />
+    <link rel="prev" title="3.3.1. Introduction to Sudoku" href="sud1.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,32 +30,32 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="sud3.html" title="3.4.3. Sudoku Puzzle class"
+          <a href="sud3.html" title="3.3.3. Sudoku Puzzle class"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sud1.html" title="3.4.1. Introduction to Sudoku"
+          <a href="sud1.html" title="3.3.1. Introduction to Sudoku"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="sud_index.html" accesskey="U">3.4. Learning to program using Sudoku</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="sud_index.html" accesskey="U">3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.4.2. Containers for Sudoku</a><ul>
-<li><a class="reference internal" href="#cell-class">3.4.2.1. Cell class</a></li>
+<li><a class="reference internal" href="#">3.3.2. Containers for Sudoku</a><ul>
+<li><a class="reference internal" href="#cell-class">3.3.2.1. Cell class</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="sud1.html"
-                        title="previous chapter">3.4.1. Introduction to Sudoku</a></p>
+                        title="previous chapter">3.3.1. Introduction to Sudoku</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sud3.html"
-                        title="next chapter">3.4.3. Sudoku Puzzle class</a></p>
+                        title="next chapter">3.3.3. Sudoku Puzzle class</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -78,12 +65,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -95,17 +84,17 @@
           <div class="body" role="main">
             
   <div class="section" id="containers-for-sudoku">
-<h1>3.4.2. Containers for Sudoku<a class="headerlink" href="#containers-for-sudoku" title="Permalink to this headline">¶</a></h1>
+<h1>3.3.2. Containers for Sudoku<a class="headerlink" href="#containers-for-sudoku" title="Permalink to this headline">¶</a></h1>
 <p>Recall that our main idea to solve Sudoku (constraint propagation) revolves around the idea of checking how many possible values a cell has, and if it has only one possible value, set it.</p>
 <p>We then discussed the concept of a cell - which may either have a value, or at least we should know which values it could and could not have.</p>
-<p>After our discussion around classes we now almost have enough to implement a class &#8220;Cell&#8221;, which represents a cell and the value it has or could have. Before we implement this, let&#8217;s consider for a moment how we could achieve this concept of potential values.</p>
-<p>If we know which value a cell has, it&#8217;s no different from an integer. However, if it can have multiple values, then it can effectively be represented a set of multiple integers.</p>
+<p>After our discussion around classes we now almost have enough to implement a class “Cell”, which represents a cell and the value it has or could have. Before we implement this, let’s consider for a moment how we could achieve this concept of potential values.</p>
+<p>If we know which value a cell has, it’s no different from an integer. However, if it can have multiple values, then it can effectively be represented a set of multiple integers.</p>
 <p><em>Exercise</em>: What ways or data structures can you think of to store this information?</p>
-<p>We&#8217;ve talked about arrays before, but arrays generally have a fixed size. We could, however, e.g. have an array of nine integers, each integer having a value between 1 and 9, or -1 if one or more numbers have been eliminated.</p>
+<p>We’ve talked about arrays before, but arrays generally have a fixed size. We could, however, e.g. have an array of nine integers, each integer having a value between 1 and 9, or -1 if one or more numbers have been eliminated.</p>
 <p>Alternatively we could use a dynamically sized array, and only store the possible values there. If only one value is stored, then we know the value in the cell.</p>
 <p>Furthermore, we could use a <em>set</em>, i.e. a <em>binary search tree</em> which is similar to vector in the sense that it stores values, but with the feature of having a faster time complexity for e.g. lookup functions than a vector (O(log n) vs. O(n)).</p>
 <p>The following quickly demonstrates the three approaches in C++, with the example of attempting to find a number 3 in an array as well as checking the size:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -265,22 +254,22 @@
 <p>Vector and set also allow initialisation using the {} notation like arrays, but the above demonstrates the functions to add values in them explicitly.</p>
 <p>Most of this is possibly rather self explanatory, but it seems two pieces of code are of specific interest:</p>
 <ul class="simple">
-<li>Erasing an element in a vector; this is the so-called <em>erase-remove</em> idiom which is the (admittedly clunky) way in C++ to remove an element from a vector. It uses std::remove(), a generic function in the C++ standard template library (STL) which takes <em>iterators</em> as parameters, which are provided by the standard containers in C++ for iterating over the containers and conceptually are pointers pointing to an element. This is passed to vec.erase() which will then remove the element from the vector. E.g. the first element in a vector or a set can be accessed using &#8220;*vec.begin()&#8221;.</li>
-<li>In the for loops, we use the construct &#8220;const auto &amp;v&#8221;. This means &#8220;v should be a reference to a constant variable of automatically inferred type&#8221;. What referencing (&#8220;&amp;&#8221;) means in practice is that we don&#8217;t copy the data, possibly saving some CPU cycles. What &#8220;const&#8221; means is that we promise not to modify the data within the container. Overall this means we simply want to read the contents. If we wanted to, say, modify the element then we should remove &#8220;const&#8221;. If we wanted to construct a copy of the element (e.g. for modifying it but without modifying the element in the container) then we should remove the &#8220;&amp;&#8221;.</li>
+<li>Erasing an element in a vector; this is the so-called <em>erase-remove</em> idiom which is the (admittedly clunky) way in C++ to remove an element from a vector. It uses std::remove(), a generic function in the C++ standard template library (STL) which takes <em>iterators</em> as parameters, which are provided by the standard containers in C++ for iterating over the containers and conceptually are pointers pointing to an element. This is passed to vec.erase() which will then remove the element from the vector. E.g. the first element in a vector or a set can be accessed using “*vec.begin()”.</li>
+<li>In the for loops, we use the construct “const auto &amp;v”. This means “v should be a reference to a constant variable of automatically inferred type”. What referencing (“&amp;”) means in practice is that we don’t copy the data, possibly saving some CPU cycles. What “const” means is that we promise not to modify the data within the container. Overall this means we simply want to read the contents. If we wanted to, say, modify the element then we should remove “const”. If we wanted to construct a copy of the element (e.g. for modifying it but without modifying the element in the container) then we should remove the “&amp;”.</li>
 </ul>
 <div class="section" id="cell-class">
-<h2>3.4.2.1. Cell class<a class="headerlink" href="#cell-class" title="Permalink to this headline">¶</a></h2>
+<h2>3.3.2.1. Cell class<a class="headerlink" href="#cell-class" title="Permalink to this headline">¶</a></h2>
 <p>Now, we should have everything we need for a Cell class. It should have the following functionality:</p>
 <ul class="simple">
 <li>On construction, it should store the numbers from 1 to 9.</li>
 <li>It should be possible to <em>set</em> it, i.e. remove all values except one (which is given as a parameter).</li>
 <li>It should be possible to check whether a cell is valid, i.e. whether it has at least one value still available.</li>
-<li>It should be possible to <em>eliminate</em> a value, i.e. remove a value if it exists. For convenience, let&#8217;s have the function &#8220;eliminate&#8221; return false if the last number in the cell was eliminated and true otherwise.</li>
+<li>It should be possible to <em>eliminate</em> a value, i.e. remove a value if it exists. For convenience, let’s have the function “eliminate” return false if the last number in the cell was eliminated and true otherwise.</li>
 <li>It should be possible to ask whether it contains only one number, or multiple.</li>
 <li>It should be possible to retrieve the current values.</li>
 </ul>
 <p>More specifically, it should correctly implement an interface as used by this program:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
 <span class="cm">/* Cell class declaration and definition goes here */</span>
 
@@ -305,7 +294,7 @@
 </div>
 <div class="topic">
 <p class="topic-title first">Bounds checking</p>
-<p>Similar to assertion, and relevant in C++, is <em>bounds checking</em>. Normally, when you access an element in an array (with e.g. &#8220;a[3]&#8221;), there&#8217;s nothing stopping you from trying to access an element beyond the size of the array, leading to undefined behaviour. At a small (typically negligible these days) runtime cost you can, for the classes std::vector and std::array, have the bounds checked at each access by using e.g. &#8220;a.at(3)&#8221; instead. Now code will be called that will check whether the element is within the bounds and throw an exception if not, hopefully saving lots of debugging time in the future.</p>
+<p>Similar to assertion, and relevant in C++, is <em>bounds checking</em>. Normally, when you access an element in an array (with e.g. “a[3]”), there’s nothing stopping you from trying to access an element beyond the size of the array, leading to undefined behaviour. At a small (typically negligible these days) runtime cost you can, for the classes std::vector and std::array, have the bounds checked at each access by using e.g. “a.at(3)” instead. Now code will be called that will check whether the element is within the bounds and throw an exception if not, hopefully saving lots of debugging time in the future.</p>
 </div>
 <p><em>Exercise</em>: Implement the Cell class. You can use any data structure you like although either vector or set should be the easiest ones. Test it with the test code above.</p>
 <p>We may need some more member functions for our Cell class later, but we can implement these as we go along.</p>
@@ -325,19 +314,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="sud3.html" title="3.4.3. Sudoku Puzzle class"
+          <a href="sud3.html" title="3.3.3. Sudoku Puzzle class"
              >next</a> |</li>
         <li class="right" >
-          <a href="sud1.html" title="3.4.1. Introduction to Sudoku"
+          <a href="sud1.html" title="3.3.1. Introduction to Sudoku"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="sud_index.html" >3.4. Learning to program using Sudoku</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="sud_index.html" >3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 Records
 -------
 
-In our previous code we worked with functions and quadratic equations. A function was represented by three floating point values a, b and c. Let's write a function that returns the value of the function at a given point x:
+In our previous code we worked with functions and quadratic equations. A quadratic equation was represented by three floating point values a, b and c. Let's write a function that returns the value of a quadratic function at a given point x:
 
 .. code-block:: c
 
@@ -10,7 +10,7 @@ In our previous code we worked with functions and quadratic equations. A functio
         return a * (x * x) + b * x + c;
     }
 
-Seems straightforward enough. Now, let's imagine we need to find out the difference between two functions at a given point x. Let's write this function:
+Seems straightforward enough. Now, let's imagine we need to find out the difference between two quadratic functions at a given point x. Let's write this function:
 
 .. code-block:: c
 
@@ -27,7 +27,7 @@ In C (and in fact most programming languages) it's possible to combine values in
 
 .. code-block:: c
 
-    struct function {
+    struct quadratic_function {
         float a;
         float b;
         float c;
@@ -37,7 +37,7 @@ If we wanted to declare such a struct and define its values, we can do simply:
 
 .. code-block:: c
 
-    struct function f;
+    struct quadratic_function f;
     f.a = 1.0f;
     f.b = 2.0f;
     f.c = 3.0f;
@@ -48,7 +48,7 @@ We can now also redefine the function that calculates the value at a given point
 
 .. code-block:: c
 
-    float function_value(const struct function *f, float x)
+    float function_value(const struct quadratic_function *f, float x)
     {
         return f->a * (x * x) + f->b * x + f->c;
     }
@@ -70,14 +70,14 @@ Now, defining the function difference_between_functions can be much clearer:
 
 .. code-block:: c
 
-    float difference_between_functions(const struct function *f1, const struct function *f2, float x)
+    float difference_between_functions(const struct quadratic_function *f1, const struct quadratic_function *f2, float x)
     {
         float val1 = function_value(f1, x);
         float val2 = function_value(f2, x);
         return val2 - val1;
     }
 
-*Exercise*: The derivative of a function ax^2 + bx + c is 2ax + b. Write a function that calculates the derivative for a function at a given point x and call it, with the input function passed as a pointer to a struct.
+*Exercise*: The derivative of a quadratic function ax^2 + bx + c is 2ax + b. Write a function that calculates the derivative for a quadratic function at a given point x and call it, with the input data passed as a pointer to a struct.
 
 What is a struct
 ================
@@ -88,7 +88,7 @@ You can find out what the size of a data type is in C by using the "sizeof" oper
 
 .. code-block:: c
 
-    printf("%lu\n", sizeof(struct function));
+    printf("%lu\n", sizeof(struct quadratic_function));
 
 In this sense, defining structures in C mostly serves to combine various data into one unit, simplifying code and aiding in having the necessary memory available and allocated.
 

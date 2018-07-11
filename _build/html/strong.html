@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>3.3.3. The case for statically, strongly typed languages &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.2.3. The case for statically, strongly typed languages &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3.3.4. Established languages" href="strong2.html" />
-    <link rel="prev" title="3.3.2. Virtual machines" href="vm.html" />
+    <link rel="next" title="3.2.4. Established languages" href="strong2.html" />
+    <link rel="prev" title="3.2.2. Virtual machines" href="vm.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,23 +30,23 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="strong2.html" title="3.3.4. Established languages"
+          <a href="strong2.html" title="3.2.4. Established languages"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="vm.html" title="3.3.2. Virtual machines"
+          <a href="vm.html" title="3.2.2. Virtual machines"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="strong_index.html" accesskey="U">3.3. Strongly, statically typed languages</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="strong_index.html" accesskey="U">3.2. Strongly, statically typed languages</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.3.3. The case for statically, strongly typed languages</a><ul>
-<li><a class="reference internal" href="#what-s-new">3.3.3.1. What&#8217;s new</a><ul>
-<li><a class="reference internal" href="#generic-functions">3.3.3.1.1. Generic functions</a></li>
+<li><a class="reference internal" href="#">3.2.3. The case for statically, strongly typed languages</a><ul>
+<li><a class="reference internal" href="#what-s-new">3.2.3.1. What’s new</a><ul>
+<li><a class="reference internal" href="#generic-functions">3.2.3.1.1. Generic functions</a></li>
 </ul>
 </li>
 </ul>
@@ -68,10 +55,10 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="vm.html"
-                        title="previous chapter">3.3.2. Virtual machines</a></p>
+                        title="previous chapter">3.2.2. Virtual machines</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="strong2.html"
-                        title="next chapter">3.3.4. Established languages</a></p>
+                        title="next chapter">3.2.4. Established languages</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -81,12 +68,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -98,27 +87,27 @@
           <div class="body" role="main">
             
   <div class="section" id="the-case-for-statically-strongly-typed-languages">
-<h1>3.3.3. The case for statically, strongly typed languages<a class="headerlink" href="#the-case-for-statically-strongly-typed-languages" title="Permalink to this headline">¶</a></h1>
-<p>We&#8217;ve so far mostly used three languages:</p>
+<h1>3.2.3. The case for statically, strongly typed languages<a class="headerlink" href="#the-case-for-statically-strongly-typed-languages" title="Permalink to this headline">¶</a></h1>
+<p>We’ve so far mostly used three languages:</p>
 <ul class="simple">
 <li>Javascript: a dynamically, weakly typed language</li>
 <li>C: a statically, weakly typed language</li>
 <li>Python: a dynamically, strongly typed language</li>
 </ul>
-<p>Let&#8217;s see what alternatives we have for a statically, strongly typed language.</p>
+<p>Let’s see what alternatives we have for a statically, strongly typed language.</p>
 <p>Disclaimer: different programming languages are another topic that can get fairly religious among programmers. While I attempt to remain objective, 90% of programmers will probably disagree with most of the contents of this chapter. That is their right.</p>
 <p>This chapter attempts to summarise different programming languages by identifying their most important traits. The languages have vast differences but the scope of this chapter is not to capture all of them, but instead only serve as an introduction. We will make a deeper dive to some of the languages later.</p>
-<p>All the languages here are statically, strongly typed as well as imperative, such that it shouldn&#8217;t be very difficult for the reader to implement FizzBuzz for any of the languages after seeing the &#8220;Hello world&#8221; program and possibly a search or two online on syntax. To make things more interesting we&#8217;ll also, for each language, quote two programs for relatively common operations:</p>
+<p>All the languages here are statically, strongly typed as well as imperative, such that it shouldn’t be very difficult for the reader to implement FizzBuzz for any of the languages after seeing the “Hello world” program and possibly a search or two online on syntax. To make things more interesting we’ll also, for each language, quote two programs for relatively common operations:</p>
 <ul class="simple">
 <li>Splitting a string by a space, with the goal to be able to access and print out each word separately.</li>
 <li>A separate function which filters numbers less than zero from a list (or an array)</li>
 </ul>
 <p>For the second operation, the implementation should be implemented generically, i.e. for any different numeric types, if possible, in each language.</p>
 <p>This may be helpful in illustrating the different concepts between languages.</p>
-<p><em>Exercise</em>: Implement both of the above operations in one of the languages (C, Python or Javascript). Note that example implementations will be listed below. If you pick C, you may want to use the function &#8220;realloc&#8221;. If you pick Javascript, you may want to look up the reference for the Javascript array class first.</p>
-<p>To prepare, here&#8217;s how to split a string in C, Python and Javascript:</p>
+<p><em>Exercise</em>: Implement both of the above operations in one of the languages (C, Python or Javascript). Note that example implementations will be listed below. If you pick C, you may want to use the function “realloc”. If you pick Javascript, you may want to look up the reference for the Javascript array class first.</p>
+<p>To prepare, here’s how to split a string in C, Python and Javascript:</p>
 <p>C:</p>
-<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -189,24 +178,24 @@
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>(Compile and run e.g. using &#8220;gcc -Wall -O2 -o str str.c &amp;&amp; ./str&#8221;.)</p>
-<p>Some explanation to the above: we create a buffer where we store a copy of the original string, with each space replaced with a string terminator (&#8216;\0&#8217;). We index into the buffer in order to access the individual words. In order to do this, we create an array with MAX_WORDS (20) elements, each one including the index (position) of the word.</p>
+<p>(Compile and run e.g. using “gcc -Wall -O2 -o str str.c &amp;&amp; ./str”.)</p>
+<p>Some explanation to the above: we create a buffer where we store a copy of the original string, with each space replaced with a string terminator (‘\0’). We index into the buffer in order to access the individual words. In order to do this, we create an array with MAX_WORDS (20) elements, each one including the index (position) of the word.</p>
 <p>Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;this is a string.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;this is a string.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
 <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">):</span>
     <span class="k">print</span> <span class="n">word</span>
 </pre></div>
 </div>
 <p>Javascript:</p>
-<div class="highlight-js"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">&quot;this is a string.\n&quot;</span><span class="p">;</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">&quot;this is a string.\n&quot;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">);</span>
 <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Here&#8217;s the program to filter numbers less than zero in C, Python and Javascript:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<p>Here’s the program to filter numbers less than zero in C, Python and Javascript:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
 
@@ -272,16 +261,16 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>(This uses &#8220;realloc&#8221; for re-allocating existing memory.)</p>
+<p>(This uses “realloc” for re-allocating existing memory.)</p>
 <p>Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filt</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filt</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">arr</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]</span>
 <span class="k">print</span> <span class="n">filt</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Javascript:</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">];</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">];</span>
 <span class="kd">function</span> <span class="nx">filt</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">;</span>
@@ -291,26 +280,26 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">filt</span><span class="p">(</span><span class="nx">inp</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>(We use the built-in array class member function &#8220;filter&#8221; and pass it an anonymous function as the callback that defines what to filter on.)</p>
+<p>(We use the built-in array class member function “filter” and pass it an anonymous function as the callback that defines what to filter on.)</p>
 <div class="section" id="what-s-new">
-<h2>3.3.3.1. What&#8217;s new<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.3.1. What’s new<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <p>What could statically, strongly typed languages improve on compared to the above?</p>
 <p>Python and Javascript are fairly concise but, when compared to C, have some characteristics that can be perceived as disadvantages:</p>
 <ul class="simple">
 <li>The performance of Python and Javascript is generally not as good as C and much of this is due to dynamic typing, although there are optimisations that can be done to alleviate this (for example <em>JIT</em>, or just-in-time compilation, where parts of a program can be compiled during execution after the runtime has collected data on which type is typically associated with each variable)</li>
-<li>There&#8217;s arguably more room for error with dynamic typing; errors that could be caught before running the program may cause a run time error during execution</li>
+<li>There’s arguably more room for error with dynamic typing; errors that could be caught before running the program may cause a run time error during execution</li>
 </ul>
 <p>On the other hand, C has some characteristics that can be perceived as disadvantages compared to Python and Javascript:</p>
 <ul class="simple">
-<li>C is fairly verbose; based on the number of lines already there&#8217;s arguably more effort required in C to achieve the same behaviour</li>
+<li>C is fairly verbose; based on the number of lines already there’s arguably more effort required in C to achieve the same behaviour</li>
 <li>C is not memory safe, opening the possibility of nasty memory related bugs and security holes</li>
 <li>C is not as strongly typed as Python, such that some bugs in the code could go undetected which would raise a (run time) error in Python</li>
-<li>While we haven&#8217;t discussed C projects with multiple files in detail, in general the system in C with header files and source files, with the header files being included in source files using the #include preprocessor directive (which practically automatically copy-pastes the header file in the source file) introduces some drawbacks ideally can be improved upon</li>
+<li>While we haven’t discussed C projects with multiple files in detail, in general the system in C with header files and source files, with the header files being included in source files using the #include preprocessor directive (which practically automatically copy-pastes the header file in the source file) introduces some drawbacks ideally can be improved upon</li>
 </ul>
 <div class="section" id="generic-functions">
-<h3>3.3.3.1.1. Generic functions<a class="headerlink" href="#generic-functions" title="Permalink to this headline">¶</a></h3>
+<h3>3.2.3.1.1. Generic functions<a class="headerlink" href="#generic-functions" title="Permalink to this headline">¶</a></h3>
 <p>Another point to note is that because types have to be explicitly defined in C, it is generally not possible to implement some <em>generic</em> functions in C without eliminating type safety. A classic example is a function to return the maximum value of two values:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">max_int</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">max_int</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
@@ -328,7 +317,7 @@
 </pre></div>
 </div>
 <p>Typically, in C, this particular case would be handled with a <em>macro</em>:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#define max(a, b) ((a) &gt; (b) ? (a) : (b))</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define max(a, b) ((a) &gt; (b) ? (a) : (b))</span>
 
 <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
@@ -336,7 +325,7 @@
 </pre></div>
 </div>
 <p>(The <em>ternary operator</em> ?: returns the term before the : if the term before the ? is true and the term after the : otherwise.)</p>
-<p>However, macros provide no type safety, such that it&#8217;s e.g. possible to mix the types of &#8220;a&#8221; and &#8220;b&#8221; in the above without warning. (Macros also have other issues; if, for example, an expression with side effects such as &#8220;x++&#8221; was passed to the above &#8220;max&#8221; macro, then x could be incremented twice.)</p>
+<p>However, macros provide no type safety, such that it’s e.g. possible to mix the types of “a” and “b” in the above without warning. (Macros also have other issues; if, for example, an expression with side effects such as “x++” was passed to the above “max” macro, then x could be incremented twice.)</p>
 <p>Other languages may attempt to improve on the above points. It should be noted that there is no silver bullet, i.e. even with static, strong typing it can be argued that no language is categorically better than all other languages.</p>
 </div>
 </div>
@@ -355,19 +344,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="strong2.html" title="3.3.4. Established languages"
+          <a href="strong2.html" title="3.2.4. Established languages"
              >next</a> |</li>
         <li class="right" >
-          <a href="vm.html" title="3.3.2. Virtual machines"
+          <a href="vm.html" title="3.2.2. Virtual machines"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="strong_index.html" >3.3. Strongly, statically typed languages</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="strong_index.html" >3.2. Strongly, statically typed languages</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

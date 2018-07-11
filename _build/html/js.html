@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.3.1. Guessing game in JS &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -70,12 +57,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -88,17 +77,15 @@
             
   <div class="section" id="guessing-game-in-js">
 <h1>2.3.1. Guessing game in JS<a class="headerlink" href="#guessing-game-in-js" title="Permalink to this headline">¶</a></h1>
-<p>Let&#8217;s write a guessing game. This game is fairly simple: the computer thinks of a number between 1 and 25, and you need to guess what it is. The computer will give hints such as &#8220;my number is smaller&#8221; or &#8220;my number is bigger&#8221; on wrong guesses.</p>
-<p>Moreover, let&#8217;s write this such that it&#8217;s run in the browser. It should look something like this:</p>
+<p>Let’s write a guessing game. This game is fairly simple: the computer thinks of a number between 1 and 25, and you need to guess what it is. The computer will give hints such as “my number is smaller” or “my number is bigger” on wrong guesses.</p>
+<p>Moreover, let’s write this such that it’s run in the browser. It should look something like this:</p>
 <img alt="_images/guess.png" src="_images/guess.png" />
-<p>Now, in order to do this we&#8217;re going to need Javascript and HTML.</p>
-<p>In order to get started, let&#8217;s search online for &#8220;html js&#8221;. We&#8217;ll find lots of tutorials and reference material for web development, including Javascript tutorials.</p>
-<p><em>Exercise</em>: Find a Javascript tutorial online. You won&#8217;t need it right now but in general you&#8217;ll need to be able to look up more information when necessary.</p>
-<p>The development environment will work like this: create a file with an extension .html and open it in your text editor. After you&#8217;ve made changes to your file, you can open it in your browser. For example, on Linux, if your file is called hello.html, you can open it in Firefox by running &#8220;firefox hello.html&#8221; in your terminal. When you make changes to the file, refresh the tab in your browser. If you&#8217;re running some other system you&#8217;ll need to find out how to open a local HTML file.</p>
-<p>What happens here is that the browser will read in the contents of your file and interpret it. The browser has an engine for reading and rendering HTML, such that if you for example mark a part of text as red in your HTML code, the browser will know to render that text red. Similarly the browser has a Javascript interpreter built in, and will execute the Javascript code embedded in the HTML file.</p>
-<p>In order to break down this task, we need to identify the main components of our software. We can accomplish this breakdown by looking at the tutorials online.</p>
-<p>After browsing some tutorials we&#8217;re able to construct one of the most basic HTML files:</p>
-<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>Now, in order to do this we’re going to need Javascript and HTML.</p>
+<p>Disclaimer: This book introduces the basics of Javascript and HTML but does specifically <em>not</em> include the modern best practices around web development. There are several reasons for this, one being that the best practices on web development are still under relatively rapid change, but the material in this book should be enough for the reader to gain a high level understanding of Javascript and HTML and put together some interactive web pages.</p>
+<p>The development environment will work like this: create a file with an extension .html and open it in your text editor. After you’ve made changes to your file, you can open it in your browser. For example, on Linux, if your file is called hello.html, you can open it in Firefox by running “firefox hello.html” in your terminal. When you make changes to the file, refresh the tab in your browser. If you’re running some other system you’ll need to find out how to open a local HTML file.</p>
+<p>What happens here is that the browser will read in the contents of your file and interpret it. The browser has an engine for reading and rendering HTML, such that if you for example describe, in your HTML, that a part of text should be displayed red, the browser will know to render that text red. Similarly the browser has a Javascript interpreter built in, and will execute the Javascript code embedded in the HTML file.</p>
+<p>Let’s start breaking down this task by creating the most basic HTML and Javascript. Here’s an HTML file:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -119,10 +106,10 @@
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span> 
 </pre></div>
 </td></tr></table></div>
-<p>You can copy-paste this code into a file and open it in your browser. You should see a plain web page with a text &#8220;some text&#8221;.</p>
-<p>If we go through this in detail, we see a bunch of tags such as &#8220;&lt;html&gt;&#8221; which mostly have a start and an end (e.g. &#8220;&lt;/html&gt;&#8221;, and the text &#8220;some text&#8221; in the middle. Most of the tags aren&#8217;t very important now though I should note the tag &#8220;&lt;p&gt;&#8221; denotes a paragraph.</p>
-<p>After browsing some tutorials we can write one of the most basic &#8220;programs&#8221; that utilise JS and HTML:</p>
-<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>You can type this code into a file and open it in your browser. You should see a plain web page with a text “some text”.</p>
+<p>If we go through this in detail, we see a bunch of tags such as “&lt;html&gt;” which mostly have a start and an end (e.g. “&lt;/html&gt;”, and the text “some text” in the middle. Most of the tags aren’t very important now though I should note the tag “&lt;p&gt;” denotes a paragraph.</p>
+<p>Here’s one of the most basic “programs” that utilises JS and HTML:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -157,11 +144,11 @@
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span> 
 </pre></div>
 </td></tr></table></div>
-<p>If you run this in your browser, you should see a text &#8220;old text&#8221; and a button. If you press the button, the text is replaced with &#8220;new text&#8221;.</p>
+<p>If you run this in your browser, you should see a text “old text” and a button. If you press the button, the text is replaced with “new text”.</p>
 <p>What happens here is that the paragraph has an ID, and the button has a Javascript function associated with it. When pressing the button, the browser executes the Javascript code which changes the text.</p>
 <p>In general, HTML describes the content, i.e. what is shown to the user, while Javascript describes the logic, i.e. what happens.</p>
-<p>Let&#8217;s put together one more example to capture the other bits and pieces we need for our game:</p>
-<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>Let’s put together one more example to capture the other bits and pieces we need for our game:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -220,18 +207,18 @@
 <ul class="simple">
 <li>A random floating point number between 0 and 1 can be obtained by calling Math.random()</li>
 <li>Numbers can be rounded down by using Math.floor()</li>
-<li>HTML tag &lt;input&gt; with type=&#8221;text&#8221; introduces a text box, the value of which can be read using Javascript.</li>
+<li>HTML tag &lt;input&gt; with type=”text” introduces a text box, the value of which can be read using Javascript.</li>
 </ul>
-<p>To be clear, with Javascript we can change the HTML, i.e. what the user sees, based on logic (code). Our Javascript code can <em>read</em> user input by reading the values stored in the <em>Document Object Model</em> (DOM), e.g. by reading the variable of a text field using document.getElementById(&#8220;guess&#8221;).value. Similarly our Javascript code can <em>write</em> to the DOM, i.e. modify what the user sees e.g. by changing the value of a variable such as document.getElementById(&#8220;paragraph&#8221;).innerHTML. By reading user input from DOM and making changes to DOM, we can build interactive web pages.</p>
-<p>Now we have everything we need to put our game together. What we&#8217;ll need is:</p>
+<p>To be clear, with Javascript we can change the HTML, i.e. what the user sees, based on logic (code). Our Javascript code can <em>read</em> user input by reading the values stored in the <em>Document Object Model</em> (DOM), e.g. by reading the variable of a text field using document.getElementById(“guess”).value. Similarly our Javascript code can <em>write</em> to the DOM, i.e. modify what the user sees e.g. by changing the value of a variable such as document.getElementById(“paragraph”).innerHTML. By reading user input from DOM and making changes to DOM, we can build interactive web pages.</p>
+<p>Now we have everything we need to put our game together. What we’ll need is:</p>
 <ol class="arabic simple">
 <li>Some JS logic to generate the number and check the guess against the number the computer is thinking of</li>
 <li>A field where to input what the guess is</li>
-<li>A button indicating we&#8217;d like to make a guess</li>
+<li>A button indicating we’d like to make a guess</li>
 <li>Text indicating whether our guess is correct or not</li>
 </ol>
-<p>You may need to debug Javascript, for example if you make a typo, causing your program to not run correctly. How to debug Javascript depends on your browser. For example with Chrome, you can hit F12 to bring up the developer information panel. This shows any Javascript errors, for example. You&#8217;ll also need to store the value to be guessed as a global variable, that is, outside any function. This ensures the value will stay persistent.</p>
-<p><em>Exercise</em>: Implement the guessing game. Good luck! Once you&#8217;re done, or if you get stuck, you can take a look at the appendix to see an example implementation.</p>
+<p>You may need to debug Javascript, for example if you make a typo, causing your program to not run correctly. How to debug Javascript depends on your browser. For example with Chrome, you can hit F12 to bring up the developer information panel. This shows any Javascript errors, for example. You’ll also need to store the value to be guessed as a global variable, that is, outside any function. This ensures the value will stay persistent.</p>
+<p><em>Exercise</em>: Implement the guessing game. Good luck! Once you’re done, or if you get stuck, you can take a look at the appendix to see an example implementation.</p>
 <p><em>Exercise</em>: Have the program count the number of guesses, and display the total number at the end.</p>
 </div>
 
@@ -260,7 +247,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

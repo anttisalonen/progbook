@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>4.1.4. Drawing the schedule screen using SDL2 &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.4.4. Drawing the schedule screen using SDL2 &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.1.5. Unix way - sched" href="sched.html" />
-    <link rel="prev" title="4.1.3. Drawing to a screen using SDL2" href="sdl.html" />
+    <link rel="next" title="3.4.5. Unix way - sched" href="sched.html" />
+    <link rel="prev" title="3.4.3. Drawing to a screen using SDL2" href="sdl.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,33 +30,33 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="sched.html" title="4.1.5. Unix way - sched"
+          <a href="sched.html" title="3.4.5. Unix way - sched"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sdl.html" title="4.1.3. Drawing to a screen using SDL2"
+          <a href="sdl.html" title="3.4.3. Drawing to a screen using SDL2"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.1.4. Drawing the schedule screen using SDL2</a><ul>
-<li><a class="reference internal" href="#refactoring">4.1.4.1. Refactoring</a></li>
-<li><a class="reference internal" href="#reading-in-the-labels">4.1.4.2. Reading in the labels</a></li>
+<li><a class="reference internal" href="#">3.4.4. Drawing the schedule screen using SDL2</a><ul>
+<li><a class="reference internal" href="#refactoring">3.4.4.1. Refactoring</a></li>
+<li><a class="reference internal" href="#reading-in-the-labels">3.4.4.2. Reading in the labels</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="sdl.html"
-                        title="previous chapter">4.1.3. Drawing to a screen using SDL2</a></p>
+                        title="previous chapter">3.4.3. Drawing to a screen using SDL2</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sched.html"
-                        title="next chapter">4.1.5. Unix way - sched</a></p>
+                        title="next chapter">3.4.5. Unix way - sched</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -79,12 +66,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -96,22 +85,22 @@
           <div class="body" role="main">
             
   <div class="section" id="drawing-the-schedule-screen-using-sdl2">
-<h1>4.1.4. Drawing the schedule screen using SDL2<a class="headerlink" href="#drawing-the-schedule-screen-using-sdl2" title="Permalink to this headline">¶</a></h1>
-<p>We&#8217;re now able to draw some text on a screen using SDL. Let&#8217;s expand this so we can draw the bus schedule screen.</p>
-<p>As per the requirements and our engineering spec, we need to draw 23 different text labels. We&#8217;ll want one piece of C++ code to be shared for both implementations but let&#8217;s start with the simpler one - the Unix way. We have this written in our engineering spec:</p>
+<h1>3.4.4. Drawing the schedule screen using SDL2<a class="headerlink" href="#drawing-the-schedule-screen-using-sdl2" title="Permalink to this headline">¶</a></h1>
+<p>We’re now able to draw some text on a screen using SDL. Let’s expand this so we can draw the bus schedule screen.</p>
+<p>As per the requirements and our engineering spec, we need to draw 23 different text labels. We’ll want one piece of C++ code to be shared for both implementations but let’s start with the simpler one - the Unix way. We have this written in our engineering spec:</p>
 <ul class="simple">
-<li>&#8220;display&#8221; shall take one parameter: a filename for the output of &#8220;merge&#8221;. It shall output, to a window in a test environment, the bus information as specified in the requirements. It shall read the contents of the input file every ten seconds to update the output view.</li>
-<li>&#8220;merge&#8221; shall [...] output, to stdout, 23 lines, each one containing the text for one label, from top to bottom, from left to right, i.e. the bus stop name, current time, then route number, destination and arrival time for the next seven buses.</li>
+<li>“display” shall take one parameter: a filename for the output of “merge”. It shall output, to a window in a test environment, the bus information as specified in the requirements. It shall read the contents of the input file every ten seconds to update the output view.</li>
+<li>“merge” shall […] output, to stdout, 23 lines, each one containing the text for one label, from top to bottom, from left to right, i.e. the bus stop name, current time, then route number, destination and arrival time for the next seven buses.</li>
 </ul>
-<p>So let&#8217;s adapt our SDL code to read in a text file which has 23 lines, and then display these lines on the final image.</p>
-<p>If your existing SDL code is anything close to mine, it&#8217;s difficult to extend. The exercise solution has all the code in one function, main(), which has about 50 lines of code including several variables declared along the way which we don&#8217;t really care about but which are necessary for the rendering. Surely we can do better.</p>
+<p>So let’s adapt our SDL code to read in a text file which has 23 lines, and then display these lines on the final image.</p>
+<p>If your existing SDL code is anything close to mine, it’s difficult to extend. The exercise solution has all the code in one function, main(), which has about 50 lines of code including several variables declared along the way which we don’t really care about but which are necessary for the rendering. Surely we can do better.</p>
 <div class="section" id="refactoring">
-<h2>4.1.4.1. Refactoring<a class="headerlink" href="#refactoring" title="Permalink to this headline">¶</a></h2>
-<p>Taking existing code and modifying it such that the functionality stays the same but the code is cleaner or easier to maintain is called <em>refactoring</em>. Let&#8217;s refactor our code to start with. First, let&#8217;s consider how we&#8217;d want our code to look for the purpose of the specification of showing 23 different labels based on file contents. Our input is the file name, our output is shown on the screen, and we need a bunch of SDL related variables in between to take care of the displaying.</p>
-<p>Generally, a function is a nice way to abstract <em>stateless</em> logic - where you have some certain input, causing some certain output, not specifically depending on anything external. A class is a way to capture <em>state</em> - such that the member functions of an object also produce some output for a certain input but the output also depends on the state, i.e. the member variables, of the object. Because we need a few variables which are relatively fixed after the initialisation, such as the font handle, let&#8217;s implement a class that takes care of our task in a clean way.</p>
-<p>A good way to start designing such a class is to write <em>the interface</em> - the public functions that the class exposes. We want the object creation to only take the filename as input, and we want to update the screen every ten seconds. It seems like one way to design this, then, is to have a constructor and a render member function. We&#8217;ll also need a <em>destructor</em> - a function that&#8217;s automatically called when the memory the object resides in is freed.</p>
-<p>We can also already think about the private member variables for this class. Since we already have a starting point for our work in the previous exercise&#8217;s main function, we can think of all the variables used in the main function to be private member variables of our class. We&#8217;ll then end up with the following class declaration:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<h2>3.4.4.1. Refactoring<a class="headerlink" href="#refactoring" title="Permalink to this headline">¶</a></h2>
+<p>Taking existing code and modifying it such that the functionality stays the same but the code is cleaner or easier to maintain is called <em>refactoring</em>. Let’s refactor our code to start with. First, let’s consider how we’d want our code to look for the purpose of the specification of showing 23 different labels based on file contents. Our input is the file name, our output is shown on the screen, and we need a bunch of SDL related variables in between to take care of the displaying.</p>
+<p>Generally, a function is a nice way to abstract <em>stateless</em> logic - where you have some certain input, causing some certain output, not specifically depending on anything external. A class is a way to capture <em>state</em> - such that the member functions of an object also produce some output for a certain input but the output also depends on the state, i.e. the member variables, of the object. Because we need a few variables which are relatively fixed after the initialisation, such as the font handle, let’s implement a class that takes care of our task in a clean way.</p>
+<p>A good way to start designing such a class is to write <em>the interface</em> - the public functions that the class exposes. We want the object creation to only take the filename as input, and we want to update the screen every ten seconds. It seems like one way to design this, then, is to have a constructor and a render member function. We’ll also need a <em>destructor</em> - a function that’s automatically called when the memory the object resides in is freed.</p>
+<p>We can also already think about the private member variables for this class. Since we already have a starting point for our work in the previous exercise’s main function, we can think of all the variables used in the main function to be private member variables of our class. We’ll then end up with the following class declaration:</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -138,9 +127,9 @@
 <span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
-<p>In other words, let&#8217;s refactor our code such that it does what it did before, but such that the old code now resides in a class, whereby the initialisation and the cleanup is captured in the constructor and destructor functions and the actual rendering of the text happens in another member function. This way, when making further changes to actually use the data from the file to decide what to render, future code changes will be easier to make.</p>
+<p>In other words, let’s refactor our code such that it does what it did before, but such that the old code now resides in a class, whereby the initialisation and the cleanup is captured in the constructor and destructor functions and the actual rendering of the text happens in another member function. This way, when making further changes to actually use the data from the file to decide what to render, future code changes will be easier to make.</p>
 <p>Once we have the functions defined then we can have the main function instantiate an object of this class, call the render() function, wait for three seconds, and exit. The main function could have e.g. the following contents:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -165,20 +154,20 @@
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here we also parse the command line options. Although we don&#8217;t yet have any code to read in the file, as per the class interface we&#8217;ll need to pass the function some string as the filename, so we can just as well go ahead and pass on the actual command line parameter. If we were to compile such a main function to a binary and run the binary with command line options such as e.g.:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./main file.txt
+<p>Here we also parse the command line options. Although we don’t yet have any code to read in the file, as per the class interface we’ll need to pass the function some string as the filename, so we can just as well go ahead and pass on the actual command line parameter. If we were to compile such a main function to a binary and run the binary with command line options such as e.g.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./main file.txt
 </pre></div>
 </div>
-<p>...then the variable &#8220;argc&#8221; (argument count) would be 2, and the variable &#8220;argv&#8221; (argument vector) would be a pointer to an array of two pointers, first one (argv[0]) pointing to a character buffer containing &#8221;./main&#8221; (null delimited) and the second one (argv[1]) pointing to &#8220;file.txt&#8221;. This way we can access the command line options in our C or C++ code.</p>
-<p>Here, then, we check that there was one command line parameter passed to our function, and pass that on to our constructor. We then call the &#8220;render&#8221; member function, wait for three seconds, and exit the program, which also calls the destructor of our SDL_Schedule class as a side effect.</p>
-<p><em>Exercise</em>: Refactor your existing code to live in a class instead of a function. You need to define the functions mentioned above, i.e. the constructor, the destructor and the render function, and ensure they include the code of your old main function which displayed &#8220;Hello world&#8221; on the screen. You don&#8217;t need to read in the file contents at this stage.</p>
-<p>This pattern of having a class constructor do all the necessary initialisation to use the object, and the destructor free all acquired resources is called <em>RAII</em> (resource acquisition is initialisation), and is a C++ specific pattern for ensuring objects have a valid state. In order to have good error handling in the constructor, it&#8217;s typically necessary to <em>throw an exception</em> in case of an error. This can be done e.g. by stating &#8216;throw std::runtime_error(&#8220;error&#8221;)&#8217; in your code. You may need to #include &lt;stdexcept&gt; to get std::runtime_error in scope.</p>
-<p>Now that we&#8217;ve done some refactoring, we can go ahead and do the rest of the work.</p>
+<p>…then the variable “argc” (argument count) would be 2, and the variable “argv” (argument vector) would be a pointer to an array of two pointers, first one (argv[0]) pointing to a character buffer containing “./main” (null delimited) and the second one (argv[1]) pointing to “file.txt”. This way we can access the command line options in our C or C++ code.</p>
+<p>Here, then, we check that there was one command line parameter passed to our function, and pass that on to our constructor. We then call the “render” member function, wait for three seconds, and exit the program, which also calls the destructor of our SDL_Schedule class as a side effect.</p>
+<p><em>Exercise</em>: Refactor your existing code to live in a class instead of a function. You need to define the functions mentioned above, i.e. the constructor, the destructor and the render function, and ensure they include the code of your old main function which displayed “Hello world” on the screen. You don’t need to read in the file contents at this stage.</p>
+<p>This pattern of having a class constructor do all the necessary initialisation to use the object, and the destructor free all acquired resources is called <em>RAII</em> (resource acquisition is initialisation), and is a C++ specific pattern for ensuring objects have a valid state. In order to have good error handling in the constructor, it’s typically necessary to <em>throw an exception</em> in case of an error. This can be done e.g. by stating ‘throw std::runtime_error(“error”)’ in your code. You may need to #include &lt;stdexcept&gt; to get std::runtime_error in scope.</p>
+<p>Now that we’ve done some refactoring, we can go ahead and do the rest of the work.</p>
 </div>
 <div class="section" id="reading-in-the-labels">
-<h2>4.1.4.2. Reading in the labels<a class="headerlink" href="#reading-in-the-labels" title="Permalink to this headline">¶</a></h2>
+<h2>3.4.4.2. Reading in the labels<a class="headerlink" href="#reading-in-the-labels" title="Permalink to this headline">¶</a></h2>
 <p>A quick online search will reveal a way to parse lines from a file to a std::vector&lt;std::string&gt; in C++:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="cp"></span>
 
 <span class="p">...</span>
@@ -194,20 +183,20 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Here, &#8220;file&#8221; is our input file name. The C++ way includes defining several intermediate variables but the final output we actually care about is stored in the &#8220;res&#8221; variable.</p>
-<p><em>Exercise</em>: Integrate the above to your program. Store the parameter to your constructor in a member variable. In the render function, read the file contents using the snippet above. For now you don&#8217;t need to do much with the result though you may want to write it out to stdout. In order to test it, create an input file. You may also download a sample input file here:</p>
+<p>Here, “file” is our input file name. The C++ way includes defining several intermediate variables but the final output we actually care about is stored in the “res” variable.</p>
+<p><em>Exercise</em>: Integrate the above to your program. Store the parameter to your constructor in a member variable. In the render function, read the file contents using the snippet above. For now you don’t need to do much with the result though you may want to write it out to stdout. In order to test it, create an input file. You may also download a sample input file here:</p>
 <ul class="simple">
-<li><a class="reference download internal" href="_downloads/label_info.txt" download=""><code class="xref download docutils literal"><span class="pre">label_info.txt</span></code></a></li>
+<li><a class="reference download internal" href="_downloads/label_info.txt" download=""><code class="xref download docutils literal notranslate"><span class="pre">label_info.txt</span></code></a></li>
 </ul>
-<p>Now, instead of drawing a single &#8220;Hello world&#8221; label, let&#8217;s draw 23 of them.</p>
-<p>You&#8217;ll need to write a loop in your render() function that loops through your std::vector&lt;std::string&gt;.</p>
-<p>Instead of passing a static string to TTF_RenderUTF8_Blended, pass in a string that you read from the file. You can convert an std::string to a character buffer by calling the &#8220;c_str()&#8221; member function, e.g:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">);</span>
+<p>Now, instead of drawing a single “Hello world” label, let’s draw 23 of them.</p>
+<p>You’ll need to write a loop in your render() function that loops through your std::vector&lt;std::string&gt;.</p>
+<p>Instead of passing a static string to TTF_RenderUTF8_Blended, pass in a string that you read from the file. You can convert an std::string to a character buffer by calling the “c_str()” member function, e.g:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">);</span>
 <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">my_pointer</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span> <span class="c1">// my_pointer now points to &quot;abc&quot;</span>
 </pre></div>
 </div>
 <p>Define another colour, in addition to white; this other colour should be yellow and used for the first row of labels. In your for loop, make the colour depend on the loop variable.</p>
-<p>Before, for our &#8220;Hello world&#8221;, we used an SDL_Rect variable to determine the location of the label. We need to do the same thing here. This is the formula to get the correct layout (whereby (0, 0) is the top left corner of the screen):</p>
+<p>Before, for our “Hello world”, we used an SDL_Rect variable to determine the location of the label. We need to do the same thing here. This is the formula to get the correct layout (whereby (0, 0) is the top left corner of the screen):</p>
 <ul class="simple">
 <li>The first column should be 10 pixels from the left border of the screen</li>
 <li>The second column should be 100 pixels from the left border</li>
@@ -217,7 +206,7 @@
 <li>The following rows should be 55 pixels further down; e.g. the third row should be at 80 + 55 = 135 pixels from the top of the screen</li>
 <li>The font size should be 36</li>
 </ul>
-<p>You&#8217;ll need to define the SDL_Rect variable correctly and pass it to the SDL_RenderCopy() function so that the layout of the labels is correct. You can do this using loops. The right alignment of the text can be done by taking the width of the screen (640 pixels) and subtracting the width of the label which is available after calling the SDL_QueryTexture() function.</p>
+<p>You’ll need to define the SDL_Rect variable correctly and pass it to the SDL_RenderCopy() function so that the layout of the labels is correct. You can do this using loops. The right alignment of the text can be done by taking the width of the screen (640 pixels) and subtracting the width of the label which is available after calling the SDL_QueryTexture() function.</p>
 <p><em>Exercise</em>: Add the necessary code in your program as described above to display the 23 labels on the screen. If you made it here, congratulations.</p>
 </div>
 </div>
@@ -235,19 +224,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="sched.html" title="4.1.5. Unix way - sched"
+          <a href="sched.html" title="3.4.5. Unix way - sched"
              >next</a> |</li>
         <li class="right" >
-          <a href="sdl.html" title="4.1.3. Drawing to a screen using SDL2"
+          <a href="sdl.html" title="3.4.3. Drawing to a screen using SDL2"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" >4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" >3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

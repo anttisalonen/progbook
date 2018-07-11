@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>3.4.4. Finding Sudoku peers &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.3.4. Finding Sudoku peers &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Stage 2" href="ch4_index.html" />
-    <link rel="prev" title="3.4.3. Sudoku Puzzle class" href="sud3.html" />
+    <link rel="next" title="3.4. Larger software" href="design_index.html" />
+    <link rel="prev" title="3.3.3. Sudoku Puzzle class" href="sud3.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,35 +30,35 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="ch4_index.html" title="4. Stage 2"
+          <a href="design_index.html" title="3.4. Larger software"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sud3.html" title="3.4.3. Sudoku Puzzle class"
+          <a href="sud3.html" title="3.3.3. Sudoku Puzzle class"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="sud_index.html" accesskey="U">3.4. Learning to program using Sudoku</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="sud_index.html" accesskey="U">3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.4.4. Finding Sudoku peers</a><ul>
-<li><a class="reference internal" href="#searching">3.4.4.1. Searching</a></li>
-<li><a class="reference internal" href="#working-with-this">3.4.4.2. Working with &#8220;this&#8221;</a></li>
-<li><a class="reference internal" href="#solving-more-sudokus">3.4.4.3. Solving more Sudokus</a></li>
-<li><a class="reference internal" href="#constraint-propagation-with-units">3.4.4.4. Constraint propagation with units</a></li>
+<li><a class="reference internal" href="#">3.3.4. Finding Sudoku peers</a><ul>
+<li><a class="reference internal" href="#searching">3.3.4.1. Searching</a></li>
+<li><a class="reference internal" href="#working-with-this">3.3.4.2. Working with “this”</a></li>
+<li><a class="reference internal" href="#solving-more-sudokus">3.3.4.3. Solving more Sudokus</a></li>
+<li><a class="reference internal" href="#constraint-propagation-with-units">3.3.4.4. Constraint propagation with units</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="sud3.html"
-                        title="previous chapter">3.4.3. Sudoku Puzzle class</a></p>
+                        title="previous chapter">3.3.3. Sudoku Puzzle class</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="ch4_index.html"
-                        title="next chapter">4. Stage 2</a></p>
+  <p class="topless"><a href="design_index.html"
+                        title="next chapter">3.4. Larger software</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -81,12 +68,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -98,15 +87,15 @@
           <div class="body" role="main">
             
   <div class="section" id="finding-sudoku-peers">
-<h1>3.4.4. Finding Sudoku peers<a class="headerlink" href="#finding-sudoku-peers" title="Permalink to this headline">¶</a></h1>
-<p>Previously we filled out the blanks except for finding peers. Now, let&#8217;s implement this. In the function, we should consider the three ways we could have a peer:</p>
+<h1>3.3.4. Finding Sudoku peers<a class="headerlink" href="#finding-sudoku-peers" title="Permalink to this headline">¶</a></h1>
+<p>Previously we filled out the blanks except for finding peers. Now, let’s implement this. In the function, we should consider the three ways we could have a peer:</p>
 <ul class="simple">
 <li>Cells in the same horizontal line</li>
 <li>Cells in the same vertical line</li>
 <li>Cells in the same 3x3 grid</li>
 </ul>
-<p>Above we used the values in the return container as an index to the &#8220;peers&#8221; member. This suggests we should return such indices. The input parameter was also an index in this array. This suggests we have the function declaration:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Puzzle</span> <span class="p">{</span>
+<p>Above we used the values in the return container as an index to the “peers” member. This suggests we should return such indices. The input parameter was also an index in this array. This suggests we have the function declaration:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Puzzle</span> <span class="p">{</span>
     <span class="k">public</span><span class="o">:</span>
         <span class="p">...</span>
 
@@ -116,9 +105,9 @@
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>That is, our function returns a vector of integers, takes an integer as a parameter, and doesn&#8217;t modify the data within the Puzzle object. Furthermore our function is <em>private</em> as it&#8217;s not necessary to call this function from outside the class.</p>
-<p>Now, here&#8217;s one way to find the indices to the cells that are in the same vertical line:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>That is, our function returns a vector of integers, takes an integer as a parameter, and doesn’t modify the data within the Puzzle object. Furthermore our function is <em>private</em> as it’s not necessary to call this function from outside the class.</p>
+<p>Now, here’s one way to find the indices to the cells that are in the same vertical line:</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -147,20 +136,20 @@
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Let&#8217;s go through this in detail.</p>
+<p>Let’s go through this in detail.</p>
 <ul class="simple">
 <li>Line 3: Our return variable.</li>
 <li>Line 5: We calculate <em>the column</em> for the given index by dividing by 9 and taking the remainder. This means that for e.g. indices 4, 13, 22 etc. all return the same column (4).</li>
 <li>Line 6: We define a loop that goes through nine elements.</li>
-<li>Line 7: We calculate the <em>peer index</em> by multiplying the variable &#8220;i&#8221; by 9 and adding the column. This means that e.g. with index 4 we get 4, 13, 22 etc.</li>
+<li>Line 7: We calculate the <em>peer index</em> by multiplying the variable “i” by 9 and adding the column. This means that e.g. with index 4 we get 4, 13, 22 etc.</li>
 <li>Line 9: We add the peer index in the return variable.</li>
 </ul>
-<p>Now, let&#8217;s add the missing logic.</p>
+<p>Now, let’s add the missing logic.</p>
 <p><em>Exercise</em>: Add the logic for the horizontal lines and the 3x3 grids in the above function. Try it out.</p>
 <div class="topic">
 <p class="topic-title first">Digression: static member functions</p>
-<p>You may have noticed that our function above not only does not modify the data in the Puzzle object (&#8220;cells&#8221; array), it doesn&#8217;t even read it. This means it could actually be a free standing function and doesn&#8217;t have to be a member function of the Puzzle class. On the other hand, it may be convenient to group functions that are relevant for certain classes together. There&#8217;s a mechanism for this: <em>static member functions</em>. You can declare one by including the keyword &#8220;static&#8221; at the beginning of the declaration. You&#8217;ll then need to name the class when calling it. Here&#8217;s an example:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<p>You may have noticed that our function above not only does not modify the data in the Puzzle object (“cells” array), it doesn’t even read it. This means it could actually be a free standing function and doesn’t have to be a member function of the Puzzle class. On the other hand, it may be convenient to group functions that are relevant for certain classes together. There’s a mechanism for this: <em>static member functions</em>. You can declare one by including the keyword “static” at the beginning of the declaration. You’ll then need to name the class when calling it. Here’s an example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
 <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
     <span class="k">public</span><span class="o">:</span>
@@ -178,39 +167,39 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>You mustn&#8217;t use the keyword &#8220;const&#8221; to annotate the function const as it&#8217;s a static function and hence won&#8217;t be able to access object data anyway.</p>
+<p>You mustn’t use the keyword “const” to annotate the function const as it’s a static function and hence won’t be able to access object data anyway.</p>
 </div>
-<p>Now, let&#8217;s put everything together:</p>
+<p>Now, let’s put everything together:</p>
 <ul class="simple">
 <li>Parse the Sudoku puzzle from the previous chapter into a Puzzle object</li>
 <li>Call propagate() whenever you set a value of a cell</li>
-<li>Check if it&#8217;s already solved using the solved() function</li>
+<li>Check if it’s already solved using the solved() function</li>
 <li>Print out the puzzle after reading it</li>
 </ul>
 <p>If everything works correctly, your program should be able to solve the example Sudoku puzzle just by using constraint propagation alone.</p>
 <p><em>Exercise</em>: Put everything together and see if you can solve the first puzzle. If not, debug.</p>
-<p>Now we have enough to solve one easy Sudoku puzzle, but our program won&#8217;t solve most puzzles, especially not the difficult ones. To test, here&#8217;s one more difficult puzzle:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">4.</span><span class="o">....</span><span class="mf">8.5</span><span class="o">.</span><span class="mf">3.</span><span class="o">.........</span><span class="mf">7.</span><span class="o">.....</span><span class="mf">2.</span><span class="o">....</span><span class="mf">6.</span><span class="o">....</span><span class="mf">8.4</span><span class="o">......</span><span class="mf">1.</span><span class="o">......</span><span class="mf">6.3</span><span class="o">.</span><span class="mf">7.5</span><span class="o">..</span><span class="mf">2.</span><span class="o">....</span><span class="mf">1.4</span><span class="o">......</span>
+<p>Now we have enough to solve one easy Sudoku puzzle, but our program won’t solve most puzzles, especially not the difficult ones. To test, here’s one more difficult puzzle:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">4.</span><span class="o">....</span><span class="mf">8.5</span><span class="o">.</span><span class="mf">3.</span><span class="o">.........</span><span class="mf">7.</span><span class="o">.....</span><span class="mf">2.</span><span class="o">....</span><span class="mf">6.</span><span class="o">....</span><span class="mf">8.4</span><span class="o">......</span><span class="mf">1.</span><span class="o">......</span><span class="mf">6.3</span><span class="o">.</span><span class="mf">7.5</span><span class="o">..</span><span class="mf">2.</span><span class="o">....</span><span class="mf">1.4</span><span class="o">......</span>
 </pre></div>
 </div>
 <div class="section" id="searching">
-<h2>3.4.4.1. Searching<a class="headerlink" href="#searching" title="Permalink to this headline">¶</a></h2>
-<p>The next puzzle to solve is searching. Recall that we wanted to propagate constraints where possible but at some point we won&#8217;t be able to progress any further and have to guess (search). How searching should work in principle is this:</p>
+<h2>3.3.4.1. Searching<a class="headerlink" href="#searching" title="Permalink to this headline">¶</a></h2>
+<p>The next puzzle to solve is searching. Recall that we wanted to propagate constraints where possible but at some point we won’t be able to progress any further and have to guess (search). How searching should work in principle is this:</p>
 <ul class="simple">
 <li>We pick one cell where we make a guess (namely the one with the least possible options to minimise the number of searches)</li>
-<li>We make a copy of the current puzzle and make a guess on this copy (by calling the &#8220;set&#8221; member function of the cell object)</li>
+<li>We make a copy of the current puzzle and make a guess on this copy (by calling the “set” member function of the cell object)</li>
 <li>We propagate this guess</li>
-<li>If propagation shows we&#8217;ve solved the puzzle, we&#8217;re done</li>
-<li>If propagation shows we haven&#8217;t solved the puzzle but can&#8217;t progress any further, we repeat this (search recursively again on this board)</li>
-<li>If propagation shows we&#8217;ve ended up with an invalid puzzle (wrong guess), we throw out this copy and guess a different number on the same cell. If we&#8217;ve tried all numbers then we&#8217;ve made a wrong guess at some point before and return from our (recursive) function call.</li>
+<li>If propagation shows we’ve solved the puzzle, we’re done</li>
+<li>If propagation shows we haven’t solved the puzzle but can’t progress any further, we repeat this (search recursively again on this board)</li>
+<li>If propagation shows we’ve ended up with an invalid puzzle (wrong guess), we throw out this copy and guess a different number on the same cell. If we’ve tried all numbers then we’ve made a wrong guess at some point before and return from our (recursive) function call.</li>
 </ul>
-<p>What we have here is <em>depth-first search</em>. It&#8217;s called depth first because we follow one &#8220;path&#8221; until we either find the solution, in which case we return this, or a dead end, in which case we try the next path. It&#8217;s similar to trying to find the exit from a maze by always following the wall on one side; you may have to traverse the maze quite a lot but you&#8217;ll find the exit eventually (if it exists). This is in contrast to <em>breadth-width search</em> which, instead of following one path down, visits each neighbouring node first before progressing further down the graph.</p>
+<p>What we have here is <em>depth-first search</em>. It’s called depth first because we follow one “path” until we either find the solution, in which case we return this, or a dead end, in which case we try the next path. It’s similar to trying to find the exit from a maze by always following the wall on one side; you may have to traverse the maze quite a lot but you’ll find the exit eventually (if it exists). This is in contrast to <em>breadth-width search</em> which, instead of following one path down, visits each neighbouring node first before progressing further down the graph.</p>
 <p>Generally speaking we can agree on the following structure:</p>
 <ul class="simple">
-<li>The Puzzle class has a member function &#8220;search&#8221;, which, when called, will return a Puzzle class which is expected to be the solved puzzle</li>
-<li>The &#8220;search&#8221; member function does the following:<ul>
+<li>The Puzzle class has a member function “search”, which, when called, will return a Puzzle class which is expected to be the solved puzzle</li>
+<li>The “search” member function does the following:<ul>
 <li>Check if this puzzle is solved; if so then return self</li>
-<li>Check if any of the cells in this puzzle are invalid, i.e. don&#8217;t have any valid options; if so then return self</li>
+<li>Check if any of the cells in this puzzle are invalid, i.e. don’t have any valid options; if so then return self</li>
 <li>Find the cell with the smallest number of valid options (but still more than 1)</li>
 <li>For all the options in the selected cell, make a copy of the puzzle, set a value in the copy, search in the copy; if solution found then return it, else return self</li>
 </ul>
@@ -219,9 +208,9 @@
 <p>Now, in terms of syntax, there are a couple of useful things to know.</p>
 </div>
 <div class="section" id="working-with-this">
-<h2>3.4.4.2. Working with &#8220;this&#8221;<a class="headerlink" href="#working-with-this" title="Permalink to this headline">¶</a></h2>
-<p>In C++, &#8220;this&#8221; is a keyword that is a pointer to the current object. In our case, it allows us to make a copy of our object. Here&#8217;s an example use:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<h2>3.3.4.2. Working with “this”<a class="headerlink" href="#working-with-this" title="Permalink to this headline">¶</a></h2>
+<p>In C++, “this” is a keyword that is a pointer to the current object. In our case, it allows us to make a copy of our object. Here’s an example use:</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -264,13 +253,13 @@
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here, we define a function named &#8220;search&#8221; which is a member function of the class Puzzle. It has Puzzle as its return value. We check if this Puzzle is solved, and if so, we return the <em>dereferenced pointer</em> to &#8220;this&#8221;, meaning a copy of the Puzzle. If this Puzzle is not solved we call &#8220;search&#8221; recursively. (Because we set a cell value each time we search, we either find a solution or a dead end.)</p>
+<p>Here, we define a function named “search” which is a member function of the class Puzzle. It has Puzzle as its return value. We check if this Puzzle is solved, and if so, we return the <em>dereferenced pointer</em> to “this”, meaning a copy of the Puzzle. If this Puzzle is not solved we call “search” recursively. (Because we set a cell value each time we search, we either find a solution or a dead end.)</p>
 <p><em>Exercise</em>: Finish the above function. Call it from your program. See if you can solve the more difficult Sudoku puzzle.</p>
 </div>
 <div class="section" id="solving-more-sudokus">
-<h2>3.4.4.3. Solving more Sudokus<a class="headerlink" href="#solving-more-sudokus" title="Permalink to this headline">¶</a></h2>
+<h2>3.3.4.3. Solving more Sudokus<a class="headerlink" href="#solving-more-sudokus" title="Permalink to this headline">¶</a></h2>
 <p>Here are 30 easy Sudoku puzzles, courtesy project Euler:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span><span class="mf">3.2</span><span class="o">.</span><span class="mf">6.</span><span class="o">.</span><span class="mf">9.</span><span class="o">.</span><span class="mf">3.5</span><span class="o">..</span><span class="mf">1.</span><span class="o">.</span><span class="mf">18.64</span><span class="o">....</span><span class="mf">81.29</span><span class="o">..</span><span class="mf">7.</span><span class="o">......</span><span class="mf">8.</span><span class="o">.</span><span class="mf">67.82</span><span class="o">....</span><span class="mf">26.95</span><span class="o">..</span><span class="mf">8.</span><span class="o">.</span><span class="mf">2.3</span><span class="o">..</span><span class="mf">9.</span><span class="o">.</span><span class="mf">5.1</span><span class="o">.</span><span class="mf">3.</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span><span class="mf">3.2</span><span class="o">.</span><span class="mf">6.</span><span class="o">.</span><span class="mf">9.</span><span class="o">.</span><span class="mf">3.5</span><span class="o">..</span><span class="mf">1.</span><span class="o">.</span><span class="mf">18.64</span><span class="o">....</span><span class="mf">81.29</span><span class="o">..</span><span class="mf">7.</span><span class="o">......</span><span class="mf">8.</span><span class="o">.</span><span class="mf">67.82</span><span class="o">....</span><span class="mf">26.95</span><span class="o">..</span><span class="mf">8.</span><span class="o">.</span><span class="mf">2.3</span><span class="o">..</span><span class="mf">9.</span><span class="o">.</span><span class="mf">5.1</span><span class="o">.</span><span class="mf">3.</span><span class="o">.</span>
 <span class="mf">2.</span><span class="o">..</span><span class="mf">8.3</span><span class="o">...</span><span class="mf">6.</span><span class="o">.</span><span class="mf">7.</span><span class="o">.</span><span class="mf">84.3</span><span class="o">.</span><span class="mf">5.</span><span class="o">.</span><span class="mf">2.9</span><span class="o">...</span><span class="mf">1.54</span><span class="o">.</span><span class="mf">8.</span><span class="o">........</span><span class="mf">4.27</span><span class="o">.</span><span class="mf">6.</span><span class="o">..</span><span class="mf">3.1</span><span class="o">..</span><span class="mf">7.4</span><span class="o">.</span><span class="mf">72.</span><span class="o">.</span><span class="mf">4.</span><span class="o">.</span><span class="mf">6.</span><span class="o">..</span><span class="mf">4.1</span><span class="o">...</span><span class="mi">3</span>
 <span class="o">......</span><span class="mf">9.7</span><span class="o">...</span><span class="mf">42.18</span><span class="o">....</span><span class="mf">7.5</span><span class="o">.</span><span class="mf">261.</span><span class="o">.</span><span class="mf">9.4</span><span class="o">....</span><span class="mf">5.</span><span class="o">....</span><span class="mf">4.</span><span class="o">...</span><span class="mf">5.7</span><span class="o">..</span><span class="mf">992.1</span><span class="o">.</span><span class="mf">8.</span><span class="o">...</span><span class="mf">34.59</span><span class="o">...</span><span class="mf">5.7</span><span class="o">......</span>
 <span class="o">.</span><span class="mf">3.</span><span class="o">.</span><span class="mf">5.</span><span class="o">.</span><span class="mf">4.</span><span class="o">..</span><span class="mf">8.1</span><span class="o">.</span><span class="mf">5.</span><span class="o">.</span><span class="mf">46.</span><span class="o">....</span><span class="mf">12.7</span><span class="o">.</span><span class="mf">5.2</span><span class="o">.</span><span class="mf">8.</span><span class="o">...</span><span class="mf">6.3</span><span class="o">....</span><span class="mf">4.1</span><span class="o">.</span><span class="mf">9.3</span><span class="o">.</span><span class="mf">25.</span><span class="o">....</span><span class="mf">98.</span><span class="o">.</span><span class="mf">1.2</span><span class="o">.</span><span class="mf">6.</span><span class="o">..</span><span class="mf">8.</span><span class="o">.</span><span class="mf">6.</span><span class="o">.</span><span class="mf">2.</span>
@@ -302,9 +291,9 @@
 <span class="mf">2.</span><span class="o">.</span><span class="mf">17.6</span><span class="o">.</span><span class="mf">3.5</span><span class="o">....</span><span class="mf">1.</span><span class="o">......</span><span class="mf">6.79</span><span class="o">....</span><span class="mf">4.7</span><span class="o">.....</span><span class="mf">8.1</span><span class="o">.....</span><span class="mf">9.5</span><span class="o">....</span><span class="mf">31.4</span><span class="o">.......</span><span class="mf">5.</span><span class="o">...</span><span class="mf">6.9</span><span class="o">.</span><span class="mf">6.37</span><span class="o">..</span><span class="mi">2</span>
 </pre></div>
 </div>
-<p><em>Exercise</em>: Save the above to a file. Rewrite your program to read each of these, and solve them all one after another. See how long it takes. (On Unix, you can time your program execution by prefixing the command with &#8220;time&#8221;, e.g. &#8220;time ls&#8221;.)</p>
+<p><em>Exercise</em>: Save the above to a file. Rewrite your program to read each of these, and solve them all one after another. See how long it takes. (On Unix, you can time your program execution by prefixing the command with “time”, e.g. “time ls”.)</p>
 <p>Here are 30 difficult Sudoku puzzles, courtesy <a class="reference external" href="http://magictour.free.fr/top95">http://magictour.free.fr/top95</a>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">4.</span><span class="o">....</span><span class="mf">8.5</span><span class="o">.</span><span class="mf">3.</span><span class="o">.........</span><span class="mf">7.</span><span class="o">.....</span><span class="mf">2.</span><span class="o">....</span><span class="mf">6.</span><span class="o">....</span><span class="mf">8.4</span><span class="o">......</span><span class="mf">1.</span><span class="o">......</span><span class="mf">6.3</span><span class="o">.</span><span class="mf">7.5</span><span class="o">..</span><span class="mf">2.</span><span class="o">....</span><span class="mf">1.4</span><span class="o">......</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">4.</span><span class="o">....</span><span class="mf">8.5</span><span class="o">.</span><span class="mf">3.</span><span class="o">.........</span><span class="mf">7.</span><span class="o">.....</span><span class="mf">2.</span><span class="o">....</span><span class="mf">6.</span><span class="o">....</span><span class="mf">8.4</span><span class="o">......</span><span class="mf">1.</span><span class="o">......</span><span class="mf">6.3</span><span class="o">.</span><span class="mf">7.5</span><span class="o">..</span><span class="mf">2.</span><span class="o">....</span><span class="mf">1.4</span><span class="o">......</span>
 <span class="mf">52.</span><span class="o">..</span><span class="mf">6.</span><span class="o">........</span><span class="mf">7.13</span><span class="o">...........</span><span class="mf">4.</span><span class="o">.</span><span class="mf">8.</span><span class="o">.</span><span class="mf">6.</span><span class="o">.....</span><span class="mf">5.</span><span class="o">..........</span><span class="mf">418.</span><span class="o">........</span><span class="mf">3.</span><span class="o">.</span><span class="mf">2.</span><span class="o">..</span><span class="mf">87.</span><span class="o">....</span>
 <span class="mf">6.</span><span class="o">....</span><span class="mf">8.3</span><span class="o">.</span><span class="mf">4.7</span><span class="o">.................</span><span class="mf">5.4</span><span class="o">.</span><span class="mf">7.3</span><span class="o">..</span><span class="mf">2.</span><span class="o">....</span><span class="mf">1.6</span><span class="o">.......</span><span class="mf">2.</span><span class="o">....</span><span class="mf">5.</span><span class="o">....</span><span class="mf">8.6</span><span class="o">......</span><span class="mf">1.</span><span class="o">...</span>
 <span class="mf">48.3</span><span class="o">............</span><span class="mf">71.2</span><span class="o">.......</span><span class="mf">7.5</span><span class="o">....</span><span class="mf">6.</span><span class="o">...</span><span class="mf">2.</span><span class="o">.</span><span class="mf">8.</span><span class="o">............</span><span class="mf">1.76</span><span class="o">...</span><span class="mf">3.</span><span class="o">....</span><span class="mf">4.</span><span class="o">.....</span><span class="mf">5.</span><span class="o">...</span>
@@ -336,15 +325,15 @@
 <span class="o">......</span><span class="mf">8.17</span><span class="o">..</span><span class="mf">2.</span><span class="o">.......</span><span class="mf">5.6</span><span class="o">......</span><span class="mf">7.</span><span class="o">..</span><span class="mf">5.</span><span class="o">.</span><span class="mf">1.</span><span class="o">...</span><span class="mf">3.</span><span class="o">..</span><span class="mf">8.</span><span class="o">......</span><span class="mf">5.</span><span class="o">.....</span><span class="mf">2.</span><span class="o">.</span><span class="mf">4.</span><span class="o">.</span><span class="mf">8.</span><span class="o">...</span><span class="mf">6.</span><span class="o">..</span><span class="mf">3.</span><span class="o">...</span>
 </pre></div>
 </div>
-<p><em>Exercise</em>: Solve these puzzles as well. If you get tired of waiting, remember to compile your program with optimisations, that is, with &#8220;-O2&#8221; which can speed up C++ programs significantly.</p>
+<p><em>Exercise</em>: Solve these puzzles as well. If you get tired of waiting, remember to compile your program with optimisations, that is, with “-O2” which can speed up C++ programs significantly.</p>
 </div>
 <div class="section" id="constraint-propagation-with-units">
-<h2>3.4.4.4. Constraint propagation with units<a class="headerlink" href="#constraint-propagation-with-units" title="Permalink to this headline">¶</a></h2>
-<p>We&#8217;ve missed one part of our plan: in the introduction we said that &#8220;another common strategy is to see if a number has been ruled out for all cells in a unit except one. In this case it must be the correct number for that cell.&#8221;</p>
+<h2>3.3.4.4. Constraint propagation with units<a class="headerlink" href="#constraint-propagation-with-units" title="Permalink to this headline">¶</a></h2>
+<p>We’ve missed one part of our plan: in the introduction we said that “another common strategy is to see if a number has been ruled out for all cells in a unit except one. In this case it must be the correct number for that cell.”</p>
 <p>This means that if e.g. we have a row where a cell could have values 2, 3 and 7, but the number 7 was eliminated in all peers, then we can assign the number 7 for this cell.</p>
 <p><em>Exercise</em>: Implement this strategy as part of the propagation function. Note that you may find it necessary to use recursion. See if this strategy speeds up your program execution. You may want to reuse parts of your function to identify peers of a cell, and rewrite it to suit you better.</p>
 <p>Now we have a program that can solve all Sudoku puzzles fairly quickly.</p>
-<p><em>Exercise</em>: Look up Peter Norvig&#8217;s essay on solving Sudoku puzzles online, which served as inspiration for this part of the book.</p>
+<p><em>Exercise</em>: Look up Peter Norvig’s essay on solving Sudoku puzzles online, which served as inspiration for this part of the book.</p>
 </div>
 </div>
 
@@ -361,19 +350,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="ch4_index.html" title="4. Stage 2"
+          <a href="design_index.html" title="3.4. Larger software"
              >next</a> |</li>
         <li class="right" >
-          <a href="sud3.html" title="3.4.3. Sudoku Puzzle class"
+          <a href="sud3.html" title="3.3.3. Sudoku Puzzle class"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="sud_index.html" >3.4. Learning to program using Sudoku</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="sud_index.html" >3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

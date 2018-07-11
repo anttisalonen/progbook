@@ -37,7 +37,6 @@ reading open source code
 algorithms - sort, binary search, dfs, bfs, np completeness, o notation
 
 May not need
-cron
 bootstrap
 opengl shaders
 stack overflow profile
@@ -48,6 +47,7 @@ ffi
 timestamp sort
 online shop - sql, json
 http server revisited - sw design in c
+esr
 
 Missing
 profiling
@@ -60,13 +60,16 @@ Will have
 processes - unit testing, code reviews, q&a, ci
 jupyter + pandas + plotly
 parallel programming - threads, mutexes
-esr
 processes + virtual memory?
 np complete (knapsack)
 utf-8
 structs?
 btree
 ring buffer
+conclusion with text on desktop+mobile apps
+cron
+dynamic programming
+env variables
 
 Exercises
 graphics programming
@@ -80,16 +83,9 @@ web server - sockets, pointers, osi
 sudoku - dfs, recursion, classes, propagate + search
 bus schedule - software design, strong+static languages, more algorithms, make, kiss (wiki/unix_philosophy)
 dot parsing  - regexes, fsm, proper parser, backus naur, graphs, bfs, topological sort
+print return receipt - scan code, pdf, sql
 
 Projects left
-print return receipt - scan code, pdf, sql
 crawler - regexes + concurrent programming + bfs + tagsoup
 tech behind the book
 
-- create pdf
-- create epub
-- proof read
-- spell check
-- check image resolutions on pdf
-- initial formatting re: isbn, acknowledgements etc.
-- print

@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>1.1.5. The basics of programming &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -81,12 +68,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -103,33 +92,33 @@
 <div><p>And programming computers was so fascinating. You create your own little universe, and then it does what you tell it to do.</p>
 <p class="attribution">&mdash;Vint Cerf</p>
 </div></blockquote>
-<p>It&#8217;s debatable what the basics of programming are. This chapter presents the author&#8217;s view and will cover:</p>
+<p>It’s debatable what the basics of programming are. This chapter presents the author’s view and will cover:</p>
 <ul class="simple">
 <li>Variables</li>
 <li>Loops</li>
 <li>Branches</li>
 <li>Functions</li>
 </ul>
-<p>We already have a Python programming environment so we&#8217;ll continue using that. This chapter will include some code examples. The reader is expected to type these into a file, and then run the Python interpreter with that file as input. For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello world&#39;</span><span class="p">)</span>
+<p>We already have a Python programming environment so we’ll continue using that. This chapter will include some code examples. The reader is expected to type these into a file, and then run the Python interpreter with that file as input. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello world&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This is the program we wrote a couple of chapters ago. Make sure you still know how to create and write such a program.</p>
-<p><em>Exercise</em>: Run your &#8216;Hello world&#8217; program.</p>
-<p><em>Exercise</em>: Modify the text &#8220;Hello world&#8221; (e.g. change it to &#8216;Hallo Welt&#8217;) in your program and run it again.</p>
-<p>It&#8217;s best not to copy-paste the code from this book but instead type it yourself as this reinforces the learning effect.</p>
+<p><em>Exercise</em>: Run your ‘Hello world’ program.</p>
+<p><em>Exercise</em>: Modify the text “Hello world” (e.g. change it to ‘Hallo Welt’) in your program and run it again.</p>
+<p>It’s best not to copy-paste the code from this book but instead type it yourself as this reinforces the learning effect.</p>
 <div class="section" id="variables">
 <h2>1.1.5.1. Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
-<p>Variables hold some value. The following example defines and uses a variable named &#8216;x&#8217;:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<p>Variables hold some value. The following example defines and uses a variable named ‘x’:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The above will write &#8216;5&#8217; followed by &#8216;7&#8217; in the terminal. &#8216;x&#8217; is first defined with the value 5. It is then written out before its value is changed to 7.</p>
+<p>The above will write ‘5’ followed by ‘7’ in the terminal. ‘x’ is first defined with the value 5. It is then written out before its value is changed to 7.</p>
 <p>You can have several variables, and the assignment can refer to other variables:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -144,32 +133,32 @@
 <h2>1.1.5.2. Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
 <p>A loop can repeat a section of code multiple times.</p>
 <p>The following is an example of using a loop in Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The above will print (write to the terminal) the numbers from 0 to 9. The words &#8220;for&#8221; and &#8220;in&#8221; are Python keywords; range() is a Python function that can be used to describe the iterations of a loop; &#8220;i&#8221; is a variable that is defined using the &#8220;for&#8221; loop and will hold the current value that is provided by the range() function.</p>
+<p>The above will print (write to the terminal) the numbers from 0 to 9. The words “for” and “in” are Python keywords; range() is a Python function that can be used to describe the iterations of a loop; “i” is a variable that is defined using the “for” loop and will hold the current value that is provided by the range() function.</p>
 <div class="topic">
 <p class="topic-title first">Indentation matters (in Python)</p>
-<p>Indentation refers to the whitespace (spaces or tabs) between the start of a row and the start of a text within that row. In the above example, the line containing &#8220;print(i)&#8221; has four spaces before the word &#8220;print&#8221;. Whitespace must exist to indicate the body of the loop; without it, Python with raise a syntax error. The convention is to use four spaces for each indentation level in Python. Tab characters and spaces must not be mixed in Python.</p>
+<p>Indentation refers to the whitespace (spaces or tabs) between the start of a row and the start of a text within that row. In the above example, the line containing “print(i)” has four spaces before the word “print”. Whitespace must exist to indicate the body of the loop; without it, Python with raise a syntax error. The convention is to use four spaces for each indentation level in Python. Tab characters and spaces must not be mixed in Python.</p>
 </div>
-<p>Here&#8217;s another loop:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<p>Here’s another loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><em>Exercise</em>: What does the above code write out? Try it out.</p>
 <p><em>Exercise</em>: Write a program that prints the number 42 five times.</p>
-<p>The &#8220;print&#8221; function can also include both text and a variable. This can be achieved using e.g. the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<p>The “print” function can also include both text and a variable. This can be achieved using e.g. the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;i has the value </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This looks like it needs some explaining. What we have here is the text &#8220;i has the value %d&#8221;, whereby the fragment &#8220;%d&#8221; is a <em>placeholder</em> for a number. The number for the placeholder is provided by having the percent character (&#8220;%&#8221;) after the text string, followed by the variable the value of which we want to insert to the placeholder. Hence, the above program will print e.g. &#8220;i has the value 0&#8221;, &#8220;i has the value 1&#8221; etc.</p>
+<p>This looks like it needs some explaining. What we have here is the text “i has the value %d”, whereby the fragment “%d” is a <em>placeholder</em> for a number. The number for the placeholder is provided by having the percent character (“%”) after the text string, followed by the variable the value of which we want to insert to the placeholder. Hence, the above program will print e.g. “i has the value 0”, “i has the value 1” etc.</p>
 <p><em>Exercise</em>: Write a program that prints the value of a variable as part of other text five times.</p>
 <p>The range() function can also be used to start from another number than 0. To start from 1 you can use:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;i has the value </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -178,22 +167,22 @@
 <div class="section" id="branches">
 <h2>1.1.5.3. Branches<a class="headerlink" href="#branches" title="Permalink to this headline">¶</a></h2>
 <p>A branch refers to the if-then structure. This is a branch:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;x is smaller than 10&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here, we declare a variable named &#8216;x&#8217; with the value 5. We then compare its value against 10; if it&#8217;s less, we print out some text.</p>
+<p>Here, we declare a variable named ‘x’ with the value 5. We then compare its value against 10; if it’s less, we print out some text.</p>
 <p>The else-part is optional (in Python). If we want to have it, it could look like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;x is smaller than 10&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;x is larger than or equal to 10&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The if-then-else-statements can be <em>chained</em>. In Python, the keyword &#8220;elif&#8221; (portmanteau of &#8220;else if&#8221;) is used in this case:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<p>The if-then-else-statements can be <em>chained</em>. In Python, the keyword “elif” (portmanteau of “else if”) is used in this case:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;x is smaller than 10&#39;</span><span class="p">)</span>
 <span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
@@ -202,16 +191,16 @@
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;x is larger than or equal to 20&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Furthermore, the keywords &#8220;or&#8221; and &#8220;and&#8221; can be used to combine conditions:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<p>Furthermore, the keywords “or” and “and” can be used to combine conditions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;x is between 0 and 10&#39;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;x is either negative or larger than 10&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>All the constructs can be combined. Here&#8217;s a branch within a loop:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<p>All the constructs can be combined. Here’s a branch within a loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -220,15 +209,15 @@
 </div>
 <p><em>Exercise</em>: What does the above print? Try it out.</p>
 <p>Apart from comparing for larger and smaller values, we can also check for equality by using two equals-to characters:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;i is 5&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;i is not 5&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here&#8217;s a loop within a branch:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<p>Here’s a loop within a branch:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
         <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -237,12 +226,12 @@
 </pre></div>
 </div>
 <p><em>Exercise</em>: What does the above print? Try it out.</p>
-<p><em>Exercise</em>: Write a program that prints &#8220;Hello world&#8221; five times, followed by printing &#8220;Hallo Welt&#8221; five times. Note that this can be written either with or without using a branch. Write both versions.</p>
+<p><em>Exercise</em>: Write a program that prints “Hello world” five times, followed by printing “Hallo Welt” five times. Note that this can be written either with or without using a branch. Write both versions.</p>
 </div>
 <div class="section" id="functions">
 <h2>1.1.5.4. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<p>Functions can be used to capture certain code in one block. Here&#8217;s an example of a function definition and usage:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
+<p>Functions can be used to capture certain code in one block. Here’s an example of a function definition and usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
 
@@ -252,18 +241,18 @@
 <span class="n">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here, we define the function using the keyword &#8220;def&#8221;, followed by the name of the function and the <em>parameters</em> to the function. Here, the parameter is called &#8220;variable&#8221; and is available within the function. The function receives this parameter as input. Like with loops and branches, the function body must be indented. We then call the function twice with different values.</p>
+<p>Here, we define the function using the keyword “def”, followed by the name of the function and the <em>parameters</em> to the function. Here, the parameter is called “variable” and is available within the function. The function receives this parameter as input. Like with loops and branches, the function body must be indented. We then call the function twice with different values.</p>
 <p><em>Exercise</em>: What do you think the above program prints? Try it out.</p>
-<p>There are also pre-defined functions as part of the Python programming language. We&#8217;ve already used some of them, e.g. range() and the numeric comparator functions (&lt;, &lt;= etc.). print() is also a function (although technically only in Python 3, not in Python 2).</p>
-<p>There are a lot more pre-defined functions in Python. For example, the arithmetic operations (+, -, *, /) are all predefined functions. Here&#8217;s an example of using them:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<p>There are also pre-defined functions as part of the Python programming language. We’ve already used some of them, e.g. range() and the numeric comparator functions (&lt;, &lt;= etc.). print() is also a function (although technically only in Python 3, not in Python 2).</p>
+<p>There are a lot more pre-defined functions in Python. For example, the arithmetic operations (+, -, *, /) are all predefined functions. Here’s an example of using them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span>
 <span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The above will print the number 17.</p>
-<p>Functions can also <em>return</em> values. These can be seen as the output of the function. This way, a function can be seen as something that takes input and produces output, similarly to our logic gates. Here&#8217;s such an example function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<p>Functions can also <em>return</em> values. These can be seen as the output of the function. This way, a function can be seen as something that takes input and produces output, similarly to our logic gates. Here’s such an example function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 
 <span class="n">number1</span> <span class="o">=</span> <span class="mi">5</span>
@@ -274,7 +263,7 @@
 <p>The above will define a variable that holds the value 5, squares it (25), stores the squared value to another variable and prints it out.</p>
 <p><em>Exercise</em>: Define and use a function that takes a number as input and returns that number plus one.</p>
 <p>Functions can be combined with branches and loops:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -282,8 +271,8 @@
     <span class="k">print</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>The above will print numbers from 0 to 9 as well as the squares of those numbers. The formatting is a bit ugly because we print &#8220;i&#8221; on one line and the square of &#8220;i&#8221; on the next line. This can be fixed by using the following construct:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<p>The above will print numbers from 0 to 9 as well as the squares of those numbers. The formatting is a bit ugly because we print “i” on one line and the square of “i” on the next line. This can be fixed by using the following construct:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -291,9 +280,9 @@
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i_squared</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Here, we use the placeholder syntax from earlier, but we write two numbers in each line. It&#8217;s similar to what we did before but when more than one placeholder is used then the values to be inserted in the placeholders need to be enclosed in parentheses (here, &#8220;i&#8221; and &#8220;i_squared&#8221;).</p>
-<p>We don&#8217;t need to define a variable before printing it out, so we could save some typing by doing the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<p>Here, we use the placeholder syntax from earlier, but we write two numbers in each line. It’s similar to what we did before but when more than one placeholder is used then the values to be inserted in the placeholders need to be enclosed in parentheses (here, “i” and “i_squared”).</p>
+<p>We don’t need to define a variable before printing it out, so we could save some typing by doing the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -301,7 +290,7 @@
 </pre></div>
 </div>
 <p>The next program combines functions, branches and loops:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -312,26 +301,26 @@
 </div>
 <p><em>Exercise</em>: What does the above code print? Try it out.</p>
 <p>Loops can also contain loops:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
         <span class="n">added</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;i=</span><span class="si">%d</span><span class="s2">; j=</span><span class="si">%d</span><span class="s2">; i+j=</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">added</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><em>Exercise</em>: Print the multiplication table for numbers from 1 to 10. I.e. the numbers 1 * 1, 1 * 2 etc. up to 10 * 10.</p>
-<p>Python also supports <em>floating point numbers</em>, i.e. numbers with a decimal point (with the number of supported digits before and after the comma varying depending on the magnitude of the number). Here&#8217;s an example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">5.2</span>
+<p>Python also supports <em>floating point numbers</em>, i.e. numbers with a decimal point (with the number of supported digits before and after the comma varying depending on the magnitude of the number). Here’s an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">5.2</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mf">3.4</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;x and y summed is </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Here, because x and y are floating point numbers, we need to use &#8220;%f&#8221; as the placeholder instead of &#8220;%d&#8221;. (If we used %d, we&#8217;d only see the number rounded down to the first integer.)</p>
-<p><em>Exercise</em>: Define and use a function that calculates the area of a circle. The function should receive the radius as the input and return the area as the output. Use the formula &#8220;area = 3.14 * radius * radius&#8221;. (You can also use the Python built-in power function by writing e.g. &#8220;radius ** 2&#8221; for radius squared.)</p>
-<p><em>Exercise</em>: Use the above function to print out the areas of circles with radius 1, 2, 3... up to 10.</p>
+<p>Here, because x and y are floating point numbers, we need to use “%f” as the placeholder instead of “%d”. (If we used %d, we’d only see the number rounded down to the first integer.)</p>
+<p><em>Exercise</em>: Define and use a function that calculates the area of a circle. The function should receive the radius as the input and return the area as the output. Use the formula “area = 3.14 * radius * radius”. (You can also use the Python built-in power function by writing e.g. “radius ** 2” for radius squared.)</p>
+<p><em>Exercise</em>: Use the above function to print out the areas of circles with radius 1, 2, 3… up to 10.</p>
 <p><em>Exercise</em>: Write a program that, for numbers from 1 to 10, will print the area of the circle with that radius if the area is between 10 and 100.</p>
 <p><em>Exercise</em>: For numbers from 1 to 10, calculate both the area and the square of the number. Print out the difference between the area and the square.</p>
-<p>Apart from the standard arithmetic operators and the power function, there&#8217;s another potentially useful operator, namely <em>modulo</em>. It returns the remainder after a division, e.g.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">23</span>
+<p>Apart from the standard arithmetic operators and the power function, there’s another potentially useful operator, namely <em>modulo</em>. It returns the remainder after a division, e.g.:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">23</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;a = </span><span class="si">%d</span><span class="s1">; b = </span><span class="si">%d</span><span class="s1">; a / b = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;a = </span><span class="si">%d</span><span class="s1">; b = </span><span class="si">%d</span><span class="s1">; a % b = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">))</span>
@@ -339,8 +328,8 @@
 </div>
 <p><em>Exercise</em>: What do you think the above will print? Try it out.</p>
 <p><em>Exercise</em>: Write a program that prints out the numbers between 1 to 10 which, after being divided by 3, have a remainder of 1.</p>
-<p>We now have enough in our toolbox to write <em>FizzBuzz</em>: FizzBuzz is originally a children&#8217;s game where each player is expected to tell the next number, starting from 1, except if the number is divisible by 3 then the player should instead say &#8220;Fizz&#8221;, and if the number is divisible by 5 then the player should say &#8220;Buzz&#8221;, and if the number is divisible by both 3 and 5 then the player should say &#8220;FizzBuzz&#8221;. We should write a program that plays this game; from 1 to 100, it should print the correct answer. The correct output should start with:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="m">1</span>
+<p>We now have enough in our toolbox to write <em>FizzBuzz</em>: FizzBuzz is originally a children’s game where each player is expected to tell the next number, starting from 1, except if the number is divisible by 3 then the player should instead say “Fizz”, and if the number is divisible by 5 then the player should say “Buzz”, and if the number is divisible by both 3 and 5 then the player should say “FizzBuzz”. We should write a program that plays this game; from 1 to 100, it should print the correct answer. The correct output should start with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">1</span>
 <span class="m">2</span>
 Fizz
 <span class="m">4</span>
@@ -391,7 +380,7 @@ Fizz
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

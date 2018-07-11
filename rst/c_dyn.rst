@@ -10,7 +10,7 @@ You might ask yourself any of the following questions:
 
 The answer to all of these is *dynamic memory allocation*.
 
-The C standard library provides two functions for this: "malloc" and "free". The function "malloc" (memory allocation) allocated memory, which can then be freed using the function "free". Here's a simple example:
+The C standard library provides two functions for this: "malloc" and "free". The function "malloc" (memory allocation) allocates memory, which can then be freed using the function "free". Here's a simple example:
 
 .. literalinclude:: ../material/stack/st9.c
    :language: c
@@ -22,8 +22,8 @@ Let's first go through this line by line:
 * Line 9: We *assert* the return value of "malloc" is non-zero. If "malloc" fails, it will return a NULL pointer, and in this case our assertion would fail, meaning our program would crash itself. This is to ensure our memory allocation succeeded. (In practice there should be no problem allocating 80 bytes.)
 * Line 10: We set all of the allocated memory to 0.
 * Line 11: We set the first element in our array to 3.
-* Line 12: We set the second element in our array to 4. The syntax here is equivalent to what was used in line 11.
-* Line 13: We declare a variable "b" which has the same value as "a".
+* Line 12: We set the second element in our array to 4. The syntax is different but the semantics here is equivalent to what was used in line 11.
+* Line 13: We define a variable "b" which has the same value as "a".
 * Line 14: We increment the value of "b" by two (that is, eight bytes, assuming our int is four bytes). It now points to the third element in our array.
 * Line 15: We set the value pointed to by "b" to 5.
 * Line 17: We free the memory we allocated.

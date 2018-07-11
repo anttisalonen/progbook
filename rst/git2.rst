@@ -67,14 +67,14 @@ Let's create, add and commit a new file with some more interesting contents:
 
 This simple Python script generates a new file with some numbers in it.
 
-Now, let's make two branches from master, such that both branches have some changes to this file:
+Now, let's assume we're developing this script together with another developer. We think the values that the script outputs above should be changed. At the same time, the other developer thinks the script should output three values instead of two. Let's simulate this.
+
+We both make our changes locally in different *branches* which are branched from master. In the end both branches should have made some changes to this file:
 
 * The first branch should be called "values" and change the values being written to a file
 * The second branch should be called "three" and write three values in the file instead of two
 
-Let's then merge the two branches in master. As there's no obvious way to merge the two branches we'll end up in conflict which we'll have to resolve manually.
-
-Why would you do this? This could happen because we're confused with what we're doing, or because we're working in a team and making conflicting changes, or because we want to pick different changes from different versions to create a new version. While we'll do this work on local branches, in general the principle is the same when working with remote code, e.g. code from other people.
+Let's then merge the two branches in master. As there's no obvious way to merge the two branches we'll end up in conflict which we'll have to resolve manually. Apart from this example of working in a team and making conflicting changes, this could also happen if we want to pick different changes from different versions to create a new version. While we'll do this work on local branches, in general the principle is the same when working with remote code, e.g. code from other people.
 
 Let's then create a new branch where we want to change the values that are being saved in the file such that they're 0.0 and 1.0:
 
@@ -141,7 +141,7 @@ You can change between branches by using "git checkout":
 Merging and conflicts
 =====================
 
-Let's then create the branch "three" and create a commit there:
+Let's then simulate the other developer and create the branch "three" off "master" and create a commit there:
 
 .. code-block:: bash
 
@@ -182,7 +182,7 @@ Now, let's see where we are:
 * "master" is still where it is - but now it has two branches ahead of it
 * HEAD, our current checkout, is at the head of "three", which is a new commit, dd6c856
 
-Now, let's try to switch to "master" and *merge* the changes from both "values" and "three" to it:
+Now, let's try to switch to the master branch and start with *merging* the changes from "values" to it:
 
 .. code-block:: bash
 
@@ -207,7 +207,7 @@ Here, we run "git merge" to merge two branches. ("git pull" does "git fetch", i.
     * 43130e1 add printing hello world again
     * b279b4f initial commit
 
-Here, our current state (HEAD) is the head of master, which is also the head of values, and three is a separate branch that doesn't have commit 4cf7d38. It does however have the commit dd6c856 so let's try to merge that to master as well:
+Here, our current state (HEAD) is the head of master, which is also the head of values, and three is a separate branch that doesn't have commit 4cf7d38. It does however have the commit dd6c856. Now, let's try to merge "three" to master as well:
 
 .. code-block:: bash
 
@@ -251,7 +251,7 @@ We can check the status using "git status":
 
     no changes added to commit (use "git add" and/or "git commit -a")
 
-We'll then have to fix the code manually:
+We'll then have to fix the code manually, e.g. by deciding we want to output values 0.0, 0.5 and 1.0:
 
 .. code-block:: bash
 

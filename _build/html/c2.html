@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.4.1. Records &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -78,12 +65,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -96,15 +85,15 @@
             
   <div class="section" id="records">
 <h1>2.4.1. Records<a class="headerlink" href="#records" title="Permalink to this headline">¶</a></h1>
-<p>In our previous code we worked with functions and quadratic equations. A function was represented by three floating point values a, b and c. Let&#8217;s write a function that returns the value of the function at a given point x:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">function_value</span><span class="p">(</span><span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+<p>In our previous code we worked with functions and quadratic equations. A quadratic equation was represented by three floating point values a, b and c. Let’s write a function that returns the value of a quadratic function at a given point x:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">function_value</span><span class="p">(</span><span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Seems straightforward enough. Now, let&#8217;s imagine we need to find out the difference between two functions at a given point x. Let&#8217;s write this function:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">difference_between_functions</span><span class="p">(</span><span class="kt">float</span> <span class="n">a1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+<p>Seems straightforward enough. Now, let’s imagine we need to find out the difference between two quadratic functions at a given point x. Let’s write this function:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">difference_between_functions</span><span class="p">(</span><span class="kt">float</span> <span class="n">a1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">c2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">float</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">function_value</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
     <span class="kt">float</span> <span class="n">val2</span> <span class="o">=</span> <span class="n">function_value</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
@@ -112,9 +101,9 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>This seems a bit unwieldly: The function takes seven parameters in total, and it&#8217;s easy to make a mistake somewhere. Surely we can do better?</p>
-<p>In C (and in fact most programming languages) it&#8217;s possible to combine values in <em>records</em> or composite data types. See below:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">function</span> <span class="p">{</span>
+<p>This seems a bit unwieldly: The function takes seven parameters in total, and it’s easy to make a mistake somewhere. Surely we can do better?</p>
+<p>In C (and in fact most programming languages) it’s possible to combine values in <em>records</em> or composite data types. See below:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">quadratic_function</span> <span class="p">{</span>
     <span class="kt">float</span> <span class="n">a</span><span class="p">;</span>
     <span class="kt">float</span> <span class="n">b</span><span class="p">;</span>
     <span class="kt">float</span> <span class="n">c</span><span class="p">;</span>
@@ -122,31 +111,31 @@
 </pre></div>
 </div>
 <p>If we wanted to declare such a struct and define its values, we can do simply:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">function</span> <span class="n">f</span><span class="p">;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">quadratic_function</span> <span class="n">f</span><span class="p">;</span>
 <span class="n">f</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mf">1.0f</span><span class="p">;</span>
 <span class="n">f</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="p">;</span>
 <span class="n">f</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="mf">3.0f</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>...and use f.a, f.b and f.c as we want.</p>
+<p>…and use f.a, f.b and f.c as we want.</p>
 <p>We can now also redefine the function that calculates the value at a given point:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">function_value</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">function</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">function_value</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">quadratic_function</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">c</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>We&#8217;ve made a few changes:</p>
+<p>We’ve made a few changes:</p>
 <ul class="simple">
 <li>The parameters a, b and c are now replaced by (or contained in) f, a struct</li>
 <li>f is passed in as a const pointer, not a value</li>
 </ul>
-<p>About passing a variable to a function as a pointer: By default, in C, whenever a variable is passed to a function it&#8217;s passed <em>by value</em> which means a copy of the variable is made for the function (allocated in the stack), and the copy is discarded when the function returns. It often makes sense to pass a pointer to a function instead, i.e. <em>by reference</em>, because then the data the function has access to is the original data.</p>
+<p>About passing a variable to a function as a pointer: By default, in C, whenever a variable is passed to a function it’s passed <em>by value</em> which means a copy of the variable is made for the function (allocated in the stack), and the copy is discarded when the function returns. It often makes sense to pass a pointer to a function instead, i.e. <em>by reference</em>, because then the data the function has access to is the original data.</p>
 <p>In this case, it makes very little difference except that it saves an unnecessary copy of a few bytes.</p>
-<p>About the keyword const: this means we treat the variable f as a constant within the function, and if we wanted to modify the data pointed to by f, i.e. its fields a, b or c, the compiler would issue an error. This is helpful for us as the function implementors to ensure we don&#8217;t modify data we don&#8217;t want to modify, and helpful to the caller of the function to know that the function shouldn&#8217;t modify the input data.</p>
+<p>About the keyword const: this means we treat the variable f as a constant within the function, and if we wanted to modify the data pointed to by f, i.e. its fields a, b or c, the compiler would issue an error. This is helpful for us as the function implementors to ensure we don’t modify data we don’t want to modify, and helpful to the caller of the function to know that the function shouldn’t modify the input data.</p>
 <p>Because f is a pointer, the syntax for accessing the fields of the struct is different: the operator -&gt; is used instead of dot (.).</p>
 <p>Now, defining the function difference_between_functions can be much clearer:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">difference_between_functions</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">function</span> <span class="o">*</span><span class="n">f1</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">function</span> <span class="o">*</span><span class="n">f2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="nf">difference_between_functions</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">quadratic_function</span> <span class="o">*</span><span class="n">f1</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">quadratic_function</span> <span class="o">*</span><span class="n">f2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">float</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">function_value</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
     <span class="kt">float</span> <span class="n">val2</span> <span class="o">=</span> <span class="n">function_value</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
@@ -154,12 +143,12 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><em>Exercise</em>: The derivative of a function ax^2 + bx + c is 2ax + b. Write a function that calculates the derivative for a function at a given point x and call it, with the input function passed as a pointer to a struct.</p>
+<p><em>Exercise</em>: The derivative of a quadratic function ax^2 + bx + c is 2ax + b. Write a function that calculates the derivative for a quadratic function at a given point x and call it, with the input data passed as a pointer to a struct.</p>
 <div class="section" id="what-is-a-struct">
 <h2>2.4.1.1. What is a struct<a class="headerlink" href="#what-is-a-struct" title="Permalink to this headline">¶</a></h2>
-<p>Our example struct consists of three integers. As C is relatively close to the actual hardware, we can reason about what this struct looks like in practice. In general, the amount of memory used by an integer in C is implementation defined but for the purpose of this section we can assume it&#8217;s 4 bytes (32 bits). Defining a structure like this typically means the data will be packed well, such that 12 bytes will be required for one allocation of struct my_datatype and the layout will only contain the memory required for a, b and c, nothing more. (Mixing different data types of different sizes may cause padding memory to be added by the C compiler, depending on the hardware constraints.)</p>
-<p>You can find out what the size of a data type is in C by using the &#8220;sizeof&#8221; operator:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">function</span><span class="p">));</span>
+<p>Our example struct consists of three integers. As C is relatively close to the actual hardware, we can reason about what this struct looks like in practice. In general, the amount of memory used by an integer in C is implementation defined but for the purpose of this section we can assume it’s 4 bytes (32 bits). Defining a structure like this typically means the data will be packed well, such that 12 bytes will be required for one allocation of struct my_datatype and the layout will only contain the memory required for a, b and c, nothing more. (Mixing different data types of different sizes may cause padding memory to be added by the C compiler, depending on the hardware constraints.)</p>
+<p>You can find out what the size of a data type is in C by using the “sizeof” operator:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">quadratic_function</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>In this sense, defining structures in C mostly serves to combine various data into one unit, simplifying code and aiding in having the necessary memory available and allocated.</p>
@@ -191,7 +180,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

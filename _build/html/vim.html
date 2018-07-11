@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>1.5.1. Vim &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -78,12 +65,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -96,29 +85,29 @@
             
   <div class="section" id="vim">
 <h1>1.5.1. Vim<a class="headerlink" href="#vim" title="Permalink to this headline">¶</a></h1>
-<p>In general, in order to install vim, I&#8217;ll refer you to your OS. If on Linux, you should be able to install vim using your package manager, if it&#8217;s not already installed. On Mac and Windows you should be able to find a way to install it after searching online.</p>
-<p>After you&#8217;ve installed vim, you can start it in Unix shell by running e.g.:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ vim file.txt
+<p>In general, in order to install vim, I’ll refer you to your OS. If on Linux, you should be able to install vim using your package manager, if it’s not already installed. On Mac and Windows you should be able to find a way to install it after searching online.</p>
+<p>After you’ve installed vim, you can start it in Unix shell by running e.g.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vim file.txt
 </pre></div>
 </div>
-<p>This opens the file called &#8220;file.txt&#8221; in vim. If the file doesn&#8217;t exist, vim opens an empty buffer which, if saved, will be saved as file.txt.</p>
+<p>This opens the file called “file.txt” in vim. If the file doesn’t exist, vim opens an empty buffer which, if saved, will be saved as file.txt.</p>
 <p>Vim is a modal editor. This means it has <em>modes</em>. When starting vim, it is in <em>normal mode</em>. You can always get to this mode by hitting the Escape key (ESC) three times. Go ahead, try it out.</p>
 <p>The second mode is the <em>command line mode</em>. You can enter this mode from the normal mode by pressing colon (:) (without hitting enter afterwards). You should then see a colon at the bottom of the screen.</p>
-<p>In command line mode, you can enter several commands. For exit, you can quit vim by typing &#8221;:q&#8221; followed by enter (or &#8221;:q&lt;Enter&gt;&#8221;). Try it out. Enter vim again.</p>
-<p>Another useful command is &#8221;:w&#8221;, for writing, i.e. saving a file. Try running &#8221;:w&lt;Enter&gt;&#8221;. This should save file.txt. As we didn&#8217;t enter any contents to the file, it&#8217;ll be empty.</p>
-<p>You can also combine commands. For example, the command &#8221;:wq&#8221; will save and quit vim.</p>
-<p>The third mode is the <em>insert mode</em>. This allows you to actually type text in the file. One way to enter this mode from the normal mode is by pressing &#8220;i&#8221;. Now, anything you type will be added in the buffer. You can exit the insert mode by pressing the Escape key.</p>
-<p>For example, if you were to type &#8220;iHello.&lt;ESC&gt;&#8221;, you&#8217;d enter the insert mode, add the text &#8220;Hello.&#8221; in the file, then go back to the normal mode. Try this out. Save your file with &#8221;:w&#8221;. If you want to be sure, quit vim and run &#8220;cat file.txt&#8221; to see the file contents. Enter vim again.</p>
-<p>Now you have the basics of how to use vim for general file editing. So far, there isn&#8217;t much that makes vim much better than any other editor.</p>
+<p>In command line mode, you can enter several commands. For exit, you can quit vim by typing “:q” followed by enter (or “:q&lt;Enter&gt;”). Try it out. Enter vim again.</p>
+<p>Another useful command is “:w”, for writing, i.e. saving a file. Try running “:w&lt;Enter&gt;”. This should save file.txt. As we didn’t enter any contents to the file, it’ll be empty.</p>
+<p>You can also combine commands. For example, the command “:wq” will save and quit vim.</p>
+<p>The third mode is the <em>insert mode</em>. This allows you to actually type text in the file. One way to enter this mode from the normal mode is by pressing “i”. Now, anything you type will be added in the buffer. You can exit the insert mode by pressing the Escape key.</p>
+<p>For example, if you were to type “iHello.&lt;ESC&gt;”, you’d enter the insert mode, add the text “Hello.” in the file, then go back to the normal mode. Try this out. Save your file with “:w”. If you want to be sure, quit vim and run “cat file.txt” to see the file contents. Enter vim again.</p>
+<p>Now you have the basics of how to use vim for general file editing. So far, there isn’t much that makes vim much better than any other editor.</p>
 <div class="section" id="some-more-commands">
 <h2>1.5.1.1. Some more commands<a class="headerlink" href="#some-more-commands" title="Permalink to this headline">¶</a></h2>
-<p>There are some more commands that are helpful when editing text. These commands are all run from the normal mode. For example, the command &#8220;Y&#8221; will copy the current line. That is, if you are in the normal mode (which you can reach by pressing ESC), then press the keys for capital Y (shift+y), you&#8217;ve copied the current line. You can then paste this line after the current line by pressing &#8220;p&#8221;. Try this out. You should then have the line &#8220;Hello.&#8221; twice.</p>
-<p>You can repeat commands multiple times by entering a number before the command. Try, in the normal mode, after you&#8217;ve copied the line using &#8220;Y&#8221;, to type &#8220;10p&#8221;. This should add ten lines with the text &#8220;Hello.&#8221; in them.</p>
-<p>You can undo with the command &#8220;u&#8221;. You can re-do (undo the undo) by pressing ctrl+r. Try this out a few times. You can undo until the point where you started vim, and re-do until the last command.</p>
-<p>Let&#8217;s modify one of our &#8220;Hello.&#8221; lines. You can use the arrow keys to move around the file (or also the h, j, k and l keys). The command &#8220;x&#8221; will remove the character under the cursor. Try it out. You can also type e.g. &#8220;3x&#8221; to remove the three next characters.</p>
-<p>You can remove a whole line using the command &#8220;dd&#8221;. (This cuts the line such that you can paste it again.) You can remove the next e.g. three lines with &#8220;3dd&#8221;. Try it out. Paste them again with &#8220;P&#8221;. (Capital &#8220;P&#8221; pastes before the cursor, small &#8220;p&#8221; pastes after the cursor.) The text from the cursor to the end of the line can be removed with &#8220;D&#8221;.</p>
-<p>You can navigate in the file with arrow keys, but there are shortcuts. Typing &#8220;gg&#8221; moves the cursor to the top of the file. Typing &#8220;G&#8221; moves the cursor to the end of the file. &#8220;$&#8221; moves the cursor to the end of the current line. &#8220;^&#8221; moves the cursor to the beginning of the current line.</p>
-<p>Move the cursor to the top of the file with &#8220;gg&#8221;. You can delete e.g. the next 50 lines of the file by running &#8220;50dd&#8221;. Run this to empty the file.</p>
+<p>There are some more commands that are helpful when editing text. These commands are all run from the normal mode. For example, the command “Y” will copy the current line. That is, if you are in the normal mode (which you can reach by pressing ESC), then press the keys for capital Y (shift+y), you’ve copied the current line. You can then paste this line after the current line by pressing “p”. Try this out. You should then have the line “Hello.” twice.</p>
+<p>You can repeat commands multiple times by entering a number before the command. Try, in the normal mode, after you’ve copied the line using “Y”, to type “10p”. This should add ten lines with the text “Hello.” in them.</p>
+<p>You can undo with the command “u”. You can re-do (undo the undo) by pressing ctrl+r. Try this out a few times. You can undo until the point where you started vim, and re-do until the last command.</p>
+<p>Let’s modify one of our “Hello.” lines. You can use the arrow keys to move around the file (or also the h, j, k and l keys). The command “x” will remove the character under the cursor. Try it out. You can also type e.g. “3x” to remove the three next characters.</p>
+<p>You can remove a whole line using the command “dd”. (This cuts the line such that you can paste it again.) You can remove the next e.g. three lines with “3dd”. Try it out. Paste them again with “P”. (Capital “P” pastes before the cursor, small “p” pastes after the cursor.) The text from the cursor to the end of the line can be removed with “D”.</p>
+<p>You can navigate in the file with arrow keys, but there are shortcuts. Typing “gg” moves the cursor to the top of the file. Typing “G” moves the cursor to the end of the file. “$” moves the cursor to the end of the current line. “^” moves the cursor to the beginning of the current line.</p>
+<p>Move the cursor to the top of the file with “gg”. You can delete e.g. the next 50 lines of the file by running “50dd”. Run this to empty the file.</p>
 </div>
 </div>
 
@@ -147,7 +136,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

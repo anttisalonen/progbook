@@ -26,7 +26,7 @@ It doesn't seem to make a huge difference which way we go, but let's pick the fi
 
 To break this down in tasks:
 
-1. Write the HTML for the "start new game" page. This page should have a HTML form for capturing user input, and pressing the button to submit the form should lead the user to the guessing game page.
+1. Write the HTML for the "start new game" page. This page should have an HTML form for capturing user input, and pressing the button to submit the form should lead the user to the guessing game page.
 2. Update our server code to serve the new HTML for some URL.
 3. Modify our guessing game HTML and JS such that it reads the user name and maximum number from server parameters.
 4. Handle any possible GET parameters in our server code such that they'll be used to fill the guessing game page template.
@@ -67,7 +67,7 @@ HTML forms are a fairly simple way to get simple data from a user. Here's an exa
 Using templates
 ===============
 
-So what we have now is a page has a form, which, when filled and submitted, will fetch our guessing game, and send the parameters from the form to the server as part of the URL when fetching the guessing game page. (If you try this out you should see the parameters encoded in the URL.) However, the guessing game page doesn't use the parameters. Let's fix this.
+So what we have now is a page that has a form, which, when filled and submitted, will fetch our guessing game, and send the parameters from the form to the server as part of the URL when fetching the guessing game page. (If you try this out you should see the parameters encoded in the URL.) However, the guessing game page doesn't use the parameters. Let's fix this.
 
 Earlier we decided to handle this using *templates*: Flask provides an easy way to define variables in our HTML files such that the server can *generate* the HTML page differently depending on the parameters. This is documented thoroughly on the Flask web site but let's see how it would look in our URL handler function:
 
@@ -96,7 +96,7 @@ Here, we use the parameter "user" using double curly braces ('{{' and '}}'). Wha
 Uploading more JSON data
 ========================
 
-Now we should have everything in place such that the maximum number depends on the user input, and the user name is available for our Javascript. Let's add this information in the database. We should currently have something like this in our Javascript code:
+Now we should have everything in place such that the maximum number depends on the user input, and the user name is available for our Javascript. Let's add this information in the database when the user has correctly guessed the number. We should currently have something like this in our Javascript code:
 
 .. code-block:: js
 

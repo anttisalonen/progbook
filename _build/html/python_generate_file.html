@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>1.2.4. Generating input data using Python &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -49,7 +36,7 @@
           <a href="quad2.html" title="1.2.3. Quadratic formula in Python"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="quad_index.html" accesskey="U">1.2. Quadratic formula</a> &#187;</li> 
       </ul>
     </div>
@@ -70,12 +57,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -90,20 +79,20 @@
 <h1>1.2.4. Generating input data using Python<a class="headerlink" href="#generating-input-data-using-python" title="Permalink to this headline">¶</a></h1>
 <p>Previously we wrote a program that calculates the roots of 10,000 quadratic equations. You may ask, where did the input data, i.e. the definitions of 10,000 quadratic equations, come from?</p>
 <p>The short answer is that is was generated using a Python script. How would we go about generating this file in Python? The file contains 10,000 lines, each having three floating point numbers. The numbers should be random. Python provides a set of random functions, the simplest one being random.random(), which returns a random floating point number between 0 and 1:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 
 <span class="n">value</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
 <span class="k">print</span> <span class="n">value</span>
 </pre></div>
 </div>
-<p>Writing files in Python is fairly straightforward. We can use the &#8216;with&#8217; clause which ensures the file will be closed after we&#8217;re done with it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<p>Writing files in Python is fairly straightforward. We can use the ‘with’ clause which ensures the file will be closed after we’re done with it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="s2"> </span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>This program will create a file called test.txt with five times the line &#8220;0.200000 0.500000&#8221;. (If the file existed before, it will be overwritten.)</p>
-<p><em>Exercise</em>: Create the described input file. To make the functions more interesting, don&#8217;t use the output of random.random() directly, i.e. don&#8217;t only store numbers between 0.0 and 1.0, but use multiplication and subtraction to generate numbers that are e.g. between -10.0 and 10.0.</p>
+<p>This program will create a file called test.txt with five times the line “0.200000 0.500000”. (If the file existed before, it will be overwritten.)</p>
+<p><em>Exercise</em>: Create the described input file. To make the functions more interesting, don’t use the output of random.random() directly, i.e. don’t only store numbers between 0.0 and 1.0, but use multiplication and subtraction to generate numbers that are e.g. between -10.0 and 10.0.</p>
 </div>
 
 
@@ -125,13 +114,13 @@
           <a href="quad2.html" title="1.2.3. Quadratic formula in Python"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="quad_index.html" >1.2. Quadratic formula</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

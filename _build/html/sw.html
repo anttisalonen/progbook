@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>1.1.2. What is software? &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -70,12 +57,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -93,61 +82,61 @@
 <p class="attribution">&mdash;Linus Torvalds</p>
 </div></blockquote>
 <p>Software is code that tells computer hardware what to do.</p>
-<p>To get started, let&#8217;s write a very simple software program.</p>
+<p>To get started, let’s write a very simple software program.</p>
 <p>For this, the first thing you need to do is start a terminal with a Unix shell in it.</p>
-<p>I can&#8217;t tell you how to do this exactly as this is operating system (OS) dependent. At least with some versions of Mac OS, you can start the terminal by searching for &#8220;terminal&#8221; in Spotlight. On Windows 10, you can install &#8220;Windows Subsystem for Linux&#8221; (WSL). On older Windowses, there are ways to get a Unix shell like Cygwin but it&#8217;s more tricky. Searching online is your friend.</p>
+<p>I can’t tell you how to do this exactly as this is operating system (OS) dependent. At least with some versions of Mac OS, you can start the terminal by searching for “terminal” in Spotlight. On Windows 10, you can install “Windows Subsystem for Linux” (WSL). On older Windowses, there are ways to get a Unix shell like Cygwin but it’s more tricky. Searching online is your friend.</p>
 <p>In the end, it could look something like this:</p>
 <img alt="_images/term.png" src="_images/term.png" />
-<p>Most notably, the Windows cmd.exe or PowerShell are <em>not</em> Unix shells. Typical Unix shells characteristics are the at sign (&#8220;&#64;&#8221;) designating your user name and the host name of the computer you&#8217;re logged on to, a tilde (&#8220;~&#8221;) to designate the home directory and the dollar sign (&#8220;$&#8221;) to designate the prompt. You can use these to identify whether you&#8217;re running a Unix shell or not.</p>
+<p>Most notably, the Windows cmd.exe or PowerShell are <em>not</em> Unix shells. Typical Unix shells characteristics are the at sign (“&#64;”) designating your user name and the host name of the computer you’re logged on to, a tilde (“~”) to designate the home directory and the dollar sign (“$”) to designate the prompt. You can use these to identify whether you’re running a Unix shell or not.</p>
 <p><em>Exercise</em>: Start a terminal with a Unix shell.</p>
-<p>Apart from the shell, we also need an interpreter and an editor. For this chapter we&#8217;ll use Python as our programming language; so let&#8217;s install the Python interpreter. Again, I can&#8217;t tell you how to do this; some OSes may have it already installed. To find out if you have it, start your Unix shell and try typing:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python
+<p>Apart from the shell, we also need an interpreter and an editor. For this chapter we’ll use Python as our programming language; so let’s install the Python interpreter. Again, I can’t tell you how to do this; some OSes may have it already installed. To find out if you have it, start your Unix shell and try typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python
 Python <span class="m">3</span>.6.0 <span class="o">(</span>default, Jan <span class="m">16</span> <span class="m">2017</span>, <span class="m">12</span>:12:55<span class="o">)</span>
 <span class="o">[</span>GCC <span class="m">6</span>.3.1 <span class="m">20170109</span><span class="o">]</span> on linux
 Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
 </pre></div>
 </div>
 <div class="topic">
-<p class="topic-title first">I&#8217;m supposed to type all that?</p>
-<p>Actually you&#8217;re only supposed to type &#8220;python&#8221; (without quotes). On the first line, the dollar sign (&#8220;$&#8221;) means the prompt, i.e. the part of the screen where you can type. The first line effectively means &#8220;type &#8216;python&#8217;&#8221;. The following lines don&#8217;t start with the dollar sign so they&#8217;re meant to demonstrate the possible output from running the previous command.</p>
+<p class="topic-title first">I’m supposed to type all that?</p>
+<p>Actually you’re only supposed to type “python” (without quotes). On the first line, the dollar sign (“$”) means the prompt, i.e. the part of the screen where you can type. The first line effectively means “type ‘python’”. The following lines don’t start with the dollar sign so they’re meant to demonstrate the possible output from running the previous command.</p>
 </div>
-<p>If you don&#8217;t have Python, you might see something like this instead:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python
+<p>If you don’t have Python, you might see something like this instead:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python
 bash: python: <span class="nb">command</span> not found
 </pre></div>
 </div>
-<p>In this case you&#8217;ll need to find out how to install it. On e.g. Ubuntu, running something like &#8220;sudo apt-get install python&#8221; might do it. On Mac you may need to install Python from the Python official web site. Although we&#8217;ll be using Python 2 later in this book, this chapter will work with either Python 2 or 3 so the version you pick isn&#8217;t very important for now.</p>
-<p>Once you do get to the Python interpreter as shown above you can exit it by typing &#8220;exit()&#8221; (without the quotes).</p>
-<p><em>Exercise</em>: Install the Python interpreter if your system doesn&#8217;t already have it. Run it and exit it.</p>
-<p>Now that we have the shell and the interpreter, the final bit we need is the editor. For now it&#8217;s enough with an editor that&#8217;s easy to use, though Notepad, which is installed by default on Windows, won&#8217;t do. If you&#8217;re on a Linux system you can install e.g. gedit. On Windows you could install notepad++. There are other editors available like Atom or Visual Studio Code. It doesn&#8217;t really matter which one you install now, as long as you end up with a window where you can type text and save it to a file. Here&#8217;s an example of what an editor could look like:</p>
+<p>In this case you’ll need to find out how to install it. On e.g. Ubuntu, running something like “sudo apt-get install python” might do it. On Mac you may need to install Python from the Python official web site. Although we’ll be using Python 2 later in this book, this chapter will work with either Python 2 or 3 so the version you pick isn’t very important for now.</p>
+<p>Once you do get to the Python interpreter as shown above you can exit it by typing “exit()” (without the quotes).</p>
+<p><em>Exercise</em>: Install the Python interpreter if your system doesn’t already have it. Run it and exit it.</p>
+<p>Now that we have the shell and the interpreter, the final bit we need is the editor. For now it’s enough with an editor that’s easy to use, though Notepad, which is installed by default on Windows, won’t do. If you’re on a Linux system you can install e.g. gedit. On Windows you could install notepad++. There are other editors available like Atom or Visual Studio Code. It doesn’t really matter which one you install now, as long as you end up with a window where you can type text and save it to a file. Here’s an example of what an editor could look like:</p>
 <img alt="_images/editor.png" src="_images/editor.png" />
 <p><em>Exercise</em>: Install and start an editor.</p>
 <p>Now we can use the editor to write some code and save it in a file, then use the shell to start the interpreter with our code as input. The interpreter will then run our code.</p>
 <p>The next step is to create a file with these contents:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The above is a one-line Python program (which works either with Python 2 or Python 3). When run, it will write the text &#8220;Hello world&#8221; to the terminal.</p>
-<p><em>Exercise</em>: Create a file with the above contents. Call it &#8220;hello.py&#8221;. Make sure you know in which directory you saved the file.</p>
+<p>The above is a one-line Python program (which works either with Python 2 or Python 3). When run, it will write the text “Hello world” to the terminal.</p>
+<p><em>Exercise</em>: Create a file with the above contents. Call it “hello.py”. Make sure you know in which directory you saved the file.</p>
 <p>Now, we need to navigate to the directory where the file was saved, and run the Python interpreter with our program as the input.</p>
 <p>The directory paths are again somewhat OS dependent but you have a few tools that help you locate your file:</p>
 <ul class="simple">
-<li>You can find out which files are in the <em>current directory</em> in the shell by running &#8220;ls&#8221;.</li>
-<li>You can find out what your current directory is by running &#8220;cwd&#8221; (current working directory).</li>
-<li>You can change the directory by running &#8220;cd&#8221; followed by the directory. E.g. if you have a directory called &#8220;Documents&#8221; in your current working directory and you wish to change your current working directory to that directory, you can do this by running &#8220;cd Documents&#8221;.</li>
-<li>You can change to the <em>parent directory</em> by running &#8220;cd ..&#8221;.</li>
+<li>You can find out which files are in the <em>current directory</em> in the shell by running “ls”.</li>
+<li>You can find out what your current directory is by running “cwd” (current working directory).</li>
+<li>You can change the directory by running “cd” followed by the directory. E.g. if you have a directory called “Documents” in your current working directory and you wish to change your current working directory to that directory, you can do this by running “cd Documents”.</li>
+<li>You can change to the <em>parent directory</em> by running “cd ..”.</li>
 </ul>
-<p><em>Exercise</em>: Run &#8220;ls&#8221; in your shell to see the contents of the current working directory.</p>
+<p><em>Exercise</em>: Run “ls” in your shell to see the contents of the current working directory.</p>
 <p>Now we have some idea of how to navigate around the various directories in our Unix shell.</p>
-<p><em>Exercise</em>: Locate your hello.py in the shell. Change to that directory. If you can&#8217;t find it, try saving to another location. If you&#8217;re on Windows you may need to consult the Windows documentation on how to find the Windows files from WSL or vice versa. If you&#8217;re stuck, you may also try to open the editor from the shell e.g. by running &#8220;gedit hello.py&#8221; (if gedit is the editor you have installed). This way, after saving the file in your editor, the file should be saved in the current working directory.</p>
-<p>Now that you have your source file available, let&#8217;s run the interpreter with your source file as input by running:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python hello.py
+<p><em>Exercise</em>: Locate your hello.py in the shell. Change to that directory. If you can’t find it, try saving to another location. If you’re on Windows you may need to consult the Windows documentation on how to find the Windows files from WSL or vice versa. If you’re stuck, you may also try to open the editor from the shell e.g. by running “gedit hello.py” (if gedit is the editor you have installed). This way, after saving the file in your editor, the file should be saved in the current working directory.</p>
+<p>Now that you have your source file available, let’s run the interpreter with your source file as input by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python hello.py
 Hello world
 </pre></div>
 </div>
-<p>This should cause the Python interpreter to run your program which will output the text &#8220;Hello world&#8221; on the screen.</p>
+<p>This should cause the Python interpreter to run your program which will output the text “Hello world” on the screen.</p>
 <p><em>Exercise</em>: Run your program.</p>
-<p>If you made it here, congratulations. You&#8217;ve written your first software.</p>
+<p>If you made it here, congratulations. You’ve written your first software.</p>
 </div>
 
 
@@ -175,7 +164,7 @@ Hello world
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

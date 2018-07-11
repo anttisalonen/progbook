@@ -127,9 +127,31 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'guide.tex', project,
-     u'Antti Salonen', 'manual'),
+     u'Antti Salonen', 'scrbook'),
 ]
 
+latex_engine = 'xelatex'
+
+#    'fontpkg': r'''
+#\setmainfont{DejaVu Serif}
+#\setsansfont{DejaVu Sans}
+#\setmonofont{DejaVu Sans Mono}
+#''',
+
+latex_elements = {
+    'preamble': r'''
+\areaset[0.50in]{4.5in}{8in}
+\let\oldsection\section
+\renewcommand\section{\clearpage\oldsection}
+''',
+    'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
+    'printindex': r'\footnotesize\raggedright\printindex',
+    'papersize': r'paper=6in:9in,pagesize=pdftex,headinclude=on,footinclude=on',
+    'pointsize': r'12pt'
+}
+
+latex_show_urls = 'footnote'
+latex_toplevel_sectioning = 'chapter'
 
 # -- Options for manual page output ---------------------------------------
 

@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.7.3. More useful Python constructs &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -82,12 +69,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -100,16 +89,16 @@
             
   <div class="section" id="more-useful-python-constructs">
 <h1>2.7.3. More useful Python constructs<a class="headerlink" href="#more-useful-python-constructs" title="Permalink to this headline">¶</a></h1>
-<p>To demonstrate some of these constructs, let&#8217;s start by loading some data to work on. As before, let&#8217;s work on the 10,000 functions we defined before, and load this data from JSON.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/dev/stdin&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+<p>To demonstrate some of these constructs, let’s start by loading some data to work on. As before, let’s work on the 10,000 quadratic equations we defined before, and load this data from JSON.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/dev/stdin&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>We read the JSON data from stdin, meaning that we can define the input file on the command line like this:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python2 useful.py &lt; test.json
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python2 useful.py &lt; test.json
 </pre></div>
 </div>
 <p>In the following, we assume the data is stored in a list of lists, i.e.:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>
    <span class="o">[</span>
       <span class="m">6</span>.44887349885013,
       -6.80408794830961,
@@ -125,80 +114,80 @@
 <div class="section" id="list-comprehensions">
 <h2>2.7.3.1. List comprehensions<a class="headerlink" href="#list-comprehensions" title="Permalink to this headline">¶</a></h2>
 <p>List comprehensions are a shorthand notation for doing things with lists. They spare you at times from having to write tedious for loops.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>This line fetches the second column of our data, i.e. all the &#8216;b&#8217; values for our functions (hence the variable name, &#8216;b&#8217;s). What it means is:</p>
+<p>This line fetches the second column of our data, i.e. all the ‘b’ values for our quadratic equations (hence the variable name, ‘b’s). What it means is:</p>
 <blockquote>
-<div>&#8220;For each data point (l) in our input list (data), take the second element.&#8221;</div></blockquote>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Number of b&#39;s: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">))</span> <span class="c1"># prints 10,000</span>
+<div>“For each data point (l) in our input list (data), take the second element.”</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Number of b&#39;s: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">))</span> <span class="c1"># prints 10,000</span>
 </pre></div>
 </div>
-<p>The variable bs is a list of 10,000 numbers. With &#8220;len(bs)&#8221; we can obtain the length of the list. (With &#8220;str()&#8221; we can convert data to a string for output purposes.)</p>
-<p>We can now calculate the average of all &#8216;b&#8217;s:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">b_avg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">))</span>
+<p>The variable bs is a list of 10,000 numbers. With “len(bs)” we can obtain the length of the list. (With “str()” we can convert data to a string for output purposes.)</p>
+<p>We can now calculate the average of all ‘b’s:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">b_avg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>(We need to convert the denominator to float to ensure the result is also float.)</p>
-<p>In other words, while for delimiter separated data we could write a one-liner in awk to calculate the average, for JSON we&#8217;ll need to write about three lines of Python. On the other hand JSON is in general more powerful than delimiter separated data.</p>
+<p>In other words, while for delimiter separated data we could write a one-liner in awk to calculate the average, for JSON we’ll need to write about three lines of Python. On the other hand JSON is in general more powerful than delimiter separated data.</p>
 </div>
 <div class="section" id="slices">
 <h2>2.7.3.2. Slices<a class="headerlink" href="#slices" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">first_hundred</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span> <span class="c1"># len(first_hundred) is 100</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first_hundred</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span> <span class="c1"># len(first_hundred) is 100</span>
 </pre></div>
 </div>
-<p>Here, with &#8220;[:100]&#8221; we say &#8220;<em>slice</em> the list such that only the first hundred elements are included&#8221;.</p>
+<p>Here, with “[:100]” we say “<em>slice</em> the list such that only the first hundred elements are included”.</p>
 <p>You can also slice the end of the list by using negative index.</p>
 </div>
 <div class="section" id="sorting">
 <h2>2.7.3.3. Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h2>
 <p>Python has sorting built in:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>This line introduces a few concepts:</p>
 <ul class="simple">
 <li>By calling the function sorted(data), we can obtain a sorted copy of the data.</li>
-<li>sorted() takes an <em>optional parameter</em> &#8220;reverse&#8221; which we set to True. This means that the returned list will be sorted in descending order instead of ascending.</li>
+<li>sorted() takes an <em>optional parameter</em> “reverse” which we set to True. This means that the returned list will be sorted in descending order instead of ascending.</li>
 </ul>
 </div>
 <div class="section" id="useful-built-in-functions">
 <h2>2.7.3.4. Useful built in functions<a class="headerlink" href="#useful-built-in-functions" title="Permalink to this headline">¶</a></h2>
-<p>&#8220;sum&#8221; sums up all the numbers in a list:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sum_of_all_numbers</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+<p>“sum” sums up all the numbers in a list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sum_of_all_numbers</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>&#8220;all&#8221; returns True if all values are True in a list, and False otherwise. (&#8220;any&#8221; return True if any element in a list is True.)</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">all_numbers_in_list_are_above_zero</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+<p>“all” returns True if all values are True in a list, and False otherwise. (“any” return True if any element in a list is True.)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">all_numbers_in_list_are_above_zero</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">l</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>List comprehensions also support <em>filtering</em>, i.e. applying a function to only include certain elements in the resulting list:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">above_zero_functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">all_numbers_in_list_above_zero</span><span class="p">(</span><span class="n">f</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">above_zero_equations</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">all_numbers_in_list_above_zero</span><span class="p">(</span><span class="n">f</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p><em>Exercise</em>: For your data set, find the function where the sum of its values (a, b and c) is the highest.</p>
-<p><em>Exercise</em>: For your data set, find the function where the sum of its values (a, b and c) is the highest <em>and</em> all values a, b and c are negative.</p>
+<p><em>Exercise</em>: For your data set, find the quadratic equations where the sum of its values (a, b and c) is the highest.</p>
+<p><em>Exercise</em>: For your data set, find the quadratic equations where the sum of its values (a, b and c) is the highest <em>and</em> all values a, b and c are negative.</p>
 </div>
 <div class="section" id="tuples">
 <h2>2.7.3.5. Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">¶</a></h2>
-<p>Tuples in Python are quite similar to lists, but the size of a tuple is fixed. This means that while you can remove or add elements to a list in Python, this isn&#8217;t possible with tuples, making tuples a nice way to implicitly document a fixed nature of some of your data.</p>
+<p>Tuples in Python are quite similar to lists, but the size of a tuple is fixed. This means that while you can remove or add elements to a list in Python, this isn’t possible with tuples, making tuples a nice way to implicitly document a fixed nature of some of your data.</p>
 <p>Tuples can be created using parentheses:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>They can be accessed like you access lists:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">my_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># returns &#39;a&#39;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># returns &#39;a&#39;</span>
 <span class="n">my_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># returns 1</span>
 </pre></div>
 </div>
 <p>They can be used like any other variable, e.g. added in lists:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
 <span class="k">print</span> <span class="n">my_list</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># first element of the second element in the list, i.e. &#39;b&#39;</span>
 </pre></div>
 </div>
-<p>A fun function is &#8220;zip&#8221; - which zips two given lists to one list of tuples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<p>A fun function is “zip” - which zips two given lists to one list of tuples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span>
 <span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 
 <span class="n">zipped_list</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">)</span>
@@ -233,7 +222,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>1.5.2. Programming with vim &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -85,12 +72,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -103,17 +92,17 @@
             
   <div class="section" id="programming-with-vim">
 <h1>1.5.2. Programming with vim<a class="headerlink" href="#programming-with-vim" title="Permalink to this headline">¶</a></h1>
-<p>In order to use vim for programming, it&#8217;s usually a good idea to configure vim accordingly. Vim can be configured by entering commands in the file &#8220;~/.vimrc&#8221;, i.e. the hidden file called .vimrc in your $HOME directory. Let&#8217;s open this file in vim:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ vim ~/.vimrc
+<p>In order to use vim for programming, it’s usually a good idea to configure vim accordingly. Vim can be configured by entering commands in the file “~/.vimrc”, i.e. the hidden file called .vimrc in your $HOME directory. Let’s open this file in vim:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vim ~/.vimrc
 </pre></div>
 </div>
 <p>Depending on how vim is installed, it might already have some commands. What happens is vim automatically runs all the commands listed in the ~/.vimrc file in the command line mode when vim is started. For example, this line in ~/.vimrc:</p>
-<div class="highlight-vim"><div class="highlight"><pre><span></span><span class="k">set</span> <span class="nb">hlsearch</span>        <span class="c">&quot; Highlight search results</span>
+<div class="highlight-vim notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> <span class="nb">hlsearch</span>        <span class="c">&quot; Highlight search results</span>
 </pre></div>
 </div>
-<p>...means that when vim is started, it automatically runs &#8221;:set hlsearch&#8221;, which enables highlighting search results. (The quote character &#8221; in .vimrc denotes a comment until the end of the line.)</p>
+<p>…means that when vim is started, it automatically runs “:set hlsearch”, which enables highlighting search results. (The quote character ” in .vimrc denotes a comment until the end of the line.)</p>
 <p>I recommend you add at least the following lines to your .vimrc file:</p>
-<div class="highlight-vim"><div class="highlight"><pre><span></span><span class="nb">syntax</span> <span class="k">on</span>                 <span class="c">&quot; Syntax highlighting</span>
+<div class="highlight-vim notranslate"><div class="highlight"><pre><span></span><span class="nb">syntax</span> <span class="k">on</span>                 <span class="c">&quot; Syntax highlighting</span>
 <span class="k">set</span> <span class="nb">background</span><span class="p">=</span><span class="nb">dark</span>       <span class="c">&quot; Vim colours for dark background</span>
 <span class="k">set</span> <span class="nb">showcmd</span>               <span class="c">&quot; Show (partial) command in status line.</span>
 <span class="k">set</span> <span class="nb">showmatch</span>             <span class="c">&quot; Show matching brackets.</span>
@@ -138,24 +127,24 @@ autocmd <span class="nb">BufNewFile</span><span class="p">,</span><span class="n
 </pre></div>
 </div>
 <p>The first block sets a bunch of useful vim settings. The second one enables C indenting for .c and .cpp files (you may add move file extensions here depending on languages you use), and disables C indenting for python. The third block ensures only spaces are ever added in Python programs, not tabs, as mixing the two will break Python programs.</p>
-<p>Note that if you copy text outside vim and want to paste it in vim, enter the insert mode in vim first by pressing &#8220;i&#8221;, then paste. Otherwise you&#8217;ll be entering the text in normal mode, causing odd things to happen. Save your changes in .vimrc.</p>
+<p>Note that if you copy text outside vim and want to paste it in vim, enter the insert mode in vim first by pressing “i”, then paste. Otherwise you’ll be entering the text in normal mode, causing odd things to happen. Save your changes in .vimrc.</p>
 <div class="section" id="windows-in-vim">
 <h2>1.5.2.1. Windows in vim<a class="headerlink" href="#windows-in-vim" title="Permalink to this headline">¶</a></h2>
-<p>You can get a description of what each setting does using the &#8221;:help&#8221; command. For example, try running &#8221;:help hlsearch&#8221;. This opens another <em>window</em> in vim with the help on hlsearch. You can browse the window as you normally would. If you want move between windows, first press &#8220;ctrl+w&#8221;, then either arrow down or up to move to either the lower or upper window respectively. Move back and forth a couple of times.</p>
-<p>To close the window you&#8217;re currently in, run &#8221;:q&#8221;.</p>
-<p>Let&#8217;s run the command &#8221;:help hlsearch&#8221; again. The command line mode (&#8221;:&#8221;) supports history. This means you can type &#8221;:&#8221;, then press arrow up a couple of times, and you should see your previous &#8221;:help hlsearch&#8221; command. Press enter to run this again.</p>
-<p>If you have multiple windows open and want to quit all of them, i.e. quit vim, you can run &#8221;:qa&#8221; (quit all). If you had changes in one of the files you hadn&#8217;t yet saved, vim will warn you. You can save all unsaved changes by running &#8221;:wa&#8221;. You can quit all without saving your changes by running &#8221;:qa!&#8221;.</p>
+<p>You can get a description of what each setting does using the “:help” command. For example, try running “:help hlsearch”. This opens another <em>window</em> in vim with the help on hlsearch. You can browse the window as you normally would. If you want move between windows, first press “ctrl+w”, then either arrow down or up to move to either the lower or upper window respectively. Move back and forth a couple of times.</p>
+<p>To close the window you’re currently in, run “:q”.</p>
+<p>Let’s run the command “:help hlsearch” again. The command line mode (“:”) supports history. This means you can type “:”, then press arrow up a couple of times, and you should see your previous “:help hlsearch” command. Press enter to run this again.</p>
+<p>If you have multiple windows open and want to quit all of them, i.e. quit vim, you can run “:qa” (quit all). If you had changes in one of the files you hadn’t yet saved, vim will warn you. You can save all unsaved changes by running “:wa”. You can quit all without saving your changes by running “:qa!”.</p>
 </div>
 <div class="section" id="multiple-files-in-vim">
 <h2>1.5.2.2. Multiple files in vim<a class="headerlink" href="#multiple-files-in-vim" title="Permalink to this headline">¶</a></h2>
-<p>You can open multiple files in vim. For example, if you run &#8220;vim file.txt file2.txt&#8221;, you&#8217;ll open two buffers, one for each file. You can list all open buffers using the &#8221;:ls&#8221; command. Try it out.</p>
-<p>You can switch between the buffers with the &#8221;:b&#8221; command. For example, &#8221;:b1&#8221; opens the first buffer. &#8221;:b2&#8221; opens the second buffer, and so on. Make some changes in the second buffer (&#8220;file2.txt&#8221;), then change back to the first buffer. If you have &#8220;set hidden&#8221; in your .vimrc as per above, you should be able to change between buffers without having to save the file in between.</p>
-<p>You can always change to the previous buffer, whichever it was, by running &#8221;:b#&#8221;. Try this out. If you run &#8221;:ls&#8221;, you can see which buffer is the previous one (it&#8217;s marked with a #). Files with unsaved changes are marked with a +. You can save all changes with &#8221;:wa&#8221;.</p>
+<p>You can open multiple files in vim. For example, if you run “vim file.txt file2.txt”, you’ll open two buffers, one for each file. You can list all open buffers using the “:ls” command. Try it out.</p>
+<p>You can switch between the buffers with the “:b” command. For example, “:b1” opens the first buffer. “:b2” opens the second buffer, and so on. Make some changes in the second buffer (“file2.txt”), then change back to the first buffer. If you have “set hidden” in your .vimrc as per above, you should be able to change between buffers without having to save the file in between.</p>
+<p>You can always change to the previous buffer, whichever it was, by running “:b#”. Try this out. If you run “:ls”, you can see which buffer is the previous one (it’s marked with a #). Files with unsaved changes are marked with a +. You can save all changes with “:wa”.</p>
 </div>
 <div class="section" id="typing-code-in-vim">
 <h2>1.5.2.3. Typing code in vim<a class="headerlink" href="#typing-code-in-vim" title="Permalink to this headline">¶</a></h2>
-<p>Let&#8217;s quit vim and open a file &#8220;hello.c&#8221;. Let&#8217;s go to insert mode using &#8220;i&#8221; and then type (not copy paste) the following:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<p>Let’s quit vim and open a file “hello.c”. Let’s go to insert mode using “i” and then type (not copy paste) the following:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
@@ -163,47 +152,47 @@ autocmd <span class="nb">BufNewFile</span><span class="p">,</span><span class="n
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Exit the insert mode by pressing ESC and save your file using &#8221;:w&#8221;. Vim should have taken care of indentation for you.</p>
-<p>Typically, as part of the edit-compile-run cycle, you&#8217;d have vim running on one terminal window or tab, and have another window or tab for compiling and running the program. After you&#8217;ve saved the file, you could try compiling and running it e.g. by running &#8220;gcc -Wall -o hello hello.c &amp;&amp; ./hello&#8221; (assuming you have a C compiler set up).</p>
-<p>Alternatively, vim allows you to run shell commands from within vim. E.g. &#8221;:!ls&#8221; will run &#8220;ls&#8221; in the shell. You could also type e.g. &#8221;:!gcc hello.c &amp;&amp; ./a.out&#8221; to compile and run your program. Vim will then display the output of your command.</p>
-<p>In C, it&#8217;s optional for the main function to return a value. Let&#8217;s add a line in our program for this. You could enter the insert mode by pressing &#8220;i&#8221;, then navigating to the end of the printf line, then pressing enter and typing the new line, but vim provides a shortcut for this. The command &#8220;o&#8221; will automatically create a new line under the current one and enter the insert mode. Try this: move the cursor to the line with the printf statement, then, while in normal mode, press &#8220;o&#8221;, type &#8220;return 0;&#8221;, go back to normal mode by pressing ESC and save with &#8221;:w&#8221;.</p>
+<p>Exit the insert mode by pressing ESC and save your file using “:w”. Vim should have taken care of indentation for you.</p>
+<p>Typically, as part of the edit-compile-run cycle, you’d have vim running on one terminal window or tab, and have another window or tab for compiling and running the program. After you’ve saved the file, you could try compiling and running it e.g. by running “gcc -Wall -o hello hello.c &amp;&amp; ./hello”.</p>
+<p>Alternatively, vim allows you to run shell commands from within vim. E.g. “:!ls” will run “ls” in the shell. You could also type e.g. “:!gcc hello.c &amp;&amp; ./a.out” to compile and run your program. Vim will then display the output of your command.</p>
+<p>In C, it’s optional for the main function to return a value. Let’s add a line in our program for this. You could enter the insert mode by pressing “i”, then navigating to the end of the printf line, then pressing enter and typing the new line, but vim provides a shortcut for this. The command “o” will automatically create a new line under the current one and enter the insert mode. Try this: move the cursor to the line with the printf statement, then, while in normal mode, press “o”, type “return 0;”, go back to normal mode by pressing ESC and save with “:w”.</p>
 </div>
 <div class="section" id="search-and-replace">
 <h2>1.5.2.4. Search and replace<a class="headerlink" href="#search-and-replace" title="Permalink to this headline">¶</a></h2>
-<p>Let&#8217;s say we want to replace word &#8220;hello&#8221; in our program with &#8220;hullo&#8221;. The following command achieves this: &#8221;:%s/hello/hullo/g&#8221;. Let&#8217;s go through this one by one:</p>
+<p>Let’s say we want to replace word “hello” in our program with “hullo”. The following command achieves this: “:%s/hello/hullo/g”. Let’s go through this one by one:</p>
 <ul class="simple">
-<li>&#8221;:&#8221;: We enter the command line mode</li>
-<li>&#8220;%&#8221;: We want the search-and-replace to run for the whole file, not only the current line</li>
-<li>&#8220;s&#8221;: search and replace</li>
-<li>&#8220;/hello&#8221;: search for &#8220;hello&#8221;</li>
-<li>&#8220;/hullo&#8221;: replace with &#8220;hullo&#8221;</li>
-<li>&#8220;g&#8221;: replace all occurrences on each line, not only the first one</li>
+<li>“:”: We enter the command line mode</li>
+<li>“%”: We want the search-and-replace to run for the whole file, not only the current line</li>
+<li>“s”: search and replace</li>
+<li>“/hello”: search for “hello”</li>
+<li>“/hullo”: replace with “hullo”</li>
+<li>“g”: replace all occurrences on each line, not only the first one</li>
 </ul>
-<p>You can also simply search. If you want to e.g. search for printf, type, while in normal mode, &#8220;/printf&#8221;. This will move the cursor to printf and also highlight the word. To get to the next search match, use the command &#8220;n&#8221;. To get to the previous match, use &#8220;N&#8221;.</p>
-<p>Another very useful command is &#8220;*&#8221;. This searches for the word currently under the cursor. If you e.g. have a variable, you can use this to highlight and go to all places where the variable is used.</p>
+<p>You can also simply search. If you want to e.g. search for printf, type, while in normal mode, “/printf”. This will move the cursor to printf and also highlight the word. To get to the next search match, use the command “n”. To get to the previous match, use “N”.</p>
+<p>Another very useful command is “*”. This searches for the word currently under the cursor. If you e.g. have a variable, you can use this to highlight and go to all places where the variable is used.</p>
 </div>
 <div class="section" id="code-modifications">
 <h2>1.5.2.5. Code modifications<a class="headerlink" href="#code-modifications" title="Permalink to this headline">¶</a></h2>
-<p>Let&#8217;s now duplicate our printf statement by typing &#8220;Y&#8221; and &#8220;P&#8221; in the normal mode. We should now have two statements. They both print &#8220;hullo world&#8221;. Let&#8217;s change one of them back to &#8220;hello&#8221; manually. Originally, I assume your cursor is at the &#8220;p&#8221; of the word &#8220;printf&#8221;. To change &#8220;hullo&#8221; to &#8220;hello&#8221;, we could simply go to insert mode with &#8220;i&#8221;, move to the correct position with the arrow keys, use backspace to remove the &#8220;u&#8221;, and add &#8220;e&#8221;, but vim provides a few shortcuts here.</p>
-<p>First, we can move forwards one word at a time by pressing &#8220;w&#8221; in normal mode. Move forwards a few times. You can move backwards one word at a time with &#8220;b&#8221;. Normally, special symbols like parentheses (&#8220;(&#8221; and &#8221;)&#8221;) break words, such that you&#8217;ll need to press &#8220;w&#8221; a few times (or run e.g. &#8220;7w&#8221;) to go through one printf statement. You can also use capital letters (&#8220;W&#8221; and &#8220;B&#8221;) which only understand spaces to break words. Use &#8220;w&#8221; to get to the &#8220;h&#8221; in &#8220;hullo&#8221;.</p>
-<p>You can then move the cursor one character to the right using the arrow keys and press &#8220;s&#8221; which does both &#8220;x&#8221; and &#8220;i&#8221;, i.e. removes the current character and goes to insert mode. You can then press &#8220;e&#8221; to insert &#8220;e&#8221; and ESC to go back to normal mode.</p>
-<p>Another very useful command is &#8221;.&#8221;. Pressing the dot character re-does whichever command you ran. For example, the previous command replaced the character currently under the cursor with &#8220;e&#8221;. Move the cursor around, and press &#8221;.&#8221;. This will replace the character under the cursor with &#8220;e&#8221;.</p>
+<p>Let’s now duplicate our printf statement by typing “Y” and “P” in the normal mode. We should now have two statements. They both print “hullo world”. Let’s change one of them back to “hello” manually. Originally, I assume your cursor is at the “p” of the word “printf”. To change “hullo” to “hello”, we could simply go to insert mode with “i”, move to the correct position with the arrow keys, use backspace to remove the “u”, and add “e”, but vim provides a few shortcuts here.</p>
+<p>First, we can move forwards one word at a time by pressing “w” in normal mode. Move forwards a few times. You can move backwards one word at a time with “b”. Normally, special symbols like parentheses (“(” and “)”) break words, such that you’ll need to press “w” a few times (or run e.g. “7w”) to go through one printf statement. You can also use capital letters (“W” and “B”) which only understand spaces to break words. Use “w” to get to the “h” in “hullo”.</p>
+<p>You can then move the cursor one character to the right using the arrow keys and press “s” which does both “x” and “i”, i.e. removes the current character and goes to insert mode. You can then press “e” to insert “e” and ESC to go back to normal mode.</p>
+<p>Another very useful command is “.”. Pressing the dot character re-does whichever command you ran. For example, the previous command replaced the character currently under the cursor with “e”. Move the cursor around, and press “.”. This will replace the character under the cursor with “e”.</p>
 </div>
 <div class="section" id="indentation">
 <h2>1.5.2.6. Indentation<a class="headerlink" href="#indentation" title="Permalink to this headline">¶</a></h2>
-<p>You can shift a line to the left or right by &#8220;&lt;&lt;&#8221; or &#8220;&gt;&gt;&#8221; respectively. Try it out.</p>
-<p>The command &#8220;==&#8221; will indent the line correctly based on the line or lines above it.</p>
-<p>Now, for a test, let&#8217;s mess up the indentation and fix it. First, using &#8220;&lt;&lt;&#8221; and &#8220;&gt;&gt;&#8221;, have the braces (&#8220;{&#8221; and &#8220;}&#8221;) stick out to the right. Have the printf statements be indented differently.</p>
-<p>Then, type &#8220;gg=G&#8221; to correctly indent the whole file. You may recall that &#8220;gg&#8221; goes to the top of the file, &#8220;=&#8221; indents correctly, and &#8220;G&#8221; denotes the end of the file.</p>
+<p>You can shift a line to the left or right by “&lt;&lt;” or “&gt;&gt;” respectively. Try it out.</p>
+<p>The command “==” will indent the line correctly based on the line or lines above it.</p>
+<p>Now, for a test, let’s mess up the indentation and fix it. First, using “&lt;&lt;” and “&gt;&gt;”, have the braces (“{” and “}”) stick out to the right. Have the printf statements be indented differently.</p>
+<p>Then, type “gg=G” to correctly indent the whole file. You may recall that “gg” goes to the top of the file, “=” indents correctly, and “G” denotes the end of the file.</p>
 </div>
 <div class="section" id="working-with-braces">
 <h2>1.5.2.7. Working with braces<a class="headerlink" href="#working-with-braces" title="Permalink to this headline">¶</a></h2>
-<p>If you have the cursor on top of a start or end of any kind of parenthesis (&#8220;(&#8221;, &#8220;[&#8221;, &#8220;{&#8221;, either opening or closing), pressing &#8220;%&#8221; will jump to either the closing or opening of the parenthesis. You can use e.g. the command &#8220;di(&#8221; to delete all text within the &#8220;(&#8221; parenthesis the cursor is at. (Similarly you can delete a word with &#8220;dw&#8221;, or e.g. delete the next three words with &#8220;d3w&#8221;.) Another useful command is &#8220;c&#8221;, for changing text. Running &#8220;cc&#8221; will remove the current line and go to insert mode. &#8220;cw&#8221; will remove the current word and go to insert mode. Running &#8220;ci(&#8221; will remove the text within parenthesis and go to insert mode. Similarly, running &#8220;ci&#8221;&#8221; (that is, ci followed by quote) will remove the text within quotes (&#8221;) and go to insert mode.</p>
-<p>Combining the above, if you e.g. move the cursor to an opening brace, running &#8220;=%&#8221; will indent everything within the braces.</p>
+<p>If you have the cursor on top of a start or end of any kind of parenthesis (“(“, “[“, “{“, either opening or closing), pressing “%” will jump to either the closing or opening of the parenthesis. You can use e.g. the command “di(” to delete all text within the “(” parenthesis the cursor is at. (Similarly you can delete a word with “dw”, or e.g. delete the next three words with “d3w”.) Another useful command is “c”, for changing text. Running “cc” will remove the current line and go to insert mode. “cw” will remove the current word and go to insert mode. Running “ci(” will remove the text within parenthesis and go to insert mode. Similarly, running “ci”” (that is, ci followed by quote) will remove the text within quotes (“) and go to insert mode.</p>
+<p>Combining the above, if you e.g. move the cursor to an opening brace, running “=%” will indent everything within the braces.</p>
 </div>
 <div class="section" id="visual-mode">
 <h2>1.5.2.8. Visual mode<a class="headerlink" href="#visual-mode" title="Permalink to this headline">¶</a></h2>
-<p>Vim also has a visual mode which allows you to select parts of the file and apply operations to it. You can enter the visual mode by pressing &#8220;v&#8221;. Try entering the visual mode, then moving the cursor a few lines up or down, and then pressing &#8220;=&#8221;. This will indent the selected lines correctly.</p>
+<p>Vim also has a visual mode which allows you to select parts of the file and apply operations to it. You can enter the visual mode by pressing “v”. Try entering the visual mode, then moving the cursor a few lines up or down, and then pressing “=”. This will indent the selected lines correctly.</p>
 <p>This concludes our introduction to vim, and should cover a good portion of the functionality to improve productivity.</p>
 <p><em>Exercise</em>: Use vim in your future software development.</p>
 </div>
@@ -234,7 +223,7 @@ autocmd <span class="nb">BufNewFile</span><span class="p">,</span><span class="n
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

@@ -26,7 +26,7 @@ So in essence, a database needs the following:
 
 The interface is typically, though not always, a TCP/IP socket, such that a program can connect to it over web (or from the same machine as the database is running on), and then send commands and data to the database, and receive data.
 
-In some cases, like our programs that worked with 10,000 quadratic function definitions, as databases can be used to store data persistently, a database can be used instead of storing data in a file. The program would then read the data from the database instead of a file.
+In some cases, like our programs that worked with 10,000 quadratic equation definitions, as databases can be used to store data persistently, a database can be used instead of storing data in a file. The program would then read the data from the database instead of a file.
 
 SQL vs. NoSQL
 =============
@@ -70,7 +70,7 @@ Running these commands should result in your system compiling Redis and all its 
 
 .. topic:: Software versioning
 
-  The Redis package downloaded in the example was version 4.0.8. The typical convention is that the number '4' in this version denotes the *major* version number, '0' is the *minor* version number and '8' is the *patch level* version number. As Redis is software we'll write software to work against and hence has an API, it's important to note which version is being used. When we use Redis we assume that the documentation matches its behaviour - but this might change in future Redis versions. Typically, in new versions which only have the patch level changed, e.g. 4.0.9, all changes made will be *backwards compatible* - that means, all the code that was written against 4.0.8 will work for 4.0.9. This is typically also the case for minor versions, but a major version change can be expected to introduced changes that *break* backwards compatibility. That means, if we were to update our Redis server years later, it might end up e.g. as version 6.0.0, and if changes that break backwards compatibility were introduced and we tried running our code with that version we'd get errors.
+  The Redis package downloaded in the example was version 4.0.8. The typical convention is that the number '4' in this version denotes the *major* version number, '0' is the *minor* version number and '8' is the *patch level* version number. As Redis is software we'll write software to work against and hence has an API, it's important to note which version is being used. When we use Redis we assume that the documentation matches its behaviour - but this might change in future Redis versions. Typically, in new versions which only have the patch level changed, e.g. 4.0.9, all changes made will be *backwards compatible* - that means, all the code that was written against 4.0.8 will work for 4.0.9. This is typically also the case for minor versions, but a major version change can be expected to introduced changes that *break* backwards compatibility. That means, if we were to update our Redis server years later, it might end up e.g. as version 6.0.0, and if changes that break backwards compatibility were introduced and we tried running our old code with that version we'd get errors.
 
   Code that's ended up not working due to software it's dependent on having moved on to break backwards compatibility is said to have *bitrot*. Somewhat related, code that has been written over a longer time without consideration over maintainability or proper structure is said to have *organically grown*. Code for which the execution flow is hard to follow due to various branches and lack of structure is called *spaghetti code*.
 
@@ -126,6 +126,6 @@ Using Redis
 
 There are several ways to store data in Redis. While Redis can store simple string key-value pairs, it can do more, for example lists and sets. The best way depends on how you access and modify the data, but for getting a bit familiar with Redis we can envision the following exercises.
 
-*Exercise*: Write a Python program to read in your JSON file with 10,000 functions, and store it as a value, as a string, in Redis. The key isn't very important for this exercise.
+*Exercise*: Write a Python program to read in your JSON file with 10,000 quadratic equations, and store it as a value, as a string, in Redis. The key isn't very important for this exercise.
 
-*Exercise*: In your Python program that reads 10,000 functions from a file, add functionality to read the data from the Redis database instead. You'll need to parse the JSON string.
+*Exercise*: In your Python program that reads 10,000 quadratic equations from a file, add functionality to read the data from the Redis database instead. You'll need to parse the JSON string.

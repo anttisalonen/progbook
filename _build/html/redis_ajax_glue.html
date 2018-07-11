@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>3.1.4. Gluing AJAX and Redis together &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>2.9.4. Gluing AJAX and Redis together &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3.1.5. The page for starting a new game" href="guess_start.html" />
-    <link rel="prev" title="3.1.3. AJAX" href="ajax.html" />
+    <link rel="next" title="2.9.5. The page for starting a new game" href="guess_start.html" />
+    <link rel="prev" title="2.9.3. AJAX" href="ajax.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,24 +30,24 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="guess_start.html" title="3.1.5. The page for starting a new game"
+          <a href="guess_start.html" title="2.9.5. The page for starting a new game"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="ajax.html" title="3.1.3. AJAX"
+          <a href="ajax.html" title="2.9.3. AJAX"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="int_web_index.html" accesskey="U">3.1. Intermediate web development</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_web_index.html" accesskey="U">2.9. A bit more web development</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="ajax.html"
-                        title="previous chapter">3.1.3. AJAX</a></p>
+                        title="previous chapter">2.9.3. AJAX</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="guess_start.html"
-                        title="next chapter">3.1.5. The page for starting a new game</a></p>
+                        title="next chapter">2.9.5. The page for starting a new game</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -70,12 +57,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -87,12 +76,12 @@
           <div class="body" role="main">
             
   <div class="section" id="gluing-ajax-and-redis-together">
-<h1>3.1.4. Gluing AJAX and Redis together<a class="headerlink" href="#gluing-ajax-and-redis-together" title="Permalink to this headline">¶</a></h1>
-<p>After the exercises in the previous chapter we&#8217;re starting to have some pieces we can put together. Let&#8217;s start with a couple more exercises.</p>
+<h1>2.9.4. Gluing AJAX and Redis together<a class="headerlink" href="#gluing-ajax-and-redis-together" title="Permalink to this headline">¶</a></h1>
+<p>After the exercises in the previous chapter we’re starting to have some pieces we can put together. Let’s start with a couple more exercises.</p>
 <p><em>Exercise</em>: Modify your guessing game such that when the number was guessed correctly, send the number of guesses to the server in JSON.</p>
 <p><em>Exercise</em>: Connect to the Redis server in your Python module. Note that the code in the Python module will be executed automatically when you start Flask. This means you can connect to the Redis server in your top level Python code, without having to define a function for this.</p>
-<p>Now, let&#8217;s see if we can store the number of guesses in the Redis database. Here&#8217;s something to get you started:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<p>Now, let’s see if we can store the number of guesses in the Redis database. Here’s something to get you started:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -111,28 +100,28 @@
 </td></tr></table></div>
 <p>This introduces a few new concepts:</p>
 <ul class="simple">
-<li>Line 1: We want the URL /guess/finished to handle POST requests. We need to tell this to Flask explicitly by using the &#8220;methods&#8221; optional parameter in the &#64;app.route decorator.</li>
-<li>Line 3: As per Flask documentation, Flask provides the globally accessible object called &#8220;request&#8221; which includes all data associated with the request. More specifically, it allows us to access the POST data the user sent. If the user sent JSON, it&#8217;s available to us using the get_json() member function.</li>
-<li>Line 4: As the JSON data has been parsed by the get_json() function, it&#8217;s available to us in Python dictionary form.</li>
-<li>Line 5: We can query the current system time by calling the function &#8220;datetime.datetime.now()&#8221; (after importing datetime). Furthermore we can convert it (and almost any other data type including numbers) to a string by calling the str() function.</li>
-<li>Line 6: We can convert a Python dictionary to a JSON string by calling the &#8220;json.dumps()&#8221; function (after importing json).</li>
-<li>Line 7: Here, we insert data in the Redis database whereby the connection is represented by the &#8220;r&#8221; object. We use the member function &#8220;lpush&#8221; which ensures the value in the key-value pair is a list. More specifically, it:<ul>
+<li>Line 1: We want the URL /guess/finished to handle POST requests. We need to tell this to Flask explicitly by using the “methods” optional parameter in the &#64;app.route decorator.</li>
+<li>Line 3: As per Flask documentation, Flask provides the globally accessible object called “request” which includes all data associated with the request. More specifically, it allows us to access the POST data the user sent. If the user sent JSON, it’s available to us using the get_json() member function.</li>
+<li>Line 4: As the JSON data has been parsed by the get_json() function, it’s available to us in Python dictionary form.</li>
+<li>Line 5: We can query the current system time by calling the function “datetime.datetime.now()” (after importing datetime). Furthermore we can convert it (and almost any other data type including numbers) to a string by calling the str() function.</li>
+<li>Line 6: We can convert a Python dictionary to a JSON string by calling the “json.dumps()” function (after importing json).</li>
+<li>Line 7: Here, we insert data in the Redis database whereby the connection is represented by the “r” object. We use the member function “lpush” which ensures the value in the key-value pair is a list. More specifically, it:<ul>
 <li>Takes two parameters, the key and a value</li>
-<li>Creates a new list if the key didn&#8217;t yet exist, such that the value is a new list with a single element, namely the value</li>
+<li>Creates a new list if the key didn’t yet exist, such that the value is a new list with a single element, namely the value</li>
 <li>Appends the value to the end of the existing list if the key existed</li>
 </ul>
 </li>
 <li>Line 8: We return a string which will be available in JSON in the xhr.responseText variable.</li>
 </ul>
-<p>Here, we also implicitly defined the <em>database schema</em> for our data: the key is the maximum number that the computer could think of, as a string. For now it&#8217;s hard coded to 25 but we&#8217;ll make it configurable later. The value is a list whereby each element in a list describes a finished game. Each finished game should be represented in JSON, such that the JSON has a field describing the number of guesses required in the game as well as the timestamp when the game was finished. We&#8217;ll expand on this later.</p>
+<p>Here, we also implicitly defined the <em>database schema</em> for our data: the key is the maximum number that the computer could think of, as a string. For now it’s hard coded to 25 but we’ll make it configurable later. The value is a list whereby each element in a list describes a finished game. Each finished game should be represented in JSON, such that the JSON has a field describing the number of guesses required in the game as well as the timestamp when the game was finished. We’ll expand on this later.</p>
 <p>Note that there are different ways the schema could be defined for this use case - this is one of the simplest ways but in general, schemas can be defined in significantly different ways, depending on the use case, amount of data and any performance requirements.</p>
 <p><em>Exercise</em>: When your server receives the number of guesses from Javascript, store this in the Redis database.</p>
 <p>Here are some hints:</p>
 <ul class="simple">
 <li>If you need to purge the database, call r.flushdb(). This will erase all data in the database.</li>
-<li>You may want to write a small script or a URL handler to check the contents of the database to ensure you&#8217;re adding the correct data. You may alternatively want to use the Redis command line interface for this.</li>
+<li>You may want to write a small script or a URL handler to check the contents of the database to ensure you’re adding the correct data. You may alternatively want to use the Redis command line interface for this.</li>
 </ul>
-<p>We should now be able to store something resembling a high score list in a database, but we&#8217;re still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapters.</p>
+<p>We should now be able to store something resembling a high score list in a database, but we’re still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapters.</p>
 </div>
 
 
@@ -148,19 +137,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="guess_start.html" title="3.1.5. The page for starting a new game"
+          <a href="guess_start.html" title="2.9.5. The page for starting a new game"
              >next</a> |</li>
         <li class="right" >
-          <a href="ajax.html" title="3.1.3. AJAX"
+          <a href="ajax.html" title="2.9.3. AJAX"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="int_web_index.html" >3.1. Intermediate web development</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="int_web_index.html" >2.9. A bit more web development</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

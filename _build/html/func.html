@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.8.1. Callbacks and anonymous functions &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -85,12 +72,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -106,41 +95,41 @@
 <p>This chapter explains some concepts that will be needed later.</p>
 <div class="section" id="functions-as-first-order-values">
 <h2>2.8.1.1. Functions as first order values<a class="headerlink" href="#functions-as-first-order-values" title="Permalink to this headline">¶</a></h2>
-<p>The concept of functions as first order values means that variables can have functions as values like any other type. Code speaks more than a thousand words so let&#8217;s take a look at an example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<p>The concept of functions as first order values means that variables can have functions as values like any other type. Code speaks more than a thousand words so let’s take a look at an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">my_functions</span> <span class="o">=</span> <span class="p">[</span><span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="nb">sum</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">my_functions</span><span class="p">:</span>
     <span class="k">print</span> <span class="n">function</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This snippet defines two lists. The first one looks typical but the second has three functions in it: &#8220;min&#8221;, &#8220;max&#8221; and &#8220;sum&#8221;. All of these functions can take a list of numbers as input; they&#8217;ll return the smallest, largest and sum of the list respectively.</p>
+<p>This snippet defines two lists. The first one looks typical but the second has three functions in it: “min”, “max” and “sum”. All of these functions can take a list of numbers as input; they’ll return the smallest, largest and sum of the list respectively.</p>
 <p><em>Exercise</em>: What do you think this code will print? Try it out.</p>
 </div>
 <div class="section" id="callback">
 <h2>2.8.1.2. Callback<a class="headerlink" href="#callback" title="Permalink to this headline">¶</a></h2>
-<p>A callback, put shortly, is a function that will be called back. It follows the Hollywood principle - &#8220;don&#8217;t call us, we will call you&#8221;. Let&#8217;s take another look at our at our example of sorting a list in Python.</p>
+<p>A callback, put shortly, is a function that will be called back. It follows the Hollywood principle - “don’t call us, we will call you”. Let’s take another look at our at our example of sorting a list in Python.</p>
 <div class="section" id="sorting-in-python">
 <h3>2.8.1.2.1. Sorting in Python<a class="headerlink" href="#sorting-in-python" title="Permalink to this headline">¶</a></h3>
-<p>Recall that we can read in our data of 10,000 functions to a list of lists, such that we have a list with 10,000 entries, each a list of three elements, e.g. [[6.44, -6.80, 5.87], ...]. We can sort this list to get the first three elements like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+<p>Recall that we can read in our data of 10,000 functions to a list of lists, such that we have a list with 10,000 entries, each a list of three elements, e.g. [[6.44, -6.80, 5.87], …]. We can sort this list to get the first three elements like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>However, what if we wanted to sort by the third element in the inner lists, i.e. by the value &#8220;c&#8221; in the functions? The function &#8220;sorted&#8221; supports this by allowing us to supply a <em>callback</em> function which will be called for each element, such that the return value of the function defines the ordering of the resulting list. Let&#8217;s show the code:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_callback</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+<p>However, what if we wanted to sort by the third element in the inner lists, i.e. by the value “c” in the functions? The function “sorted” supports this by allowing us to supply a <em>callback</em> function which will be called for each element, such that the return value of the function defines the ordering of the resulting list. Let’s show the code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_callback</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
     <span class="c1"># values is a function, i.e. list with three elements</span>
     <span class="k">return</span> <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">my_callback</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>What happens here is that we define a function called &#8220;my_callback&#8221; which returns the third value in a list. That&#8217;s a fairly boring function, but we provide this function as a <em>callback</em> to the sorted() function, namely as the &#8220;key&#8221; parameter. As sorted() calls the key function for each element and uses that to define the ordering, we end up with the resulting list being sorted by the third value in the functions, i.e. the value &#8220;c&#8221;.</p>
+<p>What happens here is that we define a function called “my_callback” which returns the third value in a list. That’s a fairly boring function, but we provide this function as a <em>callback</em> to the sorted() function, namely as the “key” parameter. As sorted() calls the key function for each element and uses that to define the ordering, we end up with the resulting list being sorted by the third value in the functions, i.e. the value “c”.</p>
 </div>
 <div class="section" id="sorting-in-c">
 <h3>2.8.1.2.2. Sorting in C<a class="headerlink" href="#sorting-in-c" title="Permalink to this headline">¶</a></h3>
-<p>In the chapter &#8220;Big O notation&#8221; we touched upon sorting in C using the built in &#8220;qsort&#8221; function. Here&#8217;s the code again:</p>
+<p>In the chapter “Big O notation” we touched upon sorting in C using the built in “qsort” function. Here’s the code again:</p>
 <blockquote>
-<div><div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div><div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -186,22 +175,22 @@
 <div class="section" id="callbacks-in-javascript">
 <h3>2.8.1.2.3. Callbacks in Javascript<a class="headerlink" href="#callbacks-in-javascript" title="Permalink to this headline">¶</a></h3>
 <p>We already had an example when we defined a function to call at the page load phase:</p>
-<div class="highlight-js"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/* my code goes here */</span>
 <span class="p">}</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">init</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Here, our function &#8220;init&#8221; is defined as the callback function for the object &#8220;window&#8221;.</p>
+<p>Here, our function “init” is defined as the callback function for the object “window”.</p>
 </div>
 </div>
 <div class="section" id="anonymous-functions">
 <h2>2.8.1.3. Anonymous functions<a class="headerlink" href="#anonymous-functions" title="Permalink to this headline">¶</a></h2>
-<p>In some languages including Python and Javascript, we can define functions <em>anonymously</em>, meaning we don&#8217;t have to really define a function with a name, but merely a function without one. Going back to our Python example about providing a callback function as the &#8220;key&#8221; parameter, we wrote a function to return the third element of a list but this function is actually very simple. We can shorten our code by doing the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">])[:</span><span class="mi">3</span><span class="p">]</span>
+<p>In some languages including Python and Javascript, we can define functions <em>anonymously</em>, meaning we don’t have to really define a function with a name, but merely a function without one. Going back to our Python example about providing a callback function as the “key” parameter, we wrote a function to return the third element of a list but this function is actually very simple. We can shorten our code by doing the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">])[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>In Python, <em>lambda</em> is a key word for defining an anonymous function: instead of using &#8220;key=my_callback&#8221;, we set &#8220;key&#8221; to a lambda function, which is otherwise defined like a regular function but we skip the &#8220;return&#8221; keyword. This will have the same behaviour as our earlier example where we defined a named function as the callback.</p>
+<p>In Python, <em>lambda</em> is a key word for defining an anonymous function: instead of using “key=my_callback”, we set “key” to a lambda function, which is otherwise defined like a regular function but we skip the “return” keyword. This will have the same behaviour as our earlier example where we defined a named function as the callback.</p>
 </div>
 </div>
 
@@ -230,7 +219,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

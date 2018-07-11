@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.2.1. Big O notation &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -82,12 +69,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -101,29 +90,29 @@
   <div class="section" id="big-o-notation">
 <h1>2.2.1. Big O notation<a class="headerlink" href="#big-o-notation" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div><p>If you don&#8217;t know anything about computers, just remember that they are machines that do exactly what you tell them but often surprise you in the result.</p>
+<div><p>If you don’t know anything about computers, just remember that they are machines that do exactly what you tell them but often surprise you in the result.</p>
 <p class="attribution">&mdash;Richard Dawkins</p>
 </div></blockquote>
 <p>An algorithm is, succinctly put, a piece of code (or logic) which solves a class of problems.</p>
-<p>When discussing algorithms, it&#8217;s handy to understand what big O notation is.</p>
+<p>When discussing algorithms, it’s handy to understand what big O notation is.</p>
 <p>To put it short (possibly oversimplified), the big O notation is a notation to express the run time of an algorithm or a function in terms of the input size.</p>
-<p>Maybe it&#8217;s easiest to go through some examples.</p>
+<p>Maybe it’s easiest to go through some examples.</p>
 <div class="section" id="constant-time">
 <h2>2.2.1.1. Constant time<a class="headerlink" href="#constant-time" title="Permalink to this headline">¶</a></h2>
-<p>Let&#8217;s assume we have a C array with five integers in it.</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<p>Let’s assume we have a C array with five integers in it.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
 <span class="cm">/* define values in the array */</span>
 </pre></div>
 </div>
 <p>If you wanted to access, say, the third element of the array, conceptually this can be done in <em>constant time</em> - meaning that the time it takes to read the value of the variable is independent of the index:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="cm">/* whether we access the third or the fourth element, the run time is the same */</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="cm">/* whether we access the third or the fourth element, the run time is the same */</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="linear-time">
 <h2>2.2.1.2. Linear time<a class="headerlink" href="#linear-time" title="Permalink to this headline">¶</a></h2>
-<p>Now, let&#8217;s assume we want to check whether the number 42 is included in the array:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<p>Now, let’s assume we want to check whether the number 42 is included in the array:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">find_in_array</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num_elems</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num_to_find</span><span class="p">)</span>
 <span class="p">{</span>
@@ -151,22 +140,23 @@
 <p>Here, we have a for loop that goes through the whole array (in the worst case). If our array had 10 elements, it would need twice the time (conceptually speaking). Hence, the run time is <em>linear</em> to the size of the array.</p>
 <div class="topic">
 <p class="topic-title first">Decay to pointer</p>
-<p>You had an array, then you passed it to a function, and the function parameter is a pointer! What&#8217;s going on?</p>
+<p>You had an array, then you passed it to a function, and the function parameter is a pointer! What’s going on?</p>
 <p>In C, while array in general is not the same thing as a pointer, the two are sometimes interexchangable. In C, arrays are always passed by reference to a function, which means that the array is not automatically copied for the function (like a single int would be), but instead <em>a pointer</em> is passed to the function, whereby the pointer points to the first element in the array. Hence the array will <em>decay</em> into a pointer.</p>
 </div>
 <div class="topic">
-<p class="topic-title first">What do you mean &#8220;conceptually?&#8221;</p>
-<p>You may remember that the CPU has a few registers, and the computer (or mobile phone, or a car, or whatever) also has RAM for storing more data. When you declare an array of, say, five elements, the array is allocated in RAM, and whenever the CPU wants to do anything with any of the values in the array (e.g. compare the value of an element with another value like in our search), it has to fetch the value from the memory. What happens in practice for such a small array is that all of it will be fetched in a <em>cache</em> - an extra small memory which is faster for the CPU to access than RAM (but not as fast as registers). The cache is part of a <em>cache hierarchy</em> - register, level 1 (L1) cache, L2 cache, L3 cache and finally RAM.</p>
-<p>Using data in a register or fetching data from the L1 cache typically takes one CPU cycle. Fetching data from the L2 cache can take perhaps 10-15 cycles. Fetching data from RAM could take perhaps 200 cycles, or 200 times as long as fetching data from the L1 cache. If fetching data from the L1 cache is like getting a glass of water from the kitchen (one minute), fetching data from RAM is like going shopping for groceries and then cooking and eating dinner (three hours and 20 minutes).</p>
-<p>Because it&#8217;s silly to go shopping and cooking every time you need to eat or drink something, if the computer needs to go to RAM, it typically fetches a bunch of stuff from there that it thinks it needs later on, like the next few bytes beyond the one address it needs. Hence, if you define an array of five elements, and later look up the first one but the data isn&#8217;t cached but in RAM, the computer will bring the whole array to the L2 (and L1) cache. However, if you have an array with a million elements (if we assume 32 bits or 4 bytes per integer, that would be 4 megabytes) and randomly access elements in the array then you might need to go to RAM several times, or not, depending on your access pattern. However, <em>conceptually</em> the accesses are still in linear time.</p>
+<p class="topic-title first">What do you mean “conceptually?”</p>
+<p>You may remember that a CPU has instructions (like ADD, CMP etc.) which operate on data. Typically, the CPU has a few <em>registers</em> available for storing this data, each register typically being able to hold a <em>word</em>, i.e. the natural unit of data for the CPU, e.g. 32 bits. In addition, the computer (or mobile phone, or a car, or whatever) also has RAM for storing more data.</p>
+<p>When you declare an array of, say, five elements, the array is allocated in RAM, and whenever the CPU wants to do anything with any of the values in the array (e.g. compare the value of an element with another value like in our search), it has to fetch the value from the memory. What happens in practice for such a small array is that all of it will be fetched in a <em>cache</em> - an extra small memory which is faster for the CPU to access than RAM (but not as fast as registers). The cache is part of a <em>cache hierarchy</em> - register, level 1 (L1) cache, L2 cache, L3 cache and finally RAM.</p>
+<p>Using data in a register or fetching data from the L1 cache typically takes one CPU cycle (one cycle being the time it takes for the CPU <em>clock signal</em> to oscillate once between low and high). Fetching data from the L2 cache can take perhaps 10-15 cycles. Fetching data from RAM could take perhaps 200 cycles, or 200 times as long as fetching data from the L1 cache. If fetching data from the L1 cache is like getting a glass of water from the kitchen (one minute), fetching data from RAM is like going shopping for groceries and then cooking and eating dinner (three hours and 20 minutes).</p>
+<p>Because it’s silly to go shopping and cooking every time you need to eat or drink something, if the computer needs to go to RAM, it typically fetches a bunch of stuff from there that it thinks it needs later on, like the next few bytes beyond the one address it needs. Hence, if you define an array of five elements, and later look up the first one but the data isn’t cached but in RAM, the computer will bring the whole array to the L2 (and L1) cache. However, if you have an array with a million elements (if we assume 32 bits or 4 bytes per integer, that would be 4 megabytes) and randomly access elements in the array then you might need to go to RAM several times, or not, depending on your access pattern. However, <em>conceptually</em> the accesses are still in linear time.</p>
 </div>
 <p>In terms of big O notation, constant time is annotated O(1). Linear time, i.e. run time depends directly on the size of the array (n) is annotated O(n).</p>
 <p><em>Exercise</em>: Try to implement the above algorithm of checking if an element is in an array without copy-pasting the code or looking at it.</p>
 </div>
 <div class="section" id="quadratic-run-time">
 <h2>2.2.1.3. Quadratic run time<a class="headerlink" href="#quadratic-run-time" title="Permalink to this headline">¶</a></h2>
-<p>Furthermore, let&#8217;s assume we want to sort the array. We can invent a simple sorting algorithm for this:</p>
-<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>Furthermore, let’s assume we want to sort the array. We can invent a simple sorting algorithm for this:</p>
+<div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -219,16 +209,16 @@
 
 </pre></div>
 </td></tr></table></div>
-<p>This got a bit interesting so let&#8217;s go through this line by line.</p>
+<p>This got a bit interesting so let’s go through this line by line.</p>
 <ul class="simple">
 <li>Line 5: We define the <em>outer</em> for loop that goes through all elements, indexed with j.</li>
 <li>Line 6: We define a variable to store the index of the smallest number so far, initialised to j.</li>
 <li>Line 7: We define the <em>inner</em> for loop that goes through all elements from j + 1 until the end.</li>
-<li>Line 8-10: If the value at position i (which is bound to be &#8220;to the right&#8221; of j, if we imagine the array to be a row of boxes extending to the right) is smaller than the value at position smallest_index (which was initialised to j) then we note this index as the index with the smallest number in the rest of the array.</li>
-<li>Line 12-14: We finally <em>swap</em> the value at j with the smallest value we found. We swap by copying the value at j to a temporary variable, then putting the smallest value to j&#8217;th element, and finally putting the temporary value to where the smallest value was.</li>
+<li>Line 8-10: If the value at position i (which is bound to be “to the right” of j, if we imagine the array to be a row of boxes extending to the right) is smaller than the value at position smallest_index (which was initialised to j) then we note this index as the index with the smallest number in the rest of the array.</li>
+<li>Line 12-14: We finally <em>swap</em> the value at j with the smallest value we found. We swap by copying the value at j to a temporary variable, then putting the smallest value to j’th element, and finally putting the temporary value to where the smallest value was.</li>
 </ul>
-<p>Here&#8217;s an &#8220;animation&#8221; of how this algorithm would work, for an array of size 5:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>| 3 | 7 | 5 | 1 | 8 | # j = 0; i = 1 (points to 7) - smallest index is 0
+<p>Here’s an “animation” of how this algorithm would work, for an array of size 5:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>| 3 | 7 | 5 | 1 | 8 | # j = 0; i = 1 (points to 7) - smallest index is 0
 | 3 | 7 | 5 | 1 | 8 | # j = 0; i = 2 (points to 5) - smallest index is 0
 | 3 | 7 | 5 | 1 | 8 | # j = 0; i = 3 (points to 1) =&gt; smallest index is set to 3 (1 &lt; 3)
 | 3 | 7 | 5 | 1 | 8 | # j = 0; i = 4 - inner loop finished. We swap 0th element (3) with the 3rd element (1).
@@ -241,8 +231,8 @@
 | 1 | 3 | 5 | 7 | 8 | # j = 4 - inner loop not started because i would start at 5 - sort is done.
 </pre></div>
 </div>
-<p>This sorting algorithm is called <em>selection sort</em> and it&#8217;s one of the simpler ones.</p>
-<p>What&#8217;s the run time of this algorithm? We saw it has two for loops, and the number of iterations of both is only dependent (and linear to) the array size. Hence, the run time is <em>quadratic</em> to n - in terms of big O notation, O(n<sup>2</sup>). For every new element in the array we&#8217;ll have to run the inner loop <em>and</em> the outer loop once more. If n = 10, we have 9 * 8 = 72 iterations. If n = 100, we have 99 * 98 = 9702 iterations.</p>
+<p>This sorting algorithm is called <em>selection sort</em> and it’s one of the simpler ones.</p>
+<p>What’s the run time of this algorithm? We saw it has two for loops, and the number of iterations of both is only dependent (and linear to) the array size. Hence, the run time is <em>quadratic</em> to n - in terms of big O notation, O(n<sup>2</sup>). For every new element in the array we’ll have to run the inner loop <em>and</em> the outer loop once more. If n = 10, we have 9 * 8 = 72 iterations. If n = 100, we have 99 * 98 = 9702 iterations.</p>
 <p><em>Exercise</em>: Try to implement the above algorithm of sorting an array without copy-pasting the code or looking at it.</p>
 </div>
 <div class="section" id="logarithmic-run-time">
@@ -254,18 +244,18 @@
 <p>The final common run time class is O(n log n) - logarithmic run time multiplied with a linear run time. This means the run time is generally dominated by the linear part as the logarithmic run time grows relatively slowly. O(n log n) is also been proven to be the fastest possible run time class for a generic sorting algorithm.</p>
 <div class="topic">
 <p class="topic-title first">Fast sorting algorithms</p>
-<p>I won&#8217;t go through the implementation of a fast sorting algorithm here. Interested readers can look them up online. Suffice to say, there are two popular fast sorting algorithms: <em>quicksort</em> and <em>mergesort</em>.</p>
-<p>Quicksort works by picking one element at random, moving smaller elements than the selected one to its left and larger ones to its right and recursively sorting the elements on the left and on the right: for all the elements on the left, you pick one element at random, then move smaller elements than the selected one to its left and larger ones to its right and recursively sort the elements on the left and on the right. At some point you only have one or zero elements to consider and have thus sorted that part of the array. While quicksort has O(n<sup>2</sup>) run time in the worst case, it&#8217;s O(n log n) in the typical case.</p>
+<p>I won’t go through the implementation of a fast sorting algorithm here. Interested readers can look them up online. Suffice to say, there are two popular fast sorting algorithms: <em>quicksort</em> and <em>mergesort</em>.</p>
+<p>Quicksort works by picking one element at random, moving smaller elements than the selected one to its left and larger ones to its right and recursively sorting the elements on the left and on the right: for all the elements on the left, you pick one element at random, then move smaller elements than the selected one to its left and larger ones to its right and recursively sort the elements on the left and on the right. At some point you only have one or zero elements to consider and have thus sorted that part of the array. While quicksort has O(n<sup>2</sup>) run time in the worst case, it’s O(n log n) in the typical case.</p>
 <p>Merge sort divides the original array into sub-arrays of one element each (hence trivially sorted), and then works backwards by merging each sub-array, sorting the resulting array in the process. Merge sort has O(n log n) run time.</p>
-<p>Typically it&#8217;s rare for a programmer to have to implement a sort algorithm, especially a fast one. All main programming languages (even C) provide sorting as part of the standard library. For example, Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<p>Typically it’s rare for a programmer to have to implement a sort algorithm, especially a fast one. All main programming languages (even C) provide sorting as part of the standard library. For example, Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_array</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_array</span>
 <span class="go">[1, 3, 5, 7, 8]</span>
 </pre></div>
 </div>
-<p>(Python uses &#8220;Timsort&#8221; as its sorting algorithm, which is merge sort when n is large and insertion sort when n is small.) In C, one would do:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<p>(Python uses “Timsort” as its sorting algorithm, which is merge sort when n is large and insertion sort when n is small.) In C, one would do:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">comparison</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span>
@@ -284,7 +274,7 @@
 
 </pre></div>
 </div>
-<p>For qsort() in C, one has to define a <em>callback function</em> - a function that qsort() calls to get information on what the ordering between the elements should be, as well as the <em>size of</em> each element in the array. We&#8217;ll touch more on these constructs later.</p>
+<p>For qsort() in C, one has to define a <em>callback function</em> - a function that qsort() calls to get information on what the ordering between the elements should be, as well as the <em>size of</em> each element in the array. We’ll touch more on these constructs later.</p>
 </div>
 <p><em>Exercise</em>: There are lots of nice visualisations on how sorting algorithms work, for example on Wikipedia. Check out one or two.</p>
 </div>
@@ -315,7 +305,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 Writing a toy web server
 ------------------------
 
-After using Flask a bit, you might have wondered "what's actually happening?"
+After having used Flask a bit, you might have wondered "what's actually happening?"
 
 In essence, Flask receives HTTP requests from the browser over the network, and sends HTML data back to the browser which then displays it. But we should dig a bit further here.
 

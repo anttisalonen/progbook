@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>1.1.8. Learning to learn &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -49,7 +36,7 @@
           <a href="prog3.html" title="1.1.7. The basics of programming in C"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="intro_index.html" accesskey="U">1.1. Introduction</a> &#187;</li> 
       </ul>
     </div>
@@ -70,12 +57,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -90,25 +79,25 @@
 <h1>1.1.8. Learning to learn<a class="headerlink" href="#learning-to-learn" title="Permalink to this headline">¶</a></h1>
 <p>There are a few concepts to point out about learning programming.</p>
 <p>When learning a programming language, there are a few different areas that need to be learned. One is the syntax. For example, the syntax for branches in Python looks like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
     <span class="k">print</span> <span class="s1">&#39;a is greater than 5&#39;</span>
 </pre></div>
 </div>
 <p>While for example in C it would look like this:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a is greater than 5</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Another is the standard library, i.e. the library included as part of the language implementation. For example, as part of its standard library, Python has a module for math functions, called &#8220;math&#8221;:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<p>Another is the standard library, i.e. the library included as part of the language implementation. For example, as part of its standard library, Python has a module for math functions, called “math”:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 
 <span class="k">print</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
 </pre></div>
 </div>
-<p>The &#8220;math&#8221; module has lots of functions, and the <em>reference</em> for them can be accessed in the Python interpreter e.g. by running the following commands:</p>
-<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<p>The “math” module has lots of functions, and the <em>reference</em> for them can be accessed in the Python interpreter e.g. by running the following commands:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -121,11 +110,11 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 &gt;&gt;&gt; help<span class="o">(</span>math<span class="o">)</span>
 </pre></div>
 </td></tr></table></div>
-<p>That is, on line 1 we run &#8220;python2&#8221; in shell to start the Python interactive interpreter. On line 5 we import the math module, and on line 6 we ask for the help for that module.</p>
-<p><em>Exercise</em>: Check out the help for the math module in Python. You can exit the help screen by pressing &#8220;q&#8221;. You can exit the Python interpreter by pressing ctrl+d.</p>
-<p>The concept of reference is important: it&#8217;s a factual listing of a library or a programming language. It typically doesn&#8217;t include examples or tutorials but is useful for getting a deeper understanding of a subject.</p>
-<p>As another example, we will introduce the Unix command &#8220;ls&#8221;, a tool for listing files. In order to gain initial understanding of this tool, this book will give a couple of examples:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls
+<p>That is, on line 1 we run “python2” in shell to start the Python interactive interpreter. On line 5 we import the math module, and on line 6 we ask for the help for that module.</p>
+<p><em>Exercise</em>: Check out the help for the math module in Python. You can exit the help screen by pressing “q”. You can exit the Python interpreter by pressing ctrl+d.</p>
+<p>The concept of reference is important: it’s a factual listing of a library or a programming language. It typically doesn’t include examples or tutorials but is useful for getting a deeper understanding of a subject.</p>
+<p>As another example, we will introduce the Unix command “ls”, a tool for listing files. In order to gain initial understanding of this tool, this book will give a couple of examples:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ls
 genindex.html  index.html  objects.inv                regex.html   searchindex.js  _static
 _images        js.html     python_generate_file.html  search.html  _sources        unix.html
 $ ls -l
@@ -137,8 +126,8 @@ drwxr-xr-x <span class="m">2</span> antti users  <span class="m">4096</span> Feb
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>This example shows that merely running &#8220;ls&#8221; will list the files, while adding the switch &#8220;-l&#8221; will give more information, such as the last modify time of the files. However, &#8220;ls&#8221; has a lot more possible switches which are not all covered in this book, although they will become useful and will to some extent be necessary to use, learn and understand as a software engineer. Hence it&#8217;ll be important to refer to the reference of the command to get an overview. This can typically be done either by passing the switch &#8220;&#8211;help&#8221; to the relevant command, or reading the manual for the command (by running &#8220;man&#8221;, e.g. &#8220;man ls&#8221;). For example:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls --help
+<p>This example shows that merely running “ls” will list the files, while adding the switch “-l” will give more information, such as the last modify time of the files. However, “ls” has a lot more possible switches which are not all covered in this book, although they will become useful and will to some extent be necessary to use, learn and understand as a software engineer. Hence it’ll be important to refer to the reference of the command to get an overview. This can typically be done either by passing the switch “–help” to the relevant command, or reading the manual for the command (by running “man”, e.g. “man ls”). For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ls --help
 Usage: ls <span class="o">[</span>OPTION<span class="o">]</span>... <span class="o">[</span>FILE<span class="o">]</span>...
 List information about the FILEs <span class="o">(</span>the current directory by default<span class="o">)</span>.
 Sort entries alphabetically <span class="k">if</span> none of -cftuvSUX nor --sort is specified.
@@ -149,10 +138,10 @@ Mandatory arguments to long options are mandatory <span class="k">for</span> sho
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>If you run &#8220;man ls&#8221; you&#8217;ll open the manual page which you can exit by pressing &#8220;q&#8221;.</p>
+<p>If you run “man ls” you’ll open the manual page which you can exit by pressing “q”.</p>
 <p><em>Exercise</em>: Open the manual page for ls.</p>
-<p>The same principle applies not only to Unix commands, but also to programming languages as well as standard and non-standard libraries. For example, for most programming languages there is either a language specification or reference material available which should be consulted whenever questions arise about a specific behaviour in a programming language. Similarly, libraries typically come with references. The standard library for C is included in the Unix man pages, such that for example running &#8220;man scanf&#8221; will present a detailed documentation of the scanf() function family. For other libraries, the website of the library or other similar material should be consulted. Many libraries also install their own man pages as part of the library installation.</p>
-<p>Terminology wise, this book will use the terms &#8220;API&#8221; and &#8220;library&#8221; interexchangably. The acronym &#8220;API&#8221; stands for &#8220;Application Programming Interface&#8221; and generally means the interface, i.e. the available functions, variables and other constructs, that a library provides to make use of the library. For example, if one were to use the libcurl library, a library for downloading files via URLs, one would want to find the reference of the library on the webpage of the software.</p>
+<p>The same principle applies not only to Unix commands, but also to programming languages as well as standard and non-standard libraries. For example, for most programming languages there is either a language specification or reference material available which should be consulted whenever questions arise about a specific behaviour in a programming language. Similarly, libraries typically come with references. The standard library for C is included in the Unix man pages, such that for example running “man scanf” will present a detailed documentation of the scanf() function family. For other libraries, the website of the library or other similar material should be consulted. Many libraries also install their own man pages as part of the library installation.</p>
+<p>Terminology wise, this book will use the terms “API” and “library” interexchangably. The acronym “API” stands for “Application Programming Interface” and generally means the interface, i.e. the available functions, variables and other constructs, that a library provides to make use of the library. For example, if one were to use the libcurl library, a library for downloading files via URLs, one would want to find the reference of the library on the webpage of the software.</p>
 <p><em>Exercise</em>: Look up the man page for printf().</p>
 <p><em>Exercise</em>: Find the reference of the libcurl library online. See if you can find both the entry point to the reference as well as the reference of a specific libcurl function, for example curl_easy_init().</p>
 </div>
@@ -176,13 +165,13 @@ Mandatory arguments to long options are mandatory <span class="k">for</span> sho
           <a href="prog3.html" title="1.1.7. The basics of programming in C"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. Introduction</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="intro_index.html" >1.1. Introduction</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.5.2. Some related Unix tools &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -79,12 +66,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -101,11 +90,11 @@
 <h2>2.5.2.1. Hashing<a class="headerlink" href="#hashing" title="Permalink to this headline">¶</a></h2>
 <p>You may have wondered what the hashes are about that git uses.</p>
 <p>In general, a hash function takes any data as input and creates a hash value of the data. You can try this yourself by e.g. running the following command on Unix:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sha1sum with.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sha1sum with.py
 4f2fb68a29c3a1f9978be115a1798371a57e9ae9  with.py
 </pre></div>
 </div>
-<p>Here, we run the command sha1sum which calculates the SHA-1 hash of the file with.py. If you don&#8217;t have sha1sum you may try e.g. md5sum (or possibly md5 on Mac). Hash functions can have the following properties:</p>
+<p>Here, we run the command sha1sum which calculates the SHA-1 hash of the file with.py. If you don’t have sha1sum you may try e.g. md5sum (or possibly md5 on Mac). Hash functions can have the following properties:</p>
 <ul class="simple">
 <li>Changing a file insignificantly (e.g. by adding one byte) may significantly change the hash (e.g. result in a completely different hash)</li>
 <li>The hash function may be <em>cryptographically secure</em> - i.e. it is difficult or impossible to modify the input data such that the resulting hash would still be the same</li>
@@ -115,8 +104,8 @@
 </div>
 <div class="section" id="diff-and-patch">
 <h2>2.5.2.2. diff and patch<a class="headerlink" href="#diff-and-patch" title="Permalink to this headline">¶</a></h2>
-<p>&#8220;git diff&#8221; gives a practical output of a difference between a file before and after a change:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git diff
+<p>“git diff” gives a practical output of a difference between a file before and after a change:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git diff
 diff --git a/with.py b/with.py
 index f61db97..d63b0bf <span class="m">100644</span>
 --- a/with.py
@@ -128,8 +117,8 @@ index f61db97..d63b0bf <span class="m">100644</span>
 +        f.write<span class="o">(</span><span class="s2">&quot;%f %f\n&quot;</span> % <span class="o">(</span><span class="m">0</span>.0, <span class="m">1</span>.0<span class="o">))</span>
 </pre></div>
 </div>
-<p>In general, you can <em>diff</em> any two files by running the utility &#8220;diff&#8221;. Conventionally the switch &#8220;-u&#8221; is used to display the output in <em>unified form</em>, which is also the default git uses:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ diff -u with2.py with.py
+<p>In general, you can <em>diff</em> any two files by running the utility “diff”. Conventionally the switch “-u” is used to display the output in <em>unified form</em>, which is also the default git uses:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ diff -u with2.py with.py
 --- with2.py        <span class="m">2018</span>-03-25 <span class="m">22</span>:34:47.530840487 +0200
 +++ with.py <span class="m">2018</span>-03-25 <span class="m">22</span>:05:25.477035716 +0200
 @@ -1,3 +1,3 @@
@@ -139,12 +128,12 @@ index f61db97..d63b0bf <span class="m">100644</span>
 +        f.write<span class="o">(</span><span class="s2">&quot;%f %f %f\n&quot;</span> % <span class="o">(</span><span class="m">0</span>.0, <span class="m">0</span>.5, <span class="m">1</span>.0<span class="o">)</span>
 </pre></div>
 </div>
-<p>What can be useful is redirecting diff output to a file. There&#8217;s another utility called <em>patch</em> which takes the output from diff to actually make changes to a file, i.e. patch them. Let&#8217;s say someone sent us the above diff output and we had our file with.py which we wanted to patch:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ patch -p0 &lt; with.diff
+<p>What can be useful is redirecting diff output to a file. There’s another utility called <em>patch</em> which takes the output from diff to actually make changes to a file, i.e. patch them. Let’s say someone sent us the above diff output and we had our file with.py which we wanted to patch:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ patch -p0 &lt; with.diff
 patching file with.py
 </pre></div>
 </div>
-<p>Here, &#8220;patch&#8221; will modify our with.py according to the diff.</p>
+<p>Here, “patch” will modify our with.py according to the diff.</p>
 </div>
 </div>
 
@@ -173,7 +162,7 @@ patching file with.py
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

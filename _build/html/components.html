@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>4.1.2. Breaking software down to components &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.4.2. Breaking software down to components &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.1.3. Drawing to a screen using SDL2" href="sdl.html" />
-    <link rel="prev" title="4.1.1. Introduction to larger software" href="design_intro.html" />
+    <link rel="next" title="3.4.3. Drawing to a screen using SDL2" href="sdl.html" />
+    <link rel="prev" title="3.4.1. Introduction to larger software" href="design_intro.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,32 +30,32 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="sdl.html" title="4.1.3. Drawing to a screen using SDL2"
+          <a href="sdl.html" title="3.4.3. Drawing to a screen using SDL2"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="design_intro.html" title="4.1.1. Introduction to larger software"
+          <a href="design_intro.html" title="3.4.1. Introduction to larger software"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.1.2. Breaking software down to components</a><ul>
-<li><a class="reference internal" href="#engineering-specification">4.1.2.1. Engineering specification</a></li>
+<li><a class="reference internal" href="#">3.4.2. Breaking software down to components</a><ul>
+<li><a class="reference internal" href="#engineering-specification">3.4.2.1. Engineering specification</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="design_intro.html"
-                        title="previous chapter">4.1.1. Introduction to larger software</a></p>
+                        title="previous chapter">3.4.1. Introduction to larger software</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sdl.html"
-                        title="next chapter">4.1.3. Drawing to a screen using SDL2</a></p>
+                        title="next chapter">3.4.3. Drawing to a screen using SDL2</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -78,12 +65,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -95,7 +84,7 @@
           <div class="body" role="main">
             
   <div class="section" id="breaking-software-down-to-components">
-<h1>4.1.2. Breaking software down to components<a class="headerlink" href="#breaking-software-down-to-components" title="Permalink to this headline">¶</a></h1>
+<h1>3.4.2. Breaking software down to components<a class="headerlink" href="#breaking-software-down-to-components" title="Permalink to this headline">¶</a></h1>
 <blockquote>
 <div><p>Controlling complexity is the essence of computer programming.</p>
 <p class="attribution">&mdash;Brian Kernighan</p>
@@ -110,10 +99,10 @@
 <p>Here, round items represent some or other kind of data, while square, grey boxes represent logic, or software components.</p>
 <p>We then identified our first component:</p>
 <img alt="_images/plan2.png" src="_images/plan2.png" />
-<p>Now, let&#8217;s find out how to generate these 23 text labels. The first two are relatively trivial in that we don&#8217;t depend on the main inputs for them. How do we know whether we should use the GPS data or the schedule data? The requirement spec says we should use GPS data when available and schedule data otherwise. It seems just figuring out which data to use or not is worthy of another component. This also implies we could have one component processing the GPS data, and one component processing the schedule data.</p>
+<p>Now, let’s find out how to generate these 23 text labels. The first two are relatively trivial in that we don’t depend on the main inputs for them. How do we know whether we should use the GPS data or the schedule data? The requirement spec says we should use GPS data when available and schedule data otherwise. It seems just figuring out which data to use or not is worthy of another component. This also implies we could have one component processing the GPS data, and one component processing the schedule data.</p>
 <p>So we could have one component that reads in some kind of GPS data and some kind of schedule data, with the goal of outputting 23 text labels. What should the input formats be for this component? The inputs will be generated by the components handling the GPS and the schedule data, and it seems simplest to have a single format for these two. Putting all of this together, we have:</p>
 <img alt="_images/plan3.png" src="_images/plan3.png" />
-<p>Now, it looks like we&#8217;ve identified our main components. We can then further define the functionality of the components as well as the interfaces. First the components:</p>
+<p>Now, it looks like we’ve identified our main components. We can then further define the functionality of the components as well as the interfaces. First the components:</p>
 <ul class="simple">
 <li>Screen drawing: takes 23 strings as input, with the purpose of drawing these on the screen</li>
 <li>Merge GPS and schedule data: takes two incoming bus data sets as input, finds the seven buses that seem to arrive at the bus stop first, preferring buses with GPS information if available, and generates 23 strings as output which identify the bus route numbers, destinations and the times of arrival. The input data will need to include the start number so we can match GPS entries with schedule entries.</li>
@@ -125,20 +114,20 @@
 <li>23 text labels: 23 strings (trivial, e.g. in an array).</li>
 <li>Incoming bus data (same format for whichever source): for each incoming bus, the route number, the start number, the type of arrival (estimated from GPS data or planned) and the time need to be captured. The data format itself could then be e.g. an array of structs, whereby each struct contains this information.</li>
 </ul>
-<p>It&#8217;s worth pointing out that identifying the components and the interfaces is closer to software design and architecture, and less about actual coding, and hence there is no obvious right or wrong answer - different people will end up with different designs.</p>
+<p>It’s worth pointing out that identifying the components and the interfaces is closer to software design and architecture, and less about actual coding, and hence there is no obvious right or wrong answer - different people will end up with different designs.</p>
 <div class="section" id="engineering-specification">
-<h2>4.1.2.1. Engineering specification<a class="headerlink" href="#engineering-specification" title="Permalink to this headline">¶</a></h2>
+<h2>3.4.2.1. Engineering specification<a class="headerlink" href="#engineering-specification" title="Permalink to this headline">¶</a></h2>
 <p>Now, as mentioned before, we will write two different engineering specifications and have two different implementations to fulfil the requirements, for the purpose of understanding the different trade offs between software design decisions.</p>
 <p>The first specification will follow the <em>Unix philosophy</em>. The Unix philosophy originates from the developers of Unix, including Ken Thompson, Dennis Ritchie and Doug McIlroy, and emphasises minimalist, modular software development. It was later summarised this way:</p>
 <blockquote>
 <div><p>This is the Unix philosophy: Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface.</p>
 <p class="attribution">&mdash;Doug McIlroy</p>
 </div></blockquote>
-<p>The Unix philosophy has also been summarised as &#8220;KISS&#8221;, or &#8220;Keep it simple, stupid&#8221;. Much has been written about the Unix philosophy but applying it to our problem at hand, we could arrive at the following engineering spec:</p>
+<p>The Unix philosophy has also been summarised as “KISS”, or “Keep it simple, stupid”. Much has been written about the Unix philosophy but applying it to our problem at hand, we could arrive at the following engineering spec:</p>
 <div class="topic">
 <p class="topic-title first">Engineering spec 1</p>
 <p>The software shall consist of four executables: parse_gps, sched, merge and display to implement the main behaviour and a main executable, bus, to glue them together.</p>
-<p>&#8220;parse_gps&#8221; shall take three parameters: current time, filename identifying the current GPS data (gps_raw.txt) and filename identifying the historical GPS data (gps.txt). It shall output, to stdout, the incoming bus data in the following format:</p>
+<p>“parse_gps” shall take three parameters: current time, filename identifying the current GPS data (gps_raw.txt) and filename identifying the historical GPS data (gps.txt). It shall output, to stdout, the incoming bus data in the following format:</p>
 <ul class="simple">
 <li>Five integers per row</li>
 <li>Several rows (as many as necessary)</li>
@@ -149,19 +138,19 @@
 <li>Fifth is the identifier for the type: 0 for GPS data, 1 for schedule data, 2 if the bus has already passed the bus stop</li>
 </ul>
 <p>For buses that have already passed the bus stop, the time (hour and minute) can be zeroes.</p>
-<p>&#8220;parse_gps&#8221; shall read in the two input files, then, for all buses with current GPS data, calculate the estimated arrival time, and finally print out the incoming and passed buses in the format as specified above.</p>
-<p>&#8220;sched&#8221; shall take two parameters: current time and filename identifying the schedule data (sched.txt). It shall output, to stdout, the incoming bus data in the same format as &#8220;parse_gps&#8221;. It shall find the next 50 buses planned to approach the bus stop and output the data for these.</p>
-<p>&#8220;merge&#8221; shall take four parameters: our bus stop name, current time, and filenames for the output of &#8220;parse_gps&#8221; and &#8220;sched&#8221;. It shall output, to stdout, 23 lines, each one containing the text for one label, from top to bottom, from left to right, i.e. the bus stop name, current time, then route number, destination and arrival time for the next seven buses.</p>
-<p>&#8220;display&#8221; shall take one parameter: a filename for the output of &#8220;merge&#8221;. It shall output, to a window in a test environment, the bus information as specified in the requirements. It shall read the contents of the input file every ten seconds to update the output view.</p>
-<p>&#8220;bus&#8221; shall take no parameters. It shall run &#8220;parse_gps&#8221;, &#8220;sched&#8221; and &#8220;merge&#8221; every ten seconds, such that the final output file is updated. It shall start &#8220;display&#8221; in the background with the output of &#8220;merge&#8221; as the input parameter.</p>
+<p>“parse_gps” shall read in the two input files, then, for all buses with current GPS data, calculate the estimated arrival time, and finally print out the incoming and passed buses in the format as specified above.</p>
+<p>“sched” shall take two parameters: current time and filename identifying the schedule data (sched.txt). It shall output, to stdout, the incoming bus data in the same format as “parse_gps”. It shall find the next 50 buses planned to approach the bus stop and output the data for these.</p>
+<p>“merge” shall take four parameters: our bus stop name, current time, and filenames for the output of “parse_gps” and “sched”. It shall output, to stdout, 23 lines, each one containing the text for one label, from top to bottom, from left to right, i.e. the bus stop name, current time, then route number, destination and arrival time for the next seven buses.</p>
+<p>“display” shall take one parameter: a filename for the output of “merge”. It shall output, to a window in a test environment, the bus information as specified in the requirements. It shall read the contents of the input file every ten seconds to update the output view.</p>
+<p>“bus” shall take no parameters. It shall run “parse_gps”, “sched” and “merge” every ten seconds, such that the final output file is updated. It shall start “display” in the background with the output of “merge” as the input parameter.</p>
 </div>
-<p>This is a fairly high level spec - it doesn&#8217;t specify the contents of the individual components - but it does specify the interfaces in some detail, and how they should be integrated to run together.</p>
-<p>It doesn&#8217;t specify the programming language for the executables. We&#8217;ll be using Python for &#8220;parse_gps&#8221;, &#8220;sched&#8221; and &#8220;merge&#8221;; C++ for &#8220;display&#8221; and bash for &#8220;bus&#8221;.</p>
-<p>The other engineering spec we&#8217;ll write is somewhat opposite to the Unix philosophy: it specifies a <em>monolithic application</em> - an application where all functionality is integrated into a single executable.</p>
-<p>While the engineering spec here won&#8217;t specify the language to use, we will use C++ for the implementation. However, in general it could be written in almost any language, e.g. Java or C#.</p>
+<p>This is a fairly high level spec - it doesn’t specify the contents of the individual components - but it does specify the interfaces in some detail, and how they should be integrated to run together.</p>
+<p>It doesn’t specify the programming language for the executables. We’ll be using Python for “parse_gps”, “sched” and “merge”; C++ for “display” and bash for “bus”.</p>
+<p>The other engineering spec we’ll write is somewhat opposite to the Unix philosophy: it specifies a <em>monolithic application</em> - an application where all functionality is integrated into a single executable.</p>
+<p>While the engineering spec here won’t specify the language to use, we will use C++ for the implementation. However, in general it could be written in almost any language, e.g. Java or C#.</p>
 <div class="topic">
 <p class="topic-title first">Engineering spec 2</p>
-<p>The software shall consist of one executable &#8220;bus&#8221; with the following input parameters: a string identifying the current bus stop and three filenames for the input files (gps_raw.txt, gps.txt and sched.txt).</p>
+<p>The software shall consist of one executable “bus” with the following input parameters: a string identifying the current bus stop and three filenames for the input files (gps_raw.txt, gps.txt and sched.txt).</p>
 <p>It shall, every ten seconds, perform the following tasks:</p>
 <ul class="simple">
 <li>Read in the current GPS data</li>
@@ -180,7 +169,7 @@
 <li>Kind kind;</li>
 </ul>
 </li>
-<li>&#8220;Time&#8221; is a class containing the fields hour and minute. Kind is an enumeration describing the kind of data, i.e. either GPS, Schedule or Passed.</li>
+<li>“Time” is a class containing the fields hour and minute. Kind is an enumeration describing the kind of data, i.e. either GPS, Schedule or Passed.</li>
 <li>The task to merge the data will read in two arrays of incoming bus data (for GPS and scheduled data). The output of the merging shall result in the 23 labels used for rendering.</li>
 </ul>
 </div>
@@ -191,7 +180,7 @@
 <li>Having multiple executables involves extra overhead in writing out data to intermediate formats and then parsing it in the next step.</li>
 <li>Having multiple executables can make it easier to test each component in isolation.</li>
 </ul>
-<p>In any case, it&#8217;s important to note that however the functionality is written, the main thing to do is decompose the problem to subproblems, with well defined interfaces, such that the components can be implemented and tested separately. In our case, we have the same overall design in both approaches, also to highlight that the decomposition stays the same independent of the approach on how to write the actual code. If we had a team of engineers working on this, each could mock up some input data and start implementing their component. After each component was seen to work individually, they could then be integrated to the final application.</p>
+<p>In any case, it’s important to note that however the functionality is written, the main thing to do is decompose the problem to subproblems, with well defined interfaces, such that the components can be implemented and tested separately. In our case, we have the same overall design in both approaches, also to highlight that the decomposition stays the same independent of the approach on how to write the actual code. If we had a team of engineers working on this, each could mock up some input data and start implementing their component. After each component was seen to work individually, they could then be integrated to the final application.</p>
 </div>
 </div>
 
@@ -208,19 +197,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="sdl.html" title="4.1.3. Drawing to a screen using SDL2"
+          <a href="sdl.html" title="3.4.3. Drawing to a screen using SDL2"
              >next</a> |</li>
         <li class="right" >
-          <a href="design_intro.html" title="4.1.1. Introduction to larger software"
+          <a href="design_intro.html" title="3.4.1. Introduction to larger software"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" >4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" >3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

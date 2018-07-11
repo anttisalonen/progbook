@@ -75,7 +75,7 @@ Or in Javascript:
 JSON vs. delimiter separated data
 =================================
 
-In our code where we read in the 10,000 functions we used delimiter separated data (delimiter being the space character in our case). In other words, our data looked like this:
+In our code where we read in the 10,000 quadratic equations we used delimiter separated data (delimiter being the space character in our case). In other words, our data looked like this:
 
 .. code-block:: bash
 
@@ -118,8 +118,8 @@ That is, a list of objects, whereby each object has the keys a, b and c. If we w
     with open('data.json', 'r') as f:
         data = json.load(f)    # data is now a list with 10,000 elements
     print len(data) # would print 10000 for 10,000 objects in the list
-    for function in data:
-        print function['a'], function['b'], function['c'] # prints out the values for each function
+    for equation in data:
+        print equation['a'], equation['b'], equation['c'] # prints out the values for each equation
 
 Another way to store the same data would be:
 
@@ -140,12 +140,12 @@ That is, a list of lists, whereby each inner list always has three entries. We c
     with open('data.json', 'r') as f:
         data = json.load(f)    # data is now a list with 10,000 elements
     print len(data) # would print 10000 for 10,000 elements in the list
-    for function in data: # function is a list of three floats
-        print function[0], function[1], function[2] # prints out the values for each function
+    for equation in data: # equation is a list of three floats
+        print equation[0], equation[1], equation[2] # prints out the values for each equation
 
 Whichever way the data is structured is mostly a matter of personal preference, though the latter in some ways has less room for error as there are no keys to type.
 
-*Exercise*: Rewrite the Python program that generates 10,000 functions to generate JSON instead. You can simply put your data in a list, which you'd then need to write out using json.dumps(my_list, indent=4). You can initialise a list e.g. by stating my_list = list(), and append to a list using my_list.append(item). You can also create a dictionary e.g. by stating my_dict = dict(), and setting a value by stating my_dict['key'] = value.
+*Exercise*: Rewrite the Python program that generates 10,000 quadratic equations to generate JSON instead. You can simply put your data in a list, which you'd then need to write out using json.dumps(my_list, indent=4). You can initialise a list e.g. by stating my_list = list(), and append to a list using my_list.append(item). You can also create a dictionary e.g. by stating my_dict = dict(), and setting a value by stating my_dict['key'] = value.
 
-*Exercise*: Modify your Python program that reads in 10,000 functions to read from your JSON file instead.
+*Exercise*: Modify your Python program that reads in 10,000 quadratic equations to read from your JSON file instead.
 

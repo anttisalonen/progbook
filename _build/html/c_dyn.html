@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.4.4. Dynamic memory allocation &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -78,12 +65,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -100,12 +89,12 @@
 <ul class="simple">
 <li>The stack can hold up to eight megabytes. What if I need more memory?</li>
 <li>What if I want to allocate memory in a function and have the caller use it?</li>
-<li>What if I want to allocate memory where I don&#8217;t know how long I&#8217;ll be needing it?</li>
-<li>What if I want to allocate memory where the exact amount of memory I need isn&#8217;t known until runtime?</li>
+<li>What if I want to allocate memory where I don’t know how long I’ll be needing it?</li>
+<li>What if I want to allocate memory where the exact amount of memory I need isn’t known until runtime?</li>
 </ul>
 <p>The answer to all of these is <em>dynamic memory allocation</em>.</p>
-<p>The C standard library provides two functions for this: &#8220;malloc&#8221; and &#8220;free&#8221;. The function &#8220;malloc&#8221; (memory allocation) allocated memory, which can then be freed using the function &#8220;free&#8221;. Here&#8217;s a simple example:</p>
-<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>The C standard library provides two functions for this: “malloc” and “free”. The function “malloc” (memory allocation) allocates memory, which can then be freed using the function “free”. Here’s a simple example:</p>
+<div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -144,40 +133,40 @@
 
 </pre></div>
 </td></tr></table></div>
-<p>Let&#8217;s first go through this line by line:</p>
+<p>Let’s first go through this line by line:</p>
 <ul class="simple">
-<li>Line 8: We call &#8220;malloc&#8221; to allocate memory for 20 integers (80 bytes if our int is four bytes). We <em>cast</em> the type of the &#8220;malloc&#8221; return value from void pointer to int pointer. This is because &#8220;malloc&#8221; in general returns a void pointer, which means any pointer, because &#8220;malloc&#8221; isn&#8217;t specific to any type. We&#8217;ll go a bit deeper around casting later.</li>
-<li>Line 9: We <em>assert</em> the return value of &#8220;malloc&#8221; is non-zero. If &#8220;malloc&#8221; fails, it will return a NULL pointer, and in this case our assertion would fail, meaning our program would crash itself. This is to ensure our memory allocation succeeded. (In practice there should be no problem allocating 80 bytes.)</li>
+<li>Line 8: We call “malloc” to allocate memory for 20 integers (80 bytes if our int is four bytes). We <em>cast</em> the type of the “malloc” return value from void pointer to int pointer. This is because “malloc” in general returns a void pointer, which means any pointer, because “malloc” isn’t specific to any type. We’ll go a bit deeper around casting later.</li>
+<li>Line 9: We <em>assert</em> the return value of “malloc” is non-zero. If “malloc” fails, it will return a NULL pointer, and in this case our assertion would fail, meaning our program would crash itself. This is to ensure our memory allocation succeeded. (In practice there should be no problem allocating 80 bytes.)</li>
 <li>Line 10: We set all of the allocated memory to 0.</li>
 <li>Line 11: We set the first element in our array to 3.</li>
-<li>Line 12: We set the second element in our array to 4. The syntax here is equivalent to what was used in line 11.</li>
-<li>Line 13: We declare a variable &#8220;b&#8221; which has the same value as &#8220;a&#8221;.</li>
-<li>Line 14: We increment the value of &#8220;b&#8221; by two (that is, eight bytes, assuming our int is four bytes). It now points to the third element in our array.</li>
-<li>Line 15: We set the value pointed to by &#8220;b&#8221; to 5.</li>
+<li>Line 12: We set the second element in our array to 4. The syntax is different but the semantics here is equivalent to what was used in line 11.</li>
+<li>Line 13: We define a variable “b” which has the same value as “a”.</li>
+<li>Line 14: We increment the value of “b” by two (that is, eight bytes, assuming our int is four bytes). It now points to the third element in our array.</li>
+<li>Line 15: We set the value pointed to by “b” to 5.</li>
 <li>Line 17: We free the memory we allocated.</li>
 </ul>
 <p>At the end of the main function, our stack will look something like this:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">Address</span>    <span class="o">|</span> <span class="n">Contents</span>   <span class="o">|</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">Address</span>    <span class="o">|</span> <span class="n">Contents</span>   <span class="o">|</span>
 <span class="o">|</span> <span class="mh">0x50000004</span> <span class="o">|</span> <span class="mh">0x23456788</span> <span class="o">|</span>
 <span class="o">|</span> <span class="mh">0x50000000</span> <span class="o">|</span> <span class="mh">0x23456780</span> <span class="o">|</span>
 </pre></div>
 </div>
-<p>That is, we have two variables, &#8220;a&#8221; and &#8220;b&#8221;, whereby &#8220;a&#8221; points to the address of the first byte of the memory we allocated (and freed) and &#8220;b&#8221; points to an address eight bytes after. The function &#8220;malloc&#8221;, when allocating memory, will, with the help of the operating system, retrieve and provide the address to a block of memory somewhere in RAM, such that the address may look random but will <em>not</em> be in the stack. It is said that the memory is in this case allocated in the <em>heap</em>.</p>
-<p><em>Exercise</em>: Allocate some memory using &#8220;malloc&#8221;. Print out the address of the memory returned using printf(&#8220;%p\n&#8221;, pointer). Compare against the address of a variable you have in stack. Run your program multiple times. Do the addresses change?</p>
+<p>That is, we have two variables, “a” and “b”, whereby “a” points to the address of the first byte of the memory we allocated (and freed) and “b” points to an address eight bytes after. The function “malloc”, when allocating memory, will, with the help of the operating system, retrieve and provide the address to a block of memory somewhere in RAM, such that the address may look random but will <em>not</em> be in the stack. It is said that the memory is in this case allocated in the <em>heap</em>.</p>
+<p><em>Exercise</em>: Allocate some memory using “malloc”. Print out the address of the memory returned using printf(“%p\n”, pointer). Compare against the address of a variable you have in stack. Run your program multiple times. Do the addresses change?</p>
 <div class="section" id="dynamic-memory-allocation-gotchas">
 <h2>2.4.4.1. Dynamic memory allocation gotchas<a class="headerlink" href="#dynamic-memory-allocation-gotchas" title="Permalink to this headline">¶</a></h2>
 <p>There are a few things that could go wrong with dynamic memory allocations, providing job security for programmers for years to come.</p>
-<p>Use after free: As we saw in our program above, the variable &#8220;a&#8221;, which contained the address of memory allocated in heap stayed unchanged after freeing the memory. In principle there&#8217;s nothing preventing the programmer from accidentally reading the memory after freeing it, or writing to it. Reading it and then using the value, for example, in an &#8220;if&#8221; statement, will cause the code to randomly either branch into the &#8220;if&#8221; statement or not. Writing to it will possibly mess up some other memory in your program, e.g. accidentally changing some unrelated variable. This is all nasty.</p>
+<p>Use after free: As we saw in our program above, the variable “a”, which contained the address of memory allocated in heap stayed unchanged after freeing the memory. In principle there’s nothing preventing the programmer from accidentally reading the memory after freeing it, or writing to it. Reading it and then using the value, for example, in an “if” statement, will cause the code to randomly either branch into the “if” statement or not. Writing to it will possibly mess up some other memory in your program, e.g. accidentally changing some unrelated variable. This is all nasty.</p>
 <p>One way to prevent this is to always reset your pointers after freeing the memory that was pointed to. E.g.:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(...);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(...);</span>
 <span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 <span class="n">a</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>By setting &#8220;a&#8221; to NULL, which is a special pointer value roughly meaning &#8220;invalid&#8221;, if we now try to either read the value pointed to by it, or write to it, the program will immediately crash. (Actually reading or writing to NULL is undefined behaviour, but in practice compilers seem to do us a favour and crash.) This makes it more obvious what has gone wrong.</p>
-<p>Double free: You may accidentally free memory pointed to by a pointer after it&#8217;s already been freed. This will possibly free some other memory that you&#8217;re still using, or otherwise generally corrupt your memory. Again, resetting pointers to NULL after &#8220;free&#8221; helps as calling &#8220;free&#8221; for a NULL pointer is defined to do nothing.</p>
+<p>By setting “a” to NULL, which is a special pointer value roughly meaning “invalid”, if we now try to either read the value pointed to by it, or write to it, the program will immediately crash. (Actually reading or writing to NULL is undefined behaviour, but in practice compilers seem to do us a favour and crash.) This makes it more obvious what has gone wrong.</p>
+<p>Double free: You may accidentally free memory pointed to by a pointer after it’s already been freed. This will possibly free some other memory that you’re still using, or otherwise generally corrupt your memory. Again, resetting pointers to NULL after “free” helps as calling “free” for a NULL pointer is defined to do nothing.</p>
 <p>Memory leaks: You may have a pointer to memory, then point the pointer somewhere else but not free the memory. The memory is now inaccessible but still allocated to your program. If you do this often enough, or if your program runs long enough, it will soak up a significant amount of memory and will need to be restarted.</p>
-<p>In general, it&#8217;s sometimes not clear from using a function what the semantics for memory ownership are. Let&#8217;s say you call a function from a library which returns a pointer. Should you call &#8220;free&#8221; on that pointer when you&#8217;re done with it, or not? This is typically (hopefully) described in the documentation for the function.</p>
+<p>In general, it’s sometimes not clear from using a function what the semantics for memory ownership are. Let’s say you call a function from a library which returns a pointer. Should you call “free” on that pointer when you’re done with it, or not? This is typically (hopefully) described in the documentation for the function.</p>
 </div>
 </div>
 
@@ -206,7 +195,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

@@ -1,6 +1,8 @@
 Making our web page work
 ------------------------
 
+So we have the buttons, and we have some Python code that doesn't really do much. We can improve things by writing some Python code that reacts to the button presses by starting or stopping an mp3 stream replay. To be able to do this, we should first understand how we can start or stop an mp3 stream replay on the command line.
+
 Streaming mp3 files on the command line
 =======================================
 
@@ -61,7 +63,7 @@ However, our use case is fairly simple: we want to be able to start an mp3 playe
 
 As per the subprocess documentation, a special optional parameter called "shell" exists. If set to true, the command will be interpreted by our shell. This can simplify our code when we want our command to run in the background, and can also be used for redirecting the command output. (In a real software project, as per the subprocess documentation, it might be better to refrain from using "shell=True" and instead use the subprocess methods for running commands in the background or capturing command output.)
 
-Using "shell=True" also implies that providing a list of parameters to subprocess.call() is no longer necessary. This means that if we wanted to e.g. run "ls -l" and redirect the output to a file called "out.txt", we could write this:
+Using "shell=True" also implies that providing the command as a list of parameters to subprocess.call() is no longer necessary. This means that if we wanted to e.g. run "ls -l" and redirect the output to a file called "out.txt", we could write this:
 
 .. code-block:: python
 

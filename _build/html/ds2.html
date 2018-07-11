@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.6.1. More data structures &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -81,12 +68,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -102,21 +91,21 @@
 <p>Previously we had a section on arrays. Recall that arrays are a continuous block of memory and have fast random access but slow insertion. This section goes through some more interesting data structures.</p>
 <div class="section" id="linked-lists">
 <h2>2.6.1.1. Linked lists<a class="headerlink" href="#linked-lists" title="Permalink to this headline">¶</a></h2>
-<p>Linked lists solve the problem of inserting an element in the middle. They&#8217;re constructed such that each element in a list holds the data as well as a pointer to the next cell in the list, whereby each cell is individually allocated.</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">+--------+--+</span>      <span class="o">+--------+--+</span>      <span class="o">+--------+---+</span>
+<p>Linked lists solve the problem of inserting an element in the middle. They’re constructed such that each element in a list holds the data as well as a pointer to the next cell in the list, whereby each cell is individually allocated.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">+--------+--+</span>      <span class="o">+--------+--+</span>      <span class="o">+--------+---+</span>
 <span class="o">|</span> <span class="n">data</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">-+-----&gt;|</span> <span class="n">data</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">-+-----&gt;|</span> <span class="n">data</span> <span class="mi">3</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span>
 <span class="o">+--------+--+</span>      <span class="o">+--------+--+</span>      <span class="o">+--------+---+</span>
 <span class="p">.</span>    <span class="o">^</span>
 <span class="p">.</span>   <span class="n">Head</span>
 </pre></div>
 </div>
-<p>The &#8220;head&#8221; pointer points to the beginning of the list. The last element will have the &#8220;next&#8221; pointer point to NULL (denoted by &#8220;x&#8221; in the diagram above), signaling the end of the list. If one were now to add an element in the list, this can be done by changing the &#8220;next&#8221; pointer of the previous cell in the list to point to the new element and the &#8220;next&#8221; pointer of the new element to the cell that was previously pointed to by the previous cell.</p>
+<p>The “head” pointer points to the beginning of the list. The last element will have the “next” pointer point to NULL (denoted by “x” in the diagram above), signaling the end of the list. If one were now to add an element in the list, this can be done by changing the “next” pointer of the previous cell in the list to point to the new element and the “next” pointer of the new element to the cell that was previously pointed to by the previous cell.</p>
 <p>In practice, due to the overhead of allocating memory for individual cells and the performance issues caused by memory fragmentation and poor cache locality, linked lists rarely show any performance benefit over arrays.</p>
 </div>
 <div class="section" id="sets">
 <h2>2.6.1.2. Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h2>
 <p>A set is a data structure that can hold different values of data and efficiently answer the question whether a value is contained in the set or not. A typical way to achieve this is to implement a <em>balanced binary tree</em>, i.e. a tree structure which can be traversed top-down when doing basic operations such as looking up or inserting data.</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="p">.</span>             <span class="o">-------------</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span>             <span class="o">-------------</span>
 <span class="n">Root</span> <span class="n">node</span> <span class="o">--&gt;</span> <span class="o">|</span> <span class="mi">4</span> <span class="o">|</span> <span class="p">.</span> <span class="o">|</span> <span class="p">.</span> <span class="o">|</span>
 <span class="p">.</span>             <span class="o">------|---|--</span>
 <span class="p">.</span>                   <span class="o">|</span>   <span class="o">|</span>
@@ -129,7 +118,7 @@
 <span class="p">.</span>        <span class="o">-------------</span>
 </pre></div>
 </div>
-<p>Here, the root node is the entry point to the tree. Each node has payload data as well as two pointers, one to the left and one to the right. The pointer to the left points to a node where the payload data is less than in the current node. The pointer to the right points to a node where the payload data is more than in the current node. In this example set we have stored number 1, 3, 4 and 5. If one were now to ask, &#8220;do we have number 3 stored in the set&#8221;, a function answering this would do the following:</p>
+<p>Here, the root node is the entry point to the tree. Each node has payload data as well as two pointers, one to the left and one to the right. The pointer to the left points to a node where the payload data is less than in the current node. The pointer to the right points to a node where the payload data is more than in the current node. In this example set we have stored number 1, 3, 4 and 5. If one were now to ask, “do we have number 3 stored in the set”, a function answering this would do the following:</p>
 <ol class="arabic simple">
 <li>Root node value is 4, which is more than 3, so enter the left node (as it is not NULL).</li>
 <li>Our next node value is 1, which is less than 3, so enter the right node (as it is not NULL).</li>
@@ -141,8 +130,8 @@
 <li>Our next node value is 5, which is less than 6, but the right node pointer is NULL, hence the value 6 is not included, so the function must return <em>false</em>.</li>
 </ol>
 <p>Inserting a number is trickier but, similarly to lookup, can be performed in O(log n) time. (To support efficient insertion, a <em>self balancing binary search tree</em> such as a red-black tree is required.)</p>
-<p>C doesn&#8217;t have built in support for sets (although C++ does). In Python, sets can be defined and used in the following manner:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<p>C doesn’t have built in support for sets (although C++ does). In Python, sets can be defined and used in the following manner:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -160,9 +149,9 @@
 <p>Dictionary, also called a <em>hash map</em>, is similar to a set but has a <em>value</em> associated with each <em>key</em> stored in the map, with the key playing the same role as the payload data did for sets.</p>
 <p>Hence it can have a similar internal structure to a set, but with another pointer in each cell indicating the value for the key.</p>
 <p>Apart from a binary search tree, another way to implement dictionaries is to use a <em>hash function</em> to hash the data, i.e. generate an index (or <em>bucket</em>) for each data point and use this index to retrieve the data. For example, if we have keys 1, 3, 4 and 5 in our dictionary, we could <em>hash</em> these to indices 0, 1, 2 and 3 of an array. Now, when the user asks for the value for the key 1, we access our array at index 0 and return the corresponding data.</p>
-<p>In practice, the <em>hash function</em>, i.e. the function which generates this mapping from keys to indices, isn&#8217;t perfect (unless all keys are predefined) and there will need to be more indices in the array than keys, and two or more keys may use the same index, requiring the implementation to handle this case (<em>hash collision</em>), for example by storing a linked list for each index, with each element in the linked list corresponding to one key-value pair. These complexities lead to the worst case insertion (where all indices have to be regenerated) to have O(n) runtime. Search can also have O(n) worst case runtime in the case where all keys end up in a single index, such that the search degenerates to a search in a linked list.</p>
-<p>C doesn&#8217;t have built in support for dictionaries (although C++ does). In Python, dictionaries can be defined and used in the following manner:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<p>In practice, the <em>hash function</em>, i.e. the function which generates this mapping from keys to indices, isn’t perfect (unless all keys are predefined) and there will need to be more indices in the array than keys, and two or more keys may use the same index, requiring the implementation to handle this case (<em>hash collision</em>), for example by storing a linked list for each index, with each element in the linked list corresponding to one key-value pair. These complexities lead to the worst case insertion (where all indices have to be regenerated) to have O(n) runtime. Search can also have O(n) worst case runtime in the case where all keys end up in a single index, such that the search degenerates to a search in a linked list.</p>
+<p>C doesn’t have built in support for dictionaries (although C++ does). In Python, dictionaries can be defined and used in the following manner:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_dict</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_dict</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">my_dict</span>
@@ -182,11 +171,11 @@
 <span class="go">not found</span>
 </pre></div>
 </div>
-<p>(This example also demonstrates Python exception handling and the Pythonic EAFP (&#8220;easier to ask for forgiveness than permission&#8221;) principle as well as exceptions: it&#8217;s typically cleaner code to try to access a key in a dictionary and handle the error if the key is not found than check beforehand whether the key is in a dictionary and only access it if it is.)</p>
+<p>(This example also demonstrates Python exception handling and the Pythonic EAFP (“easier to ask for forgiveness than permission”) principle as well as exceptions: it’s typically cleaner code to try to access a key in a dictionary and handle the error if the key is not found than check beforehand whether the key is in a dictionary and only access it if it is.)</p>
 </div>
 <div class="section" id="summary">
 <h2>2.6.1.4. Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
-<p>Finally, here&#8217;s a summary table of the performance of the different operations:</p>
+<p>Finally, here’s a summary table of the performance of the different operations:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="39%" />
@@ -250,7 +239,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

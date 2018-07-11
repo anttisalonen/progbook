@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>3.4.3. Sudoku Puzzle class &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.3.3. Sudoku Puzzle class &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3.4.4. Finding Sudoku peers" href="sud4.html" />
-    <link rel="prev" title="3.4.2. Containers for Sudoku" href="sud2.html" />
+    <link rel="next" title="3.3.4. Finding Sudoku peers" href="sud4.html" />
+    <link rel="prev" title="3.3.2. Containers for Sudoku" href="sud2.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,32 +30,32 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="sud4.html" title="3.4.4. Finding Sudoku peers"
+          <a href="sud4.html" title="3.3.4. Finding Sudoku peers"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sud2.html" title="3.4.2. Containers for Sudoku"
+          <a href="sud2.html" title="3.3.2. Containers for Sudoku"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="sud_index.html" accesskey="U">3.4. Learning to program using Sudoku</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="sud_index.html" accesskey="U">3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.4.3. Sudoku Puzzle class</a><ul>
-<li><a class="reference internal" href="#displaying-puzzles">3.4.3.1. Displaying puzzles</a></li>
+<li><a class="reference internal" href="#">3.3.3. Sudoku Puzzle class</a><ul>
+<li><a class="reference internal" href="#displaying-puzzles">3.3.3.1. Displaying puzzles</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="sud2.html"
-                        title="previous chapter">3.4.2. Containers for Sudoku</a></p>
+                        title="previous chapter">3.3.2. Containers for Sudoku</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sud4.html"
-                        title="next chapter">3.4.4. Finding Sudoku peers</a></p>
+                        title="next chapter">3.3.4. Finding Sudoku peers</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -78,12 +65,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -95,9 +84,9 @@
           <div class="body" role="main">
             
   <div class="section" id="sudoku-puzzle-class">
-<h1>3.4.3. Sudoku Puzzle class<a class="headerlink" href="#sudoku-puzzle-class" title="Permalink to this headline">¶</a></h1>
-<p>Now, we can start implementing our Puzzle class. From data point of view, this is nothing else but an array of cells. Let&#8217;s declare this:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Puzzle</span> <span class="p">{</span>
+<h1>3.3.3. Sudoku Puzzle class<a class="headerlink" href="#sudoku-puzzle-class" title="Permalink to this headline">¶</a></h1>
+<p>Now, we can start implementing our Puzzle class. From data point of view, this is nothing else but an array of cells. Let’s declare this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Puzzle</span> <span class="p">{</span>
     <span class="k">public</span><span class="o">:</span>
         <span class="n">Puzzle</span><span class="p">();</span>
         <span class="kt">bool</span> <span class="nf">solved</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
@@ -107,14 +96,14 @@
 <span class="p">};</span>
 </pre></div>
 </div>
-<p><em>Exercise</em>: Implement the constructor and the &#8220;solved&#8221; function. The constructor doesn&#8217;t need any contents as the array elements will be constructed using the default constructor for Cell, which as per the previous exercise initialises the cell such that all values are possible. The &#8220;solved&#8221; function will need to check whether all cells have only one number, and only return true in this case. (Initially, it should hence return false.)
+<p><em>Exercise</em>: Implement the constructor and the “solved” function. The constructor doesn’t need any contents as the array elements will be constructed using the default constructor for Cell, which as per the previous exercise initialises the cell such that all values are possible. The “solved” function will need to check whether all cells have only one number, and only return true in this case. (Initially, it should hence return false.)
 Now, we can look into actually constructing an object of class Puzzle by reading a Sudoku puzzle from a file.</p>
-<p>As per Norvig, let&#8217;s define the file format for a Sudoku puzzle such that a number in a file defines the value for a cell, while either a dot (.) or a zero (0) denote an unknown cell, and all characters can be ignored. This means that e.g. the following line is a valid puzzle (again courtesy Norvig, who sourced the puzzle from Project Euler):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span><span class="mf">3.2</span><span class="o">.</span><span class="mf">6.</span><span class="o">.</span><span class="mf">9.</span><span class="o">.</span><span class="mf">3.5</span><span class="o">..</span><span class="mf">1.</span><span class="o">.</span><span class="mf">18.64</span><span class="o">....</span><span class="mf">81.29</span><span class="o">..</span><span class="mf">7.</span><span class="o">......</span><span class="mf">8.</span><span class="o">.</span><span class="mf">67.82</span><span class="o">....</span><span class="mf">26.95</span><span class="o">..</span><span class="mf">8.</span><span class="o">.</span><span class="mf">2.3</span><span class="o">..</span><span class="mf">9.</span><span class="o">.</span><span class="mf">5.1</span><span class="o">.</span><span class="mf">3.</span><span class="o">.</span>
+<p>As per Norvig, let’s define the file format for a Sudoku puzzle such that a number in a file defines the value for a cell, while either a dot (.) or a zero (0) denote an unknown cell, and all characters can be ignored. This means that e.g. the following line is a valid puzzle (again courtesy Norvig, who sourced the puzzle from Project Euler):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span><span class="mf">3.2</span><span class="o">.</span><span class="mf">6.</span><span class="o">.</span><span class="mf">9.</span><span class="o">.</span><span class="mf">3.5</span><span class="o">..</span><span class="mf">1.</span><span class="o">.</span><span class="mf">18.64</span><span class="o">....</span><span class="mf">81.29</span><span class="o">..</span><span class="mf">7.</span><span class="o">......</span><span class="mf">8.</span><span class="o">.</span><span class="mf">67.82</span><span class="o">....</span><span class="mf">26.95</span><span class="o">..</span><span class="mf">8.</span><span class="o">.</span><span class="mf">2.3</span><span class="o">..</span><span class="mf">9.</span><span class="o">.</span><span class="mf">5.1</span><span class="o">.</span><span class="mf">3.</span><span class="o">.</span>
 </pre></div>
 </div>
 <p>The same puzzle could be represented like this:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span><span class="mi">3</span> <span class="o">.</span><span class="mf">2.</span> <span class="mf">6.</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span><span class="mi">3</span> <span class="o">.</span><span class="mf">2.</span> <span class="mf">6.</span><span class="o">.</span>
 <span class="mf">9.</span><span class="o">.</span> <span class="mf">3.5</span> <span class="o">..</span><span class="mi">1</span>
 <span class="o">..</span><span class="mi">1</span> <span class="mf">8.6</span> <span class="mf">4.</span><span class="o">.</span>
 
@@ -127,8 +116,8 @@ Now, we can look into actually constructing an object of class Puzzle by reading
 <span class="o">..</span><span class="mi">5</span> <span class="o">.</span><span class="mf">1.</span> <span class="mf">3.</span><span class="o">.</span>
 </pre></div>
 </div>
-<p>Now, let&#8217;s write the code to read this. In C++, one can read a file to a string with the following snippet (this uses the first parameter given to the program):</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<p>Now, let’s write the code to read this. In C++, one can read a file to a string with the following snippet (this uses the first parameter given to the program):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
 
@@ -141,8 +130,8 @@ Now, we can look into actually constructing an object of class Puzzle by reading
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Now that we can read file into a string, let&#8217;s turn this into a puzzle. First, let&#8217;s define the interface:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<p>Now that we can read file into a string, let’s turn this into a puzzle. First, let’s define the interface:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="cm">/* ... */</span><span class="p">;</span>
      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="n">parse_string</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
@@ -151,9 +140,9 @@ Now, we can look into actually constructing an object of class Puzzle by reading
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In other words, we need the Puzzle class constructor to receive an std::vector&lt;int&gt; as input. Each element in the vector should either be a number between 1 or 9, denoting a pre-filled cell, or something else (like 0) to denote a clear cell. We should also have a function &#8220;parse_string&#8221; to turn the string to an int vector.</p>
-<p>As a skeleton, let&#8217;s put something together that also introduces character-to-integer conversions in C++, exceptions and reference parameters.</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>In other words, we need the Puzzle class constructor to receive an std::vector&lt;int&gt; as input. Each element in the vector should either be a number between 1 or 9, denoting a pre-filled cell, or something else (like 0) to denote a clear cell. We should also have a function “parse_string” to turn the string to an int vector.</p>
+<p>As a skeleton, let’s put something together that also introduces character-to-integer conversions in C++, exceptions and reference parameters.</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -184,24 +173,24 @@ Now, we can look into actually constructing an object of class Puzzle by reading
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Let&#8217;s go through this line by line:</p>
+<p>Let’s go through this line by line:</p>
 <ul class="simple">
-<li>Line 1: We define the function such that it takes a parameter &#8220;const std::string&amp; s&#8221;. A simpler version to write effectively the same thing would be &#8220;string s&#8221;, however the latter would cause the input string to be copied for the function. With the former version we receive a reference to a constant string instead, saving an unnecessary data copy.</li>
+<li>Line 1: We define the function such that it takes a parameter “const std::string&amp; s”. A simpler version to write effectively the same thing would be “string s”, however the latter would cause the input string to be copied for the function. With the former version we receive a reference to a constant string instead, saving an unnecessary data copy.</li>
 <li>Line 2: We define a variable to keep track of the current cell we might fill.</li>
 <li>Line 3: We define our return variable.</li>
 <li>Line 4: We iterate over all characters in the string.</li>
-<li>Line 5: We check if the character value is between &#8216;1&#8217; and &#8216;9&#8217;. As the character values are based on the ASCII table, meaning they can be treated as numeric values, we can use arithmetic operators (&gt;= and &lt;=) to compare them.</li>
+<li>Line 5: We check if the character value is between ‘1’ and ‘9’. As the character values are based on the ASCII table, meaning they can be treated as numeric values, we can use arithmetic operators (&gt;= and &lt;=) to compare them.</li>
 <li>Line 7: We check whether the character is a dot or a zero.</li>
-<li>Line 10: We check whether we&#8217;ve found a symbol for each cell in the puzzle.</li>
-<li>Line 14: If we didn&#8217;t find enough symbols of interest, then we cannot fill our array of cells any further and <em>throw an exception</em>: this effectively ends the current execution of the code and goes up the function call stack until a caller is found who <em>catches</em> the exception thrown. As we have no code to catch the exception, this effectively prints the error message on the screen and terminates the program.</li>
+<li>Line 10: We check whether we’ve found a symbol for each cell in the puzzle.</li>
+<li>Line 14: If we didn’t find enough symbols of interest, then we cannot fill our array of cells any further and <em>throw an exception</em>: this effectively ends the current execution of the code and goes up the function call stack until a caller is found who <em>catches</em> the exception thrown. As we have no code to catch the exception, this effectively prints the error message on the screen and terminates the program.</li>
 </ul>
 <p><em>Exercise</em>: Implement the above function. Fill out the correct code for the TODOs such that the return varialbe is updated correctly and returned. See if you can run it without an exception being thrown with the example input from above.</p>
-<p>Now that we&#8217;re able to parse a string to an int vector, let&#8217;s turn this int vector to a Puzzle.</p>
-<p><em>Exercise</em>: Rewrite the constructor of the Puzzle class to take an int vector as a parameter, and loop through it to set the contents of the &#8220;cells&#8221; member variable. Use the &#8220;set&#8221; member function of the Cell class to set the values.</p>
+<p>Now that we’re able to parse a string to an int vector, let’s turn this int vector to a Puzzle.</p>
+<p><em>Exercise</em>: Rewrite the constructor of the Puzzle class to take an int vector as a parameter, and loop through it to set the contents of the “cells” member variable. Use the “set” member function of the Cell class to set the values.</p>
 <div class="section" id="displaying-puzzles">
-<h2>3.4.3.1. Displaying puzzles<a class="headerlink" href="#displaying-puzzles" title="Permalink to this headline">¶</a></h2>
-<p>We&#8217;re now able to read in a Sudoku puzzle but have no visibility over the contents of the Puzzle class. To remedy this, let&#8217;s write a function to display the puzzle. Here&#8217;s the declaration:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Puzzle</span> <span class="p">{</span>
+<h2>3.3.3.1. Displaying puzzles<a class="headerlink" href="#displaying-puzzles" title="Permalink to this headline">¶</a></h2>
+<p>We’re now able to read in a Sudoku puzzle but have no visibility over the contents of the Puzzle class. To remedy this, let’s write a function to display the puzzle. Here’s the declaration:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Puzzle</span> <span class="p">{</span>
     <span class="k">public</span><span class="o">:</span>
         <span class="p">...</span>
         <span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
@@ -209,7 +198,7 @@ Now, we can look into actually constructing an object of class Puzzle by reading
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>That is, a public member function which doesn&#8217;t modify the object.</p>
+<p>That is, a public member function which doesn’t modify the object.</p>
 <p>Now, we can implement this function by looping through the array of cells, and for each cell, print out something. What we print should have the same number of characters for each cell for proper formatting. The simplest way to do this is to either print out a number if a cell has one, or a placeholder (e.g. a space or a dot) otherwise.</p>
 <p><em>Exercise</em>: Implement this function and test it.</p>
 <p>We can now start thinking about the meat of our program: actually implementing the first strategy of constraint propagation. Recall that what we want to do is:</p>
@@ -225,9 +214,9 @@ Now, we can look into actually constructing an object of class Puzzle by reading
 </ol>
 <p>We already implemented 1) when we implemented the Cell class.</p>
 <p>Recall that the peers of a cell are the cells that are on either the same horizontal line, on the same vertical line, or in the same 3x3 sub-grid, i.e. in the same <em>unit</em> as the cell.</p>
-<p>When implementing a function for 2), the question arises on what data types should the function use as input and output. It&#8217;s often easier to answer this if we consider the user of this function, i.e point 3).</p>
+<p>When implementing a function for 2), the question arises on what data types should the function use as input and output. It’s often easier to answer this if we consider the user of this function, i.e point 3).</p>
 <p>The pseudocode for point 3) could look like the following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">propagate</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">propagate</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">has_only_one_value</span><span class="p">():</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_sole_value</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">peer</span> <span class="ow">in</span> <span class="n">peers</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
@@ -242,8 +231,8 @@ Now, we can look into actually constructing an object of class Puzzle by reading
 </pre></div>
 </div>
 <p>That is, we go through each cell, and if it only has one value, we eliminate the value from the peers if they had it. If a peer ends up only having one value, we repeat for that cell. If we invalidate the puzzle with this (which should only happen if we made a wrong guess), we stop.</p>
-<p>Let&#8217;s put together a skeleton for this function in C++:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>Let’s put together a skeleton for this function in C++:</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -284,16 +273,16 @@ Now, we can look into actually constructing an object of class Puzzle by reading
 </td></tr></table></div>
 <p>Now, a couple of notes:</p>
 <ul class="simple">
-<li>Line 3: we previously introduced the Cell class member function &#8220;has_one&#8221;. This is used here.</li>
-<li>Line 5: We need an additional function to get the single value (although &#8220;get_values&#8221; could be used as well).</li>
-<li>Line 6: We call the function &#8220;peers&#8221; which should be a member function of the Puzzle class. This isn&#8217;t yet defined. It takes an integer as input (index of a cell in the array &#8220;cells&#8221;) and returns an array or a vector of indices which are the indices of the peer cells.</li>
+<li>Line 3: we previously introduced the Cell class member function “has_one”. This is used here.</li>
+<li>Line 5: We need an additional function to get the single value (although “get_values” could be used as well).</li>
+<li>Line 6: We call the function “peers” which should be a member function of the Puzzle class. This isn’t yet defined. It takes an integer as input (index of a cell in the array “cells”) and returns an array or a vector of indices which are the indices of the peer cells.</li>
 <li>Line 7: We iterate through all the peers.</li>
-<li>Line 8: We can access the peers in the &#8220;cells&#8221; array by index &#8220;peer&#8221;, and call the Cell class member function &#8220;has&#8221; which should return true if the value is possible for the cell. The function is yet to be defined.</li>
-<li>Line 10: We call the function &#8220;propagate&#8221; for the peer which is the function we&#8217;re defining; recursion. What happens is another function call is pushed to the stack, such that we enter the function &#8220;propagate&#8221; again but with the variable &#8220;i&#8221; being set to &#8220;peer&#8221; for this second call. Once that function call returns then we end up at line 10 again, with &#8220;i&#8221; at the original value, continuing the original for loop to process the rest of the peers. With recursion, it&#8217;s important to have a <em>base case</em>, i.e. a case where the recursive call will not be made, to avoid infinite loop. Our base cases are either no cells having only one value, or all peers already having a single value.</li>
+<li>Line 8: We can access the peers in the “cells” array by index “peer”, and call the Cell class member function “has” which should return true if the value is possible for the cell. The function is yet to be defined.</li>
+<li>Line 10: We call the function “propagate” for the peer which is the function we’re defining; recursion. What happens is another function call is pushed to the stack, such that we enter the function “propagate” again but with the variable “i” being set to “peer” for this second call. Once that function call returns then we end up at line 10 again, with “i” at the original value, continuing the original for loop to process the rest of the peers. With recursion, it’s important to have a <em>base case</em>, i.e. a case where the recursive call will not be made, to avoid infinite loop. Our base cases are either no cells having only one value, or all peers already having a single value.</li>
 </ul>
 <p>What we have here, after filling out the blanks, is the propagation function, which eliminates numbers from peer cells, and also propagates this if the peer cell ends up with only one value.</p>
-<p><em>Exercise</em>: Implement the &#8220;get_one&#8221; and &#8220;has&#8221; member functions for the Cell class.</p>
-<p><em>Exercise</em>: What happens when the user of the Cell class calls &#8220;get_one&#8221; but the cell has more than one value? What is the cell has no values at all (all numbers eliminated)? What would you expect to happen? Is it possible to improve the has_one/get_one interface to avoid invalid use?</p>
+<p><em>Exercise</em>: Implement the “get_one” and “has” member functions for the Cell class.</p>
+<p><em>Exercise</em>: What happens when the user of the Cell class calls “get_one” but the cell has more than one value? What is the cell has no values at all (all numbers eliminated)? What would you expect to happen? Is it possible to improve the has_one/get_one interface to avoid invalid use?</p>
 </div>
 </div>
 
@@ -310,19 +299,19 @@ Now, we can look into actually constructing an object of class Puzzle by reading
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="sud4.html" title="3.4.4. Finding Sudoku peers"
+          <a href="sud4.html" title="3.3.4. Finding Sudoku peers"
              >next</a> |</li>
         <li class="right" >
-          <a href="sud2.html" title="3.4.2. Containers for Sudoku"
+          <a href="sud2.html" title="3.3.2. Containers for Sudoku"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="sud_index.html" >3.4. Learning to program using Sudoku</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="sud_index.html" >3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

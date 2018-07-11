@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>4.1.9. Monolithic way - scheduled arrivals and GPS data &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.4.9. Monolithic way - scheduled arrivals and GPS data &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.1.10. Monolithic way - merging and putting it all together" href="bus4.html" />
-    <link rel="prev" title="4.1.8. Monolithic way - parsing" href="bus2.html" />
+    <link rel="next" title="3.4.10. Monolithic way - merging and putting it all together" href="bus4.html" />
+    <link rel="prev" title="3.4.8. Monolithic way - parsing" href="bus2.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,36 +30,36 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="bus4.html" title="4.1.10. Monolithic way - merging and putting it all together"
+          <a href="bus4.html" title="3.4.10. Monolithic way - merging and putting it all together"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="bus2.html" title="4.1.8. Monolithic way - parsing"
+          <a href="bus2.html" title="3.4.8. Monolithic way - parsing"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.1.9. Monolithic way - scheduled arrivals and GPS data</a><ul>
-<li><a class="reference internal" href="#filtering">4.1.9.1. Filtering</a></li>
-<li><a class="reference internal" href="#sorting">4.1.9.2. Sorting</a></li>
-<li><a class="reference internal" href="#slicing">4.1.9.3. Slicing</a></li>
-<li><a class="reference internal" href="#handling-gps-data">4.1.9.4. Handling GPS data</a></li>
-<li><a class="reference internal" href="#digression-parameters-and-god-classes">4.1.9.5. Digression: parameters and god classes</a></li>
+<li><a class="reference internal" href="#">3.4.9. Monolithic way - scheduled arrivals and GPS data</a><ul>
+<li><a class="reference internal" href="#filtering">3.4.9.1. Filtering</a></li>
+<li><a class="reference internal" href="#sorting">3.4.9.2. Sorting</a></li>
+<li><a class="reference internal" href="#slicing">3.4.9.3. Slicing</a></li>
+<li><a class="reference internal" href="#handling-gps-data">3.4.9.4. Handling GPS data</a></li>
+<li><a class="reference internal" href="#digression-parameters-and-god-classes">3.4.9.5. Digression: parameters and god classes</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="bus2.html"
-                        title="previous chapter">4.1.8. Monolithic way - parsing</a></p>
+                        title="previous chapter">3.4.8. Monolithic way - parsing</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="bus4.html"
-                        title="next chapter">4.1.10. Monolithic way - merging and putting it all together</a></p>
+                        title="next chapter">3.4.10. Monolithic way - merging and putting it all together</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -82,12 +69,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -99,18 +88,18 @@
           <div class="body" role="main">
             
   <div class="section" id="monolithic-way-scheduled-arrivals-and-gps-data">
-<h1>4.1.9. Monolithic way - scheduled arrivals and GPS data<a class="headerlink" href="#monolithic-way-scheduled-arrivals-and-gps-data" title="Permalink to this headline">¶</a></h1>
-<p>In the previous chapter we wrote the code to read in all the necessary data. Now let&#8217;s use some of it.</p>
+<h1>3.4.9. Monolithic way - scheduled arrivals and GPS data<a class="headerlink" href="#monolithic-way-scheduled-arrivals-and-gps-data" title="Permalink to this headline">¶</a></h1>
+<p>In the previous chapter we wrote the code to read in all the necessary data. Now let’s use some of it.</p>
 <p>We want to write the logic that takes two things as input:</p>
 <ul class="simple">
 <li>The scheduled arrivals</li>
 <li>Current time of day</li>
 </ul>
 <p>And, like sched in our Python version, outputs the next 50 buses that will be arriving at the bus stop. The output will be merged with the output of the GPS data analysis.</p>
-<p>To start with, let&#8217;s define the output data type. We&#8217;ve already defined a few - schedule entries, historical data, current GPS data - but none of them seem to match the requirement of encoding the arrival time, route number, start number and kind, i.e. the fact that this data results from the bus schedule (or indeed arriving or passed bus based on GPS data). While we could organise this differently, by e.g. using the schedule entry data type, as per our original architecture diagram we can simplify the merging logic by ensuring the data format for both GPS and schedule data is the same.</p>
+<p>To start with, let’s define the output data type. We’ve already defined a few - schedule entries, historical data, current GPS data - but none of them seem to match the requirement of encoding the arrival time, route number, start number and kind, i.e. the fact that this data results from the bus schedule (or indeed arriving or passed bus based on GPS data). While we could organise this differently, by e.g. using the schedule entry data type, as per our original architecture diagram we can simplify the merging logic by ensuring the data format for both GPS and schedule data is the same.</p>
 <p><em>Exercise</em>: Write a class that includes the arrival time, route number, start number and kind as member variables.</p>
 <div class="section" id="filtering">
-<h2>4.1.9.1. Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h2>
+<h2>3.4.9.1. Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h2>
 <p>We can now write a function that does three things:</p>
 <ul class="simple">
 <li>From a list of all scheduled arrivals, filter only those that arrive e.g. in the next 12 hours</li>
@@ -118,14 +107,14 @@
 <li>Keep only the first 50 elements of the list (slice)</li>
 </ul>
 <p>In Python, this could look e.g. something like the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">entry</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">l</span> <span class="k">if</span> <span class="n">time_diff</span><span class="p">(</span><span class="n">current_time</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">entry</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">l</span> <span class="k">if</span> <span class="n">time_diff</span><span class="p">(</span><span class="n">current_time</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">l</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">entry</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
 <span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>In C++, we can conceptually do the same, albeit with a bit more typing.</p>
 <p>We can filter in C++ by #including &lt;algorithm&gt; and using std::remove_if, e.g.:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cm">/* my_array is the input list */</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* my_array is the input list */</span>
 <span class="cm">/* curr_time is the current time */</span>
 <span class="n">std</span><span class="o">::</span><span class="n">remove_if</span><span class="p">(</span><span class="n">my_array</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">my_array</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
         <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">bi</span><span class="p">)</span> <span class="p">{</span>
@@ -138,20 +127,20 @@
 <li>The start iterator - beginning of our array (or list, or any collection)</li>
 <li>The end iterator - end of our array</li>
 <li>The lambda function which works as the filter. The lambda function itself consists of three elements:<ol class="arabic">
-<li>[&amp;] - this tells the compiler which local variables to capture, and how. In this case we need to capture the curr_time as it&#8217;s a local variable used in the lambda function, and we don&#8217;t wish to copy it but instead refer to it, which is expressed with [&amp;].</li>
-<li>(const auto&amp; bi) - this is the parameter to our lambda function. It&#8217;s the same type as the elements in our array my_array. We can use the keyword &#8220;auto&#8221; instead of explicitly naming the type.</li>
-<li>&#8220;return time_diff(curr_time, bi.time) &lt; 0;&#8221; - the function body itself. This will result in removing all elements where our function time_diff returns a value less than zero.</li>
+<li>[&amp;] - this tells the compiler which local variables to capture, and how. In this case we need to capture the curr_time as it’s a local variable used in the lambda function, and we don’t wish to copy it but instead refer to it, which is expressed with [&amp;].</li>
+<li>(const auto&amp; bi) - this is the parameter to our lambda function. It’s the same type as the elements in our array my_array. We can use the keyword “auto” instead of explicitly naming the type.</li>
+<li>“return time_diff(curr_time, bi.time) &lt; 0;” - the function body itself. This will result in removing all elements where our function time_diff returns a value less than zero.</li>
 </ol>
 </li>
 </ol>
 <p><em>Exercise</em>: Look up the C++ reference for std::remove_if.</p>
 <p>Alternatively, primitives such as for-loops and vector::push_back() can be used instead.</p>
-<p><em>Exercise</em>: Write the beginning of our sched function - a function that takes the schedule data that was parsed and a timestamp, and returns bus arrivals, namely those arriving next. The result doesn&#8217;t yet need to be sorted. Run your code.</p>
+<p><em>Exercise</em>: Write the beginning of our sched function - a function that takes the schedule data that was parsed and a timestamp, and returns bus arrivals, namely those arriving next. The result doesn’t yet need to be sorted. Run your code.</p>
 </div>
 <div class="section" id="sorting">
-<h2>4.1.9.2. Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h2>
-<p>We haven&#8217;t yet sorted data in C++ so let&#8217;s fix that. Sorting can be done e.g. like this:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">my_array</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">my_array</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+<h2>3.4.9.2. Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h2>
+<p>We haven’t yet sorted data in C++ so let’s fix that. Sorting can be done e.g. like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">my_array</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">my_array</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
     <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">b1</span><span class="p">,</span> <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">b2</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">time_diff</span><span class="p">(</span><span class="n">b2</span><span class="p">.</span><span class="n">time</span><span class="p">,</span> <span class="n">b1</span><span class="p">.</span><span class="n">time</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">;</span>
     <span class="p">});</span>
@@ -163,9 +152,9 @@
 <p><em>Exercise</em>: Include sorting in your sched function.</p>
 </div>
 <div class="section" id="slicing">
-<h2>4.1.9.3. Slicing<a class="headerlink" href="#slicing" title="Permalink to this headline">¶</a></h2>
-<p>Now, let&#8217;s tackle the final hurdle of only keeping the first 50 elements of our array (or list). We already touched upon the erase-remove idiom with our Sudoku exercises, and keeping the first elements is similar:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">my_array</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)</span>
+<h2>3.4.9.3. Slicing<a class="headerlink" href="#slicing" title="Permalink to this headline">¶</a></h2>
+<p>Now, let’s tackle the final hurdle of only keeping the first 50 elements of our array (or list). We already touched upon the erase-remove idiom with our Sudoku exercises, and keeping the first elements is similar:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">my_array</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)</span>
     <span class="n">my_array</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">my_array</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">50</span><span class="p">,</span> <span class="n">my_array</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -174,7 +163,7 @@
 <p>We now have the code in place to find the next buses to arrive at our bus stop, according to the bus schedule.</p>
 </div>
 <div class="section" id="handling-gps-data">
-<h2>4.1.9.4. Handling GPS data<a class="headerlink" href="#handling-gps-data" title="Permalink to this headline">¶</a></h2>
+<h2>3.4.9.4. Handling GPS data<a class="headerlink" href="#handling-gps-data" title="Permalink to this headline">¶</a></h2>
 <p>For GPS data, as with our Python code, we need to do the following:</p>
 <ul class="simple">
 <li>For all current GPS data, find the relevant historical data points - i.e. data points with the same route and within 100 meters of the current position</li>
@@ -182,8 +171,8 @@
 <li>Sort the current GPS data by the average time, and keep the first 20 points</li>
 <li>In addition to the buses that seem to arrive soon, output the list of buses that have already passed according to the GPS data</li>
 </ul>
-<p>Now, the main new thing is <em>associating</em> a time with the GPS data point. We already have a class representing a current GPS data point. We could define a new class that e.g. includes an object of such a class as a member variable, and has the average time based on historical data as another member variable. Another way to do this is to use <em>tuples</em>: ad-hoc combinations of multiple data types in one. Here&#8217;s an example of using tuples in C++):</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>Now, the main new thing is <em>associating</em> a time with the GPS data point. We already have a class representing a current GPS data point. We could define a new class that e.g. includes an object of such a class as a member variable, and has the average time based on historical data as another member variable. Another way to do this is to use <em>tuples</em>: ad-hoc combinations of multiple data types in one. Here’s an example of using tuples in C++):</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -216,17 +205,17 @@
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Let&#8217;s see what we have:</p>
+<p>Let’s see what we have:</p>
 <ul class="simple">
 <li>Line 2: We #include &lt;tuple&gt; as is needed when working with tuples</li>
 <li>Lines 4-9: We define a class called C. It has one constructor which takes two parameters, a and b. It also has two member variables, m_a and m_b. They are initialised when the contructor is run. Because it has a constructor defined, it has no <em>default constructor</em>, i.e. the two values need to be passed to the constructor whenever an object of class C is instantiated.</li>
 <li>Lines 11-16: We define the main function.</li>
-<li>Line 13: We define our tuple. It&#8217;s a tuple of C and int. We create it using the std::make_tuple() function, which takes an object of type C and an int as is required from the tuple type definition. We instantiate an object of type C with values 1 and 2.</li>
-<li>Line 14: Using std::get&lt;0&gt; we can access the first element in the tuple, i.e. the value of type C. We can then access its public member variable using &#8221;.m_a&#8221;, hence printing 1.</li>
+<li>Line 13: We define our tuple. It’s a tuple of C and int. We create it using the std::make_tuple() function, which takes an object of type C and an int as is required from the tuple type definition. We instantiate an object of type C with values 1 and 2.</li>
+<li>Line 14: Using std::get&lt;0&gt; we can access the first element in the tuple, i.e. the value of type C. We can then access its public member variable using “.m_a”, hence printing 1.</li>
 <li>Line 15: We can access the second element in the tuple using std::get&lt;1&gt;.</li>
 </ul>
 <p>Similarly to any other type, you can have a vector of tuples. This could be defined and used e.g. like this (after #including &lt;vector&gt;):</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">C</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">my_array</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">C</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">my_array</span><span class="p">;</span>
 <span class="n">my_array</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">6</span><span class="p">));</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">my_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="n">m_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="c1">// prints 5</span>
 </pre></div>
@@ -237,10 +226,10 @@
 <p><em>Exercise</em>: Sort your resulting data based on the time until estimated arrival. Convert your data to the same data type as your code that works with the scheduled arrivals. You can do this by adding the time until estimated arrival with the current time of day. Also include the passed buses in your output.</p>
 </div>
 <div class="section" id="digression-parameters-and-god-classes">
-<h2>4.1.9.5. Digression: parameters and god classes<a class="headerlink" href="#digression-parameters-and-god-classes" title="Permalink to this headline">¶</a></h2>
-<p>We&#8217;ve now written a few functions which take several different kinds of data as input and return several kinds of data as output. For example, the above GPS analysis function will need, in addition to the current and historical GPS data, the current time of day, and will return an array of incoming bus data. While it&#8217;s typically no problem writing such functions, there&#8217;s another way to organise such code: instead of passing all the data as parameters we can define a class which has all the necessary data as member variables and write the logic as member function or functions. With this scheme, all the functions always have access to the data, making passing or returning data unnecessary.</p>
-<p>This has the benefit of potentially simplifying the code, but the downside of breaking code modularity - because all code has access to all data, it may quickly become unclear what each function does and how it depends on other functions without inspecting the code of other functions. Because of this, it&#8217;s generally better practice to isolate the different functions from each other and not have so called &#8220;god classes&#8221; - so called because they see and have access to everything. Never the less, in some cases writing a god class may be easier and quicker than splitting all the logic to isolated functions.</p>
-<p>We now have the code to read in all our schedule and GPS data. What&#8217;s left is merging this data and final touches regarding command line option parsing and label output.</p>
+<h2>3.4.9.5. Digression: parameters and god classes<a class="headerlink" href="#digression-parameters-and-god-classes" title="Permalink to this headline">¶</a></h2>
+<p>We’ve now written a few functions which take several different kinds of data as input and return several kinds of data as output. For example, the above GPS analysis function will need, in addition to the current and historical GPS data, the current time of day, and will return an array of incoming bus data. While it’s typically no problem writing such functions, there’s another way to organise such code: instead of passing all the data as parameters we can define a class which has all the necessary data as member variables and write the logic as member function or functions. With this scheme, all the functions always have access to the data, making passing or returning data unnecessary.</p>
+<p>This has the benefit of potentially simplifying the code, but the downside of breaking code modularity - because all code has access to all data, it may quickly become unclear what each function does and how it depends on other functions without inspecting the code of other functions. Because of this, it’s generally better practice to isolate the different functions from each other and not have so called “god classes” - so called because they see and have access to everything. Never the less, in some cases writing a god class may be easier and quicker than splitting all the logic to isolated functions.</p>
+<p>We now have the code to read in all our schedule and GPS data. What’s left is merging this data and final touches regarding command line option parsing and label output.</p>
 </div>
 </div>
 
@@ -257,19 +246,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="bus4.html" title="4.1.10. Monolithic way - merging and putting it all together"
+          <a href="bus4.html" title="3.4.10. Monolithic way - merging and putting it all together"
              >next</a> |</li>
         <li class="right" >
-          <a href="bus2.html" title="4.1.8. Monolithic way - parsing"
+          <a href="bus2.html" title="3.4.8. Monolithic way - parsing"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" >4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" >3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

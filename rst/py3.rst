@@ -1,7 +1,7 @@
 More useful Python constructs
 -----------------------------
 
-To demonstrate some of these constructs, let's start by loading some data to work on. As before, let's work on the 10,000 functions we defined before, and load this data from JSON.
+To demonstrate some of these constructs, let's start by loading some data to work on. As before, let's work on the 10,000 quadratic equations we defined before, and load this data from JSON.
 
 .. code-block:: python
 
@@ -38,7 +38,7 @@ List comprehensions are a shorthand notation for doing things with lists. They s
 
     bs = [l[1] for l in data]
 
-This line fetches the second column of our data, i.e. all the 'b' values for our functions (hence the variable name, 'b's). What it means is:
+This line fetches the second column of our data, i.e. all the 'b' values for our quadratic equations (hence the variable name, 'b's). What it means is:
 
     "For each data point (l) in our input list (data), take the second element."
 
@@ -103,11 +103,11 @@ List comprehensions also support *filtering*, i.e. applying a function to only i
 
 .. code-block:: python
 
-    above_zero_functions = [f for f in data if all_numbers_in_list_above_zero(f)]
+    above_zero_equations = [f for f in data if all_numbers_in_list_above_zero(f)]
 
-*Exercise*: For your data set, find the function where the sum of its values (a, b and c) is the highest.
+*Exercise*: For your data set, find the quadratic equations where the sum of its values (a, b and c) is the highest.
 
-*Exercise*: For your data set, find the function where the sum of its values (a, b and c) is the highest *and* all values a, b and c are negative.
+*Exercise*: For your data set, find the quadratic equations where the sum of its values (a, b and c) is the highest *and* all values a, b and c are negative.
 
 Tuples
 ======

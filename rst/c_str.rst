@@ -40,11 +40,11 @@ In general, however, you may write something into a buffer where you don't know 
 
     char my_array[8];
     memset(my_array, 0x00, sizeof(my_array)); /* sizeof(my_array) will return 8 */
-    snprintf(my_array, 7, "Hello");
+    snprintf(my_array, 8, "Hello");
 
 * Line 1: We allocate the buffer in stack.
 * Line 2: We clear the buffer, such that all the values in the buffer are 0. This way, as long as we keep the last character to 0 in the buffer (remember 0 indicates end of a string), we shouldn't be either reading or writing past the end of our buffer. (You will need to #include <string.h> to declare memset().)
-* Line 3: We write the string "Hello" to the buffer using *snprintf*, which takes as a parameter the maximum number of bytes to write. We tell it to write maximum seven characters such that the last one will always be 0.
+* Line 3: We write the string "Hello" to the buffer using *snprintf*, which takes as a parameter the maximum number of bytes to write. We tell it to write maximum eight characters such that the last one will always be 0.
 
 Now, while array in general is not the same thing as a pointer, for strings the two are sometimes interexchangable. For example, let's assume you want to pass your array as a parameter to another function. You can't because arrays are always passed by reference in C. This means that the array will *decay* into a pointer:
 
@@ -53,7 +53,7 @@ Now, while array in general is not the same thing as a pointer, for strings the 
 
     void my_function(const char *str, int len) {
         /* sizeof(str) will NOT give an answer as to how long the buffer is */
-        snprintf(str, len - 1, "Hello");
+        snprintf(str, len, "Hello");
     }
 
     int main(void) {
@@ -73,7 +73,7 @@ Let's say we want to modify the array by a character. We can do this:
 
     char my_array[8];
     memset(my_array, 0x00, sizeof(my_array));
-    snprintf(my_array, 7, "Hello");
+    snprintf(my_array, 8, "Hello");
     my_array[0] = 'J'; /* my_array is now "Jello"; */
     my_array[4] = 'y'; /* my_array is now "Jelly"; */
 
@@ -91,7 +91,7 @@ How would we do this if we only had a char pointer, not the array itself? We can
     int main(void) {
         char my_array[8];
         memset(my_array, 0x00, sizeof(my_array));
-        snprintf(my_array, 7, "Hello");
+        snprintf(my_array, 8, "Hello");
         my_function(my_array);
     }
 

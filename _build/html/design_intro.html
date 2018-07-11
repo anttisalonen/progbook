@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>4.1.1. Introduction to larger software &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.4.1. Introduction to larger software &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.1.2. Breaking software down to components" href="components.html" />
-    <link rel="prev" title="4.1. Larger software" href="design_index.html" />
+    <link rel="next" title="3.4.2. Breaking software down to components" href="components.html" />
+    <link rel="prev" title="3.4. Larger software" href="design_index.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,33 +30,33 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="components.html" title="4.1.2. Breaking software down to components"
+          <a href="components.html" title="3.4.2. Breaking software down to components"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="design_index.html" title="4.1. Larger software"
+          <a href="design_index.html" title="3.4. Larger software"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.1.1. Introduction to larger software</a><ul>
-<li><a class="reference internal" href="#overview">4.1.1.1. Overview</a></li>
-<li><a class="reference internal" href="#requirements">4.1.1.2. Requirements</a></li>
+<li><a class="reference internal" href="#">3.4.1. Introduction to larger software</a><ul>
+<li><a class="reference internal" href="#overview">3.4.1.1. Overview</a></li>
+<li><a class="reference internal" href="#requirements">3.4.1.2. Requirements</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="design_index.html"
-                        title="previous chapter">4.1. Larger software</a></p>
+                        title="previous chapter">3.4. Larger software</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="components.html"
-                        title="next chapter">4.1.2. Breaking software down to components</a></p>
+                        title="next chapter">3.4.2. Breaking software down to components</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -79,12 +66,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -96,14 +85,14 @@
           <div class="body" role="main">
             
   <div class="section" id="introduction-to-larger-software">
-<h1>4.1.1. Introduction to larger software<a class="headerlink" href="#introduction-to-larger-software" title="Permalink to this headline">¶</a></h1>
+<h1>3.4.1. Introduction to larger software<a class="headerlink" href="#introduction-to-larger-software" title="Permalink to this headline">¶</a></h1>
 <blockquote>
 <div><p>There are two ways of constructing a software design. One way is to make it so simple that there are obviously no deficiencies. And the other way is to make it so complicated that there are no obvious deficiencies.</p>
 <p class="attribution">&mdash;C.A.R. Hoare</p>
 </div></blockquote>
-<p>We&#8217;ve had and solved a few different smaller software problems. You may wonder, what about real life, professional, large scale software problems. This chapter discusses this in more detail.</p>
+<p>We’ve had and solved a few different smaller software problems. You may wonder, what about real life, professional, large scale software problems. This chapter discusses this in more detail.</p>
 <div class="section" id="overview">
-<h2>4.1.1.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2>3.4.1.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Though not always obvious, the typical flow for software development, and indeed much of engineering in general is:</p>
 <ul class="simple">
 <li>Capturing the requirements - understanding what needs to be built</li>
@@ -112,14 +101,14 @@
 <li>Integrating all components to the final software and testing it</li>
 <li>Quality assurance, or validation - checking that the end product meets the original requirements</li>
 </ul>
-<p>Depending on the software, problem at hand and lots of other factors, all these steps can be followed at e.g. two-week cycles, or multi-year cycles, or anything in between. The terminology also often differs between companies and kinds of software. For example, a web site may have a new request from a user to add new functionality to the website; this may require getting more information from the customer, planning the technical changes to the web site and implementing these, and finally checking whether the result works as intended both from internal and user&#8217;s point of view. On the other hand, e.g. developing software for a space shuttle may require several years to capture the requirements before planning, implementing, integrating and testing the software.</p>
-<p>In this chapter we&#8217;ll build software from scratch to address a very specific use case: we imagine we&#8217;re a software company with a contract from a local transport company to improve the public transport bus service. The company has fitted GPS transmitters to the local buses and would like to improve the experience of the passengers waiting for a bus by installing screens on the bus stops which would show which buses are expected to soon arrive at the bus stop, and when.</p>
-<p>This is a problem that could potentially require a fairly large amount of software; in our case, as we&#8217;ll cut some corners, we&#8217;ll end up with relatively little code. However, it&#8217;s enough to introduce the general steps of software development and software design.</p>
-<p>Specifically, we&#8217;ll start with having the requirements well captured in advance, which often is not the case. We&#8217;ll go through breaking down the problem space, and discuss two different ways to actually implement such a software. We&#8217;ll end up with two implementations for this problem, which sum up to a total of around 600 lines of C++ and 200 lines of Python. The reader will get to write these two implementations as well. The author used about seven hours for the two implementations; the reader should ideally be able to finish them in 40 hours.</p>
+<p>Depending on the software, problem at hand and lots of other factors, all these steps can be followed at e.g. two-week cycles, or multi-year cycles, or anything in between. The terminology also often differs between companies and kinds of software. For example, a web site may have a new request from a user to add new functionality to the website; this may require getting more information from the customer, planning the technical changes to the web site and implementing these, and finally checking whether the result works as intended both from internal and user’s point of view. On the other hand, e.g. developing software for a space shuttle may require several years to capture the requirements before planning, implementing, integrating and testing the software.</p>
+<p>In this chapter we’ll build software from scratch to address a very specific use case: we imagine we’re a software company with a contract from a local transport company to improve the public transport bus service. The company has fitted GPS transmitters to the local buses and would like to improve the experience of the passengers waiting for a bus by installing screens on the bus stops which would show which buses are expected to soon arrive at the bus stop, and when.</p>
+<p>This is a problem that could potentially require a fairly large amount of software; in our case, as we’ll cut some corners, we’ll end up with relatively little code. However, it’s enough to introduce the general steps of software development and software design.</p>
+<p>Specifically, we’ll start with having the requirements well captured in advance, which often is not the case. We’ll go through breaking down the problem space, and discuss two different ways to actually implement such a software. We’ll end up with two implementations for this problem, which sum up to a total of around 600 lines of C++ and 200 lines of Python. The reader will get to write these two implementations as well. The author used about seven hours for the two implementations; the reader should ideally be able to finish them in 40 hours.</p>
 </div>
 <div class="section" id="requirements">
-<h2>4.1.1.2. Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>The following is the requirement specification for the software. It&#8217;s written by our customer. It describes what the expected output of the software is, what the inputs to the software are, and what external constraints the software has.</p>
+<h2>3.4.1.2. Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>The following is the requirement specification for the software. It’s written by our customer. It describes what the expected output of the software is, what the inputs to the software are, and what external constraints the software has.</p>
 <div class="topic">
 <p class="topic-title first">Requirements</p>
 <p>General</p>
@@ -131,14 +120,14 @@
 <li>Rows 2-8 must include the bus route number, the final destination of the bus route, and the expected arrival time of the bus</li>
 </ul>
 <p>The expected arrival time must either be derived from the bus schedule (if GPS data is not available) or from the GPS data (if available).</p>
-<p>If no GPS data is available, the arrival time must reflect this by prefixing the time with text &#8220;ca.&#8221;.</p>
+<p>If no GPS data is available, the arrival time must reflect this by prefixing the time with text “ca.”.</p>
 <p>The bus schedule data must be used directly when displaying the bus arrival time.</p>
 <p>The times must be displayed in 24 hour format and contain the hour and the minute.</p>
 <p>The routes displayed must be sorted such that the one arriving soonest must be displayed at the top.</p>
 <p>The first row text must be in yellow while the other rows must be in white. The background colour must be white.</p>
 <p>The table must not have any borders.</p>
 <p>This is an example ASCII representation of the table:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Park</span> <span class="n">Avenue</span>              <span class="mi">10</span><span class="p">:</span><span class="mi">00</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Park</span> <span class="n">Avenue</span>              <span class="mi">10</span><span class="p">:</span><span class="mi">00</span>
 
 <span class="mi">72</span>  <span class="n">Hill</span> <span class="n">Street</span>          <span class="mi">10</span><span class="p">:</span><span class="mi">04</span>
 <span class="mi">29</span>  <span class="n">Central</span> <span class="n">Park</span>         <span class="mi">10</span><span class="p">:</span><span class="mi">05</span>
@@ -154,8 +143,8 @@
 <p>The font to use is Deja Vu Sans.</p>
 <p>Inputs</p>
 <p>The system will have the following inputs: bus schedule, historical GPS data from previous bus runs, current GPS data from current buses and current bus stop name.</p>
-<p>The bus schedule is a file available at &#8220;sched.txt&#8221;. The file is an ASCII text file with several, unspecified number of lines. Each line has data in the following format:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">route</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">start</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">hour</span> <span class="n">of</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">arriving</span> <span class="n">at</span> <span class="n">the</span> <span class="n">stop</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">minute</span> <span class="n">of</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">arriving</span> <span class="n">at</span> <span class="n">the</span> <span class="n">stop</span><span class="o">&gt;</span>
+<p>The bus schedule is a file available at “sched.txt”. The file is an ASCII text file with several, unspecified number of lines. Each line has data in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">route</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">start</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">hour</span> <span class="n">of</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">arriving</span> <span class="n">at</span> <span class="n">the</span> <span class="n">stop</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">minute</span> <span class="n">of</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">arriving</span> <span class="n">at</span> <span class="n">the</span> <span class="n">stop</span><span class="o">&gt;</span>
 <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">:</span>
 <span class="mi">3</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">6</span>
 <span class="mi">3</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">16</span>
@@ -164,17 +153,17 @@
 </div>
 <p>In other words, each line has four integers separated by spaces. The first integer identifies the route. The second is a counter for the bus for this route for each day (start number). The third and fourth integers represent the time the bus is expected to arrive at the stop.</p>
 <p>The schedule is the same for all days of the week.</p>
-<p>The historical GPS data is a file available at &#8220;gps.txt&#8221;. The file is an ASCII text file with several, unspecified number of lines. Each line has data in the following format:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">route</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">floating</span> <span class="n">point</span> <span class="n">number</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">time</span> <span class="n">it</span> <span class="n">took</span> <span class="k">for</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">to</span> <span class="n">reach</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="kn">from</span> <span class="nn">this</span> <span class="n">position</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">the</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">measurement</span> <span class="n">position</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="n">on</span> <span class="n">the</span> <span class="n">X</span> <span class="n">axis</span> <span class="p">(</span><span class="n">west</span><span class="o">-</span><span class="n">east</span> <span class="n">axis</span><span class="p">)</span> <span class="ow">in</span> <span class="n">meters</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">the</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">measurement</span> <span class="n">position</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="n">on</span> <span class="n">the</span> <span class="n">Y</span> <span class="n">axis</span> <span class="p">(</span><span class="n">north</span><span class="o">-</span><span class="n">south</span> <span class="n">axis</span><span class="p">)</span> <span class="ow">in</span> <span class="n">meters</span><span class="o">&gt;</span>
+<p>The historical GPS data is a file available at “gps.txt”. The file is an ASCII text file with several, unspecified number of lines. Each line has data in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">route</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">floating</span> <span class="n">point</span> <span class="n">number</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">time</span> <span class="n">it</span> <span class="n">took</span> <span class="k">for</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">to</span> <span class="n">reach</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="kn">from</span> <span class="nn">this</span> <span class="n">position</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">the</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">measurement</span> <span class="n">position</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="n">on</span> <span class="n">the</span> <span class="n">X</span> <span class="n">axis</span> <span class="p">(</span><span class="n">west</span><span class="o">-</span><span class="n">east</span> <span class="n">axis</span><span class="p">)</span> <span class="ow">in</span> <span class="n">meters</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">the</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">measurement</span> <span class="n">position</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="n">on</span> <span class="n">the</span> <span class="n">Y</span> <span class="n">axis</span> <span class="p">(</span><span class="n">north</span><span class="o">-</span><span class="n">south</span> <span class="n">axis</span><span class="p">)</span> <span class="ow">in</span> <span class="n">meters</span><span class="o">&gt;</span>
 <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">:</span>
 <span class="mi">3</span> <span class="mf">10.8713536724</span> <span class="o">-</span><span class="mf">4003.3505052</span> <span class="o">-</span><span class="mf">3998.10233076</span>
 <span class="mi">3</span> <span class="mf">10.7045996484</span> <span class="o">-</span><span class="mf">3943.15506994</span> <span class="o">-</span><span class="mf">3938.06461792</span>
 <span class="p">[</span><span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>In other words, each line has four numbers separated by spaces. The first integer identifies the route. The second is the time it took for the bus to reach the bus stop at the time the data was collected. The third and fourth are the position coordinates relative to the bus stop. They&#8217;ve been normalised such that the unit is in meters as opposed to degrees.</p>
-<p>The current bus GPS data is a file available at &#8220;gps_raw.txt&#8221;. The file is an ASCII text file with several, unspecified number of lines. Each line has data in the following format:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">route</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">start</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">the</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">measurement</span> <span class="n">position</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="n">on</span> <span class="n">the</span> <span class="n">X</span> <span class="n">axis</span> <span class="p">(</span><span class="n">west</span><span class="o">-</span><span class="n">east</span> <span class="n">axis</span><span class="p">)</span> <span class="ow">in</span> <span class="n">meters</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">the</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">measurement</span> <span class="n">position</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="n">on</span> <span class="n">the</span> <span class="n">Y</span> <span class="n">axis</span> <span class="p">(</span><span class="n">north</span><span class="o">-</span><span class="n">south</span> <span class="n">axis</span><span class="p">)</span> <span class="ow">in</span> <span class="n">meters</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">an</span> <span class="n">integer</span> <span class="n">representing</span> <span class="n">whether</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">has</span> <span class="n">already</span> <span class="n">passed</span> <span class="n">this</span> <span class="n">bus</span> <span class="n">stop</span><span class="p">;</span> <span class="mi">0</span> <span class="n">meaning</span> <span class="n">no</span><span class="p">,</span> <span class="mi">2</span> <span class="n">meaning</span> <span class="n">yes</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">other</span> <span class="n">possible</span> <span class="n">data</span> <span class="n">to</span> <span class="n">be</span> <span class="n">ignored</span><span class="p">]</span>
+<p>In other words, each line has four numbers separated by spaces. The first integer identifies the route. The second is the time it took for the bus to reach the bus stop at the time the data was collected. The third and fourth are the position coordinates relative to the bus stop. They’ve been normalised such that the unit is in meters as opposed to degrees.</p>
+<p>The current bus GPS data is a file available at “gps_raw.txt”. The file is an ASCII text file with several, unspecified number of lines. Each line has data in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">route</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">integer</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">start</span> <span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">the</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">measurement</span> <span class="n">position</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="n">on</span> <span class="n">the</span> <span class="n">X</span> <span class="n">axis</span> <span class="p">(</span><span class="n">west</span><span class="o">-</span><span class="n">east</span> <span class="n">axis</span><span class="p">)</span> <span class="ow">in</span> <span class="n">meters</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">the</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">measurement</span> <span class="n">position</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">stop</span> <span class="n">on</span> <span class="n">the</span> <span class="n">Y</span> <span class="n">axis</span> <span class="p">(</span><span class="n">north</span><span class="o">-</span><span class="n">south</span> <span class="n">axis</span><span class="p">)</span> <span class="ow">in</span> <span class="n">meters</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">an</span> <span class="n">integer</span> <span class="n">representing</span> <span class="n">whether</span> <span class="n">the</span> <span class="n">bus</span> <span class="n">has</span> <span class="n">already</span> <span class="n">passed</span> <span class="n">this</span> <span class="n">bus</span> <span class="n">stop</span><span class="p">;</span> <span class="mi">0</span> <span class="n">meaning</span> <span class="n">no</span><span class="p">,</span> <span class="mi">2</span> <span class="n">meaning</span> <span class="n">yes</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">other</span> <span class="n">possible</span> <span class="n">data</span> <span class="n">to</span> <span class="n">be</span> <span class="n">ignored</span><span class="p">]</span>
 <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">:</span>
 <span class="mi">72</span> <span class="mi">21</span> <span class="o">-</span><span class="mf">1534.20182433</span> <span class="mf">1469.51178823</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mf">5.82836846952</span>
 <span class="mi">3</span> <span class="mi">30</span> <span class="o">-</span><span class="mf">200.376943403</span> <span class="o">-</span><span class="mf">205.032704345</span> <span class="mi">2</span> <span class="o">-</span><span class="mi">4</span> <span class="o">-</span><span class="mf">0.345019886326</span>
@@ -182,9 +171,9 @@
 </pre></div>
 </div>
 <p>In other words, each line has at least five numbers separated by spaces. Each line could have more numbers which are not to be used. The first number identifies the route. The second identifies the start number as is used in the schedule file. The third and fourth provide the relative position of the bus to the bus stop as is used in the historical GPS file. The fifth identifies whether the bus has already passed the bus stop.</p>
-<p>The current bus GPS data is updated automatically by another process running on the system approximately every 10 seconds. The program must take into account that the current GPS data file may be empty because it&#8217;s being rewritten. In this case the contents of the previous GPS file must be used.</p>
+<p>The current bus GPS data is updated automatically by another process running on the system approximately every 10 seconds. The program must take into account that the current GPS data file may be empty because it’s being rewritten. In this case the contents of the previous GPS file must be used.</p>
 <p>There may not be GPS data available for all buses approaching the bus stop.</p>
-<p>The current bus stop name will be passed to the program as a command line parameter. The program will be started using: &#8216;./bus &lt;bus stop name&gt;&#8217;; e.g. &#8216;./bus &#8220;Park Avenue&#8221;&#8217;</p>
+<p>The current bus stop name will be passed to the program as a command line parameter. The program will be started using: ‘./bus &lt;bus stop name&gt;’; e.g. ‘./bus “Park Avenue”’</p>
 <p>The algorithm to identify the time to reach the bus stop from GPS data must work as follows:</p>
 <ul class="simple">
 <li>The time to reach the bus stop is assumed to be the average time of all the points in the historical data within 100 meters of the current bus position for the route of the bus.</li>
@@ -199,19 +188,19 @@
 <li>848 - Wall Street</li>
 </ul>
 <p>Constraints</p>
-<p>The program will run on a Linux OS on an embedded system with 1GB of RAM and a 800 MHz CPU. The program can store several megabytes of data in the current working directory, for storing any intermediate files. The current working directory will have the font file available as &#8220;DejaVuSans.ttf&#8221;.</p>
+<p>The program will run on a Linux OS on an embedded system with 1GB of RAM and a 800 MHz CPU. The program can store several megabytes of data in the current working directory, for storing any intermediate files. The current working directory will have the font file available as “DejaVuSans.ttf”.</p>
 <p>It will have access to the files described above using normal file operations.</p>
 <p>It has access to a screen with resolution 640x480, 16 bits of colour.</p>
 <p>The screen is available through the fbdev Linux subsystem.</p>
 <p>The program will need access to current date and time. These are available using normal OS time functions.</p>
 </div>
-<p>Sounds fun, doesn&#8217;t it?</p>
-<p>We won&#8217;t actually have the hardware to try this out so we&#8217;ll have to simulate. We&#8217;ll have a few input files to work with; for output we&#8217;ll have to write something that displays the view matching the requirements on our development computer, and not need to worry about the actual hardware.</p>
+<p>Sounds fun, doesn’t it?</p>
+<p>We won’t actually have the hardware to try this out so we’ll have to simulate. We’ll have a few input files to work with; for output we’ll have to write something that displays the view matching the requirements on our development computer, and not need to worry about the actual hardware.</p>
 <p>You can download the necessary input files for testing here:</p>
 <ul class="simple">
-<li><a class="reference download internal" href="_downloads/sched.txt" download=""><code class="xref download docutils literal"><span class="pre">sched.txt</span></code></a></li>
-<li><a class="reference download internal" href="_downloads/gps.txt" download=""><code class="xref download docutils literal"><span class="pre">gps.txt</span></code></a></li>
-<li><a class="reference download internal" href="_downloads/gps_raw.txt" download=""><code class="xref download docutils literal"><span class="pre">gps_raw.txt</span></code></a></li>
+<li><a class="reference download internal" href="_downloads/sched.txt" download=""><code class="xref download docutils literal notranslate"><span class="pre">sched.txt</span></code></a></li>
+<li><a class="reference download internal" href="_downloads/gps.txt" download=""><code class="xref download docutils literal notranslate"><span class="pre">gps.txt</span></code></a></li>
+<li><a class="reference download internal" href="_downloads/gps_raw.txt" download=""><code class="xref download docutils literal notranslate"><span class="pre">gps_raw.txt</span></code></a></li>
 </ul>
 <p>You can download the font file from the DejaVu fonts web page. You may already have the font available somewhere on your computer.</p>
 </div>
@@ -230,19 +219,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="components.html" title="4.1.2. Breaking software down to components"
+          <a href="components.html" title="3.4.2. Breaking software down to components"
              >next</a> |</li>
         <li class="right" >
-          <a href="design_index.html" title="4.1. Larger software"
+          <a href="design_index.html" title="3.4. Larger software"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" >4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" >3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

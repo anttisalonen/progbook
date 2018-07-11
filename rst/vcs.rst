@@ -42,7 +42,7 @@ What we want to do next is store the file hello.py in the git repository. After 
 
     $ git add hello.py
 
-We can then run "git status" to see the current status:
+This adds "hello.py" to *the staging area* which is an area describing what will be committed next. We can then run "git status" to see the current status:
 
 .. code-block:: bash
 
@@ -56,7 +56,9 @@ We can then run "git status" to see the current status:
 
     	new file:   hello.py
 
-What this means is that if we were to commit our changes, i.e. create a new version, the new version would include a new file, namely hello.py. Let's do just that:
+What this means is that if we were to commit our changes, i.e. create a new version, the new version would include a new file, namely hello.py. We can furthermore see the contents of the new commit by running "git diff --cached".
+
+Let's create our commit:
 
 .. code-block:: bash
 

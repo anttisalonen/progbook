@@ -10,7 +10,7 @@ Let's connect the dots. Here's our high level architecture:
 * On page load, the Javascript code requests the high score data from the server.
 * In Python, we have a handler that replies to this request by fetching data from the database and use this data to generate and send back a suitable JSON that can be used for the high score table.
 * In Javascript, we receive this data, and write and call a function that takes this data as the input parameter and inserts it in the HTML high score table.
-* Once the player has guessed the correct number, the server shall send the high score data to the client and the client shall update the high score table again.
+* Once the player has guessed the correct number, the server shall provide updated high score data to the client which the client shall use to update values in the high score table again.
 
 You might wonder, why have the Javascript code request data from the server at page load time instead of generating the high score table as part of the template on the server? While this is certainly a feasible approach, the good thing about having the Javascript generate the high score table at page load is that as we want to have Javascript code to update the high score table at the end of the game anyway, we can reuse that code at page load and hence have only one piece of code update the high score table instead of two.
 

@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.7.1. Object oriented programming &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -81,12 +68,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -99,18 +88,18 @@
             
   <div class="section" id="object-oriented-programming">
 <h1>2.7.1. Object oriented programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">¶</a></h1>
-<p>Object oriented programming is fairly common in Python, and we&#8217;ve used it pretty much from the beginning. See for example this code:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<p>Object oriented programming is fairly common in Python, and we’ve used it pretty much from the beginning. See for example this code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="s2"> </span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Here, &#8220;f&#8221; is a file object and &#8220;write&#8221; is a <em>member function</em> of the file class.</p>
-<p>In general, in many languages including Python, if you call a function such that the function syntactically appears to &#8220;belong&#8221; to a variable, like with &#8220;f.write()&#8221;, then you&#8217;re probably calling a member function of a class.</p>
+<p>Here, “f” is a file object and “write” is a <em>member function</em> of the file class.</p>
+<p>In general, in many languages including Python, if you call a function such that the function syntactically appears to “belong” to a variable, like with “f.write()”, then you’re probably calling a member function of a class.</p>
 <div class="section" id="defining-your-own-data-types">
 <h2>2.7.1.1. Defining your own data types<a class="headerlink" href="#defining-your-own-data-types" title="Permalink to this headline">¶</a></h2>
-<p>In Python, data types are defined using the &#8220;class&#8221; keyword:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>In Python, data types are defined using the “class” keyword:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -143,28 +132,28 @@
 
 </pre></div>
 </td></tr></table></div>
-<p>Let&#8217;s go through this line by line:</p>
+<p>Let’s go through this line by line:</p>
 <ul class="simple">
 <li>Line 1: We define a <em>class</em> named A. At a high level, a class is a data type, describing data types and functions common to the class.</li>
 <li>Line 2: We define the <em>init function</em>, or <em>constructor</em>: a function that will be automatically called when an object of this class is created.</li>
-<li>Line 3: The constructor will create a <em>member variable</em> named foo - a variable that&#8217;s contained within the object.</li>
-<li>Line 5-6: We define a <em>member function</em> - a function that&#8217;s part of a class.</li>
+<li>Line 3: The constructor will create a <em>member variable</em> named foo - a variable that’s contained within the object.</li>
+<li>Line 5-6: We define a <em>member function</em> - a function that’s part of a class.</li>
 <li>Line 8-9: This member function produces some output and also uses the member variable value.</li>
 <li>Line 11: We create (or <em>instantiate</em>) one object of class A. Class A has a constructor that requires one parameter: we pass in 42.</li>
-<li>Line 13: We call the member function &#8220;call_me&#8221; for class A.</li>
-<li>Line 14: We call the member function &#8220;add_one&#8221; for class A.</li>
-<li>Line 15: We call the member function &#8220;call_me&#8221; for class A.</li>
+<li>Line 13: We call the member function “call_me” for class A.</li>
+<li>Line 14: We call the member function “add_one” for class A.</li>
+<li>Line 15: We call the member function “call_me” for class A.</li>
 </ul>
 <p>Executing this will output:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python2 cl1.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python2 cl1.py
 A called - my foo is: <span class="m">42</span>
 A called - my foo is: <span class="m">43</span>
 </pre></div>
 </div>
 <div class="section" id="duck-typing-revisited">
 <h3>2.7.1.1.1. Duck typing revisited<a class="headerlink" href="#duck-typing-revisited" title="Permalink to this headline">¶</a></h3>
-<p>Here&#8217;s a bit larger example:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>Here’s a bit larger example:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -203,22 +192,22 @@ A called - my foo is: <span class="m">43</span>
 
 </pre></div>
 </td></tr></table></div>
-<p>Let&#8217;s go through this line by line:</p>
+<p>Let’s go through this line by line:</p>
 <ul class="simple">
 <li>Lines 1-10: As in the example above.</li>
 <li>Line 11: We define another class named B.</li>
 <li>Line 12-13: We define a member function for class B - with the same name as we did for class A.</li>
 <li>Line 15: We define a list with two elements, and create (or <em>instantiate</em>) one object of each class; one of class A, one of class B. Class A has a constructor that requires one parameter: we pass in 42.</li>
 <li>Line 17: We iterate through our list.</li>
-<li>Line 18: We call the member function &#8220;call_me&#8221; for each element in the list, i.e. once for our object of class A, once for our object of class B.</li>
+<li>Line 18: We call the member function “call_me” for each element in the list, i.e. once for our object of class A, once for our object of class B.</li>
 </ul>
 <p>Executing this will output:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python2 cl.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python2 cl.py
 A called - my foo is: <span class="m">42</span>
 B called
 </pre></div>
 </div>
-<p>We see an example of duck typing here: while classes A and B technically have nothing to do with each other, they do share the same <em>interface</em>, namely calling the function &#8220;call_me&#8221;. We also see that the classes in Python are more powerful than the structs in C: in Python we can combine multiple variables in one object, but in addition we can have member functions and use these to define an interface on interacting with the data.</p>
+<p>We see an example of duck typing here: while classes A and B technically have nothing to do with each other, they do share the same <em>interface</em>, namely calling the function “call_me”. We also see that the classes in Python are more powerful than the structs in C: in Python we can combine multiple variables in one object, but in addition we can have member functions and use these to define an interface on interacting with the data.</p>
 </div>
 </div>
 </div>
@@ -248,7 +237,7 @@ B called
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

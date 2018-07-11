@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>3.4.1. Introduction to Sudoku &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.3.1. Introduction to Sudoku &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3.4.2. Containers for Sudoku" href="sud2.html" />
-    <link rel="prev" title="3.4. Learning to program using Sudoku" href="sud_index.html" />
+    <link rel="next" title="3.3.2. Containers for Sudoku" href="sud2.html" />
+    <link rel="prev" title="3.3. Learning to program using Sudoku" href="sud_index.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,32 +30,32 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="sud2.html" title="3.4.2. Containers for Sudoku"
+          <a href="sud2.html" title="3.3.2. Containers for Sudoku"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sud_index.html" title="3.4. Learning to program using Sudoku"
+          <a href="sud_index.html" title="3.3. Learning to program using Sudoku"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="sud_index.html" accesskey="U">3.4. Learning to program using Sudoku</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="sud_index.html" accesskey="U">3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.4.1. Introduction to Sudoku</a><ul>
-<li><a class="reference internal" href="#sudoku-and-classes">3.4.1.1. Sudoku and classes</a></li>
+<li><a class="reference internal" href="#">3.3.1. Introduction to Sudoku</a><ul>
+<li><a class="reference internal" href="#sudoku-and-classes">3.3.1.1. Sudoku and classes</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="sud_index.html"
-                        title="previous chapter">3.4. Learning to program using Sudoku</a></p>
+                        title="previous chapter">3.3. Learning to program using Sudoku</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sud2.html"
-                        title="next chapter">3.4.2. Containers for Sudoku</a></p>
+                        title="next chapter">3.3.2. Containers for Sudoku</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -78,12 +65,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -95,17 +84,17 @@
           <div class="body" role="main">
             
   <div class="section" id="introduction-to-sudoku">
-<h1>3.4.1. Introduction to Sudoku<a class="headerlink" href="#introduction-to-sudoku" title="Permalink to this headline">¶</a></h1>
-<p>In this part of the book we&#8217;ll learn some new programming concepts using Sudoku, a Japanese game.</p>
-<p>We&#8217;ll learn about the following concepts:</p>
+<h1>3.3.1. Introduction to Sudoku<a class="headerlink" href="#introduction-to-sudoku" title="Permalink to this headline">¶</a></h1>
+<p>In this part of the book we’ll learn some new programming concepts using Sudoku, a Japanese game.</p>
+<p>We’ll learn about the following concepts:</p>
 <ul class="simple">
 <li>Using a statically, strongly typed language to solve a problem</li>
 <li>Some bits around algorithms, namely search and constraint propagation, i.e. some classical AI</li>
 <li>Recursion</li>
 </ul>
 <p>What is Sudoku? Sudoku is a game with a grid of 9x9 numbers, whereby each cell in the grid can have a number between 1 and 9. Some cells are pre-filled and the goal of the game is to fill all the cells, such that each cell contains a number that is not already used by any of its peers. The peers of a cell are the cells either on the same horizontal line, on the same vertical line, or within the same 3x3 grid. The cells that are peers of each other, i.e. on the same horizontal or vertical line or within the same 3x3 grid are called a <em>unit</em>.</p>
-<p>Here&#8217;s an example Sudoku puzzle:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">36</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">89</span>
+<p>Here’s an example Sudoku puzzle:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">36</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">89</span>
    <span class="o">|</span><span class="mi">361</span><span class="o">|</span>
    <span class="o">|</span>   <span class="o">|</span>
 <span class="o">---+---+---</span>
@@ -118,13 +107,13 @@
 <span class="mi">97</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span> <span class="mi">14</span>
 </pre></div>
 </div>
-<p>Now, what we&#8217;re going to write is a program that, given any Sudoku puzzle, will solve it.</p>
-<p>In order to be able to write such a program, we must first be capable of understanding the problem, i.e. understanding what our program should do. To gain this understanding it&#8217;s helpful to try to solve the Sudoku puzzle manually first. Then, &#8220;all&#8221; we need to do is replicate this logic in code.</p>
+<p>Now, what we’re going to write is a program that, given any Sudoku puzzle, will solve it.</p>
+<p>In order to be able to write such a program, we must first be capable of understanding the problem, i.e. understanding what our program should do. To gain this understanding it’s helpful to try to solve the Sudoku puzzle manually first. Then, “all” we need to do is replicate this logic in code.</p>
 <p><em>Exercise</em>: Try to solve the above Sudoku puzzle. (No need to actually solve it.)</p>
 <p>Now, when trying to solve the puzzle, you probably came up with one common strategy: try and see if a cell only has one possible value because its peers rule all other values out, and in this case, fill the cell with this value.</p>
 <p>Another common strategy is to see if a number has been ruled out for all cells in a unit except one. In this case it must be the correct number for that cell.</p>
 <p>If you fill a cell with a value, then this rules out that value of its peers, meaning you can again check those peers if they only have one possible value.</p>
-<p>At some point you may have seen that it&#8217;s not possible to progress using these strategies: all open cells may all have more than one possible value. What you could try then is guess: pick one of the possible values, assume it&#8217;s the correct one and see if you end up with the solution for the Sudoku.</p>
+<p>At some point you may have seen that it’s not possible to progress using these strategies: all open cells may all have more than one possible value. What you could try then is guess: pick one of the possible values, assume it’s the correct one and see if you end up with the solution for the Sudoku.</p>
 <p>While there are several more strategies to solve a Sudoku puzzle, these two, combined with the guessing, are enough for our purposes.</p>
 <p>Our program will have the following parts:</p>
 <ul class="simple">
@@ -134,12 +123,12 @@
 <li>Guess, or search: assume a value is correct for a cell, then propagate the constraint and search further until a solution is found, or guess another value if the previous guess turned out to be wrong (also called <em>backtracking</em>)</li>
 <li>Checking we solved the puzzle, and printing out the solution</li>
 </ul>
-<p>You can use any programming language but the snippets in the book necessary for writing the program will be in C++. Should you choose to use another language you&#8217;ll need to find out the relevant snippets yourself. It&#8217;s been demonstrated this problem can be solved in about 20 lines of Python, though I&#8217;d recommend using a statically typed language for the sole reason of gaining more experience using one. The solution for the problem in this book is about 300 lines of C++.</p>
-<p>I&#8217;d also like to credit Peter Norvig for writing an excellent article about this problem which is the foundation for this part of the book. You may want to look it up online after completing the exercises.</p>
+<p>You can use any programming language but the snippets in the book necessary for writing the program will be in C++. Should you choose to use another language you’ll need to find out the relevant snippets yourself. It’s been demonstrated this problem can be solved in about 20 lines of Python, though I’d recommend using a statically typed language for the sole reason of gaining more experience using one. The solution for the problem in this book is about 300 lines of C++.</p>
+<p>I’d also like to credit Peter Norvig for writing an excellent article about this problem which is the foundation for this part of the book. You may want to look it up online after completing the exercises.</p>
 <div class="section" id="sudoku-and-classes">
-<h2>3.4.1.1. Sudoku and classes<a class="headerlink" href="#sudoku-and-classes" title="Permalink to this headline">¶</a></h2>
-<p>As mentioned we&#8217;ll be using C++ to solve this. We&#8217;ll also use some object oriented concepts to see how these can be used for such a problem.</p>
-<p>Generally speaking, it&#8217;s often useful to first identify the main data structures and how they relate to each other. In this case, we can see there are following structures:</p>
+<h2>3.3.1.1. Sudoku and classes<a class="headerlink" href="#sudoku-and-classes" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned we’ll be using C++ to solve this. We’ll also use some object oriented concepts to see how these can be used for such a problem.</p>
+<p>Generally speaking, it’s often useful to first identify the main data structures and how they relate to each other. In this case, we can see there are following structures:</p>
 <ul class="simple">
 <li>The puzzle itself - either in solved or unsolved state</li>
 <li>Cells - whereby each cell can be represented by which value it has, or better, could have</li>
@@ -147,7 +136,7 @@
 <p>On relations, we can see the puzzle contains multiple cells, namely 9x9=81.</p>
 <p>In the spirit of object oriented programming, we can construct objects for these two structures.</p>
 <p>In C++, the syntax for declaring a class is the following:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -166,18 +155,18 @@
 <span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
-<p>Let&#8217;s go through this line by line:</p>
+<p>Let’s go through this line by line:</p>
 <ul class="simple">
-<li>Line 1: We use the keyword <em>class</em> to define a class. This is similar to &#8220;struct&#8221; - indeed, almost equivalent.</li>
+<li>Line 1: We use the keyword <em>class</em> to define a class. This is similar to “struct” - indeed, almost equivalent.</li>
 <li>Line 2: We use the keyword <em>public</em> to denote functions (and possibly variables) that can be called from code that is not part of the class. This specifies the <em>interface</em> of the class.</li>
 <li>Line 3: We declare a function with the same name as our class, and without a return value. This function is called the <em>constructor</em> and is called whenever an object of this class is <em>instantiated</em>, i.e. whenever a variable of this type is defined. In this case, the constructor takes one int as a parameter.</li>
 <li>Line 4: We define a <em>getter function</em> - a function which has the simple function of returning some variable for which direct access is not allowed from the outside. We denote this function with the keyword <em>const</em> at the end - this means that the function does not modify the object (i.e. the variable of this type).</li>
-<li>Line 5: We define a function that modifies the object somehow. In this case, we&#8217;d expect the function to increment the value of the internal int by one.</li>
+<li>Line 5: We define a function that modifies the object somehow. In this case, we’d expect the function to increment the value of the internal int by one.</li>
 <li>Line 7: We use the keyword <em>private</em> to denote functions and variables that are part of the class but not accessible from code outside the class.</li>
 <li>Line 8: We declare an int as the internal data for this class.</li>
 </ul>
 <p>Now, the above defines the interface for the class as well as its (hidden) data. We still need to define the member functions. This can be done as follows:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -208,12 +197,12 @@
 </td></tr></table></div>
 <p>In other words:</p>
 <ul class="simple">
-<li>Line 1-4: We define the constructor. We first copy-paste the declaration and add &#8220;MyClass::&#8221; in front of the function name. Second line demonstrates the syntax for initialising internal variables. The function body itself is empty.</li>
-<li>Line 6-9: We define the function &#8220;get_value&#8221;. We again copy-paste the declaration and add &#8220;MyClass::&#8221; in front of the function name. Instead of a semicolon at the end we have the function body. It&#8217;s very simple in this case, returning an integer containing the value of the variable &#8220;value&#8221;.</li>
-<li>Line 11-15: We define the function &#8220;increment&#8221; which simply increments &#8220;value&#8221; by one.</li>
+<li>Line 1-4: We define the constructor. We first copy-paste the declaration and add “MyClass::” in front of the function name. Second line demonstrates the syntax for initialising internal variables. The function body itself is empty.</li>
+<li>Line 6-9: We define the function “get_value”. We again copy-paste the declaration and add “MyClass::” in front of the function name. Instead of a semicolon at the end we have the function body. It’s very simple in this case, returning an integer containing the value of the variable “value”.</li>
+<li>Line 11-15: We define the function “increment” which simply increments “value” by one.</li>
 </ul>
 <p>If we wanted to use this class, we could e.g. do the following:</p>
-<div class="highlight-cpp"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -234,9 +223,9 @@
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>This would print &#8220;4&#8221; and &#8220;12&#8221;.</p>
-<p>This class is fairly trivial but demonstrates most of the concepts we&#8217;ll be needing. In terms of usability of this class, it effectively <em>encapsulates</em> an integer such that most integer options are not possible, for example subtraction or multiplication. It could be used e.g. as a counter for something.</p>
-<p><em>Exercise</em>: Add a &#8220;decrement&#8221; function to our class. Test it by using it in test code.</p>
+<p>This would print “4” and “12”.</p>
+<p>This class is fairly trivial but demonstrates most of the concepts we’ll be needing. In terms of usability of this class, it effectively <em>encapsulates</em> an integer such that most integer options are not possible, for example subtraction or multiplication. It could be used e.g. as a counter for something.</p>
+<p><em>Exercise</em>: Add a “decrement” function to our class. Test it by using it in test code.</p>
 </div>
 </div>
 
@@ -253,19 +242,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="sud2.html" title="3.4.2. Containers for Sudoku"
+          <a href="sud2.html" title="3.3.2. Containers for Sudoku"
              >next</a> |</li>
         <li class="right" >
-          <a href="sud_index.html" title="3.4. Learning to program using Sudoku"
+          <a href="sud_index.html" title="3.3. Learning to program using Sudoku"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="sud_index.html" >3.4. Learning to program using Sudoku</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="sud_index.html" >3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

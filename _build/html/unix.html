@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>1.3.1. Basic Unix shell usage &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -90,12 +77,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -113,22 +102,22 @@
 <p class="attribution">&mdash;Dennis Ritchie</p>
 </div></blockquote>
 <p>Basic Unix shell commands are quite useful in day to day software development.</p>
-<p>Let&#8217;s assume you have the file with 10,000 lines defining the functions as discussed in &#8220;Quadratic formula&#8221;. In order to inspect this file, you could open it in the text editor, but there are also other, typically easier, ways to achieve this.</p>
-<p>In the following, the character &#8216;$&#8217; means the shell prompt, i.e. you typically type in the shell whatever comes after &#8216;$&#8217;.</p>
-<p>If you wanted to take a quick look browsing a file, you could use the utility &#8216;less&#8217;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ less test.txt
+<p>Let’s assume you have the file with 10,000 lines defining the functions as discussed in “Quadratic formula”. In order to inspect this file, you could open it in the text editor, but there are also other, typically easier, ways to achieve this.</p>
+<p>In the following, the character ‘$’ means the shell prompt, i.e. you typically type in the shell whatever comes after ‘$’.</p>
+<p>If you wanted to take a quick look browsing a file, you could use the utility ‘less’:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ less test.txt
 </pre></div>
 </div>
-<p>This will open the file test.txt in &#8216;less&#8217;, which allows you to read and browse the file. Less has a few useful commands:</p>
+<p>This will open the file test.txt in ‘less’, which allows you to read and browse the file. Less has a few useful commands:</p>
 <ul class="simple">
-<li>&#8216;q&#8217; exits less</li>
-<li>&#8216;/&#8217; allows you to search in the file - type &#8216;/&#8217; followed by the string you want to search for, followed by &#8216;return&#8217;</li>
-<li>&#8216;n&#8217; repeats the previous search</li>
-<li>&#8216;N&#8217; repeats the previous search but searches backwards</li>
+<li>‘q’ exits less</li>
+<li>‘/’ allows you to search in the file - type ‘/’ followed by the string you want to search for, followed by ‘return’</li>
+<li>‘n’ repeats the previous search</li>
+<li>‘N’ repeats the previous search but searches backwards</li>
 </ul>
-<p>There are a few more, and you can look up the reference for &#8216;less&#8217; to see all of them (by running &#8220;man less&#8221;). These same commands are to some degree shared across several other Unix tools. For example vim has the same commands for searching.</p>
-<p>Let&#8217;s say you only wanted to see the beginning of the file. You can achieve this using &#8216;head&#8217;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ head test.txt
+<p>There are a few more, and you can look up the reference for ‘less’ to see all of them (by running “man less”). These same commands are to some degree shared across several other Unix tools. For example vim has the same commands for searching.</p>
+<p>Let’s say you only wanted to see the beginning of the file. You can achieve this using ‘head’:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ head test.txt
 <span class="m">7</span>.269553 <span class="m">3</span>.427526 <span class="m">6</span>.633603
 <span class="m">1</span>.980206 -3.655827 -2.629755
 -8.687820 -6.930905 -8.731439
@@ -136,9 +125,9 @@
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>This will print the first ten lines of the file. You can adjust the number of lines output by using the &#8220;-n&#8221; switch. For example, the command &#8220;head -n5 test.txt&#8221; would only output the first five lines.</p>
-<p>The command &#8216;tail&#8217; can be used to output the last lines of a file, by default ten:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ tail test.txt
+<p>This will print the first ten lines of the file. You can adjust the number of lines output by using the “-n” switch. For example, the command “head -n5 test.txt” would only output the first five lines.</p>
+<p>The command ‘tail’ can be used to output the last lines of a file, by default ten:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ tail test.txt
 <span class="o">[</span>...<span class="o">]</span>
 -7.058864 -5.461025 -8.337095
 -0.197971 -1.485949 -0.748672
@@ -146,18 +135,18 @@
 <span class="m">0</span>.868340 -2.444818 -3.173135
 </pre></div>
 </div>
-<p>If you want to search for a string in the file, you can use &#8216;grep&#8217;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ grep <span class="s2">&quot;1234&quot;</span> test.txt
+<p>If you want to search for a string in the file, you can use ‘grep’:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ grep <span class="s2">&quot;1234&quot;</span> test.txt
 <span class="m">6</span>.133025 -4.612349 <span class="m">4</span>.969612
 -0.904910 -5.976920 <span class="m">8</span>.821234
 -6.123416 <span class="m">7</span>.494195 <span class="m">4</span>.350390
 -1.123468 <span class="m">0</span>.327963 <span class="m">1</span>.291879
 </pre></div>
 </div>
-<p>This command would print all lines which have the string &#8220;1234&#8221; in them. The command &#8216;grep&#8217; also has a lot of useful switches, for example including lines before or after the line that includes the search string, or inverse search (only print lines that don&#8217;t have a match).</p>
+<p>This command would print all lines which have the string “1234” in them. The command ‘grep’ also has a lot of useful switches, for example including lines before or after the line that includes the search string, or inverse search (only print lines that don’t have a match).</p>
 <p><em>Exercise</em>: Find out which grep switch makes grep only select non-matching lines.</p>
-<p>If you only wanted to print one column of the file, you could achieve this using &#8216;awk&#8217;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{print $1}&#39;</span> test.txt
+<p>If you only wanted to print one column of the file, you could achieve this using ‘awk’:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{print $1}&#39;</span> test.txt
 <span class="m">7</span>.269553
 <span class="m">1</span>.980206
 -8.687820
@@ -165,29 +154,29 @@
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>This example only prints the first column in the file. (&#8216;awk&#8217; by default assumed the space is the delimiter character.)</p>
-<p>&#8216;awk&#8217; is actually a programming language capable of much more, but much of the daily use is simple one-liners. Let&#8217;s say we want to calculate the average of all values in the first column. This can be achieved using &#8216;awk&#8217;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{sum += $1; n++} END {print sum / n}&#39;</span> test.txt
+<p>This example only prints the first column in the file. (‘awk’ by default assumed the space is the delimiter character.)</p>
+<p>‘awk’ is actually a programming language capable of much more, but much of the daily use is simple one-liners. Let’s say we want to calculate the average of all values in the first column. This can be achieved using ‘awk’:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{sum += $1; n++} END {print sum / n}&#39;</span> test.txt
 <span class="m">0</span>.0478027
 </pre></div>
 </div>
 <p>What this line means is:</p>
 <ul class="simple">
-<li>For each line, take the value of the number in the first column, and add it in the variable called &#8220;sum&#8221; (automatically initialised to 0). Increment the variable &#8220;n&#8221; by one (also automatically initialised to 0).</li>
-<li>After the file has been processed, print &#8220;sum&#8221; divided by &#8220;n&#8221;, i.e. the sum divided by the number of lines.</li>
+<li>For each line, take the value of the number in the first column, and add it in the variable called “sum” (automatically initialised to 0). Increment the variable “n” by one (also automatically initialised to 0).</li>
+<li>After the file has been processed, print “sum” divided by “n”, i.e. the sum divided by the number of lines.</li>
 </ul>
-<p>Another useful command is &#8216;wc&#8217;, or &#8220;word count&#8221;, which can be used to count the words in a file:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ wc test.txt
+<p>Another useful command is ‘wc’, or “word count”, which can be used to count the words in a file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ wc test.txt
 <span class="m">10000</span>  <span class="m">30000</span> <span class="m">284890</span> test.txt
 </pre></div>
 </div>
-<p>The output includes the number of lines, words, characters and the file name. By adding the switch &#8216;-l&#8217;, only the number of lines and the file name are output:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ wc -l test.txt
+<p>The output includes the number of lines, words, characters and the file name. By adding the switch ‘-l’, only the number of lines and the file name are output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ wc -l test.txt
 <span class="m">10000</span> test.txt
 </pre></div>
 </div>
-<p>The final command introduced here is &#8216;sed&#8217;, or &#8220;stream editor&#8221;, which modified the input using a given expression. For example we can use &#8216;sed&#8217; to change all space characters in the file to commas:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sed <span class="s1">&#39;s/ /,/g&#39;</span> test.txt
+<p>The final command introduced here is ‘sed’, or “stream editor”, which modified the input using a given expression. For example we can use ‘sed’ to change all space characters in the file to commas:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sed <span class="s1">&#39;s/ /,/g&#39;</span> test.txt
 <span class="m">7</span>.269553,3.427526,6.633603
 <span class="m">1</span>.980206,-3.655827,-2.629755
 -8.687820,-6.930905,-8.731439
@@ -195,16 +184,16 @@
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>Let&#8217;s break down this expression &#8216;s/ /,/g&#8217;:</p>
+<p>Let’s break down this expression ‘s/ /,/g’:</p>
 <ul class="simple">
-<li>The character &#8216;/&#8217; is the delimiter; the expression consists of four parts: &#8216;s&#8217;, &#8216; &#8216;, &#8216;,&#8217; and &#8216;g&#8217;:</li>
-<li>&#8216;s&#8217;: initial command: search (and replace)</li>
-<li>&#8216; &#8216;: search for the space character</li>
-<li>&#8216;,&#8217;: replace with the comma</li>
-<li>&#8216;g&#8217;: do this globally, i.e. not only once per line (the default), but for all occurrences in the file.</li>
+<li>The character ‘/’ is the delimiter; the expression consists of four parts: ‘s’, ‘ ‘, ‘,’ and ‘g’:</li>
+<li>‘s’: initial command: search (and replace)</li>
+<li>‘ ‘: search for the space character</li>
+<li>‘,’: replace with the comma</li>
+<li>‘g’: do this globally, i.e. not only once per line (the default), but for all occurrences in the file.</li>
 </ul>
-<p>Another example is removing all &#8216;-&#8216; characters from the file:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sed <span class="s1">&#39;s/-//g&#39;</span> test.txt
+<p>Another example is removing all ‘-‘ characters from the file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sed <span class="s1">&#39;s/-//g&#39;</span> test.txt
 <span class="m">7</span>.269553 <span class="m">3</span>.427526 <span class="m">6</span>.633603
 <span class="m">1</span>.980206 <span class="m">3</span>.655827 <span class="m">2</span>.629755
 <span class="m">8</span>.687820 <span class="m">6</span>.930905 <span class="m">8</span>.731439
@@ -212,8 +201,8 @@
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>We can also pass multiple expressions to &#8216;sed&#8217; by using the &#8216;-e&#8217; switch, for example to replace spaces with commas and remove the dashes:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sed -e <span class="s1">&#39;s/ /,/g&#39;</span> -e <span class="s1">&#39;s/-//g&#39;</span> test.txt
+<p>We can also pass multiple expressions to ‘sed’ by using the ‘-e’ switch, for example to replace spaces with commas and remove the dashes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sed -e <span class="s1">&#39;s/ /,/g&#39;</span> -e <span class="s1">&#39;s/-//g&#39;</span> test.txt
 <span class="m">7</span>.269553,3.427526,6.633603
 <span class="m">1</span>.980206,3.655827,2.629755
 <span class="m">8</span>.687820,6.930905,8.731439
@@ -223,8 +212,8 @@
 </div>
 <div class="section" id="unix-pipelines">
 <h2>1.3.1.1. Unix pipelines<a class="headerlink" href="#unix-pipelines" title="Permalink to this headline">¶</a></h2>
-<p>The &#8216;awk&#8217; command above lists the first column for all 10,000 lines which might not be what you want. Let&#8217;s say you only wanted to see the first ten lines, i.e. apply the &#8216;head&#8217; command to the output of the &#8216;awk&#8217; command. You can achieve this using pipelines:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{print $1}&#39;</span> test.txt <span class="p">|</span> head
+<p>The ‘awk’ command above lists the first column for all 10,000 lines which might not be what you want. Let’s say you only wanted to see the first ten lines, i.e. apply the ‘head’ command to the output of the ‘awk’ command. You can achieve this using pipelines:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ awk <span class="s1">&#39;{print $1}&#39;</span> test.txt <span class="p">|</span> head
 <span class="m">7</span>.269553
 <span class="m">1</span>.980206
 -8.687820
@@ -232,27 +221,27 @@
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>In this case, head doesn&#8217;t take a file name as input, but instead reads from standard input, i.e. the output from &#8216;awk&#8217;. This is the typical behaviour for Unix commands.</p>
+<p>In this case, head doesn’t take a file name as input, but instead reads from standard input, i.e. the output from ‘awk’. This is the typical behaviour for Unix commands.</p>
 <p>In general, the commands can be combined in any way, giving a lot of power to the user.</p>
-<p><em>Exercise</em>: Find out how many lines in the file have no &#8216;0&#8217; character in them.</p>
+<p><em>Exercise</em>: Find out how many lines in the file have no ‘0’ character in them.</p>
 </div>
 <div class="section" id="further-unix-shell-tips-and-tricks">
 <h2>1.3.1.2. Further Unix shell tips and tricks<a class="headerlink" href="#further-unix-shell-tips-and-tricks" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="man">
 <h3>1.3.1.2.1. man<a class="headerlink" href="#man" title="Permalink to this headline">¶</a></h3>
-<p>The command &#8220;man&#8221; (short for &#8220;manual&#8221;) allows you to browse the documentation of different tools. For example, running &#8220;man grep&#8221; will display the documentation for grep. The documentation is opened using &#8220;less&#8221;, such that you can browse the text freely and exit with &#8216;q&#8217;.</p>
-<p>There can be multiple man pages for a single command. For example, &#8220;man signal&#8221; can mean either looking up the signal() C standard library functions or the general overview of signals. The man pages are categorised by type, such that for example category 1 means commands that can be run, 3 means C standard library functions and 7 means miscellaneous documentation. You can specify which category you mean by including it in your command, for example:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ man <span class="m">7</span> signal
+<p>The command “man” (short for “manual”) allows you to browse the documentation of different tools. For example, running “man grep” will display the documentation for grep. The documentation is opened using “less”, such that you can browse the text freely and exit with ‘q’.</p>
+<p>There can be multiple man pages for a single command. For example, “man signal” can mean either looking up the signal() C standard library functions or the general overview of signals. The man pages are categorised by type, such that for example category 1 means commands that can be run, 3 means C standard library functions and 7 means miscellaneous documentation. You can specify which category you mean by including it in your command, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ man <span class="m">7</span> signal
 </pre></div>
 </div>
-<p>...will, on some Linux systems, look up the man page on signal in category 7, providing the reader with an overview of signals in Unix.</p>
-<p><em>Exercise</em>: Look up the man page for the command &#8220;man&#8221;.</p>
-<p><em>Exercise</em>: Look up the man page for the C function call &#8220;printf&#8221;.</p>
+<p>…will, on some Linux systems, look up the man page on signal in category 7, providing the reader with an overview of signals in Unix.</p>
+<p><em>Exercise</em>: Look up the man page for the command “man”.</p>
+<p><em>Exercise</em>: Look up the man page for the C function call “printf”.</p>
 </div>
 <div class="section" id="sort">
 <h3>1.3.1.2.2. sort<a class="headerlink" href="#sort" title="Permalink to this headline">¶</a></h3>
-<p>The tool &#8220;sort&#8221; sorts its input line by line. By default it sorts alphabetically, but by passing the switch &#8220;-n&#8221; it will interpret its input data numerically. It by default sorts based on the beginning of each line but this can be changed:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sort -n test.txt <span class="p">|</span> head
+<p>The tool “sort” sorts its input line by line. By default it sorts alphabetically, but by passing the switch “-n” it will interpret its input data numerically. It by default sorts based on the beginning of each line but this can be changed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sort -n test.txt <span class="p">|</span> head
 -9.995596 <span class="m">8</span>.887278 <span class="m">2</span>.325502
 -9.995454 -0.339710 <span class="m">4</span>.518171
 -9.993047 -9.059912 -0.660508
@@ -260,30 +249,30 @@
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>(If your sort command output seems nonsensical, it might be due to the locale set on your shell such that the decimal point is defined as &#8216;,&#8217; instead of &#8216;.&#8217;, confusing sort. You should be able to fix this by running &#8220;export LC_ALL=C&#8221;.)</p>
+<p>(If your sort command output seems nonsensical, it might be due to the locale set on your shell such that the decimal point is defined as ‘,’ instead of ‘.’, confusing sort. You should be able to fix this by running “export LC_ALL=C”.)</p>
 <p>The above sorted the data based on the first column. If we wanted to sort by the second column instead, we can use:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sort -n -k <span class="m">2</span> test.txt <span class="p">|</span> head
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sort -n -k <span class="m">2</span> test.txt <span class="p">|</span> head
 <span class="m">0</span>.649875 -9.998834 <span class="m">2</span>.834749
 -3.819303 -9.998413 -7.295722
 <span class="m">0</span>.985071 -9.997176 <span class="m">1</span>.182082
 -6.991833 -9.995815 -7.523136
 </pre></div>
 </div>
-<p>&#8220;sort&#8221; also allows redefining the delimiter character using the &#8220;-t&#8221; switch. For more information, run &#8220;man sort&#8221;.</p>
+<p>“sort” also allows redefining the delimiter character using the “-t” switch. For more information, run “man sort”.</p>
 </div>
 <div class="section" id="variables">
 <h3>1.3.1.2.3. Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
-<p>Variable support is typically something that Unix shells have built in. That is, defining variables isn&#8217;t executing a program per se, but rather using a feature of the shell itself.</p>
+<p>Variable support is typically something that Unix shells have built in. That is, defining variables isn’t executing a program per se, but rather using a feature of the shell itself.</p>
 <p>Terminology wise, there are different Unix shells (called for example bash, tcsh, zsh), each with different characteristics and quirks, but each one typically implements the same core functionality, namely being compatible with the original Unix shell (sh) and conforming to the POSIX shell specification.</p>
 <p>This example defines a variable in bash:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nv">MY_FILE</span><span class="o">=</span>test.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">MY_FILE</span><span class="o">=</span>test.txt
 $ head -n1 <span class="nv">$MY_FILE</span>
 <span class="m">7</span>.269553 <span class="m">3</span>.427526 <span class="m">6</span>.633603
 </pre></div>
 </div>
 <p>In other words, defining a variable is trivial, and you can use the variable by prefixing it with a dollar sign.</p>
-<p>Sometimes you might want to combine the variable with other bits. In those cases it&#8217;s typically safe to enclose the variable with curly brackets ({ and }). This will make it clear when the variable name starts and ends. For example, if we wanted to combine two variables in one file name:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nv">MY_FILE_START</span><span class="o">=</span><span class="nb">test</span>
+<p>Sometimes you might want to combine the variable with other bits. In those cases it’s typically safe to enclose the variable with curly brackets ({ and }). This will make it clear when the variable name starts and ends. For example, if we wanted to combine two variables in one file name:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">MY_FILE_START</span><span class="o">=</span><span class="nb">test</span>
 $ <span class="nv">MY_FILE_SUFFIX</span><span class="o">=</span>txt
 $ <span class="nb">echo</span> <span class="si">${</span><span class="nv">MY_FILE_START</span><span class="si">}</span>.<span class="si">${</span><span class="nv">MY_FILE_SUFFIX</span><span class="si">}</span>
 test.txt
@@ -292,8 +281,8 @@ test.txt
 </div>
 <div class="section" id="echo-and-cat">
 <h3>1.3.1.2.4. echo and cat<a class="headerlink" href="#echo-and-cat" title="Permalink to this headline">¶</a></h3>
-<p>The command &#8220;echo&#8221; simply prints its input. For example:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;hello&quot;</span>
+<p>The command “echo” simply prints its input. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;hello&quot;</span>
 hello
 $ <span class="nb">echo</span> <span class="nv">$MY_FILE</span>
 test.txt
@@ -301,8 +290,8 @@ $ <span class="nb">echo</span> <span class="s2">&quot;abc,def,ghi&quot;</span> <
 abc def ghi
 </pre></div>
 </div>
-<p>The command &#8220;cat&#8221; concatenates files. It can also be used to display the contents of a file:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ cat test.txt
+<p>The command “cat” concatenates files. It can also be used to display the contents of a file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cat test.txt
 <span class="m">7</span>.269553 <span class="m">3</span>.427526 <span class="m">6</span>.633603
 <span class="m">1</span>.980206 -3.655827 -2.629755
 -8.687820 -6.930905 -8.731439
@@ -313,8 +302,8 @@ abc def ghi
 </div>
 <div class="section" id="exit-codes">
 <h3>1.3.1.2.5. Exit codes<a class="headerlink" href="#exit-codes" title="Permalink to this headline">¶</a></h3>
-<p>Whenever you&#8217;ve finished running a program in Unix, it will return an exit code. The convention is that the exit code 0 means success while non-0 means failure. You can typically see the conditions under which a program returns success or failure by looking at the documentation. For example, grep returns exit code 1 if the search string was not found at all. You can use the special built-in variable $? to access the exit code:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ grep <span class="m">2345</span> test.txt
+<p>Whenever you’ve finished running a program in Unix, it will return an exit code. The convention is that the exit code 0 means success while non-0 means failure. You can typically see the conditions under which a program returns success or failure by looking at the documentation. For example, grep returns exit code 1 if the search string was not found at all. You can use the special built-in variable $? to access the exit code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ grep <span class="m">2345</span> test.txt
 <span class="m">5</span>.145898 <span class="m">3</span>.219212 <span class="m">3</span>.234599
 <span class="m">3</span>.323714 <span class="m">3</span>.883829 -4.722345
 <span class="m">6</span>.142345 -4.611688 <span class="m">0</span>.817618
@@ -329,14 +318,14 @@ $ <span class="nb">echo</span> <span class="nv">$?</span>
 </div>
 <div class="section" id="multiple-commands">
 <h3>1.3.1.2.6. Multiple commands<a class="headerlink" href="#multiple-commands" title="Permalink to this headline">¶</a></h3>
-<p>You can run multiple commands in series in one line. The following runs &#8220;head&#8221;, followed by &#8220;tail&#8221;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ head -n <span class="m">1</span> test.txt <span class="p">;</span> tail -n <span class="m">1</span> test.txt
+<p>You can run multiple commands in series in one line. The following runs “head”, followed by “tail”:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ head -n <span class="m">1</span> test.txt <span class="p">;</span> tail -n <span class="m">1</span> test.txt
 <span class="m">7</span>.269553 <span class="m">3</span>.427526 <span class="m">6</span>.633603
 <span class="m">0</span>.868340 -2.444818 -3.173135
 </pre></div>
 </div>
-<p>You can also run multiple commands depending on the exit code of the previous execution. The shorthand &#8220;&amp;&amp;&#8221; means &#8220;run the following command only if the previous command succeeded, i.e. returned an exit code 0&#8221;. The shorthand &#8220;||&#8221; means &#8220;run the following command only if the previous command failed&#8221;. You can also group commands using parentheses. For example:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="o">(</span>grep <span class="m">2345</span> test.txt <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;found&quot;</span><span class="o">)</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&quot;not found&quot;</span>
+<p>You can also run multiple commands depending on the exit code of the previous execution. The shorthand “&amp;&amp;” means “run the following command only if the previous command succeeded, i.e. returned an exit code 0”. The shorthand “||” means “run the following command only if the previous command failed”. You can also group commands using parentheses. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="o">(</span>grep <span class="m">2345</span> test.txt <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;found&quot;</span><span class="o">)</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&quot;not found&quot;</span>
 <span class="m">5</span>.145898 <span class="m">3</span>.219212 <span class="m">3</span>.234599
 <span class="m">3</span>.323714 <span class="m">3</span>.883829 -4.722345
 <span class="m">6</span>.142345 -4.611688 <span class="m">0</span>.817618
@@ -349,8 +338,8 @@ not found
 </div>
 <div class="section" id="globbing">
 <h3>1.3.1.2.7. Globbing<a class="headerlink" href="#globbing" title="Permalink to this headline">¶</a></h3>
-<p>Globbing refers to using special characters to match multiple files. An example is &#8220;*.py&#8221; which means &#8220;all files with the extension .py in the current directory&#8221;. For example, to find out the number of lines in Python files:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ wc -l *.py
+<p>Globbing refers to using special characters to match multiple files. An example is “*.py” which means “all files with the extension .py in the current directory”. For example, to find out the number of lines in Python files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ wc -l *.py
  <span class="m">156</span> conf.py
    <span class="m">8</span> gen.py
    <span class="m">4</span> rand.py
@@ -361,8 +350,8 @@ not found
 </div>
 <div class="section" id="seq">
 <h3>1.3.1.2.8. Seq<a class="headerlink" href="#seq" title="Permalink to this headline">¶</a></h3>
-<p>The command &#8220;seq&#8221; simply outputs a sequence of numbers:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ seq <span class="m">1</span> <span class="m">5</span>
+<p>The command “seq” simply outputs a sequence of numbers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ seq <span class="m">1</span> <span class="m">5</span>
 <span class="m">1</span>
 <span class="m">2</span>
 <span class="m">3</span>
@@ -375,22 +364,22 @@ not found
 <div class="section" id="find">
 <h3>1.3.1.2.9. Find<a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h3>
 <p>Find is useful for finding files, and optionally performing operations on them.</p>
-<p>For example, let&#8217;s assume you have a directory with subdirectories, with the directory and subdirectories having lots of Python files. Let&#8217;s further assume you had used the Python &#8220;with&#8221; statement in some of the files and would like to see how, but you can&#8217;t remember which files exactly use &#8220;with&#8221;. Find and grep to the rescue:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ find . -name <span class="s1">&#39;*.py&#39;</span> -exec grep with <span class="o">{}</span> +
+<p>For example, let’s assume you have a directory with subdirectories, with the directory and subdirectories having lots of Python files. Let’s further assume you had used the Python “with” statement in some of the files and would like to see how, but you can’t remember which files exactly use “with”. Find and grep to the rescue:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ find . -name <span class="s1">&#39;*.py&#39;</span> -exec grep with <span class="o">{}</span> +
 ./conf.py:# extensions coming with Sphinx <span class="o">(</span>named <span class="s1">&#39;sphinx.ext.*&#39;</span><span class="o">)</span> or your custom
 ./with.py:with open<span class="o">(</span><span class="s1">&#39;test.txt&#39;</span>, <span class="s1">&#39;w&#39;</span><span class="o">)</span> as f:
 </pre></div>
 </div>
-<p>Let&#8217;s go through this point by point:</p>
+<p>Let’s go through this point by point:</p>
 <ul class="simple">
 <li>We execute find with several parameters</li>
-<li>The first parameter is &#8216;.&#8217;, i.e. search in the current working directory (as well as subdirectories)</li>
-<li>Search for files with the extension &#8216;.py&#8217;</li>
-<li>For each found file, run &#8220;grep with $filename&#8221;. The notation {} means the found file name will be used here, and the final &#8216;+&#8217; means the grep command will be run once with all the files as parameters. For example, if the find command found three Python files, ./a.py, subdir/b.py and subdir2/c.py, it would execute &#8220;grep with ./a.py subdir/b.py subdir2/c.py&#8221;.</li>
+<li>The first parameter is ‘.’, i.e. search in the current working directory (as well as subdirectories)</li>
+<li>Search for files with the extension ‘.py’</li>
+<li>For each found file, run “grep with $filename”. The notation {} means the found file name will be used here, and the final ‘+’ means the grep command will be run once with all the files as parameters. For example, if the find command found three Python files, ./a.py, subdir/b.py and subdir2/c.py, it would execute “grep with ./a.py subdir/b.py subdir2/c.py”.</li>
 </ul>
-<p>The output has two lines: one with grep matching in conf.py, where a comment using the word &#8220;with&#8221;, and another in with.py where the Python with statement was used.</p>
+<p>The output has two lines: one with grep matching in conf.py, where a comment using the word “with”, and another in with.py where the Python with statement was used.</p>
 <p>If we only wanted to find the files with the Python extension without grepping, we simply leave out the -exec part:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ find . -name <span class="s1">&#39;*.py&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ find . -name <span class="s1">&#39;*.py&#39;</span>
 ./tmp/config.py
 ./conf.py
 ./my_project/hello.py
@@ -428,7 +417,7 @@ not found
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

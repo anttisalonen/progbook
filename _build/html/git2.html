@@ -2,26 +2,14 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2.5.1. Working with other git repositories &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -80,12 +67,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -98,9 +87,9 @@
             
   <div class="section" id="working-with-other-git-repositories">
 <h1>2.5.1. Working with other git repositories<a class="headerlink" href="#working-with-other-git-repositories" title="Permalink to this headline">¶</a></h1>
-<p>We&#8217;ve learned how to create a git repository and commit changes to it. Git allows collaboration between different people by having the functionality to <em>push</em> commits to and <em>pull</em> commits from another repository. (Git is a <em>distributed</em> version control system, which means that each repository is equal; there is no server-client relationship like with some other version control systems such as Subversion.)</p>
-<p>Let&#8217;s practice this a bit. We created a repository the last time by running &#8220;git init&#8221; in a directory. We can <em>clone</em> that directory by running &#8220;git clone&#8221;, e.g.:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ mkdir my_clone
+<p>We’ve learned how to create a git repository and commit changes to it. Git allows collaboration between different people by having the functionality to <em>push</em> commits to and <em>pull</em> commits from another repository. (Git is a <em>distributed</em> version control system, which means that each repository is equal; there is no server-client relationship like with some other version control systems such as Subversion.)</p>
+<p>Let’s practice this a bit. We created a repository the last time by running “git init” in a directory. We can <em>clone</em> that directory by running “git clone”, e.g.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir my_clone
 $ <span class="nb">cd</span> my_clone
 $ git clone ../my_project
 Cloning into <span class="s1">&#39;my_project&#39;</span>...
@@ -122,11 +111,11 @@ Date:   Fri Feb <span class="m">9</span> <span class="m">00</span>:35:05 <span c
     initial commit
 </pre></div>
 </div>
-<p>What happened here is that by running &#8220;git clone&#8221; git creates an identical copy of the existing repository. It&#8217;s not very interesting on your own machine but you can also tell git to clone a remote repository, i.e. over the Internet.</p>
+<p>What happened here is that by running “git clone” git creates an identical copy of the existing repository. It’s not very interesting on your own machine but you can also tell git to clone a remote repository, i.e. over the Internet.</p>
 <div class="section" id="collaboration">
 <h2>2.5.1.1. Collaboration<a class="headerlink" href="#collaboration" title="Permalink to this headline">¶</a></h2>
-<p>Now, let&#8217;s make a change in our clone:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;print &#39;hello world&#39;&quot;</span> &gt;&gt; hello.py
+<p>Now, let’s make a change in our clone:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;print &#39;hello world&#39;&quot;</span> &gt;&gt; hello.py
 $ git commit hello.py -m <span class="s2">&quot;add third print&quot;</span>
 <span class="o">[</span>master bc6ef9e<span class="o">]</span> add third print
  <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>
@@ -134,42 +123,42 @@ $ git commit hello.py -m <span class="s2">&quot;add third print&quot;</span>
 </div>
 <p>We now have one more commit in our clone than in our original repository.</p>
 <p>The typical flow, e.g. when working with a repository in github or generally a central repository, is to push the change to the <em>origin</em>, i.e. to the repository that was used for creating the clone:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git push origin master
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push origin master
 </pre></div>
 </div>
-<p>Here, we tell git to push the changes to the <em>master branch</em> on the origin. Branches generally speaking allow you to have different developments in different branches, and the master branch is the default branch. You can try the command above but because we work with local repositories, git doesn&#8217;t by default allow pushing to it.</p>
-<p>What we could do would be to change the directory back to the origin repository and run &#8220;git pull ../my_clone/my_project&#8221; which would fetch and merge the changes from the clone back to the original repository.</p>
+<p>Here, we tell git to push the changes to the <em>master branch</em> on the origin. Branches generally speaking allow you to have different developments in different branches, and the master branch is the default branch. You can try the command above but because we work with local repositories, git doesn’t by default allow pushing to it.</p>
+<p>What we could do would be to change the directory back to the origin repository and run “git pull ../my_clone/my_project” which would fetch and merge the changes from the clone back to the original repository.</p>
 </div>
 <div class="section" id="branches">
 <h2>2.5.1.2. Branches<a class="headerlink" href="#branches" title="Permalink to this headline">¶</a></h2>
-<p>Let&#8217;s create, add and commit a new file with some more interesting contents:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<p>Let’s create, add and commit a new file with some more interesting contents:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="s2"> </span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>This simple Python script generates a new file with some numbers in it.</p>
-<p>Now, let&#8217;s make two branches from master, such that both branches have some changes to this file:</p>
+<p>Now, let’s assume we’re developing this script together with another developer. We think the values that the script outputs above should be changed. At the same time, the other developer thinks the script should output three values instead of two. Let’s simulate this.</p>
+<p>We both make our changes locally in different <em>branches</em> which are branched from master. In the end both branches should have made some changes to this file:</p>
 <ul class="simple">
-<li>The first branch should be called &#8220;values&#8221; and change the values being written to a file</li>
-<li>The second branch should be called &#8220;three&#8221; and write three values in the file instead of two</li>
+<li>The first branch should be called “values” and change the values being written to a file</li>
+<li>The second branch should be called “three” and write three values in the file instead of two</li>
 </ul>
-<p>Let&#8217;s then merge the two branches in master. As there&#8217;s no obvious way to merge the two branches we&#8217;ll end up in conflict which we&#8217;ll have to resolve manually.</p>
-<p>Why would you do this? This could happen because we&#8217;re confused with what we&#8217;re doing, or because we&#8217;re working in a team and making conflicting changes, or because we want to pick different changes from different versions to create a new version. While we&#8217;ll do this work on local branches, in general the principle is the same when working with remote code, e.g. code from other people.</p>
-<p>Let&#8217;s then create a new branch where we want to change the values that are being saved in the file such that they&#8217;re 0.0 and 1.0:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git branch values
+<p>Let’s then merge the two branches in master. As there’s no obvious way to merge the two branches we’ll end up in conflict which we’ll have to resolve manually. Apart from this example of working in a team and making conflicting changes, this could also happen if we want to pick different changes from different versions to create a new version. While we’ll do this work on local branches, in general the principle is the same when working with remote code, e.g. code from other people.</p>
+<p>Let’s then create a new branch where we want to change the values that are being saved in the file such that they’re 0.0 and 1.0:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git branch values
 $ git checkout values
 Switched to branch <span class="s1">&#39;values&#39;</span>
 </pre></div>
 </div>
-<p>What we did here was create a new branch &#8220;values&#8221;, then checked it out, meaning we changed the current branch to it. We can check which branch we&#8217;re in by running &#8220;git branch&#8221;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git branch
+<p>What we did here was create a new branch “values”, then checked it out, meaning we changed the current branch to it. We can check which branch we’re in by running “git branch”:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git branch
   master
 * values
 </pre></div>
 </div>
-<p>Now, let&#8217;s modify the file. By running &#8220;git diff&#8221; before adding the changes to the staging area or committing them we can see changes in the current checkout:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git diff
+<p>Now, let’s modify the file. By running “git diff” before adding the changes to the staging area or committing them we can see changes in the current checkout:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git diff
 diff --git a/with.py b/with.py
 index f61db97..d63b0bf <span class="m">100644</span>
 --- a/with.py
@@ -181,9 +170,9 @@ index f61db97..d63b0bf <span class="m">100644</span>
 +        f.write<span class="o">(</span><span class="s2">&quot;%f %f\n&quot;</span> % <span class="o">(</span><span class="m">0</span>.0, <span class="m">1</span>.0<span class="o">))</span>
 </pre></div>
 </div>
-<p>Here, git shows us the changes we&#8217;ve made. We can now commit the changes.</p>
+<p>Here, git shows us the changes we’ve made. We can now commit the changes.</p>
 <p>What our repository now looks like is this:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git log --graph --decorate --pretty<span class="o">=</span>oneline --abbrev-commit --all
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git log --graph --decorate --pretty<span class="o">=</span>oneline --abbrev-commit --all
 * 4cf7d38 <span class="o">(</span>HEAD -&gt; values<span class="o">)</span> change values to be <span class="m">0</span> and <span class="m">1</span>
 * 91abbc4 <span class="o">(</span>master<span class="o">)</span> add with
 * bc6ef9e add third print
@@ -193,11 +182,11 @@ index f61db97..d63b0bf <span class="m">100644</span>
 </div>
 <p>This means:</p>
 <ul class="simple">
-<li>We have the latest commit which is the current working directory state (HEAD) and the head of the &#8220;values&#8221; branch which has the commit with hash 4cf7d38 where we changed the values to be 0 and 1</li>
-<li>The head of the &#8220;master&#8221; branch is 91abbc4 where we added the original with.py</li>
+<li>We have the latest commit which is the current working directory state (HEAD) and the head of the “values” branch which has the commit with hash 4cf7d38 where we changed the values to be 0 and 1</li>
+<li>The head of the “master” branch is 91abbc4 where we added the original with.py</li>
 </ul>
-<p>You can change between branches by using &#8220;git checkout&#8221;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git checkout master
+<p>You can change between branches by using “git checkout”:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git checkout master
 Switched to branch <span class="s1">&#39;master&#39;</span>
 $ grep write with.py
         f.write<span class="o">(</span><span class="s2">&quot;%f %f\n&quot;</span> % <span class="o">(</span><span class="m">0</span>.2, <span class="m">0</span>.5<span class="o">))</span>
@@ -210,8 +199,8 @@ $ grep write with.py
 </div>
 <div class="section" id="merging-and-conflicts">
 <h2>2.5.1.3. Merging and conflicts<a class="headerlink" href="#merging-and-conflicts" title="Permalink to this headline">¶</a></h2>
-<p>Let&#8217;s then create the branch &#8220;three&#8221; and create a commit there:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git checkout master
+<p>Let’s then simulate the other developer and create the branch “three” off “master” and create a commit there:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git checkout master
 Switched to branch <span class="s1">&#39;master&#39;</span>
 $ git branch three
 $ git checkout three
@@ -232,8 +221,8 @@ $ git commit -m <span class="s2">&quot;write out three values&quot;</span> with.
  <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>, <span class="m">1</span> deletion<span class="o">(</span>-<span class="o">)</span>
 </pre></div>
 </div>
-<p>Now, let&#8217;s see where we are:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git log --graph --decorate --pretty<span class="o">=</span>oneline --abbrev-commit --all
+<p>Now, let’s see where we are:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git log --graph --decorate --pretty<span class="o">=</span>oneline --abbrev-commit --all
 * 4cf7d38 <span class="o">(</span>values<span class="o">)</span> change values to be <span class="m">0</span> and <span class="m">1</span>
 <span class="p">|</span> * dd6c856 <span class="o">(</span>HEAD -&gt; three<span class="o">)</span> write out three values
 <span class="p">|</span>/
@@ -244,12 +233,12 @@ $ git commit -m <span class="s2">&quot;write out three values&quot;</span> with.
 </pre></div>
 </div>
 <ul class="simple">
-<li>&#8220;values&#8221; is still where it is - one commit ahead of master, namely 4cf7d38</li>
-<li>&#8220;master&#8221; is still where it is - but now it has two branches ahead of it</li>
-<li>HEAD, our current checkout, is at the head of &#8220;three&#8221;, which is a new commit, dd6c856</li>
+<li>“values” is still where it is - one commit ahead of master, namely 4cf7d38</li>
+<li>“master” is still where it is - but now it has two branches ahead of it</li>
+<li>HEAD, our current checkout, is at the head of “three”, which is a new commit, dd6c856</li>
 </ul>
-<p>Now, let&#8217;s try to switch to &#8220;master&#8221; and <em>merge</em> the changes from both &#8220;values&#8221; and &#8220;three&#8221; to it:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git checkout master
+<p>Now, let’s try to switch to the master branch and start with <em>merging</em> the changes from “values” to it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git checkout master
 Switched to branch <span class="s1">&#39;master&#39;</span>
 $ git merge values
 Updating 91abbc4..4cf7d38
@@ -258,8 +247,8 @@ Fast-forward
  <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>, <span class="m">1</span> deletion<span class="o">(</span>-<span class="o">)</span>
 </pre></div>
 </div>
-<p>Here, we run &#8220;git merge&#8221; to merge two branches. (&#8220;git pull&#8221; does &#8220;git fetch&#8221;, i.e. downloading the status of a remote repository, followed by &#8220;git merge&#8221;, i.e. merging the status of the remote repository with ours.) It works out well and git modifies our with.py to include the changes from &#8220;values&#8221;. We can check the status using &#8220;git log&#8221;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git log --graph --decorate --pretty<span class="o">=</span>oneline --abbrev-commit --all
+<p>Here, we run “git merge” to merge two branches. (“git pull” does “git fetch”, i.e. downloading the status of a remote repository, followed by “git merge”, i.e. merging the status of the remote repository with ours.) It works out well and git modifies our with.py to include the changes from “values”. We can check the status using “git log”:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git log --graph --decorate --pretty<span class="o">=</span>oneline --abbrev-commit --all
 * 4cf7d38 <span class="o">(</span>HEAD -&gt; master, values<span class="o">)</span> change values to be <span class="m">0</span> and <span class="m">1</span>
 <span class="p">|</span> * dd6c856 <span class="o">(</span>three<span class="o">)</span> write out three values
 <span class="p">|</span>/
@@ -269,15 +258,15 @@ Fast-forward
 * b279b4f initial commit
 </pre></div>
 </div>
-<p>Here, our current state (HEAD) is the head of master, which is also the head of values, and three is a separate branch that doesn&#8217;t have commit 4cf7d38. It does however have the commit dd6c856 so let&#8217;s try to merge that to master as well:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git merge three
+<p>Here, our current state (HEAD) is the head of master, which is also the head of values, and three is a separate branch that doesn’t have commit 4cf7d38. It does however have the commit dd6c856. Now, let’s try to merge “three” to master as well:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git merge three
 Auto-merging with.py
 CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict in with.py
 Automatic merge failed<span class="p">;</span> fix conflicts and <span class="k">then</span> commit the result.
 </pre></div>
 </div>
-<p>Now, because we&#8217;ve modified the same location in the same file in two different commits which we try to merge, git doesn&#8217;t know how to merge these automatically and tells us to fix it ourselves. Let&#8217;s now take a look at with.py:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ cat with.py
+<p>Now, because we’ve modified the same location in the same file in two different commits which we try to merge, git doesn’t know how to merge these automatically and tells us to fix it ourselves. Let’s now take a look at with.py:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cat with.py
 with open<span class="o">(</span><span class="s1">&#39;test.txt&#39;</span>, <span class="s1">&#39;w&#39;</span><span class="o">)</span> as f:
     <span class="k">for</span> i in xrange<span class="o">(</span><span class="m">5</span><span class="o">)</span>:
 <span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt; HEAD
@@ -292,8 +281,8 @@ with open<span class="o">(</span><span class="s1">&#39;test.txt&#39;</span>, <sp
 <li>In HEAD, we have code writing out 0.0 and 1.0</li>
 <li>In the other branch (three), we have code writing out 0.2, 0.5, 0.8</li>
 </ul>
-<p>We can check the status using &#8220;git status&#8221;:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git status
+<p>We can check the status using “git status”:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git status
 On branch master
 You have unmerged paths.
   <span class="o">(</span>fix conflicts and run <span class="s2">&quot;git commit&quot;</span><span class="o">)</span>
@@ -307,8 +296,8 @@ Unmerged paths:
 no changes added to commit <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> and/or <span class="s2">&quot;git commit -a&quot;</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>We&#8217;ll then have to fix the code manually:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ vim with.py
+<p>We’ll then have to fix the code manually, e.g. by deciding we want to output values 0.0, 0.5 and 1.0:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vim with.py
 $ git add with.py
 $ git status
 On branch master
@@ -331,8 +320,8 @@ index d63b0bf..ae90c0d <span class="m">100644</span>
 +        f.write<span class="o">(</span><span class="s2">&quot;%f %f %f\n&quot;</span> % <span class="o">(</span><span class="m">0</span>.0, <span class="m">0</span>.5, <span class="m">1</span>.0<span class="o">)</span>
 </pre></div>
 </div>
-<p>...and commit:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git commit -m <span class="s2">&quot;merged&quot;</span>
+<p>…and commit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git commit -m <span class="s2">&quot;merged&quot;</span>
 <span class="o">[</span>master ab7a9a6<span class="o">]</span> merged with
 $ git log --graph --decorate --pretty<span class="o">=</span>oneline --abbrev-commit --all
 *   ab7a9a6 <span class="o">(</span>HEAD -&gt; master<span class="o">)</span> merged with
@@ -348,13 +337,13 @@ $ git log --graph --decorate --pretty<span class="o">=</span>oneline --abbrev-co
 </div>
 <p>Now, we see git visualise our repository again:</p>
 <ul class="simple">
-<li>The branch &#8220;values&#8221; has commit 4cf7d38</li>
-<li>The branch &#8220;three&#8221; has commit dd6c856</li>
-<li>The branch &#8220;master&#8221;, which is also our current working directory (HEAD), we have a commit that merges both threads</li>
+<li>The branch “values” has commit 4cf7d38</li>
+<li>The branch “three” has commit dd6c856</li>
+<li>The branch “master”, which is also our current working directory (HEAD), we have a commit that merges both threads</li>
 </ul>
 <p>In our case, we had a conflict between two local branches, but the process is the same if there are remote branches involved.</p>
 <p>Note that in most cases, when two commits have changes in the same files, git is still usually able to merge them without issues. Conflicts only arise when no obvious automatic merge is possible.</p>
-<p>In general, there are many different workflows one can use with git, but typically, when working with other people, one fetches and merges the code from others with &#8220;git pull&#8221;, has to resolve any merge conflicts if any arise, and push any local commits with &#8220;git push&#8221;.</p>
+<p>In general, there are many different workflows one can use with git, but typically, when working with other people, one fetches and merges the code from others with “git pull”, has to resolve any merge conflicts if any arise, and push any local commits with “git push”.</p>
 </div>
 </div>
 
@@ -383,7 +372,7 @@ $ git log --graph --decorate --pretty<span class="o">=</span>oneline --abbrev-co
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

@@ -2,40 +2,27 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>4.1.5. Unix way - sched &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
-    
+    <title>3.4.5. Unix way - sched &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.1.6. Unix way - parse_gps" href="parse_gps.html" />
-    <link rel="prev" title="4.1.4. Drawing the schedule screen using SDL2" href="sdl2.html" />
+    <link rel="next" title="3.4.6. Unix way - parse_gps" href="parse_gps.html" />
+    <link rel="prev" title="3.4.4. Drawing the schedule screen using SDL2" href="sdl2.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,24 +30,24 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="parse_gps.html" title="4.1.6. Unix way - parse_gps"
+          <a href="parse_gps.html" title="3.4.6. Unix way - parse_gps"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sdl2.html" title="4.1.4. Drawing the schedule screen using SDL2"
+          <a href="sdl2.html" title="3.4.4. Drawing the schedule screen using SDL2"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.1.5. Unix way - sched</a><ul>
-<li><a class="reference internal" href="#sched">4.1.5.1. sched</a><ul>
-<li><a class="reference internal" href="#command-line-arguments">4.1.5.1.1. Command line arguments</a></li>
-<li><a class="reference internal" href="#working-with-bus-schedule-entries">4.1.5.1.2. Working with bus schedule entries</a></li>
+<li><a class="reference internal" href="#">3.4.5. Unix way - sched</a><ul>
+<li><a class="reference internal" href="#sched">3.4.5.1. sched</a><ul>
+<li><a class="reference internal" href="#command-line-arguments">3.4.5.1.1. Command line arguments</a></li>
+<li><a class="reference internal" href="#working-with-bus-schedule-entries">3.4.5.1.2. Working with bus schedule entries</a></li>
 </ul>
 </li>
 </ul>
@@ -69,10 +56,10 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="sdl2.html"
-                        title="previous chapter">4.1.4. Drawing the schedule screen using SDL2</a></p>
+                        title="previous chapter">3.4.4. Drawing the schedule screen using SDL2</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="parse_gps.html"
-                        title="next chapter">4.1.6. Unix way - parse_gps</a></p>
+                        title="next chapter">3.4.6. Unix way - parse_gps</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -82,12 +69,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -99,16 +88,16 @@
           <div class="body" role="main">
             
   <div class="section" id="unix-way-sched">
-<h1>4.1.5. Unix way - sched<a class="headerlink" href="#unix-way-sched" title="Permalink to this headline">¶</a></h1>
-<p>We now have a C++ program that can display labels provided in a text file. Let&#8217;s take another look at our high level architecture:</p>
+<h1>3.4.5. Unix way - sched<a class="headerlink" href="#unix-way-sched" title="Permalink to this headline">¶</a></h1>
+<p>We now have a C++ program that can display labels provided in a text file. Let’s take another look at our high level architecture:</p>
 <img alt="_images/plan3.png" src="_images/plan3.png" />
-<p>Furthermore, let&#8217;s implement the Unix way i.e. engineering spec 1 first.</p>
-<p>The input to our screen drawing program should be given by a program called &#8220;merge&#8221;. However, &#8220;merge&#8221; requires incoming bus data which we don&#8217;t yet have so let&#8217;s implement the programs to generate this data from the original input i.e. schedule information and GPS data first.</p>
+<p>Furthermore, let’s implement the Unix way i.e. engineering spec 1 first.</p>
+<p>The input to our screen drawing program should be given by a program called “merge”. However, “merge” requires incoming bus data which we don’t yet have so let’s implement the programs to generate this data from the original input i.e. schedule information and GPS data first.</p>
 <div class="section" id="sched">
-<h2>4.1.5.1. sched<a class="headerlink" href="#sched" title="Permalink to this headline">¶</a></h2>
+<h2>3.4.5.1. sched<a class="headerlink" href="#sched" title="Permalink to this headline">¶</a></h2>
 <p>As per the requirements document, the schedule information, which is the input to sched, will look like the following:</p>
 <blockquote>
-<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">6</span>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">6</span>
 <span class="mi">3</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">16</span>
 </pre></div>
 </div>
@@ -116,15 +105,15 @@
 <p>Here, the numbers are the route number, the start number, and the hour and minute of the bus arrival according to the schedule.</p>
 <p>As per our engineering spec, the output of sched should look like the following:</p>
 <blockquote>
-<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">1</span>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">1</span>
 <span class="mi">3</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">16</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>In other words, the output format is exactly the same but with a 1 appended at the end to signal the fact that this data point is from a schedule, which is needed when merging the predictions based on GPS data with the schedule information. The tricky bit about sched is that it should only output the next (up to) 50 buses arriving based on the current time which is also given to the program as a parameter. So if e.g. the time 5:10 was passed to sched, it shouldn&#8217;t output any buses arriving before 5:10.</p>
+<p>In other words, the output format is exactly the same but with a 1 appended at the end to signal the fact that this data point is from a schedule, which is needed when merging the predictions based on GPS data with the schedule information. The tricky bit about sched is that it should only output the next (up to) 50 buses arriving based on the current time which is also given to the program as a parameter. So if e.g. the time 5:10 was passed to sched, it shouldn’t output any buses arriving before 5:10.</p>
 <p>We can put together a simple test case so we can see whether our program works as intended.</p>
-<p><em>Exercise</em>: Create a test input file for sched. It should have the input format as above and include e.g. five lines for five buses. The buses should have different arrival times so that if you had a functioning sched and passed a time and your test file to it as input, you could see whether that the buses that according to schedule have already passed wouldn&#8217;t be included in the output.</p>
-<p>Now, let&#8217;s implement this program and try it out. Here&#8217;s what our program will need to do:</p>
+<p><em>Exercise</em>: Create a test input file for sched. It should have the input format as above and include e.g. five lines for five buses. The buses should have different arrival times so that if you had a functioning sched and passed a time and your test file to it as input, you could see whether that the buses that according to schedule have already passed wouldn’t be included in the output.</p>
+<p>Now, let’s implement this program and try it out. Here’s what our program will need to do:</p>
 <ul class="simple">
 <li>Parse command line arguments and note the given time and filename</li>
 <li>For all entries in the given file, filter out the entries that are in the past</li>
@@ -132,9 +121,9 @@
 <li>For all the entries, print them out to stdout in the given format</li>
 </ul>
 <div class="section" id="command-line-arguments">
-<h3>4.1.5.1.1. Command line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h3>
+<h3>3.4.5.1.1. Command line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h3>
 <p>Accessing command line arguments in Python can be done using the sys.argv list:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="n">num_args</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
@@ -148,22 +137,22 @@
 </div>
 <p>Here we introduce a couple of concepts:</p>
 <ul class="simple">
-<li>We import &#8216;sys&#8217; and use the sys.argv list to access the command line arguments to the script</li>
-<li>We put our code to a function called main. In our toplevel code we check whether the special, built-in variable called __name__ equals &#8216;__main__&#8217;. If it does, this means the user has executed the program directly as opposed to importing the file from another Python script. Structuring the code like this makes it possible to use as a library which will become useful later. If the program was executed directly we call the main function which does all the real work.</li>
+<li>We import ‘sys’ and use the sys.argv list to access the command line arguments to the script</li>
+<li>We put our code to a function called main. In our toplevel code we check whether the special, built-in variable called __name__ equals ‘__main__’. If it does, this means the user has executed the program directly as opposed to importing the file from another Python script. Structuring the code like this makes it possible to use as a library which will become useful later. If the program was executed directly we call the main function which does all the real work.</li>
 </ul>
 </div>
 <div class="section" id="working-with-bus-schedule-entries">
-<h3>4.1.5.1.2. Working with bus schedule entries<a class="headerlink" href="#working-with-bus-schedule-entries" title="Permalink to this headline">¶</a></h3>
+<h3>3.4.5.1.2. Working with bus schedule entries<a class="headerlink" href="#working-with-bus-schedule-entries" title="Permalink to this headline">¶</a></h3>
 <p>One potentially tricky thing is finding out whether an entry is in the past or not. How would you go about it? Have a think.</p>
 <p>What we have is two time stamps, both having two integer values (hour and minute). The first one is the current time while the second one is the time stamp of an entry. We need to find out whether the second one is before or after the first one.</p>
-<p>Now, because the time of day is circular, a time stamp can be said to always be after another one: it could just be 23 hours and 59 minutes after. We can break this cycle by agreeing e.g. that only the entries 12 hours after the current time are actually considered to be in the future. We should also ensure we handle midnight correctly such that e.g. the time 00:02 is treated as after 23:58; we want the bus schedule display to show buses traveling right after midnight even if it&#8217;s right before midnight.</p>
+<p>Now, because the time of day is circular, a time stamp can be said to always be after another one: it could just be 23 hours and 59 minutes after. We can break this cycle by agreeing e.g. that only the entries 12 hours after the current time are actually considered to be in the future. We should also ensure we handle midnight correctly such that e.g. the time 00:02 is treated as after 23:58; we want the bus schedule display to show buses traveling right after midnight even if it’s right before midnight.</p>
 <p>We can use this to put together a small test suite:</p>
 <ul class="simple">
 <li>First parameter: 06:34; second parameter: 06:40; return value should be 6</li>
 <li>First parameter: 06:40; second parameter: 06:34; return value should be -6</li>
 </ul>
-<p>...and so forth. We can formalise this in Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+<p>…and so forth. We can formalise this in Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
     <span class="k">assert</span> <span class="n">diff_time</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span> <span class="o">==</span> <span class="mi">6</span>
     <span class="k">assert</span> <span class="n">diff_time</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">34</span><span class="p">))</span> <span class="o">==</span> <span class="mi">6</span>
     <span class="k">assert</span> <span class="n">diff_time</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">56</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span> <span class="o">==</span> <span class="mi">20</span>
@@ -175,11 +164,11 @@
 </pre></div>
 </div>
 <p>Here, the function diff_time is our function to implement. It takes two parameters, each being a tuple of two integers. This is a <em>unit test</em>: it tests the code of one unit in isolation of others and can be used to ensure that a function performs correctly.</p>
-<p>On the implementation of diff_time itself, &#8220;all&#8221; that it needs to do is take into account that an hour is 60 minutes, and track which time is bigger. It might be useful to think of it such that the timestamp can be converted to a number of minutes passed since midnight, so that e.g. the time 6:00 is represented as 360 (6 * 60) minutes, making the comparison easier.</p>
+<p>On the implementation of diff_time itself, “all” that it needs to do is take into account that an hour is 60 minutes, and track which time is bigger. It might be useful to think of it such that the timestamp can be converted to a number of minutes passed since midnight, so that e.g. the time 6:00 is represented as 360 (6 * 60) minutes, making the comparison easier.</p>
 <p><em>Exercise</em>: Implement the function diff_time which shall return the number of minutes the second timestamp is ahead of the first timestamp. Use the above test suite to ensure correctness.</p>
 <p>In the above, the timestamps were represented simply as tuples. It might be clearer to represent a timestamp using a class instead, such that the class has two member variables, i.e. hour and minute. Feel free to refactor your code to use a class instead if you prefer.</p>
-<p>Now that we&#8217;re able to parse command line arguments and we have the diff_time function, and we have some understanding of sorting and slicing lists in Python as well as printing out values, we can tie everything together. The final program should e.g. behave as the following:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./sched.py <span class="m">5</span>:15 sched_test.txt
+<p>Now that we’re able to parse command line arguments and we have the diff_time function, and we have some understanding of sorting and slicing lists in Python as well as printing out values, we can tie everything together. The final program should e.g. behave as the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./sched.py <span class="m">5</span>:15 sched_test.txt
 <span class="m">3</span> <span class="m">2</span> <span class="m">5</span> <span class="m">16</span> <span class="m">1</span>
 <span class="m">3</span> <span class="m">3</span> <span class="m">5</span> <span class="m">26</span> <span class="m">1</span>
 <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">36</span> <span class="m">1</span>
@@ -188,7 +177,7 @@
 </div>
 <p>That is, the time should be given in hh:mm format, and the output should be written to stdout. Here, the bus arriving at 5:06 is not output despite it being present in sched_test.txt.</p>
 <p>As a reminder, here are some building blocks to get you started:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -228,7 +217,7 @@
 <li>Sorting using a callback (line 17)</li>
 <li>List slicing (line 18)</li>
 </ul>
-<p><em>Exercise</em>: Tie everything together to read a test schedule file and output the next schedules buses. Once you&#8217;re done, test with the full sched.txt file that was available for download a couple of chapters back.</p>
+<p><em>Exercise</em>: Tie everything together to read a test schedule file and output the next schedules buses. Once you’re done, test with the full sched.txt file that was available for download a couple of chapters back.</p>
 </div>
 </div>
 </div>
@@ -246,19 +235,19 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="parse_gps.html" title="4.1.6. Unix way - parse_gps"
+          <a href="parse_gps.html" title="3.4.6. Unix way - parse_gps"
              >next</a> |</li>
         <li class="right" >
-          <a href="sdl2.html" title="4.1.4. Drawing the schedule screen using SDL2"
+          <a href="sdl2.html" title="3.4.4. Drawing the schedule screen using SDL2"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="design_index.html" >4.1. Larger software</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="design_index.html" >3.4. Larger software</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Antti Salonen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
   </body>
 </html>

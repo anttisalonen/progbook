@@ -76,7 +76,7 @@ Let's quit vim and open a file "hello.c". Let's go to insert mode using "i" and 
 
 Exit the insert mode by pressing ESC and save your file using ":w". Vim should have taken care of indentation for you.
 
-Typically, as part of the edit-compile-run cycle, you'd have vim running on one terminal window or tab, and have another window or tab for compiling and running the program. After you've saved the file, you could try compiling and running it e.g. by running "gcc -Wall -o hello hello.c && ./hello" (assuming you have a C compiler set up).
+Typically, as part of the edit-compile-run cycle, you'd have vim running on one terminal window or tab, and have another window or tab for compiling and running the program. After you've saved the file, you could try compiling and running it e.g. by running "gcc -Wall -o hello hello.c && ./hello".
 
 Alternatively, vim allows you to run shell commands from within vim. E.g. ":!ls" will run "ls" in the shell. You could also type e.g. ":!gcc hello.c && ./a.out" to compile and run your program. Vim will then display the output of your command.
 
