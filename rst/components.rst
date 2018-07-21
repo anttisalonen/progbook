@@ -9,19 +9,19 @@ So, we now have the requirements captured to the point where we can start specif
 
 We have some understanding of the inputs and the outputs of our software: the output is the visual output on the screen. The main inputs, ignoring minor ones such as the name of the bus stop, are the bus schedules, the historical GPS data, and the current GPS data. The first two are fixed while the last one changes every ten seconds or so. How would we go about actually planning how to write this software?
 
+Drawing this as a diagram - we'll start with this:
+
+.. image:: ../material/bus/plan1.png
+
+Here, round items represent some or other kind of data, while square, grey boxes represent logic, or software components.
+
 As a thought exercise, we should further assume we have a team of software engineers, e.g. five people assigned to work on this. Ideally all of them would have something useful to do at all times.
 
 Keeping this in mind, one very useful way to decompose software to identify the components is to specify *interfaces* between components, i.e. the inputs and outputs required for each component.
 
 In order to identify the components, we could start e.g. from the end, i.e. the final output, or the output on the screen. The requirement specification gave us an example of this: the first row having the current date and the bus stop name, other rows having the time of arrival, bus route number and destination for each of the upcoming buses. If we treat this as a separate component then we can say the purpose of this component is to display the input data, whereby the input data simply is a few text labels. A few being 23 to be exact - two on the first row, then three on each following row, times seven.
 
-Drawing this as a diagram - we started with this:
-
-.. image:: ../material/bus/plan1.png
-
-Here, round items represent some or other kind of data, while square, grey boxes represent logic, or software components.
-
-We then identified our first component:
+We've now identified our first component:
 
 .. image:: ../material/bus/plan2.png
 
@@ -60,7 +60,7 @@ The Unix philosophy has also been summarised as "KISS", or "Keep it simple, stup
 
 .. topic:: Engineering spec 1
 
-  The software shall consist of four executables: parse_gps, sched, merge and display to implement the main behaviour and a main executable, bus, to glue them together.
+  The software shall consist of five executables: parse_gps, sched, merge and display to implement the main behaviour and a main executable, bus, to glue them together.
 
   "parse_gps" shall take three parameters: current time, filename identifying the current GPS data (gps_raw.txt) and filename identifying the historical GPS data (gps.txt). It shall output, to stdout, the incoming bus data in the following format:
 
@@ -109,7 +109,7 @@ While the engineering spec here won't specify the language to use, we will use C
   * The data from the input files is parsed to data structures containing the route numbers, start numbers etc. as is available in the input files
   * The incoming bus data has the following fields:
 
-    * int route_nr
+    * int route_nr;
     * int start_nr;
     * Time time;
     * Kind kind;
@@ -121,7 +121,7 @@ Here, the main differences to the first spec are that there is only one executab
 
 As with design in general, there is no right or wrong answer on which design is better. There are some pros and cons to the two approaches though:
 
-* When separating the functionality to multiple executables, different components can be implemented in different programming languages. This can be a good thing in terms of flexibility but is can also create more confusion.
+* When separating the functionality to multiple executables, different components can be implemented in different programming languages. This can be a good thing in terms of flexibility but can also create more confusion.
 * Having multiple executables involves extra overhead in writing out data to intermediate formats and then parsing it in the next step.
 * Having multiple executables can make it easier to test each component in isolation.
 

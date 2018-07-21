@@ -13,7 +13,7 @@ On the side, we'll learn about the following smaller but important C concepts:
 * The switch-case statement
 * typedef
 
-We'll end up with a program that can parse some parts of a PNG file and display what it parsed. The program will be around 150 lines of code. The author wrote the program in about two hours. The reader should ideally be able to finish the exercises within 40 hours.
+We'll end up with a program that can parse some parts of a PNG file and display what it parsed. The program will be around 150 lines of code. The reader should ideally be able to finish the exercises within 40 hours.
 
 Introduction to PNG
 ===================

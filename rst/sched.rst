@@ -143,4 +143,4 @@ The above snippet demonstrates the following:
 * Sorting using a callback (line 17)
 * List slicing (line 18)
 
-*Exercise*: Tie everything together to read a test schedule file and output the next schedules buses. Once you're done, test with the full sched.txt file that was available for download a couple of chapters back.
+*Exercise*: Tie everything together to read a test schedule file and output the next schedules buses. Once you're done, test with the full sched.txt file that was available for download a couple of sections back.

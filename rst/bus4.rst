@@ -70,7 +70,7 @@ Going this line by line:
 Displaying the labels
 =====================
 
-As part of our chapters around SDL we put together a program that will display the labels as required, and take a filename as input which must contain the labels to be displayed. While we could generate such a file in our C++ program and then call that program, the cleaner way seems to be to call the existing code directly.
+As part of our sections around SDL we put together a program that will display the labels as required, and take a filename as input which must contain the labels to be displayed. While we could generate such a file in our C++ program and then call that program, the cleaner way seems to be to call the existing code directly.
 
 What we need to do for this is:
 

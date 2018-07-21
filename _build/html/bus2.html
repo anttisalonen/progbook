@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>3.4.8. Monolithic way - parsing &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>3.4.8. Monolithic way - parsing &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="merge.html" title="3.4.7. Unix way - merge"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">3.4. Larger software</a> &#187;</li> 
       </ul>
@@ -156,7 +156,7 @@
 <ul class="simple">
 <li>Declare the schedule entry class</li>
 <li>Write the functionality to convert a text line to a schedule entry class</li>
-<li>Read in a file and call use abovementioned functionality in a loop to generate a vector of schedule entries</li>
+<li>Read in a file and call use abovementioned functionality in a loop to generate an std::vector of schedule entries</li>
 </ul>
 <p>Let’s start with the first one.</p>
 <p><em>Exercise</em>: Declare the schedule entry class. It should have a route number, a start number and a timestamp as member variables. The first two can be integers while we should instantiate a Time object for the last one.</p>
@@ -237,10 +237,10 @@
 <li>Line 8: Declare an std::string which will hold each line of the file as we read them in.</li>
 <li>Line 9: Use the C++ standard function std::getline() which takes two parameters: the input file stream and an std::string. The contents of the next line will be read from the input stream and stored in the string. The function will return false when the whole file was processed, allowing us to use it in a while loop.</li>
 </ul>
-<p>We should now have everything we need in order to read in the schedule data and generate a vector of schedule entry objects.</p>
-<p><em>Exercise</em>: Generate a vector of schedule entry objects by reading in the schedule data file. Test your code.</p>
+<p>We should now have everything we need in order to read in the schedule data and generate an std::vector of schedule entry objects.</p>
+<p><em>Exercise</em>: Generate an std::vector of schedule entry objects by reading in the schedule data file. Test your code.</p>
 <p>While we’re in the parsing business, let’s go ahead and repeat this for the historical GPS data file.</p>
-<p><em>Exercise</em>: Implement a class to hold the historical data. It will need to have some floats as member variables to hold the time it took the bus to reach the bus stop as well as the X and Y coordinate data. Read in a historical GPS data file to a vector of historical data objects.</p>
+<p><em>Exercise</em>: Implement a class to hold the historical data. It will need to have some floats as member variables to hold the time it took the bus to reach the bus stop as well as the X and Y coordinate data. Read in a historical GPS data file to an std::vector of historical data objects.</p>
 <p>As per our requirements specification, the only file type we aren’t yet able to parse is the current GPS data. This data is interesting because it has the integer representing whether the bus has already passed our bus stop or not (0 if not, 2 if passed). As with our Python code, it seems like a good way to make our code clearer to read if we use an enumeration for this. Enums in C++ can e.g. be defined as the following:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="k">class</span> <span class="nc">Kind</span> <span class="p">{</span>
     <span class="n">GPS</span><span class="p">,</span>
@@ -262,7 +262,7 @@
 </div>
 <p>By default, with our above definition of the data type, the value 0 is converted to Kind::GPS, value 1 to Kind::Schedule, and value 2 to Kind::Passed.</p>
 <p>We should now be able to define a class to hold the current GPS data, and parse a file holding such data.</p>
-<p><em>Exercise</em>: Define a class for current GPS data. It should include a member variable of type enum class Kind. Write code to read in a file of current GPS data to generate a vector of objects of your class, and test your code.</p>
+<p><em>Exercise</em>: Define a class for current GPS data. It should include a member variable of type enum class Kind. Write code to read in a file of current GPS data to generate an std::vector of objects of your class, and test your code.</p>
 <p>Now that we’re able to parse in all the data we need, it seems that, apart from any necessary glue code, the actual logic we need to implement is reduced to:</p>
 <ul class="simple">
 <li>Calculating the estimated arrival times from GPS data</li>
@@ -271,7 +271,7 @@
 <li>Parsing the command line arguments - including parsing time from a string “hh:mm” to a timestamp</li>
 <li>Converting timestamps to strings of format “hh:mm” for displaying purposes and calling the relevant function to display the labels</li>
 </ul>
-<p>We’ll address these in the next chapter.</p>
+<p>We’ll address these in the next section.</p>
 </div>
 </div>
 
@@ -293,7 +293,7 @@
         <li class="right" >
           <a href="merge.html" title="3.4.7. Unix way - merge"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="design_index.html" >3.4. Larger software</a> &#187;</li> 
       </ul>

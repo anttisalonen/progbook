@@ -17,9 +17,11 @@ As we wrote a new GET handler in Flask to send the high score data, we created a
 If you run this, you should get a JSON string back representing your high score list. This is practical because you can do all kinds of things with this API, such as:
 
 * Write a script that gets the JSON files for all max_values, and display statistics over:
-  * which max_values have been played and which haven't
-  * who are the most active (or best) users of the game
-  * how do the high score lists evolve over time
+
+  * Which max_values have been played and which haven't
+  * Who are the most active (or best) users of the game
+  * How do the high score lists evolve over time
+
 * Visualise the high score list in some other way, like as a 3D scene
 * Fetch the high score list periodically and automatically email an alert when the list has changed
 

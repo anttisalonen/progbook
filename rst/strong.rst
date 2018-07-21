@@ -9,9 +9,9 @@ We've so far mostly used three languages:
 
 Let's see what alternatives we have for a statically, strongly typed language.
 
-Disclaimer: different programming languages are another topic that can get fairly religious among programmers. While I attempt to remain objective, 90% of programmers will probably disagree with most of the contents of this chapter. That is their right.
+Disclaimer: different programming languages are another topic that can get fairly religious among programmers. While I attempt to remain objective, 90% of programmers will probably disagree with at least some of the contents of this section. That is their right.
 
-This chapter attempts to summarise different programming languages by identifying their most important traits. The languages have vast differences but the scope of this chapter is not to capture all of them, but instead only serve as an introduction. We will make a deeper dive to some of the languages later.
+This section attempts to summarise different programming languages by identifying their most important traits. The languages have vast differences but the scope of this section is not to capture all of them, but instead only serve as an introduction. We will make a deeper dive to some of the languages later.
 
 All the languages here are statically, strongly typed as well as imperative, such that it shouldn't be very difficult for the reader to implement FizzBuzz for any of the languages after seeing the "Hello world" program and possibly a search or two online on syntax. To make things more interesting we'll also, for each language, quote two programs for relatively common operations:
 

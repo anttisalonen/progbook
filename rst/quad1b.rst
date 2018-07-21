@@ -103,4 +103,4 @@ Now we can try to find the equation with the largest root, i.e. the equation whe
 
 *Exercise*: Find the equation with the largest root. To do this, you need to note the largest root by having a variable to store this *outside* the loop. For all the roots found for an equation, compare those roots with the largest root found so far. If the root for the current equation is larger than the largest found so far, make note of it by modifying the variable which holds the largest root. Similarly, keep track of the variables a, b and c for the equation with the largest root. Print the a, b and c values of the equation with the largest root at the end.
 
-Phew! We've learned a lot in this chapter.
+Phew! We've learned a lot in this section.

@@ -127,7 +127,7 @@ We can then proceed to the time handler (type "tIME"). If you check the spec you
 
 *Exercise*: Add another handler to handle the "pHYs" block. Look up from the spec what the format is.
 
-Finally, for this chapter, we'll need to implement the background colour handler. This is interesting because, if you look at the spec, you'll see that how to parse it depends on the colour type which was defined in the header. This means that we'll have to store the colour type in a variable in the header handler and have it accessible for the background colour handler.
+Finally, for this section, we'll need to implement the background colour handler. This is interesting because, if you look at the spec, you'll see that how to parse it depends on the colour type which was defined in the header. This means that we'll have to store the colour type in a variable in the header handler and have it accessible for the background colour handler.
 
 While we could in theory use a global variable for this, such generally leads to confusing code, and we can do better. A nice way to go about this is to add another parameter to the handler functions which is shared among all functions. Generally it's best to define a struct for all the data you need to thread through the functions, e.g.:
 

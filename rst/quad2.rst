@@ -140,7 +140,7 @@ After the above we should ensure we parsed the correct number of numbers from th
 
 The above demonstrates the Python syntax for writing to standard error, like we did in C. (You will need to "import sys" first.)
 
-*Exercise*: Add code in your Python program to open the file with a single line from the previous chapter. Read in the contents of that file to a list, converting the data to floating point numbers. Use your previously written function solve_and_print() to solve that quadratic equation and print the roots.
+*Exercise*: Add code in your Python program to open the file with a single line from the previous section. Read in the contents of that file to a list, converting the data to floating point numbers. Use your previously written function solve_and_print() to solve that quadratic equation and print the roots.
 
 We can now approach the file with 10,000 equations and find the equation with the largest root. How would we handle a file with 10,000 lines in Python, each holding three numbers? We can first open() the file and read() all its contents to a string like before. After that, we should split that string so we have a list with 10,000 strings, one for each line. This can be done using the following:
 
@@ -160,7 +160,7 @@ However, there's actually a shortcut in Python for this common use case. We can 
         for line in f:
             # process each line here
 
-*Exercise*: Modify your program to open the larger file from the previous chapter. Add a loop in your program to loop through your code that reads in the values a, b and c and solves the root for that quadratic equation such that your program reads through all the 10,000 equations and calculates the root for all of them. Note: you may want to *not* print out the roots for all equations as that could create a lot of output.
+*Exercise*: Modify your program to open the larger file from the previous section. Add a loop in your program to loop through your code that reads in the values a, b and c and solves the root for that quadratic equation such that your program reads through all the 10,000 equations and calculates the root for all of them. Note: you may want to *not* print out the roots for all equations as that could create a lot of output.
 
 *Exercise*: Find the equation with the largest root. As before, to do this, you need to note the largest root by having a variable to store this outside the loop. For all the roots found for an equation, compare those roots with the largest root found so far. If the root for the current equation is larger than the largest found so far, make note of it by modifying the variable which holds the largest root. Similarly, keep track of the variables a, b and c for the equation with the largest root. Print the a, b and c values of the equation with the largest root at the end.
 

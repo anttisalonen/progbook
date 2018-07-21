@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>3.3.1. Introduction to Sudoku &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>3.3.1. Introduction to Sudoku &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="sud_index.html" title="3.3. Learning to program using Sudoku"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="sud_index.html" accesskey="U">3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>
@@ -144,9 +144,9 @@
 6
 7
 8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Counter</span> <span class="p">{</span>
     <span class="k">public</span><span class="o">:</span>
-        <span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span> <span class="n">my_value</span><span class="p">);</span> <span class="c1">// constructor</span>
+        <span class="n">Counter</span><span class="p">(</span><span class="kt">int</span> <span class="n">my_value</span><span class="p">);</span> <span class="c1">// constructor</span>
         <span class="kt">int</span> <span class="nf">get_value</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// getter function</span>
         <span class="kt">void</span> <span class="nf">increment</span><span class="p">();</span>
 
@@ -179,17 +179,17 @@
 11
 12
 13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">MyClass</span><span class="o">::</span><span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span> <span class="n">my_value</span><span class="p">)</span>
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">Counter</span><span class="o">::</span><span class="n">Counter</span><span class="p">(</span><span class="kt">int</span> <span class="n">my_value</span><span class="p">)</span>
      <span class="o">:</span> <span class="n">value</span><span class="p">(</span><span class="n">my_value</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">MyClass</span><span class="o">::</span><span class="n">get_value</span><span class="p">()</span> <span class="k">const</span>
+<span class="kt">int</span> <span class="n">Counter</span><span class="o">::</span><span class="n">get_value</span><span class="p">()</span> <span class="k">const</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">value</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">MyClass</span><span class="o">::</span><span class="n">increment</span><span class="p">()</span>
+<span class="kt">void</span> <span class="n">Counter</span><span class="o">::</span><span class="n">increment</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">value</span><span class="o">++</span><span class="p">;</span>
 <span class="p">}</span>
@@ -197,8 +197,8 @@
 </td></tr></table></div>
 <p>In other words:</p>
 <ul class="simple">
-<li>Line 1-4: We define the constructor. We first copy-paste the declaration and add “MyClass::” in front of the function name. Second line demonstrates the syntax for initialising internal variables. The function body itself is empty.</li>
-<li>Line 6-9: We define the function “get_value”. We again copy-paste the declaration and add “MyClass::” in front of the function name. Instead of a semicolon at the end we have the function body. It’s very simple in this case, returning an integer containing the value of the variable “value”.</li>
+<li>Line 1-4: We define the constructor. We first copy-paste the declaration and add “Counter::” in front of the function name. Second line demonstrates the syntax for initialising internal variables. The function body itself is empty.</li>
+<li>Line 6-9: We define the function “get_value”. We again copy-paste the declaration and add “Counter::” in front of the function name. Instead of a semicolon at the end we have the function body. It’s very simple in this case, returning an integer containing the value of the variable “value”.</li>
 <li>Line 11-15: We define the function “increment” which simply increments “value” by one.</li>
 </ul>
 <p>If we wanted to use this class, we could e.g. do the following:</p>
@@ -213,11 +213,11 @@
  9
 10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="n">MyClass</span> <span class="n">a</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">Counter</span> <span class="n">a</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
     <span class="n">a</span><span class="p">.</span><span class="n">increment</span><span class="p">();</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 
-    <span class="n">Myclass</span> <span class="n">b</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+    <span class="n">Counter</span> <span class="n">b</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -247,7 +247,7 @@
         <li class="right" >
           <a href="sud_index.html" title="3.3. Learning to program using Sudoku"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="sud_index.html" >3.3. Learning to program using Sudoku</a> &#187;</li> 
       </ul>

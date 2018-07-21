@@ -7,7 +7,7 @@ class Foo {
 
 void Foo::foo()
 {
-    std::cout << "in foo\n";
+    std::cout << "static member function Foo::foo called\n";
 }
 
 int main(void)

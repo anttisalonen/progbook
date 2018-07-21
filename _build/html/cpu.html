@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>1.1.3. How does a computer work? &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>1.1.3. How does a computer work? &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="sw.html" title="1.1.2. What is software?"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="intro_index.html" accesskey="U">1.1. Introduction</a> &#187;</li> 
       </ul>
@@ -89,7 +89,7 @@
 <div><p>Computers are good at following instructions, but not at reading your mind.</p>
 <p class="attribution">&mdash;Donald Knuth</p>
 </div></blockquote>
-<p>The previous chapter was a “hook” in that it attempted to get the reader interested without really going into technical details. This chapter is a bit different. As is characteristic for this book, we won’t go very much into specifics but we will cover the essentials about understanding computers as is required for software development.</p>
+<p>The previous section was a “hook” in that it attempted to get the reader interested without really going into technical details. This section is a bit different. As is characteristic for this book, we won’t go very much into specifics but we will cover the essentials about understanding computers as is required for software development.</p>
 <p>In order to understand how a computer works, we must first learn a bit about <em>digital logic</em>.</p>
 <p>The way computers work is mostly defined by physics, and what is possible in electronics. The key is the <em>transistor</em>, which is a semiconductor device which makes it possible to construct <em>logic gates</em>. Logic gates are physical, very small devices that perform logical operations.</p>
 <p>Logic gates take one or more <em>inputs</em> and have one or more <em>outputs</em>. The inputs and outputs typically are <em>binary signals</em>; they’re either an electric signal with a low voltage (e.g. 0 volts) or a high voltage (e.g. 3.3 volts). Binary means that there are two possible values, often called 0 (<em>false</em>) and 1 (<em>true</em>). (One binary digit is also called a <em>bit</em>.)</p>
@@ -230,7 +230,7 @@
 <p>What happens here is that the output of the OR-gate is always 1 when one of the inputs is 1.</p>
 <p>The output of AND-1 is only 1 when both A and B are 1. However, this output is negated, meaning that the output of NOT is 1 always except when both A and B are 1.</p>
 <p>Combining the above in AND-2: When both A and B are 1, the output of NOT is 0, meaning that the output of our circuit is 0. In other cases, the output is the same as the output of the OR-gate. Hence the final output is as desired.</p>
-<p>We also have a new building block: whenever we need a XOR-gate, we can use this design.</p>
+<p>We now have a new building block: whenever we need a XOR-gate, we can use this design.</p>
 <p><em>Exercise</em>: Using only the OR-, AND- and NOT-gates, design, with a pen and paper, a circuit with two inputs A and B, and output X, such that the when both A and B are 0, the output is 1. In all other cases the output must be 0.</p>
 <p>We can now put together various logical circuits. How about practical use cases?</p>
 <div class="section" id="addition">
@@ -478,7 +478,7 @@
 </table>
 <p>Here, X is 1 when A is greater than B and 0 otherwise. This, too, can be done using digital circuits.</p>
 <p><em>Exercise</em>: Come up with a design for a comparator matching the above truth table.</p>
-<p>Now that we’re able to construct digital circuits, let’s see how they can be used to put together a device with some characteristics not completely unlike those of a smartphone. This is the topic for the next chapter.</p>
+<p>Now that we’re able to construct digital circuits, let’s see how they can be used to put together a device with some characteristics not completely unlike those of a smartphone. This is the topic for the next section.</p>
 </div>
 </div>
 
@@ -500,7 +500,7 @@
         <li class="right" >
           <a href="sw.html" title="1.1.2. What is software?"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="intro_index.html" >1.1. Introduction</a> &#187;</li> 
       </ul>

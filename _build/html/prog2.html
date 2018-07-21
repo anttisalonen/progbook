@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>1.1.6. Setting up the C toolchain &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>1.1.6. Setting up the C toolchain &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="prog.html" title="1.1.5. The basics of programming"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="intro_index.html" accesskey="U">1.1. Introduction</a> &#187;</li> 
       </ul>
@@ -90,11 +90,11 @@
 <div><p>C is quirky, flawed, and an enormous success.</p>
 <p class="attribution">&mdash;Dennis Ritchie</p>
 </div></blockquote>
-<p>In the previous chapters we learnt some basic programming using Python. In order to get a better understanding of what is general in programming and what is specific to a programming language, we’ll learn some basic programming using another programming language, namely C.</p>
+<p>In the previous sections we learnt some basic programming using Python. In order to get a better understanding of what is general in programming and what is specific to a programming language, we’ll learn some basic programming using another programming language, namely C.</p>
 <p>We’ll start by setting up the C <em>toolchain</em>. A toolchain is a set of tools that are used in a chain with the purpose of compiling and running code written in a specific programming language. As you may have noticed, with Python, we executed our Python programs by passing our Python file to the Python interpreter. What happened there, in a nutshell, was that the Python interpreter <em>interpreted</em> our code, i.e. read it through and then executed it. C is typically not interpreted but <em>compiled</em>. What this means is that the C code is run through a <em>compiler</em> which generates an <em>executable file</em>, that is, a file with the CPU instructions which the CPU should execute. Only after we’ve created this executable file we can run it which in turn runs our program. (The Python intepreter is an executable. The official Python interpreter is written in C.)</p>
 <p>Now, the C toolchain is a toolchain because in addition to the compiler, you also need the <em>standard library</em> which contains the implementations of standard functions in binary form (CPU instructions), the <em>assembler</em>, because technically the compiler outputs <em>assembly language</em>, which is a human readable format for the CPU instructions which is converted to the actual binary CPU instructions by the assembler (also called the <em>object file</em>), and finally the <em>linker</em> which links the standard library, our object files and possibly other libraries together to form the final executable. In short, the toolchain looks like this:</p>
 <img alt="_images/tc.png" src="_images/tc.png" />
-<p>…however, modern C toolchains typically combine all of it in one Unix command so you can usually go from the C source file to the executable in one step. Because of this, in this chapter from now on, the terms “compiler” and “toolchain” are used interexchangeably.</p>
+<p>…however, modern C toolchains typically combine all of it in one Unix command so you can usually go from the C source file to the executable in one step. Because of this, in this section from now on, the terms “compiler” and “toolchain” are used interexchangeably.</p>
 <p>Things do look a bit different if you have several C source files and libraries, namely like this:</p>
 <img alt="_images/tc2.png" src="_images/tc2.png" />
 <p>Here, the compiler needs to be called multiple times. But our programs will be one file only, at least for now.</p>
@@ -165,7 +165,7 @@ Hello world!
         <li class="right" >
           <a href="prog.html" title="1.1.5. The basics of programming"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="intro_index.html" >1.1. Introduction</a> &#187;</li> 
       </ul>

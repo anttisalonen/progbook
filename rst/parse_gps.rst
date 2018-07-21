@@ -32,7 +32,9 @@ For the historical data, we can e.g. put together just six data points, such tha
    6 6.5 150.0 150.0
    6 9.5 500.0 500.0
 
-Here, we have mock-up data for bus routes 3 and 6; three data points each. Let's mock up some relevant current GPS data:
+Here, we have mock-up data for bus routes 3 and 6; three data points each. The first column is the bus route number. The last two columns are coordinates indicating the bus position relative to the bus stop (bus stop being at 0, 0). The second column indicates the time, in minutes, it took for the bus to reach our bus stop. As you can see, we've seen buses that are 500 meters out in both X any Y directions to take nine and a half minutes to reach our stop while buses nearer have required less time.
+
+Let's mock up some relevant current GPS data:
 
   :: 
 
@@ -43,7 +45,7 @@ Here, we have mock-up data for bus routes 3 and 6; three data points each. Let's
 
 Here, we have information about four buses:
 
-* Bus with start number 3 from route 3 is at location (120, 120) and has not yet passed the bus stop. We'd expect our program to see that there are two historical data points which can be used for this bus, as those two data points are for route 3 and within 100 meters of the current location. How many minutes should our program estimate this bus to take before arriving at the bus stop?
+* Bus with start number 3 from route 3 is at location (120, 120) and has not yet passed the bus stop. We'd expect our program to see that there are two historical data points which can be used for this bus, as those two data points are for route 3 and within 100 meters of the current location. Considering that according to the requirements, the average time from historical data from data points within 100 meters should be used for estimates, how many minutes should our program estimate this bus to take before arriving at the bus stop?
 * Bus with start number 3 from route 6 is at location (125, 125). We have one historical data point that our program is able to use to predict the arrival time.
 * Bus from route 5 is included but we have no historical data for this bus.
 * Bus with start number 2 from route 3 has already passed the stop.
@@ -62,7 +64,15 @@ Now, how would we implement software to perform this operation? Again, let's bre
 
 * We finally output the results in the required format
   
-The most complex part of deciding what the output should be, the pseudocode could look something like this:
+*Exercise*: Put together the skeleton for the program: parse the command line arguments, open the files, read in the information from the files to lists. Feel free to either store a data point (a row in either file) either to a tuple or using a class and member variables. You can convert a string to a floating point value by using e.g. "f = float(s)". You can remove all whitespace (line breaks, spaces etc.) from a string by using the "strip" string member function, e.g. s.strip(). Your program doesn't need to output anything yet.
+
+Now that we have the skeleton in place, we can try to implement the core logic. There are a couple of primitives that our core logic requires, namely calculating an average of a list of numbers and calculating the distance between two coordinates; it might be interesting to implement these first.
+
+*Exercise*: Implement and test a function to calculate the average of numbers in a list. You can use the built-in function "sum" to sum all the values in a list. Note that you probably want to cast the denominator to a floating point number to ensure the result is also a floating point number.
+
+*Exercise*: Implement and test a function to calculate the distance between two coordinates. Use the Pythagorean theorem for this: distance = math.sqrt((x_diff ** 2) + (y_diff ** 2)). You need to import math to have access to the sqrt function.
+
+For the most complex part of deciding what the output should be, the pseudocode could look something like this:
 
 .. code-block:: python
 
@@ -81,14 +91,6 @@ The most complex part of deciding what the output should be, the pseudocode coul
             bus.estimated_time_from_now = calculate_average(close_historical_data_points)
 
 In other words, we need to find the relevant historical data points (matching route number and close enough to the current bus location), and then calculate the average arrival time based on them. Once we have this information we can print it out.
-
-*Exercise*: Put together the skeleton for the program: parse the command line arguments, open the files, read in the information from the files to lists. Feel free to either store a data point (a row in either file) either to a tuple or using a class and member variables. You can convert a string to a floating point value by using e.g. "f = float(s)". You can remove all whitespace (line breaks, spaces etc.) from a string by using the "strip" string member function, e.g. s.strip(). Your program doesn't need to output anything yet.
-
-Now that we have the skeleton in place, we can try to implement the core logic. There are a couple of primitives that our core logic requires, namely calculating an average of a list of numbers and calculating the distance between two coordinates; it might be interesting to implement these first.
-
-*Exercise*: Implement and test a function to calculate the average of numbers in a list. You can use the built-in function "sum" to sum all the values in a list. Note that you probably want to cast the denominator to a floating point number to ensure the result is also a floating point number.
-
-*Exercise*: Implement and test a function to calculate the distance between two coordinates. Use the Pythagorean theorem for this: distance = math.sqrt((x_diff ** 2) + (y_diff ** 2)). You need to import math to have access to the sqrt function.
 
 It seems like we're starting to have all the pieces together so we can put our program together.
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>3.1.2. Finishing our simple PNG parser &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>3.1.2. Finishing our simple PNG parser &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="png.html" title="3.1.1. PNG files"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="bin_index.html" accesskey="U">3.1. Working with binary data</a> &#187;</li> 
       </ul>
@@ -197,7 +197,7 @@
 <p>We can then proceed to the time handler (type “tIME”). If you check the spec you’ll see that it has a field with two bytes. If it was one, we could simply cast to unsigned char. If it was four, we could use our “get_big_endian” function. Since it’s two, we need another function to parse it correctly.</p>
 <p><em>Exercise</em>: Implement the time handler. Read in the year using a function “get_2_byte_big_endian” which you need to define yourself. It should work the same as “get_big_endian” but only read in two bytes.</p>
 <p><em>Exercise</em>: Add another handler to handle the “pHYs” block. Look up from the spec what the format is.</p>
-<p>Finally, for this chapter, we’ll need to implement the background colour handler. This is interesting because, if you look at the spec, you’ll see that how to parse it depends on the colour type which was defined in the header. This means that we’ll have to store the colour type in a variable in the header handler and have it accessible for the background colour handler.</p>
+<p>Finally, for this section, we’ll need to implement the background colour handler. This is interesting because, if you look at the spec, you’ll see that how to parse it depends on the colour type which was defined in the header. This means that we’ll have to store the colour type in a variable in the header handler and have it accessible for the background colour handler.</p>
 <p>While we could in theory use a global variable for this, such generally leads to confusing code, and we can do better. A nice way to go about this is to add another parameter to the handler functions which is shared among all functions. Generally it’s best to define a struct for all the data you need to thread through the functions, e.g.:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">png_data</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">color_type</span><span class="p">;</span>
@@ -305,7 +305,7 @@
         <li class="right" >
           <a href="png.html" title="3.1.1. PNG files"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="bin_index.html" >3.1. Working with binary data</a> &#187;</li> 
       </ul>

@@ -76,7 +76,7 @@ The requirements spec defined the schedule entry to have a route number, a start
 
 * Declare the schedule entry class
 * Write the functionality to convert a text line to a schedule entry class
-* Read in a file and call use abovementioned functionality in a loop to generate a vector of schedule entries
+* Read in a file and call use abovementioned functionality in a loop to generate an std::vector of schedule entries
 
 Let's start with the first one.
 
@@ -138,13 +138,13 @@ Let's go through this line by line as well:
 * Line 8: Declare an std::string which will hold each line of the file as we read them in.
 * Line 9: Use the C++ standard function std::getline() which takes two parameters: the input file stream and an std::string. The contents of the next line will be read from the input stream and stored in the string. The function will return false when the whole file was processed, allowing us to use it in a while loop.
 
-We should now have everything we need in order to read in the schedule data and generate a vector of schedule entry objects.
+We should now have everything we need in order to read in the schedule data and generate an std::vector of schedule entry objects.
 
-*Exercise*: Generate a vector of schedule entry objects by reading in the schedule data file. Test your code.
+*Exercise*: Generate an std::vector of schedule entry objects by reading in the schedule data file. Test your code.
 
 While we're in the parsing business, let's go ahead and repeat this for the historical GPS data file.
 
-*Exercise*: Implement a class to hold the historical data. It will need to have some floats as member variables to hold the time it took the bus to reach the bus stop as well as the X and Y coordinate data. Read in a historical GPS data file to a vector of historical data objects.
+*Exercise*: Implement a class to hold the historical data. It will need to have some floats as member variables to hold the time it took the bus to reach the bus stop as well as the X and Y coordinate data. Read in a historical GPS data file to an std::vector of historical data objects.
 
 As per our requirements specification, the only file type we aren't yet able to parse is the current GPS data. This data is interesting because it has the integer representing whether the bus has already passed our bus stop or not (0 if not, 2 if passed). As with our Python code, it seems like a good way to make our code clearer to read if we use an enumeration for this. Enums in C++ can e.g. be defined as the following:
 
@@ -176,7 +176,7 @@ By default, with our above definition of the data type, the value 0 is converted
 
 We should now be able to define a class to hold the current GPS data, and parse a file holding such data.
 
-*Exercise*: Define a class for current GPS data. It should include a member variable of type enum class Kind. Write code to read in a file of current GPS data to generate a vector of objects of your class, and test your code.
+*Exercise*: Define a class for current GPS data. It should include a member variable of type enum class Kind. Write code to read in a file of current GPS data to generate an std::vector of objects of your class, and test your code.
 
 Now that we're able to parse in all the data we need, it seems that, apart from any necessary glue code, the actual logic we need to implement is reduced to:
 
@@ -186,4 +186,4 @@ Now that we're able to parse in all the data we need, it seems that, apart from 
 * Parsing the command line arguments - including parsing time from a string "hh:mm" to a timestamp
 * Converting timestamps to strings of format "hh:mm" for displaying purposes and calling the relevant function to display the labels
 
-We'll address these in the next chapter.
+We'll address these in the next section.

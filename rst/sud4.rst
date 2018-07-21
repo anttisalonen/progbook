@@ -45,7 +45,7 @@ Now, here's one way to find the indices to the cells that are in the same vertic
 Let's go through this in detail.
 
 * Line 3: Our return variable.
-* Line 5: We calculate *the column* for the given index by dividing by 9 and taking the remainder. This means that for e.g. indices 4, 13, 22 etc. all return the same column (4).
+* Line 5: We calculate *the column* for the given index by dividing by 9 and taking the remainder. This means that e.g. indices 4, 13, 22 etc. all return the same column (4).
 * Line 6: We define a loop that goes through nine elements.
 * Line 7: We calculate the *peer index* by multiplying the variable "i" by 9 and adding the column. This means that e.g. with index 4 we get 4, 13, 22 etc.
 * Line 9: We add the peer index in the return variable.
@@ -65,7 +65,7 @@ Now, let's add the missing logic.
 
 Now, let's put everything together:
 
-* Parse the Sudoku puzzle from the previous chapter into a Puzzle object
+* Parse the Sudoku puzzle from the previous section into a Puzzle object
 * Call propagate() whenever you set a value of a cell
 * Check if it's already solved using the solved() function
 * Print out the puzzle after reading it
@@ -109,7 +109,7 @@ Now, in terms of syntax, there are a couple of useful things to know.
 Working with "this"
 ===================
 
-In C++, "this" is a keyword that is a pointer to the current object. In our case, it allows us to make a copy of our object. Here's an example use:
+In C++, "this" is a keyword which means a pointer to the current object. In our case, it allows us to make a copy of our object. Here's an example use:
 
 .. code-block:: cpp
     :linenos:
@@ -215,7 +215,7 @@ Here are 30 difficult Sudoku puzzles, courtesy http://magictour.free.fr/top95:
     .47.8...1............6..7..6....357......5....1..6....28..4.....9.1...4.....2.69.
     ......8.17..2........5.6......7...5..1....3...8.......5......2..4..8....6...3....
 
-*Exercise*: Solve these puzzles as well. If you get tired of waiting, remember to compile your program with optimisations, that is, with "-O2" which can speed up C++ programs significantly.
+*Exercise*: Solve these puzzles as well. If you get tired of waiting, remember to compile your program with optimisations, that is, with the compiler command line flag "-O2" which can speed up C++ programs significantly.
 
 Constraint propagation with units
 =================================

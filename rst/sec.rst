@@ -1,7 +1,7 @@
 Security
 --------
 
-In the chapter "Writing a toy web server", I warned about potential security holes when writing C. Let's take a look at the following code, which attempts to copy a string represented by a char pointer to a 20-element char array:
+In the section "Writing a toy web server", I warned about potential security holes when writing C. Let's take a look at the following code, which attempts to copy a string represented by a char pointer to a 20-element char array:
 
 .. code-block:: c
     :linenos:

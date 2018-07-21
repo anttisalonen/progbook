@@ -21,7 +21,7 @@ Most notably, the Windows cmd.exe or PowerShell are *not* Unix shells. Typical U
 
 *Exercise*: Start a terminal with a Unix shell.
 
-Apart from the shell, we also need an interpreter and an editor. For this chapter we'll use Python as our programming language; so let's install the Python interpreter. Again, I can't tell you how to do this; some OSes may have it already installed. To find out if you have it, start your Unix shell and try typing:
+Apart from the shell, we also need an interpreter and an editor. For this section we'll use Python as our programming language; so let's install the Python interpreter. Again, I can't tell you how to do this; some OSes may have it already installed. To find out if you have it, start your Unix shell and try typing:
 
 .. code-block:: bash
 
@@ -41,7 +41,7 @@ If you don't have Python, you might see something like this instead:
     $ python
     bash: python: command not found
 
-In this case you'll need to find out how to install it. On e.g. Ubuntu, running something like "sudo apt-get install python" might do it. On Mac you may need to install Python from the Python official web site. Although we'll be using Python 2 later in this book, this chapter will work with either Python 2 or 3 so the version you pick isn't very important for now.
+In this case you'll need to find out how to install it. On e.g. Ubuntu, running something like "sudo apt-get install python" might do it. On Mac you may need to install Python from the Python official web site. Although we'll be using Python 2 later in this book, this section will work with either Python 2 or 3 so the version you pick isn't very important for now.
 
 Once you do get to the Python interpreter as shown above you can exit it by typing "exit()" (without the quotes).
 

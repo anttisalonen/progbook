@@ -5,7 +5,7 @@ How does a computer work?
 
   -- Donald Knuth
 
-The previous chapter was a "hook" in that it attempted to get the reader interested without really going into technical details. This chapter is a bit different. As is characteristic for this book, we won't go very much into specifics but we will cover the essentials about understanding computers as is required for software development.
+The previous section was a "hook" in that it attempted to get the reader interested without really going into technical details. This section is a bit different. As is characteristic for this book, we won't go very much into specifics but we will cover the essentials about understanding computers as is required for software development.
 
 In order to understand how a computer works, we must first learn a bit about *digital logic*.
 
@@ -100,7 +100,7 @@ The output of AND-1 is only 1 when both A and B are 1. However, this output is n
 
 Combining the above in AND-2: When both A and B are 1, the output of NOT is 0, meaning that the output of our circuit is 0. In other cases, the output is the same as the output of the OR-gate. Hence the final output is as desired.
 
-We also have a new building block: whenever we need a XOR-gate, we can use this design.
+We now have a new building block: whenever we need a XOR-gate, we can use this design.
 
 *Exercise*: Using only the OR-, AND- and NOT-gates, design, with a pen and paper, a circuit with two inputs A and B, and output X, such that the when both A and B are 0, the output is 1. In all other cases the output must be 0.
 
@@ -217,4 +217,4 @@ Here, X is 1 when A is greater than B and 0 otherwise. This, too, can be done us
 
 *Exercise*: Come up with a design for a comparator matching the above truth table.
 
-Now that we're able to construct digital circuits, let's see how they can be used to put together a device with some characteristics not completely unlike those of a smartphone. This is the topic for the next chapter.
+Now that we're able to construct digital circuits, let's see how they can be used to put together a device with some characteristics not completely unlike those of a smartphone. This is the topic for the next section.

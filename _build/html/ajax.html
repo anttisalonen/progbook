@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2.9.3. AJAX &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>2.9.3. AJAX &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="redis.html" title="2.9.2. Redis"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="int_web_index.html" accesskey="U">2.9. A bit more web development</a> &#187;</li> 
       </ul>
@@ -109,7 +109,7 @@
 <li>The client displays the high score list</li>
 </ol>
 <p>Seems simple, doesn’t it?</p>
-<p>Apart from entering the name, we’ve already covered steps 1-3 and to some extent step 5. In this chapter we’ll cover steps 4 and 6. They’re basically what AJAX is about.</p>
+<p>Apart from entering the name, we’ve already covered steps 1-3 and to some extent step 5. In this section we’ll cover steps 4 and 6. They’re basically what AJAX is about.</p>
 <p>Before we get to AJAX in detail, you might have noticed that we talk about server and client here, however if we simply load our HTML guessing game in the browser there is no server, only client. This means that we will have to pull up Flask, our web microframework again, as it has the capability of running a web server which we need going forwards.</p>
 <p><em>Exercise</em>: Move your guessing game HTML to be served by Flask. To do this, as per Flask documentation, you need to 1) create a directory named “templates” and move your HTML file there; 2) Set up a Flask “hello world” program such that there’s a URL which serves your HTML file (using render_template()); and 3) Start Flask and try it out to ensure everything is set up correctly.</p>
 <p>A note on security: As we’ve seen, we’re not really in control of the Javascript code - a user can replace the Javascript code with whatever code they prefer. In this sense, were we to use this architecture in a real program, a user could easily replace the data sent to the server and fake their way to the top of the high score list. For educational purposes we assume we can trust the user in this case, but were one serious about such a game and offering it for the public, the game logic would have to be done on the server side, such that the correct number would be generated on the server and each guess would need to be sent to the server.</p>
@@ -257,7 +257,7 @@
         <li class="right" >
           <a href="redis.html" title="2.9.2. Redis"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="int_web_index.html" >2.9. A bit more web development</a> &#187;</li> 
       </ul>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>3.4.3. Drawing to a screen using SDL2 &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>3.4.3. Drawing to a screen using SDL2 &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="components.html" title="3.4.2. Breaking software down to components"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">3.4. Larger software</a> &#187;</li> 
       </ul>
@@ -109,7 +109,7 @@
 <span class="cp">#endif</span>
 </pre></div>
 </div>
-<p>What this exemplifies is the use of the C preprocessor to define what code to compile. The C compiler typically defines the platform specific defines automatically, but it’s also possible to set defines either in source code or in the compiler command line. Long story short, the people behind SDL have taken care of this such that we won’t have to, and can simply call the SDL functions. As a bonus, SDL supports Linux fbdev as well (which is a rather primitive interface for displaying graphics on Linux but popular on embedded systems) so our software could theoretically actually work on a bus stop.</p>
+<p>What this exemplifies is the use of the C preprocessor to define what code to compile. The C compiler typically defines the platform specific defines automatically, but it’s also possible to set defines either in source code or in the compiler command line. Long story short, the people behind SDL have taken care of this such that we won’t have to, and we can simply call the SDL functions. As a bonus, SDL supports Linux fbdev as well (which is a rather primitive interface for displaying graphics on Linux but popular on embedded systems) so our software could theoretically actually work on a bus stop.</p>
 <p><em>Exercise</em>: SDL2 can be downloaded online although your OS may also provide it. In either case, install SDL2 on your computer. One way to do this is to download the source code, extract it and compile it using “./configure &amp;&amp; make”. You can check out the file INSTALL.txt for more details. The author used SDL2 version 2.0.8.</p>
 <p>Although SDL2 is a C library (and hence can be used from C++ directly), many <em>bindings</em> to it exist from other language. A binding is a simple wrapper that allows using a library written in one language from another language. E.g. Java bindings for SDL2 exist; this means that there is a Java library available which does nothing more but calls the C SDL2 functions, allowing the use of SDL2 from Java. Typically programming languages only have built in support for calling C functions. This means that if a library was written in e.g. Java and one wanted to call it from Go, this might not be easily possible without first writing a wrapper of the library in C and then calling the C library from Go. The takeaway is that our bus stop program could be written in e.g. Java if we wanted to.</p>
 <div class="section" id="hello-world-in-sdl2">
@@ -214,7 +214,7 @@
 <p>This basically does the same thing but tells the compiler to look for the header and library files in local directories instead of the system directories.</p>
 <p><em>Exercise</em>: Compile and run the above program. Try changing the clear colour and running again.</p>
 <p>Now, you may wonder what all is there that SDL provides, and what are all the different parameters that the different functions can accept. This is a very valid question and is answered in the SDL <em>reference</em>.</p>
-<p><em>Exercise</em>: Look up the SDL documentation for the functions SDL_Init and SDL_CreateRenderer. If you’re curious, you can also try to find the definitions of the functions in the SDL source code.</p>
+<p><em>Exercise</em>: Look up the SDL documentation for the functions SDL_Init and SDL_CreateRenderer. Find the definitions of the functions in the SDL source code.</p>
 </div>
 <div class="section" id="sdl-and-font-handling">
 <h2>3.4.3.2. SDL and font handling<a class="headerlink" href="#sdl-and-font-handling" title="Permalink to this headline">¶</a></h2>
@@ -309,7 +309,7 @@
 </td></tr></table></div>
 <p>This code is unfortunately missing some key SDL2 calls. If it was complete, you could compile it with the same command as you compile the previous example, but with the added switch “-LSDL2_ttf” to also link against the SDL2_ttf library containing the TTF_* functions.</p>
 <p><em>Exercise</em>: Fix the TODOs to get a program that displays some text on the screen. It should display “Hello world” in the top left corner. Note that as the example code is, it will search for the font in the current working directory, i.e. where your shell is when you run the program. Make sure your font file can be found.</p>
-<p>Now, provided we had the text labels for our bus stop, we should be able to actually display a window that meets the requirements. What we’ll do in this chapter is that we’ll have this bit of C++ code which is shared by both implementations of our software; our software following the Unix philosophy will create a text file with the labels which is read by the C++ code to display the correct window while our monolithic C++ application will take the labels as a function parameter and display them. In either case, the SDL code stays the same so we only need to implement that part once.</p>
+<p>Now, provided we had the text labels for our bus stop, we should be able to actually display a window that meets the requirements. What we’ll do in this section is that we’ll have this bit of C++ code which is shared by both implementations of our software; our software following the Unix philosophy will create a text file with the labels which is read by the C++ code to display the correct window while our monolithic C++ application will take the labels as a function parameter and display them. In either case, the SDL code stays the same so we only need to implement that part once.</p>
 </div>
 </div>
 
@@ -331,7 +331,7 @@
         <li class="right" >
           <a href="components.html" title="3.4.2. Breaking software down to components"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="design_index.html" >3.4. Larger software</a> &#187;</li> 
       </ul>

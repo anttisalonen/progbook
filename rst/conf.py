@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# guide documentation build configuration file, created by
+# book build configuration file, created by
 # sphinx-quickstart on Mon Feb  5 23:45:12 2018.
 #
 # This file is execfile()d with the current directory set to its
@@ -45,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Software Development: A Pragmatic Approach'
+project = u'Learn Programming'
 copyright = u'2018, Antti Salonen'
 author = u'Antti Salonen'
 
@@ -88,12 +88,21 @@ html_theme = 'bizstyle'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+
+# sphinx 1.7.5 defines body_min_width as 450 by default.
+# This seems to break render for iPhone, at least with bizstyle.
+html_theme_options = {
+    'body_min_width': 0,
+    'body_max_width': None
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# remove "documentation" from title
+html_title = ('%s %s') % (project, release)
 
 
 # -- Options for HTMLHelp output ------------------------------------------
@@ -126,7 +135,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'guide.tex', project,
+    (master_doc, 'book.tex', project,
      u'Antti Salonen', 'scrbook'),
 ]
 
@@ -158,7 +167,7 @@ latex_toplevel_sectioning = 'chapter'
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'swpa', project,
+    (master_doc, 'book', project,
      [author], 1)
 ]
 
@@ -169,8 +178,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'swpa', project,
-     author, 'swpa', project,
+    (master_doc, 'book', project,
+     author, 'book', project,
      'Miscellaneous'),
 ]
 

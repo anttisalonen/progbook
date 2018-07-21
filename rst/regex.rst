@@ -5,7 +5,7 @@ Regular expressions
 
   -- Jamie Zawinski
 
-A lot can be said about regular expressions. I'll stick to the essentials, bare minimum in this chapter.
+A lot can be said about regular expressions. I'll stick to the essentials, bare minimum in this section.
 
 Regular expressions are an extension to the usual search and replace. For example, you might want to find any line in a file that ends with the digit 9:
 

@@ -1,7 +1,7 @@
 C and the stack
 ---------------
 
-We touched on stack briefly before. This chapter goes a bit more in depth on this. Arguably, if you understand the stack then you will also understand pointers and C memory management in general.
+We touched on stack briefly before. This section goes a bit more in depth on this. Arguably, if you understand the stack then you will also understand pointers and C memory management in general.
 
 You may remember that a CPU doesn't really have a concept of variables; it has memory accesses and registers. What happens, then, when we e.g. define an int in our C code, and use it? The value for each variable is stored either in a register or in RAM where it has a specific address, or a specific offset from an address. The C compiler reads our C code, sees that we e.g. define a variable, picks a register or a memory address for this variable and generates CPU instructions that use the variable.
 

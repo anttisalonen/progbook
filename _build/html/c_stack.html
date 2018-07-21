@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2.4.2. C and the stack &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>2.4.2. C and the stack &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="c2.html" title="2.4.1. Records"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="int_c_index.html" accesskey="U">2.4. Intermediate C</a> &#187;</li> 
       </ul>
@@ -86,7 +86,7 @@
             
   <div class="section" id="c-and-the-stack">
 <h1>2.4.2. C and the stack<a class="headerlink" href="#c-and-the-stack" title="Permalink to this headline">¶</a></h1>
-<p>We touched on stack briefly before. This chapter goes a bit more in depth on this. Arguably, if you understand the stack then you will also understand pointers and C memory management in general.</p>
+<p>We touched on stack briefly before. This section goes a bit more in depth on this. Arguably, if you understand the stack then you will also understand pointers and C memory management in general.</p>
 <p>You may remember that a CPU doesn’t really have a concept of variables; it has memory accesses and registers. What happens, then, when we e.g. define an int in our C code, and use it? The value for each variable is stored either in a register or in RAM where it has a specific address, or a specific offset from an address. The C compiler reads our C code, sees that we e.g. define a variable, picks a register or a memory address for this variable and generates CPU instructions that use the variable.</p>
 <p>The stack is a chunk of memory (buffer) that the compiler allocates for your program when the program is started. It’s used for all your variables and function calls. You can imagine the stack as a stack of papers where, whenever you declare a variable, or call a function, a sheet of paper is added on top. Each variable is a sheet of paper, and the data written on the paper is the value of the variable. Whenever a variable exits the scope or the function call is over, the related sheets of paper are taken out of the stack again.</p>
 <p>Let’s imagine we have a toy program:</p>
@@ -252,7 +252,7 @@
         <li class="right" >
           <a href="c2.html" title="2.4.1. Records"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="int_c_index.html" >2.4. Intermediate C</a> &#187;</li> 
       </ul>

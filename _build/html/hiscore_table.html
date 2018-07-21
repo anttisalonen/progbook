@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2.9.6. Generating the high score table &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>2.9.6. Generating the high score table &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="guess_start.html" title="2.9.5. The page for starting a new game"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="int_web_index.html" accesskey="U">2.9. A bit more web development</a> &#187;</li> 
       </ul>
@@ -102,9 +102,9 @@
 <p>You might wonder, why have the Javascript code request data from the server at page load time instead of generating the high score table as part of the template on the server? While this is certainly a feasible approach, the good thing about having the Javascript generate the high score table at page load is that as we want to have Javascript code to update the high score table at the end of the game anyway, we can reuse that code at page load and hence have only one piece of code update the high score table instead of two.</p>
 <div class="section" id="actually-updating-the-high-score-table">
 <h2>2.9.6.1. Actually updating the high score table<a class="headerlink" href="#actually-updating-the-high-score-table" title="Permalink to this headline">¶</a></h2>
-<p>You may remember from the chapter how to call a Javascript function at page load. If not, the hint is that you assign the member function “onload” in the global object “window” as your callback function.</p>
+<p>You may remember from the section “Javascript meets algorithms” how to call a Javascript function at page load. If not, the hint is that you assign the member function “onload” in the global object “window” as your callback function.</p>
 <p>Let’s install a function called update_hiscore() as the function that will be called at page load time, and implement it.</p>
-<p>First of all, we need to send an XMLHttpRequest to the server. We should use GET as we’re only asking the server for some data. However we’ll need to supply a parameter to the server, namely <em>which</em> high score table we want - as the high score table should be different based on the maximum number the computer can think of. As we’ve learnt, with GET we can only pass parameters as part of the URL, so let’s do that. The URL should look something like “hiscore?max_value=25” - in this example, we’d fetch the page “hiscore” from the server, with “max_value” as the GET parameter, with 25 as its value.</p>
+<p>First of all, we need to send an XMLHttpRequest to the server. We should use GET as we’re only asking the server for data. However we’ll need to supply a parameter to the server, namely <em>which</em> high score table we want - as the high score table should be different based on the maximum number the computer can think of. As we’ve learnt, with GET we can only pass parameters as part of the URL, so let’s do that. The URL should look something like “hiscore?max_value=25” - in this example, we’d fetch the page “hiscore” from the server, with “max_value” as the GET parameter, with 25 as its value.</p>
 <p><em>Exercise</em>: Implement the update_hiscore() function. It should do nothing else but send an XMLHttpRequest to the server, asking for the high score data, for the maximum number that the user is currently using in his or her game. You can concatenate a number to a Javascript string with the ‘+’ operator, e.g. “hiscore?max_value=” + my_variable. The handler for the data that is received from the server should do nothing else but call a function “display_hiscore()” (which we haven’t defined yet), passing the response text to this function. For testing purposes you’ll want to add a Flask handler for this URL, but for now it can return only a test string.</p>
 </div>
 <div class="section" id="providing-the-necessary-data-server-side">
@@ -187,7 +187,7 @@
         <li class="right" >
           <a href="guess_start.html" title="2.9.5. The page for starting a new game"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="int_web_index.html" >2.9. A bit more web development</a> &#187;</li> 
       </ul>

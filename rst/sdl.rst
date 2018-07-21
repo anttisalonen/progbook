@@ -29,7 +29,7 @@ What SDL2 does, in a nutshell, is provide functions that do something like this:
     #error Unknown platform
     #endif
 
-What this exemplifies is the use of the C preprocessor to define what code to compile. The C compiler typically defines the platform specific defines automatically, but it's also possible to set defines either in source code or in the compiler command line. Long story short, the people behind SDL have taken care of this such that we won't have to, and can simply call the SDL functions. As a bonus, SDL supports Linux fbdev as well (which is a rather primitive interface for displaying graphics on Linux but popular on embedded systems) so our software could theoretically actually work on a bus stop.
+What this exemplifies is the use of the C preprocessor to define what code to compile. The C compiler typically defines the platform specific defines automatically, but it's also possible to set defines either in source code or in the compiler command line. Long story short, the people behind SDL have taken care of this such that we won't have to, and we can simply call the SDL functions. As a bonus, SDL supports Linux fbdev as well (which is a rather primitive interface for displaying graphics on Linux but popular on embedded systems) so our software could theoretically actually work on a bus stop.
 
 *Exercise*: SDL2 can be downloaded online although your OS may also provide it. In either case, install SDL2 on your computer. One way to do this is to download the source code, extract it and compile it using "./configure && make". You can check out the file INSTALL.txt for more details. The author used SDL2 version 2.0.8.
 
@@ -82,7 +82,7 @@ This basically does the same thing but tells the compiler to look for the header
 
 Now, you may wonder what all is there that SDL provides, and what are all the different parameters that the different functions can accept. This is a very valid question and is answered in the SDL *reference*.
 
-*Exercise*: Look up the SDL documentation for the functions SDL_Init and SDL_CreateRenderer. If you're curious, you can also try to find the definitions of the functions in the SDL source code.
+*Exercise*: Look up the SDL documentation for the functions SDL_Init and SDL_CreateRenderer. Find the definitions of the functions in the SDL source code.
 
 SDL and font handling
 =====================
@@ -107,4 +107,4 @@ This code is unfortunately missing some key SDL2 calls. If it was complete, you 
 
 *Exercise*: Fix the TODOs to get a program that displays some text on the screen. It should display "Hello world" in the top left corner. Note that as the example code is, it will search for the font in the current working directory, i.e. where your shell is when you run the program. Make sure your font file can be found.
 
-Now, provided we had the text labels for our bus stop, we should be able to actually display a window that meets the requirements. What we'll do in this chapter is that we'll have this bit of C++ code which is shared by both implementations of our software; our software following the Unix philosophy will create a text file with the labels which is read by the C++ code to display the correct window while our monolithic C++ application will take the labels as a function parameter and display them. In either case, the SDL code stays the same so we only need to implement that part once.
+Now, provided we had the text labels for our bus stop, we should be able to actually display a window that meets the requirements. What we'll do in this section is that we'll have this bit of C++ code which is shared by both implementations of our software; our software following the Unix philosophy will create a text file with the labels which is read by the C++ code to display the correct window while our monolithic C++ application will take the labels as a function parameter and display them. In either case, the SDL code stays the same so we only need to implement that part once.

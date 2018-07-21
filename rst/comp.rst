@@ -10,7 +10,7 @@ To reduce the modern computer to the essentials, let's build a following, very s
 * If the user taps on the bottom half of the screen, the screen must turn green.
 * If the user taps on the top half of the screen, the screen must turn red.
 
-This device is very simple but will cover the same principles shared by nearly all computers, as we shall see.
+This device is very simple but will cover some of the principles that are shared by nearly all computers, as we shall see.
 
 The following diagram explains the general concept for computers:
 

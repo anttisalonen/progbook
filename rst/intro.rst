@@ -8,7 +8,7 @@ The book doesn't have any new information compared to what you can find online o
 1. It includes what I think is important for software development from a large variety of topics, saving the reader from the dilemma "what should I learn"
 2. It collates relevant information from lots of sources in one book, saving the reader from going through several separate web sites and books
 
-It aims to contain an overview of almost everything that I think is important for software developers. It doesn't contain *everything*; but it should contain enough for the reader to understand software development, and to be able to read and understand any topic in further detail as needed.
+It aims to contain an overview of almost everything that I think is important for software developers. It doesn't contain *everything*; but it should contain enough for the reader to understand software development, and to be able to read about and understand any topic in further detail as needed.
 
 The book focuses on learning what software development is about, and the core principles around software development. It uses several technologies to this goal (e.g. C, Python, Javascript, HTML, etc.) but is not a book about technologies themselves. The reader will learn the basics (or in some cases more) of various technologies along the way, but the focus is on building a foundation for software development.
 
@@ -19,7 +19,7 @@ Why are you writing this book?
 
 My wife was asking if she could become a software engineer like I did.
 
-I ended up checking the offerings around Computer Science at the local university. As I have some years of experience in software engineering, and also am now hiring and hence interviewing software engineers, it seemed to me like there's a bit of a gap between what industry needs and what the schools are producing, at least in my local area. To some extent this is expected: universities live in the academic world, often without an explicit goal of ensuring the graduates are employed by the industry. To mitigate, universities may offer degrees directed more towards real world, but these run into the risk of not being relevant or effective enough for the industry.
+I have some years of experience in software engineering, and also am now hiring and hence interviewing software engineers. I checked the offerings around Computer Science at the local university, but it seems to me like there's a bit of a gap between what industry needs and what the schools are producing, at least in my local area. To some extent this is expected: universities live in the academic world, often without an explicit goal of ensuring the graduates are employed by the industry. To mitigate, universities may offer degrees directed more towards real world, but these run into the risk of not being relevant or effective enough for the industry.
 
 So I ended up teaching my wife what I think is the right stuff. Now, since we also have a little daughter, finding time for both of us at the same time was sometimes difficult, so I'd write down some notes or exercises for her that she could dive into when she had time. I ended up writing more and more and structuring things better and all of it ended up being this book.
 
@@ -42,9 +42,9 @@ If I'm being completely selfish, it's because I'm hiring software engineers and 
 Do you mean, if I do the points above, I too can become a professional software engineer?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Again, I obviously can't guarantee anything. Actually getting a job depends on the economy and the job market, where you live, what you're willing to do and work for etc. But I do think that after doing all the above points, the reader should have enough or almost enough *technical* skills for many software engineering jobs.
+I obviously can't guarantee anything. Actually getting a job depends on the economy and the job market, where you live, what you're willing to do and work for etc. But I do think that after doing all the above points, the reader should have enough or almost enough *technical* skills for many software engineering jobs.
 
-Apart from raising false hopes about getting a job as a software engineer, another reason for this book is that I'm not happy with how the gap between "techies" and "non-techies" is growing. I think more people should be familiar with software. I want to write a book that has very little prerequisites and teaches enough about software and technology so that a "non-techie" is able to get a better understanding about how software affects the world we live in. So even if you don't get a job, at least feel proud about having a better understanding of software and its role in the world.
+Apart from raising false hopes about getting a job as a software engineer, another reason for this book is that I'm not happy with how the gap between "techies" and "non-techies" is growing. I think more people should be familiar with software. I want to write a book that has very little prerequisites and teaches enough about software and technology so that a "non-techie" is able to get a better understanding about how software affects the world we live in. So even if you don't get a job, you can at least feel proud about having a better understanding of software and its role in the world.
 
 What's in this book?
 ====================
@@ -59,8 +59,8 @@ Although many subjects are treated almost comically lightly, overall the materia
 
 This book is not a replacement for a Computer Science degree, though it does (shallowly) include some parts of one, and complements one in other cases.
 
-You say "engineering", "development" and "computer science" - what are the differences?
-=======================================================================================
+You say "engineering", "programming", "development" and "computer science" - what are the differences?
+======================================================================================================
 
 This book teaches software development. This book doesn't teach engineering, but the term "software engineer" is used to describe a person who develops software because that's what we seem to have arrived at as an industry.
 
@@ -69,7 +69,7 @@ More specifically, I'd define the terminology as follows:
 * Engineering is something that's very structured, and something you want to learn in a very structured way. In other words, this book definitely doesn't teach engineering.
 * Software development is about solving a problem using software: it's not very clean, it's usually not really engineering nor very scientific, but it's useful in practice and there's a demand for it.
 
-Programming, or coding, is one part of software development, among design, testing, writing specifications etc. This book is not only about programming but about software development.
+Programming, or coding, is one part of software development, among design, testing, writing specifications etc. This book is about software development although programming plays a major part in it.
 
 There's also Computer Science which arguably is separate from both software development and engineering. (It is a science after all. "Computer Science is no more about computers than astronomy is about telescopes.")
 
@@ -78,7 +78,7 @@ You possibly can't have all the technical stuff that one needs in one book!
 
 No, but I can try.
 
-More seriously, whatever code you'll be writing after reading this book, you'll need to study the technology for that particular topic in more detail. The goal of this book is not to include everything; the goal is to put together a foundation so that the reader will be able to learn to write almost any software without significant hurdles, as necessary.
+Whatever code you'll be writing after reading this book, you'll need to study the technology for that particular topic in more detail. The goal of this book is not to include everything; the goal is to put together a foundation so that the reader will be able to learn to write almost any software without significant hurdles, as necessary.
 
 What are the prerequisites for this book?
 =========================================
@@ -87,7 +87,7 @@ The book is aimed at people with no experience or skills within software develop
 
 Some parts of the book use high school level maths so you should be somewhat familiar with that. You need to have a computer and be able to use it (install software etc.).
 
-The book requires your computer to be able to run a Unix shell and standard Unix tools. Mac, Linux or Windows 10 should all suffice.
+The book requires your computer to be able to run a Unix shell and standard Unix tools. Mac, Linux or Windows 10 should all suffice. Older Windows versions may be fine for the purposes of this book but installing the necessary software may be non-trivial.
 
 You should have some skills around analytical thinking and problem solving. I don't know how to teach those. I believe this book does teach them to some extent though, as a side effect.
 
@@ -95,7 +95,7 @@ I do believe that almost anyone who is able to finish high school without signif
 
 It's probably very helpful to have a tutor or someone who's familiar with software development to answer your questions. Use the Internet to your advantage; there are literally thousands of techies online waiting to share their knowledge and answer newbies' questions. Try Stack Overflow, the learnprogramming reddit, Github, or various IRC channels, e.g. those dedicated to specific programming languages.
 
-You must be able to find information online. Notice how I just dropped "IRC channels" into a sentence? If you ever do feel the need to ask a question and decide to investigate the IRC bit further, you need to use the Internet to a) find out what IRC is, b) find out what IRC channels there are e.g. for a programming language you're having trouble with, c) how to connect to such a channel and ask your question. This book won't have that information.
+You must be able to find information online. For example, notice how I used the term "IRC channels"? If you ever do feel the need to ask a question and decide to investigate the IRC bit further, you need to use the Internet to a) find out what IRC is, b) find out what IRC channels there are e.g. for a programming language you're having trouble with, c) how to connect to such a channel and ask your question. This book won't have that information.
 
 The book is free and licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. This means that you're free to share the book in any medium and modify the book for any purpose, even commercially, as long as you give appropriate credit and your distribution uses the same license. See more details at http://creativecommons.org/licenses/by-sa/4.0/. The code in this book is licensed under the MIT license.
 
@@ -108,11 +108,13 @@ The book uses the pedagogical approach of assimilation, or constructionism; info
 
 I should mention at this point, if it wasn't already clear, that the author has no real pedagogical experience.
 
-If you think there's something very unclear about some part of the book, let me know. My email is ajsalonen@gmail.com. You may also create an issue or a pull request in Github. I'm also not a native English speaker so any corrections on that front are welcome as well.
+If you think there's something very unclear about some part of the book or otherwise have any questions or comments, let me know. My email is ajsalonen@gmail.com. You may also create an issue or a pull request in Github. I'm also not a native English speaker so any corrections on that front are welcome as well.
 
-Who are you?
-============
+About the author
+================
 
-My name is Antti. I've worked as a software engineer for a few years and am currently an engineering manager at a tech company. I started writing code when I was about six years old, or 28 years ago. I've written non-trivial code in about 14 different programming languages, or about one new language every two years. I've professionally written medical device software, company internal tools, software for controlling a telescope, and a few other things. I've managed the development of a web app and been a network admin, an engineering team lead, and a small scale software architect. I've written some humble, ugly, open source games as a hobby, and made some minor contributions to some open source projects.
+My name is Antti Salonen. I've worked as a software engineer for a few years and am currently an engineering manager at a tech company. I started writing code when I was about six years old, or 28 years ago, and have written non-trivial code in about 14 different programming languages. I've professionally written medical device software, company internal tools, software for controlling a telescope, and a few other things. I've managed the development of a web app and been a network admin, an engineering team lead, and a small scale software architect. I've written some humble, ugly, open source games as a hobby, and made some minor contributions to some open source projects.
+
+Disclaimer: This book was written in my personal capacity. All the views and opinions expressed in this book are my own and may not reflect those of my past or current employer.
 
 Even though I started programming at a young age, it doesn't mean you're already a lost cause if you didn't. In fact, I know several great software engineers who didn't start programming until much later.

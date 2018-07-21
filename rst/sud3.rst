@@ -79,7 +79,7 @@ As a skeleton, let's put something together that also introduces character-to-in
         std::vector<int> my_buf;
         for(auto c : contents) {
             if(c >= '1' && c <= '9') {
-                /* TODO */
+                my_buf.push_back(c - '0');
             } else if(c == '.' || c == '0') {
                 /* TODO */
             }
@@ -97,11 +97,12 @@ Let's go through this line by line:
 * Line 3: We define our return variable.
 * Line 4: We iterate over all characters in the string.
 * Line 5: We check if the character value is between '1' and '9'. As the character values are based on the ASCII table, meaning they can be treated as numeric values, we can use arithmetic operators (>= and <=) to compare them.
+* Line 6: We subtract the ASCII value '0' from "c". This results in the integer value 0 for the character '0', 1 for character '1', 2 for character '2' etc.
 * Line 7: We check whether the character is a dot or a zero.
 * Line 10: We check whether we've found a symbol for each cell in the puzzle.
 * Line 14: If we didn't find enough symbols of interest, then we cannot fill our array of cells any further and *throw an exception*: this effectively ends the current execution of the code and goes up the function call stack until a caller is found who *catches* the exception thrown. As we have no code to catch the exception, this effectively prints the error message on the screen and terminates the program.
 
-*Exercise*: Implement the above function. Fill out the correct code for the TODOs such that the return varialbe is updated correctly and returned. See if you can run it without an exception being thrown with the example input from above.
+*Exercise*: Implement the above function. Fill out the correct code for the TODOs such that the return variable is updated correctly and returned. See if you can run it without an exception being thrown with the example input from above.
 
 Now that we're able to parse a string to an int vector, let's turn this int vector to a Puzzle.
 
@@ -144,26 +145,7 @@ Recall that the peers of a cell are the cells that are on either the same horizo
 
 When implementing a function for 2), the question arises on what data types should the function use as input and output. It's often easier to answer this if we consider the user of this function, i.e point 3).
 
-The pseudocode for point 3) could look like the following:
-
-::
-
-    propagate(c):
-        if c.has_only_one_value():
-            value = c.get_sole_value()
-            for peer in peers(c):
-                if peer has value:
-                    valid = peer.eliminate(value)
-                    if not valid:
-                        return False
-                    valid = propagate(c)
-                    if not valid:
-                        return False
-        return True
-
-That is, we go through each cell, and if it only has one value, we eliminate the value from the peers if they had it. If a peer ends up only having one value, we repeat for that cell. If we invalidate the puzzle with this (which should only happen if we made a wrong guess), we stop.
-
-Let's put together a skeleton for this function in C++:
+Let's put this function together in C++:
 
 .. code-block:: cpp
     :linenos:
@@ -188,6 +170,8 @@ Let's put together a skeleton for this function in C++:
         return true;
     }
 
+The summary of this function is that we go through each cell, and if it only has one value, we eliminate the value from the peers if they had it. If a peer ends up only having one value, we repeat for that cell. If we invalidate the puzzle with this (which shouldn't happen), we stop.
+
 Now, a couple of notes:
 
 * Line 3: we previously introduced the Cell class member function "has_one". This is used here.
@@ -195,7 +179,7 @@ Now, a couple of notes:
 * Line 6: We call the function "peers" which should be a member function of the Puzzle class. This isn't yet defined. It takes an integer as input (index of a cell in the array "cells") and returns an array or a vector of indices which are the indices of the peer cells.
 * Line 7: We iterate through all the peers.
 * Line 8: We can access the peers in the "cells" array by index "peer", and call the Cell class member function "has" which should return true if the value is possible for the cell. The function is yet to be defined.
-* Line 10: We call the function "propagate" for the peer which is the function we're defining; recursion. What happens is another function call is pushed to the stack, such that we enter the function "propagate" again but with the variable "i" being set to "peer" for this second call. Once that function call returns then we end up at line 10 again, with "i" at the original value, continuing the original for loop to process the rest of the peers. With recursion, it's important to have a *base case*, i.e. a case where the recursive call will not be made, to avoid infinite loop. Our base cases are either no cells having only one value, or all peers already having a single value.
+* Line 10: We call the function we're defining for the peer; recursion. What happens is another function call is pushed to the stack, such that we enter the function "propagate" again but with the variable "i" being set to "peer" for this second call. Once that function call returns then we end up at line 10 again, with "i" at the original value, continuing the original for loop to process the rest of the peers. With recursion, it's important to have a *base case*, i.e. a case where the recursive call will not be made, to avoid infinite loop. Our base cases are either no cells having only one value, or all peers already having a single value.
 
 What we have here, after filling out the blanks, is the propagation function, which eliminates numbers from peer cells, and also propagates this if the peer cell ends up with only one value.
 

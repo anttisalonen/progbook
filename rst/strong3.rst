@@ -77,7 +77,7 @@ Splitting a string in Rust:
 
 Rust infers the types of our variables in this program.
 
-Filtering elements from an array in Swift:
+Filtering elements from an array in Rust:
 
 .. literalinclude:: ../material/strong/filt.rs
     :language: rust
@@ -94,6 +94,6 @@ The type system and generics in Rust allows us to write the function such that i
 
 To summarise, Rust allows fairly direct control over allocation and its type system is extensive, however some work is required from the developer to take advantage of all Rust features.
 
-*Exercise*: Out of the six new languages described in this and the previous chapter, pick one that seems to appeal to you the most, and one that seems to appeal to you the least.
+*Exercise*: Out of the six new languages described in this and the previous section, pick one that seems to appeal to you the most, and one that seems to appeal to you the least.
 
-*Exercise*: For both of the two languages you picked, implement Fizz Buzz and the quadratic equation exercise of finding the largest root in a file of 10,000 equations. Note that for most of the languages you don't necessarily have to install the compiler on your computer; there are several web pages that provide an interactive code editor and compiler for testing out a language. Try searching for e.g. "rust online" or "rust playground".
+*Exercise*: For both of the two languages you picked, implement Fizz Buzz and the exercise of finding the largest root for a few quadratic equations. Note that for most of the languages you don't necessarily have to install the compiler on your computer; there are several web pages that provide an interactive code editor and compiler for testing out a language. Try searching for e.g. "rust online" or "rust playground".

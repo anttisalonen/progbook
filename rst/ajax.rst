@@ -26,7 +26,7 @@ From a high level software architecture point of view, then, this is how the flo
 
 Seems simple, doesn't it?
 
-Apart from entering the name, we've already covered steps 1-3 and to some extent step 5. In this chapter we'll cover steps 4 and 6. They're basically what AJAX is about.
+Apart from entering the name, we've already covered steps 1-3 and to some extent step 5. In this section we'll cover steps 4 and 6. They're basically what AJAX is about.
 
 Before we get to AJAX in detail, you might have noticed that we talk about server and client here, however if we simply load our HTML guessing game in the browser there is no server, only client. This means that we will have to pull up Flask, our web microframework again, as it has the capability of running a web server which we need going forwards.
 

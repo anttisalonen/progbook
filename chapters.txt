@@ -70,6 +70,7 @@ conclusion with text on desktop+mobile apps
 cron
 dynamic programming
 env variables
+future reading: c prog, cpp, sw design (esr), culture (rant) etc.
 
 Exercises
 graphics programming

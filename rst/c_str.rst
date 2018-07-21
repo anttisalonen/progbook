@@ -5,7 +5,7 @@ C and strings
 
   -- Brian Kernighan
 
-This chapter goes in depth around strings (and buffers in general) in C.
+This section goes in depth around strings (and buffers in general) in C.
 
 C string handling
 =================

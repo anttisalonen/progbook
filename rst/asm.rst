@@ -5,7 +5,7 @@ We've now used a couple of languages and gotten some meaningful output out of th
 
 In general, as we know, the CPU executes instructions, one after the other. If we program in a language such as C, our compiler typically takes our code and turns it into a listing of CPU instructions.
 
-What's new is that you can ask the compiler to output the *assembly code* into a file for inspection. Let's do just that. In the chapter "C and the stack", we had an example program:
+What's new is that you can ask the compiler to output the *assembly code* into a file for inspection. Let's do just that. In the section "C and the stack", we had an example program:
 
 .. literalinclude:: ../material/stack/st1.c
    :language: c

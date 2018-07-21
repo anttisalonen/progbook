@@ -1,7 +1,7 @@
 Callbacks and anonymous functions
 ---------------------------------
 
-This chapter explains some concepts that will be needed later.
+This section explains some concepts that will be needed later.
 
 Functions as first order values
 ===============================
@@ -49,7 +49,7 @@ What happens here is that we define a function called "my_callback" which return
 Sorting in C
 ~~~~~~~~~~~~
 
-In the chapter "Big O notation" we touched upon sorting in C using the built in "qsort" function. Here's the code again:
+In the section "Big O notation" we touched upon sorting in C using the built in "qsort" function. Here's the code again:
 
   .. literalinclude:: ../material/o_not/qsort.c
      :language: c

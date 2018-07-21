@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>3.4.10. Monolithic way - merging and putting it all together &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>3.4.10. Monolithic way - merging and putting it all together &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="bus3.html" title="3.4.9. Monolithic way - scheduled arrivals and GPS data"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="design_index.html" accesskey="U">3.4. Larger software</a> &#187;</li> 
       </ul>
@@ -158,7 +158,7 @@
 </div>
 <div class="section" id="displaying-the-labels">
 <h2>3.4.10.2. Displaying the labels<a class="headerlink" href="#displaying-the-labels" title="Permalink to this headline">¶</a></h2>
-<p>As part of our chapters around SDL we put together a program that will display the labels as required, and take a filename as input which must contain the labels to be displayed. While we could generate such a file in our C++ program and then call that program, the cleaner way seems to be to call the existing code directly.</p>
+<p>As part of our sections around SDL we put together a program that will display the labels as required, and take a filename as input which must contain the labels to be displayed. While we could generate such a file in our C++ program and then call that program, the cleaner way seems to be to call the existing code directly.</p>
 <p>What we need to do for this is:</p>
 <ul class="simple">
 <li>Refactor the existing code to allow our class that previously took the file name in the constructor and then read in the contents to have another constructor which takes an std::array&lt;std::string, 23&gt; as a parameter instead and uses the contents of that array directly</li>
@@ -298,7 +298,7 @@ $ ld -L/usr/lib -lSDL2 -lSDL2_ttf -o hello file1.o file2.o
         <li class="right" >
           <a href="bus3.html" title="3.4.9. Monolithic way - scheduled arrivals and GPS data"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch3_index.html" >3. Stage 1.5</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="design_index.html" >3.4. Larger software</a> &#187;</li> 
       </ul>

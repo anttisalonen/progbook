@@ -1,7 +1,7 @@
 Gluing AJAX and Redis together
 ------------------------------
 
-After the exercises in the previous chapter we're starting to have some pieces we can put together. Let's start with a couple more exercises.
+After the exercises in the previous section we're starting to have some pieces we can put together. Let's start with a couple more exercises.
 
 *Exercise*: Modify your guessing game such that when the number was guessed correctly, send the number of guesses to the server in JSON.
 
@@ -47,4 +47,4 @@ Here are some hints:
 * If you need to purge the database, call r.flushdb(). This will erase all data in the database.
 * You may want to write a small script or a URL handler to check the contents of the database to ensure you're adding the correct data. You may alternatively want to use the Redis command line interface for this.
 
-We should now be able to store something resembling a high score list in a database, but we're still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapters.
+We should now be able to store something resembling a high score list in a database, but we're still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next sections.

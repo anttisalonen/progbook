@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2.9.4. Gluing AJAX and Redis together &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>2.9.4. Gluing AJAX and Redis together &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="ajax.html" title="2.9.3. AJAX"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="int_web_index.html" accesskey="U">2.9. A bit more web development</a> &#187;</li> 
       </ul>
@@ -77,7 +77,7 @@
             
   <div class="section" id="gluing-ajax-and-redis-together">
 <h1>2.9.4. Gluing AJAX and Redis together<a class="headerlink" href="#gluing-ajax-and-redis-together" title="Permalink to this headline">¶</a></h1>
-<p>After the exercises in the previous chapter we’re starting to have some pieces we can put together. Let’s start with a couple more exercises.</p>
+<p>After the exercises in the previous section we’re starting to have some pieces we can put together. Let’s start with a couple more exercises.</p>
 <p><em>Exercise</em>: Modify your guessing game such that when the number was guessed correctly, send the number of guesses to the server in JSON.</p>
 <p><em>Exercise</em>: Connect to the Redis server in your Python module. Note that the code in the Python module will be executed automatically when you start Flask. This means you can connect to the Redis server in your top level Python code, without having to define a function for this.</p>
 <p>Now, let’s see if we can store the number of guesses in the Redis database. Here’s something to get you started:</p>
@@ -121,7 +121,7 @@
 <li>If you need to purge the database, call r.flushdb(). This will erase all data in the database.</li>
 <li>You may want to write a small script or a URL handler to check the contents of the database to ensure you’re adding the correct data. You may alternatively want to use the Redis command line interface for this.</li>
 </ul>
-<p>We should now be able to store something resembling a high score list in a database, but we’re still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next chapters.</p>
+<p>We should now be able to store something resembling a high score list in a database, but we’re still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next sections.</p>
 </div>
 
 
@@ -142,7 +142,7 @@
         <li class="right" >
           <a href="ajax.html" title="2.9.3. AJAX"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch2_index.html" >2. Stage 1</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="int_web_index.html" >2.9. A bit more web development</a> &#187;</li> 
       </ul>

@@ -74,9 +74,9 @@ In C++, the syntax for declaring a class is the following:
 .. code-block:: cpp
     :linenos:
 
-    class MyClass {
+    class Counter {
         public:
-            MyClass(int my_value); // constructor
+            Counter(int my_value); // constructor
             int get_value() const; // getter function
             void increment();
 
@@ -99,25 +99,25 @@ Now, the above defines the interface for the class as well as its (hidden) data.
 .. code-block:: cpp
     :linenos:
 
-    MyClass::MyClass(int my_value)
+    Counter::Counter(int my_value)
          : value(my_value)
     {
     }
 
-    int MyClass::get_value() const
+    int Counter::get_value() const
     {
         return value;
     }
 
-    void MyClass::increment()
+    void Counter::increment()
     {
         value++;
     }
 
 In other words:
 
-* Line 1-4: We define the constructor. We first copy-paste the declaration and add "MyClass::" in front of the function name. Second line demonstrates the syntax for initialising internal variables. The function body itself is empty.
-* Line 6-9: We define the function "get_value". We again copy-paste the declaration and add "MyClass::" in front of the function name. Instead of a semicolon at the end we have the function body. It's very simple in this case, returning an integer containing the value of the variable "value".
+* Line 1-4: We define the constructor. We first copy-paste the declaration and add "Counter::" in front of the function name. Second line demonstrates the syntax for initialising internal variables. The function body itself is empty.
+* Line 6-9: We define the function "get_value". We again copy-paste the declaration and add "Counter::" in front of the function name. Instead of a semicolon at the end we have the function body. It's very simple in this case, returning an integer containing the value of the variable "value".
 * Line 11-15: We define the function "increment" which simply increments "value" by one.
 
 If we wanted to use this class, we could e.g. do the following:
@@ -127,11 +127,11 @@ If we wanted to use this class, we could e.g. do the following:
 
     int main()
     {
-        MyClass a(3);
+        Counter a(3);
         a.increment();
         std::cout << a.get_value() << "\n";
 
-        Myclass b(12);
+        Counter b(12);
         std::cout << b.get_value() << "\n";
         return 0;
     }

@@ -1,17 +1,6 @@
 A bit more web development
 ==========================
 
-.. toctree::
-   :maxdepth: 1
-
-   html_tables
-   redis
-   ajax
-   redis_ajax_glue
-   guess_start
-   hiscore_table
-   web_tips
-
 In this section we'll turn our guessing game from a single HTML page to a simple web app.
 
 We'll start by adding some logic to gain some more experience in JS, and then learn about the following topics:
@@ -38,6 +27,19 @@ What we'll end up is a two-page guessing game as well as a simple algorithm to p
 | 5        | 2018-02-14 22:00:51.128031 | ai   | 8       |
 +----------+----------------------------+------+---------+
 
-It doesn't sound like much but includes lots of software development fundamentals.
+It doesn't sound like much but includes some software development fundamentals.
 
-Again, this book does *not* cover modern web development practices. However, the following chapters will help the reader understand some concepts related to web development such as the difference around frontend and backend and using a database in the backend.
+Again, this book does *not* cover modern web development practices. However, the following sections will help the reader understand some concepts related to web development such as the difference around frontend and backend and using a database in the backend.
+
+.. toctree::
+   :maxdepth: 1
+
+   html_tables
+   redis
+   ajax
+   redis_ajax_glue
+   guess_start
+   hiscore_table
+   web_tips
+
+

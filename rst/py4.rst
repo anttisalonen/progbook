@@ -15,7 +15,7 @@ Here's an example graph:
 
 .. image:: ../material/dot/dependencies2.png
 
-It's a graph showing the dependencies between the toplevel chapters of this book. For example, the chapter "Unix shell" has "Introduction" as its dependency.
+It's a graph showing the dependencies between the chapters of this book. For example, the chapter "Unix shell" has "Introduction" as its dependency.
 
 (Apart from describing dependencies between chapters, graphs can be used for describing other kinds of dependencies like in a supply chain. They can also be used to describe other relationships like distances or routes between places, relationships between people etc.)
 

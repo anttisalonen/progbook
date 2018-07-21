@@ -7,7 +7,7 @@ Functional programming
 
 The programming languages we've used so far are all *imperative*; they're based on the mental model of a computer executing instructions in a series, from a list, from the top, one by one. This is furthermore based on the mathematical model of a *Turing machine*, described by Alan Turing; a machine that points to an element on a memory tape and has instructions to move on the tape and modify elements on it.
 
-There are several programming paradigms other than imperative, but one of interest for us is *functional programming*. We won't go to details and actually program in a functional programming language in this book, but there are some aspects you should know about. (Again, as this chapter is about different programming languages, several programmers will disagree with the contents.)
+There are several programming paradigms other than imperative, but one of interest for us is *functional programming*. We won't go to details and actually program in a functional programming language in this book, but there are some aspects you should know about. (Again, as this section is about different programming languages, several programmers will disagree with the contents.)
 
 Functional programming is based on *lambda calculus*, a formal system described by Alonzo Church in the 1930s. It was later hypothesised that the work by Turing and Church is actually equivalent; that is, a Turing machine can be formally translated to lambda calculus and vice versa.
 
@@ -40,7 +40,7 @@ Fortran was originally mainly used when entering code to computers using punch c
 
 There's been a trend since the 1960's and continuing that mainstream (imperative) languages are slowly adopting features that Lisp and functional programming in general have pioneered. This is mostly because there are less limitations around computer hardware, and the focus is shifting to increasing programmer productivity and ergonomics. Indeed Python and Javascript as well as several other languages such as Java have incorporated one or more of the above list either as best practices, or as integral parts of the language.
 
-This chapter is mostly concerned with providing examples around best practices in Python which can often be applied for other languages as well, as a means to reduce the number of bugs, reduce typing, and make code easier to understand.
+This section is mostly concerned with providing examples around best practices in Python which can often be applied for other languages as well, as a means to reduce the number of bugs, reduce typing, and make code easier to understand.
 
 Map and reduce
 ==============

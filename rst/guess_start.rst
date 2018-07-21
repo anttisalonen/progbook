@@ -56,9 +56,9 @@ HTML forms are a fairly simple way to get simple data from a user. Here's an exa
         </body> 
     </html> 
 
-* Line 4: We define the form. It has two attributes: *action* and *method*. Action tells the browser which page should be fetched when the form was submitted. Method tells the browser whether it should GET or POST.
-* Line 5: We create a text box with a default value ("User") and name ("user"), the contents of which will be sent to the server. As GET will be used, they will be sent in the URL.
-* Line 6: We use the <input> tag to define the button pressing which will submit the form.
+* Line 8: We define the form. It has two attributes: *action* and *method*. Action tells the browser which page should be fetched when the form was submitted. Method tells the browser whether it should GET or POST.
+* Line 9: We create a text box with a default value ("User") and name ("user"), the contents of which will be sent to the server. As GET will be used, they will be sent in the URL.
+* Line 10: We use the <input> tag to define the button pressing which will submit the form.
 
 *Exercise*: Add this HTML to your templates directory. Add a text box such that the user can also input the maximum number.
 
@@ -116,5 +116,5 @@ There's one more step we need to do before the correct data is added in the data
 
 *Exercise*: Modify your data insertion code such that the key is the maximum number, and the value JSON includes the user name.
 
-Now we should have almost everything in place, except the user doesn't have visibility over previous scores. Let's fix this in the next chapter.
+Now we should have almost everything in place, except the user doesn't have visibility over previous scores. Let's fix this in the next section.
 

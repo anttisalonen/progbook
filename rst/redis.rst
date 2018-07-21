@@ -83,7 +83,7 @@ As per the documentation, once the compilation is done, you can then start the R
 
 Redis should now be running and accepting TCP/IP connections. You can leave it running as we try to connect to it using Python.
 
-*Exercise*: Download, compile and start Redis.
+*Exercise*: Download, compile and start Redis. Feel free to take a look at the code while you're at it.
 
 Python Redis client
 ===================

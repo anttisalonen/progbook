@@ -5,20 +5,20 @@ The basics of programming
 
   -- Vint Cerf
 
-It's debatable what the basics of programming are. This chapter presents the author's view and will cover:
+It's debatable what the basics of programming are. This section presents the author's view and will cover:
 
 * Variables
 * Loops
 * Branches
 * Functions
 
-We already have a Python programming environment so we'll continue using that. This chapter will include some code examples. The reader is expected to type these into a file, and then run the Python interpreter with that file as input. For example:
+We already have a Python programming environment so we'll continue using that. This section will include some code examples. The reader is expected to type these into a file, and then run the Python interpreter with that file as input. For example:
 
 .. code-block:: python
 
     print('Hello world')
 
-This is the program we wrote a couple of chapters ago. Make sure you still know how to create and write such a program.
+This is the program we wrote a couple of sections ago. Make sure you still know how to create and write such a program.
 
 *Exercise*: Run your 'Hello world' program.
 
@@ -350,5 +350,5 @@ We now have enough in our toolbox to write *FizzBuzz*: FizzBuzz is originally a 
 
 *Exercise*: Write a program that produces the correct output, for numbers from 1 to 100.
 
-If you succeeded in all the exercises of this chapter, congratulations! Not all software engineering applicants are able to write the code to solve FizzBuzz.
+If you succeeded in all the exercises of this section, congratulations! Not all software engineering applicants are able to write the code to solve FizzBuzz.
 

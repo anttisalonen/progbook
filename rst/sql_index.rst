@@ -1,15 +1,6 @@
 SQL and its relationship with online shops
 ==========================================
 
-.. toctree::
-   :maxdepth: 1
-
-   webshop
-   shop2
-   shop3
-   shop4
-   shop5
-
 If you've ever shopped for clothes online, you may be familiar with the return form for returning products you don't want to have: you order something, decide for whatever reason you don't want to keep some products, and, along with some piece of paper, send the products you don't want back. The piece of paper may either be a form you fill out yourself or something you receive pre-filled from the online shop and print yourself.
 
 In this section we'll assume the role of an online clothing shop and write some code to generate that return form in PDF format. Our business works like this:
@@ -33,4 +24,14 @@ From technical point of view, in this section we'll learn about the following:
 * Displaying database contents, filling forms and sending PDFs using Flask (again - but this time without Javascript)
 
 The whole thing will end up at about 300-400 lines of Python, with a good chunk of it being SQL statements.
+
+.. toctree::
+   :maxdepth: 1
+
+   webshop
+   shop2
+   shop3
+   shop4
+   shop5
+
 

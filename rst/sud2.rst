@@ -30,6 +30,10 @@ Most of this is possibly rather self explanatory, but it seems two pieces of cod
 * Erasing an element in a vector; this is the so-called *erase-remove* idiom which is the (admittedly clunky) way in C++ to remove an element from a vector. It uses std::remove(), a generic function in the C++ standard template library (STL) which takes *iterators* as parameters, which are provided by the standard containers in C++ for iterating over the containers and conceptually are pointers pointing to an element. This is passed to vec.erase() which will then remove the element from the vector. E.g. the first element in a vector or a set can be accessed using "\*vec.begin()".
 * In the for loops, we use the construct "const auto &v". This means "v should be a reference to a constant variable of automatically inferred type". What referencing ("&") means in practice is that we don't copy the data, possibly saving some CPU cycles. What "const" means is that we promise not to modify the data within the container. Overall this means we simply want to read the contents. If we wanted to, say, modify the element then we should remove "const". If we wanted to construct a copy of the element (e.g. for modifying it but without modifying the element in the container) then we should remove the "&".
 
+.. topic:: So what is this "reference"?
+
+  In C++, a reference ("&") to a variable is semantically almost the same as a pointer. The main semantic difference is that a NULL reference isn't allowed while a NULL pointer is. Also, while pointer arithmetic is allowed, "reference arithmetic" is not. Apart from this, a reference is a syntactic shortcut: you don't need to use the address-of operator when passing a reference of a variable to a function, and you don't need to dereference the pointer using "\*" when using the variable.
+
 Cell class
 ==========
 

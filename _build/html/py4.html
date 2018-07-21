@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>4.1.1. Graphs &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>4.1.1. Graphs &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="py4_index.html" title="4.1. A fistful of Python exercises"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="py4_index.html" accesskey="U">4.1. A fistful of Python exercises</a> &#187;</li> 
       </ul>
@@ -99,7 +99,7 @@
 <p>As with the other topics in this book, we only treat graphs in a shallow way. Namely to solve a very precise problem.</p>
 <p>Here’s an example graph:</p>
 <img alt="_images/dependencies21.png" src="_images/dependencies21.png" />
-<p>It’s a graph showing the dependencies between the toplevel chapters of this book. For example, the chapter “Unix shell” has “Introduction” as its dependency.</p>
+<p>It’s a graph showing the dependencies between the chapters of this book. For example, the chapter “Unix shell” has “Introduction” as its dependency.</p>
 <p>(Apart from describing dependencies between chapters, graphs can be used for describing other kinds of dependencies like in a supply chain. They can also be used to describe other relationships like distances or routes between places, relationships between people etc.)</p>
 <p>Now, here’s the problem with this graph: it has too many edges. You see, the code that creates the edges for this graph isn’t very smart, so it includes some edges that strictly speaking don’t need to be there. For example, you see the edge from “Introduction” to “Javascript”? As “Javascript” already depends on “Unix shell” which depends on “Introduction”, there’s no need to have an edge from “Introduction” to “Javascript”. This edge can and should be removed.</p>
 <p>We have two parts to this problem: one is finding the algorithm that does what we want it to do, i.e. remove the edges, and the other is putting this algorithm into use to actually generate a graph with unnecessary edges removed.</p>
@@ -322,7 +322,7 @@
         <li class="right" >
           <a href="py4_index.html" title="4.1. A fistful of Python exercises"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch4_index.html" >4. Stage 2</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="py4_index.html" >4.1. A fistful of Python exercises</a> &#187;</li> 
       </ul>

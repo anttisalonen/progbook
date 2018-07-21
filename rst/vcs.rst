@@ -187,42 +187,6 @@ If we wanted to get our changes back, we can, because we noted the commit hash:
     print 'hello world'
     print 'hello world'
 
-Staging area
-============
-
-If you're about to commit changes to git, but want to review the changes before, this is possible too. First, mark the changes you want to add with "git add":
-
-.. code-block:: bash
-
-    $ git add hello.py
-
-You can then run "git diff --cached" to see the changes that are in the *staging area*, i.e. marked to be committed:
-
-.. code-block:: bash
-
-    $ git diff --cached
-    diff --git a/hello.py b/hello.py
-    index 01283b8..4c80684 100644
-    --- a/hello.py
-    +++ b/hello.py
-    @@ -1,2 +1,3 @@
-     print 'hello world'
-     print 'hello world'
-    +print 'hello world'
-
-You can also check the status to get an overview of the files about to be committed:
-
-.. code-block:: bash
-
-    $ git status
-    On branch master
-    Changes to be committed:
-      (use "git reset HEAD <file>..." to unstage)
-
-    	modified:   hello.py
-
-Note that git also helpfully provides some tips about which commands to run.
-
 This was a very short introduction to git. There will be more covered in this book later; you can also check the built in documentation for git by running "git --help" or the help for specific commands, for example "git status --help".
 
 *Exercise*: Create a git repository and repeat the above commands yourself.

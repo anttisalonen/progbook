@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>1.3.3. Version control &#8212; Software Development: A Pragmatic Approach 0.1 documentation</title>
+    <title>1.3.3. Version control &#8212; Learn Programming 0.1</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="unix2.html" title="1.3.2. Unix shell scripting"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="unix_index.html" accesskey="U">1.3. Unix shell</a> &#187;</li> 
       </ul>
@@ -48,7 +48,6 @@
 <li><a class="reference internal" href="#creating-a-git-repository">1.3.3.1. Creating a git repository</a></li>
 <li><a class="reference internal" href="#further-commits">1.3.3.2. Further commits</a></li>
 <li><a class="reference internal" href="#git-reset">1.3.3.3. git reset</a></li>
-<li><a class="reference internal" href="#staging-area">1.3.3.4. Staging area</a></li>
 </ul>
 </li>
 </ul>
@@ -229,35 +228,6 @@ print <span class="s1">&#39;hello world&#39;</span>
 print <span class="s1">&#39;hello world&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="staging-area">
-<h2>1.3.3.4. Staging area<a class="headerlink" href="#staging-area" title="Permalink to this headline">¶</a></h2>
-<p>If you’re about to commit changes to git, but want to review the changes before, this is possible too. First, mark the changes you want to add with “git add”:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git add hello.py
-</pre></div>
-</div>
-<p>You can then run “git diff –cached” to see the changes that are in the <em>staging area</em>, i.e. marked to be committed:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git diff --cached
-diff --git a/hello.py b/hello.py
-index 01283b8..4c80684 <span class="m">100644</span>
---- a/hello.py
-+++ b/hello.py
-@@ -1,2 +1,3 @@
- print <span class="s1">&#39;hello world&#39;</span>
- print <span class="s1">&#39;hello world&#39;</span>
-+print <span class="s1">&#39;hello world&#39;</span>
-</pre></div>
-</div>
-<p>You can also check the status to get an overview of the files about to be committed:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git status
-On branch master
-Changes to be committed:
-  <span class="o">(</span>use <span class="s2">&quot;git reset HEAD &lt;file&gt;...&quot;</span> to unstage<span class="o">)</span>
-
-    modified:   hello.py
-</pre></div>
-</div>
-<p>Note that git also helpfully provides some tips about which commands to run.</p>
 <p>This was a very short introduction to git. There will be more covered in this book later; you can also check the built in documentation for git by running “git –help” or the help for specific commands, for example “git status –help”.</p>
 <p><em>Exercise</em>: Create a git repository and repeat the above commands yourself.</p>
 <p><em>Exercise</em>: Use git to version control all your previous and future software development projects.</p>
@@ -282,7 +252,7 @@ Changes to be committed:
         <li class="right" >
           <a href="unix2.html" title="1.3.2. Unix shell scripting"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Software Development: A Pragmatic Approach 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Learn Programming 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="ch1_index.html" >1. The beginning</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="unix_index.html" >1.3. Unix shell</a> &#187;</li> 
       </ul>

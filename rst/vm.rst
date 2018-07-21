@@ -1,7 +1,7 @@
 Virtual machines
 ----------------
 
-In the previous chapter we discussed the assembly language. Many languages, including C and C++, are typically compiled to a machine specific assembly code before the program can be executed. Which prompts the question, what do other languages do.
+In the previous section we discussed the assembly language. Many languages, including C and C++, are typically compiled to a machine specific assembly code before the program can be executed. Which prompts the question, what do other languages do.
 
 Python
 ======

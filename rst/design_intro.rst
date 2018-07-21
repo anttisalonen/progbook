@@ -24,7 +24,7 @@ In this chapter we'll build software from scratch to address a very specific use
 
 This is a problem that could potentially require a fairly large amount of software; in our case, as we'll cut some corners, we'll end up with relatively little code. However, it's enough to introduce the general steps of software development and software design.
 
-Specifically, we'll start with having the requirements well captured in advance, which often is not the case. We'll go through breaking down the problem space, and discuss two different ways to actually implement such a software. We'll end up with two implementations for this problem, which sum up to a total of around 600 lines of C++ and 200 lines of Python. The reader will get to write these two implementations as well. The author used about seven hours for the two implementations; the reader should ideally be able to finish them in 40 hours.
+Specifically, we'll start with having the requirements well captured in advance, which often is not the case. We'll go through breaking down the problem space, and discuss two different ways to actually implement such a software. We'll end up with two implementations for this problem, which sum up to a total of around 600 lines of C++ and 200 lines of Python. The reader will get to write these two implementations as well. The reader should ideally be able to finish the two implementations in about 40 hours.
 
 Requirements
 ============
@@ -100,7 +100,7 @@ The following is the requirement specification for the software. It's written by
 
   ::
 
-   <integer representing the route number> <floating point number representing the time it took for the bus to reach the bus stop from this position> <the distance from the measurement position to the bus stop on the X axis (west-east axis) in meters> <the distance from the measurement position to the bus stop on the Y axis (north-south axis) in meters>
+   <integer representing the route number> <floating point number representing the time it took for the bus to reach the bus stop from this position in minutes> <the distance from the measurement position to the bus stop on the X axis (west-east axis) in meters> <the distance from the measurement position to the bus stop on the Y axis (north-south axis) in meters>
    e.g.:
    3 10.8713536724 -4003.3505052 -3998.10233076
    3 10.7045996484 -3943.15506994 -3938.06461792
@@ -155,6 +155,8 @@ The following is the requirement specification for the software. It's written by
 Sounds fun, doesn't it?
 
 We won't actually have the hardware to try this out so we'll have to simulate. We'll have a few input files to work with; for output we'll have to write something that displays the view matching the requirements on our development computer, and not need to worry about the actual hardware.
+
+I should note, the overall architecture as described or implied by the above requirements specification could be done differently. For example, the transporting company might not want the software on the bus stops to calculate the estimated bus arrival time; instead this could be done on the central server which would then provide the estimated arrival time to the bus stop software instead of providing the historical and current GPS data. However, this architecture makes for a somewhat more interesting software design problem.
 
 You can download the necessary input files for testing here:
 

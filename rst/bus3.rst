@@ -1,7 +1,7 @@
 Monolithic way - scheduled arrivals and GPS data
 ------------------------------------------------
 
-In the previous chapter we wrote the code to read in all the necessary data. Now let's use some of it.
+In the previous section we wrote the code to read in all the necessary data. Now let's use some of it.
 
 We want to write the logic that takes two things as input:
 

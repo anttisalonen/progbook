@@ -17,11 +17,11 @@ You might wonder, why have the Javascript code request data from the server at p
 Actually updating the high score table
 ======================================
 
-You may remember from the chapter how to call a Javascript function at page load. If not, the hint is that you assign the member function "onload" in the global object "window" as your callback function.
+You may remember from the section "Javascript meets algorithms" how to call a Javascript function at page load. If not, the hint is that you assign the member function "onload" in the global object "window" as your callback function.
 
 Let's install a function called update_hiscore() as the function that will be called at page load time, and implement it.
 
-First of all, we need to send an XMLHttpRequest to the server. We should use GET as we're only asking the server for some data. However we'll need to supply a parameter to the server, namely *which* high score table we want - as the high score table should be different based on the maximum number the computer can think of. As we've learnt, with GET we can only pass parameters as part of the URL, so let's do that. The URL should look something like "hiscore?max_value=25" - in this example, we'd fetch the page "hiscore" from the server, with "max_value" as the GET parameter, with 25 as its value.
+First of all, we need to send an XMLHttpRequest to the server. We should use GET as we're only asking the server for data. However we'll need to supply a parameter to the server, namely *which* high score table we want - as the high score table should be different based on the maximum number the computer can think of. As we've learnt, with GET we can only pass parameters as part of the URL, so let's do that. The URL should look something like "hiscore?max_value=25" - in this example, we'd fetch the page "hiscore" from the server, with "max_value" as the GET parameter, with 25 as its value.
 
 *Exercise*: Implement the update_hiscore() function. It should do nothing else but send an XMLHttpRequest to the server, asking for the high score data, for the maximum number that the user is currently using in his or her game. You can concatenate a number to a Javascript string with the '+' operator, e.g. "hiscore?max_value=" + my_variable. The handler for the data that is received from the server should do nothing else but call a function "display_hiscore()" (which we haven't defined yet), passing the response text to this function. For testing purposes you'll want to add a Flask handler for this URL, but for now it can return only a test string.
 
