@@ -237,7 +237,7 @@ Now, we already have a module in place for generating a PDF. If that file is in 
 
     import print_return # this assumes the file is called print_return.py
 
-    @app.route(...):
+    @app.route(...)
     def foo():
         pdf = print_return.generate_pdf(return_id)
         # do something with pdf

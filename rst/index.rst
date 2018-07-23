@@ -20,11 +20,13 @@ Learn Programming
    ch3_index
    ch4_index
 
-   ex_index
+.. only:: not latex
 
+   .. toctree::
+     ex_index
+
+.. toctree::
    dep
-
-
 
 Indices and tables
 ==================

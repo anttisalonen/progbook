@@ -149,13 +149,14 @@ latex_engine = 'xelatex'
 
 latex_elements = {
     'preamble': r'''
-\areaset[0.50in]{4.5in}{8in}
 \let\oldsection\section
 \renewcommand\section{\clearpage\oldsection}
+\renewcommand\sphinxurl{\sphinxnolinkurl}
+\pagestyle{headings} % include page numbers
 ''',
-    'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
+    'fncychap': r'\usepackage[Bjarne]{fncychap}',
     'printindex': r'\footnotesize\raggedright\printindex',
-    'papersize': r'paper=6in:9in,pagesize=pdftex,headinclude=on,footinclude=on',
+    'papersize': r'paper=7in:10in,pagesize=pdftex,headinclude=on,footinclude=on',
     'pointsize': r'12pt'
 }
 

@@ -162,7 +162,7 @@
 </pre></div>
 </div>
 <p>This function explicitly defines the input and output types as integers; using other types such as a string when calling this function will issue a compiler warning.</p>
-<p>If we were to define this function in Javascript, it would look like this;</p>
+<p>If we were to define this function in Javascript, it would look like this:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
 <span class="p">}</span>
@@ -183,26 +183,26 @@
 <span class="o">}</span>
 </pre></div>
 </div>
-<p>What if we called these functions with a number? A string? The following table summarises this:</p>
+<p>What if we called these functions with a number? A string? The following table summarises the results when passing different values to the function:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="10%" />
-<col width="27%" />
-<col width="28%" />
-<col width="35%" />
+<col width="15%" />
+<col width="15%" />
+<col width="19%" />
+<col width="52%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Language</th>
-<th class="head">Result when passing 5 (number)</th>
-<th class="head">Result when passing “5” (string)</th>
-<th class="head">Result when passing “abc” (string)</th>
+<th class="head">5 (number)</th>
+<th class="head">“5” (string)</th>
+<th class="head">“abc” (string)</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>C</td>
 <td>10</td>
-<td>garbage (undefined behaviour)</td>
-<td>garbage (undefined behaviour)</td>
+<td>garbage</td>
+<td>garbage</td>
 </tr>
 <tr class="row-odd"><td>Javascript</td>
 <td>10</td>

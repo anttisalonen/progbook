@@ -10,7 +10,7 @@ The book doesn't have any new information compared to what you can find online o
 
 It aims to contain an overview of almost everything that I think is important for software developers. It doesn't contain *everything*; but it should contain enough for the reader to understand software development, and to be able to read about and understand any topic in further detail as needed.
 
-The book focuses on learning what software development is about, and the core principles around software development. It uses several technologies to this goal (e.g. C, Python, Javascript, HTML, etc.) but is not a book about technologies themselves. The reader will learn the basics (or in some cases more) of various technologies along the way, but the focus is on building a foundation for software development.
+The book focuses on teaching what software development is about, and the core principles around software development. It uses several technologies to this goal (e.g. C, Python, Javascript, HTML, etc.) but is not a book about technologies themselves. The reader will learn the basics (or in some cases more) of various technologies along the way, but the focus is on building a foundation for software development.
 
 This book does have the aim of supporting interested people in pursuing a job in software development, though I obviously can't guarantee a job. I'll expand on this further below.
 

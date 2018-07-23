@@ -55,6 +55,7 @@ This file can be fed to the dot program, e.g. like this:
 As you can see, dot takes the output format as a parameter, can read dot files from stdin and output to stdout. The result could look like this:
 
 .. image:: ../material/dot/graph.png
+    :scale: 30
 
 (The edge from A to E is unnecessary.)
 
@@ -182,6 +183,7 @@ Graph traversal
 Let's take a look at the simpler graph from before again:
 
 .. image:: ../material/dot/graph.png
+    :scale: 30
 
 If we were to start our traversal from node A, the depth first traversal, which, as the name says, goes into depth when traversing, would traverse the nodes e.g. in the following order:
 

@@ -132,7 +132,7 @@
 </pre></div>
 </div>
 <p>As you can see, dot takes the output format as a parameter, can read dot files from stdin and output to stdout. The result could look like this:</p>
-<img alt="_images/graph.png" src="_images/graph.png" />
+<a class="reference internal image-reference" href="_images/graph.png"><img alt="_images/graph.png" src="_images/graph.png" style="width: 201.3px; height: 324.9px;" /></a>
 <p>(The edge from A to E is unnecessary.)</p>
 <p><em>Exercise</em>: Install the graphviz suite on your computer. Run the above dot command to make sure you have everything set up correctly. Bonus points if you compile it from source.</p>
 <p>As you can see, the dot language is fairly simple, at least in this case, and fairly intuitive.</p>
@@ -285,7 +285,7 @@
 <div class="section" id="graph-traversal">
 <h2>4.1.1.5. Graph traversal<a class="headerlink" href="#graph-traversal" title="Permalink to this headline">¶</a></h2>
 <p>Let’s take a look at the simpler graph from before again:</p>
-<img alt="_images/graph.png" src="_images/graph.png" />
+<a class="reference internal image-reference" href="_images/graph.png"><img alt="_images/graph.png" src="_images/graph.png" style="width: 201.3px; height: 324.9px;" /></a>
 <p>If we were to start our traversal from node A, the depth first traversal, which, as the name says, goes into depth when traversing, would traverse the nodes e.g. in the following order:</p>
 <p>A -&gt; B -&gt; D -&gt; E -&gt; C</p>
 <p>This is because depth first traversal traverses along the edges of the last visited node first. In other words, depth first traversal maintains a <em>stack</em>, such that any edges from newly visited nodes are added at the top of the stack.</p>

@@ -62,7 +62,7 @@ If we were to define this function in C, it could look for example like this:
 
 This function explicitly defines the input and output types as integers; using other types such as a string when calling this function will issue a compiler warning.
 
-If we were to define this function in Javascript, it would look like this;
+If we were to define this function in Javascript, it would look like this:
 
 .. code-block:: javascript
 
@@ -91,21 +91,21 @@ Or in Java:
         return 2 * x;
     }
 
-What if we called these functions with a number? A string? The following table summarises this:
+What if we called these functions with a number? A string? The following table summarises the results when passing different values to the function:
 
-+------------+--------------------------------+----------------------------------+------------------------------------------+
-| Language   | Result when passing 5 (number) | Result when passing "5" (string) | Result when passing "abc" (string)       |
-+============+================================+==================================+==========================================+
-| C          | 10                             | garbage (undefined behaviour)    | garbage (undefined behaviour)            |
-+------------+--------------------------------+----------------------------------+------------------------------------------+
-| Javascript | 10                             | 10                               | NaN (a string indicating "not a number") |
-+------------+--------------------------------+----------------------------------+------------------------------------------+
-| Python     | 10                             | "55"                             | "abcabc"                                 |
-+------------+--------------------------------+----------------------------------+------------------------------------------+
-| Java       | 10                             | Compile error                    | Compile error                            |
-+------------+--------------------------------+----------------------------------+------------------------------------------+
-| Haskell    | 10                             | Compile error                    | Compile error                            |
-+------------+--------------------------------+----------------------------------+------------------------------------------+
++------------+------------+---------------+------------------------------------------+
+| Language   | 5 (number) | "5" (string)  | "abc" (string)                           |
++============+============+===============+==========================================+
+| C          | 10         | garbage       | garbage                                  |
++------------+------------+---------------+------------------------------------------+
+| Javascript | 10         | 10            | NaN (a string indicating "not a number") |
++------------+------------+---------------+------------------------------------------+
+| Python     | 10         | "55"          | "abcabc"                                 |
++------------+------------+---------------+------------------------------------------+
+| Java       | 10         | Compile error | Compile error                            |
++------------+------------+---------------+------------------------------------------+
+| Haskell    | 10         | Compile error | Compile error                            |
++------------+------------+---------------+------------------------------------------+
 
 We see the result makes sense when inputting a number for all languages. When inputting "5" as string, C interprets this as a pointer and undefined behaviour ensues. Javascript implicitly converts the string to a number, which works when the string is indeed a number but returns "NaN" otherwise. When passing a string to the function in Python, Python interprets the multiplication as a multiplication of the string, hence duplicating the string. Haskell and Java refuse to work with the string input.
 

@@ -32,6 +32,7 @@ Here, the inputs are labeled 'A' and 'B'. The output is labeled 'X'. The output 
 The logic gates can be shown in a diagram as well. Here's what the AND-gate would look like in a diagram:
 
 .. image:: ../material/intro/and.png
+    :scale: 30
 
 Here, the input signals would enter from the left while the output signal would exit to the right.
 
@@ -52,6 +53,7 @@ Another standard logic gate is the *OR-gate*. It has the following truth table:
 The OR-gate outputs 1 when either A or B, or both, have 1. In a diagram it would look like this:
 
 .. image:: ../material/intro/or.png
+    :scale: 30
 
 There's also the *NOT-gate*. It has only one input and one output:
 
@@ -66,6 +68,7 @@ There's also the *NOT-gate*. It has only one input and one output:
 It *negates* its input and, in a diagram, would look like this:
 
 .. image:: ../material/intro/not.png
+    :scale: 30
 
 These gates are enough to build complex digital devices including computers (though several million of them may be necessary).
 
@@ -86,6 +89,7 @@ Let's say we wanted to put together a circuit with the following truth table:
 That is, it's almost like the OR-gate but if both A and B are 1 then we output 0. (This is also called *XOR-gate*, or exclusive-or.) We could build this circuit by combining what we already have:
 
 .. image:: ../material/intro/xor.png
+    :scale: 30
 
 Let's see what we have here:
 
@@ -138,6 +142,7 @@ We could then arrive at the final sum by calculating "output is 2" \* 2 + "sum".
 This circuit could be designed e.g. like this:
 
 .. image:: ../material/intro/add2.png
+    :scale: 30
 
 The top gate is a XOR-gate. Hence the "sum" output is A and B XOR'd while the "output is 2" output is A and B AND'd.
 
