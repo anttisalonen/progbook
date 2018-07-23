@@ -1,0 +1,7 @@
+digraph req {
+    entry [image="entry.png", label="" shape=box];
+    play [image="play.png", label="" shape=box];
+    finish [image="finish.png", label="" shape=box];
+    entry -> play [label="User enters information"];
+    play -> finish [label="User guesses correctly; high score list is updated"];
+}

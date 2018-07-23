@@ -1,6 +1,8 @@
 HTML tables
 -----------
 
+In our program, we'll need an HTML table which we'll use to show the high score list to the user.
+
 HTML tables are a fairly straightforward concept. Here's one:
 
 .. code-block:: html

@@ -3,18 +3,7 @@ AJAX
 
 AJAX stands for Asynchronous Javascript and XmlHttpRequest which is quite a mouthful. Before we go through what it is, let's explain why we need it.
 
-Remember that what we wanted to do was have a high score list for our guessing game. We have the following constraints:
-
-* The client (browser) displays HTML and executes JavaScript
-* The server has direct access to the database while the client does not
-
-These constraints imply the following:
-
-* Once the user has guessed the correct number, as we want to store this in the database, the client will need to send this information to the server
-* In order to update the high score table on the page, the server will need to send the information about the high score list to the client
-* The above should happen without having to refresh or reload the page
-
-From a high level software architecture point of view, then, this is how the flow is expected to work:
+From a high level software architecture point of view, this is how the flow is expected to work:
 
 1. User opens the relevant URL in his or her browser and has some means to enter his or her name on the page
 2. Our web server serves the HTML and Javascript that is our guessing game
@@ -27,10 +16,6 @@ From a high level software architecture point of view, then, this is how the flo
 Seems simple, doesn't it?
 
 Apart from entering the name, we've already covered steps 1-3 and to some extent step 5. In this section we'll cover steps 4 and 6. They're basically what AJAX is about.
-
-Before we get to AJAX in detail, you might have noticed that we talk about server and client here, however if we simply load our HTML guessing game in the browser there is no server, only client. This means that we will have to pull up Flask, our web microframework again, as it has the capability of running a web server which we need going forwards.
-
-*Exercise*: Move your guessing game HTML to be served by Flask. To do this, as per Flask documentation, you need to 1) create a directory named "templates" and move your HTML file there; 2) Set up a Flask "hello world" program such that there's a URL which serves your HTML file (using render_template()); and 3) Start Flask and try it out to ensure everything is set up correctly.
 
 A note on security: As we've seen, we're not really in control of the Javascript code - a user can replace the Javascript code with whatever code they prefer. In this sense, were we to use this architecture in a real program, a user could easily replace the data sent to the server and fake their way to the top of the high score list. For educational purposes we assume we can trust the user in this case, but were one serious about such a game and offering it for the public, the game logic would have to be done on the server side, such that the correct number would be generated on the server and each guess would need to be sent to the server.
 
@@ -115,7 +100,7 @@ Let's try this out ourselves.
 *Exercise*: Implement the above AJAX request. You'll need the following:
 
 1) Create a new HTML file which has nothing but a button which calls a Javascript function (<input type="button" onclick="my_function()" value="Button to GET data">), and a Javascript function which does nothing more but the code from the block above.
-2) Add a function in your Python code to serve the above HTML page using Flask (render_template()).
+2) Add a function in your Python code to serve this new HTML page using Flask (render_template()).
 3) Add another function in your Python code to serve the URL that the AJAX request will request. In the example above, that URL is "file.html". Note that the URL doesn't need to have a file extension. That function should return a string, like "Hello world!"
 4) Run your Python code using Flask. Navigate to the HTML page that has the button. Open the Javascript console in the browser developer menu. Click the button. You should see the text from the Python server code in the console.
 
@@ -149,9 +134,23 @@ This looks very similar to the GET request above. The differences are:
 * Line 8: We have a new function call, namely setRequestHeader(). This sets the type of data we're sending to JSON. We need this so that the server can handle the incoming data properly.
 * Line 9: We include the data we wish to send as a parameter to send(). We use JSON.stringify to convert JSON to a string. The server will need to parse the JSON when receiving the data.
 
-*Exercise*: Add the above POST request in your HTML page. The server should return the same JSON data back but with the number multiplied by 2, e.g. if the client sends "{'my_number': 42}" to the server then the server should send back "{'my_number': 84}". Here are some hints to get you started:
+Once the client POSTs some new data to the server, how can the server use it? The following illustrates some concepts:
 
-* In your @app.route Python decorator, you need to explicitly tell Flask you're expecing POST requests. You can do this by defining the decorator e.g. like the following: @app.route("/post_test/", methods=['POST'])
-* In your function handling the POST request, Flask allows you to access the incoming JSON data by the request.get_json() function: data = request.get_json(). This will automatically parse the JSON data, returning a Python dictionary or a list, depending on the JSON.
-* You can use json.dumps() to serialise the JSON data in Python to string to be returned from your function, causing the data to be sent to the client.
+.. code-block:: python
+    :linenos:
+
+    @app.route("/guess/finished", methods=['POST'])
+    def finished():
+        data = request.get_json()
+        print data['my_number'] # prints the number
+        return json.dumps(data)
+
+This introduces a few new concepts:
+
+* Line 1: We want the URL /guess/finished to handle POST requests. We need to tell this to Flask explicitly by using the "methods" optional parameter in the @app.route decorator.
+* Line 3: As per Flask documentation, Flask provides the globally accessible object called "request" which includes all data associated with the request. More specifically, it allows us to access the POST data the user sent. If the user sent JSON, it's available to us using the get_json() member function.
+* Line 4: As the JSON data has been parsed by the get_json() function, it's available to us in Python dictionary form.
+* Line 5: We use the json.dumps() function to convert the dictionary to a string. We'll then return this string to the client which will be available in the xhr.responseText variable. (We need to import json first.)
+
+*Exercise*: Add the above POST request in your HTML page, and the code in your server side to handle the incoming data. The server should return the same JSON data back but with the number multiplied by 2, e.g. if the client sends "{'my_number': 42}" to the server then the server should send back "{'my_number': 84}".
 

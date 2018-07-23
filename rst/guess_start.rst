@@ -9,28 +9,30 @@ How could we go about this? Let's define the use case first:
 2. In the guessing game page, the maximum number the computer will think of will need to be determined by what the user entered.
 3. Once the user has guessed the correct number, the user name and the maximum number will be stored alongside the number of guesses in the database.
 
-What are the challenges around implementing this? It's often helpful to think about the interfaces, i.e. data exchanges between different components, including pages as well as the server and the client.
+What are the challenges around implementing this? It's often helpful to think about the interfaces, i.e. data exchanges between different components, including pages as well as the server and the client. We should also note that we need a mechanism to transfer the data (user name and maximum number) from the first page to the second. One way to do this is to encode the relevant information in the URL by using the *query string*. This means that the URL for the guessing game could look e.g. like this:
 
-* The "start new game" page will have to transfer the user name and the maximum number to the actual guessing game page.
+"http://127.0.0.1:8081/guess/?user=Antti&max_value=25"
 
-  * We should GET the guessing game page as opposed to POST, as we're not changing the server state. This implies the parameters from the user will need to be transferred in the URL when loading the guessing game page.
+Here, the part after the question mark ("?") is the query string. It has two parameters, namely "user" and "max_value" with values "Antti" and "25" respectively. *HTML forms* can be used to generate the query string.
 
-* The guessing game page will have to read in and use this information.
+Once we have the user name and the maximum value provided to our guessing game, we need to use this information. There are (at least) two possibilities how we could do this:
 
-How would we architect the implementation? There are (at least) two possibilities:
-
-1. We could generate the guessing game page differently based on user input.
-2. We could read the user parameters from the URL in our Javascript code in the guessing game.
+1. We could modify our server code to generate the guessing game HTML differently based on user input.
+2. We could modify our Javascript code in the guessing game to read the user parameters from the URL, and modify our HTML accordingly.
 
 It doesn't seem to make a huge difference which way we go, but let's pick the first alternative. (The second one involves using regular expressions in Javascript to parse the parameters from the URL.)
 
+The following sequence diagram illustrates the communication flow.
+
+.. image:: ../material/guess/seq2.png
+
 To break this down in tasks:
 
-1. Write the HTML for the "start new game" page. This page should have an HTML form for capturing user input, and pressing the button to submit the form should lead the user to the guessing game page.
-2. Update our server code to serve the new HTML for some URL.
-3. Modify our guessing game HTML and JS such that it reads the user name and maximum number from server parameters.
-4. Handle any possible GET parameters in our server code such that they'll be used to fill the guessing game page template.
-5. Modify our code that uploads data in the database to include the user name and the maximum number.
+1. We need to write the HTML for the "start new game" page. This page should have an HTML form for capturing user input, and pressing the button to submit the form should lead the user to the guessing game page.
+2. We need to update our server code to serve the new "start new game" HTML page for some URL.
+3. We need to modify our guessing game HTML and JS such that it reads the user name and maximum number from parameters provided by the server code.
+4. We need to handle any possible GET parameters in our server code such that they'll be used when generating the guessing game page.
+5. We need to modify our code that uploads data in the database to include the user name and the maximum number.
 
 Let's do this then.
 
@@ -77,7 +79,7 @@ Earlier we decided to handle this using *templates*: Flask provides an easy way 
     @app.route("/guess/", methods=['GET'])
     def guess():
         user = request.args.get('user', 'User')
-        return render_template('guess3.html', user=user)
+        return render_template('guess.html', user=user)
 
 What Flask provides us is a globally available object named "request" which contains any GET parameters. We use this on line 3. It has the member variable "args" which has the member function "get" which takes two parameters: the name of the GET parameter, and a default value should the parameter not exist.
 

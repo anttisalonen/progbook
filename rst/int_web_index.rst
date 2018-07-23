@@ -36,6 +36,7 @@ Again, this book does *not* cover modern web development practices. However, the
 
    html_tables
    redis
+   web_arch
    ajax
    redis_ajax_glue
    guess_start
