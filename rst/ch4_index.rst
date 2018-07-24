@@ -6,4 +6,5 @@ Stage 2
 
    py4_index
    sql_index
+   close_index
 

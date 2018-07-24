@@ -60,7 +60,8 @@
     py2 -> py3;
     json -> py3;
     js2 -> ajax;
-    redis -> ajax;
+    redis -> web_arch;
+    web_arch -> ajax;
     ajax -> redis_ajax_glue;
     redis_ajax_glue -> guess_start;
     html_tables -> hiscore_table;
@@ -100,4 +101,9 @@
     shop2 -> shop3;
     shop3 -> shop4;
     shop4 -> shop5;
+    parse -> book;
+    git2 -> book;
+    merge -> book;
+    shop4 -> book;
+    vim -> book;
 }

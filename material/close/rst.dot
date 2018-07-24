@@ -1,0 +1,9 @@
+digraph rst {
+    Sphinx [shape=box fillcolor=lightgrey style=filled];
+    LaTeX [shape=box fillcolor=lightgrey style=filled];
+    rst -> Sphinx;
+    Sphinx -> HTML;
+    Sphinx -> "LaTeX files";
+    "LaTeX files" -> LaTeX;
+    LaTeX -> PDF;
+}
