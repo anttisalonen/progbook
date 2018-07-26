@@ -36,6 +36,9 @@ editors + macros
 reading open source code
 algorithms - sort, binary search, dfs, bfs, np completeness, o notation
 jupyter + pandas + plotly
+np complete (knapsack)
+dynamic programming
+structs
 
 May not need
 bootstrap
@@ -50,34 +53,30 @@ online shop - sql, json
 http server revisited - sw design in c
 esr
 crawler - regexes + concurrent programming + bfs + tagsoup
+processes + virtual memory?
 
 Missing
 profiling
 chat web site
-open source licenses
 unit testing - bus schedule?
 data visualisation - bus schedule?
+processes - unit testing, code reviews, q&a, ci
 
 Will have
-processes - unit testing, code reviews, q&a, ci
 parallel programming - threads, mutexes
-processes + virtual memory?
-np complete (knapsack)
 utf-8
-structs?
 btree
 ring buffer
 conclusion with text on desktop+mobile apps
 cron
-dynamic programming
 env variables
 heap
 future reading: c prog, cpp, sw design (esr), culture (rant) etc.
+open source licenses
 
 Exercises
 graphics programming
 device drivers
-neural networks
 
 Projects done
 quadratic formula - generate text data, generate json, read json, plot using plotly, store to nosql, show stats
@@ -88,6 +87,3 @@ bus schedule - software design, strong+static languages, more algorithms, make, 
 dot parsing  - regexes, fsm, proper parser, backus naur, graphs, bfs, topological sort
 print return receipt - scan code, pdf, sql
 tech behind the book
-
-Projects left
-
