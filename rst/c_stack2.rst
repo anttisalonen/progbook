@@ -1,4 +1,4 @@
-More C and the stack
+Arrays and the stack
 --------------------
 
 Arrays

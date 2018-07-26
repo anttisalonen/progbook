@@ -39,6 +39,7 @@ jupyter + pandas + plotly
 np complete (knapsack)
 dynamic programming
 structs
+future reading: c prog, cpp, sw design (esr), etc.
 
 May not need
 bootstrap
@@ -71,7 +72,6 @@ conclusion with text on desktop+mobile apps
 cron
 env variables
 heap
-future reading: c prog, cpp, sw design (esr), culture (rant) etc.
 open source licenses
 
 Exercises

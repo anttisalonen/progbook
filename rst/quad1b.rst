@@ -59,6 +59,14 @@ Let's go through this line by line:
 
 *Exercise*: Look up the man page for fread() and fscanf().
 
+.. topic:: Digression: what do fread() and fscanf() *actually* do?
+
+  The functions fread() and fscanf() are implemented in the C standard library code. The specific code is implementation specific but either of them will probably call the read() function which invokes a *system call* - calling code prepared by the *operating system kernel* which relies on the CPU specific features to transfer the code execution to the kernel, and call a specific kernel function.
+  
+  The specific kernel function will be a function (typically a C function) which will look up, based on the path of the opened file, which hardware device is responsible for the file. If we assume that a hard disk is responsible for the file, then the kernel code will call the *hard disk device driver* code. This code, which may be specific to the make and model of the hard disk, will communicate with the actual hard disk hardware by setting its registers and reading values. It will do this e.g. to direct the magnetic head on the hard disk to read the data from the correct sector on the hard disk.
+  
+  Once the device driver has the requested data, it will then provide the data to the caller function in kernel space, which will copy the data back to *user space* - i.e. the memory area where our program is running. The control is finally transferred back to our program and the data we wanted to read is accessible in our variables.
+
 We should now have what we need in order to read a quadratic equation definition from the file referenced above, and calculate its roots.
 
 *Exercise*: Download the above text file in your computer. Add code in your program to open that file. Read in the contents of that file to three variables. Use your previously written function solve_and_print() to solve that quadratic equation and print the roots.
