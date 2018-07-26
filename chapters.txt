@@ -35,6 +35,7 @@ What is clean code
 editors + macros
 reading open source code
 algorithms - sort, binary search, dfs, bfs, np completeness, o notation
+jupyter + pandas + plotly
 
 May not need
 bootstrap
@@ -48,6 +49,7 @@ timestamp sort
 online shop - sql, json
 http server revisited - sw design in c
 esr
+crawler - regexes + concurrent programming + bfs + tagsoup
 
 Missing
 profiling
@@ -58,7 +60,6 @@ data visualisation - bus schedule?
 
 Will have
 processes - unit testing, code reviews, q&a, ci
-jupyter + pandas + plotly
 parallel programming - threads, mutexes
 processes + virtual memory?
 np complete (knapsack)
@@ -86,8 +87,7 @@ sudoku - dfs, recursion, classes, propagate + search
 bus schedule - software design, strong+static languages, more algorithms, make, kiss (wiki/unix_philosophy)
 dot parsing  - regexes, fsm, proper parser, backus naur, graphs, bfs, topological sort
 print return receipt - scan code, pdf, sql
+tech behind the book
 
 Projects left
-crawler - regexes + concurrent programming + bfs + tagsoup
-tech behind the book
 

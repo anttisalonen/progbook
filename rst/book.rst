@@ -57,7 +57,7 @@ The dot format was discussed in section "Graphs", and this book uses that format
 
 There are a few diagrams not generated with Graphviz, though. When I needed to create some diagrams manually or needed specific symbols, like with the diagrams on electric circuits, I used draw.io which is an online diagram maker. The diagrams created using draw.io can be exported and imported as XML. Furthermore, draw.io can turn the diagrams to images such as .png files.
 
-Apart from Graphviz and dot, in the chapter "Quadratic formula" I needed to generate an image of a quadratic function. For this I used a *Jupyter notebook*. Jupyter notebook is a web application that allows the user to write Python code and display the results. Because Jupyter notebooks make it easy to load, analyse and visualise data and share the results, they're popular among people who need to work with data.
+Apart from Graphviz and dot, in the chapter "Quadratic formula" as well as the section "NP-hard problems" I needed to generate images of a quadratic function and points on a plane respectively. For this I used a *Jupyter notebook*. Jupyter notebook is a web application that allows the user to write Python code and display the results. Because Jupyter notebooks make it easy to load, analyse and visualise data and share the results, they're popular among people who need to work with data.
 
 Within the Jupyter notebook, I used the Python libraries *plotly* and *numpy*. Plotly makes it easy to create plots within Python code, and numpy makes it easy to work with numbers in larger scale in Python, such as multi-dimensional arrays and matrices.
 

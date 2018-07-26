@@ -106,4 +106,5 @@
     merge -> book;
     shop4 -> book;
     vim -> book;
+    py4 -> tsp;
 }
