@@ -30,17 +30,6 @@ assert
 vm's
 web server
 
-May have enough of
-What is clean code
-editors + macros
-reading open source code
-algorithms - sort, binary search, dfs, bfs, np completeness, o notation
-jupyter + pandas + plotly
-np complete (knapsack)
-dynamic programming
-structs
-future reading: c prog, cpp, sw design (esr), etc.
-
 May not need
 bootstrap
 opengl shaders
@@ -63,16 +52,27 @@ unit testing - bus schedule?
 data visualisation - bus schedule?
 processes - unit testing, code reviews, q&a, ci
 
+May have enough of
+What is clean code
+editors + macros
+reading open source code
+algorithms - sort, binary search, dfs, bfs, np completeness, o notation
+jupyter + pandas + plotly
+np complete (knapsack)
+dynamic programming
+structs
+future reading: c prog, cpp, sw design (esr), etc.
+btree
+open source licenses
+conclusion with text on desktop+mobile apps
+
 Will have
 parallel programming - threads, mutexes
 utf-8
-btree
 ring buffer
-conclusion with text on desktop+mobile apps
 cron
 env variables
 heap
-open source licenses
 
 Exercises
 graphics programming

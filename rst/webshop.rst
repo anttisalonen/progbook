@@ -37,6 +37,10 @@ The above creates a new database called "my_db" with one table called "my_table"
 
 *Exercise*: Install SQLite and try it out. Bonus points if you compile it from source.
 
+.. topic:: Digression: how is the database file structured?
+
+  The database file needs to support fetching, adding, modifying and removing data efficiently. To do this, the database is often saved as a *B-tree*. A B-tree is a special kind of binary tree which allows more than two children per node and is well suited for storing, reading and writing larger blocks of data. You can find the exact specification of the SQLite database file format on the SQLite home page.
+
 Database schemas
 ================
 
