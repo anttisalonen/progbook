@@ -20,6 +20,8 @@ The "head" pointer points to the beginning of the list. The last element will ha
 
 In practice, due to the overhead of allocating memory for individual cells and the performance issues caused by memory fragmentation and poor cache locality, linked lists rarely show any performance benefit over arrays.
 
+Apart from *singly linked lists* like above, there are also *doubly linked lists*, where each element not only has a pointer to the next element but also to the previous one. These allow traversing in both directions in the list for the extra cost of storing a pointer, and maintaining this on element insertion and deletion.
+
 Sets
 ====
 
@@ -77,6 +79,8 @@ Hence it can have a similar internal structure to a set, but with another pointe
 
 Apart from a binary search tree, another way to implement dictionaries is to use a *hash function* to hash the data, i.e. generate an index (or *bucket*) for each data point and use this index to retrieve the data. For example, if we have keys 1, 3, 4 and 5 in our dictionary, we could *hash* these to indices 0, 1, 2 and 3 of an array. Now, when the user asks for the value for the key 1, we access our array at index 0 and return the corresponding data.
 
+(As an aside, technically, as sets are very similar to dictionaries - the only difference being that sets don't have a value associated with each key - sets can also be implemented using a hash function instead of a binary search tree.)
+
 In practice, the *hash function*, i.e. the function which generates this mapping from keys to indices, isn't perfect (unless all keys are predefined) and there will need to be more indices in the array than keys, and two or more keys may use the same index, requiring the implementation to handle this case (*hash collision*), for example by storing a linked list for each index, with each element in the linked list corresponding to one key-value pair. These complexities lead to the worst case insertion (where all indices have to be regenerated) to have O(n) runtime. Search can also have O(n) worst case runtime in the case where all keys end up in a single index, such that the search degenerates to a search in a linked list.
 
 C doesn't have built in support for dictionaries (although C++ does). In Python, dictionaries can be defined and used in the following manner:
@@ -109,17 +113,15 @@ Summary
 
 Finally, here's a summary table of the performance of the different operations:
 
-+-----------------------------------------------------+------------------------------------------+------------------------------------------+
-| Data type                                           | Access                                   | Insertion                                | 
-+=====================================================+==========================================+==========================================+
-| Array                                               | O(1)                                     | O(n)                                     |
-+-----------------------------------------------------+------------------------------------------+------------------------------------------+
-| Linked list                                         | O(n)                                     | O(1)                                     |
-+-----------------------------------------------------+------------------------------------------+------------------------------------------+
-| Set                                                 | O(log n)                                 | O(log n)                                 | 
-+-----------------------------------------------------+------------------------------------------+------------------------------------------+
-| Dictionary (implemented using a binary search tree) | O(log n)                                 | O(log n)                                 |
-+-----------------------------------------------------+------------------------------------------+------------------------------------------+
-| Dictionary (implemented using hashing)              | O(1) on average (O(n) in the worst case) | O(1) on average (O(n) in the worst case) |
-+-----------------------------------------------------+------------------------------------------+------------------------------------------+
++--------------------------------------------------------------+------------------------------------------+------------------------------------------+
+| Data type                                                    | Access                                   | Insertion                                | 
++==============================================================+==========================================+==========================================+
+| Array                                                        | O(1)                                     | O(n)                                     |
++--------------------------------------------------------------+------------------------------------------+------------------------------------------+
+| Linked list                                                  | O(n)                                     | O(1)                                     |
++--------------------------------------------------------------+------------------------------------------+------------------------------------------+
+| Set or a dictionary (implemented using a binary search tree) | O(log n)                                 | O(log n)                                 | 
++--------------------------------------------------------------+------------------------------------------+------------------------------------------+
+| Set or a dictionary (implemented using hashing)              | O(1) on average (O(n) in the worst case) | O(1) on average (O(n) in the worst case) |
++--------------------------------------------------------------+------------------------------------------+------------------------------------------+
 

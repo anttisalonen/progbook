@@ -213,3 +213,16 @@ Because a program can install a signal handler for SIGTERM, it's possible that s
     $
 
 *Exercise*: Start "less" to browse a file, hit ctrl+z to move it to the background, then run "fg" to bring it to foreground again.
+
+Cron
+====
+
+Cron is a software in Unix-like operating systems which allows the user to configure running a command at given time intervals.
+
+For example, running the command "ls > out.txt" in the home directory once per day, i.e. to store the listing of the files in the home directory in a file, can be done using cron. To do this, one would run the command "crontab -e", which would open the *cron table* in the user's default editor. The cron table is a file where each row describes what command to run periodically, and how often. E.g.:
+
+.. code-block:: bash
+
+    15 3 * * * ls > out.txt
+
+This line would cause cron to run the command at 3:15 AM every day. The columns on the table are minutes, hours, day of month (1-31), month (1-12) and day of week (0-6 where 0 is Sunday and 6 is Saturday). The asterisk ("\*") is a placeholder meaning "every". If you want to use cron in your system, you need to ensure it is running (e.g. by running "ps aux | grep crond"; "ps" lists the processes running in the system and crond means *the cron daemon*; daemon being a program that runs in the background). If cron is not running, you can find out how to start it from the documentation of your operating system.

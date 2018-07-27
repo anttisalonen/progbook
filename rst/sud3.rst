@@ -55,7 +55,14 @@ Now, let's write the code to read this. In C++, one can read a file to a string 
         return 0;
     }
 
-Now that we can read file into a string, let's turn this into a puzzle. First, let's define the interface:
+Now that we can read file into a string, let's turn this into a puzzle. We want to implement the following:
+
+.. image:: ../material/sudoku/block1.png
+    :scale: 30
+
+In other words, we want to read the file to an std::string, pass this string to a function called parse_string() (which we still need to write) which shall convert the std::string to a vector of integers. Once we have a vector of integers we'll pass it to our Puzzle constructor which shall use this vector to set the correct values in the member variable of type std::array<Cell, 81>. Phew!
+
+The interfaces for parse_string() and the Puzzle constructor would hence look like the following:
 
 .. code-block:: cpp
 
@@ -67,7 +74,7 @@ Now that we can read file into a string, let's turn this into a puzzle. First, l
          return 0;
     }
 
-In other words, we need the Puzzle class constructor to receive an std::vector<int> as input. Each element in the vector should either be a number between 1 or 9, denoting a pre-filled cell, or something else (like 0) to denote a clear cell. We should also have a function "parse_string" to turn the string to an int vector.
+We see here how the Puzzle class constructor shall receive an std::vector<int> as input. Each element in the vector should either be a number between 1 or 9, denoting a pre-filled cell, or something else (like 0) to denote a clear cell. We should also have a function "parse_string" to turn the string to an int vector.
 
 As a skeleton, let's put something together that also introduces character-to-integer conversions in C++, exceptions and reference parameters.
 
@@ -101,6 +108,10 @@ Let's go through this line by line:
 * Line 7: We check whether the character is a dot or a zero.
 * Line 10: We check whether we've found a symbol for each cell in the puzzle.
 * Line 14: If we didn't find enough symbols of interest, then we cannot fill our array of cells any further and *throw an exception*: this effectively ends the current execution of the code and goes up the function call stack until a caller is found who *catches* the exception thrown. As we have no code to catch the exception, this effectively prints the error message on the screen and terminates the program.
+
+.. topic:: Digression: What do you mean, "subtract the ASCII value"?
+
+  You may remember from the section "C and strings" that ASCII is a mapping between characters and numbers. Our variable 'c' is a character, but also a number. E.g. the character '3' is equivalent to the number 51 in ASCII. Hence, by subtracting 48 ('0') from 'c' we end up at the number which the ASCII character represents. By pushing the result of this subtraction to the std::vector<int> we implicitly convert the result to an int.
 
 *Exercise*: Implement the above function. Fill out the correct code for the TODOs such that the return variable is updated correctly and returned. See if you can run it without an exception being thrown with the example input from above.
 

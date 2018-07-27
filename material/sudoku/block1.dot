@@ -1,0 +1,12 @@
+digraph block1 {
+    "read file" [shape=box fillcolor=lightgrey style=filled];
+    "parse_string" [shape=box fillcolor=lightgrey style=filled];
+    "Puzzle constructor" [shape=box fillcolor=lightgrey style=filled];
+    str [label="Sudoku puzzle as std::string"];
+    "file name" -> "read file";
+    "read file" -> str;
+    str -> "parse_string";
+    "parse_string" -> "std::vector<int>";
+    "std::vector<int>" -> "Puzzle constructor";
+    "Puzzle constructor" -> "valid Puzzle object";
+}

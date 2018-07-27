@@ -65,13 +65,13 @@ future reading: c prog, cpp, sw design (esr), etc.
 btree
 open source licenses
 conclusion with text on desktop+mobile apps
+cron
+env variables
 
 Will have
 parallel programming - threads, mutexes
 utf-8
 ring buffer
-cron
-env variables
 heap
 
 Exercises

@@ -238,6 +238,8 @@ Sometimes you might want to combine the variable with other bits. In those cases
     $ echo ${MY_FILE_START}.${MY_FILE_SUFFIX}
     test.txt
 
+Furthermore, you can *export* variables such that they're available to programs started by the shell. These are also called *environment variables* as they form the environment for a program. For example, running "export MY_FILE_SUFFIX=txt" makes the environment variable MY_FILE_SUFFIX available to any programs started by the shell. Programs can then access these environment variables using e.g. C standard library functions. This may e.g. allow you to easily make the input or output files of a program configurable.
+
 echo and cat
 ~~~~~~~~~~~~
 

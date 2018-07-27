@@ -21,6 +21,10 @@ Most notably, the Windows cmd.exe or PowerShell are *not* Unix shells. Typical U
 
 *Exercise*: Start a terminal with a Unix shell.
 
+.. topic:: Is this "Unix shell" the only way to program?
+
+  No, it's also possible to program in other environments than Unix shell. However, Unix shell is one environment, and it's a pretty good one (author's opinion). If you're familiar with the Unix shell, it shouldn't be very difficult to learn to use another environment should that become necessary.
+
 Apart from the shell, we also need an interpreter and an editor. For this section we'll use Python as our programming language; so let's install the Python interpreter. Again, I can't tell you how to do this; some OSes may have it already installed. To find out if you have it, start your Unix shell and try typing:
 
 .. code-block:: bash

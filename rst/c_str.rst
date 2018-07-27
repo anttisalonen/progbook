@@ -20,6 +20,10 @@ C doesn't really have strings. What it has are buffers (allocation of continuous
     | 'H' | 'e' | 'l' | 'l' | 'o' | '\0' | ? | ? |
     +-----+-----+-----+-----+-----+------+---+---+
 
+.. topic:: Digression: what is ASCII?
+
+  ASCII is the name of a mapping (encoding) between numbers and characters. ASCII defines that, for example, the letter 'H' is equivalent to the number 72, and vice versa. The letter 'h' (lower case) is equivalent to 104. ASCII also includes non-printable characters, e.g. line feed ("\\n") which is equivalent to number 10, or null ("\\0") which is equivalent to number 0. You can find the full encoding online. If you need non-English characters then other encodings exist, such as UTF-8.
+
 This is a buffer with eight slots containing the string "Hello". The sixth slot is a 0, or '\\0', which indicates the end of a string. The value of this is in fact 0 but this has two representations: 0 (the number) or '\\0' (character). The last two slots are *undefined* and reading them results in *undefined behaviour* like crashing, garbage, nothing, or anything.
 
 You can create such a buffer by e.g. doing the following:
