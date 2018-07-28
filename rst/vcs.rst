@@ -7,7 +7,7 @@ If so then that's perfectly normal. You might, however, imagine that if you were
 
 Version control systems (VCS) have been implemented to help solve these issues, as well as help developers collaborate on the same source code.
 
-Version control systems have a long history, and I won't go through all of that. Suffice to say, there are lots of different version control systems, and many developers have their own personal favorite.
+Version control systems have a long history, and I won't go through all of that. Suffice to say, there are lots of different version control systems, and many developers have their own personal favourite.
 
 This book will introduce the reader to one of the most useful ones, named git. Git was originally developed in 2005 by Linus Torvalds for the Linux kernel development, and has since become one of the most widely used version control systems worldwide.
 

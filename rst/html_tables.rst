@@ -33,7 +33,7 @@ HTML tables are a fairly straightforward concept. Here's one:
 * Line 2: We start defining a row for the table using the <tr> (table row) tag.
 * Line 3: We define a cell using the <td> (table data) tag. The contents are simply text in this case but can in general be any HTML.
 
-In order to modify tables in Javascript, we can do the following:
+In order to modify tables in JavaScript, we can do the following:
 
 .. code-block:: js
     :linenos:
@@ -44,7 +44,7 @@ In order to modify tables in Javascript, we can do the following:
     }
 
 * Line 1: We obtain a reference to the table
-* Line 2: We iterate over two table rows using a for loop, skipping the header (both rows and cells, and Javascript arrays in general, are 0-indexed, meaning the arrays start at 0)
+* Line 2: We iterate over two table rows using a for loop, skipping the header (both rows and cells, and JavaScript arrays in general, are 0-indexed, meaning the arrays start at 0)
 * Line 3: We set the contents of the second cell of the i'th row to "2017-02-15".
 
 *Exercise*: Add a HTML table in your guessing game web page as a placeholder for the high score list.

@@ -160,7 +160,7 @@ Finally we can use the mutex in our function that the threads will run:
         return NULL;
     }
 
-Here, we lock the mutex before the increment and unlock it directly after, within our loop. Locking and unlocking a mutex in an inner loop like this will ruin our performance - a better way would be to perform the lock and unlock before and after the loop - but for demonstration purposes this'll do.
+Here, we lock the mutex before the increment and unlock it directly after, within our loop. Locking and unlocking a mutex in an inner loop like this will ruin our performance - a better way would be to perform the lock and unlock before and after the loop - but for demonstration purposes that'll do.
 
 *Exercise*: Make the required changes to the previous program such that the critical code is protected by a mutex. Does the output of the program change?
 

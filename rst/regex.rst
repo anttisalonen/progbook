@@ -60,7 +60,7 @@ It may become more obvious if we pass the switch "-o" to grep, which means that 
 
 Now, grep only outputs the strings that were matched, i.e. the numbers between -1.0 and -1.3.
 
-As unplausible as it may sound, experienced programmers are often able to derive a correct regular expression for a certain use case with ease, though sometimes, especially with more complex expressions, some debugging may be needed. This comes with practice; an experienced programmer often uses regular expressions several times per day.
+As implausible as it may sound, experienced programmers are often able to derive a correct regular expression for a certain use case with ease, though sometimes, especially with more complex expressions, some debugging may be needed. This comes with practice; an experienced programmer often uses regular expressions several times per day.
 
 Regular expressions aren't limited to grep, but are available in most programming languages as well as other Unix tools such as sed. To get a refresher on sed, you might, for example, use sed to search and replace the string "123" with "456":
 

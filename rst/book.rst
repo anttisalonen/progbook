@@ -34,7 +34,7 @@ It's worth going a bit more into detail on LaTeX. LaTeX (often pronounced "lah-t
 
 .. code-block:: latex
 
-  \section{Javascript}
+  \section{JavaScript}
   \label{\detokenize{js_index:javascript}}\label{\detokenize{js_index::doc}}
   
   \subsection{Guessing game in JS}
@@ -86,15 +86,15 @@ While generating the PDF for the print version, I noticed many of the diagrams g
 
 Let's see what this does:
 
-* Line 1: We find all the dot files within the current directory or any subdirectories, and loop over them
+* Line 1: We find all the dot files within the current directory or any sub-directories, and loop over them
 * Line 3: We first capture the *directory* where the file resides using shell expansion ("$(...)"), and then *push* this directory to a stack. Bash supports a stack for directories such that one can push a directory in the stack, which changes the current working directory and also allows the directory to be *popped* later which changes the current working directory back to what it was before the push.
 * Line 4: We capture the *base name* of the dot file - this is the file name without the directory part. We also run "$(basename $file .dot).png" which first removes the ".dot" suffix from the file name and then adds the ".png" suffix to it. Running this dot command for e.g. a file "foo.dot" effectively runs dot on "foo.dot" to generate a "foo.png".
 * Line 5: We pop the directory from the stack, arriving at the previous directory. Doing this allows our script (or one-liner) to end up in the directory we started in.
 
-Github provides a hosting service for hosting web pages such as the one for this book. There's a command to publish the generated HTML on Github pages ("git subtree push --prefix _build/html/ origin gh-pages") but as this command was difficult to remember I created a simple shell script "publish.sh" with only this command as the contents. This way, once I've committed a new section, I could run "git push origin master && ./publish.sh" which would upload all the changes online.
+GitHub provides a hosting service for hosting web pages such as the one for this book. There's a command to publish the generated HTML on GitHub pages ("git subtree push --prefix _build/html/ origin gh-pages") but as this command was difficult to remember I created a simple shell script "publish.sh" with only this command as the contents. This way, once I've committed a new section, I could run "git push origin master && ./publish.sh" which would upload all the changes online.
 
 The dependency diagrams were generated using dot. I have the master dot file which describes the actual dependencies, but this dot file doesn't include the actual section titles, only the file names. I then wrote a simple shell script to read the section titles from the rst files and generate dot statements which cause the titles to be used as labels in the diagram. These generated dot statements, together with a dot header and the master dot file are then concatenated to the final dot file which describes the dependencies between the sections.
 
 After the dependencies between sections are described in a dot file, another dot file is generated from this input which describes the dependencies between chapters (one chapter can include multiple sections). This is done in a simple Python script which parses a) the section dependencies from the dot file, and b) which sections belong to which chapters from the rst files. Finally, a shell script is run which passes the two dot files to another Python script which removes unnecessary edges (this script was written as part of the section "Parsing") and creates the final PNG images from the dot files. This flow is run as part of the Makefile invocation.
 
-The source code for the book is versioned using git and is publicly available in Github.
+The source code for the book is versioned using git and is publicly available in GitHub.

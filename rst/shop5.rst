@@ -3,7 +3,7 @@ Web UI for our return form
 
 Let's finish this chapter by putting together a simple (but ugly) web UI that allows a user to generate a return form.
 
-We'll be using Flask for this exercise, and to keep things simple, we'll skip the Javascript bit and *generate* all HTML on the server side. Flask makes this fairly easy as it integrates with the Jinja 2 templating language.
+We'll be using Flask for this exercise, and to keep things simple, we'll skip the JavaScript bit and *generate* all HTML on the server side. Flask makes this fairly easy as it integrates with the Jinja 2 templating language.
 
 Products
 ========
@@ -97,9 +97,9 @@ We have a few elements here:
 
 * The order ID is shown
 * A table listing all the products for the order is shown
-* This page includes a *form*; the user can select a number of products using the checkboxes and submit the selection to the server by pressing the button labeled "Return"
+* This page includes a *form*; the user can select a number of products using the check boxes and submit the selection to the server by pressing the button labelled "Return"
 
-We should have a grip on displaying the order ID and the table without the checkboxes by now. We can put together a form that sends the contents of the checkboxes as well as the order ID using e.g. the following HTML:
+We should have a grip on displaying the order ID and the table without the check boxes by now. We can put together a form that sends the contents of the check boxes as well as the order ID using e.g. the following HTML:
 
 .. code-block:: html
     :linenos:
@@ -127,7 +127,7 @@ We should have a grip on displaying the order ID and the table without the check
 
 That is, we do the following:
 
-* All the elements that are part of the form, including the submit button and the checkboxes must be within the <form> tag
+* All the elements that are part of the form, including the submit button and the check boxes must be within the <form> tag
 * The form tag should, with the "action" attribute, describe which URL will be loaded on the server side when the form is sent, i.e. to which URL the form contents are sent to
 * The contents of the form can be defined using the <input> tag
 * On line 15, we have an <input> tag describing the checkbox. We identify this checkbox by using the product ID which will be necessary later on.
@@ -163,7 +163,7 @@ As for the radio buttons, they can be displayed using e.g.:
     <input type="radio" name="radio_button_1" value="Enable">Enable widget<br/>
     <input type="radio" name="radio_button_1" value="Disable">Disable widget<br/>
 
-The above will create one selection with two radio buttons such that the form query string will either include "radio_button_1=Enable" or "radio_button_2=Disable". In other words, the attribute "name", like with checkboxes, defines the identifier for the radio box so your form handling code knows which variable is which. The attribute "value" describes the value that will be stored in the form if that button was selected.
+The above will create one selection with two radio buttons such that the form query string will either include "radio_button_1=Enable" or "radio_button_2=Disable". In other words, the attribute "name", like with check boxes, defines the identifier for the radio box so your form handling code knows which variable is which. The attribute "value" describes the value that will be stored in the form if that button was selected.
 
 In your code, you'll need to replace parts of the above using templates.
 

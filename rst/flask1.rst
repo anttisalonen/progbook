@@ -9,7 +9,7 @@ To do this we'll come up with a goal. Let's imagine we have the following use ca
 * We'd like this computer to play *internet radio*
 * Furthermore, we'd like to stop or start the playback using a smartphone
 
-In other words, we have a computer serving as a very simple media center, and we want to turn the music on or off without having to get up from the couch. How would we accomplish this?
+In other words, we have a computer serving as a very simple media centre, and we want to turn the music on or off without having to get up from the couch. How would we accomplish this?
 
 We'll go through the following steps:
 
@@ -22,25 +22,25 @@ We'll go through the following steps:
 External libraries in Python
 ============================
 
-Because writing all the code needed to serve a web page is a lot of work, we want to install an external library that takes care of most of this for us. In this chapter we'll be using *Flask* - a microframework for Python that allows relatively easy creation of web applications.
+Because writing all the code needed to serve a web page is a lot of work, we want to install an external library that takes care of most of this for us. In this chapter we'll be using *Flask* - a micro-framework for Python that allows relatively easy creation of web applications.
 
 Python has a tool called *pip* which can download and install libraries. You can find out if you already have pip by running "pip" in the terminal. Most Unix systems include pip as part of the Python installation. If you don't have it, please consult the documentation of pip and your operating system online on how to install it.
 
 Flask has fairly straightforward installation instructions; at the time of writing, running "pip install Flask" might be enough.
 
-*Exercise*: Look up the webpage for Flask, the Python microframework.
+*Exercise*: Look up the web page for Flask, the Python micro-framework.
 
 There are several ways to install external libraries in Python. One very convenient way is to use *virtualenv*, or *virtual environment*: this tool allows you to install libraries without having to install them system-wide, potentially greatly simplifying installation.
 
 Virtualenv is software that can be downloaded from the virtualenv web page. There are several ways to install it; at the time of writing, running "pip install virtualenv" might be enough.
 
-*Exercise*: Look up the webpage for virtualenv. Install it.
+*Exercise*: Look up the web page for virtualenv. Install it.
 
 Once you have virtualenv installed, you need to create a virtual environment and activate it. Once you've activated it, changes to Python libraries such as installing new ones will only affect the virtual environment. This means that installing libraries might be easier, but in order to use them you'll need to have activated the virtual environment.
 
 At the time of writing, the command "virtualenv myve" creates a virtual environment to directory "myve". This directory will be created as a subdirectory to the current working directory. After creating the virtual environment, it can be activated by running "source bin/activate" in the "myve" directory.
 
-*Exercise*: Create a virtual environment and activate it. Look up instructions from the virtualenv webpage if you get stuck. Install Flask in your virtual environment.
+*Exercise*: Create a virtual environment and activate it. Look up instructions from the virtualenv web page if you get stuck. Install Flask in your virtual environment.
 
 Let's test Flask to ensure you've installed it correctly. At the time of writing, it should be enough to create the following Python file:
 
@@ -55,14 +55,14 @@ Let's test Flask to ensure you've installed it correctly. At the time of writing
 
 ...and run "FLASK_APP=hello.py flask run" (where hello.py is the Python file that was just created). After this, directing your browser to "http://localhost:5000/" should display the text "Hello World!"
 
-*Exercise*: Test Flask to ensure you've installed it correctly. If you get stuck, consult the documentation on the Flask webpage.
+*Exercise*: Test Flask to ensure you've installed it correctly. If you get stuck, consult the documentation on the Flask web page.
 
-Now that we have Flask installed and can serve webpages, we can put together a simple page, though at this stage it won't do anything.
+Now that we have Flask installed and can serve web pages, we can put together a simple page, though at this stage it won't do anything.
 
 HTML
 ====
 
-We'll go more into details around HTML is later in this book. For now, suffice to say, HTML defines what will be shown to the user visiting a web page. We'll create a very simple page with two buttons labeled "Start" and "Stop", and nothing else.
+We'll go more into details around HTML is later in this book. For now, suffice to say, HTML defines what will be shown to the user visiting a web page. We'll create a very simple page with two buttons labelled "Start" and "Stop", and nothing else.
 
 As per Flask documentation, in order to display an HTML page it must reside in a subdirectory called "templates".
 
@@ -101,11 +101,11 @@ This has a few changes compared to the "Hello world" page:
 * We've added another parameter "methods=['POST', 'GET']" to the *decorator* of our function.
 * Instead of returning "Hello world", we return the return value of the render_template() function, and pass this function the file name "radio.html".
 
-*Exercise*: Modify your hello.py or create a new Python file with the above contents. Open your page in your browser. You should be able to see one button labeled "Start". Clicking it shouldn't do anything.
+*Exercise*: Modify your hello.py or create a new Python file with the above contents. Open your page in your browser. You should be able to see one button labelled "Start". Clicking it shouldn't do anything.
 
 We now have one button - but we wanted two.
 
-*Exercise*: Add a button labeled "Stop" below the first button.
+*Exercise*: Add a button labelled "Stop" below the first button.
 
 Now, you should be able to access the page from your local computer - but if you tried from another computer (or a smartphone), you might see the access will be denied. This is because by default Flask only allows connections from the local computer as in debugging mode, any Python code could be executed. Assuming you can trust the computers in your network, as per Flask documentation, you can enable Flask to allow connections from all public IPs by adding the parameter "--host=0.0.0.0" to your "flask run" command.
 

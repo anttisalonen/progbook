@@ -226,7 +226,7 @@ Now, all we need to do is define __str__ for all our classes.
 
 Congratulations, you've now written a parser. More specifically, this is a *top down parser* as it parses the top level data first before proceeding to further levels. Even more specifically, this could be a *recursive descent parser* because our grammar is defined in a recursive manner (e.g. characters), though in practice your implementation probably doesn't use recursion as our lexical analysis merged tokens such that no recursion during parsing is necessary.
 
-Parsers are fairly common in that they're part of the implementation of compilers, interpreters including for languages such as Python and Javascript, HTML renderers, regular expression engines, editors (syntax highlighting and indenting) and more. As such, during this book we've already indirectly used several different parsers.
+Parsers are fairly common in that they're part of the implementation of compilers, interpreters including for languages such as Python and JavaScript, HTML renderers, regular expression engines, editors (syntax highlighting and indenting) and more. As such, during this book we've already indirectly used several different parsers.
 
 Another tidbit is that the formal grammar we defined is a *context free grammar* which has an interesting mathematical definition but in practice means, among other things, that one can define the grammar in BNF form. Context free is opposed to *context sensitive grammar* where context matters; tokens before or after a token determine what the token means. For example parsing the C language is context sensitive because e.g. the asterisk ("*") may mean either part of a pointer variable declaration, pointer dereferencing or multiplication depending on context.
 

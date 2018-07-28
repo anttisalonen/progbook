@@ -108,7 +108,7 @@ Now, if you were to run make again without making changes to the C++ source file
 
 In other words, Make detects that recompiling the C++ file is not necessary and simply runs the script.
 
-If you do want to run the C++ compiler without making changes to the source file, you can either simply save the file, or use the Unix command "touch", e.g. "touch sdl_sched2.cpp". Either action will update the file modification timstamp which Make uses to detect whether the command to generate the target needs to be re-run or not.
+If you do want to run the C++ compiler without making changes to the source file, you can either simply save the file, or use the Unix command "touch", e.g. "touch sdl_sched2.cpp". Either action will update the file modification timestamp which Make uses to detect whether the command to generate the target needs to be re-run or not.
 
 Make can be used for lots of things and there's *a lot* more to Make than this short section might suggest; but some important properties of Make were introduced here. The main takeaway is that Make can be used to drive the build and test process.
 

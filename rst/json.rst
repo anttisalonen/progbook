@@ -1,7 +1,7 @@
 JSON
 ----
 
-JSON stands for JavaScript Object Notation but is used a lot outside Javascript.
+JSON stands for JavaScript Object Notation but is used a lot outside JavaScript.
 
 It's a data format for storing any basic data, is fairly simple and is often used for exchanging data between different programs (often implemented in different programming languages) or more generally storing the output of a program.
 
@@ -44,7 +44,7 @@ One of the main strengths about JSON is that pretty much all main languages have
     print len(data['my_list'])
     print data['alphabet']['c']
 
-The above will print 4 and 3 (the length of the list and the value for key 'c' respectively). Here's an example Javascript code to read and use the same JSON file:
+The above will print 4 and 3 (the length of the list and the value for key 'c' respectively). Here's an example JavaScript code to read and use the same JSON file:
 
 .. code-block:: js
 
@@ -63,7 +63,7 @@ Here's an example Python code to generate this JSON file:
     data['my_alphabet'] = {'a': 1, 'b': 2, 'c': 3}
     print json.dumps(data, indent=4)
 
-Or in Javascript:
+Or in JavaScript:
 
 .. code-block:: js
 

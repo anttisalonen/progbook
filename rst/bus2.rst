@@ -76,7 +76,7 @@ The requirements spec defined the schedule entry to have a route number, a start
 
 * Declare the schedule entry class
 * Write the functionality to convert a text line to a schedule entry class
-* Read in a file and call use abovementioned functionality in a loop to generate an std::vector of schedule entries
+* Read in a file and call use above mentioned functionality in a loop to generate an std::vector of schedule entries
 
 Let's start with the first one.
 

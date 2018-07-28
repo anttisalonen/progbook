@@ -1,4 +1,4 @@
-Javascript meets algorithms
+JavaScript meets algorithms
 ---------------------------
 
 .. literalinclude:: ../material/js/guess2.html

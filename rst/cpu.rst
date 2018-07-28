@@ -27,7 +27,7 @@ The behaviour of a logic gate can be captured in a *truth table*. Here's the tru
 | 1 | 1 | 1 |
 +---+---+---+
 
-Here, the inputs are labeled 'A' and 'B'. The output is labeled 'X'. The output is 1 only when both A and B are 1 and 0 otherwise, hence the name AND-gate.
+Here, the inputs are labelled 'A' and 'B'. The output is labelled 'X'. The output is 1 only when both A and B are 1 and 0 otherwise, hence the name AND-gate.
 
 The logic gates can be shown in a diagram as well. Here's what the AND-gate would look like in a diagram:
 
@@ -93,7 +93,7 @@ That is, it's almost like the OR-gate but if both A and B are 1 then we output 0
 
 Let's see what we have here:
 
-* We have one OR-gate (labeled OR), two AND-gates (labeled AND-1 and AND-2) and one NOT-gate (labeled NOT)
+* We have one OR-gate (labelled OR), two AND-gates (labelled AND-1 and AND-2) and one NOT-gate (labelled NOT)
 * The inputs, A and B, are fed both to the OR-gate and AND-1
 * The output of AND-1 is negated
 * Finally, the output of the OR-gate and the negated output of AND-1 is combined in AND-2. The output of this gate is the output of our circuit.

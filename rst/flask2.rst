@@ -104,7 +104,7 @@ We can find out which button the user pressed using e.g. the following if statem
 
     if request.form['submit'] == 'Start':
 
-This line would evaluate to True if the button labeled "Start" was pressed. We know this because our HTML knows this. (The variable "request.form['submit']" is set to what we wrote in the "value" attribute for each button in our HTML.)
+This line would evaluate to True if the button labelled "Start" was pressed. We know this because our HTML knows this. (The variable "request.form['submit']" is set to what we wrote in the "value" attribute for each button in our HTML.)
 
 For example, the following would print "Start pressed" whenever the user pressed the "Start" button, and would in any case render the HTML we wrote:
 

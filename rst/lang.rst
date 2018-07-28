@@ -18,7 +18,7 @@ What is the result of this expression? The following provides an overview:
 +------------+---------------------------------------------------------------+
 | Language   | Output                                                        |
 +============+===============================================================+
-| Javascript | 42                                                            |
+| JavaScript | 42                                                            |
 +------------+---------------------------------------------------------------+
 | Java       | 42                                                            |
 +------------+---------------------------------------------------------------+
@@ -39,7 +39,7 @@ What is the result of this expression? The following provides an overview:
 
 We see four different kinds of answers:
 
-* Javascript and Java implicitly convert the number 4 into a string, then appends 2, resulting in "42"
+* JavaScript and Java implicitly convert the number 4 into a string, then appends 2, resulting in "42"
 * Perl and Lua implicitly convert the string "2" into a number, then add 4, resulting in 6
 * Python, Haskell and Ruby throw an error
 * C and C++ interpret the addition as pointer arithmetic, accessing memory after the statically allocated string "2", resulting in undefined behaviour
@@ -62,7 +62,7 @@ If we were to define this function in C, it could look for example like this:
 
 This function explicitly defines the input and output types as integers; using other types such as a string when calling this function will issue a compiler warning.
 
-If we were to define this function in Javascript, it would look like this:
+If we were to define this function in JavaScript, it would look like this:
 
 .. code-block:: javascript
 
@@ -98,7 +98,7 @@ What if we called these functions with a number? A string? The following table s
 +============+============+===============+==========================================+
 | C          | 10         | garbage       | garbage                                  |
 +------------+------------+---------------+------------------------------------------+
-| Javascript | 10         | 10            | NaN (a string indicating "not a number") |
+| JavaScript | 10         | 10            | NaN (a string indicating "not a number") |
 +------------+------------+---------------+------------------------------------------+
 | Python     | 10         | "55"          | "abcabc"                                 |
 +------------+------------+---------------+------------------------------------------+
@@ -107,7 +107,7 @@ What if we called these functions with a number? A string? The following table s
 | Haskell    | 10         | Compile error | Compile error                            |
 +------------+------------+---------------+------------------------------------------+
 
-We see the result makes sense when inputting a number for all languages. When inputting "5" as string, C interprets this as a pointer and undefined behaviour ensues. Javascript implicitly converts the string to a number, which works when the string is indeed a number but returns "NaN" otherwise. When passing a string to the function in Python, Python interprets the multiplication as a multiplication of the string, hence duplicating the string. Haskell and Java refuse to work with the string input.
+We see the result makes sense when inputting a number for all languages. When inputting "5" as string, C interprets this as a pointer and undefined behaviour ensues. JavaScript implicitly converts the string to a number, which works when the string is indeed a number but returns "NaN" otherwise. When passing a string to the function in Python, Python interprets the multiplication as a multiplication of the string, hence duplicating the string. Haskell and Java refuse to work with the string input.
 
 The above can be summarised by categorising the language type systems by how dynamic the typing is (static vs. dynamic), and the strength (strong vs. weak).
 
@@ -116,12 +116,12 @@ Static vs. dynamic typing
 
 C, Haskell and Java are statically typed languages: the types of all variables must be defined at compilation time. For C and Java, the types must in most cases be explicitly stated, like we saw in the function definitions above. Haskell typically infers the types at compile time.
 
-Javascript and Python are dynamically typed languages: the types of variables may change depending on context. For example, the variable "x" in the function above may be a string or an integer, depending on the caller.
+JavaScript and Python are dynamically typed languages: the types of variables may change depending on context. For example, the variable "x" in the function above may be a string or an integer, depending on the caller.
 
 Strong vs. weak typing
 ~~~~~~~~~~~~~~~~~~~~~~
 
-C and Javascript are weakly typed languages: the types of the variables aren't fixed but may be implicitly converted to other types depending on the context. For example, passing a string as an int will cause implicit conversion of the string to an int.
+C and JavaScript are weakly typed languages: the types of the variables aren't fixed but may be implicitly converted to other types depending on the context. For example, passing a string as an int will cause implicit conversion of the string to an int.
 
 Python and Haskell are strongly typed languages: the types of variables are fixed and will not implicitly change, such that any type conversions must be explicit by the programmer.
 

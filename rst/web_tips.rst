@@ -32,7 +32,7 @@ CSS, or making web pages prettier
 
 CSS (Cascading Style Sheets) is a standard for defining how web pages look like. It's typically used together with HTML and JS; HTML controls the layout, JS defines the logic and CSS defines the looks. As this book isn't a web design book we won't go to the details on CSS but here's an overview:
 
-* You create a .css file which describes e.g. what color or fonts different tags should use, for example headings or paragraphs. CSS looks something like this:
+* You create a .css file which describes e.g. what colour or fonts different tags should use, for example headings or paragraphs. CSS looks something like this:
 
 .. code-block:: css
 

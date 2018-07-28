@@ -164,4 +164,4 @@ You can download the necessary input files for testing here:
 * :download:`gps.txt <../material/bus/gps.txt>`
 * :download:`gps_raw.txt <../material/bus/gps_raw.txt>`
 
-You can download the font file from the DejaVu fonts web page. You may already have the font available somewhere on your computer.
+You can download the font file from the Deja Vu fonts web page. You may already have the font available somewhere on your computer.

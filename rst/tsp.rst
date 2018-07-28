@@ -3,7 +3,7 @@ NP-hard problems
 
 In the chapter "First touch of algorithms" we discussed the run times of various algorithms (O(log n) etc.). There's more to this, namely problems which, to the best of current knowledge of mankind, are *hard*. Hard here means that the run time of an algorithm to solve the problem is expected to be high, and it's not known how to construct an algorithm that has a run time polynomial to n, i.e. the complexity class isn't O(n\ :sup:`x`\ ) for any x but rather e.g. exponential (O(2\ :sup:`n`\ ), i.e. incrementing n by one doubles the run time).
 
-There are several classifications from classical Computer Science for problems, such as *P* (solvable in polynomial time), *NP-complete* ("NP" standing for non-deterministic polynomial time) etc. which are not in the scope for this book, but the summary is that for certain problems, fast solutions are not known. This section discusses one of such problems in detail, namely the *Traveling salesman problem*.
+There are several classifications from classical Computer Science for problems, such as *P* (solvable in polynomial time), *NP-complete* ("NP" standing for non-deterministic polynomial time) etc. which are not in the scope for this book, but the summary is that for certain problems, fast solutions are not known. This section discusses one of such problems in detail, namely the *Travelling salesman problem*.
 
 Travelling salesman problem (TSP)
 =================================

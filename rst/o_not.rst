@@ -43,7 +43,7 @@ Here, we have a for loop that goes through the whole array (in the worst case). 
 
   You had an array, then you passed it to a function, and the function parameter is a pointer! What's going on?
 
-  In C, while array in general is not the same thing as a pointer, the two are sometimes interexchangable. In C, arrays are always passed by reference to a function, which means that the array is not automatically copied for the function (like a single int would be), but instead *a pointer* is passed to the function, whereby the pointer points to the first element in the array. Hence the array will *decay* into a pointer.
+  In C, while array in general is not the same thing as a pointer, the two are sometimes interchangeable. In C, arrays are always passed by reference to a function, which means that the array is not automatically copied for the function (like a single int would be), but instead *a pointer* is passed to the function, whereby the pointer points to the first element in the array. Hence the array will *decay* into a pointer.
 
 .. topic:: What do you mean "conceptually?"
 

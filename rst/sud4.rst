@@ -134,8 +134,8 @@ Here, we define a function named "search" which is a member function of the clas
 
 *Exercise*: Finish the above function. Call it from your program. See if you can solve the more difficult Sudoku puzzle.
 
-Solving more Sudokus
-====================
+Solving more Sudoku puzzles
+===========================
 
 Here are 30 easy Sudoku puzzles, courtesy project Euler: :download:`download link <../material/sudoku/sud1.txt>`
 

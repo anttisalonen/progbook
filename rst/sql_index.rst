@@ -21,7 +21,7 @@ From technical point of view, in this section we'll learn about the following:
 * Generating a bunch of random test data
 * Generating PDFs and barcodes using Python
 * Primitive business analytics
-* Displaying database contents, filling forms and sending PDFs using Flask (again - but this time without Javascript)
+* Displaying database contents, filling forms and sending PDFs using Flask (again - but this time without JavaScript)
 
 The whole thing will end up at about 300-400 lines of Python, with a good chunk of it being SQL statements.
 

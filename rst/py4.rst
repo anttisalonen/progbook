@@ -19,7 +19,7 @@ It's a graph showing the dependencies between the chapters of this book. For exa
 
 (Apart from describing dependencies between chapters, graphs can be used for describing other kinds of dependencies like in a supply chain. They can also be used to describe other relationships like distances or routes between places, relationships between people etc.)
 
-Now, here's the problem with this graph: it has too many edges. You see, the code that creates the edges for this graph isn't very smart, so it includes some edges that strictly speaking don't need to be there. For example, you see the edge from "Introduction" to "Javascript"? As "Javascript" already depends on "Unix shell" which depends on "Introduction", there's no need to have an edge from "Introduction" to "Javascript". This edge can and should be removed.
+Now, here's the problem with this graph: it has too many edges. You see, the code that creates the edges for this graph isn't very smart, so it includes some edges that strictly speaking don't need to be there. For example, you see the edge from "Introduction" to "JavaScript"? As "JavaScript" already depends on "Unix shell" which depends on "Introduction", there's no need to have an edge from "Introduction" to "JavaScript". This edge can and should be removed.
 
 We have two parts to this problem: one is finding the algorithm that does what we want it to do, i.e. remove the edges, and the other is putting this algorithm into use to actually generate a graph with unnecessary edges removed.
 
@@ -175,7 +175,7 @@ We already roughly described an algorithm to remove unnecessary edges in pseudoc
 * We need to be able to remove the edge between a node and a child node. Again, this is something we should be able to do with our dictionary (with e.g. my_dict[key].remove(node)).
 * We need to be able to tell if node A is either a direct or an indirect child node of node B, i.e. whether node B depends on node A. We don't have this yet.
 
-Let's implement this algorithm: we need to *traverse* the graph to be able to tell whether a node depends on another. There are two major kinds of graph traverals, *depth first search* and *breadth first search*. In this case it doesn't matter which one we pick.
+Let's implement this algorithm: we need to *traverse* the graph to be able to tell whether a node depends on another. There are two major kinds of graph traversals, *depth first search* and *breadth first search*. In this case it doesn't matter which one we pick.
 
 Graph traversal
 ===============

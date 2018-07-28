@@ -18,9 +18,9 @@ Here, the part after the question mark ("?") is the query string. It has two par
 Once we have the user name and the maximum value provided to our guessing game, we need to use this information. There are (at least) two possibilities how we could do this:
 
 1. We could modify our server code to generate the guessing game HTML differently based on user input.
-2. We could modify our Javascript code in the guessing game to read the user parameters from the URL, and modify our HTML accordingly.
+2. We could modify our JavaScript code in the guessing game to read the user parameters from the URL, and modify our HTML accordingly.
 
-It doesn't seem to make a huge difference which way we go, but let's pick the first alternative. (The second one involves using regular expressions in Javascript to parse the parameters from the URL.)
+It doesn't seem to make a huge difference which way we go, but let's pick the first alternative. (The second one involves using regular expressions in JavaScript to parse the parameters from the URL.)
 
 The following sequence diagram illustrates the communication flow.
 
@@ -93,12 +93,12 @@ On line 4, we pass this parameter to the HTML generation function. In order to u
 
 Here, we use the parameter "user" using double curly braces ('{{' and '}}'). What happens is Flask will generate HTML based on this template, i.e. replace "{{ user }}" with the value from our Python code, and serve the generated HTML to the browser.
 
-*Exercise*: Handle both user name and maximum number parameters in your Flask code and guessing game HTML. For the maximum number, you can have Flask insert it in your Javascript code by doing e.g. "var overall_max_value = {{ max_value }};". You can also store the user name as a Javascript variable for later use.
+*Exercise*: Handle both user name and maximum number parameters in your Flask code and guessing game HTML. For the maximum number, you can have Flask insert it in your JavaScript code by doing e.g. "var overall_max_value = {{ max_value }};". You can also store the user name as a JavaScript variable for later use.
 
 Uploading more JSON data
 ========================
 
-Now we should have everything in place such that the maximum number depends on the user input, and the user name is available for our Javascript. Let's add this information in the database when the user has correctly guessed the number. We should currently have something like this in our Javascript code:
+Now we should have everything in place such that the maximum number depends on the user input, and the user name is available for our JavaScript. Let's add this information in the database when the user has correctly guessed the number. We should currently have something like this in our JavaScript code:
 
 .. code-block:: js
 

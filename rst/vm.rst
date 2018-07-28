@@ -35,7 +35,7 @@ Speaking of the Python interpreter, it's also a good idea to take a look at the 
 Other virtual machines
 ======================
 
-Javascript is implemented by each browser, and several implementations are actually virtual machines which compile Javascript to bytecode and interpret this at run time. However, many of the main implementations actually compile Javascript code directly to machine code before the code is run for better performance; so called *JIT* or just-in-time compilation.
+JavaScript is implemented by each browser, and several implementations are actually virtual machines which compile JavaScript to bytecode and interpret this at run time. However, many of the main implementations actually compile JavaScript code directly to machine code before the code is run for better performance; so called *JIT* or just-in-time compilation.
 
 Java is generally not compiled into machine code but to bytecode executed by *JVM*, or Java Virtual Machine. JIT is also used with JVM.
 

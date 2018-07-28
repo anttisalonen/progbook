@@ -50,7 +50,7 @@ In general, however, you may write something into a buffer where you don't know 
 * Line 2: We clear the buffer, such that all the values in the buffer are 0. This way, as long as we keep the last character to 0 in the buffer (remember 0 indicates end of a string), we shouldn't be either reading or writing past the end of our buffer. (You will need to #include <string.h> to declare memset().)
 * Line 3: We write the string "Hello" to the buffer using *snprintf*, which takes as a parameter the maximum number of bytes to write. We tell it to write maximum eight characters such that the last one will always be 0.
 
-Now, while array in general is not the same thing as a pointer, for strings the two are sometimes interexchangable. For example, let's assume you want to pass your array as a parameter to another function. You can't because arrays are always passed by reference in C. This means that the array will *decay* into a pointer:
+Now, while array in general is not the same thing as a pointer, for strings the two are sometimes interchangeable. For example, let's assume you want to pass your array as a parameter to another function. You can't because arrays are always passed by reference in C. This means that the array will *decay* into a pointer:
 
 .. code-block:: c
     :linenos:
@@ -136,7 +136,7 @@ Assertions seem like going through in more detail. For example, if you have an i
 
 Now, what happens is the program will always check, when executing the statement, whether your statement is true and if not, will immediately crash the program. This is helpful for detecting cases where your assumptions were wrong.
 
-Finally, *debuggers* are programs which execute your program in a controlled environment with the ability to track and stop the program executiuon when necessary. One potentially useful debugger is *gdb* (or its clang counterpart, *lldb*). There are many ways to use it but one way is to get a *backtrace* of the function calls leading to the crash, i.e. all the function calls in the stack at the time the crash occurred. This can be achieved by following these steps:
+Finally, *debuggers* are programs which execute your program in a controlled environment with the ability to track and stop the program execution when necessary. One potentially useful debugger is *gdb* (or its clang counterpart, *lldb*). There are many ways to use it but one way is to get a *backtrace* of the function calls leading to the crash, i.e. all the function calls in the stack at the time the crash occurred. This can be achieved by following these steps:
 
   * Compile the program with "-g3" to get include debug data in the program which will be used by the debugger e.g. to display line numbers
   * Possibly do not compile with optimisations, i.e. do not compile with "-O2" as this may cause the debugger output to be very different

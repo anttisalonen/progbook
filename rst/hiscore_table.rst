@@ -9,27 +9,27 @@ What we're missing is updating the high score table both on starting the new gam
 
 Let's connect the dots. Here's how our high level architecture should look like:
 
-* On page load, the Javascript code requests the high score data from the server.
+* On page load, the JavaScript code requests the high score data from the server.
 * In Python, we have a handler that replies to this request by fetching data from the database and use this data to generate and send back a suitable JSON that can be used for the high score table.
-* In Javascript, we receive this data, and write and call a function that takes this data as the input parameter and inserts it in the HTML high score table.
+* In JavaScript, we receive this data, and write and call a function that takes this data as the input parameter and inserts it in the HTML high score table.
 * Once the player has guessed the correct number, the server shall provide updated high score data to the client which the client shall use to update values in the high score table again.
 
 The following sequence diagram illustrates the flow in more detail.
 
 .. image:: ../material/guess/seq3.png
 
-You might wonder, why have the Javascript code request data from the server at page load time instead of generating the high score table as part of the template on the server? While this is certainly a feasible approach, the good thing about having the Javascript generate the high score table at page load is that as we want to have Javascript code to update the high score table at the end of the game anyway, we can reuse that code at page load and hence have only one piece of code update the high score table instead of two.
+You might wonder, why have the JavaScript code request data from the server at page load time instead of generating the high score table as part of the template on the server? While this is certainly a feasible approach, the good thing about having the JavaScript generate the high score table at page load is that as we want to have JavaScript code to update the high score table at the end of the game anyway, we can reuse that code at page load and hence have only one piece of code update the high score table instead of two.
 
 Actually updating the high score table
 ======================================
 
-You may remember from the section "Javascript meets algorithms" how to call a Javascript function at page load. If not, the hint is that you assign the member function "onload" in the global object "window" as your callback function.
+You may remember from the section "JavaScript meets algorithms" how to call a JavaScript function at page load. If not, the hint is that you assign the member function "onload" in the global object "window" as your callback function.
 
 Let's install a function called update_hiscore() as the function that will be called at page load time, and implement it.
 
 First of all, we need to send an XMLHttpRequest to the server. We should use GET as we're only asking the server for data. However we'll need to supply a parameter to the server, namely *which* high score table we want - as the high score table should be different based on the maximum number the computer can think of. As we've learnt, with GET we can only pass parameters as part of the URL, so let's do that. The URL should look something like "hiscore?max_value=25" - in this example, we'd fetch the page "hiscore" from the server, with "max_value" as the GET parameter, with 25 as its value.
 
-*Exercise*: Implement the update_hiscore() function. It should do nothing else but send an XMLHttpRequest to the server, asking for the high score data, for the maximum number that the user is currently using in his or her game. You can concatenate a number to a Javascript string with the '+' operator, e.g. "hiscore?max_value=" + my_variable. The handler for the data that is received from the server should do nothing else but call a function "display_hiscore()" (which we haven't defined yet), passing the response text to this function. For testing purposes you'll want to add a Flask handler for this URL, but for now it can return only a test string.
+*Exercise*: Implement the update_hiscore() function. It should do nothing else but send an XMLHttpRequest to the server, asking for the high score data, for the maximum number that the user is currently using in his or her game. You can concatenate a number to a JavaScript string with the '+' operator, e.g. "hiscore?max_value=" + my_variable. The handler for the data that is received from the server should do nothing else but call a function "display_hiscore()" (which we haven't defined yet), passing the response text to this function. For testing purposes you'll want to add a Flask handler for this URL, but for now it can return only a test string.
 
 Providing the necessary data server side
 ========================================
@@ -50,7 +50,7 @@ You may recall we decided that in our database schema, the key is the maximum nu
 
     stored_data = r.lrange(key, 0, -1)
 
-The "lrange" function takes three parameters: the key, start index and end index, which, if negatively indexed, counts from the end. In other words, pssing 0 and -1 as the indices we fetch the full list. The variable "stored_data" now holds a list of strings, each string being JSON data.
+The "lrange" function takes three parameters: the key, start index and end index, which, if negatively indexed, counts from the end. In other words, passing 0 and -1 as the indices we fetch the full list. The variable "stored_data" now holds a list of strings, each string being JSON data.
 
 *Exercise*: In your handler function, read all the data for the relevant key in a variable. You need to use "request.get.args()" to get the GET parameter.
 
@@ -75,7 +75,7 @@ The data that this function receives should be the JSON string that we programme
 
 Now, what we should do is take that data and put it in our HTML table.
 
-We already saw some Javascript code before to change a cell in an HTML table:
+We already saw some JavaScript code before to change a cell in an HTML table:
 
 .. code-block:: js
     :linenos:
@@ -85,7 +85,7 @@ We already saw some Javascript code before to change a cell in an HTML table:
         table.rows[i].cells.item(1).innerHTML = "2017-02-15";
     }
 
-We've also seen how to parse a JSON string into a Javascript dictionary:
+We've also seen how to parse a JSON string into a JavaScript dictionary:
 
 .. code-block:: js
 

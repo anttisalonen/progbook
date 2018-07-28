@@ -11,7 +11,7 @@ To get started, let's write a very simple software program.
 
 For this, the first thing you need to do is start a terminal with a Unix shell in it.
 
-I can't tell you how to do this exactly as this is operating system (OS) dependent. At least with some versions of Mac OS, you can start the terminal by searching for "terminal" in Spotlight. On Windows 10, you can install "Windows Subsystem for Linux" (WSL). On older Windowses, there are ways to get a Unix shell like Cygwin but it's more tricky. Searching online is your friend.
+I can't tell you how to do this exactly as this is operating system (OS) dependent. At least with some versions of Mac OS, you can start the terminal by searching for "terminal" in Spotlight. On Windows 10, you can install "Windows Subsystem for Linux" (WSL). On older Windows versions, there are ways to get a Unix shell like Cygwin but it's more tricky. Searching online is your friend.
 
 In the end, it could look something like this:
 

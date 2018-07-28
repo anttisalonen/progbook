@@ -23,7 +23,7 @@ Let's go through this line by line again:
 * Line 5: We define a variable named "x". It has type "int". We assign the value 5 to it.
 * Line 6: We define a variable named "y". It has type "int". We assign the value 42 to it.
 * Line 7: We define a variable named "z". It has type "int". We don't assign any value to it. As a result, its contents are *undefined*; it can contain anything.
-* Line 8: We assign a value to the variable "z", namely the result of arithemtic operations.
+* Line 8: We assign a value to the variable "z", namely the result of arithmetic operations.
 * Line 9: We print the value of "z". We pass the *placeholder* "%d" to printf(). printf() is a function which takes a *variable number of parameters*. Each parameter is separated by a comma (","). Here, we pass printf() two parameters; the first one is (and must be) the format string. The number of placeholders in the format string defines the number of extra parameters that must be passed. Because we have one placeholder, we must pass one extra parameter. Here, our second parameter is "z". This results in printf() printing the value of "z".
 
 *Exercise*: Type (don't copy-paste) the above program into a file. Compile it and run the generated executable file.

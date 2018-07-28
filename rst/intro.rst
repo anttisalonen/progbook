@@ -10,7 +10,7 @@ The book doesn't have any new information compared to what you can find online o
 
 It aims to contain an overview of almost everything that I think is important for software developers. It doesn't contain *everything*; but it should contain enough for the reader to understand software development, and to be able to read about and understand any topic in further detail as needed.
 
-The book focuses on teaching what software development is about, and the core principles around software development. It uses several technologies to this goal (e.g. C, Python, Javascript, HTML, etc.) but is not a book about technologies themselves. The reader will learn the basics (or in some cases more) of various technologies along the way, but the focus is on building a foundation for software development.
+The book focuses on teaching what software development is about, and the core principles around software development. It uses several technologies to this goal (e.g. C, Python, JavaScript, HTML, etc.) but is not a book about technologies themselves. The reader will learn the basics (or in some cases more) of various technologies along the way, but the focus is on building a foundation for software development.
 
 This book does have the aim of supporting interested people in pursuing a job in software development, though I obviously can't guarantee a job. I'll expand on this further below.
 
@@ -33,7 +33,7 @@ If I'm being completely selfish, it's because I'm hiring software engineers and 
 * Read and understand everything in the book
 * Finish all the exercises
 * Write at least some personal mini project in some language (shouldn't be a problem after the above two points)
-* Interact with the rest of the software development community, may it be through Reddit or other social media, chat, Stack Overflow or Github
+* Interact with the rest of the software development community, may it be through Reddit or other social media, chat, Stack Overflow or GitHub
 
 ...then I think that that person should have the *technical* skills to at least seriously be considered for a software engineering position.
 
@@ -53,7 +53,7 @@ The book covers a lot of topics but is very shallow.
 
 The book doesn't include *everything* I know, but it includes enough that the reader should be able to follow a software development discussion, and more importantly, learn more about a specific software development subject without a hugely steep learning curve.
 
-Different programming languages such as C, Python and Javascript are touched upon. Some traditional Computer Science topics such as algorithms and data structures are touched upon. Some topics that are typical in modern software development work environments such as databases, version control and web development are touched upon. Almost nothing is treated in depth.
+Different programming languages such as C, Python and JavaScript are touched upon. Some traditional Computer Science topics such as algorithms and data structures are touched upon. Some topics that are typical in modern software development work environments such as databases, version control and web development are touched upon. Almost nothing is treated in depth.
 
 Although many subjects are treated almost comically lightly, overall the material should be enough for the reader to get a general understanding around software development.
 
@@ -93,7 +93,7 @@ You should have some skills around analytical thinking and problem solving. I do
 
 I do believe that almost anyone who is able to finish high school without significant struggles can learn how to develop software. It's not magic. It does require persistence though; you need to be able to put effort to the book, and it'll take time. I believe someone with the capability to work on the book full time, enough perseverance and help where needed, should be able to finish the book including all the exercises in a matter of months.
 
-It's probably very helpful to have a tutor or someone who's familiar with software development to answer your questions. Use the Internet to your advantage; there are literally thousands of techies online waiting to share their knowledge and answer newbies' questions. Try Stack Overflow, the learnprogramming reddit, Github, or various IRC channels, e.g. those dedicated to specific programming languages.
+It's probably very helpful to have a tutor or someone who's familiar with software development to answer your questions. Use the Internet to your advantage; there are literally thousands of techies online waiting to share their knowledge and answer newbies' questions. Try Stack Overflow, the learnprogramming subreddit, GitHub, or various IRC channels, e.g. those dedicated to specific programming languages.
 
 You must be able to find information online. For example, notice how I used the term "IRC channels"? If you ever do feel the need to ask a question and decide to investigate the IRC bit further, you need to use the Internet to a) find out what IRC is, b) find out what IRC channels there are e.g. for a programming language you're having trouble with, c) how to connect to such a channel and ask your question. This book won't have that information.
 
@@ -108,7 +108,7 @@ The book uses the pedagogical approach of assimilation, or constructionism; info
 
 I should mention at this point, if it wasn't already clear, that the author has no real pedagogical experience.
 
-If you think there's something very unclear about some part of the book or otherwise have any questions or comments, let me know. My email is ajsalonen@gmail.com. You may also create an issue or a pull request in Github. I'm also not a native English speaker so any corrections on that front are welcome as well.
+If you think there's something very unclear about some part of the book or otherwise have any questions or comments, let me know. My email is ajsalonen@gmail.com. You may also create an issue or a pull request in GitHub. I'm also not a native English speaker so any corrections on that front are welcome as well.
 
 About the author
 ================

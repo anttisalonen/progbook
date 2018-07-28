@@ -124,7 +124,7 @@ After doing the above exercise you should see a nice set of text that the web br
 
 The first line means that the browser would like to retrieve any data from the address / using the HTTP 1.1 protocol. The second line means that from the browser's point of view, it's connecting to 127.0.0.1:1234.
 
-The full HTTP 1.1 protocol is described in RFCs 7230-7237. RFC's (Request for Comments) are documents maintained by W3C (World Wide Web Consortium).
+The full HTTP 1.1 protocol is described in RFCs 7230-7237. RFCs (Request for Comments) are documents maintained by W3C (World Wide Web Consortium).
 
 *Exercise*: Look up RFC 7230 online. Don't read all of it, but try to get an overview of the HTTP 1.1 architecture.
 

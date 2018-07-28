@@ -7,7 +7,7 @@ As mentioned in the introduction, this book aims to contain an overview of almos
 
 **C++ programming language**: The C++ Programming Language by Bjarne Stroustrup
 
-**Javascript**: Eloquent JavaScript: A Modern Introduction to Programming 2nd Edition by Marijn Haverbeke
+**JavaScript**: Eloquent JavaScript: A Modern Introduction to Programming 2nd Edition by Marijn Haverbeke
 
 **Algorithms**: The Algorithm Design Manual by Steven S Skiena
 

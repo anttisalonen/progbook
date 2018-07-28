@@ -1,4 +1,4 @@
-Javascript meets algorithms
+JavaScript meets algorithms
 ---------------------------
 
 Try to play the guessing game a few times.
@@ -47,7 +47,7 @@ The above, combined with your knowledge from the previous section, should be eno
 
 *Exercise*: Once you've implemented this button, you might want to experiment with increasing the maximum number from 25 to something larger, for example 5000. See if your algorithm still finds the correct number with a small number of guesses. Make sure you define the maximum number only once in the source code such that there's no worry of your different functions going out of sync.
 
-Calling a Javascript function at page load
+Calling a JavaScript function at page load
 ==========================================
 
 A quick search online reveals a way to do this:
@@ -61,8 +61,8 @@ A quick search online reveals a way to do this:
 
 That is, we define a function which we want to be called at page load time, and install it as a *callback* function in the member function "onload" in the global object "window". (We'll get to the concepts of callback functions, member functions and objects in more detail later.)
 
-*Exercise*: The original image of the game included a text "I'm thinking of a number between 1 and 25," but after the previous exercise, this might not be true anymore. Modify this string based on the variable you have that holds the maximum value. For this you'll need to run Javascript at the page loading phase.
+*Exercise*: The original image of the game included a text "I'm thinking of a number between 1 and 25," but after the previous exercise, this might not be true anymore. Modify this string based on the variable you have that holds the maximum value. For this you'll need to run JavaScript at the page loading phase.
 
 *Exercise*: Assuming the maximum number is 5000, what is the maximum number of guesses the algorithm will need in order to find the correct number? Hint: the algorithm has O(log n) complexity.
 
-Note that the Javascript code is executed in the browser. This means that if you were to load a public webpage with, for example, such a game, you can modify the HTML your browser renders to add a new button, and the Javascript your browser executes to solve the game. It may be difficult to identify and understand the correct Javascript in order to do this, depending on the web page, but as the Javascript execution and HTML are in the end controlled by the browser, in general there's nothing stopping any webpage visitors from making their own additions to the code they execute.
+Note that the JavaScript code is executed in the browser. This means that if you were to load a public web page with, for example, such a game, you can modify the HTML your browser renders to add a new button, and the JavaScript your browser executes to solve the game. It may be difficult to identify and understand the correct JavaScript in order to do this, depending on the web page, but as the JavaScript execution and HTML are in the end controlled by the browser, in general there's nothing stopping any web page visitors from making their own additions to the code they execute.

@@ -131,7 +131,7 @@ Now, the main new thing is *associating* a time with the GPS data point. We alre
 Let's see what we have:
 
 * Line 2: We #include <tuple> as is needed when working with tuples
-* Lines 4-9: We define a class called C. It has one constructor which takes two parameters, a and b. It also has two member variables, m_a and m_b. They are initialised when the contructor is run. Because it has a constructor defined, it has no *default constructor*, i.e. the two values need to be passed to the constructor whenever an object of class C is instantiated.
+* Lines 4-9: We define a class called C. It has one constructor which takes two parameters, a and b. It also has two member variables, m_a and m_b. They are initialised when the constructor is run. Because it has a constructor defined, it has no *default constructor*, i.e. the two values need to be passed to the constructor whenever an object of class C is instantiated.
 * Lines 11-16: We define the main function.
 * Line 13: We define our tuple. It's a tuple of C and int. We create it using the std::make_tuple() function, which takes an object of type C and an int as is required from the tuple type definition. We instantiate an object of type C with values 1 and 2.
 * Line 14: Using std::get<0> we can access the first element in the tuple, i.e. the value of type C. We can then access its public member variable using ".m_a", hence printing 1.

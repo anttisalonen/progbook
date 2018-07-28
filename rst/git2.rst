@@ -44,7 +44,7 @@ Now, let's make a change in our clone:
 
 We now have one more commit in our clone than in our original repository.
 
-The typical flow, e.g. when working with a repository in github or generally a central repository, is to push the change to the *origin*, i.e. to the repository that was used for creating the clone:
+The typical flow, e.g. when working with a repository in GitHub or generally a central repository, is to push the change to the *origin*, i.e. to the repository that was used for creating the clone:
 
 .. code-block:: bash
 

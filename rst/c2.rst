@@ -21,7 +21,7 @@ Seems straightforward enough. Now, let's imagine we need to find out the differe
         return val2 - val1;
     }
 
-This seems a bit unwieldly: The function takes seven parameters in total, and it's easy to make a mistake somewhere. Surely we can do better?
+This seems a bit unwieldy: The function takes seven parameters in total, and it's easy to make a mistake somewhere. Surely we can do better?
 
 In C (and in fact most programming languages) it's possible to combine values in *records* or composite data types. See below:
 

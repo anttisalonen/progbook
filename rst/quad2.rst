@@ -106,7 +106,7 @@ There are a few points to make:
 
 *Exercise*: Try opening a file in Python and storing its contents to a variable like above. Print out the contents by printing out the value of the variable.
 
-We now have a variable with text inside, and like in C, we need to somehow *parse* the three floating point variables, a, b and c, from it. Instaed of using a function from the scanf() family, Python provides different means:
+We now have a variable with text inside, and like in C, we need to somehow *parse* the three floating point variables, a, b and c, from it. Instead of using a function from the scanf() family, Python provides different means:
 
 .. code-block:: python
     :linenos:

@@ -71,7 +71,7 @@ One potentially tricky thing is finding out whether an entry is in the past or n
 
 What we have is two time stamps, both having two integer values (hour and minute). The first one is the current time while the second one is the time stamp of an entry. We need to find out whether the second one is before or after the first one.
 
-Now, because the time of day is circular, a time stamp can be said to always be after another one: it could just be 23 hours and 59 minutes after. We can break this cycle by agreeing e.g. that only the entries 12 hours after the current time are actually considered to be in the future. We should also ensure we handle midnight correctly such that e.g. the time 00:02 is treated as after 23:58; we want the bus schedule display to show buses traveling right after midnight even if it's right before midnight.
+Now, because the time of day is circular, a time stamp can be said to always be after another one: it could just be 23 hours and 59 minutes after. We can break this cycle by agreeing e.g. that only the entries 12 hours after the current time are actually considered to be in the future. We should also ensure we handle midnight correctly such that e.g. the time 00:02 is treated as after 23:58; we want the bus schedule display to show buses travelling right after midnight even if it's right before midnight.
 
 We can use this to put together a small test suite:
 

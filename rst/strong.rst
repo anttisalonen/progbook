@@ -3,7 +3,7 @@ The case for statically, strongly typed languages
 
 We've so far mostly used three languages:
 
-* Javascript: a dynamically, weakly typed language
+* JavaScript: a dynamically, weakly typed language
 * C: a statically, weakly typed language
 * Python: a dynamically, strongly typed language
 
@@ -22,9 +22,9 @@ For the second operation, the implementation should be implemented generically, 
 
 This may be helpful in illustrating the different concepts between languages.
 
-*Exercise*: Implement both of the above operations in one of the languages (C, Python or Javascript). Note that example implementations will be listed below. If you pick C, you may want to use the function "realloc". If you pick Javascript, you may want to look up the reference for the Javascript array class first.
+*Exercise*: Implement both of the above operations in one of the languages (C, Python or JavaScript). Note that example implementations will be listed below. If you pick C, you may want to use the function "realloc". If you pick JavaScript, you may want to look up the reference for the JavaScript array class first.
 
-To prepare, here's how to split a string in C, Python and Javascript:
+To prepare, here's how to split a string in C, Python and JavaScript:
 
 C:
 
@@ -44,7 +44,7 @@ Python:
     for word in string.split(' '):
         print word
 
-Javascript:
+JavaScript:
 
 .. code-block:: js
 
@@ -54,7 +54,7 @@ Javascript:
         console.log(res[i]);
     }
 
-Here's the program to filter numbers less than zero in C, Python and Javascript:
+Here's the program to filter numbers less than zero in C, Python and JavaScript:
 
 .. literalinclude:: ../material/strong/filt.c
    :language: c
@@ -70,7 +70,7 @@ Python:
     inp = [3, -1, 4, -2, 5, -3, 6, -4]
     print filt(inp)
 
-Javascript:
+JavaScript:
 
 .. code-block:: javascript
 
@@ -90,12 +90,12 @@ What's new
 
 What could statically, strongly typed languages improve on compared to the above?
 
-Python and Javascript are fairly concise but, when compared to C, have some characteristics that can be perceived as disadvantages:
+Python and JavaScript are fairly concise but, when compared to C, have some characteristics that can be perceived as disadvantages:
 
-* The performance of Python and Javascript is generally not as good as C and much of this is due to dynamic typing, although there are optimisations that can be done to alleviate this (for example *JIT*, or just-in-time compilation, where parts of a program can be compiled during execution after the runtime has collected data on which type is typically associated with each variable)
+* The performance of Python and JavaScript is generally not as good as C and much of this is due to dynamic typing, although there are optimisations that can be done to alleviate this (for example *JIT*, or just-in-time compilation, where parts of a program can be compiled during execution after the runtime has collected data on which type is typically associated with each variable)
 * There's arguably more room for error with dynamic typing; errors that could be caught before running the program may cause a run time error during execution
 
-On the other hand, C has some characteristics that can be perceived as disadvantages compared to Python and Javascript:
+On the other hand, C has some characteristics that can be perceived as disadvantages compared to Python and JavaScript:
 
 * C is fairly verbose; based on the number of lines already there's arguably more effort required in C to achieve the same behaviour
 * C is not memory safe, opening the possibility of nasty memory related bugs and security holes

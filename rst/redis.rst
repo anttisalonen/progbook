@@ -88,7 +88,7 @@ Redis should now be running and accepting TCP/IP connections. You can leave it r
 Python Redis client
 ===================
 
-The main Python Redis client can be found online (at the time of writing, in Github). There are a few ways you could install this, but pip is probably the most straightforward:
+The main Python Redis client can be found online (at the time of writing, in GitHub). There are a few ways you could install this, but pip is probably the most straightforward:
 
 .. code-block:: bash
 

@@ -3,13 +3,13 @@ High level architecture
 
 In this section we'll discuss the high level architecture for our web app.
 
-Let's beging with the requirements. Remember that what we wanted to do was have a high score list for our guessing game. We'll have two HTML pages. The first one is the entry point for the user and allows them to enter their name as well as the maximum number that the computer will think of. This information will be used in the second page for the actual guessing game which will also include the high score table.
+Let's begin with the requirements. Remember that what we wanted to do was have a high score list for our guessing game. We'll have two HTML pages. The first one is the entry point for the user and allows them to enter their name as well as the maximum number that the computer will think of. This information will be used in the second page for the actual guessing game which will also include the high score table.
 
 Here is an illustration of what we want to achieve:
 
 .. image:: ../material/guess/req.png
 
-In order to do this, we need to have a database which stores the high scores. In order to have and use the database, we need to have some *server side* code. This means we get to pull up Flask, our web microframework again, as it has the capability of running a web server which we need going forwards.
+In order to do this, we need to have a database which stores the high scores. In order to have and use the database, we need to have some *server side* code. This means we get to pull up Flask, our web micro-framework again, as it has the capability of running a web server which we need going forwards.
 
 We have the following constraints:
 

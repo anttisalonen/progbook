@@ -36,7 +36,7 @@ Here, we also implicitly defined the *database schema* for our data: the key is 
 
 Note that there are different ways the schema could be defined for this use case - this is one of the simplest ways but in general, schemas can be defined in significantly different ways, depending on the use case, amount of data and any performance requirements.
 
-*Exercise*: When your server receives the number of guesses from Javascript, store this in the Redis database.
+*Exercise*: When your server receives the number of guesses from JavaScript, store this in the Redis database.
 
 Here are some hints:
 
@@ -45,7 +45,7 @@ Here are some hints:
 
 This should result in two relevant URLs that we serve in our Python code:
 
-* The guessing game itself: an HTML page with the relevant Javascript that allows the user to play the game
+* The guessing game itself: an HTML page with the relevant JavaScript that allows the user to play the game
 * The URL that receives the number of guesses and is called by our AJAX request
 
 We should now be able to store something resembling a high score list in a database, but we're still lacking the possibility for the user to enter his or her name, configuring the maximum number the computer thinks of and understanding how exactly turn the contents of a key in a database to a correctly sorted high score list. This will be the scope for the next sections.

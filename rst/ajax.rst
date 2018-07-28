@@ -1,28 +1,28 @@
 AJAX
 ----
 
-AJAX stands for Asynchronous Javascript and XmlHttpRequest which is quite a mouthful. Before we go through what it is, let's explain why we need it.
+AJAX stands for Asynchronous JavaScript and XmlHttpRequest which is quite a mouthful. Before we go through what it is, let's explain why we need it.
 
 From a high level software architecture point of view, this is how the flow is expected to work:
 
 1. User opens the relevant URL in his or her browser and has some means to enter his or her name on the page
-2. Our web server serves the HTML and Javascript that is our guessing game
-3. The user plays the game happily in the browser, executing Javascript, without the server being aware
-4. Once the user guesses the right answer, Javascript sends the number of guesses and the player name to the server
+2. Our web server serves the HTML and JavaScript that is our guessing game
+3. The user plays the game happily in the browser, executing JavaScript, without the server being aware
+4. Once the user guesses the right answer, JavaScript sends the number of guesses and the player name to the server
 5. The server stores the number of guesses and the player name in the database
-6. The server fetches the high score list from the database, and sends it to the client (Javascript)
+6. The server fetches the high score list from the database, and sends it to the client (JavaScript)
 7. The client displays the high score list
 
 Seems simple, doesn't it?
 
 Apart from entering the name, we've already covered steps 1-3 and to some extent step 5. In this section we'll cover steps 4 and 6. They're basically what AJAX is about.
 
-A note on security: As we've seen, we're not really in control of the Javascript code - a user can replace the Javascript code with whatever code they prefer. In this sense, were we to use this architecture in a real program, a user could easily replace the data sent to the server and fake their way to the top of the high score list. For educational purposes we assume we can trust the user in this case, but were one serious about such a game and offering it for the public, the game logic would have to be done on the server side, such that the correct number would be generated on the server and each guess would need to be sent to the server.
+A note on security: As we've seen, we're not really in control of the JavaScript code - a user can replace the JavaScript code with whatever code they prefer. In this sense, were we to use this architecture in a real program, a user could easily replace the data sent to the server and fake their way to the top of the high score list. For educational purposes we assume we can trust the user in this case, but were one serious about such a game and offering it for the public, the game logic would have to be done on the server side, such that the correct number would be generated on the server and each guess would need to be sent to the server.
 
 Asynchronous execution
 ======================
 
-Asynchronous Javascript and XmlHttpRequest. Asynchronous means that the code is not run synchronously. So far all our code has run synchronously. For example here:
+Asynchronous JavaScript and XmlHttpRequest. Asynchronous means that the code is not run synchronously. So far all our code has run synchronously. For example here:
 
 .. code-block:: js
     :linenos:
@@ -31,7 +31,7 @@ Asynchronous Javascript and XmlHttpRequest. Asynchronous means that the code is 
     x += 5;
     document.getElementById("foo").value = x;
 
-Line 1 is executed before line 2, which is executed before line 3. Asynchronous execution changes this. Instead we have something like this (not real Javascript code):
+Line 1 is executed before line 2, which is executed before line 3. Asynchronous execution changes this. Instead we have something like this (not real JavaScript code):
 
 .. code-block:: js
     :linenos:
@@ -48,14 +48,14 @@ What happens here is:
 * Lines 2-4: We define the *callback* - a function which will be called later, but not now
 * Line 5: We send the request to the server (via HTTP)
 
-After the request is sent to the server, the server (our Python code) will handle it and send something back (via HTTP). As this goes over the network it can take several milliseconds or even longer depending on what the server does. Once the server has sent the reply, the browser will receive it and its Javascript interpreter will call the function that was defined in lines 2-4 with the data from the server. In this case, the HTML element with ID "foo" will have its value changed, i.e. the result from the server is visible to the user.
+After the request is sent to the server, the server (our Python code) will handle it and send something back (via HTTP). As this goes over the network it can take several milliseconds or even longer depending on what the server does. Once the server has sent the reply, the browser will receive it and its JavaScript interpreter will call the function that was defined in lines 2-4 with the data from the server. In this case, the HTML element with ID "foo" will have its value changed, i.e. the result from the server is visible to the user.
 
 What makes this asynchronous is that we define code which isn't run synchronously with the execution flow otherwise.
 
 XmlHttpRequest
 ==============
 
-XmlHttpRequest is an API that allows asynchronous communication with the server. It's now standardised across browsers such that all major browsers provide this API, allowing us as Javascript programmers to send and receive data from the server via HTTP. It's called XmlHttpRequest (probably) because it was originally mainly used to send and receive XML data, but in general it can be used to transfer any data. Specifically, we'll be using it to transfer JSON.
+XmlHttpRequest is an API that allows asynchronous communication with the server. It's now standardised across browsers such that all major browsers provide this API, allowing us as JavaScript programmers to send and receive data from the server via HTTP. It's called XmlHttpRequest (probably) because it was originally mainly used to send and receive XML data, but in general it can be used to transfer any data. Specifically, we'll be using it to transfer JSON.
 
 .. topic:: XML and JSON
 
@@ -99,10 +99,10 @@ Let's try this out ourselves.
 
 *Exercise*: Implement the above AJAX request. You'll need the following:
 
-1) Create a new HTML file which has nothing but a button which calls a Javascript function (<input type="button" onclick="my_function()" value="Button to GET data">), and a Javascript function which does nothing more but the code from the block above.
+1) Create a new HTML file which has nothing but a button which calls a JavaScript function (<input type="button" onclick="my_function()" value="Button to GET data">), and a JavaScript function which does nothing more but the code from the block above.
 2) Add a function in your Python code to serve this new HTML page using Flask (render_template()).
 3) Add another function in your Python code to serve the URL that the AJAX request will request. In the example above, that URL is "file.html". Note that the URL doesn't need to have a file extension. That function should return a string, like "Hello world!"
-4) Run your Python code using Flask. Navigate to the HTML page that has the button. Open the Javascript console in the browser developer menu. Click the button. You should see the text from the Python server code in the console.
+4) Run your Python code using Flask. Navigate to the HTML page that has the button. Open the JavaScript console in the browser developer menu. Click the button. You should see the text from the Python server code in the console.
 
 .. topic:: GET vs. POST
 

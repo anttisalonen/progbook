@@ -61,7 +61,7 @@ Now, what happens here is the following:
 * Line 6: We cast the void pointers to int pointers (as we know our data is ints) and subtract a from b such that if a is less than b, it will be before b in the result.
 * Line 12: We call the qsort() standard library function which takes a *pointer to a function* as the fourth parameter. Pointer to a function is how a callback function is defined and used in C.
 
-Callbacks in Javascript
+Callbacks in JavaScript
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 We already had an example when we defined a function to call at the page load phase:
@@ -78,7 +78,7 @@ Here, our function "init" is defined as the callback function for the object "wi
 Anonymous functions
 ===================
 
-In some languages including Python and Javascript, we can define functions *anonymously*, meaning we don't have to really define a function with a name, but merely a function without one. Going back to our Python example about providing a callback function as the "key" parameter, we wrote a function to return the third element of a list but this function is actually very simple. We can shorten our code by doing the following:
+In some languages including Python and JavaScript, we can define functions *anonymously*, meaning we don't have to really define a function with a name, but merely a function without one. Going back to our Python example about providing a callback function as the "key" parameter, we wrote a function to return the third element of a list but this function is actually very simple. We can shorten our code by doing the following:
 
 .. code-block:: python
 

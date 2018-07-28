@@ -111,7 +111,7 @@ Here's a snippet that demonstrates the following concepts:
 
 Let's look at this closer again:
 
-* Line 6: We add the image "logo.png" in our PDF. The second and third parameters describe the position of the image. The fourth parameter designates the width of the image, here 33 millimeters. Pyfpdf calculates the height of the image automatically based on the width but if you wanted to stretch the image, as per pyfpdf reference, you could provide the height as the fifth parameter.
+* Line 6: We add the image "logo.png" in our PDF. The second and third parameters describe the position of the image. The fourth parameter designates the width of the image, here 33 millimetres. Pyfpdf calculates the height of the image automatically based on the width but if you wanted to stretch the image, as per pyfpdf reference, you could provide the height as the fifth parameter.
 * Line 8: We set the X and Y coordinates of the next item to (10, 45).
 * Line 11: We create our second text label. It will be created at position (10, 80) and have the width and height of 40 and 10 respectively. We pass the cell() member function the named parameter "ln" (line, or line break) with the value 1 which indicates that the next cell should appear below this cell (as opposed to to the right of it which is the default).
 * Line 12: Because we passed ln=1 to the previous function call, the current X and Y positions are now shifted to right below the previous cell. This means that the text "Text 2" should appear right below the text "Text 1".

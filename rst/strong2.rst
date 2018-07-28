@@ -13,7 +13,7 @@ C++ started in the 80s as an addition of features to C. Since then it has accumu
 Some things that C++ "fixes" comparing to C are:
 
 * Automatic code execution when a variable leaves the scope: We saw in our BSD socket handling code that we had to call close() and sometimes shutdown() whenever we saw something go wrong. This is easily forgotten or neglected, causing resource leaks (in this case file descriptors but can also be e.g. memory). C++ uses the concept of classes to enable automatic cleanup when necessary. This also enables *smart pointers* - pointers with *reference counting* such that no manual memory management is necessary, and instead the pointers should know themselves when the memory pointed to can be freed.
-* Arrays: In C, the programmer has to keep track of the length of an array (or pointer to an array) manually - it's not automatically associated with the array. C++ has array datatypes which include the length, greatly simplifying the code.
+* Arrays: In C, the programmer has to keep track of the length of an array (or pointer to an array) manually - it's not automatically associated with the array. C++ has array data types which include the length, greatly simplifying the code.
 * Generic programming: In C, if one were to e.g. implement a function to return the larger of two numbers, it's necessary to implement the function for all numeric data types, e.g. float, int, etc. even when the body of the function is the same. C++ solves this using *templates*.
 * Extended standard library: E.g. the max() function but also several string handling functions are included in the C++ standard library. Furthermore, data structures such as linked lists, sets and dictionaries (maps) are included.
 
@@ -94,7 +94,7 @@ Let's see what we have:
 * Line 4: We call the member function (or "method" in Java terminology) "split" of the class String which returns an array of Strings.
 * Line 5: We define a for loop where we iterate over the array, printing out each word in stdout.
 
-As you can see, the Java code is for this example not very different from Python or Javascript.
+As you can see, the Java code is for this example not very different from Python or JavaScript.
 
 Filtering numbers in an array:
 
