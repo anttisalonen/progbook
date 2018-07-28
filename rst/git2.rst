@@ -266,7 +266,7 @@ We'll then have to fix the code manually, e.g. by deciding we want to output val
     
     	modified:   with.py
     
-    $ git diff --cached
+    $ git diff --staged
     diff --git a/with.py b/with.py
     index d63b0bf..ae90c0d 100644
     --- a/with.py

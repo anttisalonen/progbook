@@ -1,0 +1,43 @@
+digraph dfs {
+    p1 [label="Propagate" shape=box fillcolor=lightgrey style=filled];
+    p2 [label="Propagate" shape=box fillcolor=lightgrey style=filled];
+    p3 [label="Propagate" shape=box fillcolor=lightgrey style=filled];
+    p4 [label="Propagate" shape=box fillcolor=lightgrey style=filled];
+    p5 [label="Propagate" shape=box fillcolor=lightgrey style=filled];
+
+    g1 [label="Guess" shape=box fillcolor=lightgrey style=filled];
+    g2 [label="Guess" shape=box fillcolor=lightgrey style=filled];
+    g3 [label="Guess" shape=box fillcolor=lightgrey style=filled];
+    g4 [label="Guess" shape=box fillcolor=lightgrey style=filled];
+
+    i1 [label="Invalid" shape=box fillcolor=red style=filled];
+    i2 [label="Invalid" shape=box fillcolor=red style=filled];
+
+    u1 [label="37 unsolved cells"];
+    u2 [label="37 unsolved cells"];
+    u3 [label="15 unsolved cells"];
+    u4 [label="14 unsolved cells"];
+    u5 [label="14 unsolved cells"];
+
+    "Solved puzzle" [shape=box fillcolor=green style=filled];
+
+    "64 unsolved cells" -> p1;
+    p1 -> "38 unsolved cells";
+    "38 unsolved cells" -> g1;
+    "38 unsolved cells" -> g2;
+    g1 -> u1;
+    u1 -> p2;
+    p2 -> i1;
+    g2 -> u2;
+    u2 -> p3;
+    p3 -> u3;
+    u3 -> g3;
+    g3 -> u4;
+    u4 -> p4;
+    p4 -> i2;
+
+    u3 -> g4;
+    g4 -> u5;
+    u5 -> p5;
+    p5 -> "Solved puzzle"
+}

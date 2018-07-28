@@ -1,0 +1,20 @@
+digraph rec {
+    d1 [label="..."];
+    d2 [label="..."];
+    d3 [label="..."];
+    d4 [label="..."];
+    d5 [label="..."];
+    "propagate: i=2" -> "eliminate at peer=0";
+    "eliminate at peer=0" -> "propagate: i=0";
+    "propagate: i=0" -> "eliminate at peer=1";
+    "eliminate at peer=1" -> "propagate: i=1";
+    "propagate: i=1" -> "eliminate at peer=3";
+    "eliminate at peer=3" -> "propagate: i=3";
+    "propagate: i=3" -> d1;
+    "propagate: i=2" -> "eliminate at peer=4";
+    "eliminate at peer=4" -> "propagate: i=4";
+    "propagate: i=4" -> d2;
+    "propagate: i=0" -> d3;
+    "propagate: i=1" -> d4;
+    "propagate: i=2" -> d5;
+}

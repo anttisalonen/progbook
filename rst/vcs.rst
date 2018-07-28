@@ -56,7 +56,7 @@ This adds "hello.py" to *the staging area* which is an area describing what will
 
     	new file:   hello.py
 
-What this means is that if we were to commit our changes, i.e. create a new version, the new version would include a new file, namely hello.py. We can furthermore see the contents of the new commit by running "git diff --cached".
+What this means is that if we were to commit our changes, i.e. create a new version, the new version would include a new file, namely hello.py. We can furthermore see the contents of the new commit by running "git diff --staged".
 
 Let's create our commit:
 

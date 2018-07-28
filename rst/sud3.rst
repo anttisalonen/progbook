@@ -150,51 +150,69 @@ In order to implement this, what we need is:
 2) Identifying what the peers are for a cell
 3) A function that calls the above functions, i.e. checks, for all cells, which values can be eliminated
 
-We already implemented 1) when we implemented the Cell class.
+We already implemented 1) when we implemented the Cell class. Let's implement 2) next.
+
+Finding Sudoku peers
+====================
 
 Recall that the peers of a cell are the cells that are on either the same horizontal line, on the same vertical line, or in the same 3x3 sub-grid, i.e. in the same *unit* as the cell.
 
-When implementing a function for 2), the question arises on what data types should the function use as input and output. It's often easier to answer this if we consider the user of this function, i.e point 3).
+On the interface for our function that finds the peers, it seems like an easy way to encode cell positions could be to use integers which represent the index in our cell array. For example, an integer 0 would mean the first element in our array, or the cell at the very top left in the puzzle. The integer 50 would represent 50 % 9 = 5th column (0-indexed) and 50 / 9 = 5th row, or the bottom right cell in the middle 3x3 sub-grid.
 
-Let's put this function together in C++:
+This suggests we have the function declaration:
+
+.. code-block:: cpp
+
+    class Puzzle {
+        public:
+            ...
+
+        private:
+            std::vector<int> peers(int index) const;
+            ...
+    };
+
+That is, our function takes an integer as a parameter (which cell to find peers for), returns a vector of integers (which cells are the peers), and doesn't modify the data within the Puzzle object. Furthermore our function is *private* as it's not necessary to call this function from outside the class.
+
+Now, here's one way to find the indices to the cells that are in the same vertical line:
 
 .. code-block:: cpp
     :linenos:
 
-    bool Puzzle::propagate(int i)
+    std::vector<int> Puzzle::peers(int index) const
     {
-        bool has_only_one = cells[i].has_one();
-        if(has_only_one) {
-             auto value = cells[i].get_one();
-             auto peers = peers(i);
-             for(const auto& peer : peers) {
-                 if(cells[peer].has(value)) {
-                     bool still_valid = cells[peer].eliminate(value);
-                     if(!still_valid)
-                         return false;
-                     still_valid = propagate(peer);
-                     if(!still_valid)
-                         return false;
-                 }
-             }
+        std::vector<int> ret;
+
+        int column = index % 9;
+        for(int i = 0; i < 9; i++) {
+            int peer_index = i * 9 + column;
+            if(peer_index != index) {
+                ret.push_back(peer_index);
+            }
         }
-        return true;
+
+        return ret;
     }
 
-The summary of this function is that we go through each cell, and if it only has one value, we eliminate the value from the peers if they had it. If a peer ends up only having one value, we repeat for that cell. If we invalidate the puzzle with this (which shouldn't happen), we stop.
+Let's go through this in detail.
 
-Now, a couple of notes:
+* Line 3: Our return variable.
+* Line 5: We calculate *the column* for the given index by dividing by 9 and taking the remainder. This means that e.g. indices 4, 13, 22 etc. all return the same column (4).
+* Line 6: We define a loop that goes through nine elements.
+* Line 7: We calculate the *peer index* by multiplying the variable "i" by 9 and adding the column. This means that e.g. with index 4 we get 4, 13, 22 etc.
+* Line 9: We add the peer index in the return variable.
 
-* Line 3: we previously introduced the Cell class member function "has_one". This is used here.
-* Line 5: We need an additional function to get the single value (although "get_values" could be used as well).
-* Line 6: We call the function "peers" which should be a member function of the Puzzle class. This isn't yet defined. It takes an integer as input (index of a cell in the array "cells") and returns an array or a vector of indices which are the indices of the peer cells.
-* Line 7: We iterate through all the peers.
-* Line 8: We can access the peers in the "cells" array by index "peer", and call the Cell class member function "has" which should return true if the value is possible for the cell. The function is yet to be defined.
-* Line 10: We call the function we're defining for the peer; recursion. What happens is another function call is pushed to the stack, such that we enter the function "propagate" again but with the variable "i" being set to "peer" for this second call. Once that function call returns then we end up at line 10 again, with "i" at the original value, continuing the original for loop to process the rest of the peers. With recursion, it's important to have a *base case*, i.e. a case where the recursive call will not be made, to avoid infinite loop. Our base cases are either no cells having only one value, or all peers already having a single value.
+Now, let's add the missing logic.
 
-What we have here, after filling out the blanks, is the propagation function, which eliminates numbers from peer cells, and also propagates this if the peer cell ends up with only one value.
+*Exercise*: Add the logic for the horizontal lines and the 3x3 grids in the above function. Try it out.
 
-*Exercise*: Implement the "get_one" and "has" member functions for the Cell class.
+.. topic:: Digression: static member functions
 
-*Exercise*: What happens when the user of the Cell class calls "get_one" but the cell has more than one value? What is the cell has no values at all (all numbers eliminated)? What would you expect to happen? Is it possible to improve the has_one/get_one interface to avoid invalid use?
+  You may have noticed that our function above not only does not modify the data in the Puzzle object ("cells" array), it doesn't even read it. This means it could actually be a free standing function and doesn't have to be a member function of the Puzzle class. On the other hand, it may be convenient to group functions that are relevant for certain classes together. There's a mechanism for this: *static member functions*. You can declare one by including the keyword "static" at the beginning of the declaration. You'll then need to name the class when calling it. Here's an example:
+
+  .. literalinclude:: ../material/sudoku/static.cpp
+    :language: cpp
+
+  You mustn't use the keyword "const" to annotate the function const as it's a static function and hence won't be able to access object data anyway.
+
 
