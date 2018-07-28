@@ -68,8 +68,6 @@ conclusion with text on desktop+mobile apps
 cron
 env variables
 utf-8
-
-Will have
 parallel programming - threads, mutexes
 ring buffer
 heap

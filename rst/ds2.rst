@@ -108,20 +108,27 @@ C doesn't have built in support for dictionaries (although C++ does). In Python,
 
 (This example also demonstrates Python exception handling and the Pythonic EAFP ("easier to ask for forgiveness than permission") principle as well as exceptions: it's typically cleaner code to try to access a key in a dictionary and handle the error if the key is not found than check beforehand whether the key is in a dictionary and only access it if it is.)
 
+Priority queues
+===============
+
+A priority queue is a data type where each element added to it has a priority (e.g. an integer), and retrieving the element with the highest priority is typically a fast operation. It supports adding elements with a given priority and removing the element with the highest priority. Priority queues are often implemented as *heaps*, which are a kind of a tree data structure (often a binary tree) with the element with the highest value as the root of the tree.
+
 Summary
 =======
 
 Finally, here's a summary table of the performance of the different operations:
 
-+--------------------------------------------------------------+------------------------------------------+------------------------------------------+
-| Data type                                                    | Access                                   | Insertion                                | 
-+==============================================================+==========================================+==========================================+
-| Array                                                        | O(1)                                     | O(n)                                     |
-+--------------------------------------------------------------+------------------------------------------+------------------------------------------+
-| Linked list                                                  | O(n)                                     | O(1)                                     |
-+--------------------------------------------------------------+------------------------------------------+------------------------------------------+
-| Set or a dictionary (implemented using a binary search tree) | O(log n)                                 | O(log n)                                 | 
-+--------------------------------------------------------------+------------------------------------------+------------------------------------------+
-| Set or a dictionary (implemented using hashing)              | O(1) on average (O(n) in the worst case) | O(1) on average (O(n) in the worst case) |
-+--------------------------------------------------------------+------------------------------------------+------------------------------------------+
++--------------------------------------------------------------+----------------------------------------------+------------------------------------------+
+| Data type                                                    | Access                                       | Insertion                                | 
++==============================================================+==============================================+==========================================+
+| Array                                                        | O(1)                                         | O(n)                                     |
++--------------------------------------------------------------+----------------------------------------------+------------------------------------------+
+| Linked list                                                  | O(n)                                         | O(1)                                     |
++--------------------------------------------------------------+----------------------------------------------+------------------------------------------+
+| Set or a dictionary (implemented using a binary search tree) | O(log n)                                     | O(log n)                                 | 
++--------------------------------------------------------------+----------------------------------------------+------------------------------------------+
+| Set or a dictionary (implemented using hashing)              | O(1) on average (O(n) in the worst case)     | O(1) on average (O(n) in the worst case) |
++--------------------------------------------------------------+----------------------------------------------+------------------------------------------+
+| Priority queue (implemented using a binary tree)             | O(1) (only for the highest priority element) | O(log n)                                 |
++--------------------------------------------------------------+----------------------------------------------+------------------------------------------+
 

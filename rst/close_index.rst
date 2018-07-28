@@ -6,5 +6,6 @@ Final bits
 
    osl
    tsp
+   thread
    book
    further

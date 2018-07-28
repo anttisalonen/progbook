@@ -109,4 +109,10 @@
     py4 -> tsp;
     book -> further;
     vcs -> osl;
+    sud4 -> thread;
+    unix2 -> thread;
+    httpserv -> thread;
+    func -> thread;
+    png2 -> thread;
+    sdl2 -> thread;
 }

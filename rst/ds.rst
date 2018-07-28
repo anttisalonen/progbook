@@ -100,4 +100,9 @@ Queue is also called "FIFO" - first in, first out. Here's an example "animation"
 * We then push 3 in the queue, meaning we set the value of the third element to 3 and note that the end of the queue is now on the third element.
 * We then pop an element from the queue, meaning we set the beginning of the queue to the second element. The 1 is still in the memory but not treated as part of the queue.
 
+More buffers
+~~~~~~~~~~~~
 
+A ring buffer is similar to a queue but, in case the buffer allocated to the queue is full, a new element replaces the oldest element in the queue, such that the oldest element is *overwritten*. This can be useful to e.g. keep track of the last N integers, or pointers, or any other data.
+
+A double-ended queue, or *deque*, is, like the name suggests, a queue where one can append or remove elements at either end of the queue. This can often be implemented as a kind of a ring buffer.

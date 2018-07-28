@@ -16,7 +16,9 @@ Learn Programming
 
     The code within this book is licensed under the MIT license.
 
-:download:`Download the book in PDF form <../_build/latex/book.pdf>`
+.. only:: html
+
+    :download:`Download the book in PDF form <../_build/latex/book.pdf>`
 
 .. toctree::
    :maxdepth: 3
