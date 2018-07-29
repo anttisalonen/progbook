@@ -141,23 +141,27 @@ latex_documents = [
 
 latex_engine = 'xelatex'
 
-#    'fontpkg': r'''
-#\setmainfont{DejaVu Serif}
-#\setsansfont{DejaVu Sans}
-#\setmonofont{DejaVu Sans Mono}
-#''',
 
 latex_elements = {
+    'fontpkg': r'''
+\setmainfont{Alegreya}
+\setsansfont{Linux Biolinum O}
+\setmonofont{Inconsolata}
+''',
     'preamble': r'''
 \let\oldsection\section
 \renewcommand\section{\clearpage\oldsection}
 \renewcommand\sphinxurl{\sphinxnolinkurl}
 \pagestyle{headings} % include page numbers
+\usepackage{xltxtra} % font support
 ''',
     'fncychap': r'\usepackage[Bjarne]{fncychap}',
     'printindex': r'\footnotesize\raggedright\printindex',
     'papersize': r'paper=7in:10in,pagesize=pdftex,headinclude=on,footinclude=on',
-    'pointsize': r'12pt'
+    'pointsize': r'12pt',
+    'tableofcontents': '''This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+    The code within this book is licensed under the MIT license.\\clearpage\\tableofcontents'''
 }
 
 latex_show_urls = 'footnote'
