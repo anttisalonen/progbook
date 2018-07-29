@@ -1,5 +1,4 @@
-_build/doctrees
-_build/html/_sources
+_build/
 tmp
 gen/dep_labels.dot
 gen/dependencies.png
