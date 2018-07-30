@@ -1,5 +1,5 @@
-Python and libraries
-====================
+Using libraries in Python
+=========================
 
 .. toctree::
    :maxdepth: 1

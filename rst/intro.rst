@@ -10,7 +10,7 @@ The book doesn't have any new information compared to what you can find online o
 
 It aims to contain an overview of almost everything that I think is important for software developers. It doesn't contain *everything*; but it should contain enough for the reader to understand software development, and to be able to read about and understand any topic in further detail as needed.
 
-The book focuses on teaching what software development is about, and the core principles around software development. It uses several technologies to this goal (e.g. C, Python, JavaScript, HTML, etc.) but is not a book about technologies themselves. The reader will learn the basics (or in some cases more) of various technologies along the way, but the focus is on building a foundation for software development.
+The book focuses on teaching the core principles around software development. It uses several technologies to this goal (e.g. C, Python, JavaScript, HTML, etc.) but is not a book about the technologies themselves. The reader will learn the basics (or in some cases more) of various technologies along the way, but the focus is on building a foundation for software development.
 
 This book does have the aim of supporting interested people in pursuing a job in software development, though I obviously can't guarantee a job. I'll expand on this further below.
 
@@ -107,6 +107,25 @@ The information in this book is very dense. Most sentences are important for the
 The book uses the pedagogical approach of assimilation, or constructionism; information is provided to the reader in bulk, and learning is facilitated by exercises which ask the student to think for themselves in an effort to learn the material. If you don't understand something, that may be fine. Let it be and come back to it later. There's a chapter dependency diagram at the end of the book which can give indication as to which chapters you need to understand before proceeding. Different topics are interleaved to some degree, allowing the reader to digest some areas while working on others and to better understand the relationships and connections between topics.
 
 I should mention at this point, if it wasn't already clear, that the author has no real pedagogical experience.
+
+Overall, the book is structured into four stages. These are the main topics in the different stages:
+
++---------------+-------------------------------+------------------------------------------------------------------+
+| Stage         | Theme                         | Main topics                                                      |
++===============+===============================+==================================================================+
+| The beginning | Introduction                  | * Basics of computers and programming using C and Python         |
+|               |                               | * Basics of Unix                                                 |
++---------------+-------------------------------+------------------------------------------------------------------+
+| Stage 1       | Slightly in-depth programming | * Introduction to algorithms and JavaScript                      |
+|               |                               | * Some more in-depth concepts in C and Python                    |
++---------------+-------------------------------+------------------------------------------------------------------+
+| Stage 1.5     | More in-depth programming     | * Web development using JavaScript and Python                    |
+|               |                               | * Strongly, statically typed languages, especially C++           |
++---------------+-------------------------------+------------------------------------------------------------------+
+| Stage 2       | Closing projects              | * Larger software using Python and C++ (or optionally e.g. Java) |
+|               |                               | * SQL                                                            |
+|               |                               | * Various intermediate topics (parsing, threads etc.)            |
++---------------+-------------------------------+------------------------------------------------------------------+
 
 If you think there's something very unclear about some part of the book or otherwise have any questions or comments, let me know. My email is ajsalonen@gmail.com. You may also create an issue or a pull request in GitHub. I'm also not a native English speaker so any corrections on that front are welcome as well.
 

@@ -1,5 +1,5 @@
-Quadratic formula
-=================
+Basics of programming in Python and C
+=====================================
 
 .. toctree::
    :maxdepth: 1

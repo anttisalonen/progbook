@@ -158,10 +158,16 @@ We won't actually have the hardware to try this out so we'll have to simulate. W
 
 I should note, the overall architecture as described or implied by the above requirements specification could be done differently. For example, the transporting company might not want the software on the bus stops to calculate the estimated bus arrival time; instead this could be done on the central server which would then provide the estimated arrival time to the bus stop software instead of providing the historical and current GPS data. However, this architecture makes for a somewhat more interesting software design problem.
 
-You can download the necessary input files for testing here:
+.. only:: html
 
-* :download:`sched.txt <../material/bus/sched.txt>`
-* :download:`gps.txt <../material/bus/gps.txt>`
-* :download:`gps_raw.txt <../material/bus/gps_raw.txt>`
+  You can download the necessary input files for testing here:
+
+  * :download:`sched.txt <../material/bus/sched.txt>`
+  * :download:`gps.txt <../material/bus/gps.txt>`
+  * :download:`gps_raw.txt <../material/bus/gps_raw.txt>`
+
+.. only:: not html
+
+  You can find download links at the web site of this book for input files necessary for testing.
 
 You can download the font file from the Deja Vu fonts web page. You may already have the font available somewhere on your computer.

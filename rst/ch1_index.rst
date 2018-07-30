@@ -8,6 +8,5 @@ The beginning
    quad_index
    unix_index
    flask_index
-   edit_index
 
 

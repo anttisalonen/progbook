@@ -44,7 +44,15 @@ The above creates a new database called "my_db" with one table called "my_table"
 Database schemas
 ================
 
-Now that we're able to use SQLite let's consider what we need to store there. As our focus is generating the return form PDF, let's take a look at what the expected output could be like: :download:`pdf <../material/retail/example.pdf>`
+.. only:: html
+
+  Now that we're able to use SQLite let's consider what we need to store there. As our focus is generating the return form PDF, let's take a look at what the expected output could be like: :download:`pdf <../material/retail/example.pdf>`
+
+.. only:: not html
+
+  Now that we're able to use SQLite let's consider what we need to store there. As our focus is generating the return form PDF, let's take a look at what the expected output could be like: 
+
+  .. image:: ../material/retail/example.png
 
 Don't focus on the details (e.g. the U.S. zip code "15443" is actually in Pennsylvania, not in Washington D.C.) but the objects we want to include are:
 

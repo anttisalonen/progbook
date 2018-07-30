@@ -6,6 +6,5 @@ Unix shell
 
    unix
    unix2
-   vcs
    regex
 

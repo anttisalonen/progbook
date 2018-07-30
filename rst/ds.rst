@@ -56,7 +56,7 @@ Stack is also called "LIFO" - last in, first out. Here's an example "animation" 
   +---+---+---+
         ^ end of stack
 
-* Initially, in this example, we have two elements in the stack (1 and 2). In total our array has three elements, such as the stack can't hold any more. If we try to push any more in the stack then we get a *stack overflow*. ('x' denotes unknown memory.)
+* Initially, in this example, we have two elements in the stack (1 and 2). In total our array has three elements, such as the stack can't hold any more. If we try to push any more in the stack then we get a *stack overflow*. ('x' denotes unknown memory.) The caret ("^") represents a pointer to the end of stack.
 * We then push 3 in the stack, meaning we set the value of the third element to 3 and note that the end of the stack is now on the third element.
 * We then pop an element from the stack, meaning we set the end of the stack to the second element. The 3 is still in the memory but not treated as part of the stack.
 

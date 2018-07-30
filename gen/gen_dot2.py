@@ -23,16 +23,34 @@ def get_low_deps():
                 ret2[res.group(2)].append(res.group(1))
     return ret1, ret2
 
+def parse_stage(fn):
+    chapters = list()
+    have_header = False
+    with open(fn, 'r') as f:
+        for line in f:
+            if not have_header:
+                title = line.strip()
+                have_header = True
+            else:
+                if line.strip().endswith('_index'):
+                    chapters.append(line.strip())
+    return title, chapters
+
 def get_chap_desc():
     files = glob.glob("rst/*_index.rst")
     reg = re.compile(" *([a-z0-9_]+)$")
     ret1 = collections.defaultdict(list)
     ret2 = dict()
     ret3 = dict()
+    stages = dict()
     for fn in files:
-        if fn.startswith('rst/ex_') or fn.startswith('rst/ch'):
+        if fn.startswith('rst/ex_'):
             continue
-        fn_clean = fn.strip('rst/').strip('.rst')
+        if fn.startswith('rst/ch'):
+            stage = int(fn[6])
+            stages[stage] = parse_stage(fn)
+            continue
+        fn_clean = fn.replace('rst/', '').replace('.rst', '')
         have_header = False
         with open(fn, 'r') as f:
             for line in f:
@@ -43,7 +61,7 @@ def get_chap_desc():
                 if res:
                     ret1[fn_clean].append(res.group(1))
                     ret2[res.group(1)] = fn_clean
-    return ret1, ret2, ret3
+    return ret1, ret2, ret3, stages
 
 def get_deps(low_deps, rev_low_deps, chap_desc, rev_chap_desc):
     deps = collections.defaultdict(set)
@@ -59,10 +77,16 @@ def get_deps(low_deps, rev_low_deps, chap_desc, rev_chap_desc):
                     deps[ch].add(hd)
     return deps
 
-def serialise(deps, headers):
+def serialise(deps, headers, stages):
     print 'digraph dep2 {'
-    for chap, header in sorted(headers.items()):
-        print '    %s [label="%s"];' % (chap, header)
+    print '    compound=true;'
+    for stagenum, (title, chapters) in sorted(stages.items()):
+        print '    subgraph cluster%d {' % (stagenum - 1)
+        for chap in sorted(chapters):
+            print '        %s [label="%s"];' % (chap, headers[chap])
+        print '    labelloc="t"';
+        print '    label="%s"' % title;
+        print '    }'
     print
     for chap, to in sorted(deps.items()):
         for i in to:
@@ -72,9 +96,9 @@ def serialise(deps, headers):
 
 def main():
     low_deps, rev_low_deps = get_low_deps()
-    chap_desc, rev_chap_desc, headers = get_chap_desc()
+    chap_desc, rev_chap_desc, headers, stages = get_chap_desc()
     deps = get_deps(low_deps, rev_low_deps, chap_desc, rev_chap_desc)
-    serialise(deps, headers)
+    serialise(deps, headers, stages)
 
 if __name__ == "__main__":
     main()

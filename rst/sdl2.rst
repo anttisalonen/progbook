@@ -100,9 +100,17 @@ A quick online search will reveal a way to parse lines from a file to a std::vec
 
 Here, "file" is our input file name. The C++ way includes defining several intermediate variables but the final output we actually care about is stored in the "res" variable.
 
-*Exercise*: Integrate the above to your program. Store the parameter to your constructor in a member variable. In the render function, read the file contents using the snippet above. For now you don't need to do much with the result though you may want to write it out to stdout. In order to test it, create an input file. You may also download a sample input file here:
+*Exercise*: Integrate the above to your program. Store the parameter to your constructor in a member variable. In the render function, read the file contents using the snippet above. For now you don't need to do much with the result though you may want to write it out to stdout. In order to test it, create an input file.
 
-* :download:`label_info.txt <../material/bus/label_info.txt>`
+.. only:: html
+
+  You may also download a sample input file here:
+
+  * :download:`label_info.txt <../material/bus/label_info.txt>`
+
+.. only:: not html
+
+  You may also download a sample input file from the book web site.
 
 Now, instead of drawing a single "Hello world" label, let's draw 23 of them.
 

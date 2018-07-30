@@ -34,4 +34,6 @@ Solutions to exercises
    ex_shop3
    ex_shop4
    ex_shop5
+   ex_tsp
+   ex_thread
 

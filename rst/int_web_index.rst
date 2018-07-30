@@ -1,5 +1,5 @@
-A bit more web development
-==========================
+Web development with Python and JavaScript
+==========================================
 
 In this section we'll turn our guessing game from a single HTML page to a simple web app.
 

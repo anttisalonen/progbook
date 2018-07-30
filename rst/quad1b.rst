@@ -6,7 +6,13 @@ Files
 
 Now that we're able to solve multiple quadratic equations, let's step it up one notch. Let's have the goal of calculating the roots of 10,000 quadratic equations and finding the function with the largest root, whereby the definitions of all functions are stored in a file.
 
-To get started, here's a file with one function definition in it: :download:`download text file <../material/quad/test1.txt>`
+.. only:: html
+
+  To get started, here's a file with one function definition in it: :download:`download text file <../material/quad/test1.txt>`
+
+.. only:: not html
+
+  You can find a download link at the web site of this book. That file will have one function definition in it.
 
 This file looks like the following:
 
@@ -74,7 +80,13 @@ We should now have what we need in order to read a quadratic equation definition
 Larger files
 ============
 
-Now that we're able to read in one quadratic equation definition from a file, let's try this for 10,000 equations. See this file: :download:`download text file <../material/quad/test.txt>`
+.. only:: html
+
+  Now that we're able to read in one quadratic equation definition from a file, let's try this for 10,000 equations. See this file: :download:`download text file <../material/quad/test.txt>`
+
+.. only:: not html
+
+  Now that we're able to read in one quadratic equation definition from a file, let's try this for 10,000 equations. You can download a related file on the book web site.
 
 That file contains 10,000 lines, each containing three floating point numbers, each representing a, b and c respectively. Let's see if we can find the equation with the largest root.
 

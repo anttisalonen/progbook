@@ -76,21 +76,33 @@ This got a bit interesting so let's go through this line by line.
 * Line 8-10: If the value at position i (which is bound to be "to the right" of j, if we imagine the array to be a row of boxes extending to the right) is smaller than the value at position smallest_index (which was initialised to j) then we note this index as the index with the smallest number in the rest of the array.
 * Line 12-14: We finally *swap* the value at j with the smallest value we found. We swap by copying the value at j to a temporary variable, then putting the smallest value to j'th element, and finally putting the temporary value to where the smallest value was.
 
-Here's an "animation" of how this algorithm would work, for an array of size 5:
+Here's an "animation" of how this algorithm would work, for an array of size 5. Each row represents one iteration. The first five columns are the elements in the array:
 
-.. code-block:: none
-
-    | 3 | 7 | 5 | 1 | 8 | # j = 0; i = 1 (points to 7) - smallest index is 0
-    | 3 | 7 | 5 | 1 | 8 | # j = 0; i = 2 (points to 5) - smallest index is 0
-    | 3 | 7 | 5 | 1 | 8 | # j = 0; i = 3 (points to 1) => smallest index is set to 3 (1 < 3)
-    | 3 | 7 | 5 | 1 | 8 | # j = 0; i = 4 - inner loop finished. We swap 0th element (3) with the 3rd element (1).
-    | 1 | 7 | 5 | 3 | 8 | # j = 1; i = 2 (points to 5) => smallest index is set to 2 (5 < 7)
-    | 1 | 7 | 5 | 3 | 8 | # j = 1; i = 3 (points to 3) => smallest index is set to 3 (3 < 5)
-    | 1 | 7 | 5 | 3 | 8 | # j = 1; i = 4 - inner loop finished. We swap the 1st element (7) with the 3rd element (3).
-    | 1 | 3 | 5 | 7 | 8 | # j = 2; i = 3 (points to 7) - smallest index is 2
-    | 1 | 3 | 5 | 7 | 8 | # j = 2; i = 4 - inner loop finished. We swap the 2nd element with itself (no change).
-    | 1 | 3 | 5 | 7 | 8 | # j = 3; i = 4 - inner loop finished. No change.
-    | 1 | 3 | 5 | 7 | 8 | # j = 4 - inner loop not started because i would start at 5 - sort is done.
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+| a0 | a1 | a2 | a3 | a4 | j | i | Comment                                                                     |
++====+====+====+====+====+===+===+=============================================================================+
+|  3 |  7 |  5 |  1 |  8 | 0 | 1 | i points to 7. Smallest index is 0.                                         |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  3 |  7 |  5 |  1 |  8 | 0 | 2 | i points to 5. Smallest index is 0.                                         |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  3 |  7 |  5 |  1 |  8 | 0 | 3 | I points to 1. Smallest index is set to 3 (1 < 3).                          |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  3 |  7 |  5 |  1 |  8 | 0 | 4 | Inner loop finished. We swap 0th element (3) with the 3rd element (1).      |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  1 |  7 |  5 |  3 |  8 | 1 | 2 | i points to 5. Smallest index is set to 2 (5 < 7).                          |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  1 |  7 |  5 |  3 |  8 | 1 | 3 | i points to 3. Smallest index is set to 3 (3 < 5).                          |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  1 |  7 |  5 |  3 |  8 | 1 | 4 | Inner loop finished. We swap the 1st element (7) with the 3rd element (3).  |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  1 |  3 |  5 |  7 |  8 | 2 | 3 | i points to 7. Smallest index is 2.                                         |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  1 |  3 |  5 |  7 |  8 | 2 | 4 | Inner loop finished. We swap the 2nd element with itself (no change).       |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  1 |  3 |  5 |  7 |  8 | 3 | 4 | Inner loop finished. No change.                                             |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
+|  1 |  3 |  5 |  7 |  8 | 4 | 4 | Inner loop not started because i would start at 5 - sort is done.           |
++----+----+----+----+----+---+---+-----------------------------------------------------------------------------+
 
 This sorting algorithm is called *selection sort* and it's one of the simpler ones.
 

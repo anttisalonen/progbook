@@ -118,7 +118,15 @@ Let's look at this closer again:
 
 We now have some tools available for starting to create our return form.
 
-*Exercise*: Create the beginning of the return form: if you have a picture available that could be used as a logo, include it. You can also pick up an image file from here: :download:`logo <../material/retail/logo.png>`. Add a label that designates the name of your company. Add labels including the name and address of the customer. Include the barcode around top right, and a label for the order number below that. See the :download:`example PDF <../material/retail/example.pdf>` for inspiration if necessary.
+*Exercise*: Create the beginning of the return form: if you have a picture available that could be used as a logo, include it. Add a label that designates the name of your company. Add labels including the name and address of the customer. Include the barcode around top right, and a label for the order number below that. 
+
+.. only:: html
+
+  You can also pick up an image file for the logo from here: :download:`logo <../material/retail/logo.png>`. See the :download:`example PDF <../material/retail/example.pdf>` for inspiration if necessary.
+
+.. only:: not html
+
+  You can also pick up an image file for the logo from the book web site.
 
 Now, how about the table that describes the products that are being returned? Here are the clues that you need:
 

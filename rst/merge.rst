@@ -93,7 +93,7 @@ Now, with this makefile, running "make" gives the following:
 
     $ make
     g++ -Wall -g3 -O2 -I/usr/include/SDL2 -D_REENTRANT -L/usr/lib -lSDL2 -lSDL2_ttf -o bus sdl_sched2.cpp
-    ./run_ex.sh
+    ./run.sh
     $
 
 In other words, it runs the C++ compiler to generate the executable "bus", followed by running our shell script, provided the compilation succeeds.
@@ -103,7 +103,7 @@ Now, if you were to run make again without making changes to the C++ source file
 .. code-block:: bash
 
     $ make
-    ./run_ex.sh
+    ./run.sh
     $
 
 In other words, Make detects that recompiling the C++ file is not necessary and simply runs the script.

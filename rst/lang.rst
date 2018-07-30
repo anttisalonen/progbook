@@ -5,6 +5,8 @@ Typing
 
   -- Bjarne Stroustrup
 
+There are a few concepts around programming languages that help pick up a new language.
+
 Most programming languages come with a more or less sophisticated type systems. The type system defines how the types of variables and functions are used and interpreted.
 
 A common example is the following expression:

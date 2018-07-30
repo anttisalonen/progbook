@@ -1,5 +1,5 @@
-Quadratic formula
------------------
+Quadratic formula in C
+----------------------
 
 Quadratic formula:
 

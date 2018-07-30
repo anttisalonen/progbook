@@ -1,5 +1,5 @@
-Learning to program using Sudoku
-================================
+Learning C++ using Sudoku
+=========================
 
 .. toctree::
    :maxdepth: 1

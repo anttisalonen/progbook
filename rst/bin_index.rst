@@ -1,5 +1,5 @@
-Working with binary data
-========================
+Working with binary data in C
+=============================
 
 .. toctree::
    :maxdepth: 1
