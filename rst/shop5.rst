@@ -20,7 +20,7 @@ To start things off, as an example, let's see how we could generate and display 
         my_list = [{'a': 1, 'b': 2}, {'a': 3, 'b': 4}]
         return render_template('products.html', my_list=my_list)
 
-This references the file "products.html" which Flask will look for in the "templates" directory. This could look e.g. like the following:
+This returns an HTML file based on the template "products.html" which Flask will look for in the "templates" directory, but with a twist: it generates the HTML based on the contents of "my_list". The HTML template could look e.g. like the following:
 
 .. code-block:: html
 
@@ -72,7 +72,7 @@ You can include your SQLite database in your Flask application by calling the re
 Orders
 ======
 
-Now, it would be nice to be able to see all the orders by a customer. It would be nice to be able to write a URL like e.g. "http://127.0.0.1:5000/orders?customer_id=123" and get an overview of the orders made by customer 123. Let's do this next.
+Now, it would be nice to be able to see all the orders by a customer. It would furthermore be nice to be able to write a URL like e.g. "http://127.0.0.1:5000/orders?customer_id=123" and get an overview of the orders made by customer 123. Let's do this next.
 
 The part in the URL after the "?" is the query string and is accessible in Flask using the function "request.args.get()". In our case, the following line is what we need:
 
@@ -89,7 +89,13 @@ Now that we're able to see what orders a customer has made, it would be nice to 
 Order details
 =============
 
-We can now click on a link that would show order details but that page doesn't exist yet so let's create it. To make things more interesting, we can imagine we're writing this page for the customer with the goal that the customer should be able to start the return process from this page. In other words, the page should look e.g. like this:
+We can now click on a link that would show order details but that page doesn't exist yet so let's create it. To make things more interesting, we can imagine we're writing this page for the customer with the goal that the customer should be able to start the return process from this page. We should have a flow that looks like this:
+
+.. image:: ../material/retail/ordflow.png
+
+In other words, the customer would first select which items to return, then enter another page where they can provide a reason for the return, and submitting the form on that page will trigger a database update to enter the data about the return and send a PDF to the customer to print and include in the return package.
+
+The order details page could look e.g. like this:
 
 .. image:: ../material/retail/order.png
 
@@ -148,7 +154,7 @@ Now, this is similar to the previous one but with a few differences:
 * Instead of including all products from the order in the table, we only display the products for which the user checked the checkbox
 * We display the different return reasons as *radio buttons*. The first one is selected as the default. We'll need to send the information about which radio button was selected as the form is sent.
 
-How would we know which products the user checked the checkbox for? The URL provides a hint: this information is included in the query string, which, again, is accessible in Flask using the request.args.get() function. As revealed by Flask documentation or general online search, the following statement will evaluate to True if the checkbox for ID 123 was checked and False otherwise:
+How would we know for which products the user checked the checkbox? The URL provides a hint: this information is included in the query string, which, again, is accessible in Flask using the request.args.get() function. We can get a list of all products the customer ordered from the database, and, for each product, check if the checkbox for that product was checked. As revealed by Flask documentation or general online search, the following statement will evaluate to True if the checkbox for ID 123 was checked and False otherwise:
 
 .. code-block:: python
 
@@ -180,13 +186,13 @@ In other words, setting the attribute "checked" to "checked" will make the radio
 
 .. code-block:: html
 
-    {% if variable %}
+    {% if default %}
     <input type="radio" name="TODO" value="TODO" checked="checked">TODO<br/>
     {% else %}
     <input type="radio" name="TODO" value="TODO">TODO<br/>
     {% endif %}
 
-You'll need to set the variable to determine which radio button is the default in your Python code accordingly.
+You'll need to set the variable "default" in your Python code accordingly to determine which radio button is the default.
 
 Return form
 ===========
@@ -218,7 +224,7 @@ After the above statement, we can query for the "id" column in the "returns" tab
 Deleting data in an SQL database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now, if the user has already let us know that they'll be returning some products from an order but are now telling us they want to return some other products instead, then what we might want to do as a real online shop is to insist that the original return form, which might already have been received by our company, is the final one and no updates are required. However, as we're building our UI for testing and development purposes, it seems like the best way to handle this is to simply delete all references to old data and start afresh. This allows us to try out different things in our UI without polluting our database with conflicting data.
+Now, if the user has already let us know that they'll be returning some products from an order but are now telling us they want to return some other products instead, then what we might want to do as a real online shop is to insist that the original return form, which might already have been received by our company, is the final one and no updates are allowed. However, as we're building our UI for testing and development purposes, it seems like the best way to handle this is to simply delete all references to old data and start afresh. This allows us to try out different things in our UI without polluting our database with conflicting data.
 
 The following command would delete rows in the table "products_returned", namely those rows where the "return_id" field is set to the according variable:
 
@@ -253,6 +259,8 @@ In other words, we can simply import the file and then call a function defined w
         pdf = generate_label(return_id)
         # do something with pdf
 
+What this branch does is check whether the special variable __name__ is '__main__'. This is only the case if the script was invoked directly from the command line. In other words, if the above snippet was stored in foo.py, then the function generate_label() would only be called if the script was started as e.g. "python2 foo.py" but not if the file was imported from another Python file. Without this branch, the function generate_label() would be called when importing the file.
+
 You may now be able to run your existing PDF code, or you may need to refactor the old code first, but the question remains: Once you have the PDF (either file or object), what do you do with it?
 
 Sending the PDF to the client
@@ -280,7 +288,7 @@ Now we should have everything we need to finish this task:
 
 *Exercise*: Put everything together and see if you can download the PDF. You'll need to do the following:
 
-* Call your existing code to generate a PDF. You should be able to call a function which takes a return ID as the input parameter and returns a PDF object (not a file). Refactor your existing code if necessary. Make sure you set the SQL database contents correctly beforehand.
+* Call your existing code to generate a PDF. You should be able to call a function which takes a return ID as the input parameter and returns a PDF object (not a file object or a file name). Refactor your existing code if necessary. Make sure you set the SQL database contents correctly beforehand.
 * Convert the PDF object to a binary stream.
 * Send the binary stream to the client using Flask.
 

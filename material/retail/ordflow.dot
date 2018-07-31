@@ -1,0 +1,8 @@
+digraph ordflow {
+    u1 [label="User selects which items to return in an order" shape=box fillcolor=lightgrey style=filled];
+    u2 [label="User selects the return reason for each item to be returned" shape=box fillcolor=lightgrey style=filled];
+    "orders.html" -> u1;
+    u1 -> "return.html" [label="GET"];
+    "return.html" -> u2;
+    u2 -> "return.pdf" [label="POST"];
+}

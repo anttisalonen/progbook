@@ -9,7 +9,7 @@ As mentioned in section "Redis", SQL is a language for querying databases, and t
 
 Generally, when starting from scratch with SQL (or with databases even more generally), the flow is something like the following:
 
-* Decide on the *schema* for your data - how do you want to store it? What data is it that you want to store? What are the relationships between different kinds of data?
+* Decide on the *schema* for your data - what data is it that you want to store? How do you want to store it? What are the relationships between different kinds of data?
 * Implement the schema in a database of your choice by creating the necessary *tables* which will hold the data.
 * Use your database: add your data in it, query for data, modify and delete data.
 
@@ -200,6 +200,6 @@ We now have our schema defined in code. It's often useful to also draw a diagram
 
 .. image:: ../material/retail/schema.png
 
-Here, we have one box for each table, and one arrow for each foreign key reference. The labels describe the relationship between the tables, e.g. "1:\*" between orders and customers reads as "one customer can have many orders". All relationships between the tables are one-to-many except the relationship between and order where each order can have (up to) one return. Several one-to-many relationships between tables lead to many-to-many relationships via junction tables, such that we have a many-to-many relationship e.g. between products and orders.
+Here, we have one box for each table, and one arrow for each foreign key reference. The labels describe the relationship between the tables, e.g. "1:\*" between orders and customers reads as "one customer can have many orders, but one order is for exactly one customer". All relationships between the tables are one-to-many except the relationship between and order where each order can have (up to) one return. Several one-to-many relationships between tables lead to many-to-many relationships via junction tables, such that we have a many-to-many relationship e.g. between products and orders.
 
 Now that we have our schema defined, the next step is using it by adding data to it.

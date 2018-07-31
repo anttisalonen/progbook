@@ -1,0 +1,6 @@
+digraph dep {
+    "sdl.h" -> "sdl.cpp";
+    "sdl.h" -> "bus.cpp";
+    "sdl.cpp" -> "bus (final executable)";
+    "bus.cpp" -> "bus (final executable)";
+}

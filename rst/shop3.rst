@@ -41,7 +41,7 @@ Here's a bit more complicated query:
 There are a few points to make here:
 
 * We select the return_reason_id and the count of ids. The column names listed between SELECT and FROM define which columns are included in the table that will be returned.
-* We specify we want to receive the count of the column "products_returned.id". In this case, simply typing "id" would've been enough. Generally, the table can be written before the column name to be clearer about which column you mean. In some cases, as we shall see, you must type the table name in order to clear ambiguity. (SQLite will return an error when the table name was required but not provided.)
+* We specify we want to receive the count of the column "products_returned.id". In this case, simply typing "id" would've been enough, as we retrieve data from from the "products_returned" table. Generally, the table can be written before the column name to be clearer about which column you mean. In some cases, as we shall see, you must type the table name in order to clear ambiguity. (SQLite will return an error when the table name was required but not provided.)
 * We want to *group* the result by the column "return_reason_id". This means that SQLite will, on the table that is the query result, group the column "return_reason_id" such that each ID will only appear once. In other words, the resulting table (the list that is returned by fetchall()) won't have any more elements than the number of return reasons we have in the database.
 * We furthermore *limit* the number of rows in the resulting table to 5. This means, we only query for and receive the data for the first five reason codes.
 
@@ -68,9 +68,27 @@ Joins
 
 Querying a single database table is fun enough, but things get more interesting when combining multiple tables.
 
-Let's say we want to find out our top five ordered products. How would we imagine the table to look like? We'd want to know the product ID, name, size and how often it was ordered, sort by the number of orders, and group by the product ID as we'd want no more than one row per product. The first three columns we can retrieve from the products table, while the fourth one (how often it was ordered) we can, as may be apparent from our database schema, retrieve by counting the products_ordered.id column.
+*Exercise*: Let's say we want to find out our top five ordered products. How would we imagine the table to look like? What are the columns? How many rows would the table have? How would the table be ordered? Have a think.
 
-This query would then look like this:
+We'd want to know the product ID, name, size and how often it was ordered, sort by the number of orders, and group by the product ID as we'd want no more than one row per product. The first three columns we can retrieve from the products table, while the fourth one (how often it was ordered) we can, as may be apparent from our database schema, retrieve by counting the products_ordered.id column.
+
+The table could end up looking e.g. like this:
+
++-------------+------------------------+----------------------------+
+| products.id | products.name          | count(products_ordered.id) |
++=============+========================+============================+
+| 158         | Green Men's T-Shirt    |                        349 |
++-------------+------------------------+----------------------------+
+| 30          | Green Women's Jeans    |                        341 |
++-------------+------------------------+----------------------------+
+| 86          | Black Women's Belt     |                        341 |
++-------------+------------------------+----------------------------+
+| 26          | Yellow Men's Belt      |                        338 |
++-------------+------------------------+----------------------------+
+| 71          | Green Women's Cardigan |                        338 |
++-------------+------------------------+----------------------------+
+
+This query would look like this:
 
 .. code-block:: python
 
@@ -85,7 +103,7 @@ Now, this is similar to the previous example but we have two new interesting cha
 
 * On the first line we describe not only columns from the table we're querying data from, but also *another* table, namely "products_ordered".
 * Because we need a column from another table in our result, we need to *join* the other table. Hence we include the keywords "INNER JOIN" to join the table "products_ordered".
-* We need to tell SQLite *how* to join the other table, so we tell it to join "ON products_ordered.product_id = products.id" - meaning, if a row from the "products" table has the same ID as the "product_id" column in the "products_ordered" table then the two rows will be joined into one in the query result.
+* We need to tell SQLite *how* to join the other table, so we tell it to join "ON products_ordered.product_id = products.id" - meaning, if a row from the "products" table has the same ID as the "product_id" column in the "products_ordered" table then the two rows will be joined into one in the query result. It's worth noting here that products_ordered.product_id is a foreign key to products.id.
 
 There are different kinds of joins like outer join, left join etc. but in practice inner join, where two tables are joined at the intersection (i.e. when a foreign key matches the primary key of a row in another table) is the most common.
 

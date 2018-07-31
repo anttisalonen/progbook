@@ -164,4 +164,6 @@ Here, we lock the mutex before the increment and unlock it directly after, withi
 
 *Exercise*: Make the required changes to the previous program such that the critical code is protected by a mutex. Does the output of the program change?
 
+*Exercise*: What would happen if a thread forgot to unlock a mutex? This might not happen in this case but could be more plausible in code with several branches, or multiple return points from a function, or C++ exceptions.
+
 While our use case for using threads was somewhat non-realistic, better uses of threads do exist. For example, an HTTP server may have several threads serving the various clients that connect to the server, such that a client doesn't need to wait until another client has been served. Another example is splitting the work: for example, our Sudoku solver solved a series or Sudoku puzzles in series. To improve performance, it could be rewritten to use threads, such that each thread picks one of the unsolved puzzles and solves it. This way, the run time of solving a set of puzzles could be dramatically decreased. While pthreads could be used with C++, C++ also provides its own object oriented API for managing threads.

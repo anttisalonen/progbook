@@ -159,9 +159,15 @@ latex_elements = {
     'printindex': r'\footnotesize\raggedright\printindex',
     'papersize': r'paper=7in:10in,pagesize=pdftex,headinclude=on,footinclude=on',
     'pointsize': r'12pt',
-    'tableofcontents': '''This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+    'tableofcontents': '''\\begin{center}Learn Programming, first edition
+    
+    Antti Salonen
+    
+    This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
-    The code within this book is licensed under the MIT license.\\clearpage\\tableofcontents'''
+    The code within this book is licensed under the MIT license.
+    
+    Copyright 2018, Antti Salonen.\\end{center}\\clearpage\\tableofcontents'''
 }
 
 latex_show_urls = 'footnote'

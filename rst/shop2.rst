@@ -28,7 +28,7 @@ Let's go through this line by line:
 * Line 5: We have a loop we loop through a 100 times
 * Line 6: We select a random string, each describing a colour. The Python function random.choice() will select one item from a given list at random.
 * Lines 7-8: We repeat the above for more descriptions of a clothing.
-* Line 9: We combine our three words to one possibly not very sensical product name.
+* Line 9: We combine our three words to one possibly nonsensical product name.
 * Line 10: We select a list by random: either a list with elements 'S', 'M', 'L', 'XL' or with elements '36', '38', '40', '42'. Either way, a list of strings.
 * Lines 11-13: We execute our SQL insert statement which inserts a new row into our "products" table, with our name and size as values.
 
@@ -49,7 +49,7 @@ The variable contents could also have been included in the insert statement usin
     # Do NOT do this ever
     cursor.execute('INSERT INTO products(name, size) VALUES(%s, %s)' % (name, size))
 
-However, the difference is that the Python string syntax (%s) inserts the variable contents in the string blindly while the SQLite built in syntax (?) *sanitises* the input first. This means that using the SQLite syntax is not a security hole unlike when the Python string syntax is used: if the variable name contents were dependent on user input, an attacker could craft an input string such as "foo'); DROP TABLE users; --" which, if inserted into the SQL statement blindly, would delete the table "users" in the database. Depending on the database the attacker could e.g. change or read passwords or other sensitive data. This kind of an attack is known as an *SQL injection*. To avoid this, use the SQLite built in syntax (?) when substituting variables in SQL statements.
+However, the difference is that the Python string syntax (%s) inserts the variable contents in the string blindly while the SQLite built in syntax "(?)" *sanitises* the input first. This means that using the SQLite syntax is not a security hole unlike when the Python string syntax is used: if the variable name contents were dependent on user input, an attacker could craft an input string such as "foo'); DROP TABLE users; --" which, if inserted into the SQL statement blindly, would delete the table "users" in the database. Depending on the database the attacker could e.g. change or read passwords or other sensitive data. This kind of an attack is known as an *SQL injection*. To avoid this, use the SQLite built in syntax "(?)" when substituting variables in SQL statements.
 
 Now that we have some mock products in our database, let's add some mock customers.
 

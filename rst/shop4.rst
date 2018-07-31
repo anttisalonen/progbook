@@ -75,7 +75,7 @@ Going through this line by line:
 
 * Line 1: import our library.
 * Line 3: create a PDF object.
-* Line 4: add a page (duh).
+* Line 4: add a page.
 * Line 5: Set font: Arial, bold, size 16.
 * Line 6: Create a *cell* which will hold text. As per pyfpdf reference, its width is 40 units (in this case 40 mm - by default the unit is mm and the page format is A4) and its height is 10 mm. The text in the cell is "Hello world" and it's left aligned within the cell. (For reference, an A4 page is 210 mm wide and 297 mm long.)
 
@@ -131,7 +131,7 @@ We now have some tools available for starting to create our return form.
 Now, how about the table that describes the products that are being returned? Here are the clues that you need:
 
 * By passing the named parameter "border=1" to pdf.cell(), the cell will have borders. You can construct a table by including borders for each cell in the table.
-* If you don't include "ln=0", the next cell will be to the right of that cell. If you do include "ln=1", the next cell will be below the leftmost cell on the previous line.
+* If you don't include "ln=1", the next cell will be to the right of that cell. If you do include "ln=1", the next cell will be below the leftmost cell on the previous line.
 * In order to have the table fit on the page, you may need to reduce the font size, e.g. to 12.
 
 In other words, if you were to run e.g. this:

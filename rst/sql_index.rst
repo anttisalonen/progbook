@@ -5,8 +5,8 @@ If you've ever shopped for clothes online, you may be familiar with the return f
 
 In this section we'll assume the role of an online clothing shop and write some code to generate that return form in PDF format. Our business works like this:
 
-* Our products are all stored in a warehouse which is automated as much as possible to save money and give a competitive advantage, with robots moving products from the massive warehouse to conveyor belts which further transport the products to workers which actually package and send the packages.
-* Upon receiving a return package, a worker will look for the return form in the package which will include a *bar code* which the worker will scan. The bar code will contain information about which products were returned such that the worker can then hand the products directly over to a robot.
+* Our products are all stored in a warehouse which is automated as much as possible to save money and give a competitive advantage, with robots moving products from the massive warehouse to conveyor belts which further transport the products to workers who actually package and send the packages.
+* Upon receiving a return package, a worker will look for the return form in the package which will include a *bar code* which the worker will scan. The bar code will contain information about which products were returned such that the worker can then hand the products directly over to a robot for storing in the warehouse.
 
 From customers' point of view, it looks like this:
 

@@ -94,20 +94,38 @@ Now that we have our tokens defined we can start with the lexical analysis:
     while pos < len(input_stream):
         for regex, token in tokens:
             # TODO: check for match with regex
-            # Use input_stream[pos:] as the input
-            # At match:
-            # 1. Store token and what was matched to lexer_output
-            # 2. Advance position by the length of what was matched
-            # Note: what was matched can be retrieved with result.group(),
-            #       where "result" is the return value of re.match()
-            # Raise an error if no regular expression matched
+
+In the above snippet, we have the input stream as a string which we can slice like a list, we want to output a list of lexemes, and have an integer (pos) to track the current position in the input stream. We can do this:
+
+* Use input_stream[pos:] as the input - that is, the string after cutting out the first pos characters
+* Loop through our possible tokens and use re.match() to apply a regular expression to the input
+* If we have a match, store both the token and what was matched in lexer_output. We need sto store what was matched so the parser has the necessary information required for parsing later on. You can retrieve what was matched by running result.group() whereby "result" is the return value of re.match().
+* After a match we can advance position by the length of what was matched
+* If none of the tokens matched we should raise an error
 
 *Exercise*: Finish and test the lexer. If you prefer you can start with a simpler form of dot files first, i.e. without labels but instead only the "A -> B;" form.
 
 Data structures
 ===============
 
-Now that we have our lexer output, we could parse it. However, as we want the output of our parsing to be stored in data structures, we should define these first. Classes seem like a good way to do this, and our classes should also somewhat reflect the data that we can expect to find in our dot files. This means we can be inspired by our grammar definition when defining our classes. E.g.:
+Now that we have our lexer output, we could parse it. Overall we'd like to have the following data flow:
+
+.. image:: ../material/dot/lex.png
+    :scale: 30
+
+Here, one thing to note is that the parser output format should be something where we can remove unnecessary edges, and use for generating a dot file.
+
+In terms of code, the high level view of using this could be e.g.:
+
+.. code-block:: python
+
+    lexer_output = lex(input_filename)
+    p = Parser(lexer_output)
+    p.parse()
+    p.graph.simplify()
+    print p.graph
+
+Hence we should store the output of our parsing in data structures and we should define these first. Classes seem like a good way to do this, and our classes should also somewhat reflect the data that we can expect to find in our dot files. This means we can be inspired by our grammar definition when defining our classes. E.g.:
 
 .. code-block:: python
 
@@ -138,7 +156,13 @@ Now, when writing a parser, there are several patterns that come up. For example
 * Checking whether the next token is as expected
 * Extracting information from a token; for example, a token holding characters may be an identifier which we want to store as the name of a graph
 
-It's often helpful to write helper functions for these. Furthermore, it may clarify the code to have the parser state like how far the parser has progressed by having this state stored as member variables of a class.
+It's often helpful to write helper functions for these. Furthermore, it may clarify the code to have the parser state like how far the parser has progressed by having this state stored as member variables of a class. One could then use the class e.g. like this:
+
+.. code-block:: python
+
+    p = Parser(lexer_output)
+    p.parse()
+    # p.graph would hold the parsed data
 
 The parser you wrote at the previous exercise may work but you may be able to make your code cleaner by restructuring it e.g. as follows:
 
@@ -204,7 +228,7 @@ There are a few ways we could serialise our data. Ideally we'd be able to do thi
     g = Graph(name)
     print g # this statement writes out the graph as a dot file to stdout
 
-How "print" works in Python is that it calls the member function __str__ of your class, expects a string as an output of that function, and then writes that output to stdout. Despite a name with several underscores, we can define this function:
+How "print" works in Python is that it calls the member function __str__ of your class, expects a string as an output of that function, and then writes that output to stdout. We can define this function e.g. like this:
 
 .. code-block:: python
 

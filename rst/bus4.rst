@@ -41,7 +41,17 @@ This code searches the vector "vec" for a tuple which has the values "route_nr" 
 Parsing a timestamp
 ===================
 
-We're starting to have a decent program but it's not yet parsing the command line options (unless you already added it). One question when implementing the command line parsing might be about parsing a timestamp in format "hh:mm". We need to split this string by the ":" character, similarly to s.split(':') in Python. This can be done in C++ e.g. using the following code:
+We're starting to have a decent program but it's not yet parsing the command line options (unless you already added it). We'd want to support e.g. the following command line:
+
+.. code:: bash
+
+    $ bus "Bus stop name here" gps_raw.txt gps.txt sched.txt 10:23
+
+Here, the first parameter is the bus stop name and will only be used as a string to display on the final screen. The next three parameters are input file names. The final one is the current time.
+
+To be precise, according to the spec, the process should only receive only one parameter, namely the bus stop name, but we can make things a bit simpler for us for now. If necessary we can wrap most of this in a shell script if necessary, except for the time stamp. While we could query the current time stamp in our code, for now we can make things simpler (and easier to test) and supply the time as a command line parameter.
+
+One question when implementing the command line parsing might be about parsing a timestamp in format "hh:mm". We need to split this string by the ":" character, similarly to s.split(':') in Python. This can be done in C++ e.g. using the following code:
 
 .. code-block:: cpp
     :linenos:
@@ -74,9 +84,9 @@ As part of our sections around SDL we put together a program that will display t
 
 What we need to do for this is:
 
-* Refactor the existing code to allow our class that previously took the file name in the constructor and then read in the contents to have another constructor which takes an std::array<std::string, 23> as a parameter instead and uses the contents of that array directly
+* Refactor the existing code which displays the screen using SDL. The constructor of the class we wrote previously took the file name as the source for the labels, but for our purposes it would be better if it took an std::array<std::string, 23> as a parameter instead and used the contents of that array directly. We can add another constructor for this purpose.
 * Instantiate an object of that class in our C++ program, putting together and passing it an std::array<std::string, 23>
-* Calling the relevant member function or functions of that object such that the correct visual output is generated
+* Call the relevant member function or functions of that object such that the correct visual output is generated
 
 Now, in order to use both our existing SDL code and our new C++ code together, you have a couple of options:
 
@@ -133,6 +143,11 @@ We should end up with e.g. have the following structure:
 * sdl.h - this has the SDL_Schedule class definition as per above.
 * bus.cpp - this has our other logic, and most importantly, the main function. It #includes sdl.h and defines and uses a variable of type SDL_Schedule.
 
+The following diagram summarises the dependencies.
+
+.. image:: ../material/bus/dep.png
+    :scale: 30
+
 Now, generally in C and C++, source files are compiled to object files (binary files including the machine code instructions that were generated from the input C code), and one or multiple object files can be linked to an executable. When you run e.g.:
 
 .. code-block:: bash
@@ -144,9 +159,9 @@ Now, generally in C and C++, source files are compiled to object files (binary f
 .. code-block:: bash
 
     $ g++ -c -o hello.o hello.cpp
-    $ ld -o hello hello.o
+    $ g++ -o hello hello.o
 
-Here, we first instruct the compiler to generate an object file with -c, then call the linker (ld) and pass it the object file as input, asking it to create the final executable. (Instead of calling ld, depending on the C++ compiler, one could also call the C++ compiler directly, e.g. g++, which would invoke the linker.)
+Here, we first instruct the compiler to generate an object file with -c, then ask the compiler to link the final executable (by not specifying -c), passing it the object file as input. (Instead of calling g++, depending on the C++ compiler, one could also call the linker directly, e.g. ld.)
 
 Now, when we have two .cpp files, we have two options:
 
@@ -162,9 +177,9 @@ Alternatively we can use:
 
     $ g++ -c -o file1.o file1.cpp
     $ g++ -c -o file2.o file2.cpp
-    $ ld -o hello file1.o file2.o
+    $ g++ -o hello file1.o file2.o
 
-Here, we explicitly compile each .cpp file to an object file and finally tell the linker to link all of them to an executable. The good thing about this method is that is improves the time it takes to compile our program; the former will always compile each .cpp file while with the latter, you can skip compiling the .cpp files that haven't been changed since the last compilation. Makefile rules come in handy here.
+Here, we explicitly compile each .cpp file to an object file by passing -c and finally tell the compiler to link all of them to an executable. The good thing about this method is that is improves the time it takes to compile our program; the former will always compile each .cpp file while with the latter, you can skip compiling the .cpp files that haven't been changed since the last compilation. Makefile rules come in handy here.
 
 .. topic:: #include <header> or #include "header"?
 
@@ -178,13 +193,13 @@ Compiling and linking our program becomes more interesting when external librari
 
     $ g++ -Wall -I/usr/include/SDL2 -c -o file1.o file1.cpp
     $ g++ -Wall -I/usr/include/SDL2 -c -o file2.o file2.cpp
-    $ ld -L/usr/lib -lSDL2 -lSDL2_ttf -o hello file1.o file2.o
+    $ g++ -L/usr/lib -lSDL2 -lSDL2_ttf -o hello file1.o file2.o
 
 Here, we pass the include path to the compiler while compiling using the -I switch, such that the compiler will be able to find the SDL2 header files.
 
-After compilation, we pass the linker the path where to find libraries using the -L switch, and tell it which libraries to link using the -l switch (in this case, SDL2 and SDL2_ttf).
+After compilation, we pass the compiler the path where to find libraries using the -L switch, and tell it which libraries to link using the -l switch (in this case, SDL2 and SDL2_ttf).
 
-SDL2 provides us with the helper tool sdl2-config which can generate these for us. sdl2-config --cflags generates the correct -I line (and more) while sdl2-config --libs generates the switches required by the linker. This is the reason we call and expand sdl2-config we compile our code that uses SDL2.
+SDL2 provides us with the helper tool sdl2-config which can generate these for us. sdl2-config --cflags generates the correct -I line (and more) while sdl2-config --libs generates the switches required by the linker. This is the reason we call and expand sdl2-config when we compile our code that uses SDL2.
 
 *Exercise*: Use our SDL code from our bus logic code. Create a new header file or files as necessary. Compile and run your code. Fill out all the holes so that your code will do everything: parse the input files, generate the labels required for the display and display the labels. Create an std::map to map route numbers to names.
 

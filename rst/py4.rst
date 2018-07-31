@@ -15,7 +15,7 @@ Here's an example graph:
 
 .. image:: ../material/dot/dependencies2.png
 
-It's a graph showing the dependencies between the chapters of this book. For example, the chapter "Unix shell" has "Introduction" as its dependency.
+It's a graph showing the dependencies between some of the chapters of this book. For example, the chapter "Unix shell" has "Introduction" as its dependency.
 
 (Apart from describing dependencies between chapters, graphs can be used for describing other kinds of dependencies like in a supply chain. They can also be used to describe other relationships like distances or routes between places, relationships between people etc.)
 
@@ -86,7 +86,7 @@ Conversely, the more accurate way is somewhat more difficult to implement but is
 The hacky way
 =============
 
-The hacky way involves heavy use of regular expressions.
+The hacky way involves use of regular expressions.
 
 The principle is simple: 
 
@@ -94,7 +94,13 @@ The principle is simple:
 * If not, print out the line (remember, we wanted to end up printing a dot file with the unnecessary edges removed), unless the line is simply a '}' which denotes the end of the dot file
 * If it does, note the two words as a link (key and value in a dictionary)
   
-After this, we'd end up with a dictionary describing all the links. The key of the dictionary would be a string while the value would be a list of strings, i.e. all the edges from a node.
+After this "parsing" we'd end up with a dictionary describing all the links. The key of the dictionary would be a string while the value would be a list of strings, i.e. all the edges from a node. We could then do the following:
+
+* Apply our algorithm to remove unnecessary edges - that is, remove the unnecessary entries in our dictionary
+* Write out all the edges by simply printing "    %s -> %s;" % (word1, word2)
+* Print '}' to close the dot file description
+
+That's it, really.
 
 .. topic:: collections.defaultdict
 
@@ -143,7 +149,7 @@ After this, we'd end up with a dictionary describing all the links. The key of t
 
      import re
 
-     regex = re.compile('[a-z]*([0-9]+)[a-z]*([0-9]+)'))
+     regex = re.compile('[a-z]*([0-9]+)[a-z]+([0-9]+)'))
      s = 'abc123def456'
      result = re.match(regex, s)
      if result:
@@ -151,14 +157,6 @@ After this, we'd end up with a dictionary describing all the links. The key of t
          print 'The number at the end of "s" is:', result.group(2)
 
   Here, you can define which captured string you want via the parameter to group().
-
-After this "parsing", we can do the following:
-
-* Apply our algorithm to remove unnecessary edges - that is, remove the unnecessary entries in our dictionary
-* Write out all the edges by simply printing "    %s -> %s;" % (word1, word2)
-* Print '}' to close the dot file description
-
-That's it, really.
 
 *Exercise*: Implement this hacky method to "parse" a dot file. You don't need to remove the unnecessary edges yet. Write the output of your program to a file and diff against the original. They should match except possibly for line ordering and whitespace. You can sort the lines in both files alphabetically using the "sort" Unix command for easier comparison. Feel free to reach out to a reference on regular expressions if needed.
 
@@ -191,7 +189,7 @@ A -> B -> D -> E -> C
 
 This is because depth first traversal traverses along the edges of the last visited node first. In other words, depth first traversal maintains a *stack*, such that any edges from newly visited nodes are added at the top of the stack.
 
-If we were to traverse from node B using breadth first traversal, the order would e.g. be the following:
+If we were to traverse from node A using breadth first traversal, the order would e.g. be the following:
 
 A -> B -> C -> E -> D
 
@@ -211,6 +209,6 @@ We should now have all the pieces we need to finish our program.
 
 *Exercise*: Finish the program to remove unnecessary edges. See the pseudocode above for the principle. Use your traversal function to determine whether a node depends on another.
 
-By the way, the Graphviz suite also includes a tool called "tred" which performs transitive reduction similarly to our code. You can also use this to validate the output of your program.
+By the way, the Graphviz suite also includes a tool called "tred" which performs transitive reduction similarly to our code. You can use this to validate the output of your program.
 
 *Exercise*: Look up the source code for "tred" in the Graphviz source.

@@ -61,6 +61,8 @@ Let's go through this line by line:
 * Lines 6-9: We define some variables that reduce redundancy in our script.
 * Lines 11-14: We run our program one after the other, resulting in the display program being run.
 
+Note that this doesn't exactly conform to the requirements specification as it specified only the bus stop is supplied as a parameter, however this is easier to test and should be relatively easy to adapt to fully match the requirements when necessary.
+
 *Exercise*: Write a shell script or modify the above one to fit your environment so that you can run all your code in one command.
 
 Makefiles

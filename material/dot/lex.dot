@@ -1,0 +1,15 @@
+digraph lex {
+    lex_out [label="Lexer output (list of (token, string) pairs)"];
+    "Lexer" [shape=box fillcolor=lightgrey style=filled];
+    "Parser" [shape=box fillcolor=lightgrey style=filled];
+    "Remove unnecessary edges" [shape=box fillcolor=lightgrey style=filled];
+    "Serialise to dot" [shape=box fillcolor=lightgrey style=filled];
+    "Input file" -> "Lexer";
+    "Lexer" -> lex_out;
+    lex_out -> "Parser";
+    "Parser" -> "Parser output";
+    "Parser output" -> "Remove unnecessary edges";
+    "Remove unnecessary edges" -> "Parser output";
+    "Parser output" -> "Serialise to dot";
+    "Serialise to dot" -> "Output file";
+}

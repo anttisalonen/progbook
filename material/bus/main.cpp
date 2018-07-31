@@ -401,6 +401,6 @@ int main(int argc, char** argv)
     }
     else {
         fprintf(stderr, "Usage: %s <stop name> <gps_raw.txt> <gps.txt> <sched.txt> [time]\n", argv[0]);
-        fprintf(stderr, "Alternative sage: %s <label file>\n", argv[0]);
+        fprintf(stderr, "Alternative usage: %s <label file>\n", argv[0]);
     }
 }
