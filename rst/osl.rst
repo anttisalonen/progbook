@@ -6,14 +6,14 @@ As a software engineer it's often useful to have some understanding of the diffe
 Proprietary software
 ====================
 
-Proprietary software, or non-free software, refers to software where another entity than the user, such as the software publisher, retains some rights. This typically means that the user may not be allowed to e.g. copy, modify, distribute or sell the software, or receive the source code of the software.
+Proprietary software, or non-free software, refers to software where another entity than the user, such as the software publisher, owns the software and retains major rights. This typically means that the user may not be allowed to e.g. copy, modify, distribute or sell the software, or receive the source code of the software.
 
 Open source licenses
 ====================
 
 We've used lots of different open source software in this book, from the compilers and interpreters (e.g. Python, gcc, clang and all main JavaScript engines) to various libraries (SQLite, SDL2, Flask) and other tools (most shells, Make, git, vim). In addition, several components of modern operating systems may be open source, from the kernel to the file system utilities (commands such as "ls", "grep" etc.) and commonly used desktop software such as the browser. There are several different open source licenses and here only some of the most popular ones are covered.
 
-A note on terminology: open source and free software are used interchangeably in this section. They're often treated as synonyms of each other although "free software" emphasises freedom (as in speech, not as in beer) while "open source" emphasises the practicality of being able to access the source.
+A note on terminology: open source and free software are used interchangeably in this section. They're often treated as synonyms of each other although "free software" emphasises freedom (as in speech, not as in beer) while "open source" emphasises the practicality of being able to access and modify the source.
 
 Permissive licenses
 ~~~~~~~~~~~~~~~~~~~

@@ -26,7 +26,7 @@ I had Sphinx generate a Makefile for myself so after I've written a new section,
 
 .. code-block:: bash
 
-    $ make html latexpdf
+    $ make latexpdf html
 
 This command will generate both HTML and PDF from the input rst files which are defined in the main table of contents.
 
@@ -46,7 +46,7 @@ In other words, it supports several different commands that describe what the ou
 The following diagram displays the overall flow. The grey boxes represent applications while the white spots are data.
 
 .. image:: ../material/close/rst.png
-    :scale: 30
+    :scale: 15
 
 Apart from using Sphinx, another alternative I read about afterwards was Asciidoctor, which is software that takes files written in AsciiDoc syntax as input (which has some similarities to rst, e.g. is also plain text) and can generate various outputs such as HTML and PDF.
 

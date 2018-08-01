@@ -24,6 +24,6 @@ As mentioned in the introduction, this book aims to contain an overview of almos
 
 **Others**:
 
+* The Art of UNIX Programming by Eric S. Raymond
 * Unix Network Programming, Volume 1: The Sockets Networking API by W. Richard Stevens
 * The Mythical Man-Month: Essays on Software Engineering by Frederick P. Brooks Jr.
-* The Art of UNIX Programming by Eric S. Raymond

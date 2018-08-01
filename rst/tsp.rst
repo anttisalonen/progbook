@@ -3,7 +3,7 @@ NP-hard problems
 
 In the chapter "First touch of algorithms" we discussed the run times of various algorithms (O(log n) etc.). There's more to this, namely problems which, to the best of current knowledge of mankind, are *hard*. Hard here means that the run time of an algorithm to solve the problem is expected to be high, and it's not known how to construct an algorithm that has a run time polynomial to n, i.e. the complexity class isn't O(n\ :sup:`x`\ ) for any x but rather e.g. exponential (O(2\ :sup:`n`\ ), i.e. incrementing n by one doubles the run time).
 
-There are several classifications from classical Computer Science for problems, such as *P* (solvable in polynomial time), *NP-complete* ("NP" standing for non-deterministic polynomial time) etc. which are not in the scope for this book, but the summary is that for certain problems, fast solutions are not known. This section discusses one of such problems in detail, namely the *Travelling salesman problem*.
+There are several classifications from classical Computer Science for problems, such as *P* (solvable in polynomial time), *NP* ("NP" standing for non-deterministic polynomial time) etc. which are not in the scope for this book, but the summary is that for certain problems, fast solutions are not known. This section discusses one of such problems in detail, namely the *Travelling salesman problem*.
 
 Travelling salesman problem (TSP)
 =================================
@@ -45,9 +45,9 @@ The following diagram displays an example of a brute force search solution to TS
 
 .. image:: ../material/close/tsp2.png
 
-Now, things get interesting if we increase N. The brute force search to TSP has the runtime complexity of O(n!), that is, each time N is increased, the runtime is *multiplied* by N. The number of permutations for N=5 is 5 * 4 * 3 * 2 * 1 = 120. For N=6 it is 120 * 6 = 720.
+Now, things get interesting if we increase N. The brute force search to TSP has the runtime complexity of O(n!), that is, each time N is incremented, the runtime is *multiplied* by N. The number of permutations for N=5 is 5 * 4 * 3 * 2 * 1 = 120. For N=6 it is 120 * 6 = 720.
 
-If we assume we require four bytes to store each permutation in RAM (quite optimistic), how much memory would we require to store all the permutations for different values of N?
+If we assume we require four bytes to store each permutation in RAM (in practice it'll be more with our data structure), how much memory would we require to store all the permutations for different values of N?
 
 *Exercise*: With the above assumption, calculate the possible memory requirements. You can use "math.factorial(n)" to calculate the factorial in Python, and convert bytes to kilobytes by dividing by 1024.0, or to megabytes by dividing by 1024.0 * 1024.0, or to gigabytes by dividing by 1024.0 * 1024.0 * 1024.0. Find out the memory requirements for N from 1 to 20.
 
@@ -70,7 +70,7 @@ The following image displays an example path found by the next neighbour algorit
 
 .. image:: ../material/close/tsp3.png
 
-Here, it's possible that the path started at (60, 48). It found the nearest neighbour at (48, 44), then at (35, 61) and so on, until the final city at (4, 63) and the return to the starting point.
+Here, it's possible that the algorithm started at (60, 48). It found the nearest neighbour at (48, 44), then at (35, 61) and so on, until the final city at (4, 63) and the return to the starting point.
 
 *Exercise*: Implement the next neighbour algorithm. Compare the resulting path length between this and the brute force search for various N, e.g. N=8.
 
@@ -78,4 +78,4 @@ The next neighbour algorithm is a *greedy algorithm*. A greedy algorithm is an a
 
 Apart from greedy algorithms, there are other heuristics that can help provide reasonable solutions to difficult problems. Another heuristic is *stochastic optimisation*, where, e.g. for TSP, multiple paths are generated at random and compared against each other, selecting the best one in the end. These can furthermore be improved e.g. by attempting to combine features of various paths.
 
-Were it actually necessary to find good and fast solutions to TSP, the best way to do this would probably be to use one of multiple libraries designed to solve TSP, which may incorporate years of optimisation and research to provide the best algorithms. Never the less, basic understanding of the problem space can be helpful in daily programming life. Furthermore, typical Computer Science topics are often a popular subject in technical interviews for software development positions.
+Were it actually necessary for you to find good and fast solutions to TSP, the best way to do this would probably be to use one of multiple libraries designed to solve TSP, which may incorporate years of optimisation and research to provide the best algorithms. Never the less, basic understanding of the problem space can be helpful in daily programming life. Furthermore, typical Computer Science topics are often a popular subject in technical interviews for software development positions.

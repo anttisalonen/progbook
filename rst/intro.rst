@@ -110,24 +110,24 @@ I should mention at this point, if it wasn't already clear, that the author has 
 
 Overall, the book is structured into four stages. These are the main topics in the different stages:
 
-+---------------+-------------------------------+------------------------------------------------------------------+
-| Stage         | Theme                         | Main topics                                                      |
-+===============+===============================+==================================================================+
-| The beginning | Introduction                  | * Basics of computers and programming using C and Python         |
-|               |                               | * Basics of Unix                                                 |
-+---------------+-------------------------------+------------------------------------------------------------------+
-| Stage 1       | Slightly in-depth programming | * Introduction to algorithms and JavaScript                      |
-|               |                               | * Some more in-depth concepts in C and Python                    |
-+---------------+-------------------------------+------------------------------------------------------------------+
-| Stage 1.5     | More in-depth programming     | * Web development using JavaScript and Python                    |
-|               |                               | * Strongly, statically typed languages, especially C++           |
-+---------------+-------------------------------+------------------------------------------------------------------+
-| Stage 2       | Closing projects              | * Larger software using Python and C++ (or optionally e.g. Java) |
-|               |                               | * SQL                                                            |
-|               |                               | * Various intermediate topics (parsing, threads etc.)            |
-+---------------+-------------------------------+------------------------------------------------------------------+
++---------------+------------------------------------------------------------------+
+| Stage         | Main topics                                                      |
++===============+==================================================================+
+| The beginning | * Basics of computers and programming using C and Python         |
+|               | * Basics of Unix                                                 |
++---------------+------------------------------------------------------------------+
+| Stage 1       | * Introduction to algorithms and JavaScript                      |
+|               | * Some more in-depth concepts in C and Python                    |
++---------------+------------------------------------------------------------------+
+| Stage 1.5     | * Web development using JavaScript and Python                    |
+|               | * Strongly, statically typed languages, especially C++           |
++---------------+------------------------------------------------------------------+
+| Stage 2       | * Larger software using Python and C++ (or optionally e.g. Java) |
+|               | * SQL                                                            |
+|               | * Various intermediate topics (parsing, threads etc.)            |
++---------------+------------------------------------------------------------------+
 
-If you think there's something very unclear about some part of the book or otherwise have any questions or comments, let me know. My email is ajsalonen@gmail.com. You may also create an issue or a pull request in GitHub. I'm also not a native English speaker so any corrections on that front are welcome as well.
+If you think there's something unclear about some part of the book or otherwise have any questions or comments, let me know. My email is ajsalonen@gmail.com. You may also create an issue or a pull request in GitHub. I'm also not a native English speaker so any corrections on that front are welcome as well.
 
 About the author
 ================
