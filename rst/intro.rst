@@ -127,7 +127,7 @@ Overall, the book is structured into four stages. These are the main topics in t
 |               | * Various intermediate topics (parsing, threads etc.)            |
 +---------------+------------------------------------------------------------------+
 
-If you think there's something unclear about some part of the book or otherwise have any questions or comments, let me know. My email is ajsalonen@gmail.com. You may also create an issue or a pull request in GitHub. I'm also not a native English speaker so any corrections on that front are welcome as well.
+If you think there's something unclear about some part of the book or otherwise have any questions or comments, let me know. My email is ajsalonen@gmail.com. You may also create an issue or a pull request in GitHub. I'm also not a native English speaker so any corrections on that front are welcome as well. The book source code is available at https://github.com/anttisalonen/progbook. The book home page is https://progbook.org.
 
 About the author
 ================

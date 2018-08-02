@@ -126,7 +126,7 @@ We now have some tools available for starting to create our return form.
 
 .. only:: not html
 
-  You can also pick up an image file for the logo from the book web site.
+  You can also pick up an image file for the logo as well as the example PDF from the book web site.
 
 Now, how about the table that describes the products that are being returned? Here are the clues that you need:
 

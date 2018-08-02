@@ -36,4 +36,31 @@ Learn Programming
 
 .. only:: html
 
+    Downloads for the print version:
+
+    * Lots of quadratic equations
+
+      * :download:`test1.txt <../material/quad/test1.txt>`
+      * :download:`test.txt <../material/quad/test.txt>`
+
+    * Propagation and search
+
+      * :download:`sud1.txt <../material/sudoku/sud1.txt>`
+      * :download:`sud2.txt <../material/sudoku/sud2.txt>`
+
+    * Introduction to larger software
+
+      * :download:`sched.txt <../material/bus/sched.txt>`
+      * :download:`gps.txt <../material/bus/gps.txt>`
+      * :download:`gps_raw.txt <../material/bus/gps_raw.txt>`
+
+    * Drawing the schedule screen using SDL2
+      
+      * :download:`label_info.txt <../material/bus/label_info.txt>`
+
+    * Generating a return form
+
+      * :download:`logo.png <../material/retail/logo.png>`
+      * :download:`example.pdf <../material/retail/example.pdf>`
+
     Contact author: ajsalonen@gmail.com
