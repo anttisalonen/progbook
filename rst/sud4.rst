@@ -66,7 +66,7 @@ Now we have enough to solve one easy Sudoku puzzle, but our program won't solve 
 
 ::
 
-    4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......
+    .7...18......7......6..91.....415.78...6.345........1.56..3....78...6.499...5....
 
 Searching
 =========
@@ -139,21 +139,21 @@ Solving more Sudoku puzzles
 
 .. only:: html
 
-  Here are 30 easy Sudoku puzzles, courtesy project Euler: :download:`download link <../material/sudoku/sud1.txt>`
+  Here are 30 easy Sudoku puzzles, courtesy QQWing, an open source Sudoku puzzle generator: :download:`download link <../material/sudoku/sud1.txt>`
 
 .. only:: not html
 
-  There is a file downloadable at the book web site containing 30 easy Sudoku puzzles, courtesy project Euler.
+  There is a file downloadable at the book web site containing 30 easy Sudoku puzzles, courtesy QQWing, an open source Sudoku puzzle generator.
 
 *Exercise*: Save the above to a file. Rewrite your program to read each of these, and solve them all one after another. See how long it takes. (On Unix, you can time your program execution by prefixing the command with "time", e.g. "time ls".)
 
 .. only:: html
 
-  Here are 30 difficult Sudoku puzzles, courtesy http://magictour.free.fr/top95: :download:`download link <../material/sudoku/sud2.txt>`
+  Here are 30 difficult Sudoku puzzles, courtesy QQWing: :download:`download link <../material/sudoku/sud2.txt>`
 
 .. only:: not html
 
-  There is a file downloadable at the book web site containing 30 difficult Sudoku puzzles, courtesy http://magictour.free.fr/top95.
+  There is a file downloadable at the book web site containing 30 difficult Sudoku puzzles, courtesy QQWing.
 
 *Exercise*: Solve these puzzles as well. If you get tired of waiting, remember to compile your program with optimisations, that is, with the compiler command line flag "-O2" which can speed up C++ programs significantly.
 

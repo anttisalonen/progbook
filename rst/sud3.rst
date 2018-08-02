@@ -17,27 +17,27 @@ Now, we can start implementing our Puzzle class. From data point of view, this i
 *Exercise*: Implement the constructor and the "solved" function. The constructor doesn't need any contents as the array elements will be constructed using the default constructor for Cell, which as per the previous exercise initialises the cell such that all values are possible. The "solved" function will need to check whether all cells have only one number, and only return true in this case. (Initially, it should hence return false.)
 Now, we can look into actually constructing an object of class Puzzle by reading a Sudoku puzzle from a file.
 
-As per Norvig, let's define the file format for a Sudoku puzzle such that a number in a file defines the value for a cell, while either a dot (.) or a zero (0) denote an unknown cell, and all characters can be ignored. This means that e.g. the following line is a valid puzzle (again courtesy Norvig, who sourced the puzzle from Project Euler):
+As per Norvig, let's define the file format for a Sudoku puzzle such that a number in a file defines the value for a cell, while either a dot (.) or a zero (0) denote an unknown cell, and all characters can be ignored. This means that e.g. the following line is a valid puzzle (courtesy QQWing, an open source Sudoku puzzle generator):
 
 ::
 
-    ..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..
+    1..42.........6.............51.4..87..3.5..61...3....528...7..4......5..6.5.18.2.
 
 The same puzzle could be represented like this:
 
 ::
 
-    ..3 .2. 6..
-    9.. 3.5 ..1
-    ..1 8.6 4..
-    
-    ..8 1.2 9..
-    7.. ... ..8
-    ..6 7.8 2..
-     
-    ..2 6.9 5..
-    8.. 2.3 ..9
-    ..5 .1. 3..
+    1.. 42. ...
+    ... ..6 ...
+    ... ... ...
+
+    .51 .4. .87
+    ..3 .5. .61
+    ... 3.. ..5
+
+    28. ..7 ..4
+    ... ... 5..
+    6.5 .18 .2.
 
 Now, let's write the code to read this. In C++, one can read a file to a string with the following snippet (this uses the first parameter given to the program):
 
