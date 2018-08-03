@@ -318,7 +318,7 @@ Apart from the standard arithmetic operators and the power function, there's ano
     a = 23
     b = 3
     print('a = %d; b = %d; a / b = %d' % (a, b, a / b))
-    print('a = %d; b = %d; a % b = %d' % (a, b, a % b))
+    print('a = %d; b = %d; a %% b = %d' % (a, b, a % b))
 
 *Exercise*: What do you think the above will print? Try it out.
 

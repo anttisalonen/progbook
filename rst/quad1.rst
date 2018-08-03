@@ -19,7 +19,7 @@ This mathematical formula can be implemented in C. For example like this:
 
 The +/- part of the formula causes up to two possible solutions for x to be available; the above C formulation only identifies one.
 
-There may be 0, 1 or 2 roots; the case of 0 roots occurs when the part for which the square root is calculated (also called the *determinant*) is negative, as a negative number cannot have a real square root. The case of 1 root occurs when the determinant is exactly 0.
+There may be 0, 1 or 2 roots; the case of 0 roots occurs when the part for which the square root is calculated (also called the *discriminant*) is negative, as a negative number cannot have a real square root. The case of 1 root occurs when the discriminant is exactly 0.
 
 The C function sqrt() is part of the standard C library but there's a twist: in order to use the function, the header file <math.h> should be included. Furthermore, you may need to link your program against the *math library* by passing "-lm" to your C compiler when compiling.
 

@@ -30,9 +30,9 @@ We should now have what we need. To get started, here's a simple Python program 
     a = 3.0
     b = -2.0
     c = -3.0
-    det = b * b - 4.0 * a * c
-    if det >= 0:
-        r1 = (-b + math.sqrt(det)) / (2.0 * a)
+    disc = b * b - 4.0 * a * c
+    if disc >= 0:
+        r1 = (-b + math.sqrt(disc)) / (2.0 * a)
         print 'Value of r1 is %.2f' % r1
 
 *Exercise*: Write a Python program that solves the quadratic equation for a=3.0, b=-2.0, c=-3.0. Print out the number of roots as well as all found roots.

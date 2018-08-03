@@ -51,7 +51,7 @@ Once you do get to the Python interpreter as shown above you can exit it by typi
 
 *Exercise*: Install the Python interpreter if your system doesn't already have it. Run it and exit it.
 
-Now that we have the shell and the interpreter, the final bit we need is the editor. For now it's enough with an editor that's easy to use, though Notepad, which is installed by default on Windows, won't do. If you're on a Linux system you can install e.g. gedit. On Windows you could install notepad++. There are other editors available like Atom or Visual Studio Code. It doesn't really matter which one you install now, as long as you end up with a window where you can type text and save it to a file. Here's an example of what an editor could look like:
+Now that we have the shell and the interpreter, the final bit we need is the editor. An editor is a program that allows writing code files, or text files in general. For now it's enough with an editor that's easy to use, though Notepad, which is installed by default on Windows, won't do. Furthermore, word processors such as Microsoft Word won't do. If you're on a Linux system you can install e.g. gedit. On Windows you could install notepad++. There are other editors available like Atom or Visual Studio Code. It doesn't really matter which one you install now, as long as you end up with a window where you can type text and save it to a file. Here's an example of what an editor could look like:
 
 .. image:: ../material/intro/editor.png
 
@@ -67,7 +67,7 @@ The next step is to create a file with these contents:
 
 The above is a one-line Python program (which works either with Python 2 or Python 3). When run, it will write the text "Hello world" to the terminal.
 
-*Exercise*: Create a file with the above contents. Call it "hello.py". Make sure you know in which directory you saved the file.
+*Exercise*: Create a file with the above contents. Call it "hello.py". Make sure you know in which directory you saved the file. If you're using Windows 10 and WSL, you should be able to find the files you've saved in Windows at /mnt/c/Users/<username>.
 
 Now, we need to navigate to the directory where the file was saved, and run the Python interpreter with our program as the input.
 
