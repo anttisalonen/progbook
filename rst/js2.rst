@@ -30,9 +30,9 @@ Here are the building blocks for this to get you started:
 
 The above snippet demonstrates the following:
 
-* On line 2, the label is set to be whatever the value of "my_guess" is
+* On line 2, the value of element called "guess" - this should be our text box where the user inputs their guess - is set to be whatever the value of "my_guess" is
 * On line 3, a button with the ID "guess_button" is clicked
-* On line 4, the text indicating the answer is stored in a variable
+* On line 4, the text indicating the answer is read from a DOM element called "paragraph" and stored in a variable
 * On line 5, the search string is searched for the text "smaller". -1 will indicate the string was not found.
 
 *Exercise*: What does the search() function as used on line 5 actually return, and what exactly can you pass to it as a parameter? Find the reference for the function online. What is the type of the variable "answer" in the snippet above?

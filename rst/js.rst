@@ -11,7 +11,7 @@ Now, in order to do this we're going to need JavaScript and HTML.
 
 Disclaimer: This book introduces the basics of JavaScript and HTML but does specifically *not* include the modern best practices around web development. There are several reasons for this, one being that the best practices on web development are still under relatively rapid change, but the material in this book should be enough for the reader to gain a high level understanding of JavaScript and HTML and put together some interactive web pages.
 
-The development environment will work like this: create a file with an extension .html and open it in your text editor. After you've made changes to your file, you can open it in your browser. For example, on Linux, if your file is called hello.html, you can open it in Firefox by running "firefox hello.html" in your terminal. When you make changes to the file, refresh the tab in your browser. If you're running some other system you'll need to find out how to open a local HTML file.
+The development environment will work like this: create a file with an extension .html and open it in your text editor. After you've made changes to your file, you can open it in your browser. For example, on Linux, if your file is called hello.html, you can open it in Firefox by running "firefox hello.html" in your terminal. When you make changes to the file, refresh the tab in your browser. If you're running some other system you'll need to find out how to open a local HTML file. On some systems, e.g. Linux, you can use the "file://" scheme, such that e.g. "file:///home/antti/hello.html" would be the URL to an HTML file in the user's directory.
 
 What happens here is that the browser will read in the contents of your file and interpret it. The browser has an engine for reading and rendering HTML, such that if you for example describe, in your HTML, that a part of text should be displayed red, the browser will know to render that text red. Similarly the browser has a JavaScript interpreter built in, and will execute the JavaScript code embedded in the HTML file.
 
@@ -35,6 +35,8 @@ If you run this in your browser, you should see a text "old text" and a button. 
 
 What happens here is that the paragraph has an ID, and the button has a JavaScript function associated with it. When pressing the button, the browser executes the JavaScript code which changes the text.
 
+To be clear, with JavaScript we can change the HTML, i.e. what the user sees, based on logic (code). Our JavaScript code can *read* user input by reading the values stored in the *Document Object Model* (DOM), e.g. by reading the variable of a text field using document.getElementById("guess").value. Similarly our JavaScript code can *write* to the DOM, i.e. modify what the user sees e.g. by changing the value of a variable such as document.getElementById("paragraph").innerHTML. By reading user input from DOM and making changes to DOM, we can build interactive web pages.
+
 In general, HTML describes the content, i.e. what is shown to the user, while JavaScript describes the logic, i.e. what happens.
 
 Let's put together one more example to capture the other bits and pieces we need for our game:
@@ -43,23 +45,22 @@ Let's put together one more example to capture the other bits and pieces we need
    :language: html
    :linenos:
 
-This example introduces a few concepts:
+The code in this example isn't very useful as a whole but includes different snippets which are needed for our guessing game:
 
 * A random floating point number between 0 and 1 can be obtained by calling Math.random()
 * Numbers can be rounded down by using Math.floor()
 * HTML tag <input> with type="text" introduces a text box, the value of which can be read using JavaScript.
 
-To be clear, with JavaScript we can change the HTML, i.e. what the user sees, based on logic (code). Our JavaScript code can *read* user input by reading the values stored in the *Document Object Model* (DOM), e.g. by reading the variable of a text field using document.getElementById("guess").value. Similarly our JavaScript code can *write* to the DOM, i.e. modify what the user sees e.g. by changing the value of a variable such as document.getElementById("paragraph").innerHTML. By reading user input from DOM and making changes to DOM, we can build interactive web pages.
-
 Now we have everything we need to put our game together. What we'll need is:
 
-1) Some JS logic to generate the number and check the guess against the number the computer is thinking of
-2) A field where to input what the guess is
+1) Some JS logic to generate the random number
+2) A text field where to input what the guess is
 3) A button indicating we'd like to make a guess
-4) Text indicating whether our guess is correct or not
+4) More JS logic to check the guess against the number the computer is thinking of
+5) Text indicating whether our guess is correct or not
 
 You may need to debug JavaScript, for example if you make a typo, causing your program to not run correctly. How to debug JavaScript depends on your browser. For example with Chrome, you can hit F12 to bring up the developer information panel. This shows any JavaScript errors, for example. You'll also need to store the value to be guessed as a global variable, that is, outside any function. This ensures the value will stay persistent.
 
-*Exercise*: Implement the guessing game. Good luck! Once you're done, or if you get stuck, you can take a look at the appendix to see an example implementation.
+*Exercise*: Implement the guessing game. Good luck! Once you're done, or if you get stuck, you can take a look at the "Solutions to exercises" section on the book home page to see an example implementation.
 
 *Exercise*: Have the program count the number of guesses, and display the total number at the end.
