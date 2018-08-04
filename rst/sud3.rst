@@ -15,6 +15,7 @@ Now, we can start implementing our Puzzle class. From data point of view, this i
     };
 
 *Exercise*: Implement the constructor and the "solved" function. The constructor doesn't need any contents as the array elements will be constructed using the default constructor for Cell, which as per the previous exercise initialises the cell such that all values are possible. The "solved" function will need to check whether all cells have only one number, and only return true in this case. (Initially, it should hence return false.)
+
 Now, we can look into actually constructing an object of class Puzzle by reading a Sudoku puzzle from a file.
 
 As per Norvig, let's define the file format for a Sudoku puzzle such that a number in a file defines the value for a cell, while either a dot (.) or a zero (0) denote an unknown cell, and all characters can be ignored. This means that e.g. the following line is a valid puzzle (courtesy QQWing, an open source Sudoku puzzle generator):
@@ -58,7 +59,7 @@ Now, let's write the code to read this. In C++, one can read a file to a string 
 Now that we can read file into a string, let's turn this into a puzzle. We want to implement the following:
 
 .. image:: ../material/sudoku/block1.png
-    :scale: 30
+    :scale: 15
 
 In other words, we want to read the file to an std::string, pass this string to a function called parse_string() (which we still need to write) which shall convert the std::string to a vector of integers. Once we have a vector of integers we'll pass it to our Puzzle constructor which shall use this vector to set the correct values in the member variable of type std::array<Cell, 81>. Phew!
 

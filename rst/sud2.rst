@@ -7,7 +7,7 @@ We then discussed the concept of a cell - which may either have a value, or at l
 
 After our discussion around classes we now almost have enough to implement a class "Cell", which represents a cell and the value it has or could have. Before we implement this, let's consider for a moment how we could achieve this concept of potential values.
 
-If we know which value a cell has, it's no different from an integer. However, if it can have multiple values, then it can effectively be represented a set of multiple integers.
+If we know which value a cell has, it's no different from an integer. However, if it can have multiple values, then it can effectively be represented as a set of multiple integers.
 
 *Exercise*: What ways or data structures can you think of to store this information?
 
@@ -57,20 +57,22 @@ More specifically, it should correctly implement an interface as used by this pr
     int main()
     {
         Cell c1;
-        std::cout << c1.count() << "\n";   // should output "9"
+        std::cout << c1.count() << "\n";   // outputs "9"
         bool ret = c1.eliminate(7);
-        std::cout << c1.count() << "\n";   // should output "8"
-        std::cout << ret << "\n";          // should output "1" (true)
+        std::cout << c1.count() << "\n";   // outputs "8"
+        std::cout << ret << "\n";          // outputs "1" (true)
         c1.set(3);
-        std::cout << c1.count() << "\n";   // should output "1"
-        std::cout << c1.valid() << "\n";   // should output "1" (true)
-        std::cout << c1.has_one() << "\n"; // should output "1" (true)
-        auto values = c1.get_values();     // return type is implementation specific (e.g. either vector<int> or set<int>)
+        std::cout << c1.count() << "\n";   // outputs "1"
+        std::cout << c1.valid() << "\n";   // outputs "1" (true)
+        std::cout << c1.has_one() << "\n"; // outputs "1" (true)
+        auto values = c1.get_values();
         for(const auto& v : values) {
-            std::cout << v << "\n";        // should output "3"
+            std::cout << v << "\n";        // outputs "3"
         }
         return 0;
     }
+
+Here, the return type of the member function get_values() is implementation specific, i.e. it could be e.g. either vector<int> or set<int>. The usage of the variable "values" would stay the same in either case.
 
 .. topic:: Bounds checking
 

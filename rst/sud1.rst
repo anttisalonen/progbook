@@ -15,17 +15,17 @@ Here's an example Sudoku puzzle:
 
 ::
 
-    36 | 2 | 89
-       |361|   
+    1  |42 |   
+       |  6|   
        |   |   
     ---+---+---
-    8 3|   |6 2
-    4  |6 3|  7
-    6 7|   |1 8
+     51| 4 | 87
+      3| 5 | 61
+       |3  |  5
     ---+---+---
-       |   |   
-       |418|   
-    97 | 3 | 14
+    28 |  7|  4
+       |   |5  
+    6 5| 18| 2 
 
 Now, what we're going to write is a program that, given any Sudoku puzzle, will solve it.
 

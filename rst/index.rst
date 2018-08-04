@@ -43,6 +43,10 @@ Learn Programming
       * :download:`test1.txt <../material/quad/test1.txt>`
       * :download:`test.txt <../material/quad/test.txt>`
 
+    * PNG files
+
+      * :download:`guess.png <../material/js/guess.png>`
+
     * Propagation and search
 
       * :download:`sud1.txt <../material/sudoku/sud1.txt>`

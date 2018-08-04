@@ -28,11 +28,9 @@ PNG file format is described online at e.g. Wikipedia but also at the RFC (Reque
 
 The signature is eight bytes long and contains the following values, in hex format:
 
-::
-
-    +----+----+----+----+----+----+----+----+
-    | 89 | 50 | 4E | 47 | 0D | 0A | 1A | 0A |
-    +----+----+----+----+----+----+----+----+
++----+----+----+----+----+----+----+----+
+| 89 | 50 | 4E | 47 | 0D | 0A | 1A | 0A |
++----+----+----+----+----+----+----+----+
 
 In ASCII, the bytes 2-4 (starting from 1) are "PNG"; bytes 5-6 are "\\r\\n" (CRLF) and byte 8 is "\\n".
 
@@ -69,6 +67,12 @@ Now, that program doesn't do very much so let's change that. We can, after openi
 
 Here, our function "check_header" calls "validate" twice, for the first two bytes in the buffer. The function "validate", defined above, checks if the condition is true, and if not, prints out an error and exits the program.
 
+.. topic:: Digression: what is "unsigned"?
+
+  In C, there are several integer data types; e.g. char (one byte), int (one word, e.g. 4 bytes, but depends on the system), *long* (system dependent but at least 4 bytes) and others. In addition, each data type can either be *signed* or *unsigned*. Signed means they can have a minus sign, i.e. can be negative. Typically, as some space e.g. one bit is used for the sign, the unsigned data can have a larger range. For example, a signed char has a range of at least from -127 to 127 while an unsigned char has a range from at least 0 to 255.
+
+  In the above, the byte values in the PNG header can be more than 127, e.g. the value 0x89 is 137 in decimal, hence the cast to unsigned char.
+
 .. topic:: Digression: stderr
 
   The function "validate" prints out the error using *fprintf*, which is similar to printf but allows defining the output file for writing. We define the output to go to *stderr*, or "standard error", which is very similar to standard in but is another file. The main use case is redirecting: if we were to direct the output of our program to a file, what gets written to stderr actually gets written out in the terminal, not in the output file. E.g:
@@ -86,21 +90,27 @@ Here, our function "check_header" calls "validate" twice, for the first two byte
 
 *Exercise*: Expand the program to check for all eight bytes of the header. Find a PNG file to test your program on.
 
-You can download a sample PNG file here - a screenshot from another chapter (e.g. right click and "save as"):
+.. only:: html
 
-.. image:: ../material/js/guess.png
+  You can download a sample PNG file here - a screenshot from another chapter (e.g. right click and "save as"):
+
+  .. image:: ../material/js/guess.png
+
+.. only:: not html
+
+  You can download a sample PNG file from the book web page - a screenshot from another chapter.
 
 You'll need to use either this exact image or another image with the same chunks for later exercises in this part of the book.
 
 Now we have a program that checks, for a given input file, whether it has the correct PNG signature or not. Let's see if we can expand it to read all the headers in a PNG file. You may have read from the RFC or Wikipedia that after the signature, the series of chunks begins, with each chunk having the following format:
 
-::
++---------+------------+----------------+---------+
+| Length  | Chunk type | Chunk data     | CRC     |
++---------+------------+----------------+---------+
+| 4 bytes | 4 bytes    | /length/ bytes | 4 bytes |
++---------+------------+----------------+---------+
 
-    +---------+------------+----------------+---------+
-    | Length  | Chunk type | Chunk data     | CRC     |
-    +---------+------------+----------------+---------+
-    | 4 bytes | 4 bytes    | /length/ bytes | 4 bytes |
-    +---------+------------+----------------+---------+
+In other words, each chunk starts with four bytes indicating the length of the chunk data in bytes, followed by the chunk type (4 bytes), the chunk data (arbitrary length), and finally the CRC which is 4 bytes and can be used to check the data for correctness.
 
 Now, let's see if we can parse this. Let's add the following code after we've checked the header:
 
@@ -140,13 +150,11 @@ You may have noticed from the RFC or other sources that some values in the PNG f
 
 In other words - each of the four bytes in binary and hex:
 
-::
-
-    +----------+----------+----------+----------+
-    | 00000000 | 00000010 | 00010000 | 00100000 |
-    +----------+----------+----------+----------+
-    |  0x00    |  0x02    |  0x10    |  0x20    |
-    +----------+----------+----------+----------+
++----------+----------+----------+----------+
+| 00000000 | 00000010 | 00010000 | 00100000 |
++----------+----------+----------+----------+
+|  0x00    |  0x02    |  0x10    |  0x20    |
++----------+----------+----------+----------+
 
 The first byte has no bits set. Each of the other bytes has one bit set each.
 
@@ -154,13 +162,11 @@ Now, the way the table is here is in *big endian* - the most significant byte is
 
 This means that in our buffer, if the length was 135,200 bytes, we'd have the following contents:
 
-::
-
-    +-------------------+-------------------+-------------------+-------------------+
-    | char buf[pos + 0] | char buf[pos + 1] | char buf[pos + 2] | char buf[pos + 3] |
-    +-------------------+-------------------+-------------------+-------------------+
-    |  0x00             |  0x02             |  0x10             |  0x20             |
-    +-------------------+-------------------+-------------------+-------------------+
++--------------+--------------+--------------+--------------+
+| buf[pos + 0] | buf[pos + 1] | buf[pos + 2] | buf[pos + 3] |
++--------------+--------------+--------------+--------------+
+|  0x00        |  0x02        |  0x10        |  0x20        |
++--------------+--------------+--------------+--------------+
 
 Now the question is, how would we convert these four bytes (char values) to an integer containing the value 135,200. This is the purpose of the function "get_big_endian".
 
@@ -200,15 +206,13 @@ Bitwise or then:
 
 Here we "or" the bits of x and y, bitwise:
 
-::
-
-    +-------+----------+
-    | x     | 00000011 |
-    +-------+----------+
-    | y     | 00000110 |
-    +-------+----------+
-    | x | y | 00000111 |
-    +-------+----------+
++-------+----------+
+| x     | 00000011 |
++-------+----------+
+| y     | 00000110 |
++-------+----------+
+| x | y | 00000111 |
++-------+----------+
 
 ...and 00000111 is 7.
 
