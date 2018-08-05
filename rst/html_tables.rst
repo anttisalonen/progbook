@@ -47,4 +47,4 @@ In order to modify tables in JavaScript, we can do the following:
 * Line 2: We iterate over two table rows using a for loop, skipping the header (both rows and cells, and JavaScript arrays in general, are 0-indexed, meaning the arrays start at 0)
 * Line 3: We set the contents of the second cell of the i'th row to "2017-02-15".
 
-*Exercise*: Add a HTML table in your guessing game web page as a placeholder for the high score list.
+*Exercise*: Add a HTML table in your guessing game web page as a placeholder for the high score list. You can set the values for the first row in the table (i.e. the header) but leave the other cells empty for now.

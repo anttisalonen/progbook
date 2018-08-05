@@ -6,6 +6,12 @@
 Learn Programming
 =================
 
+.. only:: html
+
+    Learn Programming is a free book aimed at readers who are interested in software development but have very little to no prior experience.
+
+    The book focuses on teaching the core principles around software development.
+
 .. raw:: html
 
     <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. The code within this book is licensed under the MIT license.
@@ -61,6 +67,10 @@ Learn Programming
     * Drawing the schedule screen using SDL2
       
       * :download:`label_info.txt <../material/bus/label_info.txt>`
+
+    * Graphs
+
+      * :download:`dep2.dot <../material/dot/dep2.dot>`
 
     * Generating a return form
 

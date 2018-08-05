@@ -1,7 +1,7 @@
 Web development with Python and JavaScript
 ==========================================
 
-In this section we'll turn our guessing game from a single HTML page to a simple web app.
+In this chapter we'll turn our guessing game from a single HTML page to a simple web app. Our goal is to have a *high score table* for the guessing game: the page should store and track the number of guesses for different players, and show which players have finished the game in the smallest number of guesses.
 
 We'll start by adding some logic to gain some more experience in JS, and then learn about the following topics:
 

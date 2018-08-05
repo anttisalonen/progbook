@@ -16,7 +16,7 @@ Linked lists solve the problem of inserting an element in the middle. They're co
     .    ^
     .   Head 
 
-The "head" pointer points to the beginning of the list. The last element will have the "next" pointer point to NULL (denoted by "x" in the diagram above), signalling the end of the list. If one were now to add an element in the list, this can be done by changing the "next" pointer of the previous cell in the list to point to the new element and the "next" pointer of the new element to the cell that was previously pointed to by the previous cell.
+In this illustration, each element has two fields, the first one holding the payload data and the second holding a pointer to the next element. The "head" pointer points to the beginning of the list. The last element will have the "next" pointer point to NULL (denoted by "x" in the diagram above), signalling the end of the list. If one were now to add an element in the list, this can be done by changing the "next" pointer of the previous cell in the list to point to the new element and the "next" pointer of the new element to the cell that was previously pointed to by the previous cell.
 
 In practice, due to the overhead of allocating memory for individual cells and the performance issues caused by memory fragmentation and poor cache locality, linked lists rarely show any performance benefit over arrays.
 

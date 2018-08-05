@@ -1,7 +1,7 @@
 Guessing game in JS
 -------------------
 
-Let's write a guessing game. This game is fairly simple: the computer thinks of a number between 1 and 25, and you need to guess what it is. The computer will give hints such as "my number is smaller" or "my number is bigger" on wrong guesses.
+Let's write a guessing game. This game is fairly simple: the computer thinks of a number between 1 and 25, and the user needs to guess what it is. The user can make a guess, and depending on the guess, the computer may tell the user either "my number is smaller", "my number is bigger" or "correct number!"
 
 Moreover, let's write this such that it's run in the browser. It should look something like this:
 
@@ -21,15 +21,26 @@ Let's start breaking down this task by creating the most basic HTML and JavaScri
    :language: html
    :linenos:
 
-You can type this code into a file and open it in your browser. You should see a plain web page with a text "some text".
+You can type this code into a file and open it in your browser. You should see a plain web page with a text "some text". Some lines of the code aren't important to us right now but let's go through some of it:
 
-If we go through this in detail, we see a bunch of tags such as "<html>" which mostly have a start and an end (e.g. "</html>", and the text "some text" in the middle. Most of the tags aren't very important now though I should note the tag "<p>" denotes a paragraph.
+* Line 2: we open the "html" *tag*. This is closed on line 10.
+* Lines 3-6 are our "head" section which includes, among others, the title for our page
+* Lines 7-9 are our "body" section
+* Line 8 is our paragraph (denoted with "<p>"). This paragraph has the text "some text".
 
 Here's one of the most basic "programs" that utilises JS and HTML:
 
 .. literalinclude:: ../material/js/js2.html
    :language: html
    :linenos:
+
+Let's go through this in detail:
+
+* Lines 6-10: We've introduced a new section within our "head" section: the "script" section which holds our JavaScript code.
+* Line 14: We've added an *id* to our paragraph (simply named "paragraph").
+* Line 15: We've added a *button* using the tag "<input>" with an attribute 'type="button"'. The button has a text "Press me". Once pressed, it will call the *JavaScript function* "myfunc".
+
+Our JavaScript code consists of one function definition. The JavaScript function "myfunc" has one line: it retrieves the element "paragraph" from the page, and changes its member variable "innerHTML" value to "new text". The element "paragraph" is our paragraph, and its member variable "innerHTML" is the text within that paragraph. Hence, the JavaScript function changes the contents of the paragraph.
 
 If you run this in your browser, you should see a text "old text" and a button. If you press the button, the text is replaced with "new text".
 
@@ -47,20 +58,25 @@ Let's put together one more example to capture the other bits and pieces we need
 
 The code in this example isn't very useful as a whole but includes different snippets which are needed for our guessing game:
 
-* A random floating point number between 0 and 1 can be obtained by calling Math.random()
-* Numbers can be rounded down by using Math.floor()
-* HTML tag <input> with type="text" introduces a text box, the value of which can be read using JavaScript.
+* Line 7: The function Math.random() is called which returns a random floating point number between 0 and 1. This is furthermore multiplied by 20 to get a number between 0 and 20. This line also demonstrates use of variables in JavaScript. The variable is defined outside the function, such that the random number is only generated once, at page load.
+* Line 8: The function Math.floor() is called to round the number down to an integer. The result is a number between 0 and 19.
+* Line 11: Different strings and variables can be *concatenated*, or put together, using the "+" operator.
+* Lines 12-18: JavaScript also supports branches.
+* Line 19: We can obtain the value of an element in DOM and store it in a variable. We can append to an existing string using the "+=" operator.
+* Line 22: In HTML, we can use the "<input>" tag with attribute 'type="text"' to create a *text box*. The user can type text in it. We read the contents of this text box in our JavaScript code on line 14.
+
+*Exercise*: What does the above page do? Try it out. Try reloading the page.
 
 Now we have everything we need to put our game together. What we'll need is:
 
-1) Some JS logic to generate the random number
+1) Some JS logic to generate the random number which is the number the computer "thinks" of, and which the user is expected to guess. Note that you'll need to have this code *outside* any of your functions, such that the number is generated only once per page load.
 2) A text field where to input what the guess is
 3) A button indicating we'd like to make a guess
 4) More JS logic to check the guess against the number the computer is thinking of
-5) Text indicating whether our guess is correct or not
+5) Changing the text in the paragraph to indicate whether our guess is correct, too low, or too high
 
-You may need to debug JavaScript, for example if you make a typo, causing your program to not run correctly. How to debug JavaScript depends on your browser. For example with Chrome, you can hit F12 to bring up the developer information panel. This shows any JavaScript errors, for example. You'll also need to store the value to be guessed as a global variable, that is, outside any function. This ensures the value will stay persistent.
+You may need to debug JavaScript, for example if you make a typo, causing your program to not run correctly. How to debug JavaScript depends on your browser. For example with Chrome, you can hit F12 to bring up the developer information panel. This shows any JavaScript errors, for example.
 
-*Exercise*: Implement the guessing game. Good luck! Once you're done, or if you get stuck, you can take a look at the "Solutions to exercises" section on the book home page to see an example implementation.
+*Exercise*: Implement the guessing game where the computer thinks of a number and the player needs to guess which number it is. The JavaScript code should give hints to the player whether the guess is too small, too large, or correct.
 
 *Exercise*: Have the program count the number of guesses, and display the total number at the end.

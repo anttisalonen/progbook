@@ -9,14 +9,15 @@ What we're missing is updating the high score table both on starting the new gam
 
 Let's connect the dots. Here's how our high level architecture should look like:
 
-* On page load, the JavaScript code requests the high score data from the server.
-* In Python, we have a handler that replies to this request by fetching data from the database and use this data to generate and send back a suitable JSON that can be used for the high score table.
-* In JavaScript, we receive this data, and write and call a function that takes this data as the input parameter and inserts it in the HTML high score table.
+* On page load, the JavaScript code requests the high score data from the server using AJAX.
+* In Python, we have a handler that replies to this request by fetching data from the database and uses this data to generate and send back a suitable JSON that can be used for the high score table.
+* In JavaScript, in the AJAX callback function, we receive this data, and write and call a function that takes this data as the input parameter and inserts it in the HTML high score table.
 * Once the player has guessed the correct number, the server shall provide updated high score data to the client which the client shall use to update values in the high score table again.
 
 The following sequence diagram illustrates the flow in more detail.
 
 .. image:: ../material/guess/seq3.png
+    :scale: 15
 
 You might wonder, why have the JavaScript code request data from the server at page load time instead of generating the high score table as part of the template on the server? While this is certainly a feasible approach, the good thing about having the JavaScript generate the high score table at page load is that as we want to have JavaScript code to update the high score table at the end of the game anyway, we can reuse that code at page load and hence have only one piece of code update the high score table instead of two.
 

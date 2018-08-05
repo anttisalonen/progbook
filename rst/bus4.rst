@@ -146,7 +146,7 @@ We should end up with e.g. have the following structure:
 The following diagram summarises the dependencies.
 
 .. image:: ../material/bus/dep.png
-    :scale: 30
+    :scale: 15
 
 Now, generally in C and C++, source files are compiled to object files (binary files including the machine code instructions that were generated from the input C code), and one or multiple object files can be linked to an executable. When you run e.g.:
 

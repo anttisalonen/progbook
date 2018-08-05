@@ -55,7 +55,7 @@ This file can be fed to the dot program, e.g. like this:
 As you can see, dot takes the output format as a parameter, can read dot files from stdin and output to stdout. The result could look like this:
 
 .. image:: ../material/dot/graph.png
-    :scale: 30
+    :scale: 15
 
 (The edge from A to E is unnecessary.)
 
@@ -63,9 +63,28 @@ As you can see, dot takes the output format as a parameter, can read dot files f
 
 As you can see, the dot language is fairly simple, at least in this case, and fairly intuitive.
 
-Here's a bit more complex example of a dot file - it's the source for the graph at the beginning of this section:
+The source for the graph at the beginning of this section is a bit more complex. It has this kind of structure:
 
-.. literalinclude:: ../material/dot/dep2.dot
+.. code-block:: bash
+
+    digraph dep2 {
+        bin_index [label="Working with binary data"];
+        design_index [label="Larger software"];
+        // ... more nodes ...
+
+        int_c_index -> bin_index;
+        ud_index -> design_index;
+        ds_index -> ds3_index;
+        // ... more edges ...
+    }
+
+.. only:: html
+
+  The full source for the dot file can be downloaded here: :download:`dep2.dot <../material/dot/dep2.dot>`
+
+.. only:: not html
+
+  The full source can be downloaded at the book web page.
 
 The main difference, apart from having more nodes and edges, is that the nodes have *IDs* associated with them, and each ID has *a label*. This way, the lengthy name that will be displayed for each node is only written once in the dot file, even when a node is referenced multiple times.
 
@@ -181,7 +200,7 @@ Graph traversal
 Let's take a look at the simpler graph from before again:
 
 .. image:: ../material/dot/graph.png
-    :scale: 30
+    :scale: 15
 
 If we were to start our traversal from node A, the depth first traversal, which, as the name says, goes into depth when traversing, would traverse the nodes e.g. in the following order:
 

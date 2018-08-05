@@ -154,6 +154,9 @@ latex_elements = {
 \renewcommand\sphinxurl{\sphinxnolinkurl}
 \pagestyle{headings} % include page numbers
 \usepackage{xltxtra} % font support
+\usepackage[defaultlines=4,all]{nowidow}
+\let\oldquote\quote
+\renewcommand\quote{\mbox{}\oldquote} % keep quote and quote name together
 ''',
     'fncychap': r'\usepackage[Bjarne]{fncychap}',
     'printindex': r'\footnotesize\raggedright\printindex',

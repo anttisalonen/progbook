@@ -26,7 +26,7 @@ As per our engineering spec, the output of sched should look like the following:
   ::
 
    3 1 5 6 1
-   3 1 5 16 1
+   3 2 5 16 1
 
 In other words, the output format is exactly the same but with a 1 appended at the end to signal the fact that this data point is from a schedule, which is needed when merging the predictions based on GPS data with the schedule information. The tricky bit about sched is that it should only output the next (up to) 50 buses arriving based on the current time which is also given to the program as a parameter. So if e.g. the time 5:10 was passed to sched, it shouldn't output any buses arriving before 5:10.
 

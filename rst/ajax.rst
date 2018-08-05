@@ -15,7 +15,7 @@ From a high level software architecture point of view, this is how the flow is e
 
 Seems simple, doesn't it?
 
-Apart from entering the name, we've already covered steps 1-3 and to some extent step 5. In this section we'll cover steps 4 and 6. They're basically what AJAX is about.
+Apart from entering the name, we've already covered steps 1-3 and to some extent step 5. In this section we'll cover steps 4 and 6. They're basically what AJAX is about: being able to communicate and exchange data between our JavaScript code and our server code.
 
 A note on security: As we've seen, we're not really in control of the JavaScript code - a user can replace the JavaScript code with whatever code they prefer. In this sense, were we to use this architecture in a real program, a user could easily replace the data sent to the server and fake their way to the top of the high score list. For educational purposes we assume we can trust the user in this case, but were one serious about such a game and offering it for the public, the game logic would have to be done on the server side, such that the correct number would be generated on the server and each guess would need to be sent to the server.
 
@@ -72,7 +72,7 @@ XmlHttpRequest is an API that allows asynchronous communication with the server.
 
   In general, you can define all the values (tag names, attribute keys and values, the contents in the body of a tag) as you wish. In this sense XML can be used to transfer generic data between two programs or components. For this use case XML is very similar to JSON. We're focusing on JSON in this book instead of XML because it's generally simpler to work with, and seems to be at least as common as XML if not more.
 
-Here's an example of XmlHttpRequest in practice - how to get some data from the server:
+Here's an example of XmlHttpRequest in practice - JavaScript code that requests some data from the server:
 
 .. code-block:: js
     :linenos:
@@ -95,7 +95,7 @@ Let's go through this line by line:
 * Line 5: If this condition is satisfied then we write text in the console, including the response text from the server. This can be anything - plain text, JSON, XML, binary data - whatever the server is programmed to send.
 * Line 8: We send the request to the server.
 
-Let's try this out ourselves.
+This example doesn't do anything with the data besides showing it in the log, but the data could be used to manipulate DOM, i.e. to change the HTML presented to the user. Let's try this out ourselves.
 
 *Exercise*: Implement the above AJAX request. You'll need the following:
 

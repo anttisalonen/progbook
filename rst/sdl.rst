@@ -90,6 +90,7 @@ SDL and font handling
 Now, what we want is display text on a screen using SDL. As nothing is ever as simple as you'd think when programming, SDL doesn't provide drawing text out of the box, but instead there's another library called SDL2_TTF which provides this functionality. How this works in a nutshell is that you initialise SDL2_TTF, then load a font from a .ttf file (the DejaVu Sans font that was referenced in the introduction), then use that font to create an SDL surface which we then convert to an SDL texture which we copy to the screen buffer using the renderer, finally showing the text on the screen when we present the buffer. Confused yet? The following diagram illustrates the data flow.
 
 .. image:: ../material/bus/sdlttf.png
+    :scale: 30
 
 The good news is that we only need to implement this once.
 

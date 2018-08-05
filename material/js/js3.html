@@ -4,14 +4,19 @@
         <meta charset="UTF-8">
         <title>Page</title>
         <script> 
+var value = Math.random() * 20;
+var value_rounded = Math.floor(value);
+
 function myfunc() {
-    var value = Math.random() * 20;
-    var value_rounded = Math.floor(value);
-    var str = "Values: " + value + " " + value_rounded;
-    if(value > 10) {
-        str += " value is larger than 10.";
+    var str = "Values: " + value + "; rounded: " + value_rounded;
+    if(value_rounded > 10) {
+        str += "; rounded value is larger than 10.";
+    } else if(value_rounded > 5) {
+        str += "; rounded value is between 5 and 10.";
+    } else {
+        str += "; rounded value is smaller than or equal to 5.";
     }
-    str += " " + document.getElementById("guess").value;
+    str += " Text in text box: " + document.getElementById("guess").value;
     document.getElementById("paragraph").innerHTML = str
 }
         </script> 

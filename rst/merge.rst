@@ -1,7 +1,7 @@
 Unix way - merge
 ----------------
 
-Now we have all pieces of our software except merge. Merge is expected to take the outputs of both sched and parse_gps and produce the input for display. The output will need to show the estimated bus arrival time where possible and the scheduled bus arrival time otherwise, and sort the buses based on the arrival time, i.e. interleave the estimated and scheduled arrival times as needed. Have a think about how you would design this software.
+Now we have all pieces of our software except merge. Merge is expected to take the outputs of both sched and parse_gps and produce the input for display. Merge should use the tuple (route number, start number) to match the data from schedules and GPS data; if an entry from a schedule data has the same route number and the same start number as an entry from the GPS data, then we have the GPS data available for this schedule data entry. The output will need to show the estimated bus arrival time where possible and the scheduled bus arrival time otherwise, and sort the buses based on the arrival time, i.e. interleave the estimated and scheduled arrival times as needed. Have a think about how you would design this software.
 
 As before, let's break this down:
 
