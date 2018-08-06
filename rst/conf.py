@@ -154,9 +154,25 @@ latex_elements = {
 \renewcommand\sphinxurl{\sphinxnolinkurl}
 \pagestyle{headings} % include page numbers
 \usepackage{xltxtra} % font support
-\usepackage[defaultlines=4,all]{nowidow}
+\usepackage[all]{nowidow}
 \let\oldquote\quote
 \renewcommand\quote{\mbox{}\oldquote} % keep quote and quote name together
+
+% no page break between section and first subsection
+% https://tex.stackexchange.com/questions/153444/insert-newpage-before-section-but-prevent-pagebreak-after-part
+\usepackage{etoolbox}
+\newtoggle{aftersection}
+\pretocmd{\subsection}
+  {\iftoggle{aftersection}
+    {\global\togglefalse{aftersection}}% we're after a section
+    {\clearpage}% we're not immediately after a section
+  }{}{}
+\pretocmd{\section}
+  {\clearpage % do a page break
+   \global\toggletrue{aftersection}% tell \subsection we're just after a section
+  }
+  {}{}
+
 ''',
     'fncychap': r'\usepackage[Bjarne]{fncychap}',
     'printindex': r'\footnotesize\raggedright\printindex',

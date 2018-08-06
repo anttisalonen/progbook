@@ -17,8 +17,8 @@
  */
 int *filt(int *arr, int len, int *end_len)
 {
-	// first allocate memory large enough to hold the whole array
-	// in case this is needed
+	// first allocate memory large enough to hold the
+	// whole array in case this is needed
 	int *res = (int *)malloc(sizeof(int) * len);
 	if(!res) {
 		perror("malloc");
@@ -26,8 +26,8 @@ int *filt(int *arr, int len, int *end_len)
 	}
 	memset(res, 0x00, sizeof(int) * len);
 
-	// end_len serves as our index so we know where to put the
-	// next number
+	// end_len serves as our index so we know where to
+	// put the next number
 	*end_len = 0;
 
 	for(int i = 0; i < len; i++) {

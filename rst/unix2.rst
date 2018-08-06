@@ -138,13 +138,13 @@ Another useful key combination is ctrl+z which stops the program execution and p
 
     $ cp -i big_file.tgz /mnt
     ^Z
-    [1]+  Stopped                 cp -i big_file.tgz /mnt
+    [1]+  Stopped         cp -i big_file.tgz /mnt
     $ bg
     [1]+ cp -i big_file.tgz /mnt &
     $ ls
     Makefile  dep.rst   ex_js2.rst
     $
-    [1]+  Done                    cp -i big_file.tgz /mnt
+    [1]+  Done            cp -i big_file.tgz /mnt
 
 Let's assume we have a very large file we want to copy somewhere. Copying large files can take time, and cp by default doesn't output anything while copying. We start the copy on line 1.
 
@@ -196,7 +196,7 @@ If you want to send a SIGTERM signal to another process than what's currently ru
     23904 pts/8    00:00:00 cp
     23905 pts/8    00:00:00 ps
     $ kill 23904
-    [1]+  Terminated              cp -i big_file.tgz /mnt
+    [1]+  Terminated      cp -i big_file.tgz /mnt
     $
 
 Note that bash tells you the PID of the newly started process when you start it on the background using &.
@@ -209,7 +209,7 @@ Because a program can install a signal handler for SIGTERM, it's possible that s
     [1] 23937
     $ kill -KILL 23937
     $
-    [1]+  Killed                  cp -i big_file.tgz /mnt
+    [1]+  Killed          cp -i big_file.tgz /mnt
     $
 
 *Exercise*: Start "less" to browse a file, hit ctrl+z to move it to the background, then run "fg" to bring it to foreground again.

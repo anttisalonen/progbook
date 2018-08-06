@@ -75,8 +75,6 @@ Let's walk through this step by step:
                       ^
       In file included from sock1.c:2:0:
       /usr/include/sys/socket.h:123:12: note: expected 'const struct sockaddr *' but argument is of type 'struct sockaddr_in *'
-       extern int bind (int __fd, __CONST_SOCKADDR_ARG __addr, socklen_t __len)
-                  ^~~~
 
   What the error tells us is that the function bind() expects a pointer to *struct sockaddr* but we pass it a pointer to *struct sockaddr_in*. Because of the way the API is specified (in the case of IP communication it actually required *struct sockaddr_in* despite what the function declaration says), we cast the type to *struct sockaddr*. Type casting basically means telling the compiler "please pretend this variable has a different type than what it actually has". Having this possibility in C makes C a weakly typed language.
 
