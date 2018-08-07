@@ -41,7 +41,7 @@ It's worth going a bit more into detail on LaTeX. LaTeX (often pronounced "lah-t
   \label{\detokenize{js:guessing-game-in-js}}\label{\detokenize{js::doc}}
   Let’s write a guessing game. This game is fairly simple: the computer thinks of a number between 1 and 25, and you need to guess what it is. The computer will give hints such as “my number is smaller” or “my number is bigger” on wrong guesses.
   
-In other words, it supports several different commands that describe what the output should be like. Sphinx generates LaTeX files from the rst input, and also generates and runs a Makefile which runs the Perl script latexmk which runs pdflatex which actually generates the PDF.
+In other words, it supports several different commands that describe what the output should be like. Sphinx generates LaTeX files from the rst input, and also generates and runs a Makefile which runs the Perl script latexmk which runs pdflatex which actually generates the PDF. In order to make the page layout as I wanted - with page breaks only where I wanted them and nowhere else - I needed to write some *LaTeX code*. You see, LaTeX (and TeX, the language it builds upon) is *Turing complete* - it, like all common programming languages, can be used to describe any computation, and hence supports e.g. branches, variables, and loops. This comes in handy when the document writer wants e.g. a page break before every section except the first section in the chapter, like in my case.
 
 The following diagram displays the overall flow. The grey boxes represent applications while the white spots are data.
 

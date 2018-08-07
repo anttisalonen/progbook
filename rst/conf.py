@@ -158,6 +158,24 @@ latex_elements = {
 \let\oldquote\quote
 \renewcommand\quote{\mbox{}\oldquote} % keep quote and quote name together
 
+% replace sphinxshadowbox with mdframed due to issues with page breaks
+\usepackage[framemethod=TikZ]{mdframed}
+\newenvironment{aside}
+  {\begin{mdframed}[leftline=true,%
+      rightline=true,%
+      leftmargin=0em,%
+      rightmargin=0em,%
+      innerleftmargin=1em,%
+      innerrightmargin=1em,%
+      linewidth=1pt,%
+      needspace=6em,%
+      roundcorner=8pt,%
+      skipabove=7pt,%
+      skipbelow=7pt]}
+  {\end{mdframed}}
+\let\sphinxShadowBox\aside
+\let\endsphinxShadowBox\endaside
+
 % no page break between section and first subsection
 % https://tex.stackexchange.com/questions/153444/insert-newpage-before-section-but-prevent-pagebreak-after-part
 \usepackage{etoolbox}
