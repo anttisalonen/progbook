@@ -37,9 +37,6 @@ Learn Programming
    .. toctree::
      ex_index
 
-.. toctree::
-   dep
-
 .. only:: html
 
     Downloads for the print version:
@@ -51,7 +48,7 @@ Learn Programming
 
     * PNG files
 
-      * :download:`guess.png <../material/js/guess.png>`
+      * :download:`guess1.png <../material/png/guess1.png>`
 
     * Propagation and search
 

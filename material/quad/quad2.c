@@ -31,4 +31,3 @@ int main(void)
     run(-1.0f, -1.0f, -1.0f);
     run(2.0f, 2.0f, 0.5f);
 }
-

@@ -9,4 +9,3 @@ int main(void)
 	printf("%p\n", b);
 	printf("%d\n", *b);
 }
-

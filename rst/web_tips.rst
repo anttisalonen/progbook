@@ -22,7 +22,7 @@ If you run this, you should get a JSON string back representing your high score 
   * Who are the most active (or best) users of the game
   * How do the high score lists evolve over time
 
-* Visualise the high score list in some other way, like as a 3D scene
+* Visualise the high score list in some other way, e.g. as a 3D scene
 * Fetch the high score list periodically and automatically email an alert when the list has changed
 
 It's often beneficial to expose such an API for reasons like this.

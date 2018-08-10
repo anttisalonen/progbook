@@ -41,4 +41,3 @@ int main(void)
     }
     run(a, b, c);
 }
-

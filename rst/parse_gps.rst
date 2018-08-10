@@ -78,20 +78,22 @@ For the most complex part of deciding what the output should be, the pseudocode 
 
     for bus in current_gps_data:
         if bus.passed:
-            # don't try to predict the arrival time but note that we need to include this bus in the output
+            # don't try to predict the arrival time but note that
+            # we need to include this bus in the output
         else:
             # find historical data points for this route
             historical_data_points = 
                 [data_point for data_point in historical_data if
                     data_point.route_number == bus.route_number]
-            # only include data points that are within 100 meters of current position
+            # only include data points that are within 100 meters
+            # of current position
             close_historical_data_points = 
-                [data_point for data_point in historical_data_points if
-                    distance(bus.position, data_point.position) < 100.0]
+                [point for point in historical_data_points if
+                distance(bus.position, point.position) < 100.0]
             bus.estimated_time_from_now = calculate_average(close_historical_data_points)
 
 In other words, we need to find the relevant historical data points (matching route number and close enough to the current bus location), and then calculate the average arrival time based on them. Once we have this information we can print it out.
 
-It seems like we're starting to have all the pieces together so we can put our program together.
+It seems like we're starting to have all the pieces so we can put our program together.
 
 *Exercise*: Implement the rest of your program. Test it with the mock-up data first. If that passes, see what output you get for the larger test files that were provided.

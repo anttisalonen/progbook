@@ -214,8 +214,7 @@ SQLite provides a practical way to do this:
 
 .. code-block:: python
 
-    cursor.execute('INSERT OR IGNORE INTO returns(order_id) VALUES (?)',
-            (order_id, ))
+    cursor.execute('INSERT OR IGNORE INTO returns(order_id) VALUES (?)', (order_id, ))
 
 The above statement does what you'd expect: it inserts a new row in the table "returns" with the column "order_id" set to the value of the variable "order_id" - but, if this is not possible because it would violate our "UNIQUE" constraint - that is, that the "order_id" must be unique for all rows in the table as per our database schema definition from our "CREATE TABLE" statement at the beginning - then the insertion statement is simply ignored.
 
@@ -241,7 +240,7 @@ Now, we already have a module in place for generating a PDF. If that file is in 
 
 .. code-block:: python
 
-    import print_return # this assumes the file is called print_return.py
+    import print_return # assumes the file is called print_return.py
 
     @app.route(...)
     def foo():

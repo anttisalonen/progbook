@@ -154,11 +154,11 @@ Here's an example gdb session:
     Starting program: ./segv 10 10000
 
     Program received signal SIGSEGV, Segmentation fault.
-    0x0000000000400825 in run (size=10, loop_size=10000) at segv.c:9
+    0x00400825 in run (size=10, loop_size=10000) at segv.c:9
     9	        array[i] = i + array[i - 1];
     (gdb) bt
-    #0  0x0000000000400825 in run (size=10, loop_size=10000) at segv.c:9
-    #1  0x00000000004008c1 in main (argc=3, argv=0x7fffffffe7d8) at segv.c:18
+    #0  0x00400825 in run (size=10, loop_size=10000) at segv.c:9
+    #1  0x004008c1 in main (argc=3, argv=0x7fffe7d8) at segv.c:18
     (gdb) 
 
 Here we can see the program crashed at line segv.c:9, in function "run", which was entered from function "main" at segv.c:18.

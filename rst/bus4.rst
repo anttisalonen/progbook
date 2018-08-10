@@ -33,7 +33,7 @@ This code searches the vector "vec" for a tuple which has the values "route_nr" 
     std::remove_if(vec1.begin(), vec1.end(),
             [&](const auto& bi) {
                 return std::find(vec2.begin(), vec2.end(),
-                        std::make_tuple(bi.route_nr, bi.start_nr)) != vec2.end();
+                       std::make_tuple(bi.route_nr, bi.start_nr)) != vec2.end();
             });
 
 *Exercise*: Implement the merge function and test it.

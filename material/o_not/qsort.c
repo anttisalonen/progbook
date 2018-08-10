@@ -14,4 +14,3 @@ int main(void)
         printf("%d\n", my_array[i]);
     }
 }
-

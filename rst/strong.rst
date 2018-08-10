@@ -104,7 +104,7 @@ On the other hand, C has some characteristics that can be perceived as disadvant
 * C is fairly verbose; based on the number of lines already there's arguably more effort required in C to achieve the same behaviour
 * C is not memory safe, opening the possibility of nasty memory related bugs and security holes
 * C is not as strongly typed as Python, such that some bugs in the code could go undetected which would raise a (run time) error in Python
-* While we haven't discussed C projects with multiple files in detail, in general the system in C with header files and source files, with the header files being included in source files using the #include preprocessor directive (which practically automatically copy-pastes the header file in the source file) introduces some drawbacks ideally can be improved upon
+* While we haven't discussed C projects with multiple files in detail, in general the system in C with header files and source files, with the header files being included in source files using the #include preprocessor directive (which practically automatically copy-pastes the header file in the source file) introduces some drawbacks that ideally can be improved upon
 
 Generic functions
 ~~~~~~~~~~~~~~~~~

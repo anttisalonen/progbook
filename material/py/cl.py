@@ -16,4 +16,3 @@ my_objects = [A(42), B()]
 
 for o in my_objects:
     o.call_me()
-

@@ -18,4 +18,3 @@ int main(void)
 	func(my_array, 5);
 	printf("%d\n", my_array[1]);
 }
-

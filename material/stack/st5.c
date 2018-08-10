@@ -11,4 +11,3 @@ int main(void)
 	double_input(&a);
 	printf("%d\n", a);
 }
-

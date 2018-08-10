@@ -16,4 +16,3 @@ int main(void)
 	printf("%d\n", a[2]);
 	free(a);
 }
-

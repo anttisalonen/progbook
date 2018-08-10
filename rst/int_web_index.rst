@@ -3,7 +3,7 @@ Web development with Python and JavaScript
 
 In this chapter we'll turn our guessing game from a single HTML page to a simple web app. Our goal is to have a *high score table* for the guessing game: the page should store and track the number of guesses for different players, and show which players have finished the game in the smallest number of guesses.
 
-We'll start by adding some logic to gain some more experience in JS, and then learn about the following topics:
+We'll learn about the following topics:
 
 * HTML table generation
 * JSON; which we'll need to transfer data between backend and frontend
@@ -29,7 +29,7 @@ What we'll end up is a two-page guessing game as well as a simple algorithm to p
 
 It doesn't sound like much but includes some software development fundamentals.
 
-Again, this book does *not* cover modern web development practices. However, the following sections will help the reader understand some concepts related to web development such as the difference around frontend and backend and using a database in the backend.
+Again, this book does *not* cover modern web development practices. However, the following sections will help the reader understand some concepts related to web development such as the difference around frontend (client) and backend (server) and using a database in the backend.
 
 .. toctree::
    :maxdepth: 1

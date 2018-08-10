@@ -3,7 +3,7 @@ Writing a toy web server
 
 After having used Flask a bit, you might have wondered "what's actually happening?"
 
-In essence, Flask receives HTTP requests from the browser over the network, and sends HTML data back to the browser which then displays it. But we should dig a bit further here.
+In essence, Flask receives HTTP requests from the browser over the network, and sends HTML data back to the browser which then displays it. But we should dig a bit further here. In fact, let's write a simple HTTP server ourselves; a program that will communicate with the browser over the network and send HTML files to it.
 
 OSI model
 =========
@@ -51,10 +51,10 @@ Let's walk through this step by step:
 * Line 15: We clear all the memory allocated for this variable using the standard C library memset() function.
 * Lines 16-18: We set some values in that struct, which basically mean that we want to open the TCP/IP port 1234.
 * Line 20: We use the first function of the BSD sockets API: socket(). This function should return a socket, i.e. something we can use for communications. 
-* Lines 21-24: We check the value of our socket. -1 means something went wrong. In this case we output an error string with perror() and stop the program execution.
-* Lines 26-36: We use the API to configure our socket such that it listens to incoming connections, i.e. as a server. It listens to TCP port 1234 and will allow up to five connections to line up.
+* Lines 21-24: We check the value of our server socket. -1 means something went wrong. In this case we output an error string with perror() and stop the program execution.
+* Lines 26-36: We use the API to configure our server socket such that it listens to incoming connections, i.e. as a server. It listens to TCP port 1234 and will allow up to five connections to line up.
 * Line 38: We run a for-loop which initialises nothing, has no condition for termination, and does nothing on each iteration. In other words, an infinite loop.
-* Line 39: We call accept(), another BSD sockets API function. This function call will block, i.e. our program execution will not proceed, until someone connects to the server.
+* Line 39: We call accept(), another BSD sockets API function. This function call will block, i.e. our program execution will not proceed, until someone connects to the server. Once a client has connected, accept() will return the *client socket* which we can use for communicating with the client.
 * Line 47: We call the function handle_server() which is a function that we will need to write ourselves. This defines what the server actually does.
 
 .. topic:: Digression: type casting
@@ -104,7 +104,7 @@ Here's a short and simple implementation of the handle_client function:
    :language: c
    :linenos:
 
-This function reads up to 1,023 bytes at once from the client and prints them out to stdout.
+This function reads up to 1,023 bytes at once from the client socket and prints them out to stdout.
 
 Because we now have a server which listens to connections to port 1234, we can try connecting to it using a web browser. We should then see what the web browser sends our program.
 
@@ -166,10 +166,10 @@ Let's see what we have...
 
 With the above knowledge it should be possible to finish the next exercise. You may also find it interesting to take a look at the various man pages of the different functions.
 
-*Exercise*: Modify the function handle_client to check if the client connecting appears to make a HTTP 1.1 GET request. In this case, respond with a valid HTTP 1.1 200 response, replying with a short message such as "Hello world". Make sure you set the Content-Length part of the response correctly. Connect to your server using your web browser to ensure you send the correct data. You can write data to the client by using the write() function, e.g. 'write(fd, "hello", 5);'. You can also write data piece by piece, by calling write() multiple times.
+*Exercise*: Modify the function handle_client to check if the client connecting appears to make a HTTP 1.1 GET request. In this case, respond with a valid HTTP 1.1 200 response, replying with a short message such as "Hello world". Make sure you set the Content-Length part of the response correctly. Connect to your server using your web browser to ensure you send the correct data. You can write data to the client by using the write() function, e.g. 'write(fd, "hello", 5);'. The first parameter to write() is the client socket. The second parameter must point to the buffer of data you wish to send. The third parameter describes the number of bytes you wish to send. You can also write data piece by piece, by calling write() multiple times.
 
 As you can now see, the browser will be able to render your text, which means you have the beginnings of a web server. To make things more interesting, let's have another exercise.
 
-*Exercise*: Create two HTML pages, with the first one linking to the second. (You can create a link in HTML by using the <a> tag; for example, the following creates a link to a page called two.html: <a href="two.html">link</a>.) For the request to /, serve the first HTML page by reading its contents to a buffer and then sending the buffer contents as part of the response. Again, make sure you set the Content-Length part of the response correctly. Parse the request path in detail, such that you'll be able to serve the second page when the browser requests it. Note: in order to have the browser display HTML properly, you'll need to set the Content-Type field to text/html.
+*Exercise*: Create two HTML pages, with the first one linking to the second. (You can create a link in HTML by using the <a> tag; for example, the following creates a link to a page called two.html: <a href="two.html">link</a>.) For the request to /, serve the first HTML page by reading its contents to a buffer and then sending the buffer contents as part of the response. Again, make sure you set the Content-Length part of the response correctly. You can read file contents into a buffer by using the fread() function - e.g. fread(buf, 1, 1024, fp); it will return the number of bytes read which you can use to determine the size of the file. Parse the request path in detail, such that you'll be able to serve the second page when the browser requests it. Note: in order to have the browser display HTML properly, you'll need to set the Content-Type field to text/html.
 
 At this stage our implementation doesn't respect the whole specification, but it's able to serve some web pages. If you made it here, congratulations.

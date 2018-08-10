@@ -9,4 +9,3 @@ int main(void)
 	my_array[1] = 2;
 	printf("%d\n", my_array[1]);
 }
-

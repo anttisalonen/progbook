@@ -94,7 +94,7 @@ Here, our function "check_header" calls "validate" twice, for the first two byte
 
   You can download a sample PNG file here - a screenshot from another chapter (e.g. right click and "save as"):
 
-  .. image:: ../material/js/guess.png
+  .. image:: ../material/png/guess1.png
 
 .. only:: not html
 
@@ -107,7 +107,7 @@ Now we have a program that checks, for a given input file, whether it has the co
 +---------+------------+----------------+---------+
 | Length  | Chunk type | Chunk data     | CRC     |
 +---------+------------+----------------+---------+
-| 4 bytes | 4 bytes    | /length/ bytes | 4 bytes |
+| 4 bytes | 4 bytes    | *length* bytes | 4 bytes |
 +---------+------------+----------------+---------+
 
 In other words, each chunk starts with four bytes indicating the length of the chunk data in bytes, followed by the chunk type (4 bytes), the chunk data (arbitrary length), and finally the CRC which is 4 bytes and can be used to check the data for correctness.
@@ -229,7 +229,7 @@ We take the first byte, shift its value by 24 bits to the left. We take the seco
 
 Now we have everything to fill the gaps in our loop to go through all the chunks in a PNG file.
 
-*Exercise*: Implement the missing bits. Terminate the loop when you reach the end of the file, as identified by the "size" variable. Increment pos by the chunk header size plus the length. Initialise the chunk string appropriately. Your program should output something like this (for guess.png):
+*Exercise*: Implement the missing bits. Terminate the loop when you reach the end of the file, as identified by the "size" variable. Increment pos by the chunk header size plus the length. Initialise the chunk string appropriately. Your program should output something like this (for guess1.png):
 
 .. verb::
 

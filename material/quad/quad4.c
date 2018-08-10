@@ -57,4 +57,3 @@ int main(void)
     printf("Largest root is %.2f. The function is (%.3f, %.3f, %.3f).\n",
             largest_root, largest_a, largest_b, largest_c);
 }
-

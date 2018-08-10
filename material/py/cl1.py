@@ -13,4 +13,3 @@ obj = A(42)
 obj.call_me()
 obj.add_one()
 obj.call_me()
-

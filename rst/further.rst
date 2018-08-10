@@ -22,7 +22,7 @@ As mentioned in the introduction, this book aims to contain an overview of almos
 * Structure and Interpretation of Computer Programs by Harold Abelson, Gerald Jay Sussman, Julie Sussman
 * Types and Programming Languages by Benjamin C. Pierce
 
-**Others**:
+**Other**:
 
 * The Art of UNIX Programming by Eric S. Raymond
 * Unix Network Programming, Volume 1: The Sockets Networking API by W. Richard Stevens

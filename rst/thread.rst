@@ -19,7 +19,7 @@ Apart from processes, you can use *threads* to split the work. Threads work such
 
 .. topic:: Digression: What is memory space?
 
-    When you check the pointer value of a variable, e.g. 0x7fffffffe7d8, this address, on a modern OS, does not really refer to the *physical address* in your memory. Instead, modern OSes typically employ *virtual addresses* - they let each program have their own *virtual address space*, and whenever the program tries to access memory, the CPU performs a *translation* from virtual address to the physical address on the physical memory. This way it's usually not possible for processes to read each others' memory. Indeed one of the main distinctions between a thread and a process is that when a thread is created, it shares the virtual address space with the thread that created it, while a process receives its own virtual address space from the OS on creation.
+    When you check the pointer value of a variable, e.g. 0x7fffe7d8, this address, on a modern OS, does not really refer to the *physical address* in your memory. Instead, modern OSes typically employ *virtual addresses* - they let each program have their own *virtual address space*, and whenever the program tries to access memory, the CPU performs a *translation* from virtual address to the physical address on the physical memory. This way it's usually not possible for processes to read each others' memory. Indeed one of the main distinctions between a thread and a process is that when a thread is created, it shares the virtual address space with the thread that created it, while a process receives its own virtual address space from the OS on creation.
 
 Simple example
 ==============

@@ -139,8 +139,8 @@ The above snippet demonstrates the following:
 * Tuples (lines 4, 10, 13)
 * Converting string to int (line 5)
 * Reading a file (lines 7 and 8)
-* Appending to a list (line 15)
-* Sorting using a callback (line 17)
-* List slicing (line 18)
+* Appending to a list (line 10)
+* Sorting using a callback (line 12)
+* List slicing (line 13)
 
 *Exercise*: Tie everything together to read a test schedule file and output the next schedules buses. Once you're done, test with the full sched.txt file that was available for download a couple of sections back.

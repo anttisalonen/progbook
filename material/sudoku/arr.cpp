@@ -48,8 +48,8 @@ int main()
 	size = vec.size();
 	std::cout << "Found: " << found << "; size: " << size << "\n";
 	// vec.clear() would remove all elements in the vector
-	// The following line removes the element 3 from the vector
-    vec.erase(std::remove(vec.begin(), vec.end(), 3), vec.end());
+	// The following line removes element 3 from the vector
+	vec.erase(std::remove(vec.begin(), vec.end(), 3), vec.end());
 	std::cout << "Size: " << vec.size() << "\n";
 
 	// printing all values in the vector:

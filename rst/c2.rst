@@ -42,7 +42,7 @@ If we wanted to declare such a struct and define its values, we can do simply:
     f.b = 2.0f;
     f.c = 3.0f;
 
-...and use f.a, f.b and f.c as we want.
+...and use f.a, f.b and f.c as we want. (The above code would need to reside within a function as mandated by C.)
 
 We can now also redefine the function that calculates the value at a given point:
 
@@ -77,7 +77,7 @@ Now, defining the function difference_between_functions can be much clearer:
         return val2 - val1;
     }
 
-*Exercise*: The derivative of a quadratic function ax^2 + bx + c is 2ax + b. Write a function that calculates the derivative for a quadratic function at a given point x and call it, with the input data passed as a pointer to a struct.
+*Exercise*: The derivative of a quadratic function ax\ :sup:`2`\ + bx + c is 2ax + b. Write a function that calculates the derivative for a quadratic function at a given point x and call it, with the input data passed as a pointer to a struct.
 
 What is a struct
 ================
