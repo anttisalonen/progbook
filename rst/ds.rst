@@ -8,7 +8,7 @@ Arrays
 
 We've already used *arrays* in C: Array is a data structure which contains multiple elements of data, such that each element uses the same amount of memory and they're allocated contiguously:
 
-::
+.. verb::
 
   +---+---+---+
   | 1 | 2 | 3 |
@@ -39,7 +39,7 @@ You can imagine stack as an array where you only have visibility over the last e
 
 Stack is also called "LIFO" - last in, first out. Here's an example "animation" of using a stack:
 
-::
+.. verb::
 
   +---+---+---+
   | 1 | 2 | x | # push(3)
@@ -75,7 +75,7 @@ You can imagine queue as an array where you only have visibility over the first 
 
 Queue is also called "FIFO" - first in, first out. Here's an example "animation" of using a queue:
 
-::
+.. verb::
 
   +---+---+---+---+---+
   | 1 | 2 | x | x | x | # push(3)
@@ -94,7 +94,6 @@ Queue is also called "FIFO" - first in, first out. Here's an example "animation"
   +---+---+---+---+---+
         ^   ^ end of queue
         start of queue
-
 
 * Initially, in this example, we have two elements in the queue (1 and 2). In total our array has five elements, such that we can't push more than five elements in the queue ever without reallocating.
 * We then push 3 in the queue, meaning we set the value of the third element to 3 and note that the end of the queue is now on the third element.

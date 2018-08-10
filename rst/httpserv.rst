@@ -136,18 +136,18 @@ Here's a snippet that puts some of the C string handling together:
 .. code-block:: c
     :linenos:
 
-    const char *my_string = "HTTP/1.1 200 OK\r\n"
-                            "Date: Mon, 27 Jul 2009 12:28:53 GMT\r\n";
+    const char *my_str = "HTTP/1.1 200 OK\r\n"
+                         "Date: Mon, 27 Jul 2009 12:28:53 GMT\r\n";
 
-    int ret = strncmp(my_string, "HTTP/1.1", 8);
+    int ret = strncmp(my_str, "HTTP/1.1", 8);
     if(ret == 0) {
-        printf("my_string begins with \"HTTP/1.1\"\n");
+        printf("my_str begins with \"HTTP/1.1\"\n");
     }
-    int my_string_len = strlen(my_string);
+    int my_string_len = strlen(my_str);
     if(my_string_len > 14) {
-            ret = strncmp(my_string + 9, "200", 3);
+            ret = strncmp(my_str + 9, "200", 3);
             if(ret == 0) {
-                printf("my_string has the characters \"200\" nine characters after the start.\n");
+                printf("my_str has the characters \"200\" nine characters after the start.\n");
             }
     }
     int value = 42;

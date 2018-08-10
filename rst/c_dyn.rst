@@ -30,7 +30,7 @@ Let's first go through this line by line:
 
 At the end of the main function, our stack will look something like this:
 
-::
+.. verb::
 
     | Address    | Contents   |
     | 0x50000004 | 0x23456788 |

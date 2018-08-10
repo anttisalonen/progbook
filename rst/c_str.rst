@@ -147,7 +147,7 @@ Finally, *debuggers* are programs which execute your program in a controlled env
       
 Here's an example gdb session:
 
-::
+.. verb::
 
     Reading symbols from ./segv...done.
     (gdb) r

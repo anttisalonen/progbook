@@ -20,13 +20,13 @@ Now, we can look into actually constructing an object of class Puzzle by reading
 
 As per Norvig, let's define the file format for a Sudoku puzzle such that a number in a file defines the value for a cell, while either a dot (.) or a zero (0) denote an unknown cell, and all characters can be ignored. This means that e.g. the following line is a valid puzzle (courtesy QQWing, an open source Sudoku puzzle generator):
 
-::
+.. code-block:: bash
 
     1..42.........6.............51.4..87..3.5..61...3....528...7..4......5..6.5.18.2.
 
 The same puzzle could be represented like this:
 
-::
+.. verb::
 
     1.. 42. ...
     ... ..6 ...

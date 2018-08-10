@@ -14,7 +14,7 @@ Let's imagine we have a toy program:
 
 This code effectively generates a stack that looks like this when main is entered:
 
-::
+.. verb::
 
     | Address    | Contents |
     | 0x50000008 | ?        |
@@ -39,7 +39,7 @@ What we have here is our stack with three entries: The first one (from the botto
 
 Because we just entered main and the addition hadn't been executed yet, "x" contains undefined data. After the main function has been executed, our stack looks like this:
 
-::
+.. verb::
 
     | Address    | Contents |
     | 0x50000008 | 7        |
@@ -56,7 +56,7 @@ I wrote the stack is also used for functions. Let's have another example:
 
 Here, we define a function and call it. At the beginning of main, the stack looks like this:
 
-::
+.. verb::
 
     | Address    | Contents |
     | 0x50000004 | ?        |
@@ -64,7 +64,7 @@ Here, we define a function and call it. At the beginning of main, the stack look
 
 Fairly unspectacular. However, when main calls the function "double_input" and we enter that function, the stack looks like this:
 
-::
+.. verb::
 
     | Address    | Contents   |
     | 0x5000000c | 3          |
@@ -94,7 +94,7 @@ Let's go through this line by line.
 
 How does the stack look like for this at the end of main? Can you guess?
 
-::
+.. verb::
 
     | Address    | Contents   |
     | 0x50000004 | 0x50000000 |
@@ -111,7 +111,7 @@ Let's then mix pointers and functions:
 
 The function "double_input" takes an int pointer and doubles the value of the integer that the pointer points to. Let's look at the stack when we enter that function:
 
-::
+.. verb::
 
     | Address    | Contents   |
     | 0x50000008 | 0x50000000 |

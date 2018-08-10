@@ -231,7 +231,7 @@ Now we have everything to fill the gaps in our loop to go through all the chunks
 
 *Exercise*: Implement the missing bits. Terminate the loop when you reach the end of the file, as identified by the "size" variable. Increment pos by the chunk header size plus the length. Initialise the chunk string appropriately. Your program should output something like this (for guess.png):
 
-::
+.. verb::
 
     chunk: IHDR - len: 13 (15154)
     chunk: bKGD - len: 6 (15136)

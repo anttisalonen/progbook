@@ -64,7 +64,7 @@ If everything works correctly, your program should be able to solve the example 
 
 Now we have enough to solve one easy Sudoku puzzle, but our program won't solve most puzzles, especially not the difficult ones. To test, here's one more difficult puzzle:
 
-::
+.. code-block:: bash
 
     .7...18......7......6..91.....415.78...6.345........1.56..3....78...6.499...5....
 

@@ -13,19 +13,19 @@ What is Sudoku? Sudoku is a game with a grid of 9x9 numbers, whereby each cell i
 
 Here's an example Sudoku puzzle:
 
-::
+.. verb::
 
-    1  |42 |   
-       |  6|   
-       |   |   
+    1..|42.|...
+    ...|..6|...
+    ...|...|...
     ---+---+---
-     51| 4 | 87
-      3| 5 | 61
-       |3  |  5
+    .51|.4.|.87
+    ..3|.5.|.61
+    ...|3..|..5
     ---+---+---
-    28 |  7|  4
-       |   |5  
-    6 5| 18| 2 
+    28.|..7|..4
+    ...|...|5..
+    6.5|.18|.2.
 
 Now, what we're going to write is a program that, given any Sudoku puzzle, will solve it.
 

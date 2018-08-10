@@ -85,7 +85,7 @@ Here's another loop:
 
 *Exercise*: Write a program that prints the number 42 five times.
 
-The "print" function can also include both text and a variable. This can be achieved using e.g. the following:
+The print() function can also include both text and a variable. This can be achieved using e.g. the following:
 
 .. code-block:: python
 

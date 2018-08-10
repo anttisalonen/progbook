@@ -191,7 +191,7 @@ One thing we didn't discuss here was checking the CRC to ensure the data hasn't 
 
 After these exercises, for the sample image, the output should be something like this:
 
-:: 
+.. verb:: 
 
     chunk: IHDR - len: 13 (15154)
     Width:              732

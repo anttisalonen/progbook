@@ -11,7 +11,7 @@ Arrays are blocks of memory allocated in stack.
 
 Here, at the end of main, our stack looks like this:
 
-::
+.. verb::
 
     | Address    | Contents   |
     | 0x50000010 | 0          |
@@ -33,7 +33,7 @@ When passing an array to a function, the array is not copied like a pointer or a
 
 When entering the function "func", our stack looks like this:
 
-::
+.. verb::
 
     | Address    | Contents   |
     | 0x50000020 | 0          |
@@ -50,7 +50,7 @@ That is, our array is located from 0x50000000 to 0x50000010. We then have the re
 
 What happens in the function "func"? The interesting part is the contents of the loop. On line 7, we double the value of the number pointed to by the pointer. We then increment *the pointer itself*, i.e. *the address pointed to* by one. Because the pointer is a pointer to int, incrementing the pointer by one effectively makes the pointer point to the next int. This means that after we've iterated through the loop once, our stack looks like this:
 
-::
+.. verb::
 
     | Address    | Contents   |
     | 0x50000020 | 1          |
@@ -67,7 +67,7 @@ In other words, we've doubled the value at 0x50000000, added 4 (the size of an i
 
 Now, after the function has completed and the execution returns to main, our stack looks like this:
 
-::
+.. verb::
 
     | Address    | Contents   |
     | 0x50000010 | 0          |
@@ -91,7 +91,7 @@ Typically, the compiler allocates a chunk of memory for the stack at the beginni
 
 What happens here is that we first define a variable "a", then a pointer that holds the address of that variable ("b"), and finally a pointer that accesses the memory after "b". At the end of the program our stack could look like this:
 
-::
+.. verb::
 
     | Address    | Contents   |
     | 0x50000010 | ?          |
