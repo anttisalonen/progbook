@@ -31,13 +31,13 @@ A more complex example is wanting to search any negative numbers in the file bet
     -1.114494 -4.974068 -5.414513
     [...]
 
-This command outputs any line in which a number between -1.0 and -1.3 was found. Let's go through the regular expression "\\-1\\.[012][0-9]*" piece by piece:
+This command outputs any line in which a number between -1.0 and -1.3 was found. Let's go through the regular expression "\\\\-1\\\\.[012][0-9]*" piece by piece:
 
-\\- means "match the minus character". We need a backslash before the minus character because otherwise grep would confuse it with a switch. The backslash is the escape character; in this case it means "treat the following character as the literal minus character".
+The characters "\\\\-" mean "match the minus character". We need a backslash before the minus character because otherwise grep would confuse it with a switch. The backslash is the escape character; in this case it means "treat the following character as the literal minus character".
 
 1 means we search for a 1.
 
-\\. means the period character, i.e '.'. This needs to be escaped using backslash because in regular expressions, the period character is short hand for "any character". However in this case we mean the actual period character, hence the backslash.
+The characters "\\\\." mean the period character, i.e '.'. This needs to be escaped using backslash because in regular expressions, the period character is short hand for "any character". However in this case we mean the actual period character, hence the backslash.
 
 [012] means that after the period character we search for either a 0, 1 or 2.
 
@@ -45,7 +45,7 @@ This command outputs any line in which a number between -1.0 and -1.3 was found.
 
 \* means that the previous search must be repeated as often as possible, i.e. for any digits until some other character is found.
 
-Hence, the regular expression "\\-1\\.[012][0-9]*" means "search for a string that starts with a minus character, has a 1, followed by a period, followed by either 0, 1 or 2, followed by zero or more digits".
+Hence, the regular expression "\\\\-1\\\\.[012][0-9]*" means "search for a string that starts with a minus character, has a 1, followed by a period, followed by either 0, 1 or 2, followed by zero or more digits".
 
 It may become more obvious if we pass the switch "-o" to grep, which means that only the matching strings are output, not the full line of a match:
 
