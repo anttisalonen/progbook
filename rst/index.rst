@@ -20,7 +20,9 @@ Learn Programming
 
     :download:`Download the book in PDF form. <../_build/latex/book.pdf>`
 
-    The print version of the book will be available soon.
+    The print version of the book is now available. ISBN: 978-1722834920. `Amazon.com link <https://www.amazon.com/Learn-Programming-Guided-Through-Jungle/dp/1722834927>`_
+   
+    .. image:: ../material/cover.jpg
 
 .. toctree::
    :maxdepth: 3
