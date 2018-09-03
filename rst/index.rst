@@ -24,6 +24,8 @@ Learn Programming
    
     .. image:: ../material/cover.jpg
 
+    2018-09-03: There's a :doc:`blog post <blog/blog>` on the philosophy of the structure of this book.
+
 .. toctree::
    :maxdepth: 3
    :caption: Contents
