@@ -20,6 +20,10 @@ Learn Programming
 
     :download:`Download the book in PDF form. <../_build/latex/book.pdf>`
 
+    .. raw:: html
+
+      <a href="https://gitter.im/progbook/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge"><img alt="Chat on gitter" style-"border-width:0" src="https://badges.gitter.im/progbook/community.svg"/></a><br/>
+
     The print version of the book is now available. ISBN: 978-1722834920. `Amazon.com link <https://www.amazon.com/Learn-Programming-Guided-Through-Jungle/dp/1722834927>`_ - `Amazon.co.uk <https://www.amazon.co.uk/Learn-Programming-Guided-Through-Jungle/dp/1722834927>`_ - `Amazon.de <https://www.amazon.de/Learn-Programming-Guided-Through-Jungle/dp/1722834927>`_ - `Amazon.ca <https://www.amazon.ca/Learn-Programming-Guided-Through-Jungle/dp/1722834927>`_
    
     .. image:: ../material/cover.jpg
